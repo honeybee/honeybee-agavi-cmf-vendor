@@ -1,0 +1,22 @@
+{
+    "name": "honeybee/honeybee-agavi-cmf-skeleton",
+    "type": "library",
+    "description": "Agavi CMF skeleton based on Honeybee framework",
+    "keywords": ["agavi", "mvc", "cqrs", "ddd", "event-sourcing", "hexagonal", "framework", "php"],
+    "homepage": "https://github.com/honeybee/honeybee-agavi-cmf-skeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thorsten Schmitt-Rink"
+        },
+        {
+            "name": "Steffen Gransow"
+        },
+        {
+            "name": "Igor Pelligrini"
+        },
+        {
+            "name": "Hasham Ahmad"
+        }
+    ]
+}
