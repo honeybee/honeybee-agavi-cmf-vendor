@@ -1,1 +1,1 @@
-# honeybee-agavi-cmf-skeleton
+# Honeybee-Agavi Skeleton
