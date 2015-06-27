@@ -1,7 +1,7 @@
 {
     "name": "honeybee/honeybee-agavi-cmf-skeleton",
     "type": "library",
-    "description": "Agavi CMF skeleton based on the Honeybee CQRS framework",
+    "description": "Skeleton, that can be copied to create new Honeybee-Agavi CMF applications.",
     "keywords": ["honeybee", "agavi", "mvc", "cqrs", "ddd", "event-sourcing", "hexagonal", "framework", "php"],
     "homepage": "https://github.com/honeybee/honeybee-agavi-cmf-skeleton",
     "license": "MIT",
