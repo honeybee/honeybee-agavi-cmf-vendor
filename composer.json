@@ -1,5 +1,5 @@
 {
-    "name": "honeybee/honeybee-agavi-cmf-skeleton",
+    "name": "honeybee/honeybee-agavi-vendor-cmf",
     "type": "library",
     "description": "Skeleton, that can be copied to create new Honeybee-Agavi CMF applications.",
     "keywords": ["honeybee", "agavi", "mvc", "cqrs", "ddd", "event-sourcing", "hexagonal", "framework", "php"],
