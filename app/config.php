@@ -8,7 +8,7 @@ if ($application_dir === false) {
 $application_dir = realpath($application_dir);
 $vendor_dir = $application_dir . DIRECTORY_SEPARATOR . 'vendor';
 $agavi_dir = $vendor_dir . str_replace('/', DIRECTORY_SEPARATOR, '/agavi/agavi/src');
-$honeybee_dir = $vendor_dir . str_replace('/', DIRECTORY_SEPARATOR, '/berlinonline/honeybee');
+$honeybee_dir = $vendor_dir . str_replace('/', DIRECTORY_SEPARATOR, '/honeybee/honeybee-agavi-cmf-vendor');
 
 // autoload all vendor libs and agavi in particular
 require($vendor_dir . DIRECTORY_SEPARATOR . 'autoload.php');

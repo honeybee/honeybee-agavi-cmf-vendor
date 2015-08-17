@@ -16,7 +16,7 @@
  * default options modify the schema definition file of
  * the 'Friend' type.
  *
- * @see https://github.com/berlinonline/Trellis
+ * @see https://github.com/honeybee/Trellis
  */
 
 namespace Honeybee\SystemAccount\User\Model\Aggregate\Reference\Base;
