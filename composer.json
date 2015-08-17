@@ -19,6 +19,7 @@
         {
             "name": "Thorsten Schmitt-Rink",
             "email": "schmittrink@gmail.com",
+            "homepage": "https://github.com/shrink0r",
             "role": "Developer"
         },
         {
@@ -42,7 +43,7 @@
         "php": ">=5.5.0",
         "lib-libxml": "*",
         "honeybee/agavi": "1.1.*",
-        "honeybee/honeybee": "master@dev",
+        "honeybee/honeybee": "1.0.*@dev",
         "honeybee/trellis": "master@dev",
         "shrink0r/workflux": "master@dev",
         "symfony/finder": "2.7.*",
