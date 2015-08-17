@@ -1,0 +1,7 @@
+# ignore all files and folders in this directory, BUT keep the official
+# themes versioned (the others are symlinks from project themes)
+#
+/*
+!/.gitignore
+!/honeybee*
+!/whitelabel

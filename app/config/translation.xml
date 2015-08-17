@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/translation/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+
+        <available_locales default_locale="de_DE">
+            <available_locale identifier="de_DE">
+                <ae:parameter name="description">Deutsch</ae:parameter>
+            </available_locale>
+            <available_locale identifier="en_GB">
+                <ae:parameter name="description">English GB</ae:parameter>
+            </available_locale>
+            <available_locale identifier="en_US">
+                <ae:parameter name="description">English US</ae:parameter>
+            </available_locale>
+            <available_locale identifier="ar_AR">
+                <ae:parameter name="description">Arabic</ae:parameter>
+            </available_locale>
+        </available_locales>
+
+        <translators default_domain="date_formats">
+            <translator domain="date_formats">
+                <translator domain="datetime">
+                    <date_formatter>
+                        <ae:parameters>
+                            <ae:parameter name="type">datetime</ae:parameter>
+                            <ae:parameter name="format">yyyy-MM-dd HH:mm:ss</ae:parameter>
+                        </ae:parameters>
+                    </date_formatter>
+                </translator>
+            </translator>
+        </translators>
+    </ae:configuration>
+
+    <ae:configuration>
+        <translators default_domain="application.ui">
+            <translator domain="application">
+                <message_translator class="AgaviSimpleTranslator">
+
+                    <ae:parameter name="pagination">
+                        <ae:parameter name="de">
+                            <ae:parameter name="pager.description">Seite %s von %s</ae:parameter>
+                            <ae:parameter name="pager.first_page.title">(DE) First</ae:parameter>
+                            <ae:parameter name="pager.prev_page.title">(DE) Previous</ae:parameter>
+                            <ae:parameter name="pager.jump_to_page.title">Los</ae:parameter>
+                            <ae:parameter name="pager.next_page.title">(DE) Next</ae:parameter>
+                            <ae:parameter name="pager.last_page.title">(DE) Last</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="pager.description">Page %s of %s</ae:parameter>
+                            <ae:parameter name="pager.first_page.title">First</ae:parameter>
+                            <ae:parameter name="pager.prev_page.title">Previous</ae:parameter>
+                            <ae:parameter name="pager.jump_to_page.title">Go</ae:parameter>
+                            <ae:parameter name="pager.next_page.title">Next</ae:parameter>
+                            <ae:parameter name="pager.last_page.title">Last</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <ae:parameter name="activities">
+                        <ae:parameter name="de">
+                            <ae:parameter name="search.description">Datensätze durchstöbern</ae:parameter>
+                            <ae:parameter name="search.label">Suche</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="search.description">Search</ae:parameter>
+                            <ae:parameter name="search.label">Search terms</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <ae:parameter name="ui">
+                        <ae:parameter name="de">
+                            <ae:parameter name="brand_entity">Honeybee</ae:parameter>
+                            <ae:parameter name="brand_title">Honeybee CMF</ae:parameter>
+                            <ae:parameter name="menu">Menü</ae:parameter>
+                            <ae:parameter name="go_to_dashboard">Zur Einstiegsseite…</ae:parameter>
+                            <ae:parameter name="welcome_header">Willkommen im Honeybee CMF</ae:parameter>
+                            <!-- View: collection / hierarchy -->
+                            <ae:parameter name="sort_by">Sortieren nach</ae:parameter>
+                            <ae:parameter name="sidebar">Sidebar</ae:parameter>
+                            <ae:parameter name="activities">Activities</ae:parameter>
+                            <ae:parameter name="cannot_display_collection">(DE) Can't display collection</ae:parameter>
+                            <ae:parameter name="there_were_errors">(DE) There were errors:</ae:parameter>
+                            <!-- View: hierarchy -->
+                            <ae:parameter name="parent_resource">Parent resource</ae:parameter>
+                            <ae:parameter name="child_resources">Child resources</ae:parameter>
+                            <ae:parameter name="root_resources">Root resources</ae:parameter>
+                            <!-- View: createinput -->
+                            <ae:parameter name="validation_unfortunately">Unfortunately…</ae:parameter>
+                            <!-- View: sumary -->
+                            <ae:parameter name="summary">Summary</ae:parameter>
+                            <ae:parameter name="summary_error">Summary/SummaryError</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="brand-name">Honeybee</ae:parameter>
+                            <ae:parameter name="brand-title">Honeybee CMF</ae:parameter>
+                            <ae:parameter name="menu">Menu</ae:parameter>
+                            <ae:parameter name="go_to_dashboard">Go to the dashboard…</ae:parameter>
+                            <ae:parameter name="welcome_header">Welcome to the Honeybee CMF</ae:parameter>
+                            <!-- View: collection / hierarchy -->
+                            <ae:parameter name="sort_by">Sort by</ae:parameter>
+                            <ae:parameter name="sidebar">Sidebar</ae:parameter>
+                            <ae:parameter name="activities">Activities</ae:parameter>
+                            <ae:parameter name="cannot_display_collection">Can't display collection</ae:parameter>
+                            <ae:parameter name="there_were_errors">There were errors:</ae:parameter>
+                            <!-- View: hierarchy -->
+                            <ae:parameter name="parent_resource">Parent resource</ae:parameter>
+                            <ae:parameter name="child_resources">Child resources</ae:parameter>
+                            <ae:parameter name="root_resources">Root resources</ae:parameter>
+                            <!-- View: createinput -->
+                            <ae:parameter name="validation_unfortunately">Unfortunately…</ae:parameter>
+                            <!-- View: sumary -->
+                            <ae:parameter name="summary">Summary</ae:parameter>
+                            <ae:parameter name="summary_error">Summary/SummaryError</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+            <translator domain="user">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="roles">
+                        <ae:parameter name="de">
+                            <ae:parameter name="non-privileged">Nutzer ohne Rechte</ae:parameter>
+                            <ae:parameter name="administrator">Nutzer mit allen Rechten (Administrator)</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+<!--
+            <message_translator class="AgaviGettextTranslator">
+                <ae:parameter name="text_domains">
+                    <ae:parameter name="menu">%core.app_dir%/data/i18n</ae:parameter>
+                    <ae:parameter name="layout">%core.app_dir%/data/i18n</ae:parameter>
+                    <ae:parameter name="Login">%core.app_dir%/data/i18n</ae:parameter>
+                    <ae:parameter name="SearchEngineSpam">%core.app_dir%/data/i18n</ae:parameter>
+                    <ae:parameter name="ErrorActions">%core.app_dir%/data/i18n</ae:parameter>
+                </ae:parameter>
+            </message_translator>
+-->
+        </translators>
+
+    </ae:configuration>
+<!--
+    <ae:configuration environment="development.*">
+        <translators default_domain="default">
+            <translator domain="default">
+                <message_translator class="AgaviGettextTranslator">
+                    <ae:parameter name="store_calls">%core.cache_dir%/data</ae:parameter>
+                </message_translator>
+            </translator>
+        </translators>
+    </ae:configuration>
+-->
+
+    <xi:include href="./includes/translation.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+</ae:configurations>

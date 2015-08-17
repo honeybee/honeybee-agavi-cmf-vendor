@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml"
+>
+    <ae:configuration>
+
+        <validators translation_domain="honeybee.core.errors">
+
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+
+            <!--
+                1. validate the given skeleton name and ask for it if none was given on CLI
+                2. provide a dependency token of format "skeleton_name_[SKELETON]" for skeleton specific validation
+            -->
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\SkeletonNameValidator" name="skeleton" required="false" provides="skeleton_selected">
+                <argument>skeleton</argument>
+                <error>You must specify a valid skeleton name (that is, a folder name from dev/templates/).</error>
+                <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                <ae:parameter name="match">true</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="introduction"><![CDATA[
+A skeleton is a folder in the dev/templates directory.
+Honeybee provides some default skeletons. Create your own
+skeletons from scratch or copy and modify an existing one.
+                    ]]></ae:parameter>
+                </ae:parameter>
+                <ae:parameter name="description">The name of the skeleton to use for code generation.</ae:parameter>
+            </validator>
+
+            <!--
+                1. include all skeleton validation files to have skeleton specific validation of parameters
+                2. only the validators that depend on the above generated dependency token will be executed
+            -->
+            <xi:include href="%core.config_dir%/includes/skeleton_parameters.validate.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(av=http://agavi.org/agavi/config/parts/validators/1.0) xpointer(/ae:configurations/ae:configuration/av:validators/*)" />
+
+        </validators>
+
+    </ae:configuration>
+</ae:configurations>

@@ -1,0 +1,19 @@
+{% extends _layout %}
+
+{% block toc %}
+    <h1>Files for '{{ filesystem }}'</h1>
+</div>
+{% endblock %}
+
+{% block primary %}
+
+    <h2>Files in storage '{{ filesystem }}'</h2>
+    <ul>
+    {% for file in files %}
+        <li><a href="{{ file.download_url }}">{{ file.path }}</a> ({{ file.size|format_bytes }})</li>
+    {% endfor %}
+    </ul>
+
+    <a href="{{ upload_url }}">Upload files to temporary storage '{{ temp_filesystem }}'</a>
+
+{% endblock %}

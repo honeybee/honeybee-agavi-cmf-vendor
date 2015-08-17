@@ -1,0 +1,11 @@
+// theme variables (colors, fonts, settings, breakpoints etc.)
+@import "vars";
+
+// framework files (styles, mixins etc.)
+@import "vendor";
+
+// library files (objects, mixins, helpers)
+@import "lib";
+
+// additional styles
+@import "theme";

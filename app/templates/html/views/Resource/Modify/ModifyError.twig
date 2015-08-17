@@ -1,0 +1,30 @@
+{% extends _layout %}
+
+{% block toc %}
+    <h1>Resolve conflicts for <b>{{ resource.identifier }}</b></h1>
+{% endblock %}
+
+{% block primary %}
+<div class="errors-box">
+    <h5>Conflicting changes</h5>
+    <ul>
+        {% for attr_name in task_conflict.conflictingAttributeNames %}
+            <li>
+                Field: {{ attr_name }}
+                <br />
+                Revision {{ task_conflict.conflictedResource.revision }}, Value: {{ task_conflict.conflictedResource.getValue(attr_name) }} <b>(yours)</b>
+                <br />
+                Revision {{ task_conflict.currentResource.revision }}, Value: {{ task_conflict.currentResource.getValue(attr_name) }}
+            </li>
+        {% endfor %}
+    </ul>
+    <h5>Conflicting events</h5>
+    <ul>
+        {% for event in task_conflict.conflictingEvents %}
+            <li>
+                {{ event.type }}, Revision {{ event.seqNumber }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

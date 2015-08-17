@@ -1,0 +1,35 @@
+%single-box-as-sheet {
+    .page-main {
+        @include sheet;
+        margin: $base-spacing;
+
+        @include media-query(lap-and-up) {
+            max-width: 400px;
+            margin: $base-spacing auto;
+        }
+
+        fieldset {
+            border: none;
+        }
+
+        .control-group {
+            margin-top: $base-spacing;
+        }
+    }
+}
+
+.honeybee-system_account-user-login {
+    @extend %single-box-as-sheet;
+}
+
+.honeybee-system_account-user-logout {
+    @extend %single-box-as-sheet;
+}
+
+.honeybee-system_account-user-reset_password {
+    @extend %single-box-as-sheet;
+}
+
+.honeybee-system_account-user-set_password {
+    @extend %single-box-as-sheet;
+}

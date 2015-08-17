@@ -1,0 +1,75 @@
+$colors: (
+    transparent: transparent,
+    black :#000000,
+    darkgrey1 :#1f1f1f, // e.g. Text color
+    darkgrey2: #7d7d7c, // e.g. Light Text color
+    grey1: #b8b8b6,
+    grey2: #dcdbd9, // e.g. Background & Lines
+    lightgrey1: #e7e7e5, // e.g. Tags
+    lightgrey2: #f3f2f0, // e.g. Panel Body
+    lightgrey3: #fffefc, // e.g. Panel heads
+    white :#ffffff,
+    blue :#33aed1,
+    bluedarker :#2d9ab9,
+    bluedark :#2785a0,
+    red :#d13334,
+    reddarker :#b92d2e,
+    reddark :#882122,
+    orange :#efa53c,
+    orangedarker :#d79436,
+    orangedark :#be8330,
+    green :#33d18b,
+    greendarker :#2db97b,
+    greendark :#27a06b,
+);
+
+$semantic-colors: (
+    text-primary: map-get($colors, darkgrey1),              //default text
+    text-secondary: map-get($colors, darkgrey2),            //help texts and annotations
+
+    clear: map-get($colors, transparent),
+    background-neutral: map-get($colors, lightgrey2),       //BG for large UI containers
+    background-highlight: map-get($colors, lightgrey3),     //BG for e.g. UI element titles
+    background-heavy: map-get($colors, lightgrey1),         //BG for small thigns like tags, pressed buttons
+    background-blank: map-get($colors, white),              //BG for things that just shoudn't be transparent
+    lines: map-get($colors, grey2),
+
+    //link/activity colors
+    navigational-primary: map-get($colors, blue),
+    navigational-secondary: map-get($colors, bluedarker),
+    navigational-highlight: map-get($colors, bluedark),
+
+    mutating-primary: map-get($colors, blue),
+    mutating-secondary: map-get($colors, bluedarker),
+    mutating-highlight: map-get($colors, bluedark),
+
+    positive-primary: map-get($colors, green),
+    positive-secondary: map-get($colors, greendarker),
+    positive-highlight: map-get($colors, greendark),
+
+    warning-primary: map-get($colors, orange),
+    warning-secondary: map-get($colors, orangedarker),
+    warning-highlight: map-get($colors, orangedark),
+
+    destructive-primary: map-get($colors, red),
+    destructive-secondary: map-get($colors, reddarker),
+    destructive-highlight: map-get($colors, reddark),
+
+    panel-header-background: map-get($colors, lightgrey3),
+    panel-header-text: map-get($colors, darkgrey1),
+);
+
+@function color($name) {
+    $result: map-get($semantic-colors, $name);
+
+    @if not $result {
+        $result: map-get($colors, $name);
+    }
+
+    @if not $result {
+        $result: $name;
+    }
+
+    @return $result;
+}
+

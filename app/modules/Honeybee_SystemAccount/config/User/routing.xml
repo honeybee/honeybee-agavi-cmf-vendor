@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/routing/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <!-- include standard honeybee web routes -->
+    <xi:include href="../../../../config/default_type_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configurations/*)" />
+
+    <ae:configuration context="web">
+        <!-- custom web routes -->
+        <route name=".login" pattern="^login$" action=".Login" />
+        <route name=".logout" pattern="^logout$" action=".Logout" />
+        <route name=".reset" pattern="^reset$" action=".ResetPassword" />
+        <route name=".password" pattern="^password$" action=".SetPassword" />
+    </ae:configuration>
+
+    <ae:configuration context="console">
+        <!-- custom cli routes -->
+        <route name=".password" pattern="^password$" action=".SetPassword" method="write" />
+    </ae:configuration>
+</ae:configurations>

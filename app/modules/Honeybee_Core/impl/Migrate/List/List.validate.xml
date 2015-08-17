@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
+    <ae:configuration>
+        <validators>
+
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+            
+            <validator class="inarray" name="invalid_filter" required="false">
+                <argument>only</argument>
+                <error>Invalid 'only' parameter. Expecting one of executed' or 'pending'.</error>
+                <ae:parameter name="values">executed,pending</ae:parameter>
+            </validator>
+
+            <validator class="string" name="invalid_target" required="false">
+                <argument>target</argument>
+                <error>Invalid 'target' parameter. Probably a typo within the target name.</error>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

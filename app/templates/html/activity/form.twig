@@ -1,0 +1,14 @@
+{%- set emphasized = emphasized | default(false) -%}
+<form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|join(' ') }}"  id="{{ form_id }}">
+    {% for param_name, param_value in form_parameters %}
+    <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
+    {% endfor %}
+    <button
+        type="submit"
+        name="submit-{{ form_id }}"
+        title="{{ _(activity.description, translation_domain) }}"
+        class="{{ css|join(' ') }} {{emphasized ? "emphasized" : "normal"}}"
+        rel="{{ activity.rels|join(' ') }}"
+        data-form-id="{{ form_id }}"
+    >{{ _(activity.label, translation_domain) }}</button>
+</form>

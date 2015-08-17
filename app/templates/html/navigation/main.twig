@@ -1,0 +1,14 @@
+<nav id="mainNav" class="mainNav" role="navigation">
+    <ul>
+    {% for group_name, group_data in navigation_data.groups %}
+        <li>
+            <h4 class="grouptitle">{{ _(group_name, translation_domain) }}</h4>
+            <ul>
+            {% for item in group_data.items %}
+                <li>{{ item.rendered_activity|raw }}</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+</nav>

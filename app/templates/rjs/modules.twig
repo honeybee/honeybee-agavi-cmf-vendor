@@ -1,0 +1,14 @@
+{#
+    You may define modules here, whose whose dependencies should be traced on compilation (r.js optimization).
+    When all you want to do is add custom modules, you can put those in the "rjs/additional_modules.twig" file.
+
+    For each defined module here you can use the following options:
+    - "name": (mandatory) name of the module to trace dependencies for
+    - "include": array of module names to additionaly include in this module
+    - "exclude": array of module names to exclude from this module (even though the module specifies the dependency; useful for libraries like jquery)
+    - "create": boolean value to indicate that this module is a custom one that should be created despite being non-existant in the source folder
+#}
+    modules: [
+        {{ embed_all_main_modules() | raw }},
+        {% include "rjs/additional_modules.twig" ignore missing %}
+    ]

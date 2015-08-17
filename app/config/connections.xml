@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/connections/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <ae:configuration>
+        <connections>
+            <connection name="Default.EventSource" class="Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector">
+                <setting name="host">127.0.0.1</setting>
+                <setting name="port">5984</setting>
+                <setting name="transport">http</setting>
+                <setting name="database">%core.db_prefix%%2Bdomain_events</setting>
+            </connection>
+
+            <connection name="Default.ViewStore" class="Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector">
+                <setting name="transport">http</setting>
+                <setting name="host">127.0.0.1</setting>
+                <setting name="port">9200</setting>
+                <setting name="index">%core.db_prefix%.domain_events</setting>
+            </connection>
+
+            <connection name="Default.MsgQueue" class="Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector">
+                <setting name="host">localhost</setting>
+                <setting name="port">5672</setting>
+                <setting name="user">shrink</setting>
+                <setting name="password">shrink0r</setting>
+            </connection>
+
+            <connection name="Default.Mailer" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector" />
+            <connection name="Default.Mailer.Null" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector" />
+
+            <connection name="Assets.Local" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
+                <setting name="directory">%assets.base_dir%</setting>
+            </connection>
+
+            <connection name="Assets.Local.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
+                <setting name="directory">%core.app_dir%/../data/temp_assets</setting>
+            </connection>
+
+            <!--
+            <connection name="Assets.S3" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\AwsS3Connector">
+                <setting name="key">key1234</setting>
+                <setting name="secret">secretsecretsecret</setting>
+                <setting name="region">eu-central-1</setting>
+                <setting name="bucket">bucketname</setting>
+            </connection>
+
+            <connection name="User.Assets.Dropbox.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\DropboxConnector">
+                <setting name="app_id">%core.app_name%</setting>
+                <setting name="access_token">some-secret-app-access-token</setting>
+            </connection>
+            -->
+        </connections>
+    </ae:configuration>
+
+    <xi:include href="./includes/connections.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+</ae:configurations>

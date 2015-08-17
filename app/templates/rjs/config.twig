@@ -1,0 +1,58 @@
+<script type="text/javascript">
+requirejs.config({
+{% block requirejs_config_defaults %}
+    {% if ac("requirejs.use_optimized", false) %}
+        baseUrl: 'static/modules-built/',
+    {% else %}
+        baseUrl: 'static/modules/',
+        {% if ac("requirejs.use_cachebuster", true) %}
+        urlArgs: "cb=" +  (new Date()).getTime(),
+        {% endif %}
+    {% endif %}
+    lodashLoader: {
+    {% if ac("requirejs.use_optimized", false) %}
+        root: "static/modules-built/",
+    {% else %}
+        ext: ".html",
+        root: "static/modules/",
+    {% endif %}
+        templateSettings: {}
+    },
+{% endblock %}
+{% block requirejs_config_additional %}
+    {{ ac("requirejs.additional_config", "") }},
+{% endblock %}
+{% block requirejs_config_paths %}
+    {% include "rjs/paths.twig" %},
+{% endblock %}
+{% block requirejs_config_shim %}
+    {% include "rjs/shim.twig" %}
+{% endblock %}
+{% block requirejs_config_more %}{% endblock %}
+});
+
+{% block requirejs_errors %}
+{#
+/*
+requirejs.onError = function(error) {
+    if (error.requireType === 'scripterror' && (window.console && console.error)) {
+        console.error(
+            'There is a javascript syntax error or other execution problem for module: ',
+            error.requireModules,
+            'See: http://requirejs.org/docs/errors.html#scripterror'
+        );
+    } else if (error.requireType === 'timeout' && (window.console && console.error)) {
+        console.error(
+            'A timeout occurred on loading the modules: ',
+            error.requireModules,
+            'Please check 404s, verify the path config or increase the "waitSeconds" config option.',
+            'See: http://requirejs.org/docs/errors.html#timeout'
+        );
+    } else {
+        throw error;
+    }
+};
+*/
+#}
+{% endblock %}
+</script>

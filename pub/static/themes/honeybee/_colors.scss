@@ -1,0 +1,90 @@
+$colors: (
+    white: #ffffff,
+    white-warm: #f7f7f5,
+    black: #000000,
+
+    grey: #494949,
+    grey-shadow: #262626,
+    grey-neutral: #bcc0c3,
+    grey-medium: #7c7c7c,
+    grey-light: #9a9994,
+    grey-super-light: #c3c2bc,
+    grey-warm-light: #e0e0d9,
+
+    blue: #00a5d1,
+    blue-hover: #007e9f,
+    blue-shadow: #004d62,
+
+    red: #cb212d,
+    red-hover: #a9252c,
+    red-shadow: #5b181b,
+
+    green: #45bc25,
+    green-hover: #37971e,
+    green-shadow: #03630e,
+
+    yellow: #fdca00,
+    yellow-hover: #fda700,
+    yellow-shadow: #c58200
+);
+
+$semantic-colors: (
+    text: map-get($colors, black),
+    background: map-get($colors, white),
+
+    action: (
+        default: map-get($colors, blue),
+        hover: map-get($colors, blue-hover),
+        shadow: map-get($colors, blue-shadow)
+    ),
+
+    positive: (
+        default: map-get($colors, green),
+        hover: map-get($colors, green-hover),
+        shadow: map-get($colors, green-shadow)
+    ),
+
+    destructive: (
+        default: map-get($colors, red),
+        hover: map-get($colors, red-hover),
+        shadow: map-get($colors, red-shadow)
+    ),
+
+    warning: (
+        default: map-get($colors, yellow),
+        hover: map-get($colors, yellow-hover),
+        shadow: map-get($colors, yellow-shadow)
+    ),
+
+    neutral: (
+        default: map-get($colors, grey),
+        shadow: map-get($colors, grey-shadow),
+        neutral: map-get($colors, grey-neutral),
+        medium: map-get($colors, grey-medium),
+        light: map-get($colors, grey-light),
+        super-light: map-get($colors, grey-super-light),
+        warm-light: map-get($colors, grey-warm-light)
+    )
+
+);
+
+@function color-lookup($map, $name, $modifier) {
+    $result: map-get($map, $name);
+
+    @if type-of($result) == map {
+        $result: map-get($result, $modifier);
+    }
+
+    @return $result;
+}
+
+@function color($name, $modifier: "default") {
+    $result: color-lookup($colors, $name, $modifier);
+
+    @if not $result {
+        $result: color-lookup($semantic-colors, $name, $modifier);
+    }
+
+    @return $result;
+}
+

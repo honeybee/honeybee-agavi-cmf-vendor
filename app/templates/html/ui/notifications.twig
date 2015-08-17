@@ -1,0 +1,62 @@
+<div class="notifications notifications--threeCols" >
+    <input type="checkbox" id="notifications-trigger" class="notifications__trigger">
+    <label for="notifications-trigger" class="notifications__toggle">Messages</label>
+    <label for="notifications-trigger" class="notifications__backdrop"></label>
+    <div class="notifications__panel notifications-layout">
+        <div class="settings messages-settings-box">
+            <input type="checkbox" id="settings-dialog-trigger" class="ag__trigger " />
+            <label for="settings-dialog-trigger" class="ag__toggle action" >Settings</label>
+            <div class="ag__more ">
+                <fieldset>
+                    <legend>Security Settings</legend>
+
+                    <label for="A1">
+                        <input type="checkbox" id="A1" name="allow_anonymous_login" checked class="color-reverse" />
+                        <span class="intro">Login with guest account</span>
+                        <span class="glue-off">is</span>
+                        <span class="glue-on">is</span>
+                        <span class="off">not allowed</span>
+                        <span class="on">allowed</span>
+                        <p>This setting allows users without accounts to acces this sytem. That is possibly dangerous!</p>
+                    </label>
+
+                    <label for="A2">
+                        <input type="checkbox" id="A2" name="allow_anonymous_login" checked />
+                        <span class="intro">Logs of user activity</span>
+                        <span class="glue-off">will only be</span>
+                        <span class="glue-on">will be</span>
+                        <span class="off">stored temporarily</span>
+                        <span class="on">stored permanently</span>
+                    </label>
+
+                    <label for="A3">
+                        <input type="checkbox" id="A3" name="allow_anonymous_login" checked class="color-reverse" />
+                        <span class="intro">New users</span>
+                        <span class="glue-off">will only have</span>
+                        <span class="glue-on">will have</span>
+                        <span class="off">read access</span>
+                        <span class="on">read and write access</span>
+                        <p>If new user immediately gain write access, they can manipulate data without being approved editors.</p>
+                    </label>
+                </fieldset>
+            </div>
+        </div><!-- .messages-settings-box
+        --><div class="messages-box">
+            <aside role="complimentary" class="jsb_ jsb_Core/NotificationWidget">
+                <dl class="alarms">
+                    <dt class="alarms__label">Alarms</dt>
+                    <dd class="alarms__count">2</dd>
+                </dl>
+                <dl class="todos">
+                    <dt class="todos__label">Todos</dt>
+                    <dd class="todos__count">46</dd>
+                </dl>
+                <dl class="messages">
+                    <dt class="messages__label">Messages</dt>
+                    <dd class="messages__count">9876</dd>
+                </dl>
+            </aside>
+        </div><!-- .messages-box -->
+    </div><!-- .notifications-layout -->
+</div><!-- .notifications -->
+

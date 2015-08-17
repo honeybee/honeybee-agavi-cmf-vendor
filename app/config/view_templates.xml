@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/view_templates/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+
+        <view_templates scope="default">
+
+            <view_template name="resource">
+                <tab name="content">
+                    <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="content">
+                                    <field name="identifier" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+            <view_template name="collection">
+                <tab name="content">
+                    <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="content">
+                                    <field name="identifier" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+            <view_template name="reference_collection">
+                <tab name="content">
+                    <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="content">
+                                    <field name="identifier" />
+                                    <field name="display_text" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+        </view_templates>
+    </ae:configuration>
+
+    <xi:include href="./includes/view_templates.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+</ae:configurations>

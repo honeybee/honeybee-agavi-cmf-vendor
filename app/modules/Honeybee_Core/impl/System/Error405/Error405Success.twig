@@ -1,0 +1,9 @@
+{% extends _layout %}
+
+{% block primary %}
+<ul class="error">
+    {% if _logref is defined %}<li>Logref: <span class="error__logref">{{ _logref }}</span></li>{% endif %}
+    {% if _title is defined %}<li>Title: <span class="error__title">{{ _title }}</span></li>{% endif %}
+    {% if _message is defined %}<li>Message: <span class="error__message">{{ _message }}</span></li>{% endif %}
+</ul>
+{% endblock %}

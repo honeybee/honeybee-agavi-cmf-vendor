@@ -1,0 +1,6 @@
+@import "mixins";
+
+%dropdown,
+.dropdown {
+    @include dropdown("dropdown");
+}

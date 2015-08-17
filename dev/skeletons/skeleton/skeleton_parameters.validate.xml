@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <validators>
+            <validator class="and" depends="skeleton_name_skeleton">
+
+                <validator class="skeleton_generator">
+                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\NewSkeletonGenerator</ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>new_skeleton_name</argument>
+                    <error>You must provide a valid new skeleton name (folder that doesn't exist).</error>
+                    <error for="readable">The given name exists as folder in: %prefix$s</error>
+                    <error for="format">The given name doesn't match the regex: %format$s</error>
+                    <ae:parameter name="format">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="prefix">%core.skeleton_dir%</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">Honeybee\FrameworkBinding\Agavi\Validator\FolderMissingValidator</ae:parameter>
+                        <ae:parameter name="attempts">5</ae:parameter>
+                        <ae:parameter name="introduction"><![CDATA[<info>The skeleton will be put into:</info> %core.skeleton_dir%]]></ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

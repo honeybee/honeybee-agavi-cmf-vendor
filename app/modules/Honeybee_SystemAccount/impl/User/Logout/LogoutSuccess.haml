@@ -1,0 +1,16 @@
+- extends _layout
+
+- block menu
+- endblock
+
+- block pageinfo
+- endblock
+
+- block primary
+    - embed 'html/layout/grid/1_boxes.twig' with {'name':'authentication', 'box1':'login', 'box1_css': 'logout'}
+        - block box1
+            %p
+                = _('logout_success', 'honeybee.system_account.user.ui')
+            %p
+                %a(href=ro.gen('index'))
+                    = _('to_homepage', 'honeybee.system_account.user.ui')

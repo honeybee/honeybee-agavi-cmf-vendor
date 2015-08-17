@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.config_dir%/validators.xml">
+    <ae:configuration>
+        <validators>
+        
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\FixtureTargetValidator" name="invalid_target">
+                <argument>target</argument>
+                <error>You must specify a valid fixture target name.</error>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please pick a fixture target</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="dialog" name="invalid_shortname">
+                <argument>name</argument>
+                <error>You must specify a short descriptive CamelCase name for your fixture.</error>
+                <ae:parameter name="pattern">/^[a-z\d]{3,120}$/i</ae:parameter>
+                <ae:parameter name="match">true</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                    <ae:parameter name="question">Please provide a CamelCase name for your fixture</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

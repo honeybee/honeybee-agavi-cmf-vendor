@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This buildfile is part of the Honeybee (CMF) projekt.
+    It's purpose is to provide an entry point for testing how your current code integrates into the project,
+    thereby providing xml based reports for various aspects of the code such as checkstyle, mess detection,
+    unit testing and the resulting code coverage and a couple more.
+-->
+<project name="Honeybee" default="build" basedir="../../">
+
+    <!-- Project property definitions. -->
+    <property name="source" value="${basedir}/app/"/>
+    <property name="build_dir" value="${basedir}/etc/integration/build/"/>
+    <property name="pub_dir" value="${basedir}/pub/"/>
+
+    <!--
+        Initial cleanup task that provides a green field for our integration,
+        thereby removing any previous build data and freshly creating all required sub directories,
+        where you and Jenkins (our CI-Tool) can find all relevant integration/test data.
+    -->
+    <target name="clean" description="Clean up and create artifact directories">
+        <delete dir="${build_dir}/api"/>
+        <delete dir="${build_dir}/code-browser"/>
+        <delete dir="${build_dir}/coverage"/>
+        <delete dir="${build_dir}/logs"/>
+        <delete dir="${build_dir}/pdepend"/>
+
+        <mkdir dir="${build_dir}/api"/>
+        <mkdir dir="${build_dir}/code-browser"/>
+        <mkdir dir="${build_dir}/coverage"/>
+        <mkdir dir="${build_dir}/logs"/>
+        <mkdir dir="${build_dir}/pdepend"/>
+    </target>
+
+    <!--
+        These are tasks that use the vendor libraries, that are shipped with the project such as:
+          - PHPUnit         (http://www.phpunit.de/manual/current/en/)
+          - PHPCodesniffer  (http://www.squizlabs.com/php-codesniffer)
+          - PHPDocumentor   (http://www.phpdoc.org/)
+          - PHPDepend       (http://pdepend.org/)
+          - PHPMd           (http://phpmd.org/)
+          - PHPCpd          (https://github.com/sebastianbergmann/phpcpd)
+          - PHPLoc          (https://github.com/sebastianbergmann/phploc)
+          - PHPCb           (http://blog.mayflower.de/archives/464-PHP_CodeBrowser-Release-version-0.1.0.html)
+    -->
+    <target name="php-tests" description="Runs unit tests using PHPUnit and generates junit.xml and clover.xml">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-tests" />
+        </exec>
+    </target>
+
+    <target name="php-code-sniffer" description="Verifies coding standards and generates a report.">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-code-sniffer" />
+        </exec>
+    </target>
+
+    <target name="php-docs" description="Generates server side (php) API documentation.">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-docs" />
+        </exec>
+    </target>
+    
+    <target name="php-dependencies" description="Generates a class dependency tree.">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-dependencies" />
+        </exec>
+    </target>
+
+   <target name="php-mess-detection" description="Runs php mess detection.">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-mess-detection" />
+        </exec>
+    </target>
+
+    <target name="php-copy-paste-detection" description="Runs php and copy paste detection.">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-copy-paste-detection" />
+        </exec>
+    </target>
+
+    <target name="php-metrics" description="Computes several source code metrics.">
+        <exec executable="make" dir="${basedir}" failonerror="true">
+            <arg value="php-metrics" />
+        </exec>
+    </target>
+
+    <target name="php-code-browser" description="Aggregate tool output with PHP_CodeBrowser">
+        <exec executable="${basedir}/vendor/bin/phpcb">
+            <arg value="--log" />
+            <arg path="${build_dir}/logs" />
+            <arg value="--source" />
+            <arg path="${source}" />
+            <arg value="--output" />
+            <arg path="${build_dir}/code-browser" />
+        </exec>
+    </target>
+
+    <!-- We have to convert phpunits output to fit the expectations of the jenkins xunit plugin. -->
+    <target name="phpunit_to_xunit">
+        <xslt in="${build_dir}/logs/phpunit.xml" out="${build_dir}/logs/junit.xml" style="${basedir}/etc/integration/phpunit.xsl" />
+    </target>
+
+    <target name="parallelTasks" description="Run the pdepend, phpmd, phpcpd, phpcs, phpdoc and phploc tasks in parallel using a maximum of 2 threads.">
+        <parallel threadCount="2">
+            <sequential>
+                <antcall target="php-dependencies"/>
+                <antcall target="php-mess-detection"/>
+            </sequential>
+            <antcall target="php-copy-paste-detection"/>
+            <antcall target="php-code-sniffer"/>
+            <antcall target="php-docs"/>
+            <antcall target="php-metrics"/>
+        </parallel>
+    </target>
+
+    <target name="build" depends="clean,parallelTasks,php-tests,phpunit_to_xunit,php-code-browser" />
+</project>

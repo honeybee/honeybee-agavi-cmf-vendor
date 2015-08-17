@@ -1,0 +1,59 @@
+$default-color: color(black);
+
+@mixin hb-icon-base() {
+    font-family: 'honeybee' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: inherit;
+    vertical-align: middle;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    @content;
+}
+
+@mixin hb-icon($icon-name, $color: $default-color) {
+    @include hb-icon-base;
+
+    $content: $icon-name;
+    @if map-has-key($hb-icon, $icon-name) {
+        $content: map-get($hb-icon, $icon-name);
+    }
+
+    content: "#{$content}" !important;
+    color: $color !important;
+
+    @content;
+}
+
+/*  Render the icon as pseudo-element and hide the parent container.
+
+    Note: pseudo-element icon styling should be more important than its container styling.
+          Use @content to overwrite conflicting rules with '!important'.
+*/
+@mixin hb-icon-before($icon-name, $color: $default-color) {
+    &:before {
+        @include hb-icon($icon-name, $color: $default-color);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-indent: 0;
+
+        @content;
+    }
+    & {
+        position: relative !important;
+        display: inline-block !important;
+        text-indent: -9999em !important;
+        text-overflow: clip !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        speak: none !important;
+    }
+}

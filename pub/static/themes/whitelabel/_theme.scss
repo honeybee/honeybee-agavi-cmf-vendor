@@ -1,0 +1,178 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background: color(grey2);
+    color: color(darkgrey1);
+    hyphens: auto;
+}
+
+body {
+    font-family: $font-family;
+    font-weight: $font-weight;
+    line-height: $base-spacing;
+}
+
+[hidden] {
+   @include visuallyhidden;
+}
+
+a {
+    color: color(blue);
+}
+
+button {
+    @include inuit-btn;
+    border: 0;
+    background-color: transparent;
+}
+
+.activity {
+    &.navigational {
+        @include button-colors-normal-navigational-default;
+    }
+    &.mutating {
+        @include button-colors-normal-mutating-default;
+    }
+    &.positive {
+        @include button-colors-normal-positive-default;
+    }
+    &.warning {
+        @include button-colors-normal-warning-default;
+    }
+    &.destructive {
+        @include button-colors-normal-destructive-default;
+    }
+}
+
+.button, button {
+    &.normal {
+        &.navigational { @include button-normal-navigational;}
+        &.mutating { @include button-normal-mutating;}
+        &.positive { @include button-normal-positive;}
+        &.warning { @include button-normal-warning;}
+        &.destructive { @include button-normal-destructive;}
+    }
+
+    &.emphasized {
+        &.navigational { @include button-emphasized-navigational;}
+        &.mutating { @include button-emphasized-mutating;}
+        &.positive { @include button-emphasized-positive;}
+        &.warning { @include button-emphasized-warning;}
+        &.destructive { @include button-emphasized-destructive;}
+    }
+}
+
+.button, button {
+    &[rel="save"], 
+    &[rel="promote"],
+    &[rel="demote"] {
+        &.normal {@include button-normal-mutating;}
+        &.emphasized {@include button-emphasized-mutating;}
+    }
+    &[rel="demote"] {
+        &.normal {@include button-normal-warning;}
+        &.emphasized {@include button-emphasized-warning;}
+    }
+
+    &[rel="edit"] {
+        &.normal {@include button-normal-navigational;}
+        &.emphasized {@include button-emphasized-navigational;}
+    }
+
+    &[rel="delete"] {
+        &.normal {@include button-normal-destructive;}
+        &.emphasized {@include button-emphasized-destructive;}
+    }
+}
+
+.activities-list {
+    ul {
+        @include activitylist;
+        @include activitylist--vertical;
+    }
+}
+
+.info-box, .primary-activities-box, .notifications-box {
+    //display: inline-block would result in an unwanted margin
+    display: block;
+}
+
+.page-main {
+    padding: $base-spacing;
+}
+
+.page-footer {
+    @include sheet;
+}
+
+.brand {
+    padding: 10px 20px 10px 20px;
+
+    h1 {
+        margin: 0;
+    }
+
+    a {
+        background: url('binaries/icons/honeybee-logo.png');
+        background-repeat: no-repeat;
+
+        display: block;
+        padding-left: 26px + 10px; // logo width + padding
+        text-decoration: none;
+
+        span {
+            font-size: $font-size * 1.285; // 18px
+            font-weight: normal;
+            color: color(darkgrey2);
+            padding: 0;
+        }
+    }
+
+    .brand__entity {
+        font-weight: bold;
+    }
+
+    .brand__title {
+        margin-left: 0.25em;
+    }
+}
+
+.page-header {
+    background-color: color(white);
+}
+
+.page-subheader {
+    padding: 10px 20px;
+    border-width: 1px 0px;
+    border-style: solid;
+    border-color: color(grey2);
+    border-bottom-color: color(grey1);
+    background-color: color(lightgrey2);
+}
+
+.page-title {
+    @include typography-default;
+    color: color(darkgrey2);
+}
+
+.disabled {
+    opacity: 1.0; //reset inuits disabled opacity
+}
+
+.sheet {
+    @extend %sheet;
+    margin-bottom: $base-spacing;
+}
+
+label {
+    cursor: pointer;
+}
+
+/*
+.menu__toggle {
+    @include activity-mutating;
+    @include activity-mutating-focus;
+}
+*/

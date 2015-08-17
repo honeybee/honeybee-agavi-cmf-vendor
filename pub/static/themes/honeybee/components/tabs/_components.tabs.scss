@@ -1,0 +1,25 @@
+.hb-tabs {
+    @include hb-tabs("hb-tabs");
+
+    .hb-tabs__toggle {
+        label {
+            @include activity();
+            @include activity-navigational();
+
+            &.selected {
+                @include activity-navigational-highlight();
+            }
+
+            &:focus,
+            &.focus {
+                outline: 1px solid color(grey);
+            }
+        }
+    }
+
+    .hb-tabs__toggles {
+        margin-bottom: $base-spacing;
+        border-bottom: 3px solid color(grey-light);
+    }
+}
+

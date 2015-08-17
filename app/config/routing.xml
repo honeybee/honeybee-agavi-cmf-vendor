@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/routing/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <!-- default WEB routes -->
+    <ae:configuration context="web">
+        <routes>
+
+            <!-- try to set output type depeding on Accept header content negotiation and thus override uri extension-->
+            <route name="negotiate_output_type" pattern="" source="_SERVER[HTTP_ACCEPT]" stop="false">
+                <callback class="Honeybee\FrameworkBinding\Agavi\Routing\NegotiateOutputTypeRoutingCallback">
+                    <ae:parameter name="default_output_type">html</ae:parameter>
+                </callback>
+            </route>
+            <!-- override output type depending on file extension of request uri -->
+            <route name="override_output_type" pattern=".(ext:[a-z]+)$" stop="false" cut="true">
+                <callback class="Honeybee\FrameworkBinding\Agavi\Routing\SetOutputTypeRoutingCallback">
+                    <ae:parameter name="uri_extensions">
+                        <ae:parameter name="html">
+                            <ae:parameter>html</ae:parameter>
+                            <ae:parameter>htm</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="xml">xml</ae:parameter>
+                        <ae:parameter name="json">json</ae:parameter>
+                    </ae:parameter>
+                </callback>
+                <ignore>ext</ignore>
+            </route>
+
+            <!-- matches "/de" or "/en" at the beginning of the URL and uses either value to set the locale,
+                 with British Pounds Sterling as the currency. Execution will not stop if this route matches.
+                 If it matches, the matched fragment will be stripped from the input URL for the following routes.
+                 This route has the "imply" flag, which means that it will be included in generated routes even if the gen()
+                 call does not explicitly mention it. The matched "language" parameter will not be available
+                 as a request parameter in the code, because it's "ignore"d
+            -->
+            <route name="locale" pattern="^/({locale:[a-z]{2}(_[A-Z]{2})?})" stop="false" imply="true" cut="true" locale="${locale}">
+                <callbacks>
+                    <callback class="Honeybee\FrameworkBinding\Agavi\Routing\LanguageRoutingCallback" />
+                </callbacks>
+                <ignores>
+                    <ignore>locale</ignore>
+                </ignores>
+            </route>
+
+            <!-- cms homepage/dashboard -->
+            <route name="index" pattern="^/$" module="%actions.default_module%" action="%actions.default_action%" />
+
+            <!-- <route name="disabled" pattern="^/disabled$" module="Honeybee_Core" action="Disabled" /> -->
+
+            <!-- WEB routes of all modules -->
+            <xi:include href="./includes/routing.xml"
+                xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='web']/r:routes/*)">
+                <xi:fallback />
+            </xi:include>
+
+            <!-- global type-unspecific default gen-only routes for use in renderers etc. -->
+            <route name="module" pattern="^/({module:[A-Za-z\-\/_]{3,128}})/">
+                <callbacks>
+                    <callback class="Honeybee\FrameworkBinding\Agavi\Routing\GenOnlyRoutingCallback" />
+                    <callback class="Honeybee\FrameworkBinding\Agavi\Routing\ModuleRoutingCallback" />
+                </callbacks>
+                <xi:include href="default_type_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='web']/*)" />
+            </route>
+
+            <!--
+                 If no route matched here, the 404 action will be used. You may
+                 change this by including a route with an empty pattern here.
+            -->
+        </routes>
+    </ae:configuration>
+
+    <!-- default CLI routes -->
+    <ae:configuration context="console">
+        <routes>
+            <!-- global type-unspecific default gen-only routes for use in renderers etc. -->
+            <route name="module" pattern="^({module:[A-Za-z\-\/_]{3,128}}).">
+                <callbacks>
+                    <callback class="Honeybee\FrameworkBinding\Agavi\Routing\GenOnlyRoutingCallback" />
+                    <callback class="Honeybee\FrameworkBinding\Agavi\Routing\ModuleRoutingCallback" />
+                </callbacks>
+                <xi:include href="default_type_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='console']/*)" />
+            </route>
+        </routes>
+    </ae:configuration>
+
+    <!-- default Non-WEB routes of all modules (this includes CLI routes) -->
+    <xi:include href="./includes/routing.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration[not(@context='web')])">
+        <xi:fallback />
+    </xi:include>
+
+
+</ae:configurations>

@@ -1,0 +1,142 @@
+{%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
+<div class="hb-field {{ css|default('') }}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
+    data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
+    data-attribute-path="{{ attribute_path }}" data-resource-type-prefix="{{ resource_type_prefix }}" data-resource-type-name="{{ resource_type_name }}"
+    data-resource-identifier="{{ resource_identifier }}" data-upload-url="{{ upload_url }}">
+    <div class="popup-content-here"></div>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-field__value">
+            <div class="imagelist">
+                <label class="imagelist__multiple-label hide" for="{{field_id}}_multiple">Add Images</label>
+                <input
+                    id="{{field_id}}_multiple"
+                    type="file"
+                    class="imagelist__input-multiple hide"
+                    multiple
+                    {{ required }} {{ disabled }}
+                />
+                {#
+                <div class="imagelist__thumbs">
+                    <ul>
+                        {%- for image in attribute_value -%}
+                            {% include "html/attribute/image-list/image-list-thumb.twig" with {
+                                item_id: field_id ~ loop.index0,
+                                image_url: image.image_url,
+                                alt: image.caption|default(image.title)|default(''),
+                                form_name: grouped_field_name ~"["~ loop.index0 ~"]",
+                                css: "item "
+                            } %}
+                        {%- endfor -%}
+                        {%- include "html/attribute/image-list/image-list-thumb.twig" with {
+                            item_id: field_id ~ attribute_value|length,
+                            form_name: grouped_field_name ~"["~ attribute_value|length ~"]",
+                            image_url: "http://placehold.it/400x400",
+                            alt: "new image",
+                            css: "newitem"
+                        } -%}
+                    </ul>
+                </div>#}
+                <ul class="imagelist__images">
+                    {% if isReadable %}
+                        {# and the empty element to add a new image #}
+                        {%- include "html/attribute/image-list/image-list-item.twig" with {
+                            field_id: field_id,
+                            item_id: field_id ~ attribute_value|length,
+                            form_name: grouped_field_name ~"[0]",
+
+                            image_url: "static/themes/honeybee/binaries/150x150.gif",
+                            location: "",
+                            title: "",
+                            caption: "",
+                            copyright: "",
+                            copyright_url: "",
+                            source: "",
+                            aoi: "",
+                            meta_data: {},
+
+                            checked: false,
+                            newitem: true,
+
+                            readonly: readonly,
+                            disabled: disabled,
+                        } -%}
+                    {% endif %}
+                    {%- for image in images -%}
+                        {% include "html/attribute/image-list/image-list-item.twig" with {
+
+                            field_id: field_id,
+                            item_id: field_id ~ loop.index0,
+                            form_name: grouped_field_name ~"["~ loop.index ~"]",
+
+                            image_url: image.image_url,
+                            location: image.location,
+                            title: image.title,
+                            caption: image.caption,
+                            copyright: image.copyright,
+                            copyright_url: image.copyright_url,
+                            source: image.source,
+                            meta_data: image.meta_data,
+                            aoi: image.aoi,
+
+                            checked: false,
+                            newitem: false,
+
+                            readonly: readonly,
+                            disabled: disabled,
+                        } %}
+                    {%- endfor -%}
+                </ul>
+                <script class="imagelist__item-template" type="text/plain">
+                    {#
+                        this is a template for rendering new items
+                        with lodash.js on the client side.
+
+                        note that it uses {@ @} as delimiters instead of <% %> to avoid
+                        trouble with Twig's autoescaping
+                    #}
+                    {% include "html/attribute/image-list/image-list-item.twig" with {
+                        field_id: field_id,
+                        item_id: "{@= item_id @}",
+                        checked: false,
+                        image_url: "{@= image_url @}",
+                        form_name: grouped_field_name ~"[{@= index @}]",
+                        title: "",
+                        caption: "",
+                        copyright: "",
+                        copyright_url: "",
+                        newitem: false,
+                        aoi: "",
+                        source: "",
+                        meta_data: {},
+                        css: "",
+                        meta_data: {
+                            aoi: ""
+                        },
+                        escaping: false,
+                        readonly: readonly,
+                        disabled: disabled
+                    } %}
+                </script>
+                {#
+                <script class="imagelist__thumb-template" type="text/plain">
+                    {%- include "html/attribute/image-list/image-list-thumb.twig" with {
+                        item_id: "{@= item_id @}",
+                        image_url: "{@= image_url @}",
+                        form_name: grouped_field_name ~"[{@= index @}]",
+                        alt: "",
+                        css: "item",
+                        readonly: readonly,
+                        disabled: disabled
+                    } -%}
+                </script>
+                #}
+            </div>
+        </div><!--
+        --><div class="hb-field__extra">
+        </div>
+    </div>
+</div>

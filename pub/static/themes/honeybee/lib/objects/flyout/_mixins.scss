@@ -1,0 +1,122 @@
+/**
+
+Flyout
+
+two elements with arbitrary content, one of which is visible by default, the other one 
+appears when the "toggle" element is clicked.
+A hidden checkbox is used to handle the components state.
+
+HTML element structure:
+```
+    .flyout
+        checkbox.flyout__trigger#CBID
+        div.flyout__default (optional)
+            ...
+        label.flyout__toggle[for=CBID]
+        div.flyout__more
+            ...
+```
+
+This UI widget needs a javascript behaviour to:
+- close the .flyout__more area when the body or other elements are clicked (via unchecking the checkbox)
+- change text of .flyout__toggle depending on clicked (active?) action
+*/
+$z-layer-popover: zindex("popover", 0) !default;
+
+@mixin flyout($flyout_name) {
+    $flyout_name: "flyout" !default;
+
+    position: relative;
+
+    .#{$flyout_name}__more {
+        display: none;
+    }
+
+    .#{$flyout_name}__toggle {
+        display: block;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .#{$flyout_name}__trigger {
+        @include visuallyhidden-fixed;
+
+        &:checked ~ .#{$flyout_name}__more {
+            display: block;
+        }
+    }
+
+    .action {
+        display: block;
+        text-align: left;
+    }
+
+    @content;
+}
+
+/* the "default" and "toggle" elements will be rendered in one row with no break between them */
+@mixin flyout--default-inline($flyout_name) {
+    $flyout_name: "flyout" !default;
+
+    .#{$flyout_name}__default,
+    .#{$flyout_name}__toggle {
+        display: inline-block;
+        vertical-align: top;
+    }
+}
+
+/* the "more" box will lay itself over the following content, like a tarditional menu or <select> */
+@mixin flyout--popover($flyout_name, $z-index: $z-layer-popover) {
+    $flyout_name: "flyout" !default;
+
+    $z-index: $z-layer-popover !default;
+
+    .#{$flyout_name}__more {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: $z-index;
+        /*min-width: 10rem;*/
+
+        &::before {
+            /* use "before" for the shadow so all other content is drawn on top of it */
+            content: "";
+            position: absolute;
+            bottom: 0px;
+            left: 10px;
+            right: 10px;
+            height: 10px;
+            box-shadow: 0 0 10px black;
+        }
+    }
+}
+
+/* the popover will have equal width to the flyout container */
+@mixin flyout--fit($flyout_name) {
+    $flyout_name: "flyout" !default;
+
+    .#{$flyout_name}__more {
+        width: 100%;
+    }
+}
+
+
+/* more menu appears above the default menu + toggle */
+/* this has no effect without flyout--popover */
+@mixin flyout--popover-up($flyout_name) {
+    $flyout_name: "flyout" !default;
+
+    .#{$flyout_name}__more {
+        bottom: 100%;
+        top: initial;
+
+        &::before {
+            /* move the drop shadow to the top */
+            top: 0px;
+            bottom: initial;
+        }
+    }
+
+    @content;
+}
+

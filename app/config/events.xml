@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/event_bus/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <xi:include href="./includes/events.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+    <ae:configuration>
+        <event_bus>
+            <transports>
+                <transport name="event_queue">
+                    <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport</implementor>
+                    <settings>
+                        <setting name="exchange">honeybee.domain.events</setting>
+                    </settings>
+                </transport>
+                <transport name="event_pub">
+                    <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport</implementor>
+                    <settings>
+                        <setting name="channel">%event_pub.default_channel%</setting>
+                        <setting name="host">%event_pub.pull_socket.host%</setting>
+                        <setting name="port">%event_pub.pull_socket.port%</setting>
+                    </settings>
+                </transport>
+                <transport name="sync">
+                    <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\SynchronousTransport</implementor>
+                </transport>
+            </transports>
+
+            <channels>
+                <channel name="honeybee.events.domain">
+                    <subscriptions>
+                        <subscription enabled="true">
+                            <transport>sync</transport>
+                            <filter>
+                                <setting name="expression">event.getType() matches "/.*/"</setting>
+                            </filter>
+                            <handler implementor="\Honeybee\Projection\EventHandler\DomainEventProjector">
+                                <settings>
+                                    <setting name="storage_writer">honeybee::domain_event::view_store::writer</setting>
+                                </settings>
+                            </handler>
+                        </subscription>
+                    </subscriptions>
+                </channel>
+
+                <channel name="honeybee.events.replay">
+                    <subscriptions>
+                        <subscription enabled="true">
+                            <transport>sync</transport>
+                            <filter>
+                                <setting name="expression">event.getType() matches "/.*/"</setting>
+                            </filter>
+                            <handler implementor="\Honeybee\Projection\EventHandler\DomainEventProjector">
+                                <settings>
+                                    <setting name="storage_writer">honeybee::domain_event::view_store::writer</setting>
+                                </settings>
+                            </handler>
+                        </subscription>
+                    </subscriptions>
+                </channel>
+            </channels>
+        </event_bus>
+    </ae:configuration>
+</ae:configurations>

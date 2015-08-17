@@ -1,0 +1,10 @@
+.view-templates-confirm-delete {
+    @extend %single-box-as-sheet;
+
+    .hb-item {
+
+        .hb-tabs__header {
+            display: none;
+        }
+    }
+}

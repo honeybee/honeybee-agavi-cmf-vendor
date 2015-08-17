@@ -1,0 +1,102 @@
+{% if wrapper is not defined %}
+    {% set wrapper = false %}
+{% endif %}
+
+{% set wrapper_name = name | default("unnamed") %}
+{% set wrapper_tag = wrapper_tag | default("div") %}
+{% set wrapper_css = wrapper_css | default("") %}
+{% set wrapper_attr = (wrapper_attr | default({})) | cast_to_array %}
+
+{% set box1 = box1 | default("box1") %}
+{% set box1_tag = box1_tag | default("div") %}
+{% set box1_css = box1_css | default("") %}
+{% set box1_attr = (box1_attr | default({})) | cast_to_array %}
+{% if box1_wrapper is not defined %}
+    {% set box1_wrapper = false %}
+{% endif %}
+
+{% set box2 = box2 | default("box2") %}
+{% set box2_tag = box2_tag | default("div") %}
+{% set box2_css = box2_css | default("") %}
+{% set box2_attr = (box2_attr | default({})) | cast_to_array %}
+{% if box2_wrapper is not defined %}
+    {% set box2_wrapper = false %}
+{% endif %}
+
+{% set box3 = box3 | default("box3") %}
+{% set box3_tag = box3_tag | default("div") %}
+{% set box3_css = box3_css | default("") %}
+{% set box3_attr = (box3_attr | default({})) | cast_to_array %}
+{% if box3_wrapper is not defined %}
+    {% set box3_wrapper = false %}
+{% endif %}
+
+{% set box4 = box4 | default("box4") %}
+{% set box4_tag = box4_tag | default("div") %}
+{% set box4_css = box4_css | default("") %}
+{% set box4_attr = (box4_attr | default({})) | cast_to_array %}
+{% if box4_wrapper is not defined %}
+    {% set box4_wrapper = false %}
+{% endif %}
+
+{% set box5 = box5 | default("box5") %}
+{% set box5_tag = box5_tag | default("div") %}
+{% set box5_css = box5_css | default("") %}
+{% set box5_attr = (box5_attr | default({})) | cast_to_array %}
+{% if box5_wrapper is not defined %}
+    {% set box5_wrapper = false %}
+{% endif %}
+
+{% if wrapper == true %}
+<{{ wrapper_tag }} class="{{ wrapper_name }} {{ wrapper_css }}" {% for attr, val in wrapper_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>
+{% endif %}
+    <div class="{{ wrapper_name }}-layout">
+        <div class="{{ box1 }}-box">
+            {% if box1_wrapper == true %}
+            <div class="{{ box1 }}-wrapper">
+            {% endif %}
+                <{{ box1_tag }} class="{{ box1 }} {{ box1_css}}" {% for attr, val in box1_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box1 %}{% endblock %}</{{ box1_tag }}>
+            {% if box1_wrapper == true %}
+            </div>
+            {% endif %}
+        </div><!--
+        --><div class="{{ box2 }}-box">
+            {% if box2_wrapper == true %}
+            <div class="{{ box2 }}-wrapper">
+            {% endif %}
+                <{{ box2_tag }} class="{{ box2 }} {{ box2_css}}" {% for attr, val in box2_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box2 %}{% endblock %}</{{ box2_tag }}>
+            {% if box2_wrapper == true %}
+            </div>
+            {% endif %}
+        </div><!--
+        --><div class="{{ box3 }}-box">
+            {% if box3_wrapper == true %}
+            <div class="{{ box3 }}-wrapper">
+            {% endif %}
+                <{{ box3_tag }} class="{{ box3 }} {{ box3_css}}" {% for attr, val in box3_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box3 %}{% endblock %}</{{ box3_tag }}>
+            {% if box3_wrapper == true %}
+            </div>
+            {% endif %}
+        </div><!--
+        --><div class="{{ box4 }}-box">
+            {% if box4_wrapper == true %}
+            <div class="{{ box4 }}-wrapper">
+            {% endif %}
+                <{{ box4_tag }} class="{{ box4 }} {{ box4_css}}" {% for attr, val in box4_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box4 %}{% endblock %}</{{ box4_tag }}>
+            {% if box4_wrapper == true %}
+            </div>
+            {% endif %}
+        </div><!--
+        --><div class="{{ box5 }}-box">
+            {% if box5_wrapper == true %}
+            <div class="{{ box5 }}-wrapper">
+            {% endif %}
+                <{{ box5_tag }} class="{{ box5 }} {{ box5_css}}" {% for attr, val in box5_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box5 %}{% endblock %}</{{ box5_tag }}>
+            {% if box5_wrapper == true %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% if wrapper == true %}
+</{{ wrapper_tag }}>
+{% endif %}

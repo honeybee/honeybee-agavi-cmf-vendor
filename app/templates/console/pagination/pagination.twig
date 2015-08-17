@@ -1,0 +1,7 @@
+Page {{ current_page_number }} of {{ number_of_pages }}
+
+- {{ _('pager.first_page.title', translation_domain) }} ({{ first_page_number }}): {{ first_page_url|raw }}
+- {{ _('pager.prev_page.title', translation_domain) }} ({{ prev_page_number }}): {{ prev_page_url|raw }}
+- {{ _('pager.next_page.title', translation_domain) }} ({{ next_page_number }}): {{ next_page_url|raw }}
+- {{ _('pager.last_page.title', translation_domain) }} ({{ last_page_number }}): {{ last_page_url|raw }}
+

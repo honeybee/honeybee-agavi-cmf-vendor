@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.agavi_dir%/config/defaults/validators.xml">
+    <ae:configuration>
+        <validator_definitions>
+
+            <validator_definition name="dialog" class="Honeybee\FrameworkBinding\Agavi\Validator\ConsoleDialogValidator">
+                <ae:parameter name="required">true</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator_definition>
+
+            <validator_definition name="ModuleImportConsumer" class="AgaviStringValidator">
+                <errors>
+                    <error>Please specify a %name$s defined in the module's imports.xml file.</error>
+                    <error for="min">A valid %name$s needs at least %min$s characters.</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="min">4</ae:parameter>
+                    <ae:parameter name="description">Name of a consumer from the module's imports.xml file.</ae:parameter>
+                </ae:parameters>
+            </validator_definition>
+
+            <validator_definition name="ModuleExportProvider" class="AgaviStringValidator">
+                <errors>
+                    <error>Please specify a %name$s defined in the module's exports.xml file.</error>
+                    <error for="min">A valid %name$s needs at least %min$s characters.</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="min">4</ae:parameter>
+                    <ae:parameter name="description">Name of a provider from the module's exports.xml file.</ae:parameter>
+                </ae:parameters>
+            </validator_definition>
+
+            <validator_definition class="AgaviInarrayValidator" name="valid_save_action">
+                <errors>
+                    <error>Only specific types are allowed as submit button values.</error>
+                    <error for="type">Only strings are allowed as submit button values.</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="type">string</ae:parameter>
+                    <ae:parameter name="case">true</ae:parameter>
+                    <ae:parameter name="values">
+                        <ae:parameter>save_and_continue</ae:parameter>
+                        <ae:parameter>save_resource</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </validator_definition>
+
+        </validator_definitions>
+
+        <validators method="write">
+            <validator class="valid_save_action" required="false">
+                <arguments>
+                    <argument>__submit</argument>
+                </arguments>
+            </validator>
+            <validator class="isset" name="valid_editform_tab" required="false">
+                <argument>tabs_as_fields_with_viewtemplate</argument>
+            </validator>
+        </validators>
+
+    </ae:configuration>
+</ae:configurations>

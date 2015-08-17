@@ -1,0 +1,72 @@
+%hb-itemlist,
+.hb-itemlist {
+    width: 100%;
+
+    .hb-itemlist__items {
+        @extend %list-bare;
+    }
+
+    .hb-item {
+        position: relative;
+        margin: $base-spacing;
+        padding: $base-spacing;
+    }
+
+    .hb-field__content,
+    .hb-field__label,
+    .hb-field__value {
+        display: block;
+        vertical-align: middle;
+    }
+
+    @include media-query(palm) {
+        @include itemlist-cards;
+
+        .hb-item {
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 1*$base-spacing;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        .hb-field {
+            line-height: $base-spacing;
+            display: block;
+        }
+
+        .hb-actions {
+            display: block;
+        }
+
+        .hb-field__label,
+        .hb-field__value {
+            display: block;
+        }
+    }
+
+    @include media-query(lap-and-up) {
+        @include itemlist-table;
+
+        .hb-field__label {
+            display: none;
+        }
+
+        .hb-field,
+        .hb-actions,
+        .hb-itemlist__title {
+            padding-left: $base-spacing;
+        }
+
+        .hb-field__content {
+            padding-right: $base-spacing;
+        }
+
+        $w: percentage(1/12);
+        .hb-actions {
+            width: 2*$w;
+        }
+    }
+}

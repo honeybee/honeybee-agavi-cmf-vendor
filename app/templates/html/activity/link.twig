@@ -1,0 +1,8 @@
+{%- set emphasized = emphasized | default(false) -%}
+<a
+    href="{{ link }}"
+    rel="{{ activity.rels|join(' ') }}"
+    class="{{ css|join(' ') }} {{emphasized ? "emphasized" : "normal"}}"
+    title="{{ _(activity.description, translation_domain) }}"
+>{{ _(activity.label, translation_domain) }}</a>
+

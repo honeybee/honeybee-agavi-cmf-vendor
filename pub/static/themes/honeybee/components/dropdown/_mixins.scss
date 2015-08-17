@@ -1,0 +1,55 @@
+@mixin dropdown($name: "dropdown") {
+    @include flyout("#{$name}");
+    @include flyout--fit("#{$name}");
+    @include flyout--default-inline("#{$name}");
+
+    @include media-query(lap-and-up) {
+        @include flyout--popover("#{$name}");
+    }
+
+    @at-root {
+        .#{$name}__default {
+            @include activity();
+            @include activity-underline();
+            @include activity-navigational();
+
+            padding-right: 2*$base-spacing;
+        }
+
+        .#{$name}__more {
+            @include media-query(palm) {
+                width: auto;
+                margin-right: -2*$base-spacing;
+            }
+        }
+
+        .#{$name}__more .activity {
+            @include activity-underline();
+        }
+
+        .#{$name}__toggle {
+            @include activity;
+            @include activity-navigational();
+            @include activity-underline();
+
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 2* $base-spacing;
+            text-align: center;
+        }
+
+        .#{$name}__more ul {
+            @include activitylist();
+            @include activitylist--vertical();
+        }
+
+        .#{$name}__trigger:focus {
+            ~ .#{$name}__default,
+            ~ .#{$name}__toggle {
+                @include activity-navigational-focus();
+            }
+        }
+    }
+}
+

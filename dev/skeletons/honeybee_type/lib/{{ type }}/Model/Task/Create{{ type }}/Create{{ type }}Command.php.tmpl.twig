@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ vendor }}\{{ package }}\{{ type }}\Model\Task\Create{{ type }};
+
+use Honeybee\Model\Task\CreateAggregateRoot\CreateAggregateRootCommand;
+
+class Create{{ type }}Command extends CreateAggregateRootCommand
+{
+    public function getEventClass()
+    {
+        return {{ type }}CreatedEvent::CLASS;
+    }
+}

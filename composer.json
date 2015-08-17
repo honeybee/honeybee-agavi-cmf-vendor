@@ -1,22 +1,58 @@
 {
-    "name": "honeybee/honeybee-agavi-vendor-cmf",
+    "name": "honeybee/honeybee-agavi-cmf-vendor",
     "type": "library",
-    "description": "Skeleton, that can be copied to create new Honeybee-Agavi CMF applications.",
-    "keywords": ["honeybee", "agavi", "mvc", "cqrs", "ddd", "event-sourcing", "hexagonal", "framework", "php"],
-    "homepage": "https://github.com/honeybee/honeybee-agavi-cmf-skeleton",
+    "description": "Vendor library that is used in the honeybee-agavi-cmf-project.",
+    "keywords": ["honeybee", "agavi"],
+    "homepage": "https://github.com/honeybee/honeybee-agavi-cmf-vendor",
     "license": "MIT",
     "authors": [
         {
-            "name": "Thorsten Schmitt-Rink"
+            "name": "Hasham Ahmad",
+            "email": "mr.hash@gmail.com",
+            "role": "Developer"
         },
         {
-            "name": "Steffen Gransow"
+            "name": "Steffen Gransow",
+            "email": "honeybee@mivesto.de",
+            "role": "Developer"
         },
         {
-            "name": "Igor Pelligrini"
+            "name": "Thorsten Schmitt-Rink",
+            "email": "schmittrink@gmail.com",
+            "role": "Developer"
         },
         {
-            "name": "Hasham Ahmad"
+            "name": "Honeybee Contributors",
+            "homepage": "https://github.com/honeybee/honeybee-agavi-cmf-vendor/graphs/contributors"
         }
-    ]
+    ],
+
+    "support": {
+        "issues": "https://github.com/honeybee/honeybee-agavi-cmf-vendor/issues",
+        "irc": "irc://irc.freenode.org/honeybee"
+    },
+
+    "autoload": {
+        "psr-4": { "Honeybee\\FrameworkBinding\\Agavi\\" : "app/lib/Agavi" }
+    },
+
+    "prefer-stable": true,
+
+    "require": {
+        "php": ">=5.5.0",
+        "lib-libxml": "*",
+        "honeybee/agavi": "1.1.*",
+        "honeybee/honeybee": "master@dev",
+        "honeybee/trellis": "master@dev",
+        "shrink0r/workflux": "master@dev",
+        "symfony/finder": "2.7.*",
+        "symfony/process": "2.7.*",
+        "graste/environaut": "0.5.*",
+        "michelf/php-markdown": "1.5.*",
+        "monolog/monolog": "1.16.*",
+        "mthaml/mthaml": "1.7.*",
+        "swiftmailer/swiftmailer": "5.4.*",
+        "symfony/validator": "2.7.*",
+        "willdurand/negotiation": "1.4.*"
+    }
 }

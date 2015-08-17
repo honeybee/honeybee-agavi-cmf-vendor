@@ -1,0 +1,16 @@
+@import "mixins";
+
+%dropdown,
+.dropdown {
+    @include dropdown("dropdown");
+}
+
+%dropdown-normal,
+.dropdown-normal {
+    @include dropdown-normal("dropdown-normal");
+}
+
+%dropdown-emphasized,
+.dropdown-emphasized {
+    @include dropdown-emphasized("dropdown-emphasized");
+}

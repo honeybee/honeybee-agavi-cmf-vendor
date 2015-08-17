@@ -1,0 +1,84 @@
+$color-on: green;
+$color-off: red;
+
+.settings {
+
+fieldset {
+    margin-bottom: 2em;
+}
+
+fieldset > label {
+    position: relative;
+    display: block;
+    padding: 1em 0;
+    margin: 0 1em;
+    border-top: 1px dotted black;
+    cursor: pointer;
+
+    &:first-of-type {
+        border: none;
+    }
+
+    p {
+        padding: 0 3em;
+        font-size: 0.8em;
+        //color: lighten(black, 60%);
+        color: black;
+    }
+
+    &:hover {
+        background-color: #f0f0f0;
+    }
+}
+
+input[type=checkbox] {
+    margin-right: 1em;
+}
+
+input[type=checkbox] {
+    ~ .on {
+        display: none;
+        color: $color-on;
+    }
+    ~ .off {
+        color: $color-off;
+    }
+    ~ .glue-on {
+        display: none;
+    }
+    ~ .glue-off {
+        display: inline;
+    }
+
+    &:checked {
+        ~ .on {
+            display: inline;
+        }
+        ~ .off {
+            display: none;
+        }
+        ~ .glue-on {
+            display: inline;
+        }
+        ~ .glue-off {
+            display: none;
+        }
+    }
+
+    &.color-reverse {
+        ~ .on {
+            color: $color-off;
+        }
+        ~ .off {
+            color: $color-on;
+        }
+        &:checked ~ .off {
+            color: $color-on;
+        }
+        &:checked ~ .on {
+            color: $color-off;
+        }
+    }
+}
+
+}

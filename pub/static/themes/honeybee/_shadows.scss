@@ -1,0 +1,16 @@
+@mixin shadow-container() {
+    border: 1px solid color(grey-warm-light);
+    box-shadow: 0 0 20px rgba(color(black), 0.1);
+
+    @content;
+}
+
+@mixin shadow-overlay() {
+    box-shadow: 0 0 10px rgba(color(black), 0.3);
+
+    @content;
+}
+
+@mixin shadow-panels() {
+    box-shadow: 1px 1px 1px 1px rgba(color(black), 0.3);
+}

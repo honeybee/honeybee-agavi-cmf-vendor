@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_SystemAccount/config/validators.xml">
+    <ae:configuration>
+        <validators translation_domain="honeybee.system_account.user.errors">
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ListConfigValidator" name="invalid_list_config" required="true">
+                <ae:parameter name="default_limit">50</ae:parameter>
+            </validator>
+        </validators>
+
+        <validators method="write" translation_domain="honeybee.system_account.user.errors">
+            <validator class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator" name="invalid_user" required="true">
+                <arguments base="create_user" />
+                <error>Invalid command payload given.</error>
+                <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
+                <ae:parameter name="command_implementor">Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommand</ae:parameter>
+                <ae:parameter name="attribute_blacklist">
+                    <ae:parameter>auth_token</ae:parameter>
+                    <ae:parameter>password_hash</ae:parameter>
+                    <ae:parameter>token_expire_date</ae:parameter>
+                </ae:parameter>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

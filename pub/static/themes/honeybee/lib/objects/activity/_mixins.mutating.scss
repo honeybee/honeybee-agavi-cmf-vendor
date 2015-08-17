@@ -1,0 +1,62 @@
+@mixin activity-mutating-default {
+    @include activity-colors((
+        background: color(blue),
+        text: color(white),
+        border: color(blue-shadow)
+    ));
+}
+
+@mixin activity-mutating-focus {
+    @include activity-mutating-default;
+    @include activity-shade(color(white), 0.7);
+}
+
+@mixin activity-mutating-active {
+    @include activity-colors((
+        background: mix(color(blue), #fff, 70%),
+        text: color(white),
+        border: color(blue-shadow)
+    ));
+}
+
+@mixin activity-mutating-hover {
+    @include activity-colors((
+        background: color(blue-hover),
+        text: color(white),
+        border: color(blue-shadow)
+    ));
+}
+
+@mixin activity-mutating-disabled {
+    @include activity-colors((
+        background: mix(color(blue), color(grey-neutral), 30%),
+        text: rgba(color(white), 0.6),
+        border: color(grey-medium)
+    ));
+}
+
+
+@mixin activity-mutating {
+    @include activity-mutating-default;
+
+    &:focus,
+    &.focus {
+        @include activity-mutating-focus;
+    }
+
+    &:hover,
+    &.hover {
+        @include activity-mutating-hover;
+    }
+
+    &:active,
+    &.active {
+        @include activity-mutating-active;
+    }
+
+    &:disabled,
+    &.disabled {
+        @include activity-mutating-disabled;
+    }
+}
+

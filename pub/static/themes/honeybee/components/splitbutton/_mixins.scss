@@ -1,0 +1,63 @@
+@mixin splitbutton($name: "splitbutton") {
+    @include flyout("#{$name}");
+    @include flyout--fit("#{$name}");
+    @include flyout--default-inline("#{$name}");
+
+    @include media-query(lap-and-up) {
+        @include flyout--popover("#{$name}");
+    }
+
+    @at-root {
+        .#{$name}__default {
+            width: 100%;
+
+            padding-right: 2*$base-spacing;
+
+            .activity {
+                width: 100%;
+                @include activity-left();
+                @include activity-underline();
+            }
+        }
+
+        .#{$name}--empty .#{$name}__default {
+            padding-right: 0;
+        }
+
+        .#{$name}__more {
+            @include media-query(palm) {
+                width: auto;
+                margin-right: -2*$base-spacing;
+            }
+        }
+
+        .#{$name}__more .activity {
+            @include activity-left();
+            @include activity-underline();
+        }
+
+        .#{$name}__toggle {
+            @include activity;
+            @include activity-navigational-highlight();
+            @include activity-underline();
+
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 2* $base-spacing;
+            text-align: center;
+        }
+
+        .#{$name}__more ul {
+            @include activitylist();
+            @include activitylist--vertical();
+        }
+
+        .#{$name}__trigger:focus {
+            ~ .#{$name}__toggle {
+                @include activity-navigational-highlight-focus;
+            }
+        }
+    }
+}
+

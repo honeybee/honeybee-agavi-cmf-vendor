@@ -1,0 +1,35 @@
+@mixin input-textual-colors-default {
+    color: color(text-primary);
+    border-color: color(lines);
+    outline-color: transparent;
+    background-color: color(background-blank);
+    &::-webkit-input-placeholder {
+        color: color(text-secondary);
+    }
+}
+@mixin input-textual-colors-hover {
+    @include input-textual-colors-default;
+    background-color: color(background-neutral);
+}
+@mixin input-textual-colors-focus {
+    @include input-textual-colors-default;
+    outline-color: rgba(color(blue), 0.5);
+}
+@mixin input-textual-colors-active {
+    @include input-textual-colors-default;
+}
+@mixin input-textual-colors-disabled {
+    color: color(text-secondary);
+    background-color: color(background-heavy);
+    border-color: color(lines);
+}
+@mixin input-textual-colors-invalid {
+    color: color(destructive-primary);
+    background-color: color(background-blank);
+    border-color: color(destructive-primary);
+}
+@mixin input-textual-colors-valid {
+    color: color(positive-secondary);
+    background-color: color(background-blank);
+    border-color: color(positive-secondary);
+}

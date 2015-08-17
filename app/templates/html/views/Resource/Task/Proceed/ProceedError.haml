@@ -1,0 +1,12 @@
+- extends _layout
+
+- block primary
+    <h2>Resource/Workflow/ProceedError</h2>
+    - embed 'html/layout/grid/1_boxes.twig' with {'name':'proceed', 'box1':'content'}
+        - block box1
+            %p An unexpected error occured while trying to handle proceed request.
+            - if errors is defined
+                %ul.errors
+                    - for error in errors
+                        %li.error
+                            %span = error

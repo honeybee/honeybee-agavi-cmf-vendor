@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/output_formats/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <ae:configuration>
+
+        <output_formats>
+
+            <output_format name="html"><!-- renderer_locator="Honeybee\Ui\Renderer\RendererLocator" -->
+                <acceptable_content_types>
+                    <accept>text/html</accept>
+                    <accept>application/xhtml+xml</accept>
+                    <accept>*/*</accept>
+                </acceptable_content_types>
+                <content_type>text/html</content_type>
+                <media_type_info>
+                    <type>text</type>
+                    <subtype>html</subtype>
+                    <suffix></suffix>
+                    <template>text/html</template>
+                    <template_alternatives>
+                        <template_alternative>text/html</template_alternative>
+                    </template_alternatives>
+                    <optional_parameters>
+                        <optional_parameter name="charset">description</optional_parameter>
+                    </optional_parameters>
+                    <required_parameters>
+                    </required_parameters>
+                    <file_extensions>
+                        <file_extension>.html</file_extension>
+                        <file_extension>.htm</file_extension>
+                    </file_extensions>
+                    <title>Hypertext Markup Language</title>
+                    <abstract></abstract>
+                    <description></description>
+                    <references>
+                        <reference name="rfc">http://w3.org</reference>
+                    </references>
+                    <encoding_considerations></encoding_considerations>
+                    <security_considerations></security_considerations>
+                </media_type_info>
+            </output_format>
+
+            <output_format name="json">
+                <acceptable_content_types>
+                    <accept>application/json</accept>
+                    <accept>application/x-json</accept>
+                </acceptable_content_types>
+                <content_type>application/json</content_type>
+                <media_type_info>
+                    <type>application</type>
+                    <subtype>json</subtype>
+                    <suffix></suffix>
+                    <template>application/json</template>
+                    <template_alternatives>
+                        <template_alternative>application/x-json</template_alternative>
+                    </template_alternatives>
+                    <optional_parameters>
+                    </optional_parameters>
+                    <required_parameters>
+                    </required_parameters>
+                    <file_extensions>
+                        <file_extension>.json</file_extension>
+                    </file_extensions>
+                    <title>JavaScript Object Notation</title>
+                    <abstract>JavaScript Object Notation (JSON) is a lightweight, text-based, language-independent data interchange format</abstract>
+                    <description><![CDATA[
+                        JavaScript Object Notation (JSON) is a lightweight, text-based,
+                        language-independent data interchange format. It was derived from
+                        the ECMAScript Programming Language Standard. JSON defines a small
+                        set of formatting rules for the portable representation of
+                        structured data.
+                    ]]></description>
+                    <references>
+                        <reference name="RFC7159">http://tools.ietf.org/html/rfc7159</reference>
+                        <reference name="Wikipedia EN">http://en.wikipedia.org/wiki/JSON</reference>
+                    </references>
+                    <encoding_considerations>binary</encoding_considerations>
+                    <security_considerations><![CDATA[
+                        Generally, there are security issues with scripting languages. JSON
+                        is a subset of JavaScript but excludes assignment and invocation.
+
+                        Since JSON's syntax is borrowed from JavaScript, it is possible to
+                        use that language's "eval()" function to parse JSON texts.  This
+                        generally constitutes an unacceptable security risk, since the text
+                        could contain executable code along with data declarations.  The same
+                        consideration applies to the use of eval()-like functions in any
+                        other programming language in which JSON texts conform to that
+                        language's syntax.
+                    ]]></security_considerations>
+                </media_type_info>
+            </output_format>
+
+            <output_format name="xml">
+                <acceptable_content_types>
+                    <accept>text/xml</accept>
+                    <accept>application/xml</accept>
+                </acceptable_content_types>
+                <content_type>application/xml</content_type>
+                <media_type_info>
+                    <type>application</type>
+                    <subtype>xml</subtype>
+                    <suffix></suffix>
+                    <template>application/xml</template>
+                    <template_alternatives>
+                        <template_alternative>text/xml</template_alternative>
+                    </template_alternatives>
+                    <optional_parameters>
+                        <optional_parameter name="charset">description</optional_parameter>
+                    </optional_parameters>
+                    <required_parameters>
+                    </required_parameters>
+                    <file_extensions>
+                        <file_extension>.xml</file_extension>
+                    </file_extensions>
+                    <title>Extensible Markup Language</title>
+                    <abstract></abstract>
+                    <description></description>
+                    <references>
+                    </references>
+                    <encoding_considerations></encoding_considerations>
+                    <security_considerations></security_considerations>
+                </media_type_info>
+            </output_format>
+
+            <output_format name="haljson">
+                <acceptable_content_types>
+                    <accept>application/hal+json</accept>
+                    <accept>application/vnd.hal+json</accept>
+                </acceptable_content_types>
+                <content_type>application/hal+json</content_type>
+                <media_type_info>
+                    <type>application</type>
+                    <subtype>hal</subtype>
+                    <suffix>+json</suffix>
+                    <template>application/hal+json</template>
+                    <template_alternatives>
+                        <template_alternative>application/vnd.hal+json</template_alternative>
+                    </template_alternatives>
+                    <optional_parameters>
+                        <optional_parameter name="profile">The profile link relation type that allows resource representations to indicate that they are following one or more profiles. This allows clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.</optional_parameter>
+                    </optional_parameters>
+                    <required_parameters>
+                    </required_parameters>
+                    <file_extensions>
+                        <file_extension>.haljson</file_extension>
+                        <file_extension>.json</file_extension>
+                    </file_extensions>
+                    <title>Hypertext Application Language in JSON</title>
+                    <abstract>HAL is a simple, generic hypermedia type based on JSON. It is designed for expressing links to and embeddedness of related resources.</abstract>
+                    <description><![CDATA[
+                        HAL is a simple format that gives a consistent and easy way to
+                        hyperlink between resources in your API.
+
+                        Adopting HAL will make your API explorable, and its documentation
+                        easily discoverable from within the API itself. In short, it will
+                        make your API easier to work with and therefore more attractive
+                        to client developers.
+
+                        APIs that adopt HAL can be easily served and consumed using open
+                        source libraries available for most major programming languages.
+                        It's also simple enough that you can just deal with it as you
+                        would any other JSON.
+                    ]]></description>
+                    <references>
+                        <reference name="Specification">http://stateless.co/hal_specification.html</reference>
+                        <reference name="RFC">https://tools.ietf.org/html/draft-kelly-json-hal</reference>
+                        <reference name="Specification on GitHub">https://github.com/mikekelly/hal_specification</reference>
+                        <reference name="Wikipedia EN">http://en.wikipedia.org/wiki/Hypertext_Application_Language</reference>
+                    </references>
+                    <encoding_considerations>Same as JSON: binary</encoding_considerations>
+                    <security_considerations><![CDATA[
+                        hal+json shares security issues common to all JSON content types.
+                        See RFC4627 Section #6 (http://tools.ietf.org/html/rfc4627#section-6)
+                        for additional information. hal+json does not provide executable
+                        content. Information contained in hal+json documents do not require
+                        privacy or integrity services.
+                    ]]></security_considerations>
+                </media_type_info>
+            </output_format>
+
+            <output_format name="halxml">
+                <acceptable_content_types>
+                    <accept>application/hal+xml</accept>
+                    <accept>application/vnd.hal+xml</accept>
+                </acceptable_content_types>
+                <content_type>application/hal+xml</content_type>
+                <media_type_info>
+                    <type>application</type>
+                    <subtype>hal</subtype>
+                    <suffix>+xml</suffix>
+                    <template>application/hal+xml</template>
+                    <template_alternatives>
+                        <template_alternative>application/vnd.hal+xml</template_alternative>
+                    </template_alternatives>
+                    <optional_parameters>
+                        <optional_parameter name="profile">The profile link relation type that allows resource representations to indicate that they are following one or more profiles. This allows clients to learn about additional semantics (constraints, conventions, extensions) that are associated with the resource representation, in addition to those defined by the media type and possibly other mechanisms.</optional_parameter>
+                    </optional_parameters>
+                    <required_parameters>
+                    </required_parameters>
+                    <file_extensions>
+                        <file_extension>.haljson</file_extension>
+                        <file_extension>.json</file_extension>
+                    </file_extensions>
+                    <title>Hypertext Application Language in XML</title>
+                    <abstract>HAL is a simple, generic hypermedia type based on JSON. It is designed for expressing links to and embeddedness of related resources.</abstract>
+                    <description><![CDATA[
+                        HAL is a simple format that gives a consistent and easy way to
+                        hyperlink between resources in your API.
+
+                        Adopting HAL will make your API explorable, and its documentation
+                        easily discoverable from within the API itself. In short, it will
+                        make your API easier to work with and therefore more attractive
+                        to client developers.
+
+                        APIs that adopt HAL can be easily served and consumed using open
+                        source libraries available for most major programming languages.
+                        It's also simple enough that you can just deal with it as you
+                        would any other JSON.
+                    ]]></description>
+                    <references>
+                        <reference name="Specification">http://stateless.co/hal_specification.html</reference>
+                        <reference name="RFC">https://tools.ietf.org/html/draft-kelly-json-hal</reference>
+                        <reference name="Specification on GitHub">https://github.com/mikekelly/hal_specification</reference>
+                        <reference name="Wikipedia EN">http://en.wikipedia.org/wiki/Hypertext_Application_Language</reference>
+                    </references>
+                    <encoding_considerations>Same as XML: text or binary depending on charset</encoding_considerations>
+                    <security_considerations><![CDATA[
+                        hal+xml shares security issues common to all XML content types.
+                        hal+xml does not provide executable content. Information contained
+                        in hal+xml documents do not require privacy or integrity services.
+                    ]]></security_considerations>
+                </media_type_info>
+            </output_format>
+
+            <output_format name="text">
+                <acceptable_content_types>
+                    <accept>text/plain</accept>
+                </acceptable_content_types>
+                <content_type>text/plain</content_type>
+                <media_type_info>
+                    <type>text</type>
+                    <subtype>plain</subtype>
+                    <suffix></suffix>
+                    <template>text/plain</template>
+                    <optional_parameters>
+                        <optional_parameter name="charset">description</optional_parameter>
+                    </optional_parameters>
+                    <file_extensions>
+                        <file_extension>.txt</file_extension>
+                    </file_extensions>
+                    <title>Plain text</title>
+                </media_type_info>
+            </output_format>
+
+            <output_format name="console">
+                <content_type>text/plain</content_type>
+                <media_type_info>
+                    <type>text</type>
+                    <subtype>plain</subtype>
+                    <suffix></suffix>
+                    <template>text/plain</template>
+                    <title>Plain text for CLI</title>
+                </media_type_info>
+            </output_format>
+
+        </output_formats>
+
+    </ae:configuration>
+
+</ae:configurations>

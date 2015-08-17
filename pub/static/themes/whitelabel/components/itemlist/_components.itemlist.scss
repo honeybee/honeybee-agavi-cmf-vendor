@@ -1,0 +1,69 @@
+@import "_mixins";
+@import "_layout";
+
+%hb-itemlist,
+.hb-itemlist {
+
+    .hb-field__label {
+        font-size: 90%;
+        color: #4a4a4a;
+    }
+
+    .hb-itemlist__title {
+        font-weight: 700;
+    }
+
+    .hb-field__value,
+    .hb-field__label,
+    .hb-itemlist__title {
+        word-break: break-all;
+        word-break: break-word;
+    }
+
+    @include media-query(lap-and-up) {
+        border-spacing: 0;
+
+        .hb-item {
+            position: relative;
+            border: 0;
+        }
+
+        .hb-actions,
+        .hb-field {
+            position: relative;
+            vertical-align: middle;
+            padding-top: 0.5*$base-spacing;
+            padding-bottom: 0.5*$base-spacing;
+        }
+
+        .hb-item:hover {
+            $hover-color: mix(color(blue), color(grey1), 10%);
+            .hb-field,
+            .hb-actions {
+                background-color: $hover-color;
+            }
+
+            .hb-field:first-child::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 100%;
+                width: $base-spacing;
+                background-color: $hover-color;
+            }
+
+            .hb-actions::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 100%;
+                width: $base-spacing;
+                background-color: $hover-color;
+            }
+        }
+
+    }
+}
+

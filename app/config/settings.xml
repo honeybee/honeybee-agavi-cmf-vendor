@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/settings/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!--
+        APPLICATION DEFAULT SETTINGS
+    -->
+    <ae:configuration>
+        <system_actions>
+            <system_action name="default">
+                <module>Honeybee_Core</module>
+                <action>Index</action>
+            </system_action>
+            <system_action name="error_404">
+                <module>Honeybee_Core</module>
+                <action>System/Error404</action>
+            </system_action>
+            <system_action name="login">
+                <module>Honeybee_SystemAccount</module>
+                <action>User/Login</action>
+            </system_action>
+            <system_action name="module_disabled">
+                <module>Honeybee_Core</module>
+                <action>System/ModuleDisabled</action>
+            </system_action>
+            <system_action name="secure">
+                <module>Honeybee_Core</module>
+                <action>System/Secure</action>
+            </system_action>
+            <system_action name="unavailable">
+                <module>Honeybee_Core</module>
+                <action>System/Unavailable</action>
+            </system_action>
+        </system_actions>
+
+        <settings>
+            <setting name="app_name">Honeybee CMF</setting>
+            <setting name="app_prefix">honeybee</setting>
+            <setting name="db_prefix">honeybee</setting>
+            <setting name="available">true</setting>
+            <setting name="debug">false</setting>
+            <setting name="use_database">false</setting>
+            <setting name="use_logging">true</setting>
+            <setting name="use_security">true</setting>
+            <setting name="use_translation">true</setting>
+            <setting name="http_post_file_name">post_payload</setting>
+            <setting name="context_implementation">Honeybee\FrameworkBinding\Agavi\Context</setting>
+            <setting name="test_bootstrap_tpl">%core.app_dir%/../testing/TestCaseMethod.tpl</setting>
+            <setting name="gravatar_url_tpl">//www.gravatar.com/avatar/{EMAIL_HASH}?s=31</setting>
+            <setting name="apache_tika">%core.app_dir%/../vendor/tika.jar</setting>
+            <setting name="exiftool_config">%core.config_dir%/exiftool.conf</setting>
+        </settings>
+
+        <settings prefix="event_pub.">
+            <setting name="default_channel">org.honeybee.events</setting>
+            <setting name="pull_socket.host">127.0.0.1</setting>
+            <setting name="pull_socket.port">5555</setting>
+            <setting name="web_socket.host">0.0.0.0</setting>
+            <setting name="web_socket.port">8081</setting>
+            <!-- @todo add support for pragmatic general multicast
+            <setting name="pgm.host">0.0.0.0</setting>
+            <setting name="pgm.port">5556</setting>
+            -->
+        </settings>
+
+        <settings prefix="password_constraints.">
+            <setting name="min_decimal_numbers">1</setting>
+            <setting name="min_uppercase_chars">0</setting>
+            <setting name="min_lowercase_chars">1</setting>
+            <setting name="min_string_length">10</setting>
+            <setting name="max_string_length">32</setting>
+            <setting name="similarity_percentage_threshold">70</setting>
+            <setting name="minimum_levenshtein_distance">5</setting>
+        </settings>
+
+        <settings prefix="service.short_ids.">
+            <setting name="connection">Service.ShortIds</setting>
+        </settings>
+
+        <settings prefix="assets.">
+            <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
+            <setting name="base_dir">%core.app_dir%/../data/assets</setting>
+        </settings>
+
+        <exception_templates>
+            <exception_template>%core.agavi_dir%/exception/templates/shiny.php</exception_template>
+            <exception_template context="console">%core.agavi_dir%/exception/templates/plaintext.php</exception_template>
+        </exception_templates>
+
+        <settings prefix="sass.">
+            <!-- <setting name="cmd">/opt/ruby/bin/sass</setting> -->
+            <setting name="style">compressed</setting> <!-- nested | expanded | compact | compressed -->
+        </settings>
+
+        <settings prefix="autoprefixer.">
+            <!-- <setting name="cmd">/some/path/to/node_modules/.bin/autoprefixer</setting> -->
+            <setting name="browsers"><![CDATA[ > 1%, last 3 versions, IE >= 9, Firefox ESR, Opera 12.1 ]]></setting>
+        </settings>
+
+        <settings prefix="themes.">
+            <setting name="default">whitelabel</setting>
+            <setting name="tilecolor">#ffffff</setting>
+        </settings>
+
+        <settings prefix="requirejs.">
+            <setting name="use_optimized">true</setting>
+            <setting name="additional_config">waitSeconds: 30</setting>
+            <setting name="optimize_style">uglify2</setting>
+            <setting name="cmd_rjs">node_modules/.bin/r.js</setting>
+        </settings>
+
+    </ae:configuration>
+
+    <!--
+        API login may need a specific login action depending on auth type
+    -->
+    <ae:configuration environment=".*-stateless-api">
+        <system_action name="login">
+            <module>Honeybee_SystemAccount</module>
+            <action>User/ApiLogin</action>
+        </system_action>
+    </ae:configuration>
+
+    <!--
+        DEVELOPMENT ENVIRONMENT SETTINGS
+    -->
+    <ae:configuration environment="development.*">
+        <settings>
+            <setting name="debug">true</setting>
+        </settings>
+        <settings prefix="sass.">
+            <setting name="cmd">/usr/bin/sass</setting>
+            <setting name="style">nested</setting>
+            <setting name="debug">false</setting>
+        </settings>
+        <settings prefix="requirejs.">
+            <setting name="use_optimized">false</setting>
+        </settings>
+    </ae:configuration>
+
+    <!--
+        PREVIOUS DEVELOPMENT ENVIRONMENT SETTINGS
+    -->
+    <ae:configuration environment="development-vagrant.*">
+        <settings>
+            <setting name="debug">true</setting>
+        </settings>
+        <settings prefix="sass.">
+            <setting name="cmd">/usr/local/bin/sass</setting>
+            <setting name="style">nested</setting>
+            <setting name="debug">false</setting>
+        </settings>
+        <settings prefix="requirejs.">
+            <setting name="use_optimized">false</setting>
+        </settings>
+    </ae:configuration>
+
+    <!--
+        TESTING ENVIRONMENT SETTINGS
+    -->
+    <ae:configuration environment="testing.*">
+        <settings>
+            <setting name="fixtures_dir">%core.app_dir%/../testing/fixtures/</setting>
+            <setting name="default_context">web</setting>
+        </settings>
+        <settings prefix="assets.">
+            <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
+            <setting name="base_dir">%core.app_dir%/../data/testing/assets</setting>
+        </settings>
+    </ae:configuration>
+
+    <xi:include href="./includes/settings.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+</ae:configurations>

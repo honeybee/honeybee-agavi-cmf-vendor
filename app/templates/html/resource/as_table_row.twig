@@ -1,0 +1,10 @@
+<tr class="{{ css }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    {% for rendered_field in rendered_fields %}
+        {{ rendered_field|raw }}
+    {% endfor %}
+    <td class="hb-actions">
+        <div class="hb-actions__content">
+            {{- rendered_resource_activities|raw -}}
+        </div>
+    </td>
+</tr>

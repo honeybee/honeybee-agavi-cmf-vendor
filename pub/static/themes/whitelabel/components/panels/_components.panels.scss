@@ -1,0 +1,91 @@
+.hb-panel {
+    @include frame;
+    margin: 0 0px $base-spacing 0px;
+}
+
+.hb-panel__header {
+    padding: $base-spacing;
+    background-color: color(panel-header-background);
+    border-width: 0 0 1px 0;
+    border-color: color(grey2);
+    border-style: solid;
+}
+
+.hb-panel__title {
+    @include typography-headlines;
+    color: color(panel-header-text);
+    margin: 0;
+}
+
+.hb-panel__description {
+    margin: 0 5px 0 0;
+    color: color(darkgrey2);
+}
+
+.hb-panel__content {
+    padding: $base-spacing;
+    background-color: color(lightgrey2);
+}
+
+.hb-panel__header--hidden {
+    > .hb-panel__header {
+        display: none;
+    }
+}
+
+.hb-panel__title--hidden {
+    > .hb-panel__header {
+        .hb-panel__title {
+            display: none;
+        }
+    }
+}
+
+.hb-panel__description--hidden {
+    > .hb-panel__header {
+        .hb-panel__description {
+            display: none;
+        }
+    }
+}
+
+// 1st level panels
+.hb-panel--hidden {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    box-shadow: none;
+
+    > .hb-panel__header {
+        display: none;
+    }
+
+    > .hb-panel__content {
+        padding: 0;
+        margin: 0;
+        box-shadow: none;
+        background-color: color(transparent);
+
+        // 2nd level panels
+        .hb-panel {
+            // 3rd level panels
+            .hb-panel {
+                box-shadow: none;
+                border-bottom: 2px solid darken(color(lines), 1%);
+                &:last-child {
+                    border-bottom: 0;
+                }
+
+                > .hb-panel__header {
+                    background-color: darken(color(panel-header-background), 1%);
+                    text-align: center;
+
+                    .hb-panel__title {
+                        @include typography-headlines(1.142);
+                        color: lighten(color(panel-header-text), 1%);
+                    }
+                }
+            }
+        }
+    }
+}

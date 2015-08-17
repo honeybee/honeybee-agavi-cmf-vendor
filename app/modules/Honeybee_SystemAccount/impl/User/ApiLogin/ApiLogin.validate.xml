@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_SystemAccount/config/validators.xml">
+
+    <ae:configuration context="web">
+
+        <validators translation_domain="honeybee.system_account.user.errors">
+            <validator class="string" source="headers">
+                <argument>AUTHORIZATION</argument>
+                <ae:parameter name="min">10</ae:parameter>
+                <ae:parameter name="max">200</ae:parameter>
+                <error>Authorization header value is not an acceptable string.</error>
+            </validator>
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\HttpBasicAuthValidator" source="headers">
+                <argument>AUTHORIZATION</argument>
+                <error>Invalid authorization header given.</error>
+            </validator>
+        </validators>
+
+    </ae:configuration>
+
+</ae:configurations>

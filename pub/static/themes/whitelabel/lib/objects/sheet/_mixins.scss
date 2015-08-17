@@ -1,0 +1,17 @@
+@mixin frame($sheet-color: color(white)) {
+    @include shadow-container;
+    background-color: $sheet-color;
+
+    @content;
+}
+
+@mixin sheet($sheet-color: color(lightgrey2)) {
+    @include frame($sheet-color) {
+        @include media-query(palm) {
+            padding: $base-spacing $small-spacing;
+        }
+        @include media-query(lap-and-up) {
+            padding: $base-spacing;
+        }
+    }
+}

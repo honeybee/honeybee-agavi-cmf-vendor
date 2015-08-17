@@ -1,0 +1,7 @@
+@mixin sheet($sheet-color: color(white-warm)) {
+    padding: $base-spacing;
+    @include shadow-container;
+    background-color: $sheet-color;
+
+    @content;
+}

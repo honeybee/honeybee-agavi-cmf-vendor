@@ -1,0 +1,64 @@
+{%- if location is not defined %}{% set location = "" %}{% endif -%}
+{%- set alt = caption|default(title)|default('') -%}
+{%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
+<input type="radio" class="imagelist-tabs__trigger" name="{{tabs_id}}[]" id="{{tabs_id}}-{{image_id}}" value="{{tabs_id}}-{{image_id}}" />
+<div class="imagelist-tabs__panel imagelist__item {{newitem ? "newitem": "item"}}" data-item-id="{{item_id}}" data-grouped-base-path="{{grouped_base_path}}">
+    {% embed "html/embed-actions.twig" with { 'grouped_base_path': grouped_base_path, 'add_item_to_parent_list_allowed': false } only %}{% endembed %}
+    <div class="imagelist__item-content">
+        <div class="imagelist__image {{newitem ? "newitem": "item"}}" data-field-id="{{field_id}}" data-item-id="{{item_id}}">
+            <div class="imagelist__image-content">
+                <div class="imagelist__image-img-wrapper">
+                    <div><img src="{{preview_url}}" title="{{title|default('')}}" alt="{{caption|default(title)|default('')}}" class="imagelist__image-img"/></div>
+                    {% if isReadable %}
+                    <div class="imagelist__item-controls" data-fpf-ignore>
+                        <div class="imagelist__item-controls-upload">
+                            <label class="imagelist__upload-label" for="{{item_id}}_file">Change Image</label><!--
+                            --><input id="{{item_id}}_file" type="file" class="imagelist__image-input" name="{{grouped_base_path}}[file]" {{ disabled }} {{ required }} /><!--
+                            --><input id="{{item_id}}_location" type="hidden" class="imagelist__image-location"
+                            name="{{grouped_base_path}}[location]" placeholder="location" value="{{ location }}" {{ disabled }} />
+                        </div>
+                        <div class="imagelist__item-controls-aoi">
+                            <button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-trigger hide" tabindex="-1">Area of interest</button><!--
+                            --><button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-accept hide" tabindex="-1">Accept</button><!--
+                            --><button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-cancel hide" tabindex="-1">Cancel</button>
+                        </div>
+                        <div class="imagelist__item-controls-download">
+                            <a href="{{download_url}}" target="_blank" class="btn imagelist__image-download" download="download">Download</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div><!-- imagelist__image-img-wrapper
+                --><div class="imagelist__inputs-wrapper">
+                    <label class="imagelist__label-title">Title <input type="text" id="{{item_id}}-title" name="{{grouped_base_path}}[title]" value="{{title}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-caption">Caption <input type="text" id="{{item_id}}-caption" name="{{grouped_base_path}}[caption]" value="{{caption}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-copyright">Copyright <input type="text" id="{{item_id}}-copyright" name="{{grouped_base_path}}[copyright]" value="{{copyright}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-copyright-url">Copyright URL <input type="url" id="{{item_id}}-copyright-url" name="{{grouped_base_path}}[copyright_url]" value="{{copyright_url}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-source">Source <input type="text" id="{{item_id}}-source" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-aoi">Area of Interest <input type="text" id="{{item_id}}-aoi" name="{{grouped_base_path}}[aoi]"
+                        value="{{aoi}}" class="imagelist__aoi-input" value="{{ aoi }}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    {% if meta_data %}
+                        <label class="" for="{{item_id}}_meta-data-trigger">
+                            <h3>Meta data</h3>
+                        </label>
+                        <input type="checkbox" id="{{item_id}}_meta-data-trigger"
+                        class="imagelist__meta-data-trigger visuallyhidden" {{disabled}} />
+                        <div class="imagelist__meta-data">
+                        {% for meta_name, meta_value in meta_data %}
+                            <label class="imagelist__label-meta-data imagelist__label-meta-data-{{meta_name}}">
+                                {{meta_name}}
+                                <input
+                                    type="text"
+                                    name="{{grouped_base_path}}[meta_data][{{meta_name}}]"
+                                    value="{{meta_value}}"
+                                    readonly
+                                />
+                                <ul class="errors"></ul>
+                            </label>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                </div><!-- imagelist__inputs-wrapper -->
+            </div><!-- imagelist__image-content -->
+        </div><!-- imagelist__image -->
+    </div><!-- imagelist__item-content -->
+</div>{# hb-tabs__panel / imagelist__item PLUS: comment to fix Twig whitespace problem #}

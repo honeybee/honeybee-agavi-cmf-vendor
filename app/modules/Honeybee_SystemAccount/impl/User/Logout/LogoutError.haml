@@ -1,0 +1,7 @@
+- extends _layout
+
+
+- block primary
+    - embed 'html/layout/grid/1_boxes.twig' with {'name':'authentication', 'box1':'login'}
+        - block box1
+            %p An unexpected error occured while trying to logout.

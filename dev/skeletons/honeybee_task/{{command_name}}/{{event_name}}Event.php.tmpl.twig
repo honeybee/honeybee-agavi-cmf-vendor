@@ -1,0 +1,14 @@
+<?php
+
+namespace {{module_namespace}}\Model\Task\{{command_name}};
+
+use Honeybee\Model\Task\ModifyAggregateRoot\AggregateRootModifiedEvent;
+
+class {{event_name}}Event extends AggregateRootModifiedEvent
+{
+    public function getType()
+    {
+        return '{{module_name|lower}}.{{event_name|as_snake_case}}';
+    }
+}
+

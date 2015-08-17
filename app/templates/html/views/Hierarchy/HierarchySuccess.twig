@@ -1,0 +1,84 @@
+{% extends _layout %}
+
+{# blocks that are reused in this template #}
+
+{% block pagination %}
+{{ rendered_pagination|raw }}
+{% endblock %}
+
+{% block primary_activities %}
+    <div class="primary-activities">
+        {{ rendered_primary_activities|raw }}
+    </div>
+{% endblock primary_activities %}
+
+
+{# blocks that are overridden from the parent template #}
+
+{% block toc %}
+    {% if search_value is not empty %}
+    <h1>Search: {{ resource_type_name }} resources ({{ number_of_results }} in total)</h1>
+    {% else %}
+    <h1>{{ resource_type_name }} resources ({{ number_of_results }} in total)</h1>
+    {% endif %}
+{% endblock %}
+
+
+{% block primary %}
+
+<div class="controls controls-top">
+    <div class="controls-layout">
+        <div class="search-box">
+            {{ rendered_search_form|raw }}
+        </div><!--
+        --><div class="sort-box" >
+            <label for="{{ sort_trigger_id }}" class="sort__description">{{ _('sort_by') }}</label>
+            {{ rendered_sort_activities|raw }}
+        </div><!--
+        --><div class="pager-box">
+            {{ block('pagination') }}
+        </div><!--
+        --><div class="primary-activities-box">
+            {{ block('primary_activities') }}
+        </div>
+    </div>
+</div>
+
+{% if rendered_parent_node is not empty %}
+    {% for breadcrumb in breadcrumbs %}
+        {% if not loop.first %} <b>></b> {% endif %}
+        <a href="{{ breadcrumb.link }}">{{ breadcrumb.text }}</a>
+    {% endfor %}
+    <h4>{{ _('parent_resource') }}</h4>
+    {{ rendered_parent_node|raw }}
+
+    <h4>{{ _('child_resources') }}</h4>
+{% else %}
+    <h4>{{ _('root_resources') }}</h4>
+{% endif %}
+
+{{ rendered_resource_collection|raw }}
+
+<div class="controls controls-bottom">
+    <div class="controls-layout">
+        <div class="pager-box">
+            {{ block('pagination') }}
+        </div>
+    </div>
+</div>
+
+{% endblock primary %}
+
+{% block secondary %}
+<!--
+<form action="" method="post">
+    <input type="text" name="parent_node_id" placeholder="parent" value="{{parent_node.identifier|default('')}}"/>
+    <input type="text" name="aggregate_root_identifier" placeholder="id" />
+    <input type="text" name="aggregate_root_type" placeholder="type" value="Honeybee\User\Model\Task\MoveUserNode\UserNodeMovedEvent" />
+    <input type="number" step="1" min="1" name="revision" placeholder="rev" value="1" />
+    <input type="submit" name="moveit" />
+</form>
+<br>
+<br>
+-->
+{% endblock secondary %}

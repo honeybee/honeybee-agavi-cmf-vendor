@@ -1,0 +1,70 @@
+.image-input {
+
+    .image-input__image {
+        display: block;
+        max-width: 100%;
+        max-height: 70%;
+    }
+
+    .image-input__filename {
+        @include typography-interactive;
+        padding-left: $base-spacing;
+        padding-right: $base-spacing;
+    }
+
+    .image-input__input,
+    .image-input__pick,
+    .image-input__meta-toggle {
+        display: inline-block;
+        width: auto;
+        @include activity;
+        @include activity-navigational;
+        @include activity-underline;
+    }
+
+    .image-input__input {
+    }
+
+    .image-input__meta-toggle {
+
+    }
+
+    .image-input__metadata {
+        display: none;
+    }
+
+    .image-input__trigger {
+        @include accessibility;
+
+        &:checked {
+            ~ .image-input__metadata {
+            display: block;
+            }
+
+            ~ .image-input__meta-toggle {
+                @include activity-navigational-highlight;
+            }
+        }
+    }
+
+    .image-input__progress {
+        position: absolute;
+        height: 5px;
+
+        border: 1px solid color(black);
+        border-radius: 2px;
+
+        background-color: color(white);
+
+        > div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+
+            text-align: center;
+
+            background-color: color(green);
+        }
+    }
+}

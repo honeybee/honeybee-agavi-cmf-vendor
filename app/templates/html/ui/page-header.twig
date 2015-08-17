@@ -1,0 +1,39 @@
+{% use 'html/ui/user-widget.twig' %}
+
+{%- block pageheader -%}
+<div class="layout-layout">
+    <div class="brand-box">
+        <div class="brand">
+        {%- block brand -%}
+            <h1><a href="{{ ro.gen('index') }}" title="{{ _('go_to_dashboard', 'application.ui') }}"><span class="brand__entity">{{ _('brand_entity', 'application.ui') }}</span><span class="brand__title">{{ _('brand_title', 'application.ui') }}</span></a></h1>
+        {%- endblock brand -%}
+        </div>
+    </div><!-- .brand-box
+    --><div class="menu-box">
+        {%- block menu -%}
+            {% if us.isAuthenticated() %}
+            <div class="menu">
+                <input type="checkbox" id="menu-trigger" class="menu__trigger">
+                <label for="menu-trigger" class="menu__toggle">Menu</label>
+                <label for="menu-trigger" class="menu__backdrop"></label>
+                <div class="menu__panel">
+                    <label for="menu-trigger" class="menu__toggle">Menu</label>
+                    <div class="menu__panel-layout">
+                        <div class="user-widget-box">
+                            {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
+                        </div><!-- .user-widget-box
+                        --><div class="main-nav-box">
+                            <div class="main-nav-wrapper">
+                                {%- block mainnav -%}
+                                    {{- _rendered_navigation|default('')|raw -}}
+                                {%- endblock mainnav -%}
+                            </div><!-- .main-nav-wrapper -->
+                        </div><!-- .main-nav-box -->
+                    </div><!-- .menu__panel-layout -->
+                </div><!-- .menu__panel -->
+            </div><!-- .menu -->
+            {% endif %}
+        {%- endblock menu -%}
+    </div><!-- .menu-box -->
+</div><!-- .page-header-layout -->
+{%- endblock pageheader -%}

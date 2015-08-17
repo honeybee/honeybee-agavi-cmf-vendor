@@ -1,0 +1,360 @@
+$thumb-size-default: 150px;
+
+.imagelist {
+    padding: $small-spacing;
+
+    /* @toremove */
+    border: 1px solid grey;
+    background-color: white;
+}
+
+// what to do when js-behaviour was applied?
+.imagelist.widget-initialized {
+
+    .imagelist-tabs__panel {
+        display: none !important;
+    }
+
+    .imagelist__thumb.newitem {
+        display: none;
+    }
+
+    .imagelist-tabs__toggles {
+        border: 1px dashed color(action);
+    }
+}
+
+// what to do when js-behaviour did not load?
+.hb-js-imagelist.jsb_ {
+    .imagelist__image-img-wrapper {
+        text-align: center;
+    }
+
+    .imagelist__image-img {
+        max-width: $thumb-size-default;
+        max-height: $thumb-size-default;
+    }
+
+    .newitem .hb-embed-actions,
+    .imagelist__thumb-controls {
+        display: none;
+    }
+}
+
+.imagelist-tabs {
+    @include hb-tabs("imagelist-tabs");
+
+    line-height: 0;
+    margin-top: $small-spacing;
+
+    .imagelist-tabs__toggles {
+        padding: $small-spacing $small-spacing 0 $small-spacing;
+    }
+
+    .imagelist-tabs__toggle {
+        margin: 0 $small-spacing $small-spacing 0;
+
+        img {
+            max-width: $thumb-size-default;
+            max-height: $thumb-size-default;
+        }
+    }
+}
+
+.imagelist__image-input,
+.imagelist__input-multiple-trigger {
+    @include visuallyhidden;
+}
+
+.imagelist__input-multiple-label {
+    @include button-emphasized-navigational;;
+}
+
+.imagelist__delete-input {
+    @include visuallyhidden;
+}
+
+.imagelist__item {
+    .hb-embed-actions {
+        @extend %hb-embed-actions--small;
+    }
+}
+
+.imagelist a:focus {
+    outline: 1px solid color(warning-secondary);
+}
+
+.imagelist__thumb {
+    position: relative;
+
+    .imagelist__thumb-controls {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+
+        ul {
+            @extend %list-bare;
+            @extend %pack;
+
+            li {
+                @extend %pack__item;
+
+                &:nth-of-type(2) {
+                    width: 70%;
+                    text-align: center;
+                }
+
+                &:last-of-type {
+                    text-align: right;
+                }
+            }
+        }
+
+        .imagelist__thumb-control {
+            @include inuit-font-size(20px);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .move {
+            background-color: color(background-default);
+            color: color(action);
+
+            &:hover {
+            background-color: color(background-highlight);
+                color: color(navigational-secondary);
+            }
+        }
+
+        .remove {
+            background-color: color(background-default);
+            color: color(destructive);
+
+            &:hover {
+                background-color: color(background-highlight);
+                color: color(destructive-secondary);
+            }
+        }
+    }
+
+    &.newitem .imagelist__thumb-controls {
+        display: none;
+    }
+}
+
+
+.hb-js-imagelist {
+
+    // when displayed in popup
+    .mfp-container {
+
+        .mfp-close {
+            background: color(white);
+            color: color(action);
+        }
+
+        .mfp-arrow-left:before {
+            border-right-color: color(navigational-secondary);
+        }
+        .mfp-arrow-left:after {
+            border-right-color: color(navigational-primary);
+        }
+
+        .mfp-arrow-right:before {
+            border-right-color: color(navigational-secondary);
+        }
+        .mfp-arrow-right:after {
+            border-right-color: color(navigational-primary);
+        }
+
+        .imagelist__image {
+            background: color(white);
+            margin: 2em 4em;
+            padding: 2em 2em;
+        }
+
+        .imagelist__image-content {
+            @extend %pack;
+            border-spacing: $base-spacing;
+        }
+
+        .imagelist__image-img {
+            max-width: 100%;
+            max-height: 70vmin;
+        }
+
+        .imagelist__image-img-wrapper {
+            @extend %pack__item;
+            @extend %lap-and-up-3-of-5;
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .imagelist__inputs-wrapper {
+            @extend %pack__item;
+            @extend %lap-and-up-2-of-5;
+            vertical-align: top;
+        }
+    }
+}
+
+
+.imagelist__item-controls {
+    @extend %pack;
+    @extend %pack--middle;
+    border-spacing: $base-spacing;
+
+    .imagelist__item-controls-upload,
+    .imagelist__item-controls-aoi,
+    .imagelist__item-controls-download {
+        @extend %pack__item;
+    }
+
+    .imagelist__item-controls-upload,
+    .imagelist__item-controls-download {
+        @extend %lap-and-up-1-of-5;
+    }
+
+    .imagelist__upload-label,
+    .imagelist__image-aoi-accept,
+    .imagelist__image-aoi-cancel,
+    .imagelist__image-aoi-trigger,
+    .imagelist__image-download {
+        @include button-emphasized-navigational;
+    }
+
+    .imagelist__upload-label {
+        @include button-emphasized-mutating;
+        width: 100%;
+    }
+    .imagelist__image-aoi-trigger {
+        @include button-emphasized-navigational;
+        //margin-left: $base-spacing;
+        //margin-right: $base-spacing;
+        width: 100%;
+    }
+    .imagelist__image-aoi-accept {
+        @include button-emphasized-positive;
+        margin-right: $base-spacing;
+        width: 45%;
+    }
+    .imagelist__image-aoi-cancel {
+        @include button-emphasized-destructive;
+        width: 45%;
+    }
+    .imagelist__image-download {
+        @include button-emphasized-navigational;
+        width: 100%;
+    }
+}
+
+
+.imagelist__image-input:focus ~ .imagelist__upload-label {
+}
+
+
+// when drag-and-drop operation is ongoing
+.dragging .imagelist {
+    .imagelist-tabs__toggles {
+        background-color: color(background-highlight);
+        border: 1px solid color(positive);
+
+        &.dragover {
+            background-color: color(positive-primary);
+            border: 1px solid color(positive-secondary);
+        }
+    }
+
+    .imagelist__thumb-img {
+        border: 1px solid color(lines);
+
+        &.dragover {
+            border: 3px solid color(lines);
+            outline: 3px solid color(black);
+        }
+    }
+}
+
+
+
+.imagelist__thumb {
+
+    .progress-bar,
+    progress {
+        display: none;
+    }
+
+    &.hb-js-uploading {
+
+        .imagelist__thumb-img,
+        .progress-bar,
+        progress {
+            display: block;
+        }
+    }
+}
+
+
+progress:not(value) {
+}
+
+progress[value] {
+    appearance: none;
+    border: none;
+    width: 100%; height: 20px;
+    background-color: whiteSmoke;
+    border-radius: 3px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+    color: royalblue;
+
+    position: relative;
+    margin: 0 0 1.5em;
+}
+
+
+progress[value]::-webkit-progress-bar {
+    background-color: whiteSmoke;
+    border-radius: 3px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+}
+
+progress[value]::-webkit-progress-value {
+    position: relative;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+    border-radius:3px;
+}
+
+progress[value]::-webkit-progress-value:after {
+    /* only webkit/blink browsers understand pseudo elements on pseudo classes */
+    content: '';
+    position: absolute;
+
+    width:5px; height:5px;
+    top:7px; right:7px;
+
+    background-color: white;
+    border-radius: 100%;
+}
+
+progress[value]::-moz-progress-bar {
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+    border-radius:3px;
+}
+
+/* fallback styles */
+.progress-bar {
+    background-color: whiteSmoke;
+    border-radius: 3px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+    width: 100%; height:20px;
+}
+
+.progress-bar span {
+    background-color: royalblue;
+    border-radius: 3px;
+
+    display: block;
+    text-indent: -9999px;
+}
+

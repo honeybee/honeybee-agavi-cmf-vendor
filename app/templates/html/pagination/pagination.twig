@@ -1,0 +1,35 @@
+<div class="pager pager__content">
+    <label class="pager__description">Seite {{ current_page_number }} von {{ number_of_pages }}</label>
+    <ul class="pager__list">
+        <li class="pager__first_page">
+            <a
+                href="{{ first_page_url }}"
+                title="{{ _('pager.first_page.title', translation_domain) }}"
+                class="{% if is_first_page %}disabled{% endif %}">|&#8592;</a>
+        <li class="pager__prev_page">
+            <a
+                href="{{ prev_page_url }}"
+                title="{{ _('pager.prev_page.title', translation_domain) }}"
+                class="{% if not has_prev_page %}disabled{% endif %}">&#8592;</a>
+        <li class="pager__details">
+            <form action="{{ current_page_url }}" method="get" enctype="application/x-www-form-urlencoded" name="jumpToPage">
+                {% for param_name, param_value in url_parameters %}
+                <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
+                {% endfor %}
+                <input type="number" min="1" max="{{ number_of_pages }}" step="1" value="{{ current_page_number }}" name="page" id="pager__current_page" class="pager__current_page" /><!--
+                --><button name="jumpToPage" class="pager__go" title="{{_('pager.jump_to_page.title', translation_domain)}}">{{ _('pager.jump_to_page.title', translation_domain) }}</button>
+                <span class="pager__total">{{ _('pager.of_total.title', translation_domain, null, [ number_of_pages ]) }}</span>
+            </form>
+        <li class="pager__next_page">
+            <a
+                href="{{ next_page_url }}"
+                title="{{ _('pager.next_page.title', translation_domain) }}"
+                class="{% if not has_next_page %}disabled{% endif %}">&#8594;</a>
+        <li class="pager__last_page">
+            <a
+                href="{{ last_page_url }}"
+                title="{{ _('pager.last_page.title', translation_domain) }}"
+                class="{% if is_last_page %}disabled{% endif %}">&#8594;|</a>
+    </ul>
+</div>
+

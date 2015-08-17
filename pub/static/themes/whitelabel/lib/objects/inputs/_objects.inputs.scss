@@ -1,0 +1,51 @@
+@import "mixins.shapes";
+@import "mixins.shadows";
+@import "mixins.colors";
+
+@mixin input-textual-default {
+    @include input-textual-shape-default;
+    @include input-textual-shadow-default;
+    @include input-textual-colors-default;
+}
+@mixin input-textual-hover {
+    @include input-textual-shape-hover;
+    @include input-textual-shadow-hover;
+    @include input-textual-colors-hover;
+}
+@mixin input-textual-focus {
+    @include input-textual-shape-focus;
+    @include input-textual-shadow-focus;
+    @include input-textual-colors-focus;
+}
+@mixin input-textual-active {
+    @include input-textual-shape-active;
+    @include input-textual-shadow-active;
+    @include input-textual-colors-active;
+}
+@mixin input-textual-disabled {
+    @include input-textual-shape-disabled;
+    @include input-textual-shadow-disabled;
+    @include input-textual-colors-disabled;
+}
+@mixin input-textual-invalid {
+    @include input-textual-shape-invalid;
+    @include input-textual-shadow-invalid;
+    @include input-textual-colors-invalid;
+}
+@mixin input-textual-valid {
+    @include input-textual-shape-valid;
+    @include input-textual-shadow-valid;
+    @include input-textual-colors-valid;
+}
+
+@mixin input-textual {
+    @include input-textual-default;
+    //&:hover { @include input-textual-hover; };
+    &:focus { @include input-textual-focus; }
+    &:active { @include input-textual-active; }
+    &:disabled, &.disabled { @include input-textual-disabled; }
+    &.valid { @include input-textual-valid;}
+}
+
+@mixin input-error {
+}

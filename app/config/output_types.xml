@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE namespaces [
+    <!ENTITY aeot "xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(ot=http://agavi.org/agavi/config/parts/output_types/1.0)">
+]>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/output_types/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <!--
+        the sandbox. we can put anything in here. very useful for sharing stuff inside the document using XIncludes
+    -->
+    <ae:sandbox>
+
+        <!-- default http headers that may be included in all output types -->
+        <ae:parameter name="default_http_headers">
+            <ae:parameter name="X-Content-Type-Options">nosniff</ae:parameter>
+            <ae:parameter name="X-Frame-Options">SAMEORIGIN</ae:parameter>
+        </ae:parameter>
+
+        <!-- default layers that may be of use in several layouts, the targets should always be paths to files (not directories!) -->
+        <layers>
+            <layer name="content">
+                <ae:parameters>
+                    <ae:parameter name="targets">
+                        <ae:parameter>%core.template_dir%/modules/${module}/${locale}/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.template_dir%/modules/${module}/${template}.${locale}${extension}</ae:parameter>
+                        <ae:parameter>%core.template_dir%/modules/${module}/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.module_dir%/${module}/templates/${locale}/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.module_dir%/${module}/templates/${template}.${locale}${extension}</ae:parameter>
+                        <ae:parameter>%core.module_dir%/${module}/templates/${template}${extension}</ae:parameter>
+                        <ae:parameter>${directory}/${template}.${locale}${extension}</ae:parameter>
+                        <ae:parameter>${directory}/${template}${extension}</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </layer>
+            <layer name="template">
+                <ae:parameters>
+                    <ae:parameter name="targets">
+                        <!-- <ae:parameter>%core.template_dir%/modules/${module}/${locale}/${template}${extension}</ae:parameter> -->
+                        <!-- <ae:parameter>%core.template_dir%/modules/${module}/${template}.${locale}${extension}</ae:parameter> -->
+                        <!-- <ae:parameter>%core.template_dir%/modules/${module}/${template}${extension}</ae:parameter> -->
+                        <ae:parameter>%core.module_dir%/${module}/templates/${locale}/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.module_dir%/${module}/templates/${template}.${locale}${extension}</ae:parameter>
+                        <ae:parameter>%core.module_dir%/${module}/templates/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.template_dir%/${locale}/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.template_dir%/${template}.${locale}${extension}</ae:parameter>
+                        <ae:parameter>%core.template_dir%/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.honeybee_template_dir%/${locale}/${template}${extension}</ae:parameter>
+                        <ae:parameter>%core.honeybee_template_dir%/${template}.${locale}${extension}</ae:parameter>
+                        <ae:parameter>%core.honeybee_template_dir%/${template}${extension}</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </layer>
+        </layers>
+
+        <ae:parameter name="honeybee_twig_renderer_default_parameters">
+            <ae:parameter name="assigns"> <!-- are available as twig globals -->
+                <ae:parameter name="routing">ro</ae:parameter>
+                <ae:parameter name="request">rq</ae:parameter>
+                <ae:parameter name="controller">ct</ae:parameter>
+                <ae:parameter name="user">us</ae:parameter>
+                <ae:parameter name="translation_manager">tm</ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="default_extension">.twig</ae:parameter>
+            <ae:parameter name="use_haml">true</ae:parameter>
+            <ae:parameter name="extract_vars">true</ae:parameter> <!-- template variables will be available directly; $this->setAttribute('foo', $value) will be available as {{ foo }} -->
+            <ae:parameter name="options">
+                <ae:parameter name="charset">UTF-8</ae:parameter> <!-- default charset to use -->
+                <ae:parameter name="base_template_class">Twig_Template</ae:parameter> <!-- default template class to use for generated templates-->
+                <ae:parameter name="autoescape">true</ae:parameter> <!-- html escaping is enabled by default; can be html, js, false; in templates you can use different escaping strategies like css, url, html_attr etc. -->
+                <ae:parameter name="auto_reload">true</ae:parameter> <!-- recompile template whenever source code changes -->
+                <ae:parameter name="strict_variables">false</ae:parameter> <!-- do not throw exception instead of silently using null for invalid variables, attributes or methods -->
+            </ae:parameter>
+            <ae:parameter name="template_dirs"><!-- lookup paths for twig templates and macros, all locations plus module folders are available as namespaces @ModuleName/ or @App/ or @Honeybee/ etc. -->
+                <ae:parameter>%core.template_dir%</ae:parameter>
+                <ae:parameter>%core.module_dir%/${module}/templates</ae:parameter>
+                <ae:parameter>%core.honeybee_template_dir%</ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="allowed_template_extensions">
+                <ae:parameter>.haml</ae:parameter>
+                <ae:parameter>.twig</ae:parameter>
+                <ae:parameter>.html</ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="extensions">
+                <ae:parameter>Honeybee\Infrastructure\Template\Twig\Extension\ToolkitExtension</ae:parameter>
+                <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\TranslationManagerExtension</ae:parameter>
+                <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\HoneybeeToolkitExtension</ae:parameter>
+                <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\ModuleResourcesExtension</ae:parameter>
+                <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\MarkdownExtension</ae:parameter>
+            </ae:parameter>
+        </ae:parameter>
+
+        <!-- default proxy renderer configuration with twig and php as available template languages -->
+        <renderers default="proxy">
+            <renderer name="proxy" class="Honeybee\FrameworkBinding\Agavi\Renderer\ProxyRenderer">
+                <ae:parameter name="renderers">
+                    <ae:parameter>twig</ae:parameter>
+                    <ae:parameter>hamltwig</ae:parameter>
+                    <ae:parameter>php</ae:parameter>
+                </ae:parameter>
+            </renderer>
+
+            <renderer name="twig" class="Honeybee\FrameworkBinding\Agavi\Renderer\TwigRenderer">
+                <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/*)" />
+            </renderer>
+
+            <renderer name="hamltwig" class="Honeybee\FrameworkBinding\Agavi\Renderer\TwigRenderer">
+                <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/*)" />
+                <ae:parameter name="default_extension">.haml</ae:parameter>
+            </renderer>
+
+            <renderer name="php" class="Honeybee\FrameworkBinding\Agavi\Renderer\PhpRenderer">
+                <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='assigns'])" />
+                <ae:parameter name="default_extension">.php</ae:parameter>
+                <ae:parameter name="var_name">t</ae:parameter> <!-- change the default template variables array name from $template to the more convenient $t -->
+            </renderer>
+        </renderers>
+
+    </ae:sandbox>
+
+
+    <!-- General output types to render (mail) templates using twig. This "template" output type is used e.g. by the ModuleTemplateRenderer. -->
+    <ae:configuration>
+        <output_types default="template">
+            <output_type name="template">
+                <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:renderers)" />
+                <layouts default="default">
+                    <layout name="default">
+                        <layer name="content" renderer="twig">
+                            <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:layers/ot:layer[@name='template']/*)" />
+                        </layer>
+                    </layout>
+                </layouts>
+            </output_type>
+        </output_types>
+    </ae:configuration>
+
+    <!-- output types and their configuration for web applications -->
+    <ae:configuration context="web">
+
+        <output_types default="html">
+
+            <output_type name="html">
+
+                <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:renderers)" />
+
+                <layouts default="default">
+
+                    <layout name="default">
+                        <ae:parameter name="layout_template">html/layout/MasterLayout.twig</ae:parameter>
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:layers/ot:layer[@name='content'])" />
+                        <!--
+                        <layer name="decorator">
+                            <slots>
+                                <slot name="page_header" module="Honeybee_Core" action="Slots.PageHeader" method="read" />
+                                <slot name="page_footer" module="Honeybee_Core" action="Slots.PageFooter" method="read" />
+                            </slots>
+                            <ae:parameter name="directory">%core.honeybee_template_dir%</ae:parameter>
+                            <ae:parameter name="template">Master</ae:parameter>
+                        </layer>
+                        -->
+                    </layout>
+
+                    <layout name="slot">
+                        <ae:parameter name="layout_template">html/layout/SlotLayout.twig</ae:parameter>
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:layers/ot:layer[@name='content'])" />
+                    </layout>
+
+                </layouts>
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">text/html; charset=UTF-8</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>text/html</ae:parameter>
+                    <ae:parameter>application/xhtml+xml</ae:parameter>
+                    <ae:parameter>*/*</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="json">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/json; charset=UTF-8</ae:parameter>
+                    <!-- <ae:parameter name="Content-Type">text/plain;charset=UTF-8</ae:parameter> -->
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>application/json</ae:parameter>
+                    <ae:parameter>application/x-json</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="vnderrorjson">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/vnd.error+json; charset=UTF-8</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>application/vnd.error+json</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="binary">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/octet-stream</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="xml">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/xml; charset=UTF-8</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>application/xml</ae:parameter>
+                    <ae:parameter>text/xml</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="atomxml">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/atom+xml; charset=UTF-8</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>application/atom+xml</ae:parameter>
+                    <ae:parameter>application/atom+xml;type=entry</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="pdf">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/pdf</ae:parameter>
+                    <ae:parameter name="Expires">Sat, 26 Jul 1997 05:00:00 GMT</ae:parameter>
+                    <ae:parameter name="Cache-Control">private, must-revalidate, max-age=0, s-max-age=0</ae:parameter>
+                    <ae:parameter name="Content-Transfer-Encoding">binary</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>application/pdf</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+            <output_type name="csv">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">text/csv</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>text/csv</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
+             <output_type name="zip">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">application/octet-stream</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+            </output_type>
+
+        </output_types>
+    </ae:configuration>
+
+
+
+    <!-- output types and their configuration for cli applications -->
+    <ae:configuration context="console">
+        <output_types default="console">
+            <output_type name="console">
+                <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:renderers)" />
+                <layouts default="slot">
+                    <layout name="slot">
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ot:layers/ot:layer[@name='content'])" />
+                    </layout>
+                </layouts>
+            </output_type>
+        </output_types>
+    </ae:configuration>
+
+
+    <!-- enable strict_variables for twig renderer in development environments -->
+    <ae:configuration context="web" environment="development.*">
+        <output_types default="html">
+            <output_type name="html">
+                <renderers default="proxy">
+                    <renderer name="twig" class="Honeybee\FrameworkBinding\Agavi\Renderer\TwigRenderer">
+                        <ae:parameter name="options">
+                            <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='options']/*)" />
+                            <ae:parameter name="strict_variables">true</ae:parameter> <!-- throw exception instead of silently using null for invalid variables, attributes or methods -->
+                        </ae:parameter>
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='assigns'])" />
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='template_dirs'])" />
+                        <ae:parameter name="extensions">
+                            <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='extensions']/*)" />
+                            <ae:parameter>Twig_Extension_Debug</ae:parameter>
+                        </ae:parameter>
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='allowed_template_extensions'])" />
+                        <ae:parameter name="default_extension">.twig</ae:parameter>
+                        <ae:parameter name="extract_vars">true</ae:parameter>
+                        <ae:parameter name="use_haml">true</ae:parameter>
+                    </renderer>
+                    <renderer name="hamltwig" class="Honeybee\FrameworkBinding\Agavi\Renderer\TwigRenderer">
+                        <ae:parameter name="options">
+                            <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='options']/*)" />
+                            <ae:parameter name="strict_variables">true</ae:parameter> <!-- throw exception instead of silently using null for invalid variables, attributes or methods -->
+                        </ae:parameter>
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='assigns'])" />
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='template_dirs'])" />
+                        <ae:parameter name="extensions">
+                            <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='extensions']/*)" />
+                            <ae:parameter>Twig_Extension_Debug</ae:parameter>
+                        </ae:parameter>
+                        <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='allowed_template_extensions'])" />
+                        <ae:parameter name="default_extension">.haml</ae:parameter>
+                        <ae:parameter name="extract_vars">true</ae:parameter>
+                        <ae:parameter name="use_haml">true</ae:parameter>
+                    </renderer>
+                </renderers>
+            </output_type>
+        </output_types>
+    </ae:configuration>
+
+</ae:configurations>

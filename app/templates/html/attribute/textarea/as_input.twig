@@ -1,0 +1,35 @@
+{%- set input_help = translations.input_help | default('') -%}
+{%- set input_hint = translations.input_hint | default('') -%}
+{%- set input_focus_hint = translations.input_focus_hint | default('') -%}
+{%- set placeholder = translations.placeholder | default('') -%}
+{%- set syntax_enabled = syntax.enabled | default(false) -%}
+{%- set syntax_preview = syntax.preview | default(false) -%}
+<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-field__value">
+            <textarea id="{{ field_id }}" name="{{ grouped_field_name }}" class="" placeholder="{{ placeholder }}"
+                maxlength="{{ maxlength }}" wrap="{{ wrap }}" cols="{{ cols }}" rows="{{ rows }}"
+                {{ readonly }} {{ disabled }} {{ required }}>{#
+                    #}{{ attribute_value }}{#
+                #}</textarea>
+            <ul class="errors"></ul>
+            {% if syntax_enabled and syntax_preview %}
+                <div class="input_preview" {{ field_id~'-preview' }}></div>
+            {% endif %}
+            {% if input_help %}
+                <div class="input_help">{{ input_help|raw }}</div>
+            {% endif %}
+            {% if input_hint %}
+                <div class="input_hint">{{ input_hint|raw }}</div>
+            {% endif %}
+            {% if input_focus_hint %}
+                <div class="input_hint focus">{{ input_focus_hint|raw }}</div>
+            {% endif %}
+        </div><!--
+        --><div class="hb-field__extra">
+        </div>
+    </div>
+</div>

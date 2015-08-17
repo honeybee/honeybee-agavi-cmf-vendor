@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/command_bus/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+>
+
+    <ae:configuration>
+        <command_bus>
+            <subscriptions>
+                <subscription transport="sync">
+                    <commands>
+                        <command type="honeybee.system_account.user.create_user">
+                            <handler>Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommandHandler</handler>
+                        </command>
+                        <command type="honeybee.system_account.user.modify_user">
+                            <handler>Honeybee\SystemAccount\User\Model\Task\ModifyUser\ModifyUserCommandHandler</handler>
+                        </command>
+                        <command type="honeybee.system_account.user.proceed_user_workflow">
+                            <handler>Honeybee\SystemAccount\User\Model\Task\ProceedUserWorkflow\ProceedUserWorkflowCommandHandler</handler>
+                        </command>
+                        <command type="honeybee.system_account.user.set_user_password">
+                            <handler>Honeybee\SystemAccount\User\Model\Task\SetUserPassword\SetUserPasswordCommandHandler</handler>
+                        </command>
+                        <command type="honeybee.system_account.user.set_user_auth_token">
+                            <handler>Honeybee\SystemAccount\User\Model\Task\SetUserAuthToken\SetUserAuthTokenCommandHandler</handler>
+                        </command>
+                        <command type="honeybee.system_account.user.move_user_node">
+                            <handler>Honeybee\SystemAccount\User\Model\Task\MoveUserNode\MoveUserNodeCommandHandler</handler>
+                        </command>
+                    </commands>
+                </subscription>
+            </subscriptions>
+        </command_bus>
+    </ae:configuration>
+
+</ae:configurations>

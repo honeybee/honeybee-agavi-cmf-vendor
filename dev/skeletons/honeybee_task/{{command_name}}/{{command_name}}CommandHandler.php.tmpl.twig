@@ -1,0 +1,26 @@
+<?php
+
+namespace {{module_namespace}}\Model\Task\{{command_name}};
+
+use Honeybee\Model\Command\ModelCommandHandler;
+use Honeybee\Model\Command\ModelCommandInterface;
+use Honeybee\Model\Aggregate\AggregateRootInterface;
+use {{module_namespace}}\Model\Aggregate\{{module_name}}Type;
+use {{module_namespace}}\Model\{{module_name}}UnitOfWork;
+use Psr\Log\LoggerInterface;
+
+class {{command_name}}CommandHandler extends ModelCommandHandler
+{
+    public function __construct(
+        {{module_name}}Type ${{module_name|lower}}_type,
+        {{module_name}}UnitOfWork ${{module_name|lower}}_unit_of_work,
+        LoggerInterface $logger
+    ) {
+        parent::__construct(${{module_name|lower}}_type, ${{module_name|lower}}_unit_of_work, $logger);
+    }
+
+    protected function doExecute(ModelCommandInterface $command, AggregateRootInterface ${{module_name|lower}})
+    {
+        return $user->{{command_name|as_camel_case}}($command);
+    }
+}

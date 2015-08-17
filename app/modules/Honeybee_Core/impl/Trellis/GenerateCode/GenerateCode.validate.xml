@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml"
+>
+    <ae:configuration>
+
+        <validators translation_domain="honeybee.core.errors">
+            
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+            
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
+                <argument>type</argument>
+                <error>You must specify a valid aggregate root type within you project's domain.</error>
+                <ae:parameter name="description">Generate Trellis code for the aggregate root type.</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please pick an aggregate root type</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+            
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
+                <argument>type</argument>
+                <error>You must specify a valid aggregate root type name within you project's domain.</error>
+            </validator>
+            
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\TrellisTargetValidator" name="trellis_target" depends="valid_type_name" provides="trellis_target">
+                <argument>target</argument>
+                <error>You must specify a valid Trellis target.</error>
+                <ae:parameter name="description">The name of the Trellis target to generate classes for.</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please choose a Trellis target</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+            
+             <validator class="regex" depends="trellis_target" provides="is_projection" severity="info">
+                 <argument>target</argument>
+                 <ae:parameter name="pattern">/^aggregate_root$/</ae:parameter>
+                 <ae:parameter name="match">false</ae:parameter>
+             </validator>
+            
+             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\MigrationNameValidator" name="invalid_target" depends="is_projection">
+                 <argument>migration_name</argument>
+                 <error>You must specify a valid migration name.</error>
+                 <ae:parameter name="dialog">
+                     <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                     <ae:parameter name="select">true</ae:parameter>
+                     <ae:parameter name="question">Please choose a migration in which to place generated mappings</ae:parameter>
+                     <ae:parameter name="attempts">3</ae:parameter>
+                     <ae:parameter name="introduction"><![CDATA[<info>Create a new migration if required using the migration generation command</info>]]></ae:parameter>
+                 </ae:parameter>
+             </validator>
+
+        </validators>
+
+    </ae:configuration>
+</ae:configurations>

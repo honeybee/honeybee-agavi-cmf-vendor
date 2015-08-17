@@ -1,0 +1,35 @@
+
+.user-widget-wrapper {
+    position: relative;
+}
+
+.user-widget {
+
+    .user-dropdown {
+        @include dropdown("user-dropdown");
+
+        .user-dropdown__toggle {
+            padding: 1px 2px 2px 0;
+        }
+    }
+
+
+    .user_email {
+        display: block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: auto;
+        overflow: hidden;
+    }
+
+    .avatar{
+        vertical-align: middle;
+        border-radius: 50%;
+    }
+
+    .activity {
+        padding: 0 $base-spacing;
+        //border-bottom: 2px solid #494949;
+    }
+}
+

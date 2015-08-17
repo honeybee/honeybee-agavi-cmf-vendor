@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/view_templates/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+        <view_templates scope="honeybee.system_account.user.collection">
+            <view_template name="honeybee.system_account.user">
+                <tab name="users">
+                    <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="user">
+                                    <field name="username" attribute_path="username" />
+                                    <field name="email" attribute_path="email" />
+                                    <field name="firstname" attribute_path="firstname" />
+                                    <field name="lastname" attribute_path="lastname" />
+                                    <field name="tags" attribute_path="tags" />
+                                    <field name="role" attribute_path="role" />
+                                    <field name="workflow_state" attribute_path="workflow_state" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+        </view_templates>
+    </ae:configuration>
+</ae:configurations>

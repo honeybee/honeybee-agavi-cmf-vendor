@@ -1,0 +1,27 @@
+{% extends _layout %}
+
+{% block toc %}
+    <h1>Uploaded file for '{{ filesystem }}'</h1>
+{% endblock %}
+
+{% block primary %}
+
+    <h2>Upload succeeded</h2>
+
+    <p>
+        Please use the following file location on submit: <em class="location">{{ file.location }}</em>
+    </p>
+
+    <p>
+        <a href="{{ file.download_url }}" title="Download temporary file" class="button">Download temporary file</a>
+    </p>
+
+    <ul class="fileinfo">
+        <li>Attribute: {{ attribute_name }} (Path {{ attribute_path }})</li>
+        <li>Location: <span class="location">{{ file.location }}</span></li>
+        <li>Mimetype: <span class="mimetype">{{ file.mimetype }}</span></li>
+        <li>Filesize: <span class="filesize">{{ file.filesize|format_bytes }}</span></li>
+    </ul>
+
+    <a href="{{ ro.gen(null) }}" title="Upload another temporary image" class="button">Upload another one</a>
+{% endblock %}

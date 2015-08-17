@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/logging/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+
+        <loggers default="default">
+
+            <!-- log all messages, appenders decide if they actually want to log at all -->
+            <logger name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>default</appender>
+                    <appender>fingers_crossed</appender>
+                </appenders>
+            </logger>
+
+            <!-- accept only DEBUG messages, appenders won't get other log level messages -->
+            <logger name="debug" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" level="\AgaviLogger::DEBUG">
+                <appenders>
+                    <appender>debug-only</appender>
+                </appenders>
+            </logger>
+
+            <!-- accept all messages -->
+            <logger name="error" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>error</appender> <!-- log ERROR and below (see appender) -->
+                    <appender>fingers_crossed</appender>
+                </appenders>
+            </logger>
+
+            <!-- accept all messages -->
+            <logger name="import" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>import</appender>
+                    <appender>fingers_crossed</appender>
+                </appenders>
+            </logger>
+
+            <!-- accept all messages -->
+            <logger name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>mail</appender>
+                    <appender>fingers_crossed</appender>
+                </appenders>
+            </logger>
+
+            <!-- log all authentication related messages -->
+            <logger name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>auth</appender>
+                    <appender>fingers_crossed</appender>
+                </appenders>
+            </logger>
+
+            <!-- log all translation related messages -->
+            <logger name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>translation</appender>
+                </appenders>
+            </logger>
+
+            <!-- log all translation related messages -->
+            <logger name="browserconsole" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>browserconsole-message-only</appender>
+                </appenders>
+            </logger>
+
+        </loggers>
+
+        <appenders>
+
+            <!-- DefaultSetup specifies a Monolog\Logger with FingersCrossedHandler that logs all messages above DEBUG
+                 level to syslog and file when a CRITICAL log message appears. For parameters see the source. -->
+            <appender name="fingers_crossed" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+                <ae:parameters>
+                    <ae:parameter name="channel">critical</ae:parameter>
+                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\DefaultSetup</ae:parameter>
+                </ae:parameters>
+            </appender>
+
+            <!-- FirePhpSetup specifies a Monolog\Logger with FirePHPHandler that logs all messages above DEBUG
+                 level via FirePHP and thus you may see those messages in Firefox etc. For parameters see source. -->
+            <appender name="firephp" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+                <ae:parameters>
+                    <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
+                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\FirePhpSetup</ae:parameter>
+                </ae:parameters>
+            </appender>
+
+            <!-- ChromePhpSetup specifies a Monolog\Logger with ChromePHPHandler that logs all messages above DEBUG
+                 level via ChromePHP and thus you may see those messages in Chrome etc. For parameters see source. -->
+            <appender name="chromephp" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+                <ae:parameters>
+                    <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
+                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\ChromePhpSetup</ae:parameter>
+                </ae:parameters>
+            </appender>
+
+            <appender name="browserconsole" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+                <ae:parameters>
+                    <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
+                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
+                </ae:parameters>
+            </appender>
+
+            <appender name="browserconsole-message-only" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="message-only">
+                <ae:parameters>
+                    <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
+                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
+                </ae:parameters>
+            </appender>
+            <!-- log all messages to %core.app_dir%/log/default.log -->
+            <appender name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+
+            <!-- log all messages to %core.app_dir%/log/login.log -->
+            <appender name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\VerboseLoggerAppender" layout="default" />
+
+            <!-- log all messages to %core.app_dir%/log/trace.log -->
+            <appender name="trace" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+
+            <!-- log all messages to %core.app_dir%/log/import.log -->
+            <appender name="import" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+
+            <!-- log all messages to %core.app_dir%/log/mail.log -->
+            <appender name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+
+            <appender name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="message-only" />
+
+            <!-- log all messages to %core.app_dir%/log/debug.log -->
+            <appender name="debug-only" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default">
+                <ae:parameters>
+                    <!-- logs to EMERGENCY, CRITICAL, ALERT, ERROR, WARNING, NOTICE, INFO and DEBUG, BUT as the
+                         the "debug" logger only accepts DEBUG messages there will be only those messages in the log. -->
+                    <ae:parameter name="max_level">AgaviLogger::DEBUG</ae:parameter>
+                </ae:parameters>
+            </appender>
+
+            <!-- log all messages to error.log -->
+            <appender name="error" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default">
+                <ae:parameters>
+                    <!-- logs to EMERGENCY, CRITICAL, ALERT and ERROR -->
+                    <ae:parameter name="max_level">AgaviLogger::ERROR</ae:parameter>
+                </ae:parameters>
+            </appender>
+
+            <!--
+                Debug logs are rotated in a 7 day (AgaviRotatingFileLoggerAppender default) cycle
+                Use 'cycle' parameter to alter the cycle.
+            <appender name="ApplicationLogAppender" class="AgaviRotatingFileLoggerAppender" layout="DateTimeLayout">
+                <ae:parameters>
+                    <ae:parameter name="dir">%core.app_dir%/log/</ae:parameter>
+                    <ae:parameter name="prefix">app-</ae:parameter>
+                </ae:parameters>
+            </appender>
+            -->
+
+        </appenders>
+
+        <layouts>
+            <layout name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerLayout" />
+            <layout name="DateTimeLayout" class="AgaviTimestampLoggerLayout" />
+            <layout name="message-only" class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerLayout">
+                <ae:parameter name="message_format">%4$s</ae:parameter>
+            </layout>
+        </layouts>
+
+    </ae:configuration>
+
+    <xi:include href="./includes/logging.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+</ae:configurations>

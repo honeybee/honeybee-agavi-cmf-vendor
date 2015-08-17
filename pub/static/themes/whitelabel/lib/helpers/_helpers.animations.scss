@@ -1,0 +1,31 @@
+//
+// transition all properties of an element
+//
+.transition {
+    transition: all 0.3s ease-out;
+}
+
+
+//
+// fade element in/out
+//
+.fade,
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.15s linear;
+}
+
+.fade.in {
+    opacity: 1;
+}
+
+//
+// collapse/expand element
+//
+.collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.35s ease;
+}
+

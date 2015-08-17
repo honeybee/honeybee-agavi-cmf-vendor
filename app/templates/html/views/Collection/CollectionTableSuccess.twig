@@ -1,0 +1,89 @@
+{% extends _layout %}
+
+{# blocks that are reused in this template #}
+
+{% block pagination %}
+    {{ rendered_pagination|raw }}
+{% endblock %}
+
+{% block primary_activities %}
+    <div class="primary-activities">
+        {{ rendered_primary_activities|raw }}
+    </div>
+{% endblock primary_activities %}
+
+
+{# blocks that are overridden from the parent template #}
+
+{% block toc %}
+    {% if search_value is not empty %}
+    <h1>Search: {{ resource_type_name }} resources ({{ number_of_results }} in total)</h1>
+    {% else %}
+    <h1>{{ resource_type_name }} resources ({{ number_of_results }} in total)</h1>
+    {% endif %}
+{% endblock %}
+
+
+{% block primary %}
+
+<div class="controls controls-top">
+    <div class="controls-layout">
+        <div class="search-box">
+            {{ rendered_search_form|raw }}
+        </div><!--
+        --><div class="sort-box" >
+            <div class="sort__content">
+                <label for="{{ sort_trigger_id }}" class="sort__description">{{ _('sort_by') }}</label>
+                {{ rendered_sort_activities|raw }}
+            </div>
+        </div><!--
+        --><div class="pager-box">
+            {{ block('pagination') }}
+        </div><!--
+        --><div class="primary-activities-box">
+            {{ block('primary_activities') }}
+        </div>
+    </div>
+</div>
+
+{{ rendered_resource_collection|raw }}
+
+<div class="controls controls-bottom">
+    <div class="controls-layout">
+        <div class="pager-box">
+            {{ block('pagination') }}
+        </div>
+    </div>
+</div>
+
+{% endblock primary %}
+
+
+{% block secondary %}
+<div class="sidebar">
+    <input type="checkbox" id="sidebar-trigger" class="sidebar__trigger">
+    <label for="sidebar-trigger" class="sidebar__toggle">{{ _('sidebar') }}</label>
+    <label for="sidebar-trigger" class="sidebar__backdrop"></label>
+    <div class="sidebar__panel">
+        <label for="sidebar-trigger" class="sidebar__toggle">{{ _('sidebar') }}</label>
+        <div class="sidebar-content-layout">
+            <div class="sort-box">
+                <label for="{{ sort_trigger_id|replace({'sortTrigger':'sidebarSortTrigger'}) }}" class="sort__description">{{ _('sort_by') }}</label>
+                {{ rendered_sort_activities|replace({'sortTrigger':'sidebarSortTrigger'})|raw }}
+            </div><!--
+            --><div class="pager-box">
+                <div class="pagination1">
+                    {{ block('pagination') }}
+                </div>
+                <div class="pagination2">
+                    {{ block('pagination') }}
+                </div>
+            </div><!--
+            --><div class="primary-activities-box">
+                <label>{{ _('activities') }}</label>
+                {{ block('primary_activities') }}
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock secondary %}

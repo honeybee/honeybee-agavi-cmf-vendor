@@ -1,0 +1,45 @@
+.primary-activities {
+    .activity {
+        width: 100%;
+    }
+
+    .activities-list__more li {
+        display: none;
+
+        &:first-child {
+            display: block;
+        }
+    }
+
+    @include media-query(lap-and-up) {
+        @include shadow-overlay;
+        @include zindex("overlay");
+
+        position: fixed;
+        bottom: 0;
+        right: 130px;
+
+        .activities-list__more li {
+            display: inline-block;
+
+            &:first-child {
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.sidebar {
+    .primary-activities {
+        .activities-list__more li {
+            display: block;
+            margin-bottom: 0.5*$base-spacing;
+        }
+
+        @include media-query(lap-and-up) {
+            position: relative;
+            right: 0;
+        }
+    }
+}
+

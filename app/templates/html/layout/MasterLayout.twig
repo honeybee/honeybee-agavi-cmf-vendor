@@ -1,0 +1,63 @@
+{% use 'html/ui/page-header.twig' %}
+{% use 'html/ui/page-subheader.twig' %}
+{% use 'html/ui/page-content.twig' %}
+{% use 'html/ui/page-footer.twig' %}
+{% set locale = tm.getCurrentLocale() %}
+{% set direction = locale.getCharacterOrientation() == 'right-to-left' ? 'rtl' : 'ltr' %}
+{% set language = locale.getLocaleLanguage() %}
+{% set territory = locale.getLocaleTerritory() %}
+{% set theme_url = ro.getBaseHref() ~ 'static/themes/' ~ ac('themes.default', 'honeybee-minimal') ~ '/binaries/icons/' %}
+<!DOCTYPE html>
+<html lang="{{ language }}" data-territory="{{ territory }}" data-moment-locale-identifier="{{ language }}{% if territory %}{{ '-' ~ territory|lower }}{% endif %}" dir="{{ direction }}">
+<head>
+{%- block htmlhead -%}
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>{{ _browser_title|default('Honeybee') }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <base href="{{ ro.getBaseHref() }}" id="base_href">
+    {% block favicons %}
+    <meta name="msapplication-TileColor" content="{{ ac('themes.tilecolor', '#FFFFFF') }}">
+    <meta name="msapplication-TileImage" content="{{ theme_url }}favicon-144.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ theme_url }}favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="228x228" href="{{ theme_url }}favicon-228.png">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{ theme_url }}favicon-152.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ theme_url }}favicon-144.png">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ theme_url }}favicon-120.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ theme_url }}favicon-114.png">
+    {% endblock favicons %}
+    {% block stylesheets %}<!-- %%STYLESHEETS%% -->{% endblock stylesheets %}
+{%- endblock htmlhead -%}
+</head>
+<body class="{{_bodycss|default('')}}">
+{%- block htmlbody -%}
+{%- block page -%}
+<div class="page-layout">
+    <div class="page-header-box">
+        <header class="page-header" role="banner">
+            {%- block pageheader -%}{{ parent() }}{%- endblock -%}
+            <div class="page-subheader">
+                {%- block pagesubheader -%}{{ parent() }}{%- endblock -%}
+            </div>
+        </header><!-- .page-header -->
+    </div><!-- .page-header-box
+    --><div class="page-main-box">
+        <section class="page-main">
+            {%- block pagecontent -%}{{ parent() }}{%- endblock -%}
+        </section><!-- .page-content -->
+    </div><!-- .page-content-box
+    --><div class="page-footer-box">
+        {%- block pagefooter -%}{#{ parent() }#}{%- endblock pagefooter -%}
+    </div><!-- .page-footer-box> -->
+</div><!-- .page-layout -->
+{%- endblock page -%}
+
+{%- block javascripts -%}
+    {% block requirejs_include %}<script type="text/javascript" src="static/require.js"></script>{% endblock requirejs_include %}
+    {% block requirejs_config %}{% include "rjs/config.twig" %}{% endblock requirejs_config %}
+    {% block requirejs_requires %}<!-- %%REQUIREJS%% -->{% endblock requirejs_requires %}
+{%- endblock javascripts -%}
+
+{%- endblock htmlbody -%}
+</body>
+</html>

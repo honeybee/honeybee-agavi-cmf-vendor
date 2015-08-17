@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://berlinonline.de/schemas/honeybee/config/activities/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <activity_containers>
+
+            <activity_container scope="honeybee.system_account.user.hierarchy" extends="honeybee.system_account.user.collection">
+            </activity_container>
+
+            <activity_container scope="honeybee.system_account.user.hierarchy.primary_activities" extends="honeybee.system_account.user.collection.primary_activities">
+            </activity_container>
+
+            <activity_container scope="honeybee.system_account.user.hierarchy.sort_activities" extends="honeybee.system_account.user.collection.sort_activities">
+            </activity_container>
+
+        </activity_containers>
+    </ae:configuration>
+</ae:configurations>

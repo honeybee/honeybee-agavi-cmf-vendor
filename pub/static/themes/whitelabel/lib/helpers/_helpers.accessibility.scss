@@ -1,0 +1,107 @@
+// -------------------------------------------------------------------------
+// #accessibility helpers
+// -------------------------------------------------------------------------
+
+.show {
+    display: block !important;
+}
+
+.hide {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+// Disable an element (form/widget) by:
+// - using a default cursor
+// - restricting interaction / mouse events
+// - fading the element into the background
+//[disabled="true"],
+//:disabled
+.disabled {
+    cursor: default !important;
+    opacity: 0.6;
+    pointer-events: none;
+    user-input: disabled;
+    user-focus: ignore;
+}
+
+//
+// Hide an element visually without using display:none to let assistive
+// technology still work with the element.
+//
+// [1] uses position fixed to prevent scrolling to the top/element when the
+//     element gets focus (e.g. hidden checkboxes on clicking their label)
+//     This is helpful for offcanvas stuff and action groups.
+
+@mixin accessibility {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+
+    @content;
+}
+
+@mixin visuallyhidden {
+    @include accessibility;
+
+    @content;
+}
+
+@mixin visuallyhidden-fixed {
+    @include accessibility {
+        position: fixed !important; /* [1] */
+        top: 1px;
+        left: 0;
+    }
+
+    @content;
+}
+
+.accessibility,
+.visuallyhidden,
+.hidden-accessible {
+    @include accessibility;
+}
+
+.accessibility-fixed
+.hidden-accessible-fixed,
+.visuallyhidden-fixed {
+    @include accessibility {
+        position: fixed !important; /* [1] */
+    }
+}
+
+
+@mixin reset-accessibility {
+    position: relative !important;
+    width: auto !important;
+    height: auto !important;
+    margin: initial !important;
+    padding: initial !important;
+    border: initial !important;
+    clip: auto !important;
+    overflow: auto !important;
+
+    @content;
+}
+
+.reset-visuallyhidden {
+    @include reset-accessibility;
+}
+
+.reset-visuallyhidden-fixed {
+    @include reset-accessibility {
+        top: initial !important;
+        left: initial !important;
+    }
+}

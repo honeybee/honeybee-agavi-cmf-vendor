@@ -1,0 +1,34 @@
+{%- set input_help = translations.input_help | default('') -%}
+{%- set input_hint = translations.input_hint | default('') -%}
+{%- set input_focus_hint = translations.input_focus_hint | default('') -%}
+<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
+    {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label"><label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label></div><!--
+        --><div class="hb-field__value">
+            <select id="{{ field_id }}" name="{{ grouped_field_name }}" {{ disabled }} {{ required }}>
+                {% for allowed_value in allowed_values %}
+                    <option value="{{ allowed_value }}"
+                        {% if allowed_value == attribute_value %}selected="selected"{% endif %}
+                    >{{ _(allowed_value, translation_domain) }}</option>
+                {% endfor %}
+            </select>
+            <ul class="errors"></ul>
+            {% if input_help %}
+                <div class="input_help">{{ input_help|raw }}</div>
+            {% endif %}
+            {% if input_hint %}
+                <div class="input_hint">{{ input_hint|raw }}</div>
+            {% endif %}
+            {% if input_focus_hint %}
+                <div class="input_hint focus">{{ input_focus_hint|raw }}</div>
+            {% endif %}
+        </div><!--
+        --><div class="hb-field__extra">
+            {% if readonly and disabled %}
+                <input type="hidden" name="{{ grouped_field_name }}" value="{{ attribute_value }}" />
+            {% endif %}
+        </div>
+    </div>
+</div>

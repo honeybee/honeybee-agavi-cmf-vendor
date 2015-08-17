@@ -1,0 +1,155 @@
+<div class="sheet">
+    <h1>Activities</h1>
+    {% set activities = [
+        {
+            activity: {
+                label: "Navigational",
+                description: "An activity that takes users somewhere.",
+                rels: []
+            },
+            css: "activity navigational",
+            link: "javascript:void(0);"
+        },
+        {
+            activity: {
+                label: "Mutating",
+                description: "An activity that changes data, e.g. saving a document.",
+                rels: []
+            },
+            css: "activity mutating",
+            link: "javascript:void(0);"
+        },
+        {
+            activity: {
+                label: "Positive",
+                description: "An activity that confirms something.",
+                rels: []
+            },
+            css: "activity positive",
+            link: "javascript:void(0);"
+        },
+        {
+            activity: {
+                label: "Warning",
+                description: "An activity that should be used with caution.",
+                rels: []
+            },
+            css: "activity warning",
+            link: "javascript:void(0);"
+        },
+        {
+            activity: {
+                label: "Destructive",
+                description: "An activity that potentially destroys data irreversibly.",
+                rels: []
+            },
+            css: "activity destructive",
+            link: "javascript:void(0);"
+        },
+    ] %}
+
+    <p>
+        {% for _a in activities %}
+            {% set a = _a|merge({emphasized: false, css: _a.css ~ " button"}) %}
+            {% include "html/activity/link.twig" with a %}
+        {% endfor %}
+    </p>
+    <p>
+        {% for _a in activities %}
+            {% set a = _a|merge({css: _a.css ~" button disabled"}) %}
+            {% include "html/activity/link.twig" with a %}
+        {% endfor %}
+    </p>
+</div>
+
+<div class="sheet">
+    <h1>Activities (Emphasized)</h1>
+
+    <p>
+        {% for _a in activities %}
+            {% set a = _a|merge({emphasized: true, css: _a.css ~ " button"}) %}
+            {% include "html/activity/link.twig" with a %}
+        {% endfor %}
+    </p>
+    <p>
+        {% for _a in activities %}
+            {% set a = _a|merge({emphasized: true, css: _a.css ~" button disabled"}) %}
+            {% include "html/activity/link.twig" with a %}
+        {% endfor %}
+    </p>
+</div>
+
+<div class="sheet">
+    <h1>Activity Groups</h1>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap-and-up u-1-of-3-desk">
+            {% embed 'html/activity_map/as_splitbutton.twig' with {} %}
+                {% block default %}
+                    {% include "html/activity/link.twig" with activities[0] %}
+                {% endblock %}
+                {% block more %}
+                    <ul>
+                        {% for a in activities %}
+                            <li>{% include "html/activity/link.twig" with a %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            {% endembed %}
+            {% embed 'html/activity_map/as_dropdown.twig' with {} %}
+                {% block default %}
+                    {{ activities[0].activity.label }}
+                {% endblock %}
+                {% block more %}
+                    <ul>
+                        {% for a in activities %}
+                            <li>{% include "html/activity/link.twig" with a %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            {% endembed %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap u-1-of-3-desk">
+            {% embed 'html/activity_map/as_splitbutton.twig' with {
+                emphasized: true
+            } %}
+                {% block default %}
+                    {% include "html/activity/link.twig" with activities[0] %}
+                {% endblock %}
+                {% block more %}
+                    <ul>
+                        {% for a in activities %}
+                            <li>{% include "html/activity/link.twig" with a %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            {% endembed %}
+            {% embed 'html/activity_map/as_dropdown.twig' with {
+                emphasized: true
+            } %}
+                {% block default %}
+                    {{ activities[0].activity.label }}
+                {% endblock %}
+                {% block more %}
+                    <ul>
+                        {% for a in activities %}
+                            <li>{% include "html/activity/link.twig" with a %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            {% endembed %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap u-1-of-3-desk">
+            {% embed 'html/activity_map/as_list.twig' with {
+                emphasized: true
+            } %}
+                {% block more %}
+                    <ul>
+                        {% for a in activities %}
+                            <li>{% include "html/activity/link.twig" with a %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            {% endembed %}
+        </div>
+    </div>
+</div>

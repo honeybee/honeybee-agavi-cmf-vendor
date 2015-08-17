@@ -1,0 +1,30 @@
+<div class="sheet">
+<h1>Input: Date</h1>
+    <div class="layout">
+        {# Text input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/datetime/as_input.twig" with {
+                css: "jsb_ jsb_Honeybee_Core/ui/DatePicker",
+                field_name: "Date Input One",
+                html_attributes: {},
+                field_id: "dateinput1",
+                attribute_value: "",
+                grouped_field_name: "dateinput1",
+                readonly: "",
+                disabled: "",
+                required: "",
+                pattern: "",
+                placeholder: "datetime",
+                widget_enabled: true,
+                widget_options: {},
+                translations: {
+                    placeholder: "Date/Time",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div>
+    </div>
+</div>

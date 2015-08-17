@@ -1,0 +1,42 @@
+@import "mixins.shapes";
+@import "mixins.colors";
+
+@mixin tabs-toggle-default {
+
+    @include tabs-toggle-shape-default;
+    @include tabs-toggle-colors-default;
+}
+
+@mixin tabs-toggle-hover {
+    @include tabs-toggle-shape-hover;
+    @include tabs-toggle-colors-hover;
+}
+
+@mixin tabs-toggle-active-hover {
+    @include tabs-toggle-shape-hover;
+    @include tabs-toggle-colors-active-hover;
+}
+
+@mixin tabs-toggle-focus {
+    @include tabs-toggle-shape-focus;
+    @include tabs-toggle-colors-focus;
+}
+
+@mixin tabs-toggle-active {
+    @include tabs-toggle-shape-active;
+    @include tabs-toggle-colors-active;
+}
+
+@mixin tabs-toggle-disabled {
+    @include tabs-toggle-shape-disabled;
+    @include tabs-toggle-colors-disabled;
+}
+
+@mixin tabs-toggle-normal {
+    @include tabs-toggle-default;
+    &:focus { @include tabs-toggle-focus; }
+    &:active, &.selected { @include tabs-toggle-active; }
+    &:hover { @include tabs-toggle-hover; }
+    &:active:hover, &.selected:hover { @include tabs-toggle-active-hover; }
+    &:disabled, &.disabled { @include tabs-toggle-disabled; }
+}

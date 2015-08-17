@@ -1,0 +1,234 @@
+{# THIS NEEDS TO BE FIXED – later :\ #}
+{%
+set samples = {
+    'image4': {
+            field_id: 'field_id',
+            item_id: 'item4',
+            grouped_base_path: 'some[images][3]',
+            tabs_id: 'imagestabs4',
+            image_id: 'item4',
+        thumb_url: "http://lorempixel.com/150/150/nature/4/",
+        preview_url: "http://lorempixel.com/400/400/nature/4/",
+        download_url: "http://lorempixel.com/400/400/nature/4/",
+        location: "400/400/nature/4/",
+        title: "An image of something",
+        caption: "The image's caption",
+        copyright: "© 2015 BerlinOnline",
+        copyright_url: "http://www.berlinonline.net",
+        source: "",
+        aoi: "[20,20,100,100]",
+        meta_data: {
+        }
+    },
+    'image3': {
+            field_id: 'field_id',
+            item_id: 'item3',
+            grouped_base_path: 'some[images][2]',
+            tabs_id: 'imagestabs3',
+            image_id: 'item3',
+        thumb_url: "http://lorempixel.com/150/150/nature/3/",
+        preview_url: "http://lorempixel.com/400/400/nature/3/",
+        download_url: "http://lorempixel.com/400/400/nature/3/",
+        location: "400/400/nature/3/",
+        title: "A totally different image",
+        caption: "This also has a caption",
+        copyright: "© 2015 BerlinOnline",
+        copyright_url: "http://www.berlinonline.net",
+        source: "",
+        aoi: "[20,20,100,100]",
+        meta_data: {
+        }
+    },
+    'image2': {
+            field_id: 'field_id',
+            item_id: 'item2',
+            grouped_base_path: 'some[images][1]',
+            tabs_id: 'imagestabs2',
+            image_id: 'item2',
+        thumb_url: "http://lorempixel.com/150/150/nature/2/",
+        preview_url: "http://lorempixel.com/400/400/nature/2/",
+        download_url: "http://lorempixel.com/400/400/nature/2/",
+        location: "400/400/nature/2/",
+        title: "An image of something",
+        caption: "The image's caption",
+        copyright: "© 2015 BerlinOnline",
+        copyright_url: "http://www.berlinonline.net",
+        source: "",
+        meta_data: {
+        },
+        aoi: ""
+    },
+    'image1': {
+            field_id: 'field_id',
+            item_id: 'item1',
+            grouped_base_path: 'some[images][0]',
+            tabs_id: 'imagestabs1',
+            image_id: 'item1',
+        thumb_url: "http://lorempixel.com/150/150/nature/1/",
+        preview_url: "http://lorempixel.com/400/400/nature/1/",
+        download_url: "http://lorempixel.com/400/400/nature/1/",
+        location: "400/400/nature/1/",
+        title: "A totally different image",
+        caption: "This also has a caption",
+        copyright: "© 2015 BerlinOnline",
+        copyright_url: "http://www.berlinonline.net",
+        source: "",
+        meta_data: {
+        },
+        aoi: ""
+    }
+}
+%}
+<div class="sheet">
+<h1>Input: Image List</h1>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/image-list/as_tabs.twig" with {
+                field_name: "Image Input One",
+                html_attributes: {},
+                is_embedded: false,
+                field_id: "imagelist1",
+                attribute_path: "images",
+                resource_type_prefix: "doc_type",
+                resource_type_name: "docType",
+                resource_identifier: "doc_type-457c7bd4-b3bf-4948-a4ed-ef9b9a9018b6-de_DE-1",
+                upload_url: "http://uploadservice.local/honeybee/",
+                disabled: '',
+                required: '',
+                readonly: '',
+                widget_enabled: true,
+                widget_options: { isRequired: false, isReadonly: false, isDisabled: false },
+                images: [
+                    {
+                        id:1,
+                        grouped_base_path: samples.image4.grouped_base_path,
+                        thumb_url: samples.image4.thumb_url,
+                        preview_url: samples.image4.preview_url,
+                        download_url: samples.image4.download_url,
+                        location: samples.image4.location,
+                        title: samples.image4.title,
+                        caption: samples.image4.caption,
+                        copyright: samples.image4.copyright,
+                        copyright_url: samples.image4.copyright_url,
+                        source: samples.image4.source,
+                        aoi: samples.image4.aoi,
+                        meta_data: samples.image4.meta_data
+                    },
+                    {
+                        id:2,
+                        grouped_base_path: samples.image3.grouped_base_path,
+                        thumb_url: samples.image3.thumb_url,
+                        preview_url: samples.image3.preview_url,
+                        download_url: samples.image3.download_url,
+                        location: samples.image3.location,
+                        title: samples.image3.title,
+                        caption: samples.image3.caption,
+                        copyright: samples.image3.copyright,
+                        copyright_url: samples.image3.copyright_url,
+                        source: samples.image3.source,
+                        aoi: samples.image3.aoi,
+                        meta_data: samples.image3.meta_data
+                    }
+                ],
+                attribute_value: [
+                    {
+                        grouped_base_path: samples.image3.grouped_base_path,
+                        thumb_url: samples.image2.thumb_url,
+                        preview_url: samples.image2.preview_url,
+                        download_url: samples.image2.download_url,
+                        storage_location: samples.image4.location,
+                        title: samples.image4.title,
+                        caption: samples.image4.caption,
+                        copyright: samples.image4.copyright,
+                        copyright_url: samples.image4.copyright_url,
+                        source: samples.image4.source,
+                        aoi: samples.image4.aoi,
+                        meta_data: samples.image4.meta_data
+                    },
+                    {
+                        grouped_base_path: samples.image3.grouped_base_path,
+                        thumb_url: samples.image1.thumb_url,
+                        preview_url: samples.image1.preview_url,
+                        download_url: samples.image1.download_url,
+                        storage_location: samples.image3.location,
+                        title: samples.image3.title,
+                        caption: samples.image3.caption,
+                        copyright: samples.image3.copyright,
+                        copyright_url: samples.image3.copyright_url,
+                        source: samples.image3.source,
+                        aoi: samples.image3.aoi,
+                        meta_data: samples.image3.meta_data
+                    }
+                ],
+                grouped_field_name: "imagelist1",
+                grouped_base_path: "imagelist1[0]"
+            } %}
+        </div>{#<!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/image-list/as_tabs.twig" with {
+                field_name: "Image Input Two",
+                html_attributes: {},
+                field_id: "imagelist2",
+                attribute_path: "images",
+                resource_type_prefix: "doc_type",
+                resource_type_name: "docType",
+                resource_identifier: "doc_type-457c7bd4-b3bf-4948-a4ed-ef9b9a9018b6-de_DE-1",
+                upload_url: "http://uploadservice.local/honeybee/",
+                disabled: "",
+                required: "",
+                readonly: "readonly",
+                widget_enabled: true,
+                widget_options: { isRequired: false, isReadonly: true, isDisabled: false },
+                images: [
+                    {
+                        image_url: samples.image2.image_url,
+                        location: samples.image2.location,
+                        title: samples.image2.title,
+                        caption: samples.image2.caption,
+                        copyright: samples.image2.copyright,
+                        copyright_url: samples.image2.copyright_url,
+                        source: samples.image2.source,
+                        aoi: samples.image2.aoi,
+                        meta_data: samples.image2.meta_data
+                    },
+                    {
+                        image_url: samples.image1.image_url,
+                        location: samples.image1.location,
+                        title: samples.image1.title,
+                        caption: samples.image1.caption,
+                        copyright: samples.image1.copyright,
+                        copyright_url: samples.image1.copyright_url,
+                        source: samples.image1.source,
+                        aoi: samples.image1.aoi,
+                        meta_data: samples.image1.meta_data
+                    }
+                ],
+                attribute_value: [
+                    {
+                        image_url: samples.image2.image_url,
+                        storage_location: samples.image2.location,
+                        title: samples.image2.title,
+                        caption: samples.image2.caption,
+                        copyright: samples.image2.copyright,
+                        copyright_url: samples.image2.copyright_url,
+                        source: samples.image2.source,
+                        aoi: samples.image2.aoi,
+                        meta_data: samples.image2.meta_data
+                    },
+                    {
+                        image_url: samples.image1.image_url,
+                        storage_location: samples.image1.location,
+                        title: samples.image1.title,
+                        caption: samples.image1.caption,
+                        copyright: samples.image1.copyright,
+                        copyright_url: samples.image1.copyright_url,
+                        source: samples.image1.source,
+                        aoi: samples.image1.aoi,
+                        meta_data: samples.image1.meta_data
+                    }
+                ],
+                grouped_field_name: "imagelist2"
+            } %}
+        </div>#}
+    </div>
+</div>

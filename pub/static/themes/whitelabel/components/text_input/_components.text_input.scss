@@ -1,0 +1,108 @@
+@import "mixins";
+
+label {
+    @include input-label();
+
+}
+
+.hb-field__label + .hb-field__value {
+    line-height: normal;
+}
+
+input[type="search"] {
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+input[type="password"] {
+    @include input-textual();
+}
+
+input[type="text"][disabled],
+input[type="number"][disabled],
+input[type="search"][disabled],
+input[type="url"][disabled],
+input[type="email"][disabled],
+input[type="password"][disabled] {
+    @include input-textual-disabled();
+    user-select: none;
+}
+
+input[type="text"][readonly],
+input[type="number"][readonly],
+input[type="search"][readonly],
+input[type="url"][readonly],
+input[type="email"][readonly],
+input[type="password"][readonly] {
+    @include input-textual-disabled();
+}
+
+.valid {
+    input[type="text"],
+    input[type="number"],
+    input[type="search"],
+    input[type="url"],
+    input[type="email"],
+    input[type="password"] {
+        @include input-textual-colors-valid;
+    }
+}
+
+input, textarea {
+    &+ .errors {
+        display: none;
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+
+    &.invalid, &:invalid {
+        @include input-textual-invalid;
+
+        + .errors {
+            display: block;
+        }
+
+        + .errors > .error {
+            display: block;
+            margin-top: 0.35em; // 5/14
+            color: color(destructive-primary);
+
+            &::before {
+                @include hb-icon(warning);
+                padding-right: 0.357em; // 5/14
+            }
+        }
+    }
+}
+
+textarea {
+    @include textarea;
+}
+
+.input_help,
+.input_hint {
+    color: color(text-secondary);
+
+    a {
+        color: color(navigational-primary);
+        text-decoration: none;
+    }
+}
+
+.input_hint.focus {
+    display: none;
+}
+
+input,textarea {
+    &:focus ~ .input_hint.focus {
+        display: block;
+    }
+}
+
+.input_help {
+    text-align: right;
+}

@@ -1,0 +1,27 @@
+{%- block userwidget -%}
+<div class="user-widget-wrapper">
+    <div class="user-widget " >
+        {% embed 'html/dropdown.twig' with {
+                name: 'user-dropdown'
+            } only
+        %}
+            {% block default %}
+                <span class="user_email">{{
+                us.getAttribute('name')|trim|default(us.getAttribute('email')) }}</span>
+            {% endblock %}
+            {% if avatar_url is defined %}
+                {% block toggle %}
+                    <img class="avatar" src="//www.gravatar.com/avatar/2c58cc61d2db42224cf41fdc18453261?s=31" />
+                {% endblock %}
+            {% endif %}
+            {% block more %}
+                <ul>
+                    {#<li><a href="javascript:void" rel="profile" class="activity navigational" title="{{ _('Change your profile') }}">{{ _('Profile') }}</a></li> #}
+                    <li><a href="/honeybee-system_account-user/logout" class="activity warning"
+                            title="{{ _('leave_the_system', 'honeybee.system_account.user.ui') }}">{{ _('logout', 'honeybee.system_account.user.ui') }}</a>
+                </ul>
+            {% endblock %}
+        {% endembed %}
+    </div><!-- .user-widget -->
+</div><!-- .user-widget-wrapper -->
+{%- endblock userwidget -%}

@@ -1,0 +1,49 @@
+{#
+    You may define modules here, whose whose dependencies should be traced on compilation (r.js optimization).
+
+    For each defined module here you can use the following options:
+    - "name": (mandatory) name of the module to trace dependencies for
+    - "include": array of module names to additionaly include in this module
+    - "exclude": array of module names to exclude from this module (even though the module specifies the dependency; useful for libraries like jquery)
+    - "create": boolean value to indicate that this module is a custom one that should be created despite being non-existant in the source folder
+
+    Please note, that non-AMD modules like ckeditor are no good candidates for optimization into compiled modules. The
+    ckeditor for example does not find it's own config and styles if it's compiled without those. You can only fix this
+    by converting the lib to AMD style OR try to define all necessary files via "include" below (which probably fails).
+
+    Example definitions:
+#}
+{#
+        {
+            name: "Core/All",
+            create: true,
+            include: [
+                "Core/Main",
+                "User/Main",
+                "lodash/main",
+                "Core/Widget",
+                "Core/ui/Tabs",
+                "Core/ui/DatePicker"
+            ]
+        }
+#}
+{#      {
+            name: "_project/Main",
+            exclude: [
+                "Core/Main"
+            ]
+        },
+        {
+            name: "Core/Examples",
+            exclude: [
+                "Core/Main"
+            ]
+        },
+        {
+            name: "TotallyCustomModule",
+            include: [
+                "Core/Example_1"
+            ],
+            create: true
+        }
+#}

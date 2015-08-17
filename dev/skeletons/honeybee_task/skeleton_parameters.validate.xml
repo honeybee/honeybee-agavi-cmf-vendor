@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <validators>
+            <validator class="and" depends="skeleton_name_honeybee_task">
+                <ae:parameter name="description"><![CDATA[
+                    Creates a new Honeybee Model task for a Honeybee module.
+                ]]></ae:parameter>
+
+                <!-- <validator class="skeleton_generator">
+                    <ae:parameter name="value">Your\Custom\HoneybeeModelTaskGenerator</ae:parameter>
+                </validator> -->
+
+<!--
+
+These are validators that provide the parameters that are used for rendering
+all '.tmpl.twig' files. You can use the validator 'dialog' that wraps the
+actual validator to use (specified by the dialog[validator] parameter).
+The dialog validator asks users for a value when the argument was not given
+on the command line via '-argument_name value' or the value is invalid.
+
+It is important to to set a 'target_path' parameter as that is the location
+where the files are put. If you can't provide one via CLI or validator, then
+you should create a ISkeletonGenerator implementing generator class, that
+handles necessary setup steps and declare that generator above with the
+'skeleton_generator' validator.
+
+-->
+
+                <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ModuleNameValidator">
+                    <argument>module_name</argument>
+                    <error>You must specify a valid module name.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="relative_target_path">lib/Model/Task</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="select">true</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                        <ae:parameter name="introduction"><![CDATA[<info>A honeybee module is a folder in the %core.module_dir% directory.
+Honeybee modules have a "module.ini" file.</info>]]></ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>command_name</argument>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                        <!-- <ae:parameter name="default">ConfirmOrder</ae:parameter> -->
+                        <ae:parameter name="introduction"><![CDATA[<info>
+    Commands are requests for changes sent to the Model. A command
+    is named with a verb and a noun (which may include an aggregate
+    type). Please input the command name to create in studly caps.
+
+    Examples are: ConfirmOder, RelocateTo, ChangeName
+
+                        </info>]]></ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>event_name</argument>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                        <!-- <ae:parameter name="default">OrderConfirmed</ae:parameter> -->
+                        <ae:parameter name="introduction"><![CDATA[<info>
+    Events represents something that took place in the Model. They are
+    always named with a past-participle verb. It's not unusual for an event
+    to name an aggregate or entity that it relates to.
+
+    Examples are: OrderConfirmed, RelocatedTo, NameChanged
+
+                        </info>]]></ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

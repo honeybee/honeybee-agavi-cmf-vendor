@@ -1,0 +1,77 @@
+<div class="sheet">
+<h1>Input: Text List</h1>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/text-list/as_input.twig" with {
+                field_name: "Text List One",
+                html_attributes: {},
+                field_id: "textlist1",
+                attribute_value: ["foo", "bar", "batz"],
+                grouped_field_name: "Grouped Field Name",
+                widget_enabled: true,
+                readonly: "",
+                disabled: "",
+                required: "",
+                pattern: "",
+                widget_enabled: true,
+                css: "jsb_ jsb_Honeybee_Core/ui/TextList",
+                widget_options: { isRequired: false, isReadonly: false, isDisabled: false, min_count: null, max_count: null, remove_label: "&#xe807;" },
+                translations: {
+                    placeholder: "Insert Text",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/text-list/as_input.twig" with {
+                field_name: "Text List Two",
+                html_attributes: {},
+                field_id: "textlist2",
+                attribute_value: [],
+                grouped_field_name: "Grouped Field Name",
+                widget_enabled: true,
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                css: "jsb_ jsb_Honeybee_Core/ui/TextList",
+                widget_enabled: true,
+                widget_options: { isRequired: false, isReadonly: false, isDisabled: false, min_count: 2, max_count: 3, remove_label: "&#xe807;" },
+                translations: {
+                    placeholder: "Insert Text",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/text-list/as_input.twig" with {
+                field_name: "Text List Three",
+                html_attributes: {},
+                field_id: "textlist3",
+                attribute_value: [],
+                grouped_field_name: "Grouped Field Name",
+                widget_enabled: true,
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                css: "jsb_ jsb_Honeybee_Core/ui/TextList input-text-list--full-width",
+                widget_enabled: true,
+                widget_options: { isRequired: false, isReadonly: false, isDisabled: false, min_count: 2, max_count: 3, remove_label: "&#xe807;" },
+                translations: {
+                    placeholder: "Insert Text",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div>
+    </div>
+</div>

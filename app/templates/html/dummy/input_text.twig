@@ -1,0 +1,155 @@
+<div class="sheet">
+<h1>Input: Text</h1>
+    <div class="layout">
+        {# Text input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/as_input_text.twig" with {
+                field_name: "Text Input One",
+                html_attributes: {},
+                field_id: "textinput1",
+                attribute_value: "",
+                grouped_field_name: "textinput1",
+                readonly: "",
+                disabled: "",
+                required: "",
+                pattern: "",
+                placeholder: "Insert Text",
+                translations: {
+                    placeholder: "Click to show the focus hint",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: "You can type any kind of string"
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/as_input_text.twig" with {
+                field_name: "Text Input Two (Invalid Value)",
+                html_attributes: {},
+                field_id: "textinput2",
+                attribute_value: "",
+                grouped_field_name: "textinput2",
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                placeholder: "Insert Text. Empty Not allowed.",
+                translations: {
+                    placeholder: "",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "This field is mandatory",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div>
+        {# Email input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/email/as_input_email.twig" with {
+                field_name: "Email Input One",
+                html_attributes: {},
+                field_id: "emailinput1",
+                attribute_value: "",
+                grouped_field_name: "emailinput1",
+                readonly: "",
+                disabled: "",
+                required: "",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Email",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/email/as_input_email.twig" with {
+                field_name: "Email Input Two (Invalid Value)",
+                html_attributes: {},
+                field_id: "emailinput2",
+                attribute_value: "",
+                grouped_field_name: "emailinput2",
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Email",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                },
+                errors: [
+                    "This is an error",
+                    "And another error"
+                ]
+            } %}
+        </div>
+        {# Url input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/url/as_input_url.twig" with {
+                field_name: "Url Input One",
+                html_attributes: {},
+                field_id: "urlinput1",
+                attribute_value: "",
+                grouped_field_name: "urlinput1",
+                readonly: "",
+                disabled: "",
+                required: "",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Url",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/url/as_input_url.twig" with {
+                field_name: "Url Input Two (Invalid Value)",
+                html_attributes: {},
+                field_id: "urlinput2",
+                attribute_value: "",
+                grouped_field_name: "urlinput2",
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Url",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/url/as_input_url.twig" with {
+                field_name: "Url Input Three (Valid Value)",
+                css: "valid",
+                html_attributes: {},
+                field_id: "urlinput2",
+                attribute_value: "http://example.org",
+                grouped_field_name: "urlinput2",
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Url",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+{%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
+{%- block thumb %}{# block wrapper for whitespace control #}
+<li data-item-id="{{item_id}}" class="imagelist__thumb {{css}}">
+    {% if isReadable %}
+    <input
+        id="{{item_id}}_delete"
+        type="checkbox"
+        name="{{form_name}}[delete]"
+        class="imagelist__delete-input"
+        data-item-id="{{item_id}}"
+        {{ disabled }}
+    />
+    {% endif %}
+    <label class="imagelist__thumb-label" for="{{item_id}}">
+        <img src="{{image_url}}" title="Click to enlarge and show details" alt="Thumbnail: {{alt}}" />
+    </label>
+    {% if isReadable %}
+    <a class="move left">&#9664;</a>
+    <label for="{{item_id}}_delete" class="remove">&#215;</label>
+    <a class="move right">&#9654;</a>
+    {% endif %}
+</li>
+{%- endblock thumb %}

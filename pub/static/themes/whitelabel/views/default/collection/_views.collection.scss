@@ -1,0 +1,47 @@
+@import "collection-controls";
+@import "collection-sidebar";
+
+$workflow_state_fieldname: "workflow_state";
+
+.view-collection {
+}
+
+.view-collection .hb-itemlist {
+
+    .hb-field__label {
+        font-size: 90%;
+        color: color(grey);
+    }
+
+    .hb-itemlist__title {
+        font-weight: 700;
+    }
+
+    @include media-query(palm) {
+        box-shadow: none;
+
+        .hb-item {
+            @include sheet;
+        }
+    }
+
+    @include media-query(lap-and-up) {
+        @include sheet;
+
+        .hb-field[data-hb-field-name="#{$workflow_state_fieldname}"] {
+            width: percentage(2/12);
+        }
+
+        .hb-actions {
+            width: percentage(2/12);
+        }
+    }
+
+    .hb-item:hover {
+        $hover-color: mix(color(blue), color(lightgrey1), 10%);
+        .hb-field,
+        .hb-actions {
+            background-color: $hover-color;
+        }
+    }
+}

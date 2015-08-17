@@ -1,0 +1,38 @@
+
+.notifications {
+    @include offcanvas('notifications', 'top-right', 'top', 20rem, .1s, 7000, 100);
+
+    .notifications__toggle {
+        width: auto;
+        right: 5em;
+        background: orange;
+        border-bottom: 2px solid black;
+    }
+
+    fieldset > label:hover {
+        background-color: #f3f3f3;
+    }
+
+    .notifications__panel {
+        background: #fefefe;
+    }
+
+    .messages-box {
+        text-align: center;
+    }
+
+    .messages-box dl {
+        display: inline-block;
+    }
+
+    .settings {
+        //@include ag;
+
+        .ag__toggle {
+            width: 4rem;
+            border-bottom: 2px solid black;
+        }
+    }
+
+}
+

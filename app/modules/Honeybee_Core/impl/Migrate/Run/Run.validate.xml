@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.config_dir%/validators.xml">
+    <ae:configuration>
+        <validators>
+
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+            
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\MigrationTargetValidator" name="invalid_target" translation_domain="honeybee.core.ui" provides="migration_target">
+                <argument>target</argument>
+                <error>You must specify a valid migration target name.</error>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please pick a migration target</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="string" name="invalid_version" required="false" depends="migration_target">
+                <argument>version</argument>
+                <error>Invalid or missing 'version' parameter. Expecting one of the listed available versions.</error>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

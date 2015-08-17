@@ -1,0 +1,23 @@
+/*
+    strips all box-affecting styles
+*/
+@mixin strip-box {
+    border-width: 0;
+    border-style: none;
+
+    margin: 0;
+    padding: 0;
+
+    outline-width: 0;
+    outline-style: none;
+
+    box-shadow: none;
+}
+
+/*
+    strips the background, leaving it transparent
+*/
+@mixin strip-background {
+    background-image: none;
+    background-color: transparent;
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
+    <ae:configuration>
+        <validators translation_domain="honeybee.core.errors">
+            <validator class="boolean" name="verbose" required="false">
+                <argument>verbose</argument>
+                <error>Parameter %name$s must have a boolean value.</error>
+            </validator>
+            <validator class="boolean" name="silent" required="false">
+                <argument>silent</argument>
+                <error>Parameter %name$s must have a boolean value.</error>
+            </validator>
+            <validator class="string" name="buildfile_path" required="false">
+                <argument>buildfile</argument>
+                <error>Parameter %name$s must be a full file path that is writable.</error>
+                <error for="min">Parameter %name$s must be an at least 3 characters long writable file path.</error>
+                <ae:parameter name="min">3</ae:parameter>
+                <ae:parameter name="description">defaults to the absolute path of "pub/static/buildconfig.js"</ae:parameter>
+            </validator>
+            <validator class="inarray" name="optimize" required="false">
+                <argument>optimize</argument>
+                <error>Parameter %name$s must have a valid r.js optimize style value (%values$s).</error>
+                <ae:parameter name="case">true</ae:parameter>
+                <ae:parameter name="strict">true</ae:parameter>
+                <ae:parameter name="sep">|</ae:parameter>
+                <ae:parameter name="values">uglify|uglify2|none</ae:parameter>
+                <ae:parameter name="description">One of: uglify|uglify2|none</ae:parameter>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

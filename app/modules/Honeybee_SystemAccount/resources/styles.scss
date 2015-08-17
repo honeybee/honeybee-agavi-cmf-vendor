@@ -1,0 +1,20 @@
+@import "../../../../pub/static/themes/honeybee/vars";
+@import "../../../../pub/static/themes/honeybee/vendor/inuit-responsive-settings/settings.responsive";
+@import "../../../../pub/static/themes/honeybee/vendor/inuit-responsive-tools/tools.responsive";
+
+.itemlist {
+@include media-query(desk) {
+        $w: percentage(1/12);
+        .hb-field[data-hb-field-name="username"] {
+            width: 3*$w;
+        }
+
+        .hb-field[data-hb-field-name="email"] {
+            width: 3*$w;
+        }
+
+        .hb-field[data-hb-field-name="role"] {
+            width: 2*$w;
+        }
+    }
+}

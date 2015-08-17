@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/config_handlers/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    parent="%core.system_config_dir%/config_handlers.xml">
+    <ae:configuration>
+        <handlers>
+
+            <handler pattern="%core.honeybee_config_dir%/recovery/routing.xml" class="AgaviRoutingConfigHandler">
+                <validation>%core.agavi_dir%/config/xsd/routing.xsd</validation>
+                <transformation>%core.agavi_dir%/config/xsl/routing.xsl</transformation>
+            </handler>
+
+            <handler pattern="%core.module_dir%/*/*.validate.xml" class="AgaviValidatorConfigHandler">
+                <validation>%core.agavi_dir%/config/xsd/validators.xsd</validation>
+                <transformation>%core.agavi_dir%/config/xsl/validators.xsl</transformation>
+            </handler>
+
+            <handler pattern="%core.module_dir%/*/*.cache.xml" class="AgaviCachingConfigHandler">
+                <validation>%core.agavi_dir%/config/xsd/caching.xsd</validation>
+                <transformation>%core.agavi_dir%/config/xsl/caching.xsl</transformation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/access_control.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\AclConfigHandler">
+                <validation>%core.config_dir%/xsd/access_control.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/workflows.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\WorkflowConfigHandler">
+                <validation>%core.config_dir%/xsd/workflows.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/exports.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ExportsConfigHandler">
+                <validation>%core.config_dir%/xsd/exports.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/imports.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ImportsConfigHandler">
+                <validation>%core.config_dir%/xsd/imports.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/mail.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\MailConfigHandler">
+                <validation>%core.config_dir%/xsd/mail.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/view_configs.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ViewConfigsConfigHandler">
+                <validation>%core.config_dir%/xsd/view_configs.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/commands.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\CommandBusConfigHandler">
+                <validation>%core.config_dir%/xsd/commands.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/events.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\EventBusConfigHandler">
+                <validation>%core.config_dir%/xsd/events.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/data_access.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\DataAccessConfigHandler">
+                <validation>%core.config_dir%/xsd/data_access.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/view_templates.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ViewTemplatesConfigHandler">
+                <validation>%core.config_dir%/xsd/view_templates.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/connections.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ConnectorConfigHandler">
+                <validation>%core.config_dir%/xsd/connections.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/services.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ServicesConfigHandler">
+                <validation>%core.config_dir%/xsd/services.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/navigation.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\NavigationConfigHandler">
+                <validation>%core.config_dir%/xsd/navigation.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/migration.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\MigrationConfigHandler">
+                <validation>%core.config_dir%/xsd/migration.xsd</validation>
+            </handler>
+            
+            <handler pattern="%core.config_dir%/fixture.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\FixtureConfigHandler">
+                <validation>%core.config_dir%/xsd/fixture.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/activities*.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ActivitiesConfigHandler" />
+
+            <handler pattern="%core.config_dir%/output_formats.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\OutputFormatsConfigHandler" />
+
+            <handler pattern="%core.config_dir%/filesystems.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\FilesystemsConfigHandler">
+                <validation>%core.config_dir%/xsd/filesystems.xsd</validation>
+            </handler>
+
+        </handlers>
+    </ae:configuration>
+</ae:configurations>

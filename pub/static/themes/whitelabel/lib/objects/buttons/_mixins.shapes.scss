@@ -1,0 +1,101 @@
+//copied from  inuit-buttons to avoid @extend
+@mixin inuit-btn {
+    display: inline-block; /* [1] */
+    vertical-align: middle; /* [2] */
+    font: inherit; /* [3] */
+    text-align: center; /* [4] */
+    margin:  0; /* [4] */
+    cursor: pointer; /* [5] */
+    overflow: visible; /* [6] */
+}
+
+@mixin button-shape() {
+    @include inuit-btn;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+
+    border-radius: 3px;
+
+    outline: 0;
+
+    user-select: none;
+    cursor: pointer;
+
+    text-decoration: none;
+
+    @include ellipsis;
+}
+
+@mixin button-shape-normal {
+    @include button-shape;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+@mixin button-shape-normal-navigational-default {@include button-shape-normal;}
+@mixin button-shape-normal-navigational-hover {@include button-shape-normal-navigational-default;}
+@mixin button-shape-normal-navigational-focus {@include button-shape-normal-navigational-default;}
+@mixin button-shape-normal-navigational-active {@include button-shape-normal-navigational-default;}
+@mixin button-shape-normal-navigational-disabled {@include button-shape-normal-navigational-default;}
+
+@mixin button-shape-normal-mutating-default {@include button-shape-normal;}
+@mixin button-shape-normal-mutating-hover {@include button-shape-normal-mutating-default;}
+@mixin button-shape-normal-mutating-focus {@include button-shape-normal-mutating-default;}
+@mixin button-shape-normal-mutating-active {@include button-shape-normal-mutating-default;}
+@mixin button-shape-normal-mutating-disabled {@include button-shape-normal-mutating-default;}
+
+@mixin button-shape-normal-positive-default {@include button-shape-normal;}
+@mixin button-shape-normal-positive-hover {@include button-shape-normal-positive-default;}
+@mixin button-shape-normal-positive-focus {@include button-shape-normal-positive-default;}
+@mixin button-shape-normal-positive-active {@include button-shape-normal-positive-default;}
+@mixin button-shape-normal-positive-disabled {@include button-shape-normal-positive-default;}
+
+@mixin button-shape-normal-warning-default {@include button-shape-normal;}
+@mixin button-shape-normal-warning-hover {@include button-shape-normal-warning-default;}
+@mixin button-shape-normal-warning-focus {@include button-shape-normal-warning-default;}
+@mixin button-shape-normal-warning-active {@include button-shape-normal-warning-default;}
+@mixin button-shape-normal-warning-disabled {@include button-shape-normal-warning-default;}
+
+@mixin button-shape-normal-destructive-default {@include button-shape-normal;}
+@mixin button-shape-normal-destructive-hover {@include button-shape-normal-destructive-default;}
+@mixin button-shape-normal-destructive-focus {@include button-shape-normal-destructive-default;}
+@mixin button-shape-normal-destructive-active {@include button-shape-normal-destructive-default;}
+@mixin button-shape-normal-destructive-disabled {@include button-shape-normal-destructive-default;}
+
+@mixin button-shape-emphasized {
+    @include button-shape;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    border-width: 1px;
+    border-style: solid;
+}
+
+@mixin button-shape-emphasized-navigational-default {@include button-shape-emphasized;}
+@mixin button-shape-emphasized-navigational-hover {@include button-shape-emphasized-navigational-default;}
+@mixin button-shape-emphasized-navigational-focus {@include button-shape-emphasized-navigational-default;}
+@mixin button-shape-emphasized-navigational-active {@include button-shape-emphasized-navigational-default;}
+@mixin button-shape-emphasized-navigational-disabled {@include button-shape-emphasized-navigational-default;}
+
+@mixin button-shape-emphasized-mutating-default {@include button-shape-emphasized;}
+@mixin button-shape-emphasized-mutating-hover {@include button-shape-emphasized-mutating-default;}
+@mixin button-shape-emphasized-mutating-focus {@include button-shape-emphasized-mutating-default;}
+@mixin button-shape-emphasized-mutating-active {@include button-shape-emphasized-mutating-default;}
+@mixin button-shape-emphasized-mutating-disabled {@include button-shape-emphasized-mutating-default;}
+
+@mixin button-shape-emphasized-positive-default {@include button-shape-emphasized;}
+@mixin button-shape-emphasized-positive-hover {@include button-shape-emphasized-positive-default;}
+@mixin button-shape-emphasized-positive-focus {@include button-shape-emphasized-positive-default;}
+@mixin button-shape-emphasized-positive-active {@include button-shape-emphasized-positive-default;}
+@mixin button-shape-emphasized-positive-disabled {@include button-shape-emphasized-positive-default;}
+
+@mixin button-shape-emphasized-warning-default {@include button-shape-emphasized;}
+@mixin button-shape-emphasized-warning-hover {@include button-shape-emphasized-warning-default;}
+@mixin button-shape-emphasized-warning-focus {@include button-shape-emphasized-warning-default;}
+@mixin button-shape-emphasized-warning-active {@include button-shape-emphasized-warning-default;}
+@mixin button-shape-emphasized-warning-disabled {@include button-shape-emphasized-warning-default;}
+
+@mixin button-shape-emphasized-destructive-default {@include button-shape-emphasized;}
+@mixin button-shape-emphasized-destructive-hover {@include button-shape-emphasized-destructive-default;}
+@mixin button-shape-emphasized-destructive-focus {@include button-shape-emphasized-destructive-default;}
+@mixin button-shape-emphasized-destructive-active {@include button-shape-emphasized-destructive-default;}
+@mixin button-shape-emphasized-destructive-disabled {@include button-shape-emphasized-destructive-default;}

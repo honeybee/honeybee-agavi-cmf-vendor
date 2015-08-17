@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_SystemAccount/config/validators.xml">
+    <ae:configuration>
+
+        <validators translation_domain="honeybee.system_account.user.errors" method="read">
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_user">
+                <argument>resource</argument>
+                <error>The given user(identifier) is invalid.</error>
+                <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>
+            </validator>
+        </validators>
+
+        <validators translation_domain="honeybee.system_account.user.errors" method="write">
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ProceedWorkflowCommandValidator" name="invalid_proceed_command">
+                <argument>event</argument>
+                <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
+                <ae:parameter name="identifier_arg">resource</ae:parameter>
+                <ae:parameter name="command_implementor">Honeybee\SystemAccount\User\Model\Task\ProceedUserWorkflow\ProceedUserWorkflowCommand</ae:parameter>
+                <error>Invalid command payload given.</error>
+                <error for="conflict_detected">Data has changed and conflicts with your attempt to modify it.</error>
+            </validator>
+        </validators>
+
+    </ae:configuration>
+</ae:configurations>

@@ -1,0 +1,5 @@
+{% extends _layout %}
+
+{% block primary %}
+    <p>supported events for current state <i>{{ workflow_state }}</i> are: {{ supported_events|join(', ') }}</p>
+{% endblock %}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/data_access/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <xi:include href="./includes/data_access.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+    <ae:configuration>
+        <storage_writers>
+            <!--
+                domain-events
+            -->
+            <storage_writer name="honeybee::domain_event::view_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\DomainEvent\DomainEventWriter">
+                <connection>Default.ViewStore</connection>
+                <settings>
+                    <setting name="type">domain_event</setting>
+                </settings>
+            </storage_writer>
+        </storage_writers>
+
+        <finders>
+            <!--
+                domain-events
+            -->
+            <finder name="honeybee::domain_event::view_store::finder" class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\DomainEvent\DomainEventFinder">
+                <connection>Default.ViewStore</connection>
+                <settings>
+                    <setting name="type">domain_event</setting>
+                </settings>
+            </finder>
+        </finders>
+    </ae:configuration>
+</ae:configurations>

@@ -1,0 +1,61 @@
+#!/usr/bin/env sh
+
+# set default value if local config is not set when this script is sourced
+if [ -z "$LOCAL_CONFIG_SH" ] ; then
+    LOCAL_CONFIG_SH=$(readlink -m "$(dirname $0)/../etc/local/config.sh")
+fi
+
+if [ -z "$APPLICATION_DIR" ] ; then
+    APPLICATION_DIR=$(readlink -m "$(dirname $0)/../")
+fi
+
+# source the local config
+if [ -f $LOCAL_CONFIG_SH ] ; then
+    # echo "[INFO] Sourcing local config file: $LOCAL_CONFIG_SH"
+    . $LOCAL_CONFIG_SH
+else
+    echo "[ERROR] Couldn't source local config: $LOCAL_CONFIG_SH"
+    echo "[ERROR] Make sure to run 'make configure' or 'make reconfigure'."
+    exit 1
+fi
+
+# php executable to use
+if [ -z "$PHP_COMMAND" ] ; then
+    echo "[ERROR] Unable to find a valid php executable."
+    echo "[ERROR] Make sure to run 'make configure' or 'make reconfigure'."
+    exit 1
+fi
+
+# agavi environment name
+if [ -z "$AGAVI_ENVIRONMENT" ] ; then
+    echo "[ERROR] AGAVI_ENVIRONMENT is not set."
+    echo "[ERROR] Make sure to run 'make configure' or 'make reconfigure'."
+    exit 1
+fi
+
+# php ini settings to use for dispatch
+if [ -z "$CLI_PHP_INI_SETTINGS" ] ; then
+    CLI_PHP_INI_SETTINGS="-d html_errors=off"
+fi
+
+# set php script to dispatch application
+if [ -z "$CLI_PHP_FILE" ] ; then
+    CLI_PHP_FILE=$(readlink -m "$(dirname $0)/cli.php")
+fi
+
+# set php script to use as a bootstrap file prior to dispatching the application
+if [ -z "$BOOTSTRAP_PHP_FILE" ] ; then
+    BOOTSTRAP_PHP_FILE=$(readlink -m "$(dirname $0)/../app/bootstrap.php")
+fi
+
+# echo "[INFO] Executing: PHP_COMMAND=${PHP_COMMAND} AGAVI_ENVIRONMENT=${AGAVI_ENVIRONMENT} APPLICATION_DIR=$APPLICATION_DIR BOOTSTRAP_PHP_FILE=${BOOTSTRAP_PHP_FILE} ${PHP_COMMAND} ${CLI_PHP_INI_SETTINGS} -f ${CLI_PHP_FILE} -- $@"
+
+# dispatch application
+PHP_COMMAND=${PHP_COMMAND} \
+    AGAVI_ENVIRONMENT=${AGAVI_ENVIRONMENT} \
+    APPLICATION_DIR=${APPLICATION_DIR} \
+    BOOTSTRAP_PHP_FILE=${BOOTSTRAP_PHP_FILE} \
+    ${PHP_COMMAND} \
+    ${CLI_PHP_INI_SETTINGS} \
+    -f ${CLI_PHP_FILE} -- $@
+

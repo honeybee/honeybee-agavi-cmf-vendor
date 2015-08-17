@@ -1,0 +1,7 @@
+<?php
+
+$loader = new \Composer\Autoload\Classloader();
+{% for package in packages %}
+$loader->addPsr4({{ package.namespace }}, {{ package.directory }}', true);
+{% endfor %}
+$loader->register();

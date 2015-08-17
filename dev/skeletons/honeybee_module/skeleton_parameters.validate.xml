@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <validators>
+            <validator class="and" depends="skeleton_name_honeybee_module">
+                <ae:parameter name="description">Creates a Honeybee module in the modules directory. By default it doesn't overwrite existing files.</ae:parameter>
+
+                <validator class="skeleton_generator">
+                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeModuleGenerator</ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>vendor</argument>
+                    <error>You must specify a vendor name for this module.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>package</argument>
+                    <error>You must specify a package name for this module.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{1,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>override_files</argument>
+                    <error>You must specify if you wish to override existing files.</error>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="question">Should existing files be overridden/updated?</ae:parameter>
+                        <ae:parameter name="default">false</ae:parameter>
+                        <ae:parameter name="confirm">true</ae:parameter>
+                    </ae:parameter>
+                </validator>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

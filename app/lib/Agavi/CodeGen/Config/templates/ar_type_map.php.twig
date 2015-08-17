@@ -1,0 +1,19 @@
+<?php
+
+use Honeybee\Model\Aggregate\AggregateRootTypeMap;
+use Workflux\Builder\XmlStateMachineBuilder;
+
+$ar_type_map = new AggregateRootTypeMap();
+{% for entity_key, meta_data in entity_type_map %}
+$ar_type_map->setItem(
+    '{{ entity_key }}',
+    new {{ meta_data.implementor }}(
+        (new XmlStateMachineBuilder([
+            'name' => '{{ meta_data.workflow.name }}',
+            'state_machine_definition' => '{{ meta_data.workflow.file }}'
+        ]))->build()
+    )
+);
+{% endfor %}
+
+return $ar_type_map;

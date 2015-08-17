@@ -1,0 +1,30 @@
+@mixin tabs-toggle-colors-default {
+    color: color(blue);
+    background-color: color(lightgrey3);
+    border-color: color(lightgrey1);
+}
+@mixin tabs-toggle-colors-hover {
+    color: color(bluedarker);
+    background-color: color(lightgrey2);
+    border-color: color(lightgrey1);
+}
+@mixin tabs-toggle-colors-focus {
+    color: color(white);
+    background-color: color(background-neutral);
+    border-color: color(navigational-highlight);
+}
+@mixin tabs-toggle-colors-active {
+    color: color(white);
+    background-color: color(blue);
+    border-color: color(blue);
+}
+@mixin tabs-toggle-colors-active-hover {
+    color: color(white);
+    background-color: color(bluedarker);
+    border-color: color(bluedarker);
+}
+@mixin tabs-toggle-colors-disabled {
+    color: color(text-secondary);
+    background-color: color(background-heavy);
+    border-color: color(lines);
+}

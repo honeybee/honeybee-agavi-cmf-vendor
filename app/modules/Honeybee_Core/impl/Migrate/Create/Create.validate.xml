@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.config_dir%/validators.xml">
+    <ae:configuration>
+        <validators>
+
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+            
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\MigrationTargetValidator" name="invalid_target" translation_domain="honeybee.core.ui">
+                <argument>target</argument>
+                <error>You must specify a valid migration target name.</error>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please pick a migration target</ae:parameter>
+                    <ae:parameter name="ignore_choices">all</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="dialog" name="invalid_shortname" translation_domain="honeybee.core.ui">
+                <argument>name</argument>
+                <error>You must specify a short descriptive CamelCase name for your migration.</error>
+                <ae:parameter name="pattern">/^[a-z\d]{3,120}$/i</ae:parameter>
+                <ae:parameter name="match">true</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                    <ae:parameter name="question">Please provide a CamelCase name for your migration.</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="dialog" name="invalid_description" translation_domain="honeybee.core.ui" required="false">
+                <argument>description</argument>
+                <error>You must specify a description of what your migration does. (%min$s to %max$s characters).</error>
+                <ae:parameter name="min">3</ae:parameter>
+                <ae:parameter name="max">500</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="question">Please give a description for the migration.</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

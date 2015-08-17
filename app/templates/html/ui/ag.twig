@@ -1,0 +1,33 @@
+{% set ag_name = name | default("unnamed") %}
+{% set ag_tag = tag | default("div") %}
+{% set ag_css = css | default("") %} {# should be "ag" or in SCSS "@include ag;" for this element #}
+{% set ag_attr = (attr | default({})) | cast_to_array %}
+
+{% set default_tag = default_tag | default("div") %}
+{% set default_css = default_css | default("") %}
+{% set default_attr = (default_attr | default({})) | cast_to_array %}
+
+{% set more_tag = more_tag | default("div") %}
+{% set more_css = more_css | default("") %}
+{% set more_attr = (more_attr | default({})) | cast_to_array %}
+
+{% set trigger_id = trigger_id | default(ag_name ~ random()) %}
+{% set trigger_css = trigger_css | default("") %}
+{% set trigger_attr = (trigger_attr | default({})) | cast_to_array %}
+
+{% set toggle = toggle | default("more v") %}
+{% set toggle_css = toggle_css | default("action") %}
+{% set toggle_attr = (toggle_attr | default({})) | cast_to_array %}
+
+<{{ ag_tag }} class="{{ ag_name }} {{ ag_css }}" {% for attr, val in ag_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+    <input type="checkbox" id="{{ trigger_id }}" class="ag__trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %}/>
+    <{{ default_tag }} class="ag__default {{ default_css }}" {% for attr, val in default_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+{%- block default -%}
+{%- endblock -%}
+    </{{ default_tag }}><!--
+    --><label for="{{ trigger_id }}" class="ag__toggle {{ toggle_css }}" {% for attr, val in toggle_attr %} {{ attr }}="{{ val }}" {% endfor %}>{% block toggle %}{{ toggle }}{% endblock %}</label><!--
+    --><{{ more_tag }} class="ag__more {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+{%- block more -%}
+{%- endblock -%}
+    </{{ more_tag }}>
+</{{ ag_tag }}>

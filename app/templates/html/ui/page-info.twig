@@ -1,0 +1,13 @@
+{%- block pageinfo -%}
+{#
+    This is just a quick example of the pageinfo area with a sticky header and notification area with settings.
+#}
+<div class="info-layout">
+    <div class="toc-box">
+        {%- block toc -%}<h1>{{ _('welcome_header', 'application.ui') }}</h1>{%- endblock toc -%}
+    </div><!-- .toc-box
+    --><div class="notifications-box">
+        {%- block notifications -%}{#% include "html/ui/notifications.twig" %#}{%- endblock notifications -%}
+    </div><!-- .notifications-box -->
+</div><!-- .info-layout -->
+{%- endblock pageinfo -%}

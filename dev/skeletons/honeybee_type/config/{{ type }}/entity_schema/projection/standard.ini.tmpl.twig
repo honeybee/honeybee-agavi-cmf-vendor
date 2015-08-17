@@ -1,0 +1,11 @@
+; Common settings for trellis's code generator
+cache_dir=./codecache
+deploy_dir=../../../../lib/{{ type }}/Projection
+bootstrap_file=../../../../../../../app/bootstrap.php
+template_directory=../../../../../../../dev/trellis_templates/
+
+; Integrate the plugin that is responsible for generating the module's elasticsearch mapping
+[plugin:\Honeybee\FrameworkBinding\Agavi\CodeGen\Trellis\Plugin\Elasticsearch\MappingGeneratorPlugin]
+deploy_path=./codecache/{{ type_prefix }}-standard-{% raw %}{{ timestamp }}{% endraw %}-mapping.json
+index_name={{ db_prefix }}.{{ vendor_prefix }}-{{ package_prefix }}
+type_name={{ vendor_prefix }}-{{ package_prefix }}-{{ type_prefix }}

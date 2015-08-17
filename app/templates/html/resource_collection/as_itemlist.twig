@@ -1,0 +1,17 @@
+<div class="hb-itemlist-wrapper">
+    <div class="hb-itemlist">
+        <div class="hb-itemlist__header">
+            <div class="hb-itemlist__titles">
+                {% for field in header_fields %}
+                <div class="hb-itemlist__title hb-itemlist__title-{{ field.name }}">{{ _(field.name, translation_domain) }}</div>
+                {% endfor %}
+                <div class="hb-itemlist__title hb-itemlist__title-actions">{{ _('actions', translation_domain) }}</div>
+            </div>
+        </div>
+        <ul class="hb-itemlist__items">
+            {%- for rendered_resource in rendered_resources -%}
+                {{- rendered_resource|raw -}}
+            {%- endfor -%}
+        </ul><!-- .hb-itemlist__items -->
+    </div><!-- .hb-itemlist -->
+</div><!-- .hb-itemlist-wrapper -->

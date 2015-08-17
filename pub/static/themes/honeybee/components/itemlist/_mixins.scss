@@ -1,0 +1,61 @@
+@mixin itemlist-table() {
+    display: table;
+
+    .hb-itemlist__items,
+    .hb-itemlist__header {
+        display: table-row-group;
+    }
+
+    .hb-item,
+    .hb-itemlist__titles {
+        display: table-row;
+    }
+
+    .hb-field,
+    .hb-itemlist__title,
+    .hb-actions {
+        display: table-cell;
+    }
+
+    @content;
+}
+
+
+@mixin itemlist-cards() {
+    display: block;
+
+    .hb-itemlist__items {
+        display: block;
+    }
+
+    .hb-itemlist__header,
+    .hb-itemlist__title {
+        display: none;
+    }
+
+    .hb-field,
+    .hb-actions {
+        display: block;
+        margin-top: $base-spacing;
+    }
+
+    @include media-query(palm) {
+        .hb-field {
+            margin-top: 0.5*$base-spacing;
+            &:nth-child(1) {
+                margin-top: 0;
+            }
+        }
+    }
+
+    @include media-query(lap) {
+        .hb-field {
+            &:nth-child(1),
+            &:nth-child(2) {
+                margin-top: 0;
+            }
+        }
+    }
+
+    @content;
+}

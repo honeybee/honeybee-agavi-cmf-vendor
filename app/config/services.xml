@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/services/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <xi:include href="./includes/services.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+    <ae:configuration>
+        <service_map>
+            <service_definitions>
+                <service name="honeybee.service_locator">
+                    <class>Honeybee\ServiceLocator</class>
+                </service>
+
+                <!--
+                    Infrastructure Services
+                -->
+                <service name="honeybee.infrastructure.logger">
+                    <class>Honeybee\FrameworkBinding\Agavi\Logging\Psr3Logger</class>
+                </service>
+
+                <service name="honeybee.infrastructure.command_bus">
+                    <class>Honeybee\Infrastructure\Command\Bus\CommandBus</class>
+                </service>
+
+                <service name="honeybee.infrastructure.event_bus">
+                    <class>Honeybee\Infrastructure\Event\Bus\EventBus</class>
+                </service>
+
+                <service name="honeybee.infrastructure.fixture_service">
+                    <class>Honeybee\Infrastructure\Fixture\FixtureService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.job_service">
+                    <class>Honeybee\Infrastructure\Job\JobService</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\JobServiceProvisioner</class>
+                        <settings>
+                            <setting name="connection">Default.MsgQueue</setting>
+                        </settings>
+                    </provisioner>
+                    <settings>
+                        <setting name="exchange">honeybee.domain</setting>
+                    </settings>
+                </service>
+
+                <service name="honeybee.infrastructure.acl_service">
+                    <class>Honeybee\Infrastructure\Security\Acl\AclService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.migration_service">
+                    <class>Honeybee\Infrastructure\Migration\MigrationService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.permission_service">
+                    <class>Honeybee\Infrastructure\Security\Acl\Permission\PermissionService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.data_access_service">
+                    <class>Honeybee\Infrastructure\DataAccess\DataAccessService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.auth_service">
+                    <class>Honeybee\Infrastructure\Security\Auth\StandardAuthService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.expression_service">
+                    <class>Honeybee\Infrastructure\Expression\ExpressionService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.connector_service">
+                    <class>Honeybee\Infrastructure\DataAccess\Connector\ConnectorService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.filesystem_service">
+                    <class>Honeybee\Infrastructure\Filesystem\FilesystemService</class>
+                </service>
+
+                <service name="honeybee.infrastructure.template_renderer">
+                    <class>Honeybee\Infrastructure\Template\Twig\TwigRenderer</class>
+                </service>
+
+                <service name="honeybee.infrastructure.mail_service">
+                    <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
+                        <settings>
+                            <setting name="connection">Default.Mailer</setting>
+                        </settings>
+                    </provisioner>
+                </service>
+
+                <!--
+                    Model Services
+                -->
+                <service name="honeybee.model.task_service">
+                    <class>Honeybee\Model\Task\TaskService</class>
+                </service>
+
+                <!--
+                    UI Services
+                -->
+                <service name="honeybee.ui.navigation_service">
+                    <class>Honeybee\Ui\Navigation\NavigationService</class>
+                </service>
+
+                <service name="honeybee.ui.renderer_service">
+                    <class>Honeybee\Ui\Renderer\RendererService</class>
+                </service>
+
+                <service name="honeybee.ui.activity_service">
+                    <class>Honeybee\Ui\Activity\ActivityService</class>
+                </service>
+
+                <service name="honeybee.ui.workflow_activity_service">
+                    <class>Honeybee\Ui\Activity\WorkflowActivityService</class>
+                </service>
+
+                <service name="honeybee.ui.view_config_service">
+                    <class>Honeybee\Ui\ViewConfig\ViewConfigService</class>
+                    <settings>
+                        <setting name="create_missing">true</setting>
+                    </settings>
+                </service>
+
+                <service name="honeybee.ui.view_template_service">
+                    <class>Honeybee\Ui\ViewTemplate\ViewTemplateService</class>
+                </service>
+
+                <service name="honeybee.ui.output_format_service">
+                    <class>Honeybee\Ui\OutputFormat\OutputFormatService</class>
+                </service>
+
+                <service name="honeybee.ui.url_generator">
+                    <class>Honeybee\FrameworkBinding\Agavi\Routing\AgaviUrlGenerator</class>
+                </service>
+
+                <service name="honeybee.ui.translator">
+                    <class>Honeybee\FrameworkBinding\Agavi\Translation\AgaviTranslator</class>
+                    <settings>
+                        <setting name="log_missing_translations">false</setting>
+                        <setting name="use_fallback">true</setting>
+                    </settings>
+                </service>
+            </service_definitions>
+        </service_map>
+    </ae:configuration>
+
+    <ae:configuration context="console">
+        <service_map>
+            <service_definitions>
+                <service name="honeybee.infrastructure.auth_service">
+                    <class>Honeybee\Infrastructure\Security\Auth\ConsoleAuthService</class>
+                    <settings>
+                        <setting name="role_map">
+                            <settings>
+                                <setting name="vagrant">administrator</setting>
+                                <setting name="deploy">administrator</setting>
+                            </settings>
+                        </setting>
+                    </settings>
+                </service>
+            </service_definitions>
+        </service_map>
+    </ae:configuration>
+
+    <ae:configuration environment="development.*">
+        <service_map>
+            <service_definitions>
+                <service name="honeybee.infrastructure.mail_service">
+                    <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
+                        <settings>
+                            <setting name="connection">Default.Mailer.Null</setting>
+                        </settings>
+                    </provisioner>
+                </service>
+
+                <service name="honeybee.infrastructure.template_renderer">
+                    <class>Honeybee\Infrastructure\Template\Twig\TwigRenderer</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\TemplateRendererProvisioner</class>
+                        <settings>
+                            <setting name="twig_options">
+                                <settings>
+                                    <setting name="strict_variables">true</setting>
+                                </settings>
+                            </setting>
+                        </settings>
+                    </provisioner>
+                </service>
+            </service_definitions>
+        </service_map>
+    </ae:configuration>
+<!--
+    <ae:configuration environment="development.*">
+        <service_map>
+            <service_definitions>
+                <service name="honeybee.ui.view_config_service">
+                    <class>Honeybee\Ui\ViewConfig\ViewConfigService</class>
+                    <settings>
+                        <setting name="create_missing">false</setting>
+                    </settings>
+                </service>
+            </service_definitions>
+        </service_map>
+    </ae:configuration>
+-->
+</ae:configurations>

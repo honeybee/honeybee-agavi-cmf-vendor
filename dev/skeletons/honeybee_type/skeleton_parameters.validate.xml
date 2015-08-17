@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
+    <ae:configuration>
+        <validators>
+            <validator class="and" depends="skeleton_name_honeybee_type">
+                <ae:parameter name="description">Creates a Honeybee type in the module directory. By default it doesn't overwrite existing files.</ae:parameter>
+
+                <validator class="skeleton_generator">
+                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeTypeGenerator</ae:parameter>
+                </validator>
+
+                <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ModuleNameValidator">
+                    <argument>module_name</argument>
+                    <error>You must specify an existing module name.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="select">true</ae:parameter>
+                        <ae:parameter name="ignore_choices">Honeybee_Core</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                        <ae:parameter name="introduction"><![CDATA[<info>A honeybee module is a folder in the %core.module_dir% directory.
+Honeybee modules have a "module.ini" file.</info>]]></ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>type</argument>
+                    <error>You must specify an entity type name to generate.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>override_files</argument>
+                    <error>You must specify if you wish to override existing files.</error>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="question">Should existing files be overridden/updated?</ae:parameter>
+                        <ae:parameter name="default">false</ae:parameter>
+                        <ae:parameter name="confirm">true</ae:parameter>
+                    </ae:parameter>
+                </validator>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

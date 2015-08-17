@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
+    <ae:configuration context="web">
+        <route pattern="^theme_preview$" name=".theme_preview" action="ThemePreview" />
+        <route pattern="" module="%actions.default_module%" action="%actions.error_404%" />
+    </ae:configuration>
+
+    <ae:configuration context="console">
+        <route pattern="^util" name=".util" method="write">
+            <route pattern="^.compile_js$" name=".compile_js" action="Util.CompileJs">
+                <ae:parameter name="description">Run r.js to build optimized javascript files in the "pub/static/modules-built" folder.</ae:parameter>
+            </route>
+            <route pattern="^.compile_scss$" name=".compile_scss" action="Util.CompileScss">
+                <ae:parameter name="description">Run sass to compile all themes and styles.scss files.</ae:parameter>
+            </route>
+            <route pattern="^.build_config$" name=".build_config" action="Util.BuildConfig">
+                <ae:parameter name="description">Generate include files for project config.</ae:parameter>
+            </route>
+            <route pattern="^.watch_scss$" name=".watch_scss" action="Util.WatchScss">
+                <ae:parameter name="description">Run sass to watch a theme and all styles.scss files for updates. Default theme is used if none is specified.</ae:parameter>
+            </route>
+            <route pattern="^.list_permissions$" name=".list_permissions" action="Util.ListPermissions">
+                <ae:parameter name="description">Lists all configured permissions from the access_control.xml file.</ae:parameter>
+            </route>
+            <route pattern="^.replay_events$" name=".replay_events" action="Util.ReplayEvents">
+                <ae:parameter name="description">Replay all stored events for a given module..</ae:parameter>
+            </route>
+            <route pattern="^.generate_code$" name=".generate_code" action="Util.GenerateCode">
+                <ae:parameter name="description">Generate code from available skeleton templates.</ae:parameter>
+            </route>
+        </route>
+        <route pattern="^worker" name=".queue" method="write">
+            <route pattern="^.start$" action="Worker.Start">
+                <ae:parameter name="description">Start a worker to run jobs for a given queue.</ae:parameter>
+            </route>
+            <route pattern="^.stop$" action="Worker.Stop">
+                <ae:parameter name="description">Stop a particular worker.</ae:parameter>
+            </route>
+            <route pattern="^.list$" action="Worker.List">
+                <ae:parameter name="description">List all running workers.</ae:parameter>
+            </route>
+            <route pattern="^.stats$" action="Worker.Stats">
+                <ae:parameter name="description">Display stats for a particular worker.</ae:parameter>
+            </route>
+        </route>
+        <route pattern="^migrate" name=".migrate">
+            <route pattern="^.create$" action="Migrate.Create" method="write">
+                <ae:parameter name="description">Create a new migration for a given target.</ae:parameter>
+            </route>
+            <route pattern="^.list$" action="Migrate.List" method="read">
+                <ae:parameter name="description">List migrations for a particular target.</ae:parameter>
+            </route>
+            <route pattern="^.run$" action="Migrate.Run" method="write">
+                <ae:parameter name="description">Run migrations for a given target.</ae:parameter>
+            </route>
+        </route>
+        <route pattern="^websockets" name=".websockets" method="write">
+            <route pattern="^.server$" action="WebSockets.Server">
+                <ae:parameter name="description">Start websockets server.</ae:parameter>
+            </route>
+        </route>
+        <route pattern="trellis" name=".trellis" method="write">
+            <route pattern="^.generate_code$" action="Trellis.GenerateCode">
+                <ae:parameter name="description">Generate Trellis class code.</ae:parameter>
+            </route>
+        </route>
+        <route pattern="fixture" name=".fixture" method="write">
+            <route pattern="^.create$" action="Fixture.Create" method="write">
+                <ae:parameter name="description">Create a new fixture for a given target.</ae:parameter>
+            </route>
+            <route pattern="^.import$" action="Fixture.Import">
+                <ae:parameter name="description">Import data fixture.</ae:parameter>
+            </route>
+            <route pattern="^.generate$" action="Fixture.Generate">
+                <ae:parameter name="description">Generate data fixture.</ae:parameter>
+            </route>
+        </route>
+    </ae:configuration>
+</ae:configurations>

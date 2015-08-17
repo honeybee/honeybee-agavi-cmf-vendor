@@ -1,0 +1,119 @@
+.pager__list {
+    @extend %list-bare; // remove list default styling
+    @extend %pack;  // ie9 fallback to display:table
+
+    @include flexbox;
+
+    li {
+        box-sizing: border-box;
+
+        @extend %pack__item;  // ie9 fallback to display:table-cell
+
+        @include flexbox;
+        @include flex(1, 0, auto);
+
+        vertical-align: middle;
+        text-align: center;
+        @include justify-content(center);    // for display:flex
+
+        &.pager__details {
+            margin: 0;
+            border-style: solid;
+            border-color: color(lines);
+            border-width: 0px 1px 0px 1px;
+        }
+    }
+}
+
+.pager a {
+    @include button-normal-navigational;
+    background-color: color(transparent) !important;
+}
+
+.pager {
+    .pager__details {
+        white-space: nowrap;
+
+        form {
+            padding: 0 $small-spacing;
+
+            input,
+            button {
+                display: inline-block;
+                border-style: solid;
+                border-color: color(lines);
+                border-width: 1px;
+                box-sizing: border-box;
+                padding: $small-spacing;
+            }
+
+            input, input:hover {
+                width: 1em; // as small as possible
+                min-width: 5em;
+
+                vertical-align: middle;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            button, button:hover {
+                vertical-align: middle;
+
+                border-left: 0;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+    }
+}
+
+.pager__details .pager__current_page {
+    padding-left: 0.5*$base-spacing;
+    padding-right: 0.5*$base-spacing;
+}
+
+.pager__total {
+    margin: 0 $small-spacing;
+    padding: 0 $small-spacing;
+}
+
+// Extend when providing element replacement with a background-image
+// (usually for replacing with icons)
+%pager-button-background {
+    background-size: auto $font-size;
+    background-repeat: no-repeat;
+    background-position: center center;
+    text-indent: -99999px;
+}
+
+.pager__first_page a,
+.pager__prev_page a,
+.pager__next_page a,
+.pager__last_page a,{
+    font-size: $font-size*1.5 !important;
+    padding: auto $small-spacing;
+}
+
+.pager__first_page a {
+    @include hb-icon-before(controller-jump-to-start);
+}
+.pager__prev_page a {
+    @include hb-icon-before(controller-play);
+    // reversed 'play' icon
+    transform: scaleX(-1);
+    filter: fliph; /*IE*/
+}
+.pager__go {
+    @include button-normal-navigational;
+    background-color: color(lightgrey1);
+
+    &, &:hover {
+        line-height: normal; // reset button default
+    }
+}
+.pager__next_page a {
+    @include hb-icon-before(controller-play);
+}
+.pager__last_page a {
+    @include hb-icon-before(controller-next);
+}

@@ -1,0 +1,51 @@
+.honeybee-core-theme_preview {
+    .theme-preview__colors {
+        .color-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            li {
+                position: relative;
+                display: inline-block;
+                width: 7*$base-spacing;
+
+                line-height: $base-spacing;
+                padding-top: 3*$base-spacing;
+
+                margin: 0.5*$base-spacing;
+
+                border: 1px solid black;
+
+                font-size: 0.7em;
+                text-align: center;
+
+                background-color: white;
+                color: black;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: $base-spacing;
+
+                    border-bottom: 1px solid black;
+                }
+            }
+        }
+
+    }
+
+    .theme-preview__typography {
+        .interactive {
+            @include typography-interactive();
+        }
+
+        .headline-1 { @extend h1; }
+        .headline-2 { @extend h2; }
+        .headline-3 { @extend h3; }
+
+    }
+}

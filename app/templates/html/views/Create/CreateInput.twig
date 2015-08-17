@@ -1,0 +1,53 @@
+{% extends _layout %}
+
+{% block toc %}
+    <h1>Create</h1>
+{% endblock %}
+
+
+{% block primary_activities %}
+    <div class="primary-activities">
+        {{ rendered_primary_activities|raw }}
+    </div>
+{% endblock primary_activities %}
+
+
+{% block primary %}
+<form method="post" action="{{ ro.gen(null) }}" name="editform" id="editform" enctype="multipart/form-data">
+
+    <div class="hb-validation-messages">
+        <h4>{{ _('validation_unfortunately') }}</h4>
+        <ul class="errors"></ul>
+    </div>
+
+    <div class="hb-modifyitem-wrapper">
+        {{ rendered_resource|raw }}
+    </div>
+
+    <div class="controls controls-bottom">
+        <div class="controls-layout">
+            <div class="pager-box">
+                {{ block('primary_activities') }}
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+
+{% block secondary %}
+<div class="sidebar">
+    <input type="checkbox" id="sidebar-trigger" class="sidebar__trigger">
+    <label for="sidebar-trigger" class="sidebar__toggle">{{ _('sidebar') }}</label>
+    <label for="sidebar-trigger" class="sidebar__backdrop"></label>
+    <div class="sidebar__panel">
+        <label for="sidebar-trigger" class="sidebar__toggle">{{ _('sidebar') }}</label>
+        <div class="sidebar-content-layout">
+            <div class="primary-activities-box">
+                <label>{{ _('activities') }}</label>
+                {{ block('primary_activities') }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

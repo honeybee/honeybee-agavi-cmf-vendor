@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
+    <ae:configuration>
+        <validators translation_domain="honeybee.core.errors">
+            <validator class="boolean" name="verbose" required="false">
+                <argument>verbose</argument>
+                <error>Parameter %name$s must have a boolean value.</error>
+            </validator>
+            <validator class="boolean" name="silent" required="false">
+                <argument>silent</argument>
+                <error>Parameter %name$s must have a boolean value.</error>
+            </validator>
+            <validator class="inarray" name="style" required="false">
+                <argument>style</argument>
+                <error>Parameter %name$s must have a valid scss style value (%values$s).</error>
+                <ae:parameter name="case">true</ae:parameter>
+                <ae:parameter name="strict">true</ae:parameter>
+                <ae:parameter name="sep">|</ae:parameter>
+                <ae:parameter name="values">nested|expanded|compact|compressed</ae:parameter>
+                <ae:parameter name="description">One of: nested|expanded|compact|compressed</ae:parameter>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

@@ -1,0 +1,5 @@
+{% block requirejs %}
+{% block requirejs_include %}<script type="text/javascript" src="static/require.js"></script>{% endblock %}
+{% block requirejs_config %}{% include "rjs/config.twig" %}{% endblock %}
+{% block requirejs_requires %}<!-- %%REQUIREJS%% -->{% endblock %}
+{% endblock %}

@@ -1,0 +1,41 @@
+{%- set input_help = translations.input_help | default('') -%}
+{%- set input_hint = translations.input_hint | default('') -%}
+{%- set input_focus_hint = translations.input_focus_hint | default('') -%}
+{%- set placeholder = translations.placeholder | default('') -%}
+<div
+    data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
+    class="hb-field {{ css|default('') }}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-field__value">
+        {% spaceless %}
+            <div class="datepicker-controls-wrapper">
+                <input type="text" class="datepicker-input {% if readonly is not empty %}readonly{% endif %}" name="{{ grouped_field_name }}" value="{{ attribute_value }}" id="{{ field_id }}" placeholder="{{ placeholder }}" {{ readonly }} {{ disabled }} {{ required }} {{ pattern|raw }} />
+                {% if readonly is empty and disabled is empty and widget_enabled %}
+                <button type="button" class="datepicker-toggle">
+                    <span class="datepicker-toggle__icon"></span>
+                    <span class="datepicker-toggle__label">{{ _('toggle', translation_domain) }}</span>
+                </button>
+                {% endif %}
+            </div>
+            <ul class="errors"></ul>
+            {% if input_help %}
+                <div class="input_help">{{ input_help|raw }}</div>
+            {% endif %}
+            {% if input_hint %}
+                <div class="input_hint">{{ input_hint|raw }}</div>
+            {% endif %}
+            {% if input_focus_hint %}
+                <div class="input_hint focus">{{ input_focus_hint|raw }}</div>
+            {% endif %}
+        {% endspaceless %}
+        </div><!--
+        --><div class="hb-field__extra">
+            <input type="hidden" value="{{ attribute_value }}" class="initialvalue" />
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,82 @@
+@mixin button-shadow-normal-navigational-default {
+    box-shadow: none;
+}
+@mixin button-shadow-normal-navigational-hover {
+    box-shadow: 0 0 2px rgba(color(black), 0.15);
+}
+@mixin button-shadow-normal-navigational-focus {
+    box-shadow: 0 0 2px rgba(color(blue), 0.5);
+}
+@mixin button-shadow-normal-navigational-active {
+    box-shadow: inset 0 2px 3px rgba(color(black), 0.12);
+}
+@mixin button-shadow-normal-navigational-disabled {
+    box-shadow: none;
+}
+
+@mixin button-shadow-normal-mutating-default { @include button-shadow-normal-navigational-default;}
+@mixin button-shadow-normal-mutating-hover { @include button-shadow-normal-navigational-hover;}
+@mixin button-shadow-normal-mutating-focus { @include button-shadow-normal-navigational-focus;}
+@mixin button-shadow-normal-mutating-active { @include button-shadow-normal-navigational-active;}
+@mixin button-shadow-normal-mutating-disabled { @include button-shadow-normal-navigational-disabled;}
+
+@mixin button-shadow-normal-positive-default { @include button-shadow-normal-navigational-default;}
+@mixin button-shadow-normal-positive-hover { @include button-shadow-normal-navigational-hover;}
+@mixin button-shadow-normal-positive-focus { @include button-shadow-normal-navigational-focus;}
+@mixin button-shadow-normal-positive-active { @include button-shadow-normal-navigational-active;}
+@mixin button-shadow-normal-positive-disabled { @include button-shadow-normal-navigational-disabled;}
+
+@mixin button-shadow-normal-warning-default { @include button-shadow-normal-navigational-default;}
+@mixin button-shadow-normal-warning-hover { @include button-shadow-normal-navigational-hover;}
+@mixin button-shadow-normal-warning-focus { @include button-shadow-normal-navigational-focus;}
+@mixin button-shadow-normal-warning-active { @include button-shadow-normal-navigational-active;}
+@mixin button-shadow-normal-warning-disabled { @include button-shadow-normal-navigational-disabled;}
+
+@mixin button-shadow-normal-destructive-default { @include button-shadow-normal-navigational-default;}
+@mixin button-shadow-normal-destructive-hover { @include button-shadow-normal-navigational-hover;}
+@mixin button-shadow-normal-destructive-focus { @include button-shadow-normal-navigational-focus;}
+@mixin button-shadow-normal-destructive-active { @include button-shadow-normal-navigational-active;}
+@mixin button-shadow-normal-destructive-disabled { @include button-shadow-normal-navigational-disabled;}
+
+
+
+
+@mixin button-shadow-emphasized-navigational-default {
+    box-shadow: none;
+}
+@mixin button-shadow-emphasized-navigational-hover {
+    box-shadow: none;
+}
+@mixin button-shadow-emphasized-navigational-focus {
+    box-shadow: 0 0 2px rgba(color(blue), 0.5);
+}
+@mixin button-shadow-emphasized-navigational-active {
+    box-shadow: inset 0 3px 3px rgba(color(black), 0.12);
+}
+@mixin button-shadow-emphasized-navigational-disabled {
+    box-shadow: none;
+}
+
+@mixin button-shadow-emphasized-mutating-default { @include button-shadow-emphasized-navigational-default;}
+@mixin button-shadow-emphasized-mutating-hover { @include button-shadow-emphasized-navigational-hover;}
+@mixin button-shadow-emphasized-mutating-focus { @include button-shadow-emphasized-navigational-focus;}
+@mixin button-shadow-emphasized-mutating-active { @include button-shadow-emphasized-navigational-active;}
+@mixin button-shadow-emphasized-mutating-disabled { @include button-shadow-emphasized-navigational-disabled;}
+
+@mixin button-shadow-emphasized-positive-default { @include button-shadow-emphasized-navigational-default;}
+@mixin button-shadow-emphasized-positive-hover { @include button-shadow-emphasized-navigational-hover;}
+@mixin button-shadow-emphasized-positive-focus { @include button-shadow-emphasized-navigational-focus;}
+@mixin button-shadow-emphasized-positive-active { @include button-shadow-emphasized-navigational-active;}
+@mixin button-shadow-emphasized-positive-disabled { @include button-shadow-emphasized-navigational-disabled;}
+
+@mixin button-shadow-emphasized-warning-default { @include button-shadow-emphasized-navigational-default;}
+@mixin button-shadow-emphasized-warning-hover { @include button-shadow-emphasized-navigational-hover;}
+@mixin button-shadow-emphasized-warning-focus { @include button-shadow-emphasized-navigational-focus;}
+@mixin button-shadow-emphasized-warning-active { @include button-shadow-emphasized-navigational-active;}
+@mixin button-shadow-emphasized-warning-disabled { @include button-shadow-emphasized-navigational-disabled;}
+
+@mixin button-shadow-emphasized-destructive-default { @include button-shadow-emphasized-navigational-default;}
+@mixin button-shadow-emphasized-destructive-hover { @include button-shadow-emphasized-navigational-hover;}
+@mixin button-shadow-emphasized-destructive-focus { @include button-shadow-emphasized-navigational-focus;}
+@mixin button-shadow-emphasized-destructive-active { @include button-shadow-emphasized-navigational-active;}
+@mixin button-shadow-emphasized-destructive-disabled { @include button-shadow-emphasized-navigational-disabled;}

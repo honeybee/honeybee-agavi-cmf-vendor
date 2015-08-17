@@ -1,0 +1,18 @@
+@mixin typography-default() {
+    font-size: $font-size;
+
+    @content;
+}
+
+@mixin typography-interactive() {
+    box-sizing: border-box;
+    font-weight: 400;
+    line-height: 2 * $base-spacing - 2 * $border-thick;
+
+    @content;
+}
+
+@mixin typography-headlines() {
+    font-size: $font-size * 1.285; // 18px
+    font-weight: bold;
+}

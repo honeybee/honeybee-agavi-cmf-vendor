@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/view_templates/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+
+        <view_templates scope="honeybee.system_account.user.resource.modify">
+
+            <view_template name="honeybee.system_account.user.html">
+                <tab name="content">
+                    <panel name="main">
+                        <row css="">
+                            <cell css="portable-1/1 desk-wide-1/4">
+                                <group name="primary">
+                                    <field name="username" attribute_path="username" template="html/attribute/as_input_text.twig">
+                                        <!--
+                                            If not defined, a default translation domain in generated for fields:
+                                                <prefix>.fields.<path_to_attribute>
+                                        -->
+                                        <setting name="translation_domain">honeybee.system_account.user.fields</setting>
+
+                                        <!--
+                                            Will overwrite the eventual default 'mandatory' option of the attribute.
+                                            It will have effect just on the client-side validation
+                                        -->
+                                        <setting name="required">true</setting>
+
+                                        <!-- A list of custom HTML attributes can be set here -->
+                                        <setting name="html_attributes">
+                                            <setting name="foo">bar</setting>
+                                        </setting>
+
+                                        <!-- Set attribute as disabled or readonly -->
+                                        <setting name="disabled"></setting>
+                                        <setting name="readonly"></setting>
+
+                                        <!--
+                                            Will define custom translation keys to use into the view_template (is possible also to
+                                            override the default translation keys).
+                                            These keys will be automatically translated (if available in the translations.xml)
+                                            and made available in the 'translations' view_template parameter.
+
+                                                e.g.  use 'translations.placeholder' to retrieve the value in the view_template
+                                        -->
+                                        <setting name="translation_keys">
+                                            <setting name="placeholder">placeholder_value</setting>
+                                        </setting>
+                                    </field>
+                                    <field name="email" attribute_path="email" template="html/attribute/email/as_input_email.twig" />
+                                    <field name="url" attribute_path="url" template="html/attribute/url/as_input_url.twig">
+                                        <!--
+                                            Default URL pattern and placeholder rely on the attribute's "allowed_schemes" option.
+                                            Can be overwritten with custom per-language values into the translations.xml
+                                        -->
+                                        <setting name="translation_keys">
+                                            <setting name="pattern">pattern_value</setting>
+                                        </setting>
+                                    </field>
+                                </group>
+                            </cell>
+                            <cell css="desk-wide-1/4">
+                                <group name="stammdaten">
+                                    <field name="firstname" attribute_path="firstname" template="html/attribute/as_input_text.twig" />
+                                    <field name="lastname" attribute_path="lastname" template="html/attribute/as_input_text.twig" />
+                                    <field name="birth_year" attribute_path="birth_year" template="html/attribute/integer/as_input.twig">
+                                        <setting name="min_value">1970</setting>
+                                    </field>
+                                </group>
+                            </cell>
+                            <cell css="desk-wide-1/4">
+                                <group name="secondary">
+                                    <field name="role" attribute_path="role" template="html/attribute/choice/as_input_select.twig" />
+                                    <field name="tags" attribute_path="tags" template="html/attribute/text-list/as_input.twig" />
+                                </group>
+                            </cell>
+                            <cell css="desk-wide-1/4">
+                                <group name="personaldaten">
+                                    <field name="hourly_rate" attribute_path="hourly_rate" template="html/attribute/float/as_input.twig">
+                                        <setting name="min_value">8.5</setting>
+                                        <setting name="value_step">0.05</setting>
+                                    </field>
+                                    <field name="biography" attribute_path="biography" template="html/attribute/textarea/as_input.twig">
+                                        <setting name="placeholder">placeholder_value</setting>
+                                        <!--
+                                        <setting name="maxlength"></setting>
+                                        <setting name="wrap"></setting>
+                                        <setting name="cols"></setting>
+                                        <setting name="syntax">
+                                            <settings>
+                                                <setting name="name">markdown</setting>
+                                                <setting name="enabled">true</setting>
+                                                <setting name="preview">true</setting>
+                                                <setting name="additional-syntax-option">foobar</setting>
+                                            </settings>
+                                        </setting>
+                                    -->
+                                    </field>
+                                </group>
+                            </cell>
+                        </row>
+                        <row css="">
+                            <cell css="desk-wide-1/4">
+                                <group name="comments">
+                                    <field name="comments" attribute_path="comments" template="html/attribute/embedded-entity-list/as_input.twig" />
+                                </group>
+                            </cell>
+                            <cell css="desk-wide-3/4">
+                                <group name="userimages">
+                                    <field name="images" attribute_path="images" template="html/attribute/image-list/as_tabs.twig">
+                                        <setting name="use_converjon">true</setting>
+                                    </field>
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+                <tab name="meta" css="">
+                    <panel name="meta">
+                        <row>
+                            <cell>
+                                <group name="meta_content">
+                                    <field name="uuid" attribute_path="uuid" />
+                                    <field name="workflow_state" attribute_path="workflow_state" template="html/attribute/as_input_text.twig"/>
+                                    <field name="language" attribute_path="language" />
+                                    <field name="identifier" attribute_path="identifier" template="html/attribute/as_input_hidden.twig" />
+                                    <field name="revision" attribute_path="revision" template="html/attribute/as_input_hidden.twig" />
+                                    <field name="token_expire_date" attribute_path="token_expire_date" template="html/attribute/datetime/as_input.twig">
+                                        <setting name="widget_options">
+                                            <setting name="display_format">L LTS</setting>
+                                            <setting name="display_mode">table</setting>
+                                        </setting>
+                                    </field>
+                                </group>
+                            </cell>
+                            <cell>
+                                <group name="friends">
+                                    <field name="friends">
+                                        <setting name="attribute_path">friends</setting>
+                                        <setting name="friend.suggest_attribute">username</setting>
+                                    </field>
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+            <view_template name="honeybee.system_account.user.comments.comment">
+                <tab name="content">
+                    <panel name="main" css="hb-panel--hidden">
+                        <row css="">
+                            <cell css="">
+                                <group name="primary">
+                                    <field name="identifier" attribute_path="identifier" template="html/attribute/as_input_hidden.twig"/>
+                                    <field name="title" attribute_path="title" template="html/attribute/as_input_text.twig" />
+                                    <field name="text" attribute_path="text" template="html/attribute/textarea/as_input.twig" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+            <view_template name="honeybee.system_account.user.friends.friend">
+                <tab name="content">
+                    <panel name="main" css="hb-panel--hidden">
+                        <row css="">
+                            <cell css="">
+                                <group name="primary">
+                                    <field name="identifier" attribute_path="identifier" template="html/attribute/as_input_hidden.twig" />
+                                    <field name="referenced_identifier" attribute_path="referenced_identifier" template="html/attribute/as_input_hidden.twig"/>
+                                    <field name="firstname" attribute_path="firstname" template="html/attribute/as_input_text.twig"/>
+                                    <field name="lastname" attribute_path="lastname" template="html/attribute/as_input_text.twig"/>
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+        </view_templates>
+
+    </ae:configuration>
+</ae:configurations>

@@ -1,0 +1,13 @@
+@import "mixins";
+
+%activity {
+    @include activity();
+    // the default activity is a "passive" one that just takes the user somewhere
+    @include activity-navigational();
+}
+
+%button {
+    @extend %activity;
+    @include activity-underline();
+    text-align: center;
+}

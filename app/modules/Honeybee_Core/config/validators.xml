@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.config_dir%/validators.xml"
+>
+    <ae:configuration>
+        <validator_definitions>
+
+            <validator_definition name="skeleton_generator" class="Honeybee\FrameworkBinding\Agavi\Validator\ClassExistsSetValidator">
+                <error>The given class for %argument_name$s must exist.</error>
+                <error for="class_not_found">The given %argument_name$s class does not exist. Provide a correct one via CLI or as 'value' validation parameter.</error>
+                <error for="missing_interface">The given %argument_name$s class does not implement the necessary interface %implements$s.</error>
+                <ae:parameter name="argument_name">skeleton_generator</ae:parameter>
+                <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonGenerator</ae:parameter>
+                <ae:parameter name="implements">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonGeneratorInterface</ae:parameter>
+            </validator_definition>
+
+        </validator_definitions>
+    </ae:configuration>
+</ae:configurations>

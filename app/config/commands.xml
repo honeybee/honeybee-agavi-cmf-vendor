@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/command_bus/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+
+    <ae:configuration>
+        <command_bus>
+            <transports>
+                <transport name="spinner_default">
+                    <implementor>\Honeybee\Infrastructure\Command\Bus\Transport\JobQueueTransport</implementor>
+                    <settings>
+                        <setting name="exchange">honeybee.domain.commands</setting>
+                    </settings>
+                </transport>
+                <transport name="sync">
+                    <implementor>\Honeybee\Infrastructure\Command\Bus\Transport\SynchronousTransport</implementor>
+                </transport>
+            </transports>
+        </command_bus>
+    </ae:configuration>
+
+    <xi:include href="./includes/commands.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
+
+</ae:configurations>

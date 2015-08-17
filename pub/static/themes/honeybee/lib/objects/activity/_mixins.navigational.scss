@@ -1,0 +1,62 @@
+@mixin activity-navigational-default {
+    @include activity-colors((
+        background: mix(color(grey-super-light), #fff, 60%),
+        text: color(black),
+        border: color(grey-light)
+    ));
+}
+
+@mixin activity-navigational-focus {
+    @include activity-navigational-default;
+    @include activity-shade(color(white), 0.7);
+}
+
+@mixin activity-navigational-active {
+    @include activity-colors((
+        background: mix(color(grey-super-light), #fff, 40%),
+        text: color(black),
+        border: color(grey-light)
+    ));
+}
+
+@mixin activity-navigational-hover {
+    @include activity-colors((
+        background: color(grey-super-light),
+        text: color(black),
+        border: color(grey-light)
+    ));
+}
+
+@mixin activity-navigational-disabled {
+    @include activity-colors((
+        background: mix(color(grey-super-light), #fff, 50%),
+        text: rgba(color(black), 0.3),
+        border: color(grey-super-light),
+    ));
+}
+
+
+@mixin activity-navigational {
+    @include activity-navigational-default;
+
+    &:focus,
+    &.focus {
+        @include activity-navigational-focus;
+    }
+
+    &:hover,
+    &.hover {
+        @include activity-navigational-hover;
+    }
+
+    &:active,
+    &.active {
+        @include activity-navigational-active;
+    }
+
+    &:disabled,
+    &.disabled {
+        @include activity-navigational-disabled;
+    }
+}
+

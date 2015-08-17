@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
+    <ae:configuration>
+        <validators translation_domain="honeybee.core.errors">
+            <validator class="string" name="theme" required="false">
+                <argument>theme</argument>
+                <error>Parameter %name$s must be a valid theme name (e.g. honeybee-minimal).</error>
+                <ae:parameter name="description">Name of the theme to watch.</ae:parameter>
+            </validator>
+            <validator class="isset" name="no-theme" required="false">
+                <argument>no-theme</argument>
+                <error>Parameter %name$s doesn't need a value.</error>
+                <ae:parameter name="description">Do not watch the given or default theme.</ae:parameter>
+            </validator>
+            <validator class="isset" name="no-modules" required="false">
+                <argument>no-modules</argument>
+                <error>Parameter %name$s doesn't need a value.</error>
+                <ae:parameter name="description">Do not watch the styles.scss files of the Honeybee modules.</ae:parameter>
+            </validator>
+            <validator class="boolean" name="verbose" required="false">
+                <argument>verbose</argument>
+                <error>Parameter %name$s must have a boolean value.</error>
+                <ae:parameter name="description">Outputs the commandline calls being used.</ae:parameter>
+            </validator>
+            <validator class="inarray" name="style" required="false">
+                <argument>style</argument>
+                <error>Parameter %name$s must have a valid scss style value (%values$s).</error>
+                <ae:parameter name="case">true</ae:parameter>
+                <ae:parameter name="strict">true</ae:parameter>
+                <ae:parameter name="sep">|</ae:parameter>
+                <ae:parameter name="values">nested|expanded|compact|compressed</ae:parameter>
+                <ae:parameter name="description">One of: nested|expanded|compact|compressed.</ae:parameter>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

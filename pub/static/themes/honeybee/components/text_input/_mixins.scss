@@ -1,0 +1,43 @@
+// the input-text mixin is in lib/objects/inputs/
+
+@mixin input-label {
+    position: relative;
+    width: 100%;
+    display: block;
+    color: map-get($colors, grey-medium);
+
+    &.mandatory,
+    &.readonly {
+        padding-right: $base-spacing;
+        &::after {
+            font-family: entypo;
+            font-size: $base-spacing;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    &.mandatory {
+        &::after {
+            content: "\1F516";
+            color: map-get($colors, blue);
+        }
+    }
+
+    &.readonly {
+        &::after {
+            content: "\1F512";
+            color: map-get($colors, grey-light);
+        }
+    }
+}
+
+@mixin textarea {
+    max-width: 100%;
+    resize: vertical;
+    transition: height 50ms linear; //makes the autogrow less flickery
+    //min-height: 5 * $base-spacing;
+    @include input-text();
+    @include input-text-colors();
+}

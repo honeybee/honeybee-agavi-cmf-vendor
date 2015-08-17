@@ -1,0 +1,34 @@
+- extends _layout
+
+- block menu
+- endblock
+
+- block pageinfo
+- endblock
+
+- block primary
+    - embed 'html/layout/grid/1_boxes.twig' with {'name':'authentication', 'box1':'login'}
+        - block box1
+            %form.login-form(action=ro.gen('honeybee.system_account.user.login') method="post")
+                %fieldset
+                    - if errors is defined
+                        %ul.errors
+                            - for error in errors
+                                %li.error
+                                    %span = error
+
+                    %legend = _('signin', 'honeybee.system_account.user.ui')
+
+                    .control-group
+                        %label(for="user_input") = _('username', 'honeybee.system_account.user.ui')
+                        %input#user_input(type="text" name="username" placeholder=_('username_placeholder', 'honeybee.system_account.user.ui'))
+
+                    .control-group
+                        %label(for="password_input") = _('password', 'honeybee.system_account.user.ui')
+                        %input#password_input(type="password" name="password" placeholder=_('password_placeholder', 'honeybee.system_account.user.ui'))
+
+                    .control-group
+                        %button(type="submit") = _('signin', 'honeybee.system_account.user.ui')
+
+            - if reset_support_enabled is defined and (true == reset_support_enabled)
+                %a(href=ro.gen('user.reset')) = _('reset_password', 'honeybee.system_account.user.ui')

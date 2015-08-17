@@ -1,0 +1,59 @@
+<div class="{{ css }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-tabs jsb_ jsb_Honeybee_Core/ui/Tabs">
+        {# set tabs_id = view_template.getName()|default('as_fields_with_viewtemplate')|random() #}
+        {# this name must be validated to repopulate the tab the user was on when submitting the form - see app/config/validators.xml #}
+        {% set tabs_id = random() %}
+        <div class="hb-tabs__header">
+            <ul class="hb-tabs__toggles">
+                {% for tab in view_template.getTabList() %}
+                <li class="hb-tabs__toggle"><label for="{{tabs_id}}-{{tab.name}}">{{ _(tab.name, translation_domain_tabs) }}</label></li>
+                {% endfor %}
+            </ul>
+        </div><!--
+        --><div class="hb-tabs__content">
+            {% for tab in view_template.getTabList() %}
+            <input
+                type="radio"
+                name="{{tabs_id}}[]"
+                id="{{tabs_id}}-{{tab.name}}"
+                value="{{tabs_id}}-{{tab.name}}"
+                class="hb-tabs__trigger"
+                {# by default highlight the first tab and let the FormPopulationFilter check the tab the user was really on #}
+                {% if loop.index == 1 %}checked{% endif %}
+            />
+            <div class="hb-tab hb-tab-{{ tab.name }} {{ tab.css }} hb-tabs__panel">
+                {%- for panel in tab.getPanelList() -%}
+                {%- set panel_title = _(panel.name, translation_domain_panels, null, null, '') -%}
+                <div class="hb-panel hb-panel-{{ panel.name }} {{ panel.css }} {% if panel_title is empty %} hb-panel__header--hidden {% endif %}" data-panel-name="{{ panel.name }}">
+                    <div class="hb-panel__header">
+                        <h3 class="hb-panel__title">{{ panel_title }}</h3>
+                        {%- set panel_description = _(panel.name~'.description', translation_domain_panels, null, null, '') -%}
+                        {%- if panel_description is not empty -%}
+                            <p class="hb-panel__description">{{ panel_description|raw }}</p>
+                        {%- endif -%}
+                    </div>
+                    <div class="hb-panel__content">
+                        {%- for row in panel.getRowList() -%}
+                        <div class="hb-row {{ row.css }}">
+                            {%- for cell in row.getCellList() -%}
+                            <div class="hb-cell {{ cell.css }}">
+                                {%- for group in cell.getGroupList() -%}
+                                <div class="hb-group hb-group-{{ group.name }} {{ group.css }}">
+                                    {%- for field in group.getFieldList() -%}
+                                        {{- rendered_fields[field.name]|raw -}}
+                                    {%- endfor -%}
+                                </div>
+                                {%- endfor -%}
+                            </div>
+                            {%- endfor -%}
+                        </div>
+                        {%- endfor -%}
+                    </div>
+                </div>
+                {%- endfor -%}
+            </div>
+            {%- endfor -%}
+        </div>
+    </div>
+    <div class="resource-activities">{{ rendered_resource_activities|raw }}</div>
+</div>

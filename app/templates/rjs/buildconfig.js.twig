@@ -1,0 +1,44 @@
+{#
+    This file is rendered into pub/static/buildconfig.js and used with the requirejs optimizer r.js as build config.
+
+    For available options see: https://github.com/jrburke/r.js/blob/master/build/example.build.js
+#}
+({
+
+    appDir: "./modules",            {# take everything from here #}
+    dir: "modules-built",           {# and put it into here #}
+    fileExclusionRegExp: /^\./,     {# but please do not copy files matching this regex #}
+    baseUrl: ".",                   {# while using this as the baseUrl for lookups (relative from appDir) #}
+
+    {% include "rjs/paths.twig" %},
+    {% include "rjs/shim.twig" %},
+    {% include "rjs/modules.twig" %},
+
+    generateSourceMaps: false,      {# generate source maps? #}
+    inlineText: true,               {# inline text plugin resources if specified as requirements in defines #}
+    keepBuildDir: true,             {# do not remove build dir on subsequent runs as the page would be without resources during builds #}
+    optimizeCss: "standard",        {# optimize all .css files (removing newlines etc.); use "none" to disable css compilation #}
+    removeCombined: false,          {# do not remove files from output folder that have been combined #}
+    skipDirOptimize: false,         {# do optimize all files in all folders #}
+    skipModuleInsertion: false,     {# add define() calls to non AMD files #}
+    skipSemiColonInsertion: false,  {# do insert semicolons when concat'ing files #}
+    useSourceUrl: false,
+    useStrict: false                {# do not allow "use strict" #}
+
+{#
+uglify2 custom configuration example:
+- see http://lisperator.net/uglifyjs/codegen for "output" options
+- see http://lisperator.net/uglifyjs/compress for "compress" options
+
+    uglify2: {
+        output: {
+            beautify: true
+        },
+        compress: {
+            sequences: false,
+        },
+        warnings: true,
+        mangle: false
+    },
+#}
+})

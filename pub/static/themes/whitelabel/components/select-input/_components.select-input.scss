@@ -1,0 +1,11 @@
+select {
+    @include input-textual;
+
+
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-image: url(binaries/icons/triangle_down.svg);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: right center;
+}

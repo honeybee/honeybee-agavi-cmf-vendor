@@ -1,0 +1,49 @@
+$height: 40px;
+
+.notifications {
+    @include offcanvas('notifications', 'top-right', 'top', 20rem, .1s, 7000, 100);
+
+    .notifications__toggle {
+        width: auto;
+        height: $height;
+        line-height: $height;
+        min-height: $height;
+        max-height: $height;
+        min-width: 36px;
+        right: $base-spacing;
+        padding: 0 10px;
+
+        background: color(red);
+        color: color(white);
+
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+    }
+
+    fieldset > label:hover {
+        background-color: #f3f3f3;
+    }
+
+    .notifications__panel {
+        background: #fefefe;
+    }
+
+    .messages-box {
+        text-align: center;
+    }
+
+    .messages-box dl {
+        display: inline-block;
+    }
+
+    .settings {
+        //@include ag;
+
+        .ag__toggle {
+            width: 4rem;
+            border-bottom: 2px solid black;
+        }
+    }
+
+}
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
+    <ae:configuration>
+        <translators default_domain="application.ui">
+            <translator domain="application">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="navigations">
+                        <ae:parameter name="de">
+                            <ae:parameter name="main.honeybee.core">System</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="main.honeybee.core">System</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
+            <translator domain="honeybee.core">
+                <message_translator class="AgaviSimpleTranslator">
+                    <!-- user-interface related translation for the core module go here -->
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
+                            <ae:parameter name="theme_preview.page_title">Vorschau Theme</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="theme_preview.page_title">Preview Theme</ae:parameter>
+                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                    <!-- user-interface related translation for the core module go here -->
+                    <ae:parameter name="ui">
+                        <ae:parameter name="de">
+                            <ae:parameter name="Logout">Abmelden</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                    <!-- all other core translations may be placed below -->
+                    <ae:parameter name="messages">
+                        <ae:parameter name="de">
+                            <!-- <ae:parameter name=""></ae:parameter> -->
+                        </ae:parameter>
+                    </ae:parameter>
+                    <ae:parameter name="errors">
+                        <ae:parameter name="de">
+                            <!-- <ae:parameter name=""></ae:parameter> -->
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+        </translators>
+    </ae:configuration>
+</ae:configurations>

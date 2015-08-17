@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
+    <ae:configuration>
+        <validators translation_domain="honeybee.core.errors">
+
+            <validator class="boolean" required="false">
+                <argument>quiet</argument>
+            </validator>
+
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" required="true" provides="valid_type_name">
+                <argument>type</argument>
+                <error>You must specify a valid aggregate root type name within your project's domain.</error>
+                <ae:parameter name="description">Replay all events for the given aggregate root type.</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please pick an aggregate root type</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\EventChannelValidator" name="channel" required="true" provides="valid_channel_name">
+                <argument>channel</argument>
+                <error>You must specify a valid channel name from the event_bus.xml.</error>
+                <ae:parameter name="description">Replay all events over the given channel only.</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
+                    <ae:parameter name="select">true</ae:parameter>
+                    <ae:parameter name="question">Please pick a channel name</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name valid_channel_name">
+                <argument>type</argument>
+                <error>You must specify a valid aggregate root type name within you project's domain.</error>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

@@ -1,0 +1,31 @@
+{% extends _layout %}
+
+{% block toc %}
+        <h1>Upload files for '{{ temp_filesystem }}'</h1>
+{% endblock %}
+
+{% block primary %}
+
+    <h2>Upload a file</h2>
+
+    <p>Upload files for later attachment to a resource.</p>
+
+    {% for path, attr in file_attributes %}
+    <h3>For attribute "{{ attr.name}}"</h3>
+    <form action="{{ upload_url }}" method="post" name="uploadform-{{ attr.path }}" id="uploadform-{{ attr.path }}" enctype="multipart/form-data">
+        <div>
+            <div class="hb-validation-messages">
+                <ul class="errors"></ul>
+            </div>
+
+            <ul>
+                <li>
+                    <label>{{ attr.path }}: <input type="file" {#{{ attr.multiple }}#} name="uploadform[{{ attr.path }}]"></label>
+                </li>
+            </ul>
+            <button type="submit">Submit file</button>
+        </div>
+    </form>
+    <hr class="mb+">
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,24 @@
+// the input-text mixin is in lib/objects/inputs/
+
+@mixin input-label {
+    position: relative;
+    width: 100%;
+    display: block;
+    color: color(text-secondary);
+
+    &.mandatory,
+    &.readonly {
+    }
+
+    &.mandatory {
+    }
+
+    &.readonly {
+    }
+}
+
+@mixin textarea {
+    @include input-textual();
+    resize: vertical;
+    transition: height 50ms linear; //makes the autogrow less flickery
+}

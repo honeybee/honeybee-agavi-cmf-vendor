@@ -1,0 +1,49 @@
+.mainNav {
+
+    .title {
+        color: color(white);
+        padding: $base-spacing;
+    }
+
+    ul {
+        @extend %list-bare;
+
+        li li {
+            border-top: 1px solid #474747;
+
+            color: color(orange);
+            padding: $base-spacing;
+
+            &:first-child {
+                border-top-width: 0;
+            }
+
+            a {
+                color: color(orange);
+                text-decoration: none;
+            }
+        }
+
+        li li li .actiivity {
+            padding-left: 2 * $base-spacing;
+        }
+    }
+
+    .grouptitle, .activity {
+        padding-left: $base-spacing;
+        padding-right: $base-spacing;
+    }
+
+    .grouptitle {
+        margin-top: $base-spacing;
+        margin-bottom: 0;
+
+        font-weight: 400;
+        color: color(white);
+    }
+
+    .activity {
+        display: block;
+        text-align: left;
+    }
+}

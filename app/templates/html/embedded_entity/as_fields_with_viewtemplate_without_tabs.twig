@@ -1,0 +1,46 @@
+<li class="{{ css }}" data-embed-type="{{ entity_type }}" data-input-group="{{ grouped_base_path }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    {% embed "html/embed-actions.twig" with { 'grouped_base_path': grouped_base_path, 'add_item_to_parent_list_allowed': add_item_to_parent_list_allowed } only %}{% endembed %}
+    <div class="">
+        {% for tab in view_template.getTabList() %}
+        <div class="{{ tab.css }}" data-tab-name="{{ tab.name }}">
+            {%- for panel in tab.getPanelList() -%}
+            {%- set panel_title = _(panel.name, translation_domain_panels, null, null, '') -%}
+            <div class="hb-panel hb-panel-{{ panel.name }} {{ panel.css }} {% if panel_title is empty %} hb-panel__header--hidden {% endif %}" data-panel-name="{{ panel.name }}">
+                <div class="hb-panel__header">
+                    <h3 class="hb-panel__title">{{ panel_title }}</h3>
+                    {%- set panel_description = _(panel.name~'.description', translation_domain_panels, null, null, '') -%}
+                    {%- if panel_description is not empty -%}
+                        <p class="hb-panel__description">{{ panel_description|raw }}</p>
+                    {%- endif -%}
+                </div>
+                <div class="hb-panel__content">
+                    {%- for row in panel.getRowList() -%}
+                    <div class="hb-row {{ row.css }}">
+                        {%- for cell in row.getCellList() -%}
+                        <div class="hb-cell {{ cell.css }}">
+                            {%- for group in cell.getGroupList() -%}
+                            <div class="hb-group hb-group-{{ group.name }} {{ group.css }}" data-group-name="{{ group.name }}">
+                                {%- for field in group.getFieldList() -%}
+                                    {% if is_new and field.name == 'identifier' %}
+                                        {# skip #}
+                                    {% else %}
+                                        {{- rendered_fields[field.name]|raw -}}
+                                    {% endif %}
+                                {%- endfor -%}
+                            </div>
+                            {%- endfor -%}
+                        </div>
+                        {%- endfor -%}
+                    </div>
+                    {%- endfor -%}
+                </div>
+            </div>
+            {%- endfor -%}
+        </div>
+        {%- endfor -%}
+    </div>
+    <input type="hidden" name="{{ grouped_base_path }}[@type]" value="{{ entity_type }}" />
+    {% if is_embed_template %}
+    <input type="hidden" class="hb-js-tpl-marker" name="{{ grouped_base_path }}[__template]" value="true" />
+    {% endif %}
+</li>

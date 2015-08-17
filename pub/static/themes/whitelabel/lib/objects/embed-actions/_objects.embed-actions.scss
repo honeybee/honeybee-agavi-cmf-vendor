@@ -1,0 +1,44 @@
+.hb-embed-actions {
+    @extend %list-bare;
+    @extend %pack;
+    @extend %pack--middle;
+    @extend %pack--tiny;
+
+    width: 50%;
+    margin: 0 auto;
+}
+
+.hb-embed-action {
+    @extend %pack__item;
+
+    input {
+        @include visuallyhidden;
+    }
+
+    label {
+        @include button-normal-navigational;
+    }
+
+    input:checked ~ label {
+        @include button-normal-mutating;
+    }
+
+    input:focus ~ label {
+//        @include activity-underline;
+    }
+
+    &.hb-embed-action__delete input:checked ~ label {
+        @include button-normal-destructive;
+    }
+
+    &.hb-embed-action__none input:checked ~ label {
+        @include button-normal-navigational;
+    }
+}
+
+%hb-embed-actions--small,
+.hb-embed-actions--small {
+    label {
+        @include inuit-font-size(10px, 15px);
+    }
+}

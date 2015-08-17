@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.config_dir%/validators.xml">
+    <ae:configuration>
+        <validators>
+
+            <validator class="inarray" name="invalid_type" required="true">
+                <argument>type</argument>
+                <error>Invalid or missing 'type' parameter. Expecting one of 'command' or 'event'.</error>
+                <ae:parameter name="values">command,event</ae:parameter>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

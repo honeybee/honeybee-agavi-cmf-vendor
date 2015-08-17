@@ -1,0 +1,83 @@
+.input-radiobutton,
+.input-checkbox {
+    $color: color(text-primary);
+    $width: $font-size;
+    $height: $font-size;
+
+    margin-top: $base-spacing;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    input {
+        @include visuallyhidden;
+    }
+
+    .input-proxy {
+        position: relative;
+        @include input-textual-default;
+        width: $width;
+        height: $height;
+        margin-right: 0.5 * $base-spacing;
+        outline: 0;
+
+        &::after {
+            content: "";
+            display: none;
+            position: absolute;
+            $margin: 0.25 * $base-spacing;
+            top: $margin;
+            left: $margin;
+            bottom: $margin;
+            right: $margin;
+
+            border-radius: 2px;
+
+            background-color: color(text-primary);
+        }
+    }
+
+    input:checked ~ .input-proxy::after {
+        display: block;
+    }
+
+    input:focus ~ .input-proxy {
+        @include input-textual-colors-focus;
+        border-color: color(blue);
+    }
+
+    input:active ~ .input-proxy {
+        @include input-textual-colors-active;
+        &::after {
+            display: block;
+            background-color: color(lightgrey1);
+        }
+    }
+
+    input:disabled ~ .input-proxy {
+        @include input-textual-colors-disabled;
+    }
+
+    input:disabled ~ label {
+        color: color(text-secondary);
+    }
+
+    label {
+        display: inline-block;
+        width: auto;
+        vertical-align: middle;
+
+        color: color(black);
+    }
+}
+
+.input-radiobutton {
+    .input-proxy {
+        border-radius: 50%;
+        &::after {
+            border-radius: 50%;
+        }
+    }
+}
+

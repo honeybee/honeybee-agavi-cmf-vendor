@@ -1,0 +1,227 @@
+//"normal" buttons"
+
+//navigational
+@mixin button-colors-normal-navigational-default {
+    color: color(navigational-primary);
+    background-color: color(background-blank);
+    border-color: color(clear);
+}
+@mixin button-colors-normal-navigational-hover {
+    @include button-colors-normal-navigational-default;
+}
+@mixin button-colors-normal-navigational-focus {
+    @include button-colors-normal-navigational-default;
+}
+@mixin button-colors-normal-navigational-active {
+    @include button-colors-normal-navigational-default;
+    background-color: color(background-heavy);
+}
+@mixin button-colors-normal-navigational-disabled {
+    @include button-colors-normal-navigational-default;
+    color: color(text-secondary);
+}
+
+//mutating
+@mixin button-colors-normal-mutating-default {
+    color: color(mutating-primary);
+    background-color: color(background-blank);
+    border-color: color(clear);
+}
+@mixin button-colors-normal-mutating-hover {
+    @include button-colors-normal-mutating-default;
+}
+@mixin button-colors-normal-mutating-focus {
+    @include button-colors-normal-mutating-default;
+}
+@mixin button-colors-normal-mutating-active {
+    @include button-colors-normal-mutating-default;
+    background-color: color(background-heavy);
+}
+@mixin button-colors-normal-mutating-disabled {
+    @include button-colors-normal-mutating-default;
+    color: color(text-secondary);
+}
+
+//positive
+@mixin button-colors-normal-positive-default {
+    color: color(positive-primary);
+    background-color: color(background-blank);
+    border-color: color(clear);
+}
+@mixin button-colors-normal-positive-hover {
+    @include button-colors-normal-positive-default;
+}
+@mixin button-colors-normal-positive-focus {
+    @include button-colors-normal-positive-default;
+}
+@mixin button-colors-normal-positive-active {
+    @include button-colors-normal-positive-default;
+    background-color: color(background-heavy);
+}
+@mixin button-colors-normal-positive-disabled {
+    @include button-colors-normal-positive-default;
+    color: color(text-secondary);
+}
+
+//warning
+@mixin button-colors-normal-warning-default {
+    color: color(warning-primary);
+    background-color: color(background-blank);
+    border-color: color(clear);
+}
+@mixin button-colors-normal-warning-hover {
+    @include button-colors-normal-warning-default;
+}
+@mixin button-colors-normal-warning-focus {
+    @include button-colors-normal-warning-default;
+}
+@mixin button-colors-normal-warning-active {
+    @include button-colors-normal-warning-default;
+    background-color: color(background-heavy);
+}
+@mixin button-colors-normal-warning-disabled {
+    @include button-colors-normal-warning-default;
+    color: color(text-secondary);
+}
+
+//destructive
+@mixin button-colors-normal-destructive-default {
+    color: color(destructive-primary);
+    background-color: color(background-blank);
+    border-color: color(clear);
+}
+@mixin button-colors-normal-destructive-hover {
+    @include button-colors-normal-destructive-default;
+}
+@mixin button-colors-normal-destructive-focus {
+    @include button-colors-normal-destructive-default;
+}
+@mixin button-colors-normal-destructive-active {
+    @include button-colors-normal-destructive-default;
+    background-color: color(background-heavy);
+}
+@mixin button-colors-normal-destructive-disabled {
+    @include button-colors-normal-destructive-default;
+    color: color(text-secondary);
+}
+
+
+
+
+
+// emhpasized buttons
+
+//navigational
+@mixin button-colors-emphasized-navigational-default {
+    color: color(text-primary);
+    background-color: color(background-heavy);
+    border-color: color(lines);
+}
+@mixin button-colors-emphasized-navigational-hover {
+    color: color(text-primary);
+    background-color: color(grey2);
+    border-color: color(grey1);
+}
+@mixin button-colors-emphasized-navigational-focus {
+    @include button-colors-emphasized-navigational-default;
+}
+@mixin button-colors-emphasized-navigational-active {
+    @include button-colors-emphasized-navigational-hover;
+}
+@mixin button-colors-emphasized-navigational-disabled {
+    color: color(text-secondary);
+    background-color: color(background-heavy);
+    border-color: color(lines);
+}
+
+//mutating
+@mixin button-colors-emphasized-mutating-default {
+    color: color(background-blank);
+    background-color: color(mutating-primary);
+    border-color: color(mutating-secondary);
+}
+@mixin button-colors-emphasized-mutating-hover {
+    color: color(background-blank);
+    background-color: color(mutating-secondary);
+    border-color: color(mutating-highlight);
+}
+@mixin button-colors-emphasized-mutating-focus {
+    @include button-colors-emphasized-mutating-default;
+}
+@mixin button-colors-emphasized-mutating-active {
+    color: color(background-blank);
+    background-color: color(mutating-secondary);
+    border-color: color(mutating-highlight);
+}
+@mixin button-colors-emphasized-mutating-disabled {
+    @include button-colors-emphasized-navigational-disabled;
+}
+
+//positive
+@mixin button-colors-emphasized-positive-default {
+    color: color(background-blank);
+    background-color: color(positive-primary);
+    border-color: color(positive-secondary);
+}
+@mixin button-colors-emphasized-positive-hover {
+    color: color(background-blank);
+    background-color: color(positive-secondary);
+    border-color: color(positive-highlight);
+}
+@mixin button-colors-emphasized-positive-focus {
+    @include button-colors-emphasized-positive-default;
+}
+@mixin button-colors-emphasized-positive-active {
+    color: color(background-blank);
+    background-color: color(positive-secondary);
+    border-color: color(positive-highlight);
+}
+@mixin button-colors-emphasized-positive-disabled {
+    @include button-colors-emphasized-navigational-disabled;
+}
+
+//warning
+@mixin button-colors-emphasized-warning-default {
+    color: color(background-blank);
+    background-color: color(warning-primary);
+    border-color: color(warning-secondary);
+}
+@mixin button-colors-emphasized-warning-hover {
+    color: color(background-blank);
+    background-color: color(warning-secondary);
+    border-color: color(warning-highlight);
+}
+@mixin button-colors-emphasized-warning-focus {
+    @include button-colors-emphasized-warning-default;
+}
+@mixin button-colors-emphasized-warning-active {
+    color: color(background-blank);
+    background-color: color(warning-secondary);
+    border-color: color(warning-highlight);
+}
+@mixin button-colors-emphasized-warning-disabled {
+    @include button-colors-emphasized-navigational-disabled;
+}
+
+//destructive
+@mixin button-colors-emphasized-destructive-default {
+    color: color(background-blank);
+    background-color: color(destructive-primary);
+    border-color: color(destructive-secondary);
+}
+@mixin button-colors-emphasized-destructive-hover {
+    color: color(background-blank);
+    background-color: color(destructive-secondary);
+    border-color: color(destructive-highlight);
+}
+@mixin button-colors-emphasized-destructive-focus {
+    @include button-colors-emphasized-destructive-default;
+}
+@mixin button-colors-emphasized-destructive-active {
+    color: color(background-blank);
+    background-color: color(destructive-secondary);
+    border-color: color(destructive-highlight);
+}
+@mixin button-colors-emphasized-destructive-disabled {
+    @include button-colors-emphasized-navigational-disabled;
+}

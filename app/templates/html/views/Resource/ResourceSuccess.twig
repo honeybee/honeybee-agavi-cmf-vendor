@@ -1,0 +1,25 @@
+{% extends _layout %}
+
+{# blocks that are reused in this template #}
+
+{% block toc %}
+    <h1>view <b>{{ resource.identifier }}, rev. {{ resource.revision }}</b></h1>
+{% endblock %}
+
+{% block primary %}
+<div>
+    <pre>
+    {{ dump(resource.comments.toArray()) }}
+</pre>
+    <div class="hb-viewitem-wrapper">
+        {{ rendered_resource|raw }}
+    </div>
+    {% if prev_link %}
+        <a href="{{ prev_link }}">previous version</a>
+    {% endif %}
+
+    {% if next_link %}
+        <a href="{{ next_link }}">next version</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% if wrapper is not defined %}
+    {% set wrapper = false %}
+{% endif %}
+
+{% set wrapper_name = name | default("unnamed") %}
+{% set wrapper_tag = wrapper_tag | default("div") %}
+{% set wrapper_css = wrapper_css | default("") %}
+{% set wrapper_attr = (wrapper_attr | default({})) | cast_to_array %}
+
+{% set box1 = box1 | default("box1") %}
+{% set box1_tag = box1_tag | default("div") %}
+{% set box1_css = box1_css | default("") %}
+{% set box1_attr = (box1_attr | default({})) | cast_to_array %}
+{% if box1_wrapper is not defined %}
+    {% set box1_wrapper = false %}
+{% endif %}
+
+{% set box2 = box2 | default("box2") %}
+{% set box2_tag = box2_tag | default("div") %}
+{% set box2_css = box2_css | default("") %}
+{% set box2_attr = (box2_attr | default({})) | cast_to_array %}
+{% if box2_wrapper is not defined %}
+    {% set box2_wrapper = false %}
+{% endif %}
+
+{% if wrapper == true %}
+<{{ wrapper_tag }} class="{{ wrapper_name }} {{ wrapper_css }}" {% for attr, val in wrapper_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>
+{% endif %}
+    <div class="{{ wrapper_name }}-layout">
+        <div class="{{ box1 }}-box">
+            {% if box1_wrapper == true %}
+            <div class="{{ box1 }}-wrapper">
+            {% endif %}
+                <{{ box1_tag }} class="{{ box1 }} {{ box1_css}}" {% for attr, val in box1_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box1 %}{% endblock %}</{{ box1_tag }}>
+            {% if box1_wrapper == true %}
+            </div>
+            {% endif %}
+        </div><!--
+        --><div class="{{ box2 }}-box">
+            {% if box2_wrapper == true %}
+            <div class="{{ box2 }}-wrapper">
+            {% endif %}
+                <{{ box2_tag }} class="{{ box2 }} {{ box2_css}}" {% for attr, val in box2_attr %} {{ attr }}="{{ val|e('html_attr') }}" {% endfor %}>{% block box2 %}{% endblock %}</{{ box2_tag }}>
+            {% if box2_wrapper == true %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% if wrapper == true %}
+</{{ wrapper_tag }}>
+{% endif %}

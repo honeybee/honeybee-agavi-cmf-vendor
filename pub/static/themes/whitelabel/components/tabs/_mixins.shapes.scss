@@ -1,0 +1,31 @@
+@mixin tabs-toggle-base-shape() {
+    @include button-shape;
+
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+
+    outline: 0;
+
+    user-select: none;
+    cursor: pointer;
+
+    text-decoration: none;
+
+    @include ellipsis;
+}
+
+@mixin tabs-toggle-shape {
+    @include tabs-toggle-base-shape;
+    padding: 10px 7px 7px 20px;
+    border-width: 0;
+    border-bottom-width: 1px;
+    border-style: solid;
+    text-align: left;
+    border-radius: 0;
+}
+
+@mixin tabs-toggle-shape-default {@include tabs-toggle-shape;}
+@mixin tabs-toggle-shape-hover {@include tabs-toggle-shape-default;}
+@mixin tabs-toggle-shape-focus {@include tabs-toggle-shape-default;}
+@mixin tabs-toggle-shape-active {@include tabs-toggle-shape-default;}
+@mixin tabs-toggle-shape-disabled {@include tabs-toggle-shape-default;}

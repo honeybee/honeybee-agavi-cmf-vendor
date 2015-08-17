@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/view_templates/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+
+        <view_templates scope="honeybee.system_account.user.suggestions">
+
+            <view_template name="html">
+                <tab name="users">
+                   <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="user">
+                                    <field name="username" />
+                                    <!--
+                                    <field name="firstname" />
+                                    <field name="lastname" />
+                                    -->
+                                    <field name="url" renderer="Honeybee\Ui\Renderer\Html\Dat0r\Runtime\Attribute\Url\HtmlUrlAttributeRenderer" />
+                                    <field name="email" renderer="Honeybee\Ui\Renderer\Html\Dat0r\Runtime\Attribute\Email\HtmlEmailAttributeRenderer" />
+                                    <field name="birth_year" />
+                                    <field name="tags" />
+                                    <field name="role" />
+                                    <!-- <field name="images" /> -->
+                                    <field name="workflow_state" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+            <view_template name="console">
+                <tab name="users">
+                    <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="user">
+                                    <field name="username" />
+                                    <field name="email" />
+                                    <field name="firstname" />
+                                    <field name="lastname" />
+                                    <field name="tags" />
+                                    <field name="role" />
+                                    <field name="workflow_state" />
+                                    <field name="token_expire_date" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+
+        </view_templates>
+
+    </ae:configuration>
+</ae:configurations>

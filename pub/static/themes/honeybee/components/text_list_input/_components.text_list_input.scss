@@ -1,0 +1,45 @@
+.input-text-list {
+
+    .text-list__item {
+        display: inline-block;
+        width: auto;
+
+        margin: 0.5 * $base-spacing;
+        &:first-child {
+            margin-left: 0;
+        }
+
+        input {
+            @include visuallyhidden;
+        }
+
+        span {
+            display: inline-block;
+            padding-left: 0.5 * $base-spacing;
+            padding-right: 0.5 * $base-spacing;
+
+            @include typography-interactive;
+            background-color: color(grey-warm-light);
+            color: color(black);
+
+            &::after {
+                content: "+";
+                display: inline-block;
+                width: $base-spacing;
+                text-align: center;
+                padding-left: 0.5 * $base-spacing;
+            }
+        }
+
+        input:checked ~ span {
+            background-color: color(blue);
+            color: color(white);
+
+            &::after {
+                content: "-";
+            }
+        }
+    }
+
+
+}

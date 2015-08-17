@@ -1,0 +1,11 @@
+## resource {{ resource.identifier }}
+
+### Fields:
+
+{% for rendered_field in rendered_fields %}
+{{- rendered_field|raw -}}
+{% endfor %}
+
+### Actions:
+
+{{ rendered_resource_activities|raw }}

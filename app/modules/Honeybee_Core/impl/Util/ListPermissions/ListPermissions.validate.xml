@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
+    <ae:configuration>
+        <validators translation_domain="honeybee.core.errors">
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\RoleValidator" name="role" required="false">
+                <argument>role</argument>
+                <error>Parameter %name$s must be a valid role name configured in access_control.xml.</error>
+                <ae:parameter name="description">Only list permissions specific for the given role.</ae:parameter>
+            </validator>
+        </validators>
+    </ae:configuration>
+</ae:configurations>

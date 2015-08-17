@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <title>Test form</title>
+    </head>
+    <body>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <h2>Regular file upload</h2>
+            <input type="file"></input>
+
+            <h2>capture=camera</h2>
+            <input type="file" accept="image/*;capture=camera"></input>
+
+            <h2>capture=camera (without mimetype constraint)</h2>
+            <input type="file" accept="image/" capture="camera" />
+
+            <h2>capture=camcorder</h2>
+            <input type="file" accept="video/*;capture=camcorder"></input>
+
+            <h2>capture=microphone</h2>
+            <input type="file" accept="audio/*;capture=microphone"></input>
+
+            <button type="submit">Abschicken</button>
+        </form>
+    </body>
+</html>

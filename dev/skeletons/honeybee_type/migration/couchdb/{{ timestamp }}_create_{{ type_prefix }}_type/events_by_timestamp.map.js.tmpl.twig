@@ -1,0 +1,5 @@
+function(event) {
+    if (/^{{ vendor_prefix }}\.{{ package_prefix }}\.{{ type_prefix }}\-/.test(event._id) && event.seq_number) {
+        emit(event.iso_date, 1);
+    }
+}

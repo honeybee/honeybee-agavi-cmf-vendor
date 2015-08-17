@@ -1,0 +1,26 @@
+{% set list_name = name | default("activities-list") %}
+{% set list_css = css | default("") %}
+{% set list_attr = (html_attributes | default({})) | cast_to_array %}
+{% set more_activities = more_activities | default([]) %}
+{% if not more_activities %}
+    {% set list_css = list_css ~ ' ' ~ list_name ~ '--empty' %}
+{% endif %}
+
+{% set more_css = more_css | default("") %}
+{% set more_attr = (more_html_attributes | default({})) | cast_to_array %}
+
+{%- block activities_list -%}
+<div class="{{ list_name }} {{ list_css }}" {% for attr, val in list_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+    {%- block more -%}
+    {%- if more_activities -%}
+    <ul class="{{ list_name ~ '__more' }} {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+        {%- for rendered_activity in more_activities -%}
+        <li>{{ rendered_activity|raw }}</li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+    {%- endblock -%}
+</div>
+{%- endblock activities_list -%}
+
+

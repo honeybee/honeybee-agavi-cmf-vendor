@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://berlinonline.de/schemas/honeybee/config/navigation/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+
+    <ae:configuration>
+
+        <available_items>
+            <items name="honeybee.system_account.user">
+                <activity scope="honeybee.system_account.user">create_resource</activity>
+                <activity scope="honeybee.system_account.user">collection</activity>
+                <activity scope="honeybee.system_account.user">hierarchy_root</activity>
+            </items>
+        </available_items>
+
+        <navigations default="main">
+            <navigation name="main">
+                <groups>
+                    <group name="honeybee.system_account.user">
+                        <include>honeybee.system_account.user</include>
+                    </group>
+                </groups>
+            </navigation>
+        </navigations>
+
+    </ae:configuration>
+</ae:configurations>

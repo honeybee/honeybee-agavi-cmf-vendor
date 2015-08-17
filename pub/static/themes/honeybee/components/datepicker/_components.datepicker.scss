@@ -1,0 +1,168 @@
+.datepicker-input.datepicker-input {
+    display: inline-block;
+    width: 70%;
+    &.readonly {
+        width: 100%;
+    }
+}
+
+.datepicker-toggle {
+    display: inline-block;
+    width: 30%;
+}
+
+.datepicker {
+    @include zindex(modal);
+    $line-height: 1.2em;
+
+    &.calendar--list {
+        .datepicker__content {
+            width: 10000px;
+            height: 10000px;
+        }
+
+        .calendar {
+            display: block;
+        }
+
+        @include media-query(lap-and-up) {
+            .calendar {
+                min-width: 360px;
+            }
+        }
+    }
+
+    &.calendar--table {
+        .calendar {
+            display: block;
+        }
+
+        .day {
+            width: 52px;
+        }
+    }
+
+    .datepicker__content {
+        overflow: hidden;
+
+        @include media-query(desk) {
+            max-width: 80%;
+        }
+        @include media-query(portable) {
+            max-width: 100%;
+        }
+    }
+
+    abbr {
+        border: none;
+        cursor: inherit;
+    }
+
+    .calendar {
+        background-color: color(white);
+        color: color(black);
+    }
+
+    .calendars__header,
+    .calendar__header {
+        button,
+        span {
+            @include activity;
+            @include activity-navigational;
+            @include activity-underline;
+        }
+    }
+
+    .calendars {
+    }
+
+    .calendars__header {
+        height: 2* $base-spacing;
+        padding: 0;
+    }
+
+
+    .calendars__body {
+        overflow-y: scroll;
+    }
+
+    .calendars__body_inner {
+        display: inline-block;
+    }
+
+    .calendar__body {
+        line-height: $line-height;
+
+        button {
+            @include activity-underline;
+            padding: 0.5*$base-spacing;
+            border-top: 3px solid transparent;
+            border-right: 0;
+            border-left: 0;
+            line-height: $line-height;
+
+
+            &::after {
+                bottom: 2px;
+                left: 2px;
+                right: 2px;
+                line-height: $line-height;
+                background: none;
+                text-align: left;
+            }
+        }
+
+    }
+
+    .calendar__header {
+        .month {
+            width: 60%;
+        }
+
+        .year {
+            width: 40%;
+        }
+    }
+
+
+    .day:not(.day--disabled):hover {
+        background-color: color(grey-super-light);
+    }
+
+    .weekday,
+    .calendar-week,
+    .day--excess {
+        color: color(grey-neutral);
+    }
+
+    .weekend {
+        background-color: lighten(color(grey-warm-light), 7%);
+    }
+
+    .day--today {
+        color: color(blue-shadow);
+        button {
+            border-bottom-color: color(blue);
+        }
+    }
+
+    .day--current {
+        color: color(green-shadow);
+        button {
+            border-bottom-color: color(green);
+        }
+    }
+
+    .day--selected {
+        button {
+            border-bottom-color: color(red);
+        }
+        button::after {
+            color: color(red-shadow);
+        }
+    }
+
+    .day--disabled {
+        color: color(red);
+    }
+}

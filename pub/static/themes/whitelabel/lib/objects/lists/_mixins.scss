@@ -1,0 +1,24 @@
+/* actions inside of actionlists fill the full width */
+@mixin activitylist() {
+    margin:  0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin activitylist--vertical() {
+    .activity.activity {
+        &,
+        &:hover,
+        &:focus,
+        &:active {
+            display: block;
+            padding: 0.5em 1em;
+            text-decoration: none;
+            box-shadow: none;
+        }
+        &:hover {
+            background-color: color(lightgrey1);
+        }
+    }
+}
+

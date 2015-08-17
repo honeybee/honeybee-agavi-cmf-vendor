@@ -1,0 +1,15 @@
+@mixin input-textual-shape-default {
+    width: 100%;
+    border: 1px solid;
+    padding: 0.71em; // 10/14
+    border-radius: 3px;
+    outline-width: 2px;
+    outline-style: solid;
+}
+
+@mixin input-textual-shape-hover {@include input-textual-shape-default;}
+@mixin input-textual-shape-focus {@include input-textual-shape-default;}
+@mixin input-textual-shape-active {@include input-textual-shape-default;}
+@mixin input-textual-shape-disabled {@include input-textual-shape-default;}
+@mixin input-textual-shape-invalid {@include input-textual-shape-default;}
+@mixin input-textual-shape-valid {@include input-textual-shape-default;}

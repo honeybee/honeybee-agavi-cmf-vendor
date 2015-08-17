@@ -1,0 +1,27 @@
+{% use 'html/ui/page-info.twig' %}
+
+{% block pagecontent %}
+<div class="page-content-layout">
+    <div class="info-box">
+        <div class="info">
+            {%- block pageinfo -%}{{ parent() }}{%- endblock pageinfo -%}
+        </div>
+    </div><!-- .info-box
+    --><div class="main-box">
+        <main class="main main-layout">
+            {%- block main -%}
+            <div class="primary-content-box">
+                <div class="primary-content">
+                    {%- block primary -%}{# put main data and content here #}{%- endblock primary -%}
+                </div>
+            </div><!-- .primary-content-box
+            --><div class="secondary-content-box">
+                <aside class="secondary-content" role="complementary">
+                    {%- block secondary -%}{# put complementary data and sidebars here #}{%- endblock secondary -%}
+                </aside><!-- .secondary-content -->
+            </div><!-- .secondary-content-box -->
+            {%- endblock main -%}
+        </main><!-- .main -->
+    </div><!-- .main-box -->
+</div><!-- .page-content-layout -->
+{% endblock pagecontent %}

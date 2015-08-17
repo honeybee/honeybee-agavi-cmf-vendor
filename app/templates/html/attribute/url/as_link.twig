@@ -1,0 +1,7 @@
+<a
+    href="{{ attribute_value }}"
+    class="{{ css|default('') }}"
+    {% if open_in_blank %}
+    target="__blank"
+    {% endif %}
+>{{ attribute_value }}</a>

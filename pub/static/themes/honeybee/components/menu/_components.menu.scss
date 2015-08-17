@@ -1,0 +1,71 @@
+// offcanvas menu on the left with user widget and main navigation
+
+$menu-size: 20rem !default;
+
+.menu {
+    @include offcanvas('menu', 'bottom-left', 'left', $menu-size, 0.2s, 9000, 100);
+
+    .menu__panel {
+        background: color(white);
+        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+
+        overflow: none;
+    }
+
+}
+
+@keyframes MENU_BACKDROP {
+    0%   { opacity: 0; display: block; }
+    100% { opacity: 1; display: block; }
+}
+
+.menu__trigger:checked ~ .menu__backdrop {
+    animation: MENU_BACKDROP 0.2s 1;
+}
+
+.menu__toggle {
+    @include activity();
+    @include activity-navigational-highlight();
+
+    position: fixed;
+
+    width: auto;
+    padding-left: $base-spacing;
+    padding-right: $base-spacing;
+
+    @include shadow-overlay;
+
+    transition: width 0.2s ease-out;
+}
+
+.menu__panel {
+    .menu__toggle {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+.menu__trigger:checked ~ .menu__toggle {
+    z-index: zindex(base, 1);
+}
+
+.menu__panel-layout {
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+
+    > *:last-child::after {
+        content: "";
+        display: block;
+        height: 4 * $base-spacing;
+    }
+}
+
+.menu-box {
+    //display: inline-block would result in an unwanted 24px margin
+    display: block;
+}
