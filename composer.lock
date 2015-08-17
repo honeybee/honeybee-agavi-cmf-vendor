@@ -603,12 +603,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "692c9bd1adbae2f9afb1996521fee0ca06ceacab"
+                "reference": "5dbd4019c0ceb6739cca15b506196cf586ad9a3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/692c9bd1adbae2f9afb1996521fee0ca06ceacab",
-                "reference": "692c9bd1adbae2f9afb1996521fee0ca06ceacab",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/5dbd4019c0ceb6739cca15b506196cf586ad9a3d",
+                "reference": "5dbd4019c0ceb6739cca15b506196cf586ad9a3d",
                 "shasum": ""
             },
             "require": {
@@ -674,13 +674,14 @@
                     "role": "Developer"
                 },
                 {
-                    "name": "Thorsten Schmitt-Rink",
-                    "email": "schmittrink@gmail.com",
-                    "role": "Developer"
-                },
-                {
                     "name": "Honeybee Contributors",
                     "homepage": "https://github.com/honeybee/honeybee/graphs/contributors"
+                },
+                {
+                    "name": "Thorsten Schmitt-Rink",
+                    "email": "schmittrink@gmail.com",
+                    "homepage": "https://github.com/shrink0r",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for implementing CQRS driven, event-sourced and distributed architectures.",
@@ -692,7 +693,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2015-08-17 16:50:51"
+            "time": "2015-08-17 23:20:48"
         },
         {
             "name": "honeybee/trellis",
