@@ -2,7 +2,13 @@
 <div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}"><!--
     --><div class="hb-field__content"><!--
         --><div class="hb-field__label">{{ _(field_name~'.field_name', translation_domain) }}</div><!--
-        --><div class="hb-field__value"><time datetime="{{ attribute_value }}" title="{{ attribute_value }}">{{ _d(attribute_value) }}</time></div><!--
+        --><div class="hb-field__value">
+            {%- if attribute_value is empty -%}
+                <span class="empty_value"></span>
+            {%- else -%}
+                <time datetime="{{ attribute_value }}" title="{{ attribute_value }}">{{ _d(attribute_value) }}</time>
+            {%- endif -%}
+            </div><!--
     --></div><!--
 --></div>
 {%- endblock -%}
