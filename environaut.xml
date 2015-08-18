@@ -84,12 +84,6 @@
             <parameter name="version_mask" space="preserve" literalize="false">/Sass 3\.(3|4)/</parameter>
         </check>
 
-        <check name="base_href" group="local_config">
-            <parameter name="question">What's the base HREF of the application?</parameter>
-            <parameter name="validator">Environaut\Checks\Validator::validUrl</parameter>
-            <parameter name="max_attempts">5</parameter>
-        </check>
-
         <check name="testing_enabled" group="local_config">
             <parameter name="question">Enable testing?</parameter>
             <parameter name="default">false</parameter>
