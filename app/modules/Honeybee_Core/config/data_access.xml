@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/data_access/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+        <storage_writers>
+            <storage_writer name="honeybee.core::version_list::saga_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListWriter">
+                <connection>SagaStore</connection>
+            </storage_writer>
+            <storage_writer name="honeybee.core::saga_subject::saga_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\SagaSubject\SagaSubjectWriter">
+                <connection>SagaStore</connection>
+            </storage_writer>
+        </storage_writers>
+
+        <storage_readers>
+            <storage_reader name="honeybee.core::version_list::saga_store::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListReader">
+                <connection>SagaStore</connection>
+            </storage_reader>
+            <storage_reader name="honeybee.core::saga_subject::saga_store::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\SagaSubject\SagaSubjectReader">
+                <connection>SagaStore</connection>
+            </storage_reader>
+        </storage_readers>
+    </ae:configuration>
+</ae:configurations>

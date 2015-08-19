@@ -54,11 +54,12 @@ class ServicesConfigHandler extends BaseConfigHandler
 
         if ($service_definitions_node) {
             foreach ($service_definitions_node->getChildren(self::NODE_SERVICE_DEFINITION) as $service_node) {
-                $service_definitions[] = $this->parseService($service_node);
+                $service_data = $this->parseService($service_node);
+                $service_definitions[$service_data['name']] = $service_data;
             }
         }
 
-        return array('options' => $settings, 'service_definitions' => $service_definitions);
+        return [ 'options' => $settings, 'service_definitions' => array_values($service_definitions) ];
     }
 
     protected function parseService(AgaviXmlConfigDomElement $service_node)

@@ -94,6 +94,40 @@
                     </provisioner>
                 </service>
 
+                <service name="honeybee.infrastructure.saga_service">
+                    <class>Honeybee\Infrastructure\Saga\SagaService</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\DefaultProvisioner</class>
+                        <settings>
+                            <setting name="alias">Honeybee\Infrastructure\Saga\SagaServiceInterface</setting>
+                        </settings>
+                    </provisioner>
+                    <settings>
+                        <setting name="storage_reader">honeybee.core::saga_subject::saga_store::reader</setting>
+                        <setting name="storage_writer">honeybee.core::saga_subject::saga_store::writer</setting>
+                    </settings>
+                </service>
+
+                <service name="honeybee.infrastructure.saga_map">
+                    <class>Honeybee\Infrastructure\Saga\SagaMap</class>
+                    <provisioner>
+                        <class>Honeybee\Infrastructure\Saga\SagaMapProvisioner</class>
+                        <settings>
+                            <!--
+                            <setting name="sagas">
+                                <setting name="some_saga">
+                                    <setting name="state_machine_builder">Honeybee\Infrastructure\Saga\StateMachineBuilder</setting>
+                                    <setting name="builder_settings">
+                                        <setting name="state_machine_definition">%core.modules_dir%/Some_Module/config/some_saga.xml</setting>
+                                        <setting name="name">some_saga</setting>
+                                    </setting>
+                                </setting>
+                            </setting>
+                            -->
+                        </settings>
+                    </provisioner>
+                </service>
+
                 <!--
                     Model Services
                 -->
