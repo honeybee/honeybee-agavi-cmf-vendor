@@ -32,8 +32,8 @@
             <connection name="Default.MsgQueue" class="Honeybee\Infrastructure\DataAccess\Connector\RabbitMqConnector">
                 <setting name="host">localhost</setting>
                 <setting name="port">5672</setting>
-                <setting name="user">shrink</setting>
-                <setting name="password">shrink0r</setting>
+                <setting name="user">guest</setting>
+                <setting name="password">guest</setting>
             </connection>
 
             <connection name="Default.Mailer" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector" />
