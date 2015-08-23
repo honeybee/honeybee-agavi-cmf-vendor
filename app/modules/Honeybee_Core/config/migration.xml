@@ -7,11 +7,11 @@
     <ae:configuration>
         <migration_targets>
 
-            <migration_target name="honeybee.system_core::migration::saga_store" active="true">
+            <migration_target name="honeybee.system_core::migration::process_store" active="true">
                 <settings>
-                    <setting name="version_list_reader">honeybee.core::version_list::saga_store::reader</setting>
-                    <setting name="version_list_writer">honeybee.core::version_list::saga_store::writer</setting>
-                    <setting name="target_connection">SagaStore</setting>
+                    <setting name="version_list_reader">honeybee.core::version_list::process_store::reader</setting>
+                    <setting name="version_list_writer">honeybee.core::version_list::process_store::writer</setting>
+                    <setting name="target_connection">ProcessStateStore</setting>
                 </settings>
                 <migration_loader class="Honeybee\Infrastructure\Migration\FileSystemLoader">
                     <setting name="directory">%core.module_dir%/Honeybee_Core/migration/couchdb</setting>

@@ -94,32 +94,32 @@
                     </provisioner>
                 </service>
 
-                <service name="honeybee.infrastructure.saga_service">
-                    <class>Honeybee\Infrastructure\Saga\SagaService</class>
+                <service name="honeybee.infrastructure.process_manager">
+                    <class>Honeybee\Infrastructure\ProcessManager\ProcessManager</class>
                     <provisioner>
                         <class>Honeybee\FrameworkBinding\Agavi\Provisioner\DefaultProvisioner</class>
                         <settings>
-                            <setting name="alias">Honeybee\Infrastructure\Saga\SagaServiceInterface</setting>
+                            <setting name="alias">Honeybee\Infrastructure\ProcessManager\ProcessManagerInterface</setting>
                         </settings>
                     </provisioner>
                     <settings>
-                        <setting name="storage_reader">honeybee.core::saga_subject::saga_store::reader</setting>
-                        <setting name="storage_writer">honeybee.core::saga_subject::saga_store::writer</setting>
+                        <setting name="storage_reader">honeybee.core::process_state::process_store::reader</setting>
+                        <setting name="storage_writer">honeybee.core::process_state::process_store::writer</setting>
                     </settings>
                 </service>
 
-                <service name="honeybee.infrastructure.saga_map">
-                    <class>Honeybee\Infrastructure\Saga\SagaMap</class>
+                <service name="honeybee.infrastructure.process_map">
+                    <class>Honeybee\Infrastructure\ProcessManager\ProcessMap</class>
                     <provisioner>
-                        <class>Honeybee\Infrastructure\Saga\SagaMapProvisioner</class>
+                        <class>Honeybee\Infrastructure\ProcessManager\ProcessMapProvisioner</class>
                         <settings>
                             <!--
-                            <setting name="sagas">
-                                <setting name="some_saga">
-                                    <setting name="state_machine_builder">Honeybee\Infrastructure\Saga\StateMachineBuilder</setting>
+                            <setting name="processes">
+                                <setting name="some_process">
+                                    <setting name="state_machine_builder">Honeybee\Infrastructure\ProcessManager\StateMachine\StateMachineBuilder</setting>
                                     <setting name="builder_settings">
-                                        <setting name="state_machine_definition">%core.modules_dir%/Some_Module/config/some_saga.xml</setting>
-                                        <setting name="name">some_saga</setting>
+                                        <setting name="state_machine_definition">%core.modules_dir%/Some_Module/config/some_process.xml</setting>
+                                        <setting name="name">some_process</setting>
                                     </setting>
                                 </setting>
                             </setting>

@@ -6,7 +6,7 @@ use Honeybee\Infrastructure\Migration\CouchDbMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 
-class Migration_201508182357_InitSagaStore extends CouchDbMigration
+class Migration_201508182357_InitProcessStateStore extends CouchDbMigration
 {
     protected function up(MigrationTargetInterface $migration_target)
     {
@@ -21,9 +21,9 @@ class Migration_201508182357_InitSagaStore extends CouchDbMigration
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will initially setup a couchdb database for persisting sagas.';
+            return 'Will initially setup a couchdb database for persisting process-states.';
         }
-        return 'Will deinit the couchdb database for saga persistence.';
+        return 'Will deinit the couchdb database for process-state persistence.';
     }
 
     public function isReversible()

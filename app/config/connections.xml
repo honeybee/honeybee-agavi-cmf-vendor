@@ -15,11 +15,11 @@
                 <setting name="database">%core.db_prefix%%2Bdomain_events</setting>
             </connection>
 
-            <connection name="SagaStore" class="Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector">
+            <connection name="ProcessStateStore" class="Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector">
                 <setting name="host">127.0.0.1</setting>
                 <setting name="port">5984</setting>
                 <setting name="transport">http</setting>
-                <setting name="database">%core.db_prefix%%2Bsaga_subjects</setting>
+                <setting name="database">%core.db_prefix%%2Bprocess_states</setting>
             </connection>
 
             <connection name="Default.ViewStore" class="Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector">
