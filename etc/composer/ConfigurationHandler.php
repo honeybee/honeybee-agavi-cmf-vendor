@@ -19,6 +19,9 @@ class ConfigurationHandler
         $process->run(function ($type, $buffer) use($io) {
             $io->write($buffer);
         });
+
+        self::clearCaches($event);
+        self::makeAutoload($event);
     }
 
     public static function clearCaches(Event $event)
