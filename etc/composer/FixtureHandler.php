@@ -3,23 +3,15 @@
 namespace HoneybeeExtensions\Composer;
 
 use Composer\Script\Event;
-use Symfony\Component\Process\Process;
-use Exception;
-use Symfony\Component\Process\ProcessBuilder;
 
 class FixtureHandler
 {
-    protected static function getProjectPath(Event $event)
-    {
-        return realpath($event->getComposer()->getConfig()->get('vendor-dir') . DIRECTORY_SEPARATOR . '..');
-    }
-
     public static function createFixture(Event $event)
     {
         $io = $event->getIO();
-        $process = new Process(
+        $process = ScriptToolkit::createProcess(
             'bin/cli honeybee.core.fixture.create',
-            self::getProjectPath($event)
+            ScriptToolkit::getProjectPath($event)
         );
 
         $process->run(function ($type, $buffer) use($io) {
@@ -27,12 +19,15 @@ class FixtureHandler
         });
     }
 
-    public static function importFixture(Event $event)
+    public static function importFixture(Event $event, $target = null, $fixture = null)
     {
+        $target = !empty($target) ? ' -target ' . $target : '';
+        $fixture = !empty($fixture) ? ' -fixture ' . $fixture : '';
+
         $io = $event->getIO();
-        $process = new Process(
-            'bin/cli honeybee.core.fixture.import',
-            self::getProjectPath($event)
+        $process = ScriptToolkit::createProcess(
+            'bin/cli honeybee.core.fixture.import' . $target . $fixture,
+            ScriptToolkit::getProjectPath($event)
         );
 
         $process->run(function ($type, $buffer) use($io) {
@@ -43,9 +38,9 @@ class FixtureHandler
     public static function generateFixture(Event $event)
     {
         $io = $event->getIO();
-        $process = new Process(
+        $process = ScriptToolkit::createProcess(
             'bin/cli honeybee.core.fixture.generate',
-            self::getProjectPath($event)
+            ScriptToolkit::getProjectPath($event)
         );
 
         $process->run(function ($type, $buffer) use($io) {
