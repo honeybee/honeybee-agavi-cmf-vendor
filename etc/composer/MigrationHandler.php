@@ -32,24 +32,15 @@ class MigrationHandler
         });
     }
 
-    public static function runAllMigrations(Event $event)
-    {
-        $io = $event->getIO();
-        $process = ScriptToolkit::createProcess(
-            './bin/cli honeybee.core.migrate.run -target all',
-            ScriptToolkit::getProjectPath($event)
-        );
-
-        $process->run(function ($type, $buffer) use($io) {
-            $io->write($buffer, false);
-        });
-    }
-
     public static function runMigration(Event $event)
     {
         $io = $event->getIO();
+        $args = ScriptToolkit::processArguments($event->getArguments());
+        $target = isset($args['target']) ? ' -target ' . $args['target'] : '';
+        $target = isset($args['all']) ? ' -target all' : $target;
+
         $process = ScriptToolkit::createProcess(
-            './bin/cli honeybee.core.migrate.run',
+            'bin/cli honeybee.core.migrate.run' . $target,
             ScriptToolkit::getProjectPath($event)
         );
 

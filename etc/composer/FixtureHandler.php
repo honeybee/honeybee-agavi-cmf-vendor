@@ -19,10 +19,11 @@ class FixtureHandler
         });
     }
 
-    public static function importFixture(Event $event, $target = null, $fixture = null)
+    public static function importFixture(Event $event)
     {
-        $target = !empty($target) ? ' -target ' . $target : '';
-        $fixture = !empty($fixture) ? ' -fixture ' . $fixture : '';
+        $args = ScriptToolkit::processArguments($event->getArguments());
+        $target = isset($args['target']) ? ' -target ' . $args['target'] : '';
+        $fixture = isset($args['fixture']) ? ' -fixture ' . $args['fixture'] : '';
 
         $io = $event->getIO();
         $process = ScriptToolkit::createProcess(

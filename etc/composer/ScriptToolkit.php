@@ -4,6 +4,7 @@ namespace HoneybeeExtensions\Composer;
 
 use Composer\Script\Event;
 use Symfony\Component\Process\Process;
+use Exception;
 
 class ScriptToolkit
 {
@@ -42,5 +43,21 @@ class ScriptToolkit
             }
             rmdir($path);
         }
+    }
+
+    public static function processArguments(array $arguments)
+    {
+        $processed = [];
+        foreach($arguments as $argument) {
+            if (preg_match('/^--.+/', $argument) && strpos($argument, '=') === false) {
+                $processed[substr($argument, 2)] = true;
+            }  elseif (preg_match('/^-[^-].+/', $argument) && strpos($argument, '=') >= 2) {
+                $parts = explode('=', $argument);
+                $processed[substr($parts[0], 1)] = $parts[1];
+            } else {
+                throw new Exception('Invalid argument, format should be --arg or -arg=value.');
+            }
+        }
+        return $processed;
     }
 }

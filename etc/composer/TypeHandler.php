@@ -32,21 +32,12 @@ class TypeHandler
     public static function buildType(Event $event)
     {
         $io = $event->getIO();
-        $process = ScriptToolkit::createProcess(
-            'bin/cli honeybee.core.trellis.generate_code -quiet',
-            ScriptToolkit::getProjectPath($event)
-        );
+        $args = ScriptToolkit::processArguments($event->getArguments());
+        $target = isset($args['target']) ? ' -target ' . $args['target'] : '';
+        $target = isset($args['all']) ? ' -target all' : $target;
 
-        $process->run(function ($type, $buffer) use($io) {
-            $io->write($buffer, false);
-        });
-    }
-
-    public static function buildAllType(Event $event)
-    {
-        $io = $event->getIO();
         $process = ScriptToolkit::createProcess(
-            'bin/cli honeybee.core.trellis.generate_code -target all -quiet',
+            'bin/cli honeybee.core.trellis.generate_code -quiet' . $target,
             ScriptToolkit::getProjectPath($event)
         );
 
