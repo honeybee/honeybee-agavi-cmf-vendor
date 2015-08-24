@@ -10,7 +10,7 @@ class ConfigurationHandler
     {
         $io = $event->getIO();
         $project_path = ScriptToolkit::getProjectPath($event);
-        ScriptToolkit::removeDirectory($project_path . '/app/config/includes', true);
+        ScriptToolkit::removeDirectoryContents($project_path . '/app/config/includes');
         $process = ScriptToolkit::createProcess(
             'bin/cli honeybee.core.util.build_config --recovery -quiet',
             $project_path
@@ -25,7 +25,7 @@ class ConfigurationHandler
     {
         $io = $event->getIO();
         $project_path = ScriptToolkit::getProjectPath($event);
-        ScriptToolkit::removeDirectory($project_path . '/app/cache', true);
+        ScriptToolkit::removeDirectoryContents($project_path . '/app/cache');
         $io->write('<info>-> cleared application caches</>');
     }
 
