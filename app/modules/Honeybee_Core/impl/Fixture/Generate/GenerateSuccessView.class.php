@@ -18,7 +18,6 @@ class Honeybee_Core_Fixture_Generate_GenerateSuccessView extends View
         }
 
         if (!$request_data->hasParameter('target')) {
-            $message .= PHP_EOL . '-> to write fixtures into a file use option: -target <filename.json>' . PHP_EOL;
             $message .= PHP_EOL . $this->getAttribute('data') . PHP_EOL;
         } else {
             $message .= PHP_EOL . '-> fixture file generated here:' . PHP_EOL . realpath($request_data->getParameter('target'));

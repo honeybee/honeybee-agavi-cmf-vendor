@@ -9,18 +9,6 @@
             <validator class="boolean" required="false">
                 <argument>quiet</argument>
             </validator>
-            
-            <validator class="string" name="target" required="false">
-                <argument>target</argument>
-                <error>You must specify an output target filename</error>
-            </validator>
-
-            <validator class="number" name="size" required="false">
-                <argument>size</argument>
-                <error>The number of generated fixtures should be a positive integer.</error>
-                <ae:parameter name="type">integer</ae:parameter>
-                <ae:parameter name="min">1</ae:parameter>
-            </validator>
 
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
                 <argument>type</argument>
@@ -37,6 +25,47 @@
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type name within you project's domain.</error>
+            </validator>
+        
+            <validator class="dialog">
+                <argument>file_target</argument>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="question">Would you like to write fixtures to a file?</ae:parameter>
+                    <ae:parameter name="confirm">true</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
+            </validator>
+            
+            <validator class="and" severity="none">
+                <ae:parameter name="break">true</ae:parameter>
+                <validator class="equals">
+                    <argument>file_target</argument>
+                    <ae:parameter name="value">true</ae:parameter>
+                </validator>
+                <validator class="dialog">
+                    <argument>target</argument>
+                    <error>You must specify a valid target filename.</error>
+                    <ae:parameter name="pattern">/.+\.json$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="question">Please enter a target .json filename</ae:parameter>
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                    </ae:parameter>
+                </validator>
+            </validator>
+
+            <validator class="dialog">
+                <argument>size</argument>
+                <error>You must specify a valid number of fixtures to generate.</error>
+                <ae:parameter name="type">integer</ae:parameter>
+                <ae:parameter name="min">1</ae:parameter>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="question">Please enter the number of fixtures to generate</ae:parameter>
+                    <ae:parameter name="validator">AgaviNumberValidator</ae:parameter>
+                    <ae:parameter name="default">1</ae:parameter>
+                    <ae:parameter name="attempts">3</ae:parameter>
+                </ae:parameter>
             </validator>
 
         </validators>
