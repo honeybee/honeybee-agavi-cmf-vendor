@@ -34,7 +34,10 @@
     },
 
     "autoload": {
-        "psr-4": { "Honeybee\\FrameworkBinding\\Agavi\\" : "app/lib/Agavi" }
+        "psr-4": { 
+            "Honeybee\\FrameworkBinding\\Agavi\\" : "app/lib/Agavi",
+            "HoneybeeExtensions\\Composer\\": "etc/composer/"
+        }
     },
 
     "prefer-stable": true,
