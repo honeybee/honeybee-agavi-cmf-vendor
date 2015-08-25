@@ -14,4 +14,3 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
          $this->setAttribute('translation_domain', $tm->getDefaultDomain());
     }
 }
-

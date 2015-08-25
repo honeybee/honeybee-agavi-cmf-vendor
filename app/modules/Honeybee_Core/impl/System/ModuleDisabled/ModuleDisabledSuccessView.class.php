@@ -105,8 +105,7 @@ class Honeybee_Core_System_ModuleDisabled_ModuleDisabledSuccessView extends View
     {
         $message = $this->translation_manager->_(self::DEFAULT_MESSAGE);
 
-        if (!$this->getResponse()->getParameter('append_eol', true))
-        {
+        if (!$this->getResponse()->getParameter('append_eol', true)) {
             $message .= PHP_EOL;
         }
 
@@ -117,13 +116,10 @@ class Honeybee_Core_System_ModuleDisabled_ModuleDisabledSuccessView extends View
          * does not allow us to give the handle to Agavi via $rp->setContent() or return $handle
          * notice though, that the shell exit code will still be set correctly
          */
-        if (php_sapi_name() === 'cli' && defined('STDERR'))
-        {
+        if (php_sapi_name() === 'cli' && defined('STDERR')) {
             fwrite(STDERR, $message);
             fclose(STDERR);
-        }
-        else
-        {
+        } else {
             return $message;
         }
     }

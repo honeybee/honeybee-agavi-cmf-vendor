@@ -25,7 +25,6 @@ class Honeybee_SystemAccount_User_ApiLoginAction extends Action
      */
     public function handleError(AgaviRequestDataHolder $request_data)
     {
-        var_dump(__METHOD__);
         $this->logError(
             '[UNAUTHORIZED] Failed authentication attempt: ',
             $this->getContainer()->getValidationManager()
@@ -70,7 +69,7 @@ class Honeybee_SystemAccount_User_ApiLoginAction extends Action
             );
 
             $this->logInfo("[AUTHORIZED] Successful authentication attempt " . $log_message_part);
-        } else if ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {
+        } elseif ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {
             $view_name = 'Error';
 
             $user->setAuthenticated(false);

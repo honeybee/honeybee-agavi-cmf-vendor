@@ -67,7 +67,7 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
         $errors['auth'] = $this->getContext()->getTranslationManager()->_('invalid_login', 'user.messages');
 
         $this->setAttribute('errors', $errors);
-        $this->setAttribute('reset_support_enabled', AgaviConfig::get('user.module_active', FALSE));
+        $this->setAttribute('reset_support_enabled', AgaviConfig::get('user.module_active', false));
 
         return 'Error';
     }
@@ -106,7 +106,7 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
             );
 
             $this->logInfo("[AUTHORIZED] Successful authentication attempt " . $log_message_part);
-        } else if ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {
+        } elseif ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {
             $view_name = 'Error';
 
             $user->setAuthenticated(false);

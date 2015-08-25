@@ -34,5 +34,4 @@ class Honeybee_Core_Util_ListPermissions_ListPermissionsSuccessView extends View
 
         return PHP_EOL;
     }
-
 }

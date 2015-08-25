@@ -18,7 +18,7 @@ class Honeybee_Core_Util_ListPermissionsAction extends Action
             $permissions = [];
             if (empty($role) || $role === AclService::ROLE_ADMIN) {
                 $permissions = $permission_service->getGlobalPermissions();
-            } else if (!empty($role) && $role !== AclService::ROLE_NON_PRIV) {
+            } elseif (!empty($role) && $role !== AclService::ROLE_NON_PRIV) {
                 $permissions = $permission_service->getRolePermissions($role);
             }
 

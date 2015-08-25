@@ -67,7 +67,7 @@ class Honeybee_Core_Trellis_GenerateCodeAction extends Action
                     $target_name = $request_data->getParameter('type')->getPackagePrefix() . '::migration::view_store';
                     $migration_service = $this->getServiceLocator()->getMigrationService();
                     $migration_list = $migration_service->getMigrationList($target_name);
-                    $migrations = $migration_list->filter(function(MigrationInterface $migration) use($migration_name) {
+                    $migrations = $migration_list->filter(function (MigrationInterface $migration) use ($migration_name) {
                         return $migration->getVersion() . ':' . $migration->getName() == $migration_name;
                     });
 

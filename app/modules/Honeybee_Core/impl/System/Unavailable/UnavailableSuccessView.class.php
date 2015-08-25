@@ -107,4 +107,3 @@ class Honeybee_Core_System_Unavailable_UnavailableSuccessView extends View
         return $this->cliError($this->translation_manager->_(self::DEFAULT_MESSAGE), 126);
     }
 }
-

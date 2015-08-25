@@ -11,11 +11,13 @@ class Honeybee_Core_Util_CompileJsAction extends Action
         $report = array();
         $success = false;
         try {
-            $optimize_style = $request_data->getParameter('optimize',
+            $optimize_style = $request_data->getParameter(
+                'optimize',
                 AgaviConfig::get('requirejs.optimize_style', 'uglify2')
             );
 
-            $buildfile_path = $request_data->getParameter('buildfile',
+            $buildfile_path = $request_data->getParameter(
+                'buildfile',
                 AgaviConfig::get(
                     'requirejs.buildfile_path',
                     AgaviConfig::get('core.pub_dir') . "/static/buildconfig.js"
