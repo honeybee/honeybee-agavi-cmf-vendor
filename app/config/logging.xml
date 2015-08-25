@@ -12,7 +12,6 @@
             <logger name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
                 <appenders>
                     <appender>default</appender>
-                    <appender>fingers_crossed</appender>
                 </appenders>
             </logger>
 
@@ -32,18 +31,9 @@
             </logger>
 
             <!-- accept all messages -->
-            <logger name="import" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
-                <appenders>
-                    <appender>import</appender>
-                    <appender>fingers_crossed</appender>
-                </appenders>
-            </logger>
-
-            <!-- accept all messages -->
             <logger name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
                 <appenders>
                     <appender>mail</appender>
-                    <appender>fingers_crossed</appender>
                 </appenders>
             </logger>
 
@@ -51,7 +41,6 @@
             <logger name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
                 <appenders>
                     <appender>auth</appender>
-                    <appender>fingers_crossed</appender>
                 </appenders>
             </logger>
 
@@ -121,9 +110,6 @@
 
             <!-- log all messages to %core.app_dir%/log/trace.log -->
             <appender name="trace" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
-
-            <!-- log all messages to %core.app_dir%/log/import.log -->
-            <appender name="import" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
 
             <!-- log all messages to %core.app_dir%/log/mail.log -->
             <appender name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
