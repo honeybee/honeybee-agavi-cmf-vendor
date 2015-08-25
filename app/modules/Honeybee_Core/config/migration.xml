@@ -7,7 +7,7 @@
     <ae:configuration>
         <migration_targets>
 
-            <migration_target name="honeybee.system_core::migration::process_store" active="true">
+            <migration_target name="honeybee.core::migration::process_store" active="true">
                 <settings>
                     <setting name="version_list_reader">honeybee.core::version_list::process_store::reader</setting>
                     <setting name="version_list_writer">honeybee.core::version_list::process_store::writer</setting>
