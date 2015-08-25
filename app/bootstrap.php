@@ -26,12 +26,6 @@ if (!isset($environment_modifier)) {
     $environment_modifier = '';
 }
 
-// when no environment modifier was fixed, try to determine whether this
-// request might be a stateless API request with e.g. basic auth access
-if (empty($environment_modifier) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
-    $environment_modifier = '-stateless-api';
-}
-
 // load local config and make it accessible via a static class
 Environment::load($environment_modifier);
 AgaviConfig::set('core.clean_environment', Environment::getCleanEnvironment());

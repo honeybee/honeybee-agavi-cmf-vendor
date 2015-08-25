@@ -13,6 +13,13 @@ ini_set('xdebug.var_display_max_depth', 4);
 // ----------------------------------------------------------------------------
 $default_context = 'web';
 $environment_modifier = '';
+/*
+// when no environment modifier was fixed, try to determine whether this
+// request might be a stateless API request with e.g. basic auth access
+if (empty($environment_modifier) && isset($_SERVER['HTTP_AUTHORIZATION'])) {
+    $environment_modifier = '-stateless-api';
+}
+*/
 
 // application directory must be readable
 $application_dir = getenv('APPLICATION_DIR');
