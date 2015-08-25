@@ -16,7 +16,7 @@ class ConfigurationHandler
             $project_path
         );
 
-        $process->run(function ($type, $buffer) use($io) {
+        $process->run(function ($type, $buffer) use ($io) {
             $io->write($buffer);
         });
 
@@ -40,7 +40,7 @@ class ConfigurationHandler
             ScriptToolkit::getProjectPath($event)
         );
 
-        $process->run(function ($type, $buffer) use($io) {
+        $process->run(function ($type, $buffer) use ($io) {
             $io->write($buffer);
         });
 

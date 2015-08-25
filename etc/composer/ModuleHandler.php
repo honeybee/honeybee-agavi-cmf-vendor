@@ -14,7 +14,7 @@ class ModuleHandler
             ScriptToolkit::getProjectPath($event)
         );
 
-        $process->run(function ($type, $buffer) use($io) {
+        $process->run(function ($type, $buffer) use ($io) {
             $io->write($buffer, false);
         });
 

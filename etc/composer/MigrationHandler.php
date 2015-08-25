@@ -14,7 +14,7 @@ class MigrationHandler
             ScriptToolkit::getProjectPath($event)
         );
 
-        $process->run(function ($type, $buffer) use($io) {
+        $process->run(function ($type, $buffer) use ($io) {
             $io->write($buffer, false);
         });
     }
@@ -27,7 +27,7 @@ class MigrationHandler
             ScriptToolkit::getProjectPath($event)
         );
 
-        $process->run(function ($type, $buffer) use($io) {
+        $process->run(function ($type, $buffer) use ($io) {
             $io->write($buffer, false);
         });
     }
@@ -44,7 +44,7 @@ class MigrationHandler
             ScriptToolkit::getProjectPath($event)
         );
 
-        $process->run(function ($type, $buffer) use($io) {
+        $process->run(function ($type, $buffer) use ($io) {
             $io->write($buffer, false);
         });
     }
