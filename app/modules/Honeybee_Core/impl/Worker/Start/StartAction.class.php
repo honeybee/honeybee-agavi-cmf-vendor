@@ -16,8 +16,6 @@ class Honeybee_Core_Worker_StartAction extends Action
 
     const GLOBAL_QUEUE = '.global';
 
-    const BIND_ALL = '#';
-
     public function execute(AgaviRequestDataHolder $request_data)
     {
         $service_locator = $this->getServiceLocator();
@@ -41,7 +39,7 @@ class Honeybee_Core_Worker_StartAction extends Action
             $bindings = $this->buildCommandBindings();
         } else {
             $default_exchange = self::DEFAULT_EVENT_EXCHANGE;
-            $bindings = array(self::BIND_ALL);
+            $bindings = [];
         }
 
         $exchange = $request_data->getParameter('exchange', $default_exchange);
