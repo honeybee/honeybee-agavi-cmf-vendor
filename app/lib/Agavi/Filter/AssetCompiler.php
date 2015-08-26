@@ -9,11 +9,11 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Process\ProcessUtils;
 
 /**
- * The ResourcePacker symlinks and compiles themes, compiles scss files and optimizes javascript files via r.js.
+ * The AssetPacker symlinks and compiles themes, compiles scss files and optimizes javascript files via r.js.
  *
  * @TODO Refactor these tasks into more general classes and move it out of FrameworkBinding via construcor config?
  */
-class ResourceCompiler
+class AssetCompiler
 {
     const THEME_MAIN_FILE = 'main';
     const THEME_MAIN_SCSS_FILE = 'main.scss';
@@ -26,21 +26,21 @@ class ResourceCompiler
     public static $module_dirs = null;
 
     /**
-     * Symlinks all "resources" folders of all modules to the "pub/static/modules/[module_name]" folders to have the
+     * Symlinks all "assets" folders of all modules to the "pub/static/modules/[module_name]" folders to have the
      * module specific styles, scripts, static templates and binaries available for scss compilation and requirejs.
      *
-     * Special folders next to the module resources links in "pub/static" are:
+     * Special folders next to the module assets links in "pub/static" are:
      * - themes (for all builtin and project custom themes)
      *
      * @throws \RuntimeException in case of symlinking errors
      */
-    public function symlinkModuleResources()
+    public function symlinkModuleAssets()
     {
         $old_cwd = getcwd();
 
         $cms_dir = AgaviConfig::get('core.cms_dir');
 
-        $target_location = $this->getPubStaticModuleResourcesFolder();
+        $target_location = $this->getPubStaticModuleAssetsFolder();
         if (!chdir($target_location)) {
             throw new RuntimeException('Could not change directory to target location: ' . $target_location);
         }
@@ -49,7 +49,7 @@ class ResourceCompiler
             $module_name = basename($module_directory);
             $target_module_name = $module_name;
 
-            // check for existing symlinks or symlink the module's resources folder
+            // check for existing symlinks or symlink the module's assets folder
             if (is_readable($target_module_name)) {
                 if (is_link($target_module_name)) {
                     $link_target_path = realpath(readlink($target_module_name));
@@ -61,22 +61,22 @@ class ResourceCompiler
                     }
                 } else {
                     throw new RuntimeException(
-                        'Resources folder of module "' . $module_name . '" could not be symlinked into pub/static ' .
+                        'Assets folder of module "' . $module_name . '" could not be symlinked into pub/static ' .
                         'folder as a file with name "' . $target_module_name . '" exists in: ' . getcwd()
                     );
                 }
             } else {
-                $resources_dir = '../../../app/modules/' . $module_name . '/resources';
-                if (is_readable($resources_dir)) {
-                    if (!symlink($resources_dir, $target_module_name)) {
+                $assets_dir = '../../../app/modules/' . $module_name . '/assets';
+                if (is_readable($assets_dir)) {
+                    if (!symlink($assets_dir, $target_module_name)) {
                         chdir($old_cwd);
                         throw new RuntimeException(
-                            'The symlinking of "' . $module_name . '/resources" to ' .
+                            'The symlinking of "' . $module_name . '/assets" to ' .
                             '"pub/static/' . $target_module_name . '" failed!'
                         );
                     }
                 } else {
-                    // module does not seem to have a resources folder, so no symlink necessary
+                    // module does not seem to have a assets folder, so no symlink necessary
                 }
             }
         }
@@ -168,7 +168,7 @@ class ResourceCompiler
 
         foreach ($module_directories as $module_directory) {
             $module_name = basename($module_directory);
-            $directory = $this->getPubStaticModuleResourcesFolder() . DIRECTORY_SEPARATOR . $module_name;
+            $directory = $this->getPubStaticModuleAssetsFolder() . DIRECTORY_SEPARATOR . $module_name;
 
             $input_file = $directory . DIRECTORY_SEPARATOR . self::MODULE_MAIN_SCSS_FILE;
             if (!is_readable($input_file)) {
@@ -245,7 +245,7 @@ class ResourceCompiler
         $agavi_modules = self::getAvailableModuleDirectories();
         foreach ($agavi_modules as $module_directory) {
             $module_name = basename($module_directory);
-            $module_directory = $this->getPubStaticModuleResourcesFolder();
+            $module_directory = $this->getPubStaticModuleAssetsFolder();
             $input_file = $module_directory . DIRECTORY_SEPARATOR
                 . $module_name . DIRECTORY_SEPARATOR . self::MODULE_MAIN_SCSS_FILE;
 
@@ -361,9 +361,9 @@ class ResourceCompiler
     }
 
     /**
-     * Runs RJS on the "pub/static/modules" folder to compile all resources according to the given buildfile.
+     * Runs RJS on the "pub/static/modules" folder to compile all assets according to the given buildfile.
      *
-     * @param string $buildfile full path default build configuration file used for resources folder of modules
+     * @param string $buildfile full path default build configuration file used for assets folder of modules
      * @param string $style requirejs optimize style (uglify|uglify2|none) - the "closure" style for Google's Closure
      *              Compiler is not available without java.
      * @param array $report report will contain one entry for each directory/theme compiled via sass
@@ -466,7 +466,7 @@ class ResourceCompiler
     /**
      * @return string full path to pub/static/modules folder
      */
-    public static function getPubStaticModuleResourcesFolder()
+    public static function getPubStaticModuleAssetsFolder()
     {
         return self::getPubStaticFolder() . DIRECTORY_SEPARATOR . 'modules';
     }

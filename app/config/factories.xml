@@ -119,9 +119,6 @@
     </ae:configuration>
 
     <ae:configuration context="web" environment="development.*">
-        <!--
-        <execution_filter class="Honeybee\FrameworkBinding\Agavi\Filter\DebugExecutionFilter" />
-        -->
         <response class="Honeybee\FrameworkBinding\Agavi\Response\WebResponse">
             <ae:parameter name="expose_agavi">true</ae:parameter>
         </response>

@@ -15,7 +15,7 @@ help:
 	@echo "--------------"
 	@echo ""
 	@echo "  autoloads                 - Generate and optimize autoloads."
-	@echo "  build-resources           - Builds css and javascript production packages for the project."
+	@echo "  build-assets              - Builds css and javascript production packages for the project."
 	@echo "  cc                        - Purges/clears the application caches."
 	@echo "  config                    - Generates the configuration includes for all (Agavi) modules."
 	@echo "  configure                 - Run environaut and configure environment."
@@ -64,7 +64,7 @@ autoloads:
 css:
 	@./bin/cli honeybee.core.util.compile_scss -verbose
 
-build-resources:
+build-assets:
 	@make css
 	@./bin/cli honeybee.core.util.compile_js -verbose
 	@echo "-> binary, css and javascript resource packages where successfully built"
@@ -123,7 +123,7 @@ install:
 	@./bin/wget_packages
 	@make configure
 	@make config
-	@make build-resources
+	@make build-assets
 	@./bin/cli honeybee.core.migrate.run
 
 install-production:
@@ -140,7 +140,7 @@ install-production:
 	@./bin/wget_packages
 	@make configure
 	@make config
-	@make build-resources
+	@make build-assets
 
 reconfigure:
 	@if [ -f "${ENVIRONAUT_CACHE_LOCATION}" ]; then rm ${ENVIRONAUT_CACHE_LOCATION} && echo "Deleted environaut cache."; fi
@@ -157,7 +157,7 @@ update:
 	@npm install
 	@./node_modules/.bin/bower update --config.analytics=false
 	@./bin/wget_packages
-	@make build-resources
+	@make build-assets
 
 migrate-all:
 	@./bin/cli honeybee.core.migrate.run -target all
@@ -243,4 +243,4 @@ php-mess-detection:
 php-tests:
 	@./vendor/bin/phpunit testing/unit/Honeybee
 
-.PHONY: help build-resources module-code module reconfigure cc config install update install-production
+.PHONY: help build-assets module-code module reconfigure cc config install update install-production

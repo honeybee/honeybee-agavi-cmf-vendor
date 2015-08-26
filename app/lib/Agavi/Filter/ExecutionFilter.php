@@ -7,7 +7,7 @@ use AgaviExecutionContainer;
 
 /**
  * This filter registers all affected modules of view executions
- * on the ModuleResourcesResponseFilter as that filter includes
+ * on the ModuleAssetsResponseFilter as that filter includes
  * the necessary default javascripts and styles in HTML responses.
  */
 class ExecutionFilter extends AgaviExecutionFilter
@@ -16,7 +16,7 @@ class ExecutionFilter extends AgaviExecutionFilter
     {
         $view_result = parent::executeView($container);
 
-        ModuleResourcesResponseFilter::addModule(
+        ModuleAssetsResponseFilter::addModule(
             $container->getViewModuleName(),
             $container->getOutputType()->getName()
         );

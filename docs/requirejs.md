@@ -16,7 +16,7 @@ that are defined via RequireJs can be optimized for production environments via
 the RequireJs optimizer [`r.js`](https://github.com/jrburke/r.js).
 
 To create javascript behaviours and have them loaded in your pages put them
-into the `app/[ModuleName]/resources/` folder under a path and name of your
+into the `app/[ModuleName]/assets/` folder under a path and name of your
 liking (e.g. ```path/to/Widget.js``` and activate and apply the behaviour in
 your HTML by adding the necessary ```jsb_``` CSS classes on an HTML element:
 ```jsb_ jsb_[ModuleName]/path/to/Widget```.
@@ -31,12 +31,12 @@ That template specifies the necessary script elements to load RequireJs,
 configure it and require the `Main.js` file of the currently displayed
 Honeybee module.
 
-Each Honeybee module MAY have a `resources/styles.scss` file that contains very
+Each Honeybee module MAY have a `assets/styles.scss` file that contains very
 module specific CSS styles. That file will be compiled via SASS to a `styles.css`
 file and is available in the pub directory automatically via the symlinks that
 are created by the CLI commands. The `[ModuleName]/Main.js` and
 `[ModuleName]/styles.css` files will be automatically included via the
-`ModuleResourcesResponseFilter` in the HTML page on requests to pages of that module.
+`ModuleAssetsResponseFilter` in the HTML page on requests to pages of that module.
 
 The `buildconfig.js` file for `r.js` uses the same twig templates as the
 requirejs section of the master template uses, This allows to change global
@@ -53,28 +53,28 @@ section.
 ## Module specific entry points
 
 The module specific entry points are ```Main.js``` files in each honeybee
-module's `resources` folder. These files will be included by default via the
-master template (```app/templates/Master.twig```) and the `ModuleResourcesResponseFilter`.
+module's `assets` folder. These files will be included by default via the
+master template (```app/templates/Master.twig```) and the `ModuleAssetsResponseFilter`.
 
 The main javascript files should declare all common AMD modules necessary for
 views of the current honeybee module. That's the reason why by default each
-new Honeybee module has a `resources/Main.js` file that defines the `Core/Main`
+new Honeybee module has a `assets/Main.js` file that defines the `Core/Main`
 javascripts as a dependency as that file already includes the usually needed
 files like JQuery and the JsBehaviourToolkt.
 
 To include e.g. main files from other modules in your current request or view
-you can call ```ModuleResourcesResponseFilter::addModule('ModuleName')``` in your view.
+you can call ```ModuleAssetsResponseFilter::addModule('ModuleName')``` in your view.
 
 ## Optimization for production systems
 
 Run in the commandline the following command to compile all javascript
-resources:
+assets:
 
 ```sh
 bin/cli core.util.compile_js -verbose
 ```
 
-By default all (symlinked) resources from ```pub/static/modules/``` will be
+By default all (symlinked) assets from ```pub/static/modules/``` will be
 compiled into ```pub/static/modules-built/```. The usage of the built artefacts
 can be triggered via the ```requirejs.use_optimized``` setting in your settings.
 
@@ -82,7 +82,7 @@ The shell command uses an Agavi action to render a ```pub/static/buildconfig.js`
 file that is then used to run `r.js`. The requirejs optimizer then compiles all
 single javascript and css files according to the options in the build config. It
 creates optimized ```pub/static/modules-built/[ModuleName]/Main.js``` files for
-all existing ```app/modules/[ModuleName]/resources/Main.js``` files.
+all existing ```app/modules/[ModuleName]/assets/Main.js``` files.
 
 ## Customization for single pages
 
@@ -128,7 +128,7 @@ classes within the HTML of your view like this:
 ...
 ```
 
-The mentioned `CustomWidget` resides in the `ModuleName` module's `resources`
+The mentioned `CustomWidget` resides in the `ModuleName` module's `assets`
 folder: ```CustomWidget.js``` and may look like this:
 
 ```js
@@ -182,7 +182,7 @@ file. If you want to include additional javascript files or exclude common files
 you can add `include` and `exclude` options to the above snippet.
 
 Run ```bin/cli core.util.optimize_js -verbose``` to optimize all javascript
-resources and notice the echoed log message for your widget and especially the
+assets and notice the echoed log message for your widget and especially the
 included files.
 
 To test your `CustomWidget` in that production optimized mode just enable it on

@@ -86,7 +86,7 @@
                 <ae:parameter>Honeybee\Infrastructure\Template\Twig\Extension\ToolkitExtension</ae:parameter>
                 <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\TranslationManagerExtension</ae:parameter>
                 <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\HoneybeeToolkitExtension</ae:parameter>
-                <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\ModuleResourcesExtension</ae:parameter>
+                <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\ModuleAssetsExtension</ae:parameter>
                 <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\MarkdownExtension</ae:parameter>
             </ae:parameter>
         </ae:parameter>

@@ -199,7 +199,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
      * The directories can be deeply nested and contain twig code that gets
      * rendered via the simple twig renderer. That means you can return an
      * array with this as an example string:
-     * 'some/deeply/nested/{{module_name}}/{{namespace|replace({"\\\\":"/"})}}/resources'
+     * 'some/deeply/nested/{{module_name}}/{{namespace|replace({"\\\\":"/"})}}/assets'
      * if "module_name" and "namespace" are known string parameters.
      *
      * @return array of folders to create (relative paths)

@@ -30,7 +30,7 @@ The following partials are entry points that are used in the `theme.scss`:
 
 The `theme.scss` file includes those partials and will be compiled into a
 `themes/[themename]/theme.css` file that is included in the browser via the
-`Honeybee\Agavi\Filter\ModuleResourcesResponseFilter`.
+`Honeybee\Agavi\Filter\ModuleAssetsResponseFilter`.
 
 The `_vars.scss` file should contain global variables to be used in your SCSS
 files. The `_framework.scss` file should be used to load a (S)CSS framework of

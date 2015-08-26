@@ -20,7 +20,7 @@ use MtHaml\Filter\Markdown\MichelfMarkdown as MtHamlMarkdownFilter;
 
 use Michelf\MarkdownExtra;
 
-use Honeybee\FrameworkBinding\Agavi\Filter\ResourceCompiler;
+use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
 use Honeybee\Infrastructure\Template\Twig\Loader\FilesystemLoader;
 
 //use Honeybee\FrameworkBinding\Agavi\Logging;
@@ -53,7 +53,7 @@ class TwigRenderer extends AgaviTwigRenderer
 
         $this->modules = array();
 
-        foreach (ResourceCompiler::getAvailableModuleDirectories() as $module_path) {
+        foreach (AssetCompiler::getAvailableModuleDirectories() as $module_path) {
             $this->modules[basename($module_path)] = $module_path;
         }
     }

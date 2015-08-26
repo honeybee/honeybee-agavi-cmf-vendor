@@ -18,7 +18,7 @@ use AgaviIGlobalFilter;
  * Adding files can also be done manually anywhere to add other modules'
  * files to the response.
  */
-class ModuleResourcesResponseFilter extends AgaviFilter implements AgaviIGlobalFilter
+class ModuleAssetsResponseFilter extends AgaviFilter implements AgaviIGlobalFilter
 {
     /**
      * List of modules that have been used in the current request (grouped by output_type).
@@ -99,7 +99,7 @@ class ModuleResourcesResponseFilter extends AgaviFilter implements AgaviIGlobalF
         $tags = '';
 
         $current_theme = AgaviConfig::get('themes.default', 'honeybee');
-        $theme_filename = ResourceCompiler::THEME_MAIN_CSS_FILE;
+        $theme_filename = AssetCompiler::THEME_MAIN_CSS_FILE;
         $theme_path = 'static/themes/' . $current_theme . '/' . $theme_filename;
 
         if (is_readable($theme_path)) {
@@ -125,7 +125,7 @@ class ModuleResourcesResponseFilter extends AgaviFilter implements AgaviIGlobalF
 
         if (isset(static::$modules[$this->current_output_type])) {
             foreach (static::$modules[$this->current_output_type] as $module) {
-                $file = $modules_path_prefix . '/' . $module . '/' . ResourceCompiler::MODULE_MAIN_CSS_FILE;
+                $file = $modules_path_prefix . '/' . $module . '/' . AssetCompiler::MODULE_MAIN_CSS_FILE;
                 if (is_readable($file)) {
                     $tags .= sprintf(
                         '<link rel="stylesheet" type="text/css" href="%s" />' . PHP_EOL,

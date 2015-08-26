@@ -14,7 +14,7 @@
                 <ae:parameter name="debug">false</ae:parameter>
             </filter>
 
-            <filter name="ModuleResourcesResponseFilter" class="Honeybee\FrameworkBinding\Agavi\Filter\ModuleResourcesResponseFilter">
+            <filter name="ModuleAssetsResponseFilter" class="Honeybee\FrameworkBinding\Agavi\Filter\ModuleAssetsResponseFilter">
                 <ae:parameter name="output_types">
                     <ae:parameter>html</ae:parameter>
                 </ae:parameter>

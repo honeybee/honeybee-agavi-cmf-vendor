@@ -20,13 +20,13 @@ cms
 │   │   │   │   │   └── ...
 │   │   │   │   ├── templates
 │   │   │   │   │   └── ...
-│   │   │   │   └── resources
+│   │   │   │   └── assets
 │   │   │   │       └── ...
 │   │   │   ├── Article                  -->     ../../../project/modules/Article
 │   │   │   ├── Category                 -->     ../../../project/modules/Category
 │   │   │   ├── ...
 │   │   │   ...
-│   │   ├── resources
+│   │   ├── assets
 │   │   ├── templates
 │   │   └── project/*                    -->     ../../project/app/*
 │   │
@@ -42,7 +42,7 @@ cms
 │   │   │   │   ├── Core                 -->     ../../../app/modules/Core
 │   │   │   │   ├── Article              -->     ../../../../project/modules/Article
 │   │   │   │   ├── Category             -->     ../../../../project/modules/Category
-│   │   │   │   ├── project              -->     ../../../../project/app/resources
+│   │   │   │   ├── project              -->     ../../../../project/app/assets
 │   │   │   │   └── ...                  -->     ../../../../project/modules/*
 │   │   │   └── require.js               -->     ../../../vendor/jrburke/requirejs/require.js
 │   │   └── index.php
@@ -56,7 +56,7 @@ cms
     │   │   ├── logging.xml
     │   │   ├── mail.xml
     │   │   └── translation.xml
-    │   ├── resources
+    │   ├── assets
     │   │   ├── Main.js
     │   │   └── styles.scss
     │   ├── templates
@@ -91,7 +91,7 @@ cms
         │   │   └── ...
         │   ├── templates
         │   │   └── ...
-        │   └── resources
+        │   └── assets
         │       ├── Main.js
         │       └── styles.scss
         ├── Category
@@ -103,7 +103,7 @@ cms
         │   │   └── ...
         │   ├── templates
         │   │   └── ...
-        │   └── resources
+        │   └── assets
         │       ├── Main.js
         │       └── styles.scss
         │

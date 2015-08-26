@@ -3,11 +3,11 @@
 namespace Honeybee\FrameworkBinding\Agavi\Renderer\Twig;
 
 use AgaviConfig;
-use Honeybee\FrameworkBinding\Agavi\Filter\ResourceCompiler;
+use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
 use Twig_Extension;
 use Twig_Function_Method;
 
-class ModuleResourcesExtension extends Twig_Extension
+class ModuleAssetsExtension extends Twig_Extension
 {
     public function getFunctions()
     {
@@ -20,10 +20,10 @@ class ModuleResourcesExtension extends Twig_Extension
     {
         $main_modules_for_rjs = '';
 
-        $module_dirs = ResourceCompiler::getAvailableModuleDirectories();
+        $module_dirs = AssetCompiler::getAvailableModuleDirectories();
         foreach ($module_dirs as $module_path) {
             $module_name = basename($module_path);
-            if (is_readable($module_path . "/resources/AllModules.js")) {
+            if (is_readable($module_path . "/assets/AllModules.js")) {
                 if (empty($main_modules_for_rjs)) {
                     $main_modules_for_rjs .= "{name: \"$module_name/AllModules\"}";
                 } else {
@@ -42,6 +42,6 @@ class ModuleResourcesExtension extends Twig_Extension
      */
     public function getName()
     {
-        return 'ModuleResources';
+        return 'ModuleAssets';
     }
 }

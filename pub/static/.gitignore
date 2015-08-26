@@ -1,6 +1,6 @@
 # this folder should only contain:
 # - "requirejs" symlink to the latest requirejs version
-# - "modules" folder that contains symlinks to resources folder of all modules and resources folder of the project
+# - "modules" folder that contains symlinks to assets folder of all modules and assets folder of the project
 # - "_themes" folder with symlinks to all existing (scss) themes
 #
 # - "modules-built" contains an optimized copy of the "modules" folder after running "bin/cli core.util.compile_js"

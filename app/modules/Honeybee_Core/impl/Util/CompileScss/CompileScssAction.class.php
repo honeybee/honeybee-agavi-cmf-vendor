@@ -1,7 +1,7 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Filter\ResourceCompiler;
+use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
 
 class Honeybee_Core_Util_CompileScssAction extends Action
 {
@@ -11,10 +11,10 @@ class Honeybee_Core_Util_CompileScssAction extends Action
         try {
             $style = $request_data->getParameter('style', AgaviConfig::get('sass.style', 'compressed'));
 
-            $packer = new ResourceCompiler();
+            $packer = new AssetCompiler();
 
             // just in case
-            $packer->symlinkModuleResources();
+            $packer->symlinkModuleAssets();
 
             $compilation_succeeded = $packer->compileThemes($style, $report);
             $compilation_succeeded &= $packer->compileModuleStyles($style, $report);

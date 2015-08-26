@@ -1,7 +1,7 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Filter\ResourceCompiler;
+use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
 use Honeybee\FrameworkBinding\Agavi\Renderer\ModuleTemplateRenderer;
 
 class Honeybee_Core_Util_CompileJsAction extends Action
@@ -24,10 +24,10 @@ class Honeybee_Core_Util_CompileJsAction extends Action
                 )
             );
 
-            $packer = new ResourceCompiler();
+            $packer = new AssetCompiler();
 
             // just in case
-            $packer->symlinkModuleResources();
+            $packer->symlinkModuleAssets();
 
             // render buildconfig.js and put it into the target location for compilation
             $template_service = new ModuleTemplateRenderer();

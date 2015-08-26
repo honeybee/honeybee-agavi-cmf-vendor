@@ -1,7 +1,7 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Filter\ResourceCompiler;
+use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
 
 class Honeybee_Core_Util_WatchScssAction extends Action
 {
@@ -11,9 +11,9 @@ class Honeybee_Core_Util_WatchScssAction extends Action
             $style = $request_data->getParameter('style', AgaviConfig::get('sass.style', 'compressed'));
             $theme_name = $request_data->getParameter('theme', AgaviConfig::get('themes.default', 'honeybee-minimal'));
 
-            $packer = new ResourceCompiler();
+            $packer = new AssetCompiler();
 
-            $packer->symlinkModuleResources();
+            $packer->symlinkModuleAssets();
 
             $processes = array();
             if (!$request_data->getParameter('no-theme', false)) {
