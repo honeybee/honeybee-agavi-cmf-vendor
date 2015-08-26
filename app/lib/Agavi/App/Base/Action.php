@@ -150,6 +150,17 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $this->getContext()->getServiceLocator();
     }
 
+    protected function getService($service_key)
+    {
+        $service = $this->getServiceLocator()->getService($service_key);
+
+        if (!$service) {
+            throw new RuntimeError('Unable to find service for key: ' . $service_key);
+        }
+
+        return $service;
+    }
+
     /**
      * add a validation error out of the action
      *
