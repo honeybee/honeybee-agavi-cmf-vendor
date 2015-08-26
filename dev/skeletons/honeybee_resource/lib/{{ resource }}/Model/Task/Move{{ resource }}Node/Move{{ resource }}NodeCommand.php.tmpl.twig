@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Move{{ resource }}Node;
+
+use Honeybee\Model\Task\MoveAggregateRootNode\MoveAggregateRootNodeCommand;
+
+class Move{{ resource }}NodeCommand extends MoveAggregateRootNodeCommand
+{
+    public function getEventClass()
+    {
+        return {{ resource }}NodeMovedEvent::CLASS;
+    }
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/view_templates/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration>
+        <view_templates scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection">
+            <view_template name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">
+                <tab name="{{ resource_prefix }}s">
+                    <panel name="main">
+                        <row>
+                            <cell>
+                                <group name="user">
+                                    <field name="created_at" attribute_path="created_at" />
+                                    <field name="modified_at" attribute_path="modified_at" />
+                                    <field name="identifier" attribute_path="identifier" />
+                                    <field name="workflow_state" attribute_path="workflow_state" />
+                                </group>
+                            </cell>
+                        </row>
+                    </panel>
+                </tab>
+            </view_template>
+        </view_templates>
+    </ae:configuration>
+</ae:configurations>

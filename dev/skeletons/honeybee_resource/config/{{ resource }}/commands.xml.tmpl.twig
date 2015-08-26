@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns="http://berlinonline.de/schemas/honeybee/config/command_bus/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+>
+
+    <ae:configuration>
+        <command_bus>
+            <subscriptions>
+                <subscription transport="sync">
+                    <commands>
+                        <command type="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.create_{{ resource_prefix }}">
+                            <handler>{{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Create{{ resource }}\Create{{ resource }}CommandHandler</handler>
+                        </command>
+                        <command type="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.modify_{{ resource_prefix }}">
+                            <handler>{{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Modify{{ resource }}\Modify{{ resource }}CommandHandler</handler>
+                        </command>
+                        <command type="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.proceed_{{ resource_prefix }}_workflow">
+                            <handler>{{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Proceed{{ resource }}Workflow\Proceed{{ resource }}WorkflowCommandHandler</handler>
+                        </command>
+                        <command type="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.move_{{ resource_prefix }}_node">
+                            <handler>{{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Move{{ resource }}Node\Move{{ resource }}NodeCommandHandler</handler>
+                        </command>
+                    </commands>
+                </subscription>
+            </subscriptions>
+        </command_bus>
+    </ae:configuration>
+
+</ae:configurations>

@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Proceed{{ resource }}Workflow;
+
+use Honeybee\Model\Task\ProceedWorkflow\ProceedWorkflowCommand;
+
+class Proceed{{ resource }}WorkflowCommand extends ProceedWorkflowCommand
+{
+    public function getEventClass()
+    {
+        return {{ resource }}WorkflowProceededEvent::CLASS;
+    }
+}

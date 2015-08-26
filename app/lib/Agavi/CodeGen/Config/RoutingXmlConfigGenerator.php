@@ -126,16 +126,16 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
             if ($routing_file->getPathname() === $module_routing_file) {
                 continue;
             }
-            $type_name = basename($routing_file->getPath());
-            $type_prefix = StringToolkit::asSnakeCase($type_name);
+            $resource_name = basename($routing_file->getPath());
+            $resource_prefix = StringToolkit::asSnakeCase($resource_name);
 
-            $route_pattern = sprintf('^/({module:%s-%s-%s})/', $vendor_prefix, $package_prefix, $type_prefix);
-            $route_name = sprintf('%s.%s.%s', $vendor_prefix, $package_prefix, $type_prefix);
+            $route_pattern = sprintf('^/({module:%s-%s-%s})/', $vendor_prefix, $package_prefix, $resource_prefix);
+            $route_name = sprintf('%s.%s.%s', $vendor_prefix, $package_prefix, $resource_prefix);
             $entity_type_route = $document->createElement('route');
             $entity_type_route->setAttribute('name', $route_name);
             $entity_type_route->setAttribute('pattern', $route_pattern);
             $entity_type_route->setAttribute('module', $honeybee_module);
-            $entity_type_route->setAttribute('action', $type_name);
+            $entity_type_route->setAttribute('action', $resource_name);
             $xi_include = $document->createElement('xi:include');
             $relative_href = str_replace(AgaviConfig::get('core.app_dir'), '../..', $routing_file->getPathname());
             $xi_include->setAttribute('href', $relative_href);
@@ -190,16 +190,16 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
             if ($routing_file->getPathname() === $module_routing_file) {
                 continue;
             }
-            $type_name = basename($routing_file->getPath());
-            $type_prefix = StringToolkit::asSnakeCase($type_name);
+            $resource_name = basename($routing_file->getPath());
+            $resource_prefix = StringToolkit::asSnakeCase($resource_name);
 
-            $route_pattern = sprintf('^%s.%s.%s.', $vendor_prefix, $package_prefix, $type_prefix);
-            $route_name = sprintf('%s.%s.%s', $vendor_prefix, $package_prefix, $type_prefix);
+            $route_pattern = sprintf('^%s.%s.%s.', $vendor_prefix, $package_prefix, $resource_prefix);
+            $route_name = sprintf('%s.%s.%s', $vendor_prefix, $package_prefix, $resource_prefix);
             $entity_type_route = $document->createElement('route');
             $entity_type_route->setAttribute('name', $route_name);
             $entity_type_route->setAttribute('pattern', $route_pattern);
             $entity_type_route->setAttribute('module', $honeybee_module);
-            $entity_type_route->setAttribute('action', $type_name);
+            $entity_type_route->setAttribute('action', $resource_name);
             $xi_include = $document->createElement('xi:include');
             $relative_href = str_replace(AgaviConfig::get('core.app_dir'), '../..', $routing_file->getPathname());
             $xi_include->setAttribute('href', $relative_href);

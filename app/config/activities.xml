@@ -6,7 +6,7 @@
 >
     <ae:configuration>
         <activity_containers>
-            <activity_container scope="default_type_activities">
+            <activity_container scope="default_resource_activities">
                 <activity name="create_resource">
                     <url type="route">module.create</url>
                     <rels>

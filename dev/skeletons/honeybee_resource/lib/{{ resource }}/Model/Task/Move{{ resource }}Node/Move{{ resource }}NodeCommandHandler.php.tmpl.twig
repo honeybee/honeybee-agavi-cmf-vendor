@@ -1,0 +1,23 @@
+<?php
+
+namespace {{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Move{{ resource }}Node;
+
+use {{ vendor }}\{{ package }}\{{ resource }}\Model\Aggregate\{{ resource }}Type;
+use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
+use Honeybee\Model\Task\MoveAggregateRootNode\MoveAggregateRootNodeCommandHandler;
+use Honeybee\Infrastructure\DataAccess\DataAccessServiceInterface;
+use Honeybee\Infrastructure\Filesystem\FilesystemServiceInterface;
+use Psr\Log\LoggerInterface;
+
+class Move{{ resource }}NodeCommandHandler extends MoveAggregateRootNodeCommandHandler
+{
+    public function __construct(
+        {{ resource }}Type ${{ resource_prefix }}_type,
+        DataAccessServiceInterface $data_access_service,
+        FilesystemServiceInterface $filesystem_service,
+        EventBusInterface $event_bus,
+        LoggerInterface $logger
+    ) {
+        parent::__construct(${{ resource_prefix }}_type, $data_access_service, $filesystem_service, $event_bus, $logger);
+    }
+}

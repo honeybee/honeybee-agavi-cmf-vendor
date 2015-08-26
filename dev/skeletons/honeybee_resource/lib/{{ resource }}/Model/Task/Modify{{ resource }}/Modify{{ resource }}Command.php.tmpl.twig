@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Modify{{ resource }};
+
+use Honeybee\Model\Task\ModifyAggregateRoot\ModifyAggregateRootCommand;
+
+class Modify{{ resource }}Command extends ModifyAggregateRootCommand
+{
+    public function getEventClass()
+    {
+        return {{ resource }}ModifiedEvent::CLASS;
+    }
+}

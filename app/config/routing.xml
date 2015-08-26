@@ -63,7 +63,7 @@
                     <callback class="Honeybee\FrameworkBinding\Agavi\Routing\GenOnlyRoutingCallback" />
                     <callback class="Honeybee\FrameworkBinding\Agavi\Routing\ModuleRoutingCallback" />
                 </callbacks>
-                <xi:include href="default_type_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='web']/*)" />
+                <xi:include href="default_resource_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='web']/*)" />
             </route>
 
             <!--
@@ -82,7 +82,7 @@
                     <callback class="Honeybee\FrameworkBinding\Agavi\Routing\GenOnlyRoutingCallback" />
                     <callback class="Honeybee\FrameworkBinding\Agavi\Routing\ModuleRoutingCallback" />
                 </callbacks>
-                <xi:include href="default_type_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='console']/*)" />
+                <xi:include href="default_resource_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='console']/*)" />
             </route>
         </routes>
     </ae:configuration>
