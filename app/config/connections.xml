@@ -39,23 +39,23 @@
             <connection name="Default.Mailer" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\LocalSendmailConnector" />
             <connection name="Default.Mailer.Null" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector" />
 
-            <connection name="Assets.Local" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
+            <connection name="Files.Local" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
                 <setting name="directory">%assets.base_dir%</setting>
             </connection>
 
-            <connection name="Assets.Local.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
-                <setting name="directory">%core.app_dir%/../data/temp_assets</setting>
+            <connection name="Files.Local.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
+                <setting name="directory">%core.app_dir%/../data/temp_files</setting>
             </connection>
 
             <!--
-            <connection name="Assets.S3" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\AwsS3Connector">
+            <connection name="Files.S3" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\AwsS3Connector">
                 <setting name="key">key1234</setting>
                 <setting name="secret">secretsecretsecret</setting>
                 <setting name="region">eu-central-1</setting>
                 <setting name="bucket">bucketname</setting>
             </connection>
 
-            <connection name="User.Assets.Dropbox.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\DropboxConnector">
+            <connection name="User.Files.Dropbox.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\DropboxConnector">
                 <setting name="app_id">%core.app_name%</setting>
                 <setting name="access_token">some-secret-app-access-token</setting>
             </connection>

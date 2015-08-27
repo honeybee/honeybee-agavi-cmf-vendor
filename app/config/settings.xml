@@ -78,9 +78,9 @@
             <setting name="connection">Service.ShortIds</setting>
         </settings>
 
-        <settings prefix="assets.">
+        <settings prefix="files.">
             <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
-            <setting name="base_dir">%core.app_dir%/../data/assets</setting>
+            <setting name="base_dir">%core.app_dir%/../data/files</setting>
         </settings>
 
         <exception_templates>
@@ -164,9 +164,9 @@
             <setting name="fixtures_dir">%core.app_dir%/../testing/fixtures/</setting>
             <setting name="default_context">web</setting>
         </settings>
-        <settings prefix="assets.">
+        <settings prefix="files.">
             <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
-            <setting name="base_dir">%core.app_dir%/../data/testing/assets</setting>
+            <setting name="base_dir">%core.app_dir%/../data/testing/files</setting>
         </settings>
     </ae:configuration>
 

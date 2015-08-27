@@ -7,7 +7,7 @@
 
     <ae:configuration>
         <filesystems>
-            <!-- <filesystem scheme="userfiles" connection="User.Assets.Dropbox" /> -->
+            <!-- <filesystem scheme="userfiles" connection="User.Files.Dropbox" /> -->
         </filesystems>
     </ae:configuration>
 

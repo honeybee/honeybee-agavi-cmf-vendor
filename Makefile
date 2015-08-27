@@ -108,7 +108,7 @@ info:
 install:
 	@if [ ! -d app/cache ]; then mkdir -p app/cache; fi
 	@if [ ! -d app/log ]; then mkdir -p app/log; fi
-	@if [ ! -d data/assets ]; then mkdir -p data/assets; fi
+	@if [ ! -d data/files ]; then mkdir -p data/files; fi
 
 	@if [ ! -f bin/composer.phar ]; \
 	then \

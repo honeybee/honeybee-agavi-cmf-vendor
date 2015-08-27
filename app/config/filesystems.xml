@@ -13,9 +13,9 @@
 
     <ae:configuration>
         <filesystems>
-            <filesystem scheme="files" connection="Assets.Local" />
-            <filesystem scheme="tempfiles" connection="Assets.Local.Temp" />
-            <!-- <filesystem scheme="s3" connection="Assets.S3" /> -->
+            <filesystem scheme="files" connection="Files.Local" />
+            <filesystem scheme="tempfiles" connection="Files.Local.Temp" />
+            <!-- <filesystem scheme="s3" connection="Files.S3" /> -->
         </filesystems>
     </ae:configuration>
 
