@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9700c7350e05ee1aa15f023da35132d1",
+    "hash": "892106eb4652b4cb4573357bdfb2dc78",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -607,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "46525474acdfb70c5c3fee9e52b568850a251954"
+                "reference": "9c782aa55b960e15f3d249cc214f944bebd96a36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/46525474acdfb70c5c3fee9e52b568850a251954",
-                "reference": "46525474acdfb70c5c3fee9e52b568850a251954",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/9c782aa55b960e15f3d249cc214f944bebd96a36",
+                "reference": "9c782aa55b960e15f3d249cc214f944bebd96a36",
                 "shasum": ""
             },
             "require": {
@@ -652,11 +652,6 @@
                 "videlalvaro/php-amqplib": "2.5.* as AMQP implementing message queue in async setups with e.g. rabbitmq"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Honeybee\\": "src"
@@ -697,7 +692,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2015-08-27 10:31:58"
+            "time": "2015-08-27 10:53:16"
         },
         {
             "name": "honeybee/trellis",
