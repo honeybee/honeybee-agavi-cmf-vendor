@@ -191,47 +191,5 @@ If you set it to an empty string, PHP doesn't scan at all. The default is ".user
             </check>
         </checks>
 
-        <checks name="executables" description="some checks to get absolute paths to commonly used executables">
-            <check class="&executable;" name="ls">
-                <parameter name="default">ls</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/ls.*/</parameter>
-            </check>
-            <check class="&executable;" name="cat">
-                <parameter name="default">cat</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/cat.*/</parameter>
-            </check>
-            <check class="&executable;" name="cut">
-                <parameter name="default">cut</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/cut.*/</parameter>
-            </check>
-            <check class="&executable;" name="head">
-                <parameter name="default">head</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/head.*/</parameter>
-            </check>
-            <check class="&executable;" name="tail">
-                <parameter name="default">tail</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/tail.*/</parameter>
-            </check>
-            <check class="&executable;" name="sort">
-                <parameter name="default">sort</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/sort.*/</parameter>
-            </check>
-            <check class="&executable;" name="find">
-                <parameter name="default">find</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/find.*/</parameter>
-            </check>
-            <check class="&executable;" name="grep">
-                <parameter name="default">grep</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/grep.+?(\d+\.\d+\.?\d?)/</parameter>
-            </check>
-            <check class="&executable;" name="bzip2">
-                <parameter name="default">bzip2</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/bzip2.+?Version (\d+\.\d+\.\d+).*/</parameter>
-            </check>
-            <check class="&executable;" name="curl">
-                <parameter name="default">curl</parameter>
-                <parameter name="version_mask" space="preserve" literalize="false">/curl (\d+\.\d+\.\d+) .*/</parameter>
-            </check>
-        </checks>
     </sandbox>
 </environaut>

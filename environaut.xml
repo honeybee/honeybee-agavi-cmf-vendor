@@ -84,23 +84,6 @@
             <parameter name="version_mask" space="preserve" literalize="false">/Sass 3\.(3|4)/</parameter>
         </check>
 
-        <check name="testing_enabled" group="local_config">
-            <parameter name="question">Enable testing?</parameter>
-            <parameter name="default">false</parameter>
-            <parameter name="confirm">true</parameter>
-        </check>
-
-        <check name="agavi_environment" group="local_config">
-            <parameter name="question">What environment do you want to use for this application?</parameter>
-            <parameter name="default">development</parameter>
-            <parameter name="choices">
-                <parameter>integration</parameter>
-                <parameter>staging</parameter>
-                <parameter>preview</parameter>
-                <parameter>production</parameter>
-            </parameter>
-        </check>
-
     </checks>
 
 </environaut>
