@@ -26,8 +26,6 @@
                 </activity>
 
                 <activity name="collection">
-                    <description>module.activity.collection.description</description>
-                    <label>module.activity.collection.title</label>
                     <url type="route">module.collection</url>
                     <rels>
                         <rel>activity</rel>

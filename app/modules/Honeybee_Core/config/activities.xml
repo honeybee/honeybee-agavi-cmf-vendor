@@ -7,8 +7,6 @@
         <activity_containers>
             <activity_container scope="honeybee.core">
                 <activity name="theme_preview">
-                    <description>core.activity.theme_preview.description</description>
-                    <label>core.activity.theme_preview.title</label>
                     <url type="route">honeybee.core.theme_preview</url>
                     <rels>
                         <rel>activity</rel>

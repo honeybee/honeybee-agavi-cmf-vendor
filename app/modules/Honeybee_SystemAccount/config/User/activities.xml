@@ -8,8 +8,6 @@
             <activity_container scope="honeybee.system_account.user" extends="default_resource_activities">
 
                 <activity name="view_resource" type="workflow">
-                    <description>user.activity.view_resource.description</description>
-                    <label>user.activity.view_resource.title</label>
                     <url type="route">honeybee.system_account.user.resource</url>
                     <rels>
                         <rel>activity</rel>
@@ -19,8 +17,6 @@
                 </activity>
 
                 <activity name="view_history" type="workflow">
-                    <description>user.activity.view_history.description</description>
-                    <label>user.activity.view_history.title</label>
                     <url type="route">honeybee.system_account.user.history</url>
                     <rels>
                         <rel>activity</rel>
@@ -29,8 +25,6 @@
                 </activity>
 
                 <activity name="create_resource">
-                    <description>user.activity.create_resource.description</description>
-                    <label>user.activity.create_resource.title</label>
                     <url type="route">honeybee.system_account.user.create</url>
                     <rels>
                         <rel>activity</rel>
@@ -40,8 +34,6 @@
                 </activity>
 
                 <activity name="collection">
-                    <description>user.activity.collection.description</description>
-                    <label>user.activity.collection.title</label>
                     <url type="route">honeybee.system_account.user.collection</url>
                     <url_param name="sort">modified_at:desc</url_param>
                     <rels>
@@ -52,8 +44,6 @@
                 </activity>
 
                 <activity name="hierarchy">
-                    <description>user.activity.hierarchy.description</description>
-                    <label>user.activity.hierarchy.title</label>
                     <url type="route">honeybee.system_account.user.hierarchy</url>
                     <url_param name="sort">modified_at:desc</url_param>
                     <rels>
@@ -64,8 +54,6 @@
                 </activity>
 
                 <activity name="hierarchy_root">
-                    <description>user.activity.hierarchy.description</description>
-                    <label>user.activity.hierarchy.title</label>
                     <url type="route">honeybee.system_account.user.hierarchy</url>
                     <url_param name="resource" />
                     <url_param name="sort">modified_at:desc</url_param>
@@ -80,8 +68,6 @@
 
             <activity_container scope="honeybee.system_account.user.resource.workflow.proceed">
                 <activity name="cancel">
-                    <description>user.activity.cancel.description</description>
-                    <label>user.activity.cancel.title</label>
                     <url type="route">honeybee.system_account.user.collection</url>
                     <url_param name="sort">modified_at:desc</url_param>
                     <rels>
