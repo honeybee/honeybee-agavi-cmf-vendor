@@ -29,23 +29,22 @@ class ConfigurationHandler
         $io = $event->getIO();
         $project_path = ScriptToolkit::getProjectPath($event);
         ScriptToolkit::removeDirectoryContents($project_path . '/app/cache');
-        $io->write('<info>-> cleared application caches</>');
+        $io->write('-> cleared application caches');
     }
 
     public static function makeAutoload(Event $event)
     {
-        $io = $event->getIO();
-        $process = ScriptToolkit::createProcess(
-            'bin/composer.phar dump-autoload -o -q',
-            ScriptToolkit::getProjectPath($event)
-        );
-
-        $process->run(function ($type, $buffer) use ($io) {
-            $io->write($buffer);
-        });
-
-        if ($process->isSuccessful()) {
-            $io->write('<info>-> regenerated and optimized autoload files</>');
-        }
+        $composer = $event->getComposer();
+        $event->getComposer()
+            ->getAutoloadGenerator()
+            ->dump(
+                $composer->getConfig(),
+                $composer->getRepositoryManager()->getLocalRepository(),
+                $composer->getPackage(),
+                $composer->getInstallationManager(),
+                'composer', // = default
+                true        // = optimize
+            );
+        $event->getIO()->write('-> generated composer autoload files');
     }
 }

@@ -19,13 +19,13 @@ class ResourceHandler
         });
 
         if ($process->isSuccessful()) {
-            $io->write('<info>');
+            $io->write('');
 	        $io->write('    When you have configured your entity types you');
-	        $io->write('    can build your classes using the helper command');
+	        $io->write('    can build your models using the helper command');
 	        $io->write('    line utility:');
 	        $io->write('');
 	        $io->write('    bin/composer.phar resource-build');
-            $io->write('</>');
+            $io->write('');
         }
     }
 

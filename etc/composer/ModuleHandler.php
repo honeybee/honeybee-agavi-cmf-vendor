@@ -19,12 +19,12 @@ class ModuleHandler
         });
 
         if ($process->isSuccessful()) {
-            $io->write('<info>');
+            $io->write('');
             $io->write('    You can now quickly scaffold new resources into this');
             $io->write('    module using the helper command line utility:');
             $io->write('');
             $io->write('    bin/composer.phar resource-create');
-            $io->write('</>');
+            $io->write('');
         }
     }
 }
