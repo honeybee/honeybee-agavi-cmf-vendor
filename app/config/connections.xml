@@ -40,7 +40,7 @@
             <connection name="Default.Mailer.Null" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector" />
 
             <connection name="Files.Local" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
-                <setting name="directory">%assets.base_dir%</setting>
+                <setting name="directory">%core.app_dir%/../data/files</setting>
             </connection>
 
             <connection name="Files.Local.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
