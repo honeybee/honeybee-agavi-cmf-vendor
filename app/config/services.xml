@@ -111,7 +111,7 @@
                 <service name="honeybee.infrastructure.process_map">
                     <class>Honeybee\Infrastructure\ProcessManager\ProcessMap</class>
                     <provisioner>
-                        <class>Honeybee\Infrastructure\ProcessManager\ProcessMapProvisioner</class>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\ProcessMapProvisioner</class>
                         <settings>
                             <!--
                             <setting name="processes">
