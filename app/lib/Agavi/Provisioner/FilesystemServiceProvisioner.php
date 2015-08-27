@@ -62,9 +62,6 @@ class FilesystemServiceProvisioner extends AbstractProvisioner
             foreach ($art_map->getKeys() as $art_prefix) {
                 $files_scheme = $art_prefix .'.'. FilesystemServiceInterface::SCHEME_FILES;
                 $tempfiles_scheme = $art_prefix .'.'. FilesystemServiceInterface::SCHEME_TEMPFILES;
-                $files_scheme = str_replace(['.', '_'], '', $files_scheme);
-                $tempfiles_scheme = str_replace(['.', '_'], '', $tempfiles_scheme);
-
                 if (!array_key_exists($files_scheme, $schemes)) {
                     $schemes[$files_scheme] = $connectors[FilesystemServiceInterface::SCHEME_FILES]->getName();
                 }
