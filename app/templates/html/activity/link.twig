@@ -4,5 +4,5 @@
     rel="{{ activity.rels|join(' ') }}"
     class="{{ css|join(' ') }} {{emphasized ? "emphasized" : "normal"}}"
     title="{{ _(activity.description, translation_domain) }}"
+    data-hb-translation-domain="{{ translation_domain }}"
 >{{ _(activity.label, translation_domain) }}</a>
-

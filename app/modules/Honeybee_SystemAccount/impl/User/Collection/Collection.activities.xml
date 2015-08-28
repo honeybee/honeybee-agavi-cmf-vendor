@@ -8,8 +8,6 @@
 
             <activity_container scope="honeybee.system_account.user.collection" extends="honeybee.system_account.user">
                 <activity name="search">
-                    <description>user.activity.collection.search.description</description>
-                    <label>user.activity.collection.search.title</label>
                     <url type="route">null</url>
                     <url_param name="offset">0</url_param>
                     <rels>
@@ -22,8 +20,6 @@
 
             <activity_container scope="honeybee.system_account.user.collection.primary_activities">
                 <activity name="create_resource">
-                    <description>user.activity.create_resource.description</description>
-                    <label>user.activity.create_resource.title</label>
                     <url type="route">honeybee.system_account.user.create</url>
                     <rels>
                         <rel>activity</rel>
@@ -35,8 +31,6 @@
 
             <activity_container scope="honeybee.system_account.user.collection.sort_activities">
                 <activity name="sort_by_modified_at">
-                    <description>user.activity.sort_by_modified_at.description</description>
-                    <label>user.activity.sort_by_modified_at.title</label>
                     <url type="route">null</url>
                     <url_param name="sort">modified_at:desc</url_param>
                     <url_param name="offset">0</url_param>
@@ -47,8 +41,6 @@
                     </rels>
                 </activity>
                 <activity name="sort_by_username">
-                    <description>user.activity.sort_by_username.description</description>
-                    <label>user.activity.sort_by_username.title</label>
                     <url type="route">null</url>
                     <url_param name="sort">username:asc,language:asc</url_param>
                     <url_param name="offset">0</url_param>
@@ -59,8 +51,6 @@
                     </rels>
                 </activity>
                 <activity name="sort_by_email">
-                    <description>user.activity.sort_by_email.description</description>
-                    <label>user.activity.sort_by_email.title</label>
                     <url type="route">null</url>
                     <url_param name="sort">email:asc</url_param>
                     <url_param name="offset">0</url_param>
@@ -71,8 +61,6 @@
                     </rels>
                 </activity>
                 <activity name="sort_by_role">
-                    <description>user.activity.sort_by_role.description</description>
-                    <label>user.activity.sort_by_role.title</label>
                     <url type="route">null</url>
                     <url_param name="sort">role:asc</url_param>
                     <url_param name="offset">0</url_param>
@@ -83,8 +71,6 @@
                     </rels>
                 </activity>
                 <activity name="sort_by_workflow_state">
-                    <description>user.activity.sort_by_workflow_state.description</description>
-                    <label>user.activity.sort_by_workflow_state.title</label>
                     <url type="route">null</url>
                     <url_param name="sort">workflow_state:asc</url_param>
                     <url_param name="offset">0</url_param>

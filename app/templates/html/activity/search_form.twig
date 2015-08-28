@@ -1,6 +1,6 @@
 <div class="search__content">
     <label for="{{ form_id }}search" class="search-description">{{ _('search.description', translation_domain) }}</label>
-    <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|join(' ') }}" id="{{ form_id }}">
+    <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|join(' ') }}" id="{{ form_id }}" data-hb-translation-domain="{{ translation_domain }}">
         {% for param_name, param_value in form_parameters %}
         <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
         {% endfor %}

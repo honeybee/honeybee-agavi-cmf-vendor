@@ -35,7 +35,6 @@ class ActivitiesConfigHandler extends BaseConfigHandler
         }
 
         $this->handleContainerInheritance($activity_containers, $document);
-        $this->addSensibleDefaultValues($activity_containers);
 
         $configuration_code = sprintf('return %s;', var_export($activity_containers, true));
 
@@ -86,7 +85,8 @@ class ActivitiesConfigHandler extends BaseConfigHandler
             $activity_containers[$scope]['extends'] = $extends_scope;
             $activity_containers[$scope]['activities'] = $this->parseActivities(
                 $activity_container_element,
-                $document
+                $document,
+                $scope
             );
         }
 
@@ -118,22 +118,7 @@ class ActivitiesConfigHandler extends BaseConfigHandler
         }
     }
 
-    protected function addSensibleDefaultValues(&$activity_containers)
-    {
-        foreach ($activity_containers as $scope => &$activity_container) {
-            foreach ($activity_container['activities'] as $activity_name => &$activity) {
-                if (empty($activity['label'])) {
-                    $activity['label'] = sprintf('%s.label', $activity_name);
-                }
-                if (empty($activity['description'])) {
-                    $activity['description'] = sprintf('%s.description', $activity_name);
-                }
-                $activity['rels'][] = $activity_name;
-            }
-        }
-    }
-
-    protected function parseActivities(AgaviXmlConfigDomElement $container_node, AgaviXmlConfigDomDocument $document)
+    protected function parseActivities(AgaviXmlConfigDomElement $container_node, AgaviXmlConfigDomDocument $document, $scope)
     {
         $activities = [];
 
@@ -148,6 +133,7 @@ class ActivitiesConfigHandler extends BaseConfigHandler
                 );
             }
             $activities[$name] = $this->parseActivity($activity_node, $document);
+            $activities[$name]['scope'] = $scope;
         }
 
         return $activities;
