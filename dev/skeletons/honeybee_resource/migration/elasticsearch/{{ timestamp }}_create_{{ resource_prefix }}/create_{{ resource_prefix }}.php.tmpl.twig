@@ -6,7 +6,7 @@ use Honeybee\Infrastructure\Migration\ElasticsearchMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 
-class Migration_{{ timestamp }}_Create{{ resource }}Type extends ElasticsearchMigration
+class Migration_{{ timestamp }}_Create{{ resource }} extends ElasticsearchMigration
 {
     protected function up(MigrationTargetInterface $migration_target)
     {
@@ -20,7 +20,7 @@ class Migration_{{ timestamp }}_Create{{ resource }}Type extends ElasticsearchMi
     public function getDescription($direction = MigrationInterface::MIGRATE_UP)
     {
         if ($direction === MigrationInterface::MIGRATE_UP) {
-            return 'Will create the Elasticsearch mapping for the {{ resource }} type in the {{ vendor }}_{{ package }} context.';
+            return 'Will create the Elasticsearch mapping for {{ resource }} in the {{ vendor }}_{{ package }} context.';
         }
     }
 
