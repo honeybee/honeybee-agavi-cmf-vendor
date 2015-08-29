@@ -9,14 +9,14 @@ class Fixture_{{ timestamp }}_{{ name }} extends Fixture
 {
     public function import(FixtureTargetInterface $fixture_target)
     {
-        $this->copyFixtureFilesToTempLocation(__DIR__ . DIRECTORY_SEPARATOR . 'files');
+        $this->copyFilesToTempLocation(__DIR__ . DIRECTORY_SEPARATOR . 'files');
 
-        foreach ($this->getFixtureFiles() as $filename) {
-            $this->importFixtureFile($filename);
+        foreach ($this->getFixtureData() as $filename) {
+            $this->importFixtureFromFile($filename);
         }
     }
 
-    protected function getFixtureFiles()
+    protected function getFixtureData()
     {
         return [
             __DIR__ . DIRECTORY_SEPARATOR . '{{ timestamp }}-fixture-data.json'
