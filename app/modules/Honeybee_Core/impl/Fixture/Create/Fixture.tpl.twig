@@ -9,7 +9,7 @@ class Fixture_{{ timestamp }}_{{ name }} extends Fixture
 {
     public function import(FixtureTargetInterface $fixture_target)
     {
-        $this->copyFixtureAssetsToTempLocation(__DIR__ . DIRECTORY_SEPARATOR . 'assets');
+        $this->copyFixtureFilesToTempLocation(__DIR__ . DIRECTORY_SEPARATOR . 'files');
 
         foreach ($this->getFixtureFiles() as $filename) {
             $this->importFixtureFile($filename);
