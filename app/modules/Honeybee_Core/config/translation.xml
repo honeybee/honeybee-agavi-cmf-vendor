@@ -36,6 +36,22 @@
                             <ae:parameter name="theme_preview.label">Honeybee</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
+                    <ae:parameter name="theme_preview">
+                        <ae:parameter name="de">
+                            <ae:parameter name="Text Input One.field_name">Text Input One</ae:parameter>
+                            <ae:parameter name="Text Input Two (Invalid Value).field_name">Text Input Two (Invalid Value)</ae:parameter>
+                            <ae:parameter name="Email Input Two (Invalid Value).field_name">Email Input Two (Invalid Value)</ae:parameter>
+                            <ae:parameter name="Email Input One.field_name">Email Input One</ae:parameter>
+                            <ae:parameter name="Url Input Two (Invalid Value).field_name">Url Input Two (Invalid Value)</ae:parameter>
+                            <ae:parameter name="Url Input One.field_name">Url Input One</ae:parameter>
+                            <ae:parameter name="Url Input Three (Valid Value).field_name">Url Input Three (Valid Value)</ae:parameter>
+                            <ae:parameter name="Text List One.field_name">Text List One</ae:parameter>
+                            <ae:parameter name="Text List Two.field_name">Text List Two</ae:parameter>
+                            <ae:parameter name="Text List Three.field_name">Text List Three</ae:parameter>
+                            <ae:parameter name="Image Input One.field_name">Image Input One</ae:parameter>
+                            <ae:parameter name="add_images">Add Images</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
                 </message_translator>
             </translator>
         </translators>

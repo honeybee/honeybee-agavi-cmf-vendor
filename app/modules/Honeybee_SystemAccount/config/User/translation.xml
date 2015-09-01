@@ -28,7 +28,7 @@
                             <ae:parameter name="hierarchy.page_title">Nutzerhierarchie</ae:parameter>
                             <ae:parameter name="resource.modify.page_title">Nutzer bearbeiten</ae:parameter>
                             <ae:parameter name="set_password.page_title">Passwort ändern</ae:parameter>
-                            <ae:parameter name="collection.page_title">(DE) Document Collection</ae:parameter>
+                            <ae:parameter name="collection.page_title">Nutzer Liste</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="login.page_title">Log in</ae:parameter>
@@ -165,6 +165,10 @@
                             <ae:parameter name="search.description">Suchen</ae:parameter>
                             <ae:parameter name="search.label">Suche</ae:parameter>
                             <ae:parameter name="create_resource.label">Nutzer erstellen</ae:parameter>
+                            <ae:parameter name="save_resource.label">Datensatz erstellen</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.label">Datensatz erstellen und neuen anlegen</ae:parameter>
+                            <ae:parameter name="back_to_collection.label">Zurück zur Liste</ae:parameter>
+                            <ae:parameter name="back_to_list.label">Zurück zur Liste</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sortiert aufsteigend nach Nutzernamen</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Nutzername</ae:parameter>
                             <ae:parameter name="sort_by_email.description">Sortiert aufsteigend nach Emailadresse des Nutzers</ae:parameter>
@@ -189,6 +193,10 @@
                             <ae:parameter name="search.description">Search</ae:parameter>
                             <ae:parameter name="search.label">Search</ae:parameter>
                             <ae:parameter name="create_resource.label">Create User</ae:parameter>
+                            <ae:parameter name="save_resource.label">Save resource</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.label">Save resource and continue</ae:parameter>
+                            <ae:parameter name="back_to_collection.label">Back to collection</ae:parameter>
+                            <ae:parameter name="back_to_list.label">Back to list</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sort by username</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
                             <ae:parameter name="sort_by_email.description">Sort by email address</ae:parameter>

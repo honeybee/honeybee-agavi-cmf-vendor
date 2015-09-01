@@ -14,10 +14,10 @@
             {% if us.isAuthenticated() %}
             <div class="menu">
                 <input type="checkbox" id="menu-trigger" class="menu__trigger">
-                <label for="menu-trigger" class="menu__toggle">Menu</label>
+                <label for="menu-trigger" class="menu__toggle">{{ _('menu') }}</label>
                 <label for="menu-trigger" class="menu__backdrop"></label>
                 <div class="menu__panel">
-                    <label for="menu-trigger" class="menu__toggle">Menu</label>
+                    <label for="menu-trigger" class="menu__toggle">{{ _('menu') }}</label>
                     <div class="menu__panel-layout">
                         <div class="user-widget-box">
                             {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}

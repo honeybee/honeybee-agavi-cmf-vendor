@@ -120,8 +120,6 @@
                     </rels>
                 </activity>
                 <activity name="save_resource_and_continue">
-                    <description>Datensatz erstellen und neuen anlegen</description>
-                    <label>Erstellen und weiter</label>
                     <url type="route">honeybee.system_account.user.create</url>
                     <verb>write</verb>
                     <rels>
@@ -131,8 +129,6 @@
                     </rels>
                 </activity>
                 <activity name="back_to_list">
-                    <description>Zurück zur Liste von Nutzern</description>
-                    <label>Zurück zur Liste</label>
                     <url type="route">honeybee.system_account.user.collection</url>
                     <url_param name="sort">modified_at:desc</url_param>
                     <rels>
