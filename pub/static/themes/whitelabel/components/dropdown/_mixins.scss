@@ -4,6 +4,7 @@
 
     display: inline-block;
     position: relative;
+    white-space: nowrap;
 
     @include media-query(lap-and-up) {
         @include flyout--popover("#{$name}");
@@ -35,6 +36,7 @@
             right: 0;
             top: 100%;
             margin-top: 5px;
+            min-width: 8em;
 
             @include media-query(palm) {
                 width: auto;
@@ -63,6 +65,7 @@
 
             .activity {
                 width: 100%;
+                text-align: center;
             }
         }
 
