@@ -57,6 +57,24 @@
                             <ae:parameter name="meta">Metadaten</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
+
+                    <ae:parameter name="collection">
+                        <ae:parameter name="de">
+                            <ae:parameter name="title">Titel</ae:parameter>
+                            <ae:parameter name="created_at">Erstellt</ae:parameter>
+                            <ae:parameter name="modified_at">Zuletzt bearbeitet</ae:parameter>
+                            <ae:parameter name="workflow_state">Status</ae:parameter>
+                            <ae:parameter name="actions">Aktionen</ae:parameter>
+                            <ae:parameter name="username">Nutzername</ae:parameter>
+                            <ae:parameter name="firstname">Vorname</ae:parameter>
+                            <ae:parameter name="lastname">Nachname</ae:parameter>
+                            <ae:parameter name="role">Rolle</ae:parameter>
+                            <ae:parameter name="email">Email</ae:parameter>
+                            <ae:parameter name="tags">Tags</ae:parameter>
+                            <ae:parameter name="actions">Aktionen</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
                     <!--
                         Additional User module's fields translations go here
                     -->
@@ -179,7 +197,6 @@
                             <ae:parameter name="sort_by_role.label">Nutzerrolle</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.description">Sortiert Nutzer aufsteigend nach Status</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
-                            <ae:parameter name="sort_by_username.label">Foobar</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="user_collection.label">User List</ae:parameter>
@@ -208,74 +225,6 @@
                             <ae:parameter name="sort_by_workflow_state.description">Sort by status</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <!--
-                        Workflow state translations.
-                    -->
-                    <ae:parameter name="workflow">
-                        <ae:parameter name="de">
-                            <ae:parameter name="inactive">Inaktiv</ae:parameter>
-                            <ae:parameter name="active">Aktiv</ae:parameter>
-                            <ae:parameter name="deleted">Gelöscht</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="inactive">Inactive</ae:parameter>
-                            <ae:parameter name="active">Active</ae:parameter>
-                            <ae:parameter name="deleted">Deleted</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <!--
-                         User Roles
-                    -->
-                    <ae:parameter name="roles">
-                        <ae:parameter name="de">
-                            <ae:parameter name="administrator">Honeybee-Bearbeiter</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="administrator">Honeybee-Administrator</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <!--
-                        List translations for the User module go here.
-                    -->
-                    <ae:parameter name="list">
-                        <ae:parameter name="de">
-                            <!-- list header -->
-                            <ae:parameter name="created">Erstellt</ae:parameter>
-                            <ae:parameter name="owner">Besitzer</ae:parameter>
-                            <ae:parameter name="username">Nutzername</ae:parameter>
-                            <ae:parameter name="firstname">Vorname</ae:parameter>
-                            <ae:parameter name="lastname">Nachname</ae:parameter>
-                            <ae:parameter name="state">Status</ae:parameter>
-                            <ae:parameter name="role">Rolle</ae:parameter>
-                            <ae:parameter name="email">Email</ae:parameter>
-
-                            <!-- batch dialogs -->
-                            <ae:parameter name="batch_actions">Stapelverarbeitung</ae:parameter>
-
-                            <!-- item actions -->
-                            <ae:parameter name="actions">Aktionen</ae:parameter>
-                            <ae:parameter name="promote">Aktivieren</ae:parameter>
-                            <ae:parameter name="demote">Deaktivieren</ae:parameter>
-                            <ae:parameter name="edit">Bearbeiten</ae:parameter>
-                            <ae:parameter name="view">Ansehen</ae:parameter>
-                            <ae:parameter name="disabled">Gesperrt</ae:parameter>
-                            <ae:parameter name="delete">Löschen</ae:parameter>
-
-                            <!-- workflow transitions (context sensitive action names for promote and demote) -->
-                            <ae:parameter name="inactive.promote">Aktivieren</ae:parameter>
-                            <ae:parameter name="inactive.delete">Löschen</ae:parameter>
-                            <ae:parameter name="active.demote">Deaktivieren</ae:parameter>
-                            <ae:parameter name="active.delete">Löschen</ae:parameter>
-
-                            <!-- workflow transition prompts -->
-                            <ae:parameter name="inactive.delete.prompt">Sind sie sicher, dass sie diesen Nutzer löschen möchten?</ae:parameter>
-                            <ae:parameter name="active.demote.prompt">Sind sie sicher, dass sie diesen Nutzer deaktivieren möchten?</ae:parameter>
-                            <ae:parameter name="active.delete.prompt">Sind sie sicher, dass sie diesen Nutzer löschen möchten?</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 

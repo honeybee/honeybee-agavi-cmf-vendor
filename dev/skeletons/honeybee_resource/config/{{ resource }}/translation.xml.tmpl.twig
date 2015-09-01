@@ -32,6 +32,26 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        {{ resource }} collection view's translations go here
+                    -->
+                    <ae:parameter name="collection">
+                        <ae:parameter name="de">
+                            <ae:parameter name="title">Titel</ae:parameter>
+                            <ae:parameter name="created_at">Erstellt</ae:parameter>
+                            <ae:parameter name="modified_at">Zuletzt bearbeitet</ae:parameter>
+                            <ae:parameter name="workflow_state">Status</ae:parameter>
+                            <ae:parameter name="actions">Aktionen</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="title">Title</ae:parameter>
+                            <ae:parameter name="created_at">Created at</ae:parameter>
+                            <ae:parameter name="modified_at">Modified at</ae:parameter>
+                            <ae:parameter name="workflow_state">Status</ae:parameter>
+                            <ae:parameter name="actions">Actions</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
                     <ae:parameter name="tabs">
                         <ae:parameter name="de">
                         <!--
@@ -59,19 +79,6 @@
                         </ae:parameter>
                     </ae:parameter>
 
-                    <!--
-                        {{ resource }}/Embed action's translations go here
-                    -->
-                    <ae:parameter name="embed">
-                        <ae:parameter name="de">
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <ae:parameter name="groups">
-                        <ae:parameter name="de">
-                        </ae:parameter>
-                    </ae:parameter>
-
                     <ae:parameter name="fields">
                         <ae:parameter name="de">
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
@@ -92,58 +99,6 @@
                             <ae:parameter name="revision.field_name">Revision</ae:parameter>
                             <ae:parameter name="version.field_name">Version</ae:parameter>
                             <ae:parameter name="language.field_name">Language</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <ae:parameter name="activities">
-                        <ae:parameter name="de">
-                        </ae:parameter>
-                    </ae:parameter>
-
-                </message_translator>
-            </translator>
-
-            <!--
-                Module's translations go here
-            -->
-            <translator domain="{{ vendor_prefix }}.{{ package_prefix }}">
-                <message_translator class="AgaviSimpleTranslator">
-                    <ae:parameter name="views">
-                        <ae:parameter name="de">
-                        </ae:parameter>
-                    </ae:parameter>
-                </message_translator>
-            </translator>
-
-            <!--
-                Default translation domain for generic translations
-            -->
-            <translator domain="application">
-                <message_translator class="AgaviSimpleTranslator">
-                    <ae:parameter name="navigations">
-                        <ae:parameter name="de">
-                            <ae:parameter name="main.{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">{{ vendor }}-{{ package }}-{{ resource }}</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="main.{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">{{ vendor }}-{{ package }}-{{ resource }}</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-                </message_translator>
-            </translator>
-
-            <!--
-                Others translation domains
-            -->
-            <translator domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">
-
-                <message_translator class="AgaviSimpleTranslator">
-
-                    <ae:parameter name="module">
-                        <ae:parameter name="de">
-                            <ae:parameter name="name">{{ resource }}</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="name">{{ resource }}</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -191,6 +146,72 @@
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_modified_at.description">Sort by Last modified date (Ascending)</ae:parameter>
                             <ae:parameter name="sort_by_modified_at.label">Last modified date</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                </message_translator>
+            </translator>
+
+            <!--
+                Module's translations go here
+            -->
+            <translator domain="{{ vendor_prefix }}.{{ package_prefix }}">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
+            <!--
+                Default translation domain for generic translations
+            -->
+            <translator domain="application">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="navigations">
+                        <ae:parameter name="de">
+                            <ae:parameter name="main.{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">{{ vendor }}-{{ package }}-{{ resource }}</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="main.{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">{{ vendor }}-{{ package }}-{{ resource }}</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
+            <!--
+                Others translation domains
+            -->
+            <translator domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">
+
+                <message_translator class="AgaviSimpleTranslator">
+
+                    <ae:parameter name="module">
+                        <ae:parameter name="de">
+                            <ae:parameter name="name">{{ resource }}</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="name">{{ resource }}</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <!--
+                        {{ resource }}/Embed action's translations go here
+                    -->
+                    <ae:parameter name="embed">
+                        <ae:parameter name="de">
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <ae:parameter name="groups">
+                        <ae:parameter name="de">
+                        </ae:parameter>
+                        <ae:parameter name="en">
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>
