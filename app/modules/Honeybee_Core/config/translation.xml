@@ -28,21 +28,12 @@
                             <ae:parameter name="index.page_title">Honeybee</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
-                    <!-- user-interface related translation for the core module go here -->
-                    <ae:parameter name="ui">
+                    <ae:parameter name="activity">
                         <ae:parameter name="de">
-                            <ae:parameter name="Logout">Abmelden</ae:parameter>
+                            <ae:parameter name="theme_preview.label">Vorschau Theme</ae:parameter>
                         </ae:parameter>
-                    </ae:parameter>
-                    <!-- all other core translations may be placed below -->
-                    <ae:parameter name="messages">
-                        <ae:parameter name="de">
-                            <!-- <ae:parameter name=""></ae:parameter> -->
-                        </ae:parameter>
-                    </ae:parameter>
-                    <ae:parameter name="errors">
-                        <ae:parameter name="de">
-                            <!-- <ae:parameter name=""></ae:parameter> -->
+                        <ae:parameter name="en">
+                            <ae:parameter name="theme_preview.label">Honeybee</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>

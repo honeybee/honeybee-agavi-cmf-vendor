@@ -93,50 +93,113 @@
                         </ae:parameter>
                     </ae:parameter>
 
-                    <ae:parameter name="activity">
+                    <ae:parameter name="ui">
                         <ae:parameter name="de">
-                            <ae:parameter name="edit">Bearbeiten</ae:parameter>
-                            <ae:parameter name="delete">Löschen</ae:parameter>
-                            <ae:parameter name="promote">Aktivieren</ae:parameter>
-                            <ae:parameter name="demote">Deaktivieren</ae:parameter>
-                            <ae:parameter name="view_resource">Anschauen</ae:parameter>
-                            <ae:parameter name="history">Historie</ae:parameter>
-                            <ae:parameter name="hierarchy">Baumansicht</ae:parameter>
-                            <ae:parameter name="user.activity.collection.search.description">Suchen</ae:parameter>
-                            <ae:parameter name="user.activity.collection.search.title">Suche</ae:parameter>
-                            <ae:parameter name="user.activity.create_resource.title">Nutzer erstellen</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_username.description">Sortiert aufsteigend nach Nutzernamen</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_username.title">Nutzername</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_email.description">Sortiert aufsteigend nach Emailadresse des Nutzers</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_email.title">Email</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_modified_at.description">Sortiert neueste Nutzer nach oben</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_modified_at.title">Neueste oben</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_role.description">Sortiert Nutzer aufsteigend nach Rolle</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_role.title">Nutzerrolle</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_workflow_state.description">Sortiert Nutzer aufsteigend nach Status</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_workflow_state.title">Status</ae:parameter>
+                            <ae:parameter name="signin">Anmelden</ae:parameter>
+                            <ae:parameter name="logout">Abmelden</ae:parameter>
+                            <ae:parameter name="logout_success">Abmeldung erfolgreich. Vielen Dank.</ae:parameter>
+                            <ae:parameter name="leave_the_system">Vom System abmelden…</ae:parameter>
+                            <ae:parameter name="profile">Mein Profil</ae:parameter>
+                            <ae:parameter name="to_homepage">Zur Startseite</ae:parameter>
+                            <ae:parameter name="set_password">Kennwort setzen</ae:parameter>
+                            <ae:parameter name="username">Nutzername</ae:parameter>
+                            <ae:parameter name="username_placeholder">clark.kent</ae:parameter>
+                            <ae:parameter name="password">Kennwort</ae:parameter>
+                            <ae:parameter name="password_placeholder">passwort</ae:parameter>
+                            <ae:parameter name="reset_password">Kennwort zurücksetzen</ae:parameter>
+                            <ae:parameter name="repeat_password">Kennwort wiederholen</ae:parameter>
+                            <ae:parameter name="Please sign in">Bitte Nutzernamen und Kennwort eingeben</ae:parameter>
+                            <ae:parameter name="Please enter your email or username."><![CDATA[Bitte Nutzernamen <b>oder</b> Emailadresse eingeben.]]></ae:parameter>
+                            <ae:parameter name="Min. %d characters long">Mind. %d Zeichen lang</ae:parameter>
+                            <ae:parameter name="Min. %d lowercase letters">Mind. %d Kleinbuchstaben</ae:parameter>
+                            <ae:parameter name="Min. %d uppercase characters">Mind. %d Grossbuchstaben</ae:parameter>
+                            <ae:parameter name="Min. %d numeric characters">Mind. %d Ziffern</ae:parameter>
+                            <ae:parameter name="special characters">Sonderzeichen</ae:parameter>
+                            <ae:parameter name="numeric characters">Ziffern</ae:parameter>
+                            <ae:parameter name="uppercase letters">Grossbuchstaben</ae:parameter>
+                            <ae:parameter name="lowercase letters">Kleinbuchstaben</ae:parameter>
+                            <ae:parameter name="weak">schwach</ae:parameter>
+                            <ae:parameter name="medium">mittel</ae:parameter>
+                            <ae:parameter name="strong">stark</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
-                            <ae:parameter name="edit">Edit</ae:parameter>
-                            <ae:parameter name="delete">Delete</ae:parameter>
-                            <ae:parameter name="promote">Promote</ae:parameter>
-                            <ae:parameter name="demote">Demote</ae:parameter>
-                            <ae:parameter name="view_resource">View</ae:parameter>
-                            <ae:parameter name="history">History</ae:parameter>
-                            <ae:parameter name="hierarchy">Hierarchy</ae:parameter>
-                            <ae:parameter name="user.activity.collection.search.description">Search</ae:parameter>
-                            <ae:parameter name="user.activity.collection.search.title">Search</ae:parameter>
-                            <ae:parameter name="user.activity.create_resource.title">Create User</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_username.description">Sort by username</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_username.title">Username</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_email.description">Sort by email address</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_email.title">Email</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_modified_at.description">Sort by modification date</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_modified_at.title">Modified At</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_role.description">Sort by role</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_role.title">Role</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_workflow_state.description">Sort by status</ae:parameter>
-                            <ae:parameter name="user.activity.sort_by_workflow_state.title">Status</ae:parameter>
+                            <ae:parameter name="signin">Sign in</ae:parameter>
+                            <ae:parameter name="logout">Logout</ae:parameter>
+                            <ae:parameter name="logout_success">Logout successful. Thank you.</ae:parameter>
+                            <ae:parameter name="leave_the_system">Log out from the system…</ae:parameter>
+                            <ae:parameter name="profile">My Profile</ae:parameter>
+                            <ae:parameter name="to_homepage">Go to the homepage</ae:parameter>
+                            <ae:parameter name="set_password">Set a new password</ae:parameter>
+                            <ae:parameter name="username">Username</ae:parameter>
+                            <ae:parameter name="username_placeholder">clark.kent</ae:parameter>
+                            <ae:parameter name="password">Password</ae:parameter>
+                            <ae:parameter name="password_placeholder">Type your password</ae:parameter>
+                            <ae:parameter name="reset_password">Forgot password?</ae:parameter>
+                            <ae:parameter name="repeat_password">Repeat the password</ae:parameter>
+                            <ae:parameter name="Please sign in">Please sign in</ae:parameter>
+                            <ae:parameter name="Please enter your email or username."><![CDATA[Please enter your email <b>oder</b> username.]]></ae:parameter>
+                            <ae:parameter name="Min. %d characters long">Min. %d characters long</ae:parameter>
+                            <ae:parameter name="Min. %d lowercase letters">Min. %d lowercase letters</ae:parameter>
+                            <ae:parameter name="Min. %d uppercase characters">Min. %d uppercase characters</ae:parameter>
+                            <ae:parameter name="Min. %d numeric characters">Min. %d numeric characters</ae:parameter>
+                            <ae:parameter name="special characters">Special characters</ae:parameter>
+                            <ae:parameter name="numeric characters">Numeric characters</ae:parameter>
+                            <ae:parameter name="uppercase letters">Uppercase letters</ae:parameter>
+                            <ae:parameter name="lowercase letters">Lowercase letters</ae:parameter>
+                            <ae:parameter name="weak">weak</ae:parameter>
+                            <ae:parameter name="medium">medium</ae:parameter>
+                            <ae:parameter name="strong">strong</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <ae:parameter name="activity">
+                        <ae:parameter name="de">
+                            <ae:parameter name="user_collection.label">Nutzer Liste</ae:parameter>
+                            <ae:parameter name="edit.label">Bearbeiten</ae:parameter>
+                            <ae:parameter name="delete.label">Löschen</ae:parameter>
+                            <ae:parameter name="promote.label">Aktivieren</ae:parameter>
+                            <ae:parameter name="demote.label">Deaktivieren</ae:parameter>
+                            <ae:parameter name="view_resource.label">Anschauen</ae:parameter>
+                            <ae:parameter name="resource_history.label">Historie</ae:parameter>
+                            <ae:parameter name="resource_hierarchy.label">Baumansicht</ae:parameter>
+                            <ae:parameter name="search.description">Suchen</ae:parameter>
+                            <ae:parameter name="search.label">Suche</ae:parameter>
+                            <ae:parameter name="create_resource.label">Nutzer erstellen</ae:parameter>
+                            <ae:parameter name="sort_by_username.description">Sortiert aufsteigend nach Nutzernamen</ae:parameter>
+                            <ae:parameter name="sort_by_username.label">Nutzername</ae:parameter>
+                            <ae:parameter name="sort_by_email.description">Sortiert aufsteigend nach Emailadresse des Nutzers</ae:parameter>
+                            <ae:parameter name="sort_by_email.label">Email</ae:parameter>
+                            <ae:parameter name="sort_by_modified_at.description">Sortiert neueste Nutzer nach oben</ae:parameter>
+                            <ae:parameter name="sort_by_modified_at.label">Neueste oben</ae:parameter>
+                            <ae:parameter name="sort_by_role.description">Sortiert Nutzer aufsteigend nach Rolle</ae:parameter>
+                            <ae:parameter name="sort_by_role.label">Nutzerrolle</ae:parameter>
+                            <ae:parameter name="sort_by_workflow_state.description">Sortiert Nutzer aufsteigend nach Status</ae:parameter>
+                            <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
+                            <ae:parameter name="sort_by_username.label">Foobar</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="user_collection.label">User List</ae:parameter>
+                            <ae:parameter name="edit.label">Edit</ae:parameter>
+                            <ae:parameter name="delete.label">Delete</ae:parameter>
+                            <ae:parameter name="promote.label">Promote</ae:parameter>
+                            <ae:parameter name="demote.label">Demote</ae:parameter>
+                            <ae:parameter name="view_resource.label">View resource</ae:parameter>
+                            <ae:parameter name="resource_history.label">History</ae:parameter>
+                            <ae:parameter name="resource_hierarchy.label">Hierarchy</ae:parameter>
+                            <ae:parameter name="search.description">Search</ae:parameter>
+                            <ae:parameter name="search.label">Search</ae:parameter>
+                            <ae:parameter name="create_resource.label">Create User</ae:parameter>
+                            <ae:parameter name="sort_by_username.description">Sort by username</ae:parameter>
+                            <ae:parameter name="sort_by_username.label">Username</ae:parameter>
+                            <ae:parameter name="sort_by_email.description">Sort by email address</ae:parameter>
+                            <ae:parameter name="sort_by_email.label">Email</ae:parameter>
+                            <ae:parameter name="sort_by_modified_at.description">Sort by modification date</ae:parameter>
+                            <ae:parameter name="sort_by_modified_at.label">Modified At</ae:parameter>
+                            <ae:parameter name="sort_by_role.description">Sort by role</ae:parameter>
+                            <ae:parameter name="sort_by_role.label">Role</ae:parameter>
+                            <ae:parameter name="sort_by_workflow_state.description">Sort by status</ae:parameter>
+                            <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
+                            <ae:parameter name="sort_by_username.label">Username</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -208,106 +271,6 @@
                         </ae:parameter>
                     </ae:parameter>
 
-                    <!--
-                        Input translations for the User module go here.
-                    -->
-                    <!-- Fieldnames -->
-                    <ae:parameter name="rendering.input.field">
-                        <ae:parameter name="de">
-                            <ae:parameter name="identifier">Identifikation</ae:parameter>
-                            <ae:parameter name="revision">Revision</ae:parameter>
-                            <ae:parameter name="username">Nutzername</ae:parameter>
-                            <ae:parameter name="firstname">Vorname</ae:parameter>
-                            <ae:parameter name="lastname">Nachname</ae:parameter>
-                            <ae:parameter name="email">Email</ae:parameter>
-                            <ae:parameter name="role">Rolle</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-                    <!-- Group- and Tabnames -->
-                    <ae:parameter name="rendering.input.resource">
-                        <ae:parameter name="de">
-                            <ae:parameter name="edit-form-title">User erstellen/bearbeiten</ae:parameter>
-                            <ae:parameter name="meta">Metadaten</ae:parameter>
-                            <ae:parameter name="content">Inhalte</ae:parameter>
-                            <ae:parameter name="main">Stammdaten</ae:parameter>
-                            <ae:parameter name="privledges">Zugriffsrechte</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <!--
-                        Error translations for the User module go here.
-                    -->
-                    <ae:parameter name="errors">
-                        <ae:parameter name="de">
-                            <ae:parameter name="storage_error">Das speichern der (User) Daten schlug fehl.</ae:parameter>
-                            <ae:parameter name="export_error">Während der Datenverarbeitung trat ein unerwarteter Fehler auf.</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <ae:parameter name="ui">
-                        <ae:parameter name="de">
-                            <ae:parameter name="signin">Anmelden</ae:parameter>
-                            <ae:parameter name="logout">Abmelden</ae:parameter>
-                            <ae:parameter name="logout_success">Abmeldung erfolgreich. Vielen Dank.</ae:parameter>
-                            <ae:parameter name="leave_the_system">Vom System abmelden…</ae:parameter>
-                            <ae:parameter name="profile">Mein Profil</ae:parameter>
-                            <ae:parameter name="to_homepage">Zur Startseite</ae:parameter>
-                            <ae:parameter name="set_password">Kennwort setzen</ae:parameter>
-                            <ae:parameter name="username">Nutzername</ae:parameter>
-                            <ae:parameter name="username_placeholder">clark.kent</ae:parameter>
-                            <ae:parameter name="reset_password">Kennwort zurücksetzen</ae:parameter>
-                            <ae:parameter name="password">Kennwort</ae:parameter>
-                            <ae:parameter name="password_placeholder">passwort</ae:parameter>
-                            <ae:parameter name="repeat_password">Kennwort wiederholen</ae:parameter>
-                            <ae:parameter name="Please sign in">Bitte Nutzernamen und Kennwort eingeben</ae:parameter>
-                            <ae:parameter name="Please enter your email or username."><![CDATA[Bitte Nutzernamen <b>oder</b> Emailadresse eingeben.]]></ae:parameter>
-                            <ae:parameter name="Min. %d characters long">Mind. %d Zeichen lang</ae:parameter>
-                            <ae:parameter name="Min. %d lowercase letters">Mind. %d Kleinbuchstaben</ae:parameter>
-                            <ae:parameter name="Min. %d uppercase characters">Mind. %d Grossbuchstaben</ae:parameter>
-                            <ae:parameter name="Min. %d numeric characters">Mind. %d Ziffern</ae:parameter>
-                            <ae:parameter name="special characters">Sonderzeichen</ae:parameter>
-                            <ae:parameter name="numeric characters">Ziffern</ae:parameter>
-                            <ae:parameter name="uppercase letters">Grossbuchstaben</ae:parameter>
-                            <ae:parameter name="lowercase letters">Kleinbuchstaben</ae:parameter>
-                            <ae:parameter name="weak">schwach</ae:parameter>
-                            <ae:parameter name="medium">mittel</ae:parameter>
-                            <ae:parameter name="strong">stark</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="logout">Logout</ae:parameter>
-                            <ae:parameter name="logout_success">Logout successful. Thank you.</ae:parameter>
-                            <ae:parameter name="leave_the_system">Log out from the system…</ae:parameter>
-                            <ae:parameter name="profile">My Profile</ae:parameter>
-                            <ae:parameter name="to_homepage">Go to the homepage</ae:parameter>
-                            <ae:parameter name="set_password">Set a new password</ae:parameter>
-                            <ae:parameter name="reset_password">Forgot password?</ae:parameter>
-                            <ae:parameter name="repeat_password">Repeat the password</ae:parameter>
-                            <ae:parameter name="password_placeholder">password</ae:parameter>
-                            <ae:parameter name="username_placeholder">clark.kent</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
-                    <ae:parameter name="messages">
-                        <ae:parameter name="de">
-                            <ae:parameter name="invalid_login">Die Kombination aus Nutzername und Kennwort ist ungültig.</ae:parameter>
-                            <ae:parameter name="invalid_account">Ungültige Kontodaten; bitte die angegebene Email oder den Nutzernamen auf Richtigkeit überprüfen.</ae:parameter>
-                            <ae:parameter name="Login Error">Fehler während der Anmeldung</ae:parameter>
-                            <ae:parameter name="reset_success_title">Sie haben Post!</ae:parameter>
-                            <ae:parameter name="reset_success_msg"><![CDATA[
-                                <p>Wir haben eine Email an die Adresse verschickt, die mit dem angegebenen Nutzerkonto verküpft ist.</p>
-                                <p>Darin finden sie die erforderlichen Schritte um ihr Passwort zurück zu setzen.</p>
-                            ]]></ae:parameter>
-                            <ae:parameter name="session_regeneration_error">Interner Fehler beim Login. Bitte versuchen Sie es später noch einmal.</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="reset_success_title">You have mail!</ae:parameter>
-                            <ae:parameter name="reset_success_msg"><![CDATA[
-                                <p>The password for the affected user account may be reset now.</p>
-                                <p>The necessary steps have been mailed to the email adress related to the latter user account.</p>
-                            ]]></ae:parameter>
-                            <ae:parameter name="session_regeneration_error">Internal error while login. Please try again later.</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
                 </message_translator>
             </translator>
         </translators>

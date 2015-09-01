@@ -118,7 +118,11 @@ class ActivitiesConfigHandler extends BaseConfigHandler
         }
     }
 
-    protected function parseActivities(AgaviXmlConfigDomElement $container_node, AgaviXmlConfigDomDocument $document, $scope)
+    protected function parseActivities(
+        AgaviXmlConfigDomElement $container_node,
+        AgaviXmlConfigDomDocument $document,
+        $scope
+    )
     {
         $activities = [];
 
