@@ -80,14 +80,17 @@ define([
         this.$picker_input_element = this.$widget.find(datepicker_input_selector).first();
         if (this.$picker_input_element.length > 0) {
             this.initial_picker_settings.inputElement = this.$picker_input_element;
-        } else {
-            console.error('No input element given for datepicker.');
         }
 
         // optional toggle element to show/hide the picker
         this.$picker_toggle_element = this.$widget.find(datepicker_toggle_selector);
         if (this.$picker_toggle_element.length > 0) {
             this.initial_picker_settings.toggleElement = this.$picker_toggle_element;
+        }
+
+        if ( (this.$picker_toggle_element.length === 0) && (this.$picker_input_element.length === 0) ) {
+            console.error('Neither toggle nor input element specified for DatePicker. Aborting for dom element:', dom_element);
+            return;
         }
 
         this.initial_picker_settings.displayFormat = this.options.display_format || this.$widget.data('displayFormat') || default_options.displayFormat;
