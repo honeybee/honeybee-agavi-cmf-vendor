@@ -4,21 +4,21 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
-        <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ {{ resource_prefix }} }}.errors">
+        <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
             <!--
             <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeAttributeValidator" name="invalid_attribute_path">
                 <arguments base="uploadform">
                     <argument>attribute</argument>
                 </arguments>
                 <error>An attribute path must be specified.</error>
-                <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ {{ resource_prefix }} }}</ae:parameter>
+                <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
             </validator>
             -->
             <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeFileUploadValidator" name="invalid_uploaded_files" source="files">
                 <arguments base="uploadform"></arguments>
                 <error>File is not acceptable.</error>
                 <error for="no_image">File is not an image.</error>
-                <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ {{ resource_prefix }} }}</ae:parameter>
+                <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
                 <ae:parameter name="debug">true</ae:parameter>
             </validator>
         </validators>
