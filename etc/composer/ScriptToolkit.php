@@ -37,6 +37,7 @@ class ScriptToolkit
     public static function removeDirectoryContents($path)
     {
         $files = array_diff(scandir($path), [ '.', '..', '.gitignore' ]);
+        array_walk($files, function (&$file) use ($path) { $file = $path . DIRECTORY_SEPARATOR . $file; });
         $fs = new Filesystem();
         $fs->remove($files);
     }
