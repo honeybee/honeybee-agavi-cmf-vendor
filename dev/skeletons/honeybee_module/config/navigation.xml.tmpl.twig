@@ -15,6 +15,14 @@
             <navigation name="main">
                 <groups>
                     <group name="{{ vendor_prefix }}.{{ package_prefix }}">
+                        <!--
+                            It is possible to specify a 'translation_domain' setting
+                            for translating all the items of the navigation group.
+
+                            <settings>
+                                <setting name="translation_domain">application.activities</setting>
+                            </settings>
+                        -->
                         <include>{{ vendor_prefix }}.{{ package_prefix }}</include>
                     </group>
                 </groups>

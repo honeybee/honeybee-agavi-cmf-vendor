@@ -32,12 +32,12 @@ class NavigationConfigHandler extends BaseConfigHandler
     public function execute(AgaviXmlConfigDomDocument $document)
     {
         $document->setDefaultNamespace(self::XML_NAMESPACE, 'navigation');
-        $parsed_configuration = array('navigations' => array(), 'available_items' => array());
+        $parsed_configuration = array('navigations' => [], 'available_items' => []);
         $default_navigation = null;
 
         // first traversal: plain parsing without interpolation of includes and excludes
         foreach ($document->getConfigurationElements() as $configuration) {
-            $new_navigations = array();
+            $new_navigations = [];
 
             if ($configuration->hasChild(self::NODE_NAVIGATIONS)) {
                 $navigations_node = $configuration->getChild(self::NODE_NAVIGATIONS);
@@ -48,7 +48,7 @@ class NavigationConfigHandler extends BaseConfigHandler
                 }
             }
 
-            $available_items = array();
+            $available_items = [];
             if ($configuration->hasChild(self::NODE_AVAILABLE_ITEMS)) {
                 $available_items = $this->parseAvailableItems(
                     $configuration->getChild(self::NODE_AVAILABLE_ITEMS)
@@ -82,10 +82,10 @@ class NavigationConfigHandler extends BaseConfigHandler
 
     protected function parseNavigation(AgaviXmlConfigDomElement $navigation_node)
     {
-        $navigation = array(
+        $navigation = [
             'name' => $navigation_node->getAttribute(self::ATTR_NAME),
-            'groups' => array()
-        );
+            'groups' => []
+        ];
 
         foreach ($navigation_node->get('groups') as $navigation_group_node) {
             $group_name = $navigation_group_node->getAttribute(self::ATTR_NAME);
@@ -97,9 +97,9 @@ class NavigationConfigHandler extends BaseConfigHandler
 
     protected function parseNavigationGroup(AgaviXmlConfigDomElement $navigation_group_node)
     {
-        $navigation_group = array();
-        $group_items = array();
-        $activities = array();
+        $navigation_group = [];
+        $group_items = [];
+        $activities = [];
 
         foreach ($navigation_group_node as $group_item_node) {
             $item_type = $group_item_node->nodeName;
@@ -113,7 +113,7 @@ class NavigationConfigHandler extends BaseConfigHandler
             }
         }
 
-        $settings = array();
+        $settings = [];
         if ($navigation_group_node->hasChild(self::NODE_SETTINGS)) {
             $settings = $this->parseSettings($navigation_group_node);
         }
@@ -123,7 +123,7 @@ class NavigationConfigHandler extends BaseConfigHandler
 
     protected function parseAvailableItems(AgaviXmlConfigDomElement $available_items_node)
     {
-        $available_items = array();
+        $available_items = [];
 
         foreach ($available_items_node->getChildren(self::NODE_ITEMS) as $items_node) {
             $module_name = $items_node->getAttribute(self::ATTR_NAME);
@@ -134,7 +134,7 @@ class NavigationConfigHandler extends BaseConfigHandler
                 );
             }
 
-            $available_items[$module_name] = array();
+            $available_items[$module_name] = [];
             foreach ($items_node->get(self::NODE_ACTIVITIES) as $activity_node) {
                 $available_items[$module_name][] = array(
                     'scope' =>$activity_node->getAttribute(self::ATTR_SCOPE),
@@ -166,7 +166,7 @@ class NavigationConfigHandler extends BaseConfigHandler
 
     protected function expandGroupItems(array $group_items, array $available_items)
     {
-        $expanded_group_items = array();
+        $expanded_group_items = [];
 
         foreach ($group_items as $group_item) {
             $items_keys = $group_item['items_key'];
