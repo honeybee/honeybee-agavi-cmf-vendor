@@ -24,7 +24,7 @@ class ResourceHandler
 	        $io->write('    can build your models using the helper command');
 	        $io->write('    line utility:');
 	        $io->write('');
-	        $io->write('    bin/composer.phar resource-build');
+	        $io->write('    composer resource-build');
             $io->write('');
         }
     }

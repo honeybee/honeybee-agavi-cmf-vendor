@@ -23,7 +23,7 @@ class ModuleHandler
             $io->write('    You can now quickly scaffold new resources into this');
             $io->write('    module using the helper command line utility:');
             $io->write('');
-            $io->write('    bin/composer.phar resource-create');
+            $io->write('    composer resource-create');
             $io->write('');
         }
     }
