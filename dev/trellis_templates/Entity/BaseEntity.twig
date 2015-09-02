@@ -8,13 +8,13 @@
  * class generation.
  *
  * If you are looking for a place to alter the behaviour of
- * '{{ resource_name }}' entities please see the skeleton
+ * '{{ type_name }}' entities please see the skeleton
  * class '{{ class_name }}'. Modifications to the skeleton
  * file will prevail any subsequent class generation runs.
  *
  * To define new attributes or adjust existing attributes and their
  * default options modify the schema definition file of
- * the '{{ resource_name }}' type.
+ * the '{{ type_name }}' type.
  *
  * @see https://github.com/honeybee/trellis
  */
@@ -24,7 +24,7 @@ namespace {{ namespace }};
 use {{ parent_implementor }};
 
 /**
- * Serves as the base class to the '{{ resource_name }}' entity skeleton.
+ * Serves as the base class to the '{{ type_name }}' entity skeleton.
  *
  * This class contains definitions for attributes and their options available
  * on '{{ class_name }}' instances. Modifications to getters and setters
@@ -43,7 +43,7 @@ abstract class {{ class_name }} extends {{ parent_class_name }}
 
     /**
      * Returns the current value of the '{{ attribute.name }}' attribute on this
-     * '{{ resource_name }}' entity. The 'default_value' option set for
+     * '{{ type_name }}' entity. The 'default_value' option set for
      * this attribute is returned if no value was set. If neither a value nor
      * default value was set the 'null_value' option value is returned.
      *

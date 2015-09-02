@@ -8,13 +8,13 @@
  * class generation.
  *
  * If you are looking for a place to alter the behaviour of
- * the '{{ resource_name }}' type please see the skeleton
+ * the '{{ type_name }}' type please see the skeleton
  * class '{{ class_name }}'. Modifications to the skeleton
  * file will prevail any subsequent class generation runs.
  *
  * To define new attributes or adjust existing attributes and their
  * default options modify the schema definition file of
- * the '{{ resource_name }}' type.
+ * the '{{ type_name }}' type.
  *
  * @see https://github.com/honeybee/trellis
  */
@@ -27,7 +27,7 @@ use {{ namespace }};
 use {{ parent_implementor }};
 
 /**
- * Serves as the base class to the '{{ resource_name }}' type skeleton.
+ * Serves as the base class to the '{{ type_name }}' type skeleton.
  */
 abstract class {{ class_name }} extends {{ parent_class_name }}
 {
@@ -46,7 +46,7 @@ abstract class {{ class_name }} extends {{ parent_class_name }}
         $this->workflow_state_machine = $workflow_state_machine;
 
         parent::__construct(
-            '{{ resource_name }}',
+            '{{ type_name }}',
             [
             {%- for attribute in attributes %}
                 {%- if attribute.options|length > 0 %}
