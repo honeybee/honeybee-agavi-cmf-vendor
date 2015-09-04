@@ -8,6 +8,7 @@
         .sort__description,
         .pager__description {
             margin-left: auto;
+            text-align: center;
         }
     }
 
@@ -17,18 +18,28 @@
         }
     }
 
-    .sort__content > .sort__description,
+    .sort__content .sort__description,
     .pager__content > .pager__description {
         text-align: left;
         width: auto;
         float: left;
         padding-right: $base-spacing;
+        padding-left: 0.5em;
     }
 
     // vertical align
     .pager__content, .sort__content, .pager__list{
         @include flexbox;
         @include align-items(center);
+        overflow: hidden;
+    }
+
+    .sort__control {
+        // white-space: nowrap;     // No control on overflow of long strings
+
+        > * {
+            display: inline-block;
+        }
     }
 
     .pager__description {
@@ -137,7 +148,7 @@
     }
 
     .button-search {
-        @include button-normal-navigational;
+        @include button-emphasized-navigational;
         @include flex-grow(0);
 
         max-width: 3 * $base-spacing;

@@ -23,9 +23,14 @@
     @include media-query(lap-and-up) {
         border-spacing: 0;
 
+        .hb-itemlist__titles, .hb-item {
+            border-bottom-color: color(grey2);
+            border-bottom-style: solid;
+            border-bottom-width: 1px;
+        }
+
         .hb-item {
             position: relative;
-            border: 0;
         }
 
         .hb-actions,

@@ -3,7 +3,7 @@
 //navigational
 @mixin button-colors-normal-navigational-default {
     color: color(navigational-primary);
-    background-color: color(background-blank);
+    background-color: color(clear);
     border-color: color(clear);
 }
 @mixin button-colors-normal-navigational-hover {
@@ -24,7 +24,7 @@
 //mutating
 @mixin button-colors-normal-mutating-default {
     color: color(mutating-primary);
-    background-color: color(background-blank);
+    background-color: color(clear);
     border-color: color(clear);
 }
 @mixin button-colors-normal-mutating-hover {
@@ -45,7 +45,7 @@
 //positive
 @mixin button-colors-normal-positive-default {
     color: color(positive-primary);
-    background-color: color(background-blank);
+    background-color: color(clear);
     border-color: color(clear);
 }
 @mixin button-colors-normal-positive-hover {
@@ -66,7 +66,7 @@
 //warning
 @mixin button-colors-normal-warning-default {
     color: color(warning-primary);
-    background-color: color(background-blank);
+    background-color: color(clear);
     border-color: color(clear);
 }
 @mixin button-colors-normal-warning-hover {
@@ -87,7 +87,7 @@
 //destructive
 @mixin button-colors-normal-destructive-default {
     color: color(destructive-primary);
-    background-color: color(background-blank);
+    background-color: color(clear);
     border-color: color(clear);
 }
 @mixin button-colors-normal-destructive-hover {

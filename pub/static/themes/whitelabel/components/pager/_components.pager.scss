@@ -104,8 +104,7 @@
     filter: fliph; /*IE*/
 }
 .pager__go {
-    @include button-normal-navigational;
-    background-color: color(lightgrey1);
+    @include button-emphasized-navigational;
 
     &, &:hover {
         line-height: normal; // reset button default

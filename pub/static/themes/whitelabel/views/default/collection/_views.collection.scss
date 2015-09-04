@@ -8,25 +8,33 @@ $workflow_state_fieldname: "workflow_state";
 
 .view-collection .hb-itemlist {
 
+    color: color(darkgrey2);
+
     .hb-field__label {
         font-size: 90%;
         color: color(grey);
     }
 
+    .hb-itemlist__titles {
+        background-color: color(panel-header-background);
+        color: color(darkgrey1);
+    }
+
     .hb-itemlist__title {
         font-weight: 700;
+        padding: $base-spacing;
     }
 
     @include media-query(palm) {
         box-shadow: none;
 
         .hb-item {
-            @include sheet;
+            @include frame(color(lightgrey2));
         }
     }
 
     @include media-query(lap-and-up) {
-        @include sheet;
+        @include frame(color(lightgrey2));
 
         .hb-field[data-hb-field-name="#{$workflow_state_fieldname}"] {
             width: percentage(2/12);
@@ -34,6 +42,16 @@ $workflow_state_fieldname: "workflow_state";
 
         .hb-actions {
             width: percentage(2/12);
+            padding-right: $base-spacing;
+            text-align: right;
+        }
+
+        .hb-actions__content {
+            padding: 1px 10px 1px 1px;
+        }
+
+        .hb-itemlist__title-actions {
+            @include visuallyhidden;
         }
     }
 

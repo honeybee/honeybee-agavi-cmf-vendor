@@ -33,8 +33,10 @@
         </div><!--
         --><div class="sort-box" >
             <div class="sort__content">
-                <label for="{{ sort_trigger_id }}" class="sort__description">{{ _('sort_by') }}</label>
-                {{ rendered_sort_activities|raw }}
+                <div class="sort__control">
+                    <label for="{{ sort_trigger_id }}" class="sort__description">{{ _('sort_by') }}</label>
+                    {{ rendered_sort_activities|raw }}
+                </div>
             </div>
         </div><!--
         --><div class="pager-box">
@@ -68,8 +70,10 @@
         <label for="sidebar-trigger" class="sidebar__toggle">{{ _('sidebar') }}</label>
         <div class="sidebar-content-layout">
             <div class="sort-box">
-                <label for="{{ sort_trigger_id|replace({'sortTrigger':'sidebarSortTrigger'}) }}" class="sort__description">{{ _('sort_by') }}</label>
-                {{ rendered_sort_activities|replace({'sortTrigger':'sidebarSortTrigger'})|raw }}
+                <div class="sort__control">
+                    <label for="{{ sort_trigger_id|replace({'sortTrigger':'sidebarSortTrigger'}) }}" class="sort__description">{{ _('sort_by') }}</label>
+                    {{ rendered_sort_activities|replace({'sortTrigger':'sidebarSortTrigger'})|raw }}
+                </div>
             </div><!--
             --><div class="pager-box">
                 <div class="pagination1">

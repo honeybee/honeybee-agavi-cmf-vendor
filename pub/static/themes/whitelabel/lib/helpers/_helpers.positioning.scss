@@ -1,3 +1,30 @@
+// mixins
+
+// aligns anything vertically by percentage value
+@mixin align-y($percentage: 50%) {
+    position: relative;
+    top: $percentage;
+    transform: translateY(-$percentage);
+}
+
+// aligns horizontally
+@mixin align-x() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// aligns horizontally and vertically
+@mixin center-xy($vertical_percentage: 50%) {
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    top: $vertical_percentage;
+    transform: translateY(-$vertical_percentage);
+}
+
+// classes
+
 .text-center {
     text-align: center;
 }
@@ -12,18 +39,17 @@
 
 // center element horizontally
 .center-x {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    @include align-x;
+}
+
+// center element vertically
+.center-y {
+    @include align-y;
 }
 
 // center element vertically and horizontally
 .center-xy {
-    position: relative;
-    display: table;
-    margin: 0 auto;
-    top: 50%;
-    transform: translateY(-50%);
+    @include center-xy;
 }
 
 .pull-right {
