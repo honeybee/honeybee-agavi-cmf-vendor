@@ -15,7 +15,7 @@ class {{ vendor }}_{{ package }}_{{ resource }}_CreateAction extends CreateActio
             return 'Success';
         */
 
-        $this->setAttribute('resource_type', $this->getResourceType());
+        $this->setAttribute('resource_type', $this->getProjectionType());
 
         return 'Success';
     }
