@@ -57,15 +57,15 @@ class Honeybee_Core_Fixture_Create_CreateSuccessView extends View
             )
         );
 
-        $fixture_asset_dir = sprintf(
+        $fixture_files_dir = sprintf(
             '%1$s%2$s%3$s_%4$s%2$s%5$s',
             $fixture_dir,
             DIRECTORY_SEPARATOR,
             $fixture_timestamp,
             $fixture_slug,
-            'assets'
+            'files'
         );
-        mkdir($fixture_asset_dir);
+        mkdir($fixture_files_dir);
 
         return $this->cliMessage('-> fixture template was generated here:' . PHP_EOL . $fixture_filepath . PHP_EOL);
     }
