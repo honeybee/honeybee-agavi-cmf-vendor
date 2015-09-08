@@ -35,16 +35,16 @@ class ConfigurationHandler
     public static function makeAutoload(Event $event)
     {
         $composer = $event->getComposer();
-        $event->getComposer()
-            ->getAutoloadGenerator()
-            ->dump(
-                $composer->getConfig(),
-                $composer->getRepositoryManager()->getLocalRepository(),
-                $composer->getPackage(),
-                $composer->getInstallationManager(),
-                'composer', // = default
-                true        // = optimize
-            );
+        $generator = $composer->getAutoloadGenerator();
+        $generator->setDevMode($event->isDevMode());
+        $generator->dump(
+            $composer->getConfig(),
+            $composer->getRepositoryManager()->getLocalRepository(),
+            $composer->getPackage(),
+            $composer->getInstallationManager(),
+            'composer',           // => default
+            !$event->isDevMode()  // => optimize if not dev mode
+        );
         $event->getIO()->write('-> generated composer autoload files');
     }
 }
