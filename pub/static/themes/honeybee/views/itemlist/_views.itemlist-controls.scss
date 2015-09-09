@@ -19,14 +19,7 @@
 .controls-top {
     margin-bottom: $base-spacing;
 
-    @include media-query(lap-and-up) {
-        .activities-box {
-            display: none;
-        }
-    }
-
     @include media-query(palm) {
-        .activities-box,
         .sort-box {
             display: none;
         }
@@ -71,14 +64,6 @@
 
     .pager__list {
         direction: ltr; //fix the rtl direction from the surrounding layout
-    }
-}
-
-.activities-box {
-    .activity-create_document {
-        @include activity-underline;
-
-        width: 100%;
     }
 }
 

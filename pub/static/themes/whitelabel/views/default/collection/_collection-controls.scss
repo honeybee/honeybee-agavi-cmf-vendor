@@ -84,7 +84,6 @@
     }
 
     @include media-query(palm) {
-        .activities-box,
         .sort-box,
         .pager-box {
             display: none;
@@ -121,12 +120,6 @@
         @extend .u-1-of-1-palm;
         @extend .u-5-of-8-lap-and-up;
         @extend .u-4-of-12-desk;
-    }
-}
-
-.activities-box {
-    .activity-create_document {
-        width: 100%;
     }
 }
 

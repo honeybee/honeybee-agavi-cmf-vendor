@@ -14,5 +14,8 @@
 
 @mixin typography-headlines($multiplier: 1.285) {
     font-size: $font-size * $multiplier; // 18px
-    font-weight: bold;
+
+    @include media-query(lap-and-up) {
+        font-weight: bold;
+    }
 }

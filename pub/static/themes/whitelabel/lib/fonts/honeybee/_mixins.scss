@@ -38,7 +38,7 @@ $default-color: color(black);
 */
 @mixin hb-icon-before($icon-name, $color: $default-color) {
     &:before {
-        @include hb-icon($icon-name, $color: $default-color);
+        @include hb-icon($icon-name, $color);
         position: absolute;
         left: 50%;
         top: 50%;
