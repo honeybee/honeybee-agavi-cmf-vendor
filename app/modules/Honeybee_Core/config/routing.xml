@@ -77,5 +77,10 @@
                 <ae:parameter name="description">Generate data fixture.</ae:parameter>
             </route>
         </route>
+        <route pattern="workflux" name=".workflux" method="write">
+            <route pattern="^.visualize$" action="Workflux.Visualize">
+                <ae:parameter name="description">Visualize workflow.</ae:parameter>
+            </route>
+        </route>
     </ae:configuration>
 </ae:configurations>
