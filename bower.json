@@ -10,7 +10,7 @@
         "Sortable": "~1.2",
 
         "moment": "~2.10.3",
-        "datetime-local-picker": "^0.2.0",
+        "datetime-local-picker": "^0.2.1",
         "magnific-popup": "~1",
         "selectize": "~0.12.1",
         "selectrect": "~0.0.6",

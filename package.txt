@@ -9,4 +9,4 @@
 # for old tika versions use https://archive.apache.org/dist/tika/ instead of
 # http://www.apache.org/dist/tika/ (which always only has the latest version)
 #
-http://www.apache.org/dist/tika/tika-app-1.9.jar vendor/tika.jar 8bed1680bd34f396d8e61147c7c9dc29c4a5a7a0
+https://archive.apache.org/dist/tika/tika-app-1.10.jar vendor/tika.jar 8803a37c5c9467058a4e116beaa97668dad192e1

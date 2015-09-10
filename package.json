@@ -2,13 +2,13 @@
     "name": "honeybee",
     "description": "Defines the node dependencies for honeybee.",
     "author": "Thorsten Schmitt-Rink <thorsten.schmitt-rink@berlinonline.de>",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "license": "MIT",
     "private": true,
     "dependencies": {
-        "jshint": "~2.7.0",
-        "requirejs": "~2.1.17",
-        "bower": "~1.4.1",
+        "jshint": "~2.8.0",
+        "requirejs": "~2.1.20",
+        "bower": "~1.5.2",
         "autoprefixer": "~5.1.1"
     },
     "files": [
