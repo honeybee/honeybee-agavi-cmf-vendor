@@ -4,6 +4,9 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
 
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeybee\Infrastructure\Config\Settings;
+use Honeybee\Ui\Activity\Activity;
+use Honeybee\Ui\Activity\Url as ActivityUrl;
 use Honeybee\Ui\ValueObjects\Pagination;
 
 class HierarchySuccessView extends View
@@ -161,24 +164,80 @@ EOT;
         $sort_activities = $sort_activities_container->getActivityMap();
         $current_sort_value = $request_data->getParameter('sort');
 
-        // is one of those activities the current default one?
-        $default_activity_map = $sort_activities->filterByUrlParameter('sort', $current_sort_value);
-        $default_activity_name = '';
-        if (!$default_activity_map->isEmpty()) {
-            $default_activity_name = $default_activity_map->getItem($default_activity_map->getKeys()[0])->getName();
-        }
+        $output_format = $this->getOutputFormat();
+        $view_scope = $this->getViewScope();
 
         // we generate an id instead of default to a random one, as we need to render the sort
         // activities twice in the html and need unique ids there (by replacing the necessary html snippet)
         $sort_trigger_id = 'sortTrigger' . rand(1, 10000);
 
-        $rendered_sort_activities = $this->renderSubject(
+        $default_data = [
+            'view_scope' => $view_scope,
+        ];
+
+        // get sort_activities renderer config
+        $view_config_service = $this->getServiceLocator()->getViewConfigService();
+        $renderer_config = $view_config_service->getRendererConfig(
+            $view_scope,
+            $output_format,
+            'sort_activities',
+            $default_data
+        );
+
+        /** which activity is the current default one?
+         *
+         * fallbacks order:
+         *  - 'sort' url parameter
+         *  - eventual renderer config setting
+         *  - eventual custom activity name (from setting or validation)
+         *  - first activity of the map
+         */
+        $default_activity_map = $sort_activities->filterByUrlParameter('sort', $current_sort_value);
+        $default_activity_name = '';
+        if (!$default_activity_map->isEmpty()) {
+            $default_activity_name = $default_activity_map->getItem($default_activity_map->getKeys()[0])->getName();
+        } else {
+            // when a default_activity_name setting is present we ignore the custom 'sort' url parameter
+            if ($renderer_config->has('default_activity_name')) {
+                $default_activity_name = $renderer_config->get('default_activity_name');
+            } elseif (empty($current_sort_value)) {
+                if (!$sort_activities->isEmpty()) {
+                    $default_activity_name = $sort_activities->getItem($sort_activities->getKeys()[0])->getName();
+                }
+            } else {
+                // set the custom parameter value (when validation allows it)
+                $default_activity_name = $current_sort_value;
+            }
+        }
+
+        // sort_activities renderer settings
+        $render_settings = [
+            'trigger_id' => $sort_trigger_id,
+        ];
+        if (!$sort_activities->isEmpty() && !$sort_activities->hasKey($default_activity_name)) {
+            // force a dropdown to display the custom value but only allow the choice of configured activities
+            $render_settings['as_dropdown'] = 'true';
+
+            $custom_activity = new Activity([
+                'name' => $default_activity_name,
+                'label' => $default_activity_name.'.label',
+                'url' => ActivityUrl::createUri('null'),
+                'settings' => new Settings
+            ]);
+            $sort_activities->setItem($default_activity_name, $custom_activity);
+        }
+
+        if (!empty($default_activity_name)) {
+            $render_settings['default_activity_name'] = $default_activity_name;
+        }
+
+        $renderer_service = $this->getServiceLocator()->getRendererService();
+        $rendered_sort_activities = $renderer_service->renderSubject(
             $sort_activities,
-            [
-                'default_activity_name' => $default_activity_name,
-                'trigger_id' => $sort_trigger_id,
-            ],
-            'sort_activities'
+            $output_format,
+            $renderer_config,
+            [],
+            new Settings($render_settings)
         );
 
         $this->setAttribute('sort_trigger_id', $sort_trigger_id);
