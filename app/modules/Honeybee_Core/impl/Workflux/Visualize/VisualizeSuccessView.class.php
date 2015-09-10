@@ -6,12 +6,19 @@ class Honeybee_Core_Workflux_Visualize_VisualizeSuccessView extends View
 {
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
-        $aggregate_root_type = $request_data->getParameter('type');
-        $state_machine = $aggregate_root_type->getWorkflowStateMachine();
+        $state_machine = $request_data->getParameter('subject');
         $svg = $this->renderSubject($state_machine);
 
         if ($request_data->hasParameter('output')) {
-            file_put_contents($request_data->getParameter('output'), $svg);
+            $output = $request_data->getParameter('output');
+            file_put_contents($output, $svg);
+            $message = sprintf(
+                '-> successfully generated visualization for "%s"' . PHP_EOL .
+                '-> image was generated here: %s',
+                $state_machine->getName(),
+                realpath($output)
+            );
+            return $this->cliMessage($message);
         } else {
             return $svg;
         }

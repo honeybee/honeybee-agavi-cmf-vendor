@@ -12,22 +12,21 @@
             <validator class="boolean" required="false">
                 <argument>quiet</argument>
             </validator>
-            
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
-                <argument>type</argument>
-                <error>You must specify a valid aggregate root type within you project's domain.</error>
-                <ae:parameter name="description">Visualize workflow for the aggregate root type.</ae:parameter>
-                <ae:parameter name="dialog">
+
+            <validator class="string" name="input_file" provides="valid_input_file">
+                <argument>input</argument>
+                <error>You must specify a valid Workflux definition.</error>
+            </validator>
+           
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\WorkflowSubjectValidator" name="workflow_subject" depends="valid_input_file">
+               <argument>subject</argument>
+               <error>You must specify a valid Workflux subject.</error>
+               <ae:parameter name="dialog">
                     <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
                     <ae:parameter name="select">true</ae:parameter>
-                    <ae:parameter name="question">Please pick an aggregate root type</ae:parameter>
+                    <ae:parameter name="question">Please pick a state machine</ae:parameter>
                     <ae:parameter name="attempts">3</ae:parameter>
                 </ae:parameter>
-            </validator>
-
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
-                <argument>type</argument>
-                <error>You must specify a valid aggregate root type name within you project's domain.</error>
             </validator>
             
             <validator class="string" required="false">
