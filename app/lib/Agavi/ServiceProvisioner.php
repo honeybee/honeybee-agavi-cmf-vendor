@@ -28,6 +28,7 @@ use Honeybee\FrameworkBinding\Agavi\Provisioner\MigrationServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\NavigationServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\OutputFormatServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\PermissionServiceProvisioner;
+use Honeybee\FrameworkBinding\Agavi\Provisioner\ProcessMapProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ProvisionerInterface;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\RendererServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ServiceLocatorProvisioner;
@@ -75,6 +76,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         'honeybee.infrastructure.filesystem_service' => FilesystemServiceProvisioner::CLASS,
         'honeybee.infrastructure.command_bus' => CommandBusProvisioner::CLASS,
         'honeybee.infrastructure.event_bus' => EventBusProvisioner::CLASS,
+        'honeybee.infrastructure.process_map' => ProcessMapProvisioner::CLASS,
         'honeybee.model.task_service' => TaskServiceProvisioner::CLASS,
         'honeybee.ui.activity_service' => ActivityServiceProvisioner::CLASS,
         'honeybee.ui.navigation_service' => NavigationServiceProvisioner::CLASS,

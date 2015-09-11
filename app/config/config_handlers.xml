@@ -77,7 +77,7 @@
             <handler pattern="%core.config_dir%/migration.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\MigrationConfigHandler">
                 <validation>%core.config_dir%/xsd/migration.xsd</validation>
             </handler>
-            
+
             <handler pattern="%core.config_dir%/fixture.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\FixtureConfigHandler">
                 <validation>%core.config_dir%/xsd/fixture.xsd</validation>
             </handler>
@@ -88,6 +88,10 @@
 
             <handler pattern="%core.config_dir%/filesystems.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\FilesystemsConfigHandler">
                 <validation>%core.config_dir%/xsd/filesystems.xsd</validation>
+            </handler>
+
+            <handler pattern="%core.config_dir%/process.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\ProcessConfigHandler">
+                <validation>%core.config_dir%/xsd/process.xsd</validation>
             </handler>
 
         </handlers>

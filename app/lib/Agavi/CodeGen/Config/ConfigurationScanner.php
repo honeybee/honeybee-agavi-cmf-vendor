@@ -20,19 +20,18 @@ class ConfigurationScanner
         'connections',
         'data_access',
         'events',
-        'exports',
         'filesystems',
         'fixture',
-        'imports',
         'logging',
         'mail',
         'migration',
         'navigation',
+        'process',
         'services',
         'settings',
         'translation',
-        'view_templates',
         'view_configs',
+        'view_templates',
         'workflows'
     ];
 
