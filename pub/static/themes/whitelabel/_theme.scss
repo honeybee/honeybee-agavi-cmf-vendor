@@ -99,14 +99,7 @@ button {
     display: block;
 }
 
-.page-main {
-    padding: $base-spacing;
-}
-
-.page-footer {
-    @include sheet;
-}
-
+// brand
 .brand {
     padding: 10px 20px 10px 20px;
 
@@ -129,14 +122,23 @@ button {
             padding: 0;
         }
     }
+}
 
-    .brand__entity {
-        font-weight: bold;
-    }
+.brand__entity {
+    font-weight: bold;
+}
 
-    .brand__title {
-        margin-left: 0.25em;
-    }
+.brand__title {
+    margin-left: 0.25em;
+}
+
+// page components
+.page-main {
+    padding: $base-spacing;
+}
+
+.page-footer {
+    @include sheet;
 }
 
 .page-header {
