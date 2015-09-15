@@ -25,7 +25,7 @@ $sidebar-size: 25% !default;
     }
 
     .sidebar__toggle {
-        @include button-normal-navigational;
+        @include button-emphasized-navigational;
         width: auto;
         position: fixed;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);

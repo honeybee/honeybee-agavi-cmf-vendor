@@ -50,7 +50,10 @@
             width: auto;
         }
         .#{$name}__toggle-icon {
-            font-family: entypo;
+            @include hb-icon-before(chevron-small-down, color(navigational-primary)) {
+                padding-left: 0.5em;
+            };
+            width: 1em;
             float: right;
         }
         .#{$name}__default ~ .#{$name}__toggle {

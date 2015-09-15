@@ -1,4 +1,7 @@
 .primary-activities {
+
+    @include button-colors-emphasized-navigational-default;
+
     .activity {
         width: 100%;
     }
@@ -30,6 +33,10 @@
                 display: inline-block;
             }
         }
+    }
+
+    @include media-query(palm) {
+        display: none;
     }
 }
 

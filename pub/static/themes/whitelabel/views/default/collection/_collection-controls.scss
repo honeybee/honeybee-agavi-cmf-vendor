@@ -27,15 +27,13 @@
         padding-left: 0.5em;
     }
 
-    // vertical align
-    .pager__content, .sort__content, .pager__list{
-        @include flexbox;
-        @include align-items(center);
-        overflow: hidden;
-    }
-
     .sort__control {
-        // white-space: nowrap;     // No control on overflow of long strings
+        // vertical align
+        @include media-query(lap) {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
 
         > * {
             display: inline-block;
@@ -106,6 +104,8 @@
 }
 
 .controls-layout {
+
+    @extend .layout--middle;
 
     .search-box {
         @extend .u-1-of-1-portable;
