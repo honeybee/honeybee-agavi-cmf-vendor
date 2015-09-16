@@ -5,9 +5,18 @@
 {% endblock %}
 
 {% block primary %}
-<ul>
-{% for event in events_data %}
-    <li><a href="{{ event.url }}" title="{{ _('View resource in this revision') }}">{{ event.data.seq_number }}) {{ event.data['@type'] }}, ISO-Timestamp: {{ event.data.iso_date }}</a></li>
+<ul class="cbp_tmtimeline">
+{% for event in events_data|reverse %}
+    <li>
+        <time class="cbp_tmtime" datetime="{{ event.data.iso_date }}"><span>{{ event.data.iso_date }}</span></time>
+        <div class="cbp_tmicon cbp_tmicon-phone"></div>
+        <div class="cbp_tmlabel">
+            <h2>
+                <a href="{{ event.url }}" title="{{ _('View resource in this revision') }}">Event {{ event.data.seq_number }})</a>
+            </h2>
+            <p>{{ event.data.seq_number }}) {{ event.data['@type'] }}, ISO-Timestamp: {{ event.data.iso_date }}</p>
+        </div>
+    </li>
 {% endfor %}
 <ul>
 {% endblock %}
