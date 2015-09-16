@@ -34,9 +34,13 @@
             }
         }
     }
+}
 
-    @include media-query(palm) {
-        display: none;
+.primary-content {
+    .primary-activities {
+        @include media-query(palm) {
+            display: none;
+        }
     }
 }
 
