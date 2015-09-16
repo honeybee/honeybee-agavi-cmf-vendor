@@ -1,0 +1,88 @@
+$workflow_state_fieldname: "workflow_state";
+$hover-color: mix(color(blue), color(lightgrey1), 10%);
+
+.view-resource {
+}
+
+.view-resource .hb-viewitem-wrapper {
+
+    .hb-field__content {
+        @include frame(color(lightgrey2));
+        // border-bottom: 2px solid color(grey2);
+    }
+
+    .hb-field__label {
+        font-size: 90%;
+        background-color: color(panel-header-background);
+        color: color(darkgrey1);
+        font-weight: 700;
+        padding: $base-spacing/2;
+        border-bottom: 1px solid color(grey2);
+    }
+
+    .hb-field__value {
+        padding: $base-spacing;
+        // background-color: color(lightgrey2);
+    }
+
+    .hb-field {
+
+    }
+
+    .hb-itemlist__titles {
+        background-color: color(panel-header-background);
+        color: color(darkgrey1);
+    }
+
+    .hb-itemlist__title {
+        font-weight: 700;
+        padding: $base-spacing;
+    }
+
+    @include media-query(palm) {
+        box-shadow: none;
+
+        .hb-item {
+            @include frame(color(transparent));
+        }
+
+        .hb-field__label {
+            text-align: center;
+        }
+
+        .hb-field__value {
+            padding: $base-spacing/2 $base-spacing;
+        }
+
+        .hb-field {
+            margin: 0;
+        }
+    }
+
+    @include media-query(lap-and-up) {
+        color: color(darkgrey2);
+
+        .hb-field[data-hb-field-name="#{$workflow_state_fieldname}"] {
+            width: percentage(3/12);
+        }
+
+        .hb-actions {
+            width: percentage(3/12);
+            padding-right: $base-spacing;
+            text-align: right;
+        }
+
+        .hb-actions__content {
+            padding: 1px 10px 1px 1px;
+        }
+
+        .hb-itemlist__title-actions {
+            @include visuallyhidden;
+        }
+    }
+
+    .hb-field:hover,
+    .hb-actions:hover {
+        background-color: $hover-color;
+    }
+}
