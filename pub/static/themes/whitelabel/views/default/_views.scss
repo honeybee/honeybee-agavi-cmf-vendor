@@ -1,5 +1,6 @@
 @import "modifyitem";
 @import "collection/views.collection";
+@import "resource/views.resource";
 
 .view-create {
     @include modifyitem-view();

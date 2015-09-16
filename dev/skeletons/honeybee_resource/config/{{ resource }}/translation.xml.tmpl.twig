@@ -25,6 +25,7 @@
                             Example view translation:
 
                                 <ae:parameter name="collection.page_title">List of {{ resource }} items</ae:parameter>
+                                <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
                                 <ae:parameter name="resource.modify.page_title">Edit {{ resource }} item</ae:parameter>
 
                             Translation here will be used by default also for the browser title.
@@ -81,16 +82,22 @@
 
                     <ae:parameter name="fields">
                         <ae:parameter name="de">
+                            <!-- Custom fields -->
+
+                            <!-- Default fields -->
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
-                            <ae:parameter name="created_at.field_name">Created at</ae:parameter>
-                            <ae:parameter name="modified_at.field_name">Modified at</ae:parameter>
+                            <ae:parameter name="created_at.field_name">Erstellt</ae:parameter>
+                            <ae:parameter name="modified_at.field_name">Zuletzt bearbeitet</ae:parameter>
                             <ae:parameter name="identifier.field_name">Identifer</ae:parameter>
                             <ae:parameter name="revision.field_name">Revision</ae:parameter>
                             <ae:parameter name="version.field_name">Version</ae:parameter>
-                            <ae:parameter name="language.field_name">Language</ae:parameter>
+                            <ae:parameter name="language.field_name">Sprache</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
+                            <!-- Custom fields -->
+
+                            <!-- Default fields -->
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
                             <ae:parameter name="created_at.field_name">Created at</ae:parameter>
@@ -104,7 +111,11 @@
 
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
+                            <!--
+                                Default actions names (used into the navigation)
+                            -->
                             <ae:parameter name="collection.label">{{ resource }} Liste</ae:parameter>
+                            <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
                             <ae:parameter name="edit.label">Bearbeiten</ae:parameter>
                             <ae:parameter name="edit.description">{{ resource }} bearbeiten</ae:parameter>
                             <ae:parameter name="delete.label">Löschen</ae:parameter>
@@ -138,6 +149,7 @@
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="collection.label">{{ resource }} List</ae:parameter>
+                            <ae:parameter name="resource.label">{{ resource }} Detail</ae:parameter>
                             <ae:parameter name="edit.label">Edit</ae:parameter>
                             <ae:parameter name="edit.description">Edit {{ resource }}</ae:parameter>
                             <ae:parameter name="delete.label">Delete</ae:parameter>
