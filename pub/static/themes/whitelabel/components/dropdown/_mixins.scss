@@ -1,4 +1,4 @@
-@mixin dropdown($name: "dropdown") {
+@mixin dropdown($name: "dropdown", $toggle-width: 1em) {
     @include flyout("#{$name}");
     @include flyout--default-inline("#{$name}");
 
@@ -20,6 +20,8 @@
         }
         .#{$name}__default {
             flex-grow: 1;
+            text-align: center;
+            padding-left: $toggle-width;    // keep the text centered
             .activity {
                 width: 100%;
             }
@@ -53,7 +55,7 @@
             @include hb-icon-before(chevron-small-down, color(navigational-primary)) {
                 padding-left: 0.5em;
             };
-            width: 1em;
+            width: $toggle-width;
             float: right;
         }
         .#{$name}__default ~ .#{$name}__toggle {
@@ -114,6 +116,7 @@
             vertical-align: top;
         }
 
+        // when a default choice is present
         .#{$name}__default ~ .#{$name}__toggle {
             padding-left: 0;
             border-top-left-radius: 0;

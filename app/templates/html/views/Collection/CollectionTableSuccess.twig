@@ -6,12 +6,21 @@
     {{ rendered_pagination|raw }}
 {% endblock %}
 
+{% block subheader_activities %}
+    {%- if rendered_subheader_activities is not empty -%}
+        <div class="subheader-activities-box">
+            <div class="subheader-activities">
+                {{ rendered_subheader_activities|raw }}
+            </div>
+        </div><!-- .subheader-activites-box
+-->{% endif %}
+{% endblock subheader_activities %}
+
 {% block primary_activities %}
     <div class="primary-activities">
         {{ rendered_primary_activities|raw }}
     </div>
 {% endblock primary_activities %}
-
 
 {# blocks that are overridden from the parent template #}
 

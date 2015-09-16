@@ -39,6 +39,7 @@ class CollectionSuccessView extends View
         $this->setAttribute('rendered_resource_collection', $rendered_resource_collection);
         $this->setAttribute('resource_type_name', $resource_type->getName());
 
+        $this->setSubheaderActivities($request_data);
         $this->setPrimaryActivities($request_data);
         $this->setSearchForm($request_data);
         $this->setSortActivities($request_data);
@@ -88,18 +89,44 @@ EOT;
         $this->cliMessage($text);
     }
 
-    protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
+    protected function setSubheaderActivities(AgaviRequestDataHolder $request_data)
     {
+        $container_scope_key = $this->getViewScope() . '.subheader_activities';
         $activity_service = $this->getServiceLocator()->getActivityService();
 
-        $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
-        $primary_activities = $primary_activities_container->getActivityMap();
+        $rendered_subheader_activities = '';
+        if ($activity_service->hasContainer($container_scope_key)) {
+            $subheader_activities_container = $activity_service->getContainer($container_scope_key);
 
-        $rendered_primary_activities = $this->renderSubject(
-            $primary_activities,
-            [],
-            'primary_activities'
-        );
+            $subheader_activities = $subheader_activities_container->getActivityMap();
+
+            $rendered_subheader_activities = $this->renderSubject(
+                $subheader_activities,
+                [],
+                'subheader_activities'
+            );
+        }
+
+        $this->setAttribute('rendered_subheader_activities', $rendered_subheader_activities);
+
+        return $rendered_subheader_activities;
+    }
+
+    protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
+    {
+        $rendered_primary_activities = '';
+        if (empty($this->getAttribute('rendered_subheader_activities', ''))) {
+            $activity_service = $this->getServiceLocator()->getActivityService();
+
+            $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
+            $primary_activities = $primary_activities_container->getActivityMap();
+
+            $rendered_primary_activities = $this->renderSubject(
+                $primary_activities,
+                [],
+                'primary_activities'
+            );
+        }
 
         $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
 
@@ -183,7 +210,8 @@ EOT;
             'trigger_id' => $sort_trigger_id,
         ];
         if (!$sort_activities->isEmpty() && !$sort_activities->hasKey($default_activity_name)) {
-            // force a dropdown to display the custom value but only allow the choice of configured activities
+            // force a dropdown to display the custom (non-existent) value
+            // but only allow the choice of configured activities
             $render_settings['as_dropdown'] = 'true';
 
             $custom_activity = new Activity([

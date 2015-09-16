@@ -146,7 +146,7 @@ button {
 }
 
 .page-subheader {
-    padding: 10px 20px;
+    padding: $base-spacing/2 $base-spacing;
     border-width: 1px 0px;
     border-style: solid;
     border-color: color(grey2);
@@ -154,9 +154,37 @@ button {
     background-color: color(lightgrey2);
 }
 
+.subheader-title-box {
+    @extend %lap-and-up-3-of-5;
+}
+
+.subheader-activities-box {
+    @extend %lap-and-up-2-of-5;
+}
+
+.subheader-activities {
+    .activity-map .activity {
+        width: auto;
+    }
+    text-align: right;
+
+    @include media-query(palm) {
+        text-align: center;
+        padding-top: $base-spacing/2;
+    }
+}
+
 .page-title {
     @include typography-default;
     color: color(darkgrey2);
+
+    @include media-query(palm) {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        font-size: $font-size * 1.3;
+        padding-top: 0;
+    }
 }
 
 .disabled {
