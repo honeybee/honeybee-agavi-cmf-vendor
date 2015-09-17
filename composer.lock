@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "892106eb4652b4cb4573357bdfb2dc78",
+    "content-hash": "6663e378f2332793ff46b72567d9b043",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -606,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "dae18d9983a67653e987dee2ff038cc1bbfe1d36"
+                "reference": "a73be73741c9889df67a514126d206095835147f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/dae18d9983a67653e987dee2ff038cc1bbfe1d36",
-                "reference": "dae18d9983a67653e987dee2ff038cc1bbfe1d36",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/a73be73741c9889df67a514126d206095835147f",
+                "reference": "a73be73741c9889df67a514126d206095835147f",
                 "shasum": ""
             },
             "require": {
@@ -691,7 +692,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2015-09-10 17:35:38"
+            "time": "2015-09-16 17:31:17"
         },
         {
             "name": "honeybee/trellis",
@@ -699,12 +700,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "0f61b59d7dfb9e309371a7fb74a0a4d22653786e"
+                "reference": "253d0ed887fc3db00d64873f0410e1070e298edf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/0f61b59d7dfb9e309371a7fb74a0a4d22653786e",
-                "reference": "0f61b59d7dfb9e309371a7fb74a0a4d22653786e",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/253d0ed887fc3db00d64873f0410e1070e298edf",
+                "reference": "253d0ed887fc3db00d64873f0410e1070e298edf",
                 "shasum": ""
             },
             "require": {
@@ -760,7 +761,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2015-08-27 10:28:38"
+            "time": "2015-09-11 09:14:16"
         },
         {
             "name": "league/flysystem",
