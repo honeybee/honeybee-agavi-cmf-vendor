@@ -31,6 +31,13 @@ $workflow_state_fieldname: "workflow_state";
         .hb-item {
             @include frame(color(lightgrey2));
         }
+
+        @include media-query(palm) {
+            .hb-field:hover {
+                $hover-color: mix(color(blue), color(lightgrey1), 10%);
+                background-color: $hover-color;
+            }
+        }
     }
 
     @include media-query(lap-and-up) {
@@ -53,13 +60,13 @@ $workflow_state_fieldname: "workflow_state";
         .hb-itemlist__title-actions {
             @include visuallyhidden;
         }
-    }
 
-    .hb-item:hover {
-        $hover-color: mix(color(blue), color(lightgrey1), 10%);
-        .hb-field,
-        .hb-actions {
-            background-color: $hover-color;
+        .hb-item:hover {
+            $hover-color: mix(color(blue), color(lightgrey1), 10%);
+            .hb-field,
+            .hb-actions {
+                background-color: $hover-color;
+            }
         }
     }
 }
