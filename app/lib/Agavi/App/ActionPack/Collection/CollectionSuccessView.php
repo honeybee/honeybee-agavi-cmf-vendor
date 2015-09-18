@@ -115,18 +115,16 @@ EOT;
     protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
     {
         $rendered_primary_activities = '';
-        if (empty($this->getAttribute('rendered_subheader_activities', ''))) {
-            $activity_service = $this->getServiceLocator()->getActivityService();
+        $activity_service = $this->getServiceLocator()->getActivityService();
 
-            $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
-            $primary_activities = $primary_activities_container->getActivityMap();
+        $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
+        $primary_activities = $primary_activities_container->getActivityMap();
 
-            $rendered_primary_activities = $this->renderSubject(
-                $primary_activities,
-                [],
-                'primary_activities'
-            );
-        }
+        $rendered_primary_activities = $this->renderSubject(
+            $primary_activities,
+            [],
+            'primary_activities'
+        );
 
         $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
 
