@@ -1,0 +1,81 @@
+// Styles
+
+@mixin base-dropdown-style-normal($name: "dropdown-normal") {
+    &:hover {@include button-shadow-normal-navigational-hover;}
+    border-radius: 3px;
+
+    @at-root {
+        .#{$name}__toggle {
+            @include button-shape-normal-navigational-default();
+            @include button-colors-normal-navigational-default();
+            &:hover { @include button-colors-normal-navigational-hover;}
+            &:hover { @include button-colors-normal-navigational-focus;}
+            &:active {
+                @include button-colors-normal-navigational-active;
+                @include button-shadow-normal-navigational-active;
+            }
+
+            vertical-align: top;
+        }
+
+        .#{$name}__toggle-icon {
+            padding-left: 0.5em;
+        }
+
+
+        .#{$name}__trigger:checked ~ .#{$name}__toggle {
+            @include button-colors-normal-navigational-active();
+            @include button-shadow-normal-navigational-active();
+        }
+
+        .#{$name}__more {
+            background-color: color(white);
+        }
+
+        @content;
+    }
+}
+
+@mixin base-dropdown-style-emphasized($name: "dropdown-emphasized") {
+    border-radius: 3px;
+
+    @at-root {
+        .#{$name}__toggle {
+            @include button-shape-emphasized-navigational-default();
+            @include button-colors-emphasized-navigational-default();
+            &:hover { @include button-colors-emphasized-navigational-hover;}
+            &:focus { @include button-colors-emphasized-navigational-focus;}
+            &:active {
+                @include button-colors-emphasized-navigational-active;
+                @include button-shadow-emphasized-navigational-active;
+            }
+        }
+
+        .#{$name}__toggle-icon {
+            padding-left: 0.5em;
+        }
+
+        .#{$name}__trigger:checked ~ .#{$name}__toggle {
+            @include button-colors-emphasized-navigational-active();
+            @include button-shadow-emphasized-navigational-active();
+        }
+
+        .#{$name}__more {
+            background-color: color(white);
+        }
+
+        @content;
+    }
+}
+
+@mixin base-splitbutton-style-normal($name: "dropdown-normal") {
+    @include base-dropdown-style-normal($name) {
+        @content;
+    };
+}
+
+@mixin base-splitbutton-style-emphasized($name: "dropdown-emphasized") {
+    @include base-dropdown-style-emphasized($name) {
+        @content;
+    };
+}

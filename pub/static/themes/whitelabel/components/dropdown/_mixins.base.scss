@@ -1,0 +1,110 @@
+// Base dropdown/splitbutton
+
+$dropdown-toggle-width: 1em;
+
+@mixin base-dropdown($name: "dropdown") {
+    @include flyout("#{$name}");
+    @include flyout--default-inline("#{$name}");
+
+    display: inline-block;
+    position: relative;
+
+    @include media-query(lap-and-up) {
+        @include flyout--popover("#{$name}");
+    }
+    @include media-query(palm) {
+        display: flex;
+        flex-flow: row wrap;
+        .#{$name}__toggle {
+            flex-grow: 1;
+        }
+        .#{$name}__more {
+            width: 100%;
+        }
+    }
+
+    .#{$name}__toggle--disabled {
+        border: 0;
+
+        .#{$name}__toggle-icon {
+            visibility: hidden;
+        }
+    }
+
+    @at-root {
+        .#{$name}__more {
+            left: auto;
+            right: 0;
+            top: 100%;
+            margin-top: 5px;
+            min-width: 8em;
+
+            @include media-query(palm) {
+                width: auto;
+                margin-right: -2*$base-spacing;
+            }
+        }
+
+        .#{$name}__toggle {
+            width: auto;
+        }
+
+        .#{$name}__toggle-icon {
+            @include hb-icon-before(chevron-small-down, color(navigational-primary)) {
+                padding-left: 0.5em;
+            };
+            width: $dropdown-toggle-width;
+            float: right;
+        }
+
+        .#{$name}__more {
+            ul {
+                @include activitylist;
+                @include activitylist--vertical;
+            }
+
+            .activity {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .#{$name}__trigger:focus {
+            ~ .#{$name}__toggle {
+            }
+        }
+
+        @content;
+    }
+}
+
+@mixin base-splitbutton($name: "splitbutton-normal") {
+    @include base-dropdown($name);
+    white-space: nowrap;
+
+    @include media-query(palm) {
+        .#{$name}__toggle {
+            flex-grow: 0;
+        }
+        .#{$name}__default {
+            flex-grow: 1;
+            text-align: center;
+            padding-left: $dropdown-toggle-width;    // keep the text centered
+            .activity {
+                width: 100%;
+            }
+        }
+    }
+
+    @at-root {
+        .#{$name}__toggle {
+            float: none;
+        }
+        .#{$name}__trigger:focus {
+            ~ .#{$name}__default {
+            }
+        }
+
+        @content;
+    }
+}

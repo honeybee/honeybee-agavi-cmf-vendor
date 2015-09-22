@@ -1,5 +1,5 @@
 {% set emphasized = emphasized | default(false) %}
-{% set splitbutton_name = name | default("dropdown")~(emphasized ? "-emphasized" : "-normal") %}
+{% set splitbutton_name = name | default("splitbutton")~(emphasized ? "-emphasized" : "-normal") %}
 {% set splitbutton_css = css | default("") %}
 {% if more_activities is not defined or not more_activities %}
     {% set splitbutton_css = splitbutton_css ~ ' ' ~ splitbutton_name ~ '--empty' %}
@@ -31,7 +31,7 @@
     <div class="{{ splitbutton_name ~ '__default' }} {{ default_css }}" {% for attr, val in default_attr %} {{ attr }}="{{ val }}" {% endfor %}>
     {%- block default -%}{{ default_content|raw }}{%- endblock -%}
     </div><!--
-    --><label for="{{ trigger_id }}" class="{{ splitbutton_name ~ '__toggle' }} hb-js-flyout-toggle {{ toggle_css }}" {% for attr, val in toggle_attr
+    --><label for="{{ trigger_id }}" class="{{ splitbutton_name ~ '__toggle' }} hb-js-flyout-toggle {{ toggle_css }} {% if toggle_disabled %} {{ splitbutton_name ~ '__toggle--disabled' }}{% endif %}" {% for attr, val in toggle_attr
         %} {{ attr }}="{{ val }}" {% endfor %}>{% block toggle %}<span class="{{ splitbutton_name~ '__toggle-icon'}}">{{ toggle_content|raw }}</span>{% endblock %}</label><!--
     --><div class="{{ splitbutton_name ~ '__more' }} {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
             {%- block more -%}

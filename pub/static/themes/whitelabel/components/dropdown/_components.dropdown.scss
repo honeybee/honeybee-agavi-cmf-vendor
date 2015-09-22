@@ -2,9 +2,10 @@
 
 %dropdown,
 .dropdown {
-    @include dropdown("dropdown");
+    @include base-dropdown("dropdown");
 }
 
+// Dropdown
 %dropdown-normal,
 .dropdown-normal {
     @include dropdown-normal("dropdown-normal");
@@ -13,4 +14,15 @@
 %dropdown-emphasized,
 .dropdown-emphasized {
     @include dropdown-emphasized("dropdown-emphasized");
+}
+
+// Splitbutton
+%splitbutton-normal,
+.splitbutton-normal {
+    @include splitbutton-normal("splitbutton-normal");
+}
+
+%splitbutton-emphasized,
+.splitbutton-emphasized {
+    @include splitbutton-emphasized("splitbutton-emphasized");
 }

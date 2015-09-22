@@ -83,7 +83,9 @@
     <h1>Activity Groups</h1>
     <div class="layout">
         <div class="layout__item u-1-of-2-lap-and-up u-1-of-3-desk">
-            {% embed 'html/activity_map/as_splitbutton.twig' with {} %}
+            {% embed 'html/activity_map/as_splitbutton.twig' with {
+                toggle_disabled: false,
+            } %}
                 {% block default %}
                     {% include "html/activity/link.twig" with activities[0] %}
                 {% endblock %}
@@ -95,7 +97,9 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
-            {% embed 'html/activity_map/as_dropdown.twig' with {} %}
+            {% embed 'html/activity_map/as_dropdown.twig' with {
+                toggle_disabled: false,
+            } %}
                 {% block default %}
                     {{ activities[0].activity.label }}
                 {% endblock %}
@@ -110,7 +114,8 @@
         </div><!--
         --><div class="layout__item u-1-of-2-lap u-1-of-3-desk">
             {% embed 'html/activity_map/as_splitbutton.twig' with {
-                emphasized: true
+                emphasized: true,
+                toggle_disabled: false,
             } %}
                 {% block default %}
                     {% include "html/activity/link.twig" with activities[0] %}
@@ -124,7 +129,8 @@
                 {% endblock %}
             {% endembed %}
             {% embed 'html/activity_map/as_dropdown.twig' with {
-                emphasized: true
+                emphasized: true,
+                toggle_disabled: false,
             } %}
                 {% block default %}
                     {{ activities[0].activity.label }}
