@@ -136,12 +136,12 @@
 
 //mutating
 @mixin button-colors-emphasized-mutating-default {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(mutating-primary);
     border-color: color(mutating-secondary);
 }
 @mixin button-colors-emphasized-mutating-hover {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(mutating-secondary);
     border-color: color(mutating-highlight);
 }
@@ -149,7 +149,7 @@
     @include button-colors-emphasized-mutating-default;
 }
 @mixin button-colors-emphasized-mutating-active {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(mutating-secondary);
     border-color: color(mutating-highlight);
 }
@@ -159,12 +159,12 @@
 
 //positive
 @mixin button-colors-emphasized-positive-default {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(positive-primary);
     border-color: color(positive-secondary);
 }
 @mixin button-colors-emphasized-positive-hover {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(positive-secondary);
     border-color: color(positive-highlight);
 }
@@ -172,7 +172,7 @@
     @include button-colors-emphasized-positive-default;
 }
 @mixin button-colors-emphasized-positive-active {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(positive-secondary);
     border-color: color(positive-highlight);
 }
@@ -182,12 +182,12 @@
 
 //warning
 @mixin button-colors-emphasized-warning-default {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(warning-primary);
     border-color: color(warning-secondary);
 }
 @mixin button-colors-emphasized-warning-hover {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(warning-secondary);
     border-color: color(warning-highlight);
 }
@@ -195,7 +195,7 @@
     @include button-colors-emphasized-warning-default;
 }
 @mixin button-colors-emphasized-warning-active {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(warning-secondary);
     border-color: color(warning-highlight);
 }
@@ -205,12 +205,12 @@
 
 //destructive
 @mixin button-colors-emphasized-destructive-default {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(destructive-primary);
     border-color: color(destructive-secondary);
 }
 @mixin button-colors-emphasized-destructive-hover {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(destructive-secondary);
     border-color: color(destructive-highlight);
 }
@@ -218,7 +218,7 @@
     @include button-colors-emphasized-destructive-default;
 }
 @mixin button-colors-emphasized-destructive-active {
-    color: color(background-blank);
+    color: color(emphasized-primary);
     background-color: color(destructive-secondary);
     border-color: color(destructive-highlight);
 }

@@ -197,10 +197,6 @@
     }
     /** embed/reference styles end here */
 
-    .activities-list {
-        background-color: rgba(color(lightgrey1), .8);
-    }
-
     @include media-query(palm) {
         .primary-activities .activities-list__more li {
             display: block;
@@ -210,6 +206,10 @@
         .primary-activities .activities-list__more li:last-child {
             margin-bottom: 0;
         }
+    }
+
+    .controls-bottom {
+        display: none;
     }
 
     @include media-query(lap-and-up) {

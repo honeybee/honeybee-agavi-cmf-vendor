@@ -1,13 +1,17 @@
 .primary-activities {
 
-    @include button-colors-emphasized-navigational-default;
+    .activity-map {
+        background-color: color(transparent);
+    }
 
     .activity {
+        @include button-emphasized-mutating;
         width: 100%;
     }
 
     .activities-list__more li {
         display: none;
+        margin: 0 $base-spacing/2 0 0;
 
         &:first-child {
             display: block;
@@ -19,18 +23,22 @@
     }
 
     @include media-query(lap-and-up) {
-        @include shadow-overlay;
         @include zindex("overlay");
 
         position: fixed;
-        bottom: 0;
-        right: 130px;
+        bottom: $base-spacing/2;;
+        right: $base-spacing/2;
 
         .activities-list__more li {
             display: inline-block;
+            vertical-align: top;
 
             &:first-child {
                 display: inline-block;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
             }
         }
     }

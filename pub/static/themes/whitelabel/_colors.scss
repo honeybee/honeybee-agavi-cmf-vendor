@@ -55,6 +55,8 @@ $semantic-colors: (
     destructive-secondary: map-get($colors, reddarker),
     destructive-highlight: map-get($colors, reddark),
 
+    emphasized-primary: map-get($colors, white),
+
     panel-header-background: map-get($colors, lightgrey3),
     panel-header-text: map-get($colors, darkgrey1),
 );

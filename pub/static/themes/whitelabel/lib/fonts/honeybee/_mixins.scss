@@ -36,7 +36,7 @@ $default-color: color(black);
     Note: pseudo-element icon styling should be more important than its container styling.
           Use @content to overwrite conflicting rules with '!important'.
 */
-@mixin hb-icon-before($icon-name, $color: $default-color) {
+@mixin hb-icon-before($icon-name, $color: $default-color, $hide-content: true) {
     &:before {
         @include hb-icon($icon-name, $color);
         position: absolute;
@@ -47,13 +47,15 @@ $default-color: color(black);
 
         @content;
     }
-    & {
-        position: relative !important;
-        display: inline-block !important;
-        text-indent: -9999em !important;
-        text-overflow: clip !important;
-        overflow: hidden !important;
-        white-space: nowrap !important;
-        speak: none !important;
+    @if $hide-content {
+        & {
+            position: relative !important;
+            display: inline-block !important;
+            text-indent: -9999em !important;
+            text-overflow: clip !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            speak: none !important;
+        }
     }
 }

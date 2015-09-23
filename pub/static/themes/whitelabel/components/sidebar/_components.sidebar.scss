@@ -16,6 +16,15 @@ $sidebar-size: 25% !default;
             bottom: 0;
             left: 0;
             width: 100%;
+            // override button spacings
+            &,
+            &:focus,
+            &:hover,
+            &:active,
+            &:disabled,
+            &.disabled {
+                margin: 0;
+            }
         }
     }
 
@@ -26,14 +35,26 @@ $sidebar-size: 25% !default;
 
     .sidebar__toggle {
         @include button-emphasized-navigational;
+        // override button spacings
+        &,
+        &:focus,
+        &:hover,
+        &:active,
+        &:disabled,
+        &.disabled {
+            margin: 0 $base-spacing/2 $base-spacing/2 $base-spacing;
+            padding-left: $base-spacing/2 + $font-size*1.5;
+            padding-right: $base-spacing/2;
+        }
+
+        // menu icon on the text side
+        @include hb-icon-before(align-left, color(text-primary), false) {
+            margin-left: -$font-size*1.8;
+        }
+
         width: auto;
         position: fixed;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
-        &, &:hover {
-            padding-left: $base-spacing;
-            padding-right: $base-spacing;
-        }
     }
 
     .sidebar__trigger:checked ~ .sidebar__toggle {
