@@ -9,10 +9,14 @@
     overflow: visible; /* [6] */
 }
 
+// vars
+$buttons-emphasized-padding: 0.5em;
+
+// definition
 @mixin button-shape() {
     @include inuit-btn;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
+    padding-left: $buttons-emphasized-padding;
+    padding-right: $buttons-emphasized-padding;
 
     border-radius: 3px;
 
@@ -30,6 +34,11 @@
     @include button-shape;
     padding-top: 0;
     padding-bottom: 0;
+
+    @include media-query(palm) {
+        padding-top: $buttons-emphasized-padding/2;
+        padding-bottom: $buttons-emphasized-padding/2;
+    }
 }
 
 @mixin button-shape-normal-navigational-default {@include button-shape-normal;}
@@ -64,8 +73,8 @@
 
 @mixin button-shape-emphasized {
     @include button-shape;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    padding-top: $buttons-emphasized-padding;
+    padding-bottom: $buttons-emphasized-padding;
     border-width: 1px;
     border-style: solid;
 }
