@@ -30,6 +30,11 @@
 
         .#{$name}__more {
             background-color: color(white);
+            border-top: 1px solid color(lines);
+
+            @include media-query(palm) {
+                background-color: opacify(color(white), 0.9);
+            }
         }
 
         @content;

@@ -31,6 +31,14 @@ $dropdown-toggle-width: 1em;
         }
     }
 
+    .#{$name}__toggle {
+        width: auto;
+
+        // vertical-align child to middle
+        display: flex;
+        align-items: center;
+    }
+
     @at-root {
         .#{$name}__more {
             left: auto;
@@ -42,11 +50,8 @@ $dropdown-toggle-width: 1em;
             @include media-query(palm) {
                 width: auto;
                 margin-right: -2*$base-spacing;
+                margin-top: 0;
             }
-        }
-
-        .#{$name}__toggle {
-            width: auto;
         }
 
         .#{$name}__toggle-icon {
@@ -89,9 +94,9 @@ $dropdown-toggle-width: 1em;
         .#{$name}__default {
             flex-grow: 1;
             text-align: center;
-            padding-left: $dropdown-toggle-width;    // keep the text centered
             .activity {
                 width: 100%;
+                padding-left: $dropdown-toggle-width;    // compensate splitbutton
             }
         }
     }

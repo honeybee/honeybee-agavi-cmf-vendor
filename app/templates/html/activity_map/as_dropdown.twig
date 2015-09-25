@@ -26,11 +26,11 @@
     class="{{ dropdown_name }} {{ dropdown_css }}"
     {% for attr, val in dropdown_attr %} {{ attr }}="{{ val }}" {% endfor %}
 >
-    <input type="checkbox" id="{{ trigger_id }}" class="{{ dropdown_name ~ '__trigger' }} hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %}/>
-    <label for="{{ trigger_id }}" class="{{ dropdown_name ~ '__toggle'}} hb-js-flyout-toggle {{ toggle_css }} {% if toggle_disabled %} {{ dropdown_name ~ '__toggle--disabled' }}{% endif %}" {% for attr, val in toggle_attr
+    <input type="checkbox" id="{{ trigger_id }}" class="{{ dropdown_name ~ '__trigger' }} base-dropdown__trigger hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %}/>
+    <label for="{{ trigger_id }}" class="{{ dropdown_name ~ '__toggle'}} base-dropdown__toggle hb-js-flyout-toggle {{ toggle_css }} {% if toggle_disabled %} {{ dropdown_name ~ '__toggle--disabled' }}{% endif %}" {% for attr, val in toggle_attr
         %} {{ attr }}="{{ val }}" {% endfor %}>{%- block default -%}{{ default_content|raw }}{%- endblock -%}
-        {% block toggle %}<span class="{{ dropdown_name ~ '__toggle-icon'}}">{{ toggle_content|raw }}</span>{% endblock %}</label><!--
-    --><div class="{{ dropdown_name ~ '__more' }} {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+        {% block toggle %}<span class="{{ dropdown_name ~ '__toggle-icon'}} base-dropdown__toggle-icon">{{ toggle_content|raw }}</span>{% endblock %}</label><!--
+    --><div class="{{ dropdown_name ~ '__more' }} base-dropdown__more {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
     {%- block more -%}
         <ul>
             {%- for rendered_activity in more_activities -%}

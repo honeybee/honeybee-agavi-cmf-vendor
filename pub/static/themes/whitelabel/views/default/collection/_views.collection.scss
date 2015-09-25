@@ -32,10 +32,37 @@ $workflow_state_fieldname: "workflow_state";
             @include frame(color(lightgrey2));
         }
 
-        @include media-query(palm) {
-            .hb-field:hover {
-                $hover-color: mix(color(blue), color(lightgrey1), 10%);
-                background-color: $hover-color;
+        .hb-field:hover {
+            $hover-color: mix(color(blue), color(lightgrey1), 10%);
+            background-color: $hover-color;
+        }
+
+        // Custom splitbutton actions
+        .activity-map { background-color: color(lightgrey1); }
+
+        .base-dropdown__default {
+            &:hover     { background-color: color(grey2); }
+            .activity   { padding: $base-spacing/2 0; }
+        }
+
+        .base-dropdown__more {
+            margin-top: 0;
+
+            li {
+                margin: 0 $base-spacing;
+                border-bottom: 1px solid color(lines);
+
+                &:last-child { border-bottom: 0; }
+
+                // override button styles
+                button, a {
+                    &,
+                    &:hover,
+                    &:active,
+                    &:focus  {
+                        padding: $base-spacing/2 0;
+                    }
+                }
             }
         }
     }
