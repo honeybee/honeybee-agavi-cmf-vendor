@@ -200,16 +200,7 @@
     @include media-query(palm) {
         .primary-activities .activities-list__more li {
             display: block;
-            margin-bottom: 0.5*$base-spacing;
         }
-
-        .primary-activities .activities-list__more li:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    .controls-bottom {
-        display: none;
     }
 
     @include media-query(lap-and-up) {
