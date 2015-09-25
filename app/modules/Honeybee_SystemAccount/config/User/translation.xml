@@ -24,7 +24,7 @@
                     <ae:parameter name="views">
                         <ae:parameter name="de">
                             <ae:parameter name="login.page_title">Einloggen</ae:parameter>
-                            <ae:parameter name="create.page_title">Nutzer erstellen</ae:parameter>
+                            <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
                             <ae:parameter name="hierarchy.page_title">Nutzerhierarchie</ae:parameter>
                             <ae:parameter name="resource.modify.page_title">Nutzer bearbeiten</ae:parameter>
                             <ae:parameter name="set_password.page_title">Passwort ändern</ae:parameter>
@@ -182,7 +182,7 @@
                             <ae:parameter name="resource_hierarchy.label">Baumansicht</ae:parameter>
                             <ae:parameter name="search.description">Suchen</ae:parameter>
                             <ae:parameter name="search.label">Suche</ae:parameter>
-                            <ae:parameter name="create_resource.label">Nutzer erstellen</ae:parameter>
+                            <ae:parameter name="create_resource.label">Nutzer hinzufügen</ae:parameter>
                             <ae:parameter name="save_resource.label">Datensatz erstellen</ae:parameter>
                             <ae:parameter name="save_resource_and_continue.label">Datensatz erstellen und neuen anlegen</ae:parameter>
                             <ae:parameter name="back_to_collection.label">Zurück zur Liste</ae:parameter>
