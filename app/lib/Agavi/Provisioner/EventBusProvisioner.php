@@ -15,6 +15,7 @@ use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
 use Honeybee\Infrastructure\Event\Bus\Subscription\EventFilter;
 use Honeybee\Infrastructure\Event\Bus\Subscription\EventFilterList;
 use Honeybee\Infrastructure\Event\Bus\Subscription\EventSubscription;
+use Honeybee\Infrastructure\Event\Bus\Subscription\LazyEventSubscription;
 use Honeybee\Infrastructure\Event\EventHandlerList;
 use Honeybee\ServiceDefinitionInterface;
 use Psr\Log\LoggerInterface;
@@ -66,29 +67,31 @@ class EventBusProvisioner extends AbstractProvisioner
 
         foreach ($event_bus_config['channels'] as $channel_name => $channel_config) {
             foreach ($channel_config['subscriptions'] as $subscription_config) {
-                $event_handlers = $this->buildEventHandlers($subscription_config['handlers']);
-                $event_filters = $this->buildEventFilters($subscription_config['filters']);
+                $event_handlers_callback = function() use ($subscription_config) {
+                    return $this->buildEventHandlers($subscription_config['handlers']);
+                };
 
-                $transport_name = $subscription_config['transport'];
-                if (!isset($built_transports[$transport_name])) {
-                    $built_transports[$transport_name] = $this->buildTransport(
+                $event_filters_callback = function() use ($subscription_config) {
+                    return $this->buildEventFilters($subscription_config['filters']);
+                };
+
+                $event_transport_callback = function() use ($subscription_config, $event_bus_config, $event_bus) {
+                    return $this->buildTransport(
                         $event_bus_config['transports'],
                         $subscription_config['transport'],
                         $event_bus
                     );
-                }
+                };
 
-                $event_subscription = $this->di_container->make(
-                    EventSubscription::class,
-                    [
-                        ':event_handlers' => $event_handlers,
-                        ':event_transport' => $built_transports[$transport_name],
-                        ':event_filters' => $event_filters,
-                        ':activated' => $subscription_config['enabled']
-                    ]
+                $event_bus->subscribe(
+                    $channel_name,
+                    new LazyEventSubscription(
+                        $event_handlers_callback,
+                        $event_filters_callback,
+                        $event_transport_callback,
+                        $subscription_config['enabled']
+                    )
                 );
-
-                $event_bus->subscribe($channel_name, $event_subscription);
             }
         }
     }
@@ -108,7 +111,10 @@ class EventBusProvisioner extends AbstractProvisioner
             $transport_state[':' . $prop_name] = $prop_value;
         }
 
-        return $this->di_container->make($transport_config['implementor'], $transport_state);
+        $this->di_container->define($transport_config['implementor'], $transport_state)
+            ->share($transport_config['implementor']);
+
+        return $this->di_container->make($transport_config['implementor']);
     }
 
     protected function buildEventHandlers(array $handler_configs)
