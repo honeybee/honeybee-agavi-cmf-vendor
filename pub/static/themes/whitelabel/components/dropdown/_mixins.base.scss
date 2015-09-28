@@ -85,6 +85,7 @@ $dropdown-toggle-width: 1em;
 
 @mixin base-splitbutton($name: "splitbutton-normal") {
     @include base-dropdown($name);
+    display: inline-flex; // inline-block doesn't keep splitbutton on a single line
     white-space: nowrap;
 
     @include media-query(palm) {
