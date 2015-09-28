@@ -46,6 +46,23 @@ class CollectionSuccessView extends View
         $this->setPagination($request_data);
     }
 
+    public function executeJson(AgaviRequestDataHolder $request_data)
+    {
+        $resource_collection = $this->getAttribute('resource_collection');
+        $list_config = $request_data->getParameter('list_config');
+
+        return json_encode(
+            [
+                'collection' => $resource_collection->toArray(),
+                'scrolling' => [
+                    'limit' => $list_config->getLimit(),
+                    'next_offset' => $list_config->getOffset(),
+                    'total' => $this->getAttribute('number_of_results', 0)
+                ]
+            ]
+        );
+    }
+
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
         $resource_collection = $this->getAttribute('resource_collection');
