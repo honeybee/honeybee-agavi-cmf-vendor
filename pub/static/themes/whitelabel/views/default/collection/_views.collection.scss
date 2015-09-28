@@ -42,7 +42,10 @@ $workflow_state_fieldname: "workflow_state";
 
         .base-dropdown__default {
             &:hover     { background-color: color(grey2); }
-            .activity   { padding: $base-spacing/2 0; }
+            .activity   {
+                padding-top: $base-spacing/2;
+                padding-bottom: $base-spacing/2;
+            }
         }
 
         .base-dropdown__more {
@@ -60,7 +63,8 @@ $workflow_state_fieldname: "workflow_state";
                     &:hover,
                     &:active,
                     &:focus  {
-                        padding: $base-spacing/2 0;
+                        padding-top: $base-spacing/2;
+                        padding-bottom: $base-spacing/2;
                     }
                 }
             }

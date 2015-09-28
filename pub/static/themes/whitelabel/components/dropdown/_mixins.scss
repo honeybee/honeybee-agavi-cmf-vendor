@@ -21,7 +21,6 @@
         .#{$name}__default .activity {
             @include button-shape-normal-navigational-default();
             @include button-colors-normal-navigational-default();
-            padding-right: 0.5em;
             vertical-align: top;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -56,7 +55,6 @@
         .#{$name}__default .activity.activity {
             @include button-shape-emphasized-navigational-default();
             @include button-colors-emphasized-navigational-default();
-            padding-right: 0.5em;
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
             border-right-width: 0;
