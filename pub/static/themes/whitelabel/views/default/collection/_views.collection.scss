@@ -101,3 +101,13 @@ $workflow_state_fieldname: "workflow_state";
         }
     }
 }
+
+.primary-activities-box {
+    .primary-activities {
+        display: none;
+
+        @include media-query(lap-and-up) {
+            display: block;
+        }
+    }
+}
