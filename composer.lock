@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "hash": "892106eb4652b4cb4573357bdfb2dc78",
+    "content-hash": "6663e378f2332793ff46b72567d9b043",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -606,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "2f20bbd9171db480e7c0cde9724f5fd3db6f4868"
+                "reference": "0e0ff762f6c2b1e7d62634073e4a5ff8df93eee2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/2f20bbd9171db480e7c0cde9724f5fd3db6f4868",
-                "reference": "2f20bbd9171db480e7c0cde9724f5fd3db6f4868",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/0e0ff762f6c2b1e7d62634073e4a5ff8df93eee2",
+                "reference": "0e0ff762f6c2b1e7d62634073e4a5ff8df93eee2",
                 "shasum": ""
             },
             "require": {
@@ -691,7 +692,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2015-09-28 09:50:22"
+            "time": "2015-09-29 13:48:17"
         },
         {
             "name": "honeybee/trellis",
