@@ -793,7 +793,10 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
         $fss = $this->getServiceLocator()->getFilesystemService();
         $file_identifier = $fss->createTempUri($image_payload[$location_prop], $this->getAggregateRootType());
-
+        $final_uri = $fss->createUri($image_payload[$location_prop], $this->getAggregateRootType());
+        if ($fss->has($final_uri)) {
+            return null; // file is already handled and in place
+        }
         $size = $fss->getSize($file_identifier);
         $mimetype = $fss->getMimetype($file_identifier);
         $extension = $fss->guessExtensionByMimeType($mimetype);
