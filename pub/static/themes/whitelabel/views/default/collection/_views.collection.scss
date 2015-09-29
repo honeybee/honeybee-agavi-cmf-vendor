@@ -32,11 +32,6 @@ $workflow_state_fieldname: "workflow_state";
             @include frame(color(lightgrey2));
         }
 
-        .hb-field:hover {
-            $hover-color: mix(color(blue), color(lightgrey1), 10%);
-            background-color: $hover-color;
-        }
-
         // Custom splitbutton actions
         .activity-map { background-color: color(lightgrey1); }
 
