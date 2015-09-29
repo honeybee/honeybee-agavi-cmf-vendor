@@ -86,14 +86,6 @@ $workflow_state_fieldname: "workflow_state";
         .hb-itemlist__title-actions {
             @include visuallyhidden;
         }
-
-        .hb-item:hover {
-            $hover-color: mix(color(blue), color(lightgrey1), 10%);
-            .hb-field,
-            .hb-actions {
-                background-color: $hover-color;
-            }
-        }
     }
 }
 

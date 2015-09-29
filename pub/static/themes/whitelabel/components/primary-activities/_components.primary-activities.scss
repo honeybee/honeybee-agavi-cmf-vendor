@@ -55,6 +55,9 @@
             bottom: 0px;
             right: 0px;
             margin: $base-spacing/2;
+            .activity {
+                @include shadow-overlay;
+            }
         }
     }
 }
