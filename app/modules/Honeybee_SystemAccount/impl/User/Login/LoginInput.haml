@@ -28,7 +28,7 @@
                         %input#password_input(type="password" name="password" placeholder=_('password_placeholder', 'honeybee.system_account.user.ui'))
 
                     .control-group
-                        %button(type="submit") = _('signin', 'honeybee.system_account.user.ui')
+                        %button(type="submit" rel="login") = _('login', 'honeybee.system_account.user.ui')
 
             - if reset_support_enabled is defined and (true == reset_support_enabled)
                 %a(href=ro.gen('user.reset')) = _('reset_password', 'honeybee.system_account.user.ui')

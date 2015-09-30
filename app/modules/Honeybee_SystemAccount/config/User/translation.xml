@@ -24,6 +24,7 @@
                     <ae:parameter name="views">
                         <ae:parameter name="de">
                             <ae:parameter name="login.page_title">Einloggen</ae:parameter>
+                            <ae:parameter name="logout.page_title">Abmelden</ae:parameter>
                             <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
                             <ae:parameter name="hierarchy.page_title">Nutzerhierarchie</ae:parameter>
                             <ae:parameter name="resource.modify.page_title">Nutzer bearbeiten</ae:parameter>
@@ -32,6 +33,7 @@
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="login.page_title">Log in</ae:parameter>
+                            <ae:parameter name="logout.page_title">Log out</ae:parameter>
                             <ae:parameter name="create.page_title">Create user</ae:parameter>
                             <ae:parameter name="hierarchy.page_title">User hierarchy</ae:parameter>
                             <ae:parameter name="resource.modify.page_title">Modify user</ae:parameter>
@@ -113,7 +115,8 @@
 
                     <ae:parameter name="ui">
                         <ae:parameter name="de">
-                            <ae:parameter name="signin">Anmelden</ae:parameter>
+                            <ae:parameter name="signin">Einloggen</ae:parameter>
+                            <ae:parameter name="login">Anmelden</ae:parameter>
                             <ae:parameter name="logout">Abmelden</ae:parameter>
                             <ae:parameter name="logout_success">Abmeldung erfolgreich. Vielen Dank.</ae:parameter>
                             <ae:parameter name="leave_the_system">Vom System abmelden…</ae:parameter>
@@ -142,6 +145,7 @@
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="signin">Sign in</ae:parameter>
+                            <ae:parameter name="login">Login</ae:parameter>
                             <ae:parameter name="logout">Logout</ae:parameter>
                             <ae:parameter name="logout_success">Logout successful. Thank you.</ae:parameter>
                             <ae:parameter name="leave_the_system">Log out from the system…</ae:parameter>

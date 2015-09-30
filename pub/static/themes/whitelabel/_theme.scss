@@ -200,9 +200,18 @@ label {
     cursor: pointer;
 }
 
-/*
-.menu__toggle {
-    @include activity-mutating;
-    @include activity-mutating-focus;
+.view-login {
+    .login-form {
+        legend {
+            @include typography-headlines;
+            width: 100%;
+            padding-bottom: $base-spacing/2;
+            border-bottom: 1px solid color(lines);
+            margin-bottom: $base-spacing;
+        }
+
+        button {
+            @include button-emphasized-navigational;
+        }
+    }
 }
-*/
