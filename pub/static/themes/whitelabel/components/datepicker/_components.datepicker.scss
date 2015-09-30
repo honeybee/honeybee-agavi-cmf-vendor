@@ -1,30 +1,40 @@
+$datepicker-toggle-width: 3.86em; // 54/14
+
 .datepicker-controls-wrapper {
     position: relative;
-
-    + .datepicker-toggle {
-        padding-right: 3.86em; // 54/14
-    }
 }
 
-.datepicker-input.datepicker-input {
+.datepicker-toggle + .datepicker-input {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: 0;
 }
 
 .datepicker-toggle {
-    @include button-shape-emphasized-navigational-default;
+    @include button-emphasized-navigational;
+    // override button stylings
+    &,
+    &:focus,
+    &:hover,
+    &:active,
+    &:disabled,
+    &.disabled {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border: 0;
+        margin: 1px;
+    }
+
     display: inline-block;
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
-    width: 3.86em; // 54/14
-    height: 38px;
 
-    text-align: center;
-
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    width: $datepicker-toggle-width;
+    & + .datepicker-input {
+        padding-right: $datepicker-toggle-width;
+    }
 }
 .datepicker-toggle__icon {
     &::before {
