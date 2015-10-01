@@ -13,6 +13,12 @@ $workflow_state_fieldname: "workflow_state";
     .hb-field__label {
         font-size: 90%;
         color: color(grey);
+
+        @include media-query (palm) {
+            &:after {
+                content:':';
+            }
+        }
     }
 
     .hb-itemlist__titles {
@@ -89,7 +95,7 @@ $workflow_state_fieldname: "workflow_state";
     }
 }
 
-.primary-activities-box {
+.controls {
     .primary-activities {
         display: none;
 
