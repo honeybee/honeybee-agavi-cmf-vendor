@@ -17,17 +17,7 @@
                 </activity>
             </activity_container>
 
-            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection.subheader_activities">
-                <activity name="create_resource">
-                    <label>subheader_create_resource.label</label>
-                    <description>subheader_create_resource.description</description>
-                    <url type="route">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.create</url>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>create_resource</rel>
-                        <rel>create_{{ resource_prefix }}</rel>
-                    </rels>
-                </activity>
+            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection.subheader_activities" extends="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.subheader_activities">
             </activity_container>
 
             <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection.primary_activities">

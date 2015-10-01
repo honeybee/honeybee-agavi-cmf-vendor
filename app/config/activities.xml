@@ -34,6 +34,34 @@
                 </activity>
             </activity_container>
 
+            <activity_container scope="default_subheader_activities">
+                <activity name="create_resource">
+                    <url type="route">module.create</url>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>create_resource</rel>
+                    </rels>
+                    <accepting>
+                        <type>application/x-www-form-urlencoded</type>
+                    </accepting>
+                    <sending>
+                        <type>text/html</type>
+                        <type>text/csv</type>
+                        <type>application/zip</type>
+                        <type>application/json</type>
+                        <type>application/vnd.amundsen-uber+json</type>
+                    </sending>
+                </activity>
+
+                <activity name="back_to_collection">
+                    <url type="route">module.collection</url>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>collection</rel>
+                    </rels>
+                </activity>
+            </activity_container>
+
             <activity_container scope="converjon">
                 <activity name="thumbnail">
                     <url type="uri_template"><![CDATA[%core.base_href%converjon/?file={alias}:{file}&width={width}&height={height}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>

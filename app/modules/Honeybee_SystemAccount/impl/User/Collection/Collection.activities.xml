@@ -29,6 +29,9 @@
                 </activity>
             </activity_container>
 
+            <activity_container scope="honeybee.system_account.user.collection.subheader_activities" extends="honeybee.system_account.user.subheader_activities">
+            </activity_container>
+
             <activity_container scope="honeybee.system_account.user.collection.sort_activities">
                 <activity name="sort_by_modified_at">
                     <url type="route">null</url>
