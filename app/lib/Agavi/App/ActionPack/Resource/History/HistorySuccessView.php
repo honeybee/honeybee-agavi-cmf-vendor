@@ -25,6 +25,9 @@ class HistorySuccessView extends View
                 )
             ];
         }
+
+        $this->setSubheaderActivities($request_data);
+
         $this->setAttribute('events_data', $events_data);
     }
 

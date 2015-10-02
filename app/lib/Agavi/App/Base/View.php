@@ -803,4 +803,47 @@ class View extends AgaviView
     {
         return [ 'html/layout/MasterLayout.twig', 'html/layout/SlotLayout.twig' ];
     }
+
+    /** setSubheaderActivities & setPrimaryActivities load activities for the actual layout.
+      * Those are convenient here but should not be part of the base-(non-opinionated)-view.
+      *
+      * @todo Move them in a intermediate/opinionated View that the ActionPack views could extend
+      */
+    protected function setSubheaderActivities(AgaviRequestDataHolder $request_data)
+    {
+        $container_scope_key = $this->getViewScope() . '.subheader_activities';
+        $activity_service = $this->getServiceLocator()->getActivityService();
+
+        $subheader_activities_container = $activity_service->getContainer($container_scope_key);
+        $subheader_activities = $subheader_activities_container->getActivityMap();
+
+        $rendered_subheader_activities = $this->renderSubject(
+            $subheader_activities,
+            [],
+            'subheader_activities'
+        );
+
+        $this->setAttribute('rendered_subheader_activities', $rendered_subheader_activities);
+
+        return $rendered_subheader_activities;
+    }
+
+    protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
+    {
+        $container_scope_key = $this->getViewScope() . '.primary_activities';
+        $activity_service = $this->getServiceLocator()->getActivityService();
+
+        $primary_activities_container = $activity_service->getContainer($container_scope_key);
+        $primary_activities = $primary_activities_container->getActivityMap();
+
+        $rendered_primary_activities = $this->renderSubject(
+            $primary_activities,
+            [],
+            'primary_activities'
+        );
+
+        $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
+
+        return $rendered_primary_activities;
+    }
 }

@@ -71,6 +71,7 @@ class HierarchySuccessView extends View
         $this->setAttribute('rendered_resource_collection', $rendered_resource_collection);
         $this->setAttribute('resource_type_name', $resource_type->getName());
 
+        $this->setSubheaderActivities($request_data);
         $this->setPrimaryActivities($request_data);
         $this->setSearchForm($request_data);
         $this->setSortActivities($request_data);
@@ -118,24 +119,6 @@ $rendered_resource_collection
 EOT;
 
         $this->cliMessage($text);
-    }
-
-    protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
-    {
-
-        $activity_service = $this->getServiceLocator()->getActivityService();
-        $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
-        $primary_activities = $primary_activities_container->getActivityMap();
-
-        $rendered_primary_activities = $this->renderSubject(
-            $primary_activities,
-            [],
-            'primary_activities'
-        );
-
-        $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
-
-        return $rendered_primary_activities;
     }
 
     protected function setSearchForm(AgaviRequestDataHolder $request_data)

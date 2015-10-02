@@ -27,6 +27,8 @@ class ResourceSuccessView extends View
             $next_link = $routing->gen(null, [ 'revision' => $resource->getRevision() + 1 ]);
         }
 
+        $this->setSubheaderActivities($request_data);
+
         $this->setAttribute('rendered_resource', $rendered_resource);
         $this->setAttribute('prev_link', $prev_link);
         $this->setAttribute('next_link', $next_link);

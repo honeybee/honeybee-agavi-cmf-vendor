@@ -106,48 +106,6 @@ EOT;
         $this->cliMessage($text);
     }
 
-    protected function setSubheaderActivities(AgaviRequestDataHolder $request_data)
-    {
-        $container_scope_key = $this->getViewScope() . '.subheader_activities';
-        $activity_service = $this->getServiceLocator()->getActivityService();
-
-        $rendered_subheader_activities = '';
-        if ($activity_service->hasContainer($container_scope_key)) {
-            $subheader_activities_container = $activity_service->getContainer($container_scope_key);
-
-            $subheader_activities = $subheader_activities_container->getActivityMap();
-
-            $rendered_subheader_activities = $this->renderSubject(
-                $subheader_activities,
-                [],
-                'subheader_activities'
-            );
-        }
-
-        $this->setAttribute('rendered_subheader_activities', $rendered_subheader_activities);
-
-        return $rendered_subheader_activities;
-    }
-
-    protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
-    {
-        $rendered_primary_activities = '';
-        $activity_service = $this->getServiceLocator()->getActivityService();
-
-        $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
-        $primary_activities = $primary_activities_container->getActivityMap();
-
-        $rendered_primary_activities = $this->renderSubject(
-            $primary_activities,
-            [],
-            'primary_activities'
-        );
-
-        $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
-
-        return $rendered_primary_activities;
-    }
-
     protected function setSearchForm(AgaviRequestDataHolder $request_data)
     {
         $activity_service = $this->getServiceLocator()->getActivityService();

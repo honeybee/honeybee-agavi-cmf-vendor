@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://berlinonline.de/schemas/honeybee/config/activities/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+>
+    <ae:configuration>
+        <activity_containers>
+
+            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.create">
+            </activity_container>
+
+            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.create.primary_activities">
+                <activity name="save_resource">
+                    <url type="route">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection</url>
+                    <verb>write</verb>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>create_resource</rel>
+                        <rel>create{{ resource_prefix }}</rel>
+                    </rels>
+                </activity>
+                <activity name="save_resource_and_continue">
+                    <url type="route">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.create</url>
+                    <verb>write</verb>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>create_resource</rel>
+                        <rel>create_{{ resource_prefix }}</rel>
+                    </rels>
+                </activity>
+                <activity name="back_to_list">
+                    <url type="route">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection</url>
+                    <url_param name="sort">modified_at:desc</url_param>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>collection</rel>
+                        <rel>{{ resource_prefix }}_collection</rel>
+                    </rels>
+                </activity>
+            </activity_container>
+
+            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.create.subheader_activities" extends="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.subheader_activities">
+            </activity_container>
+
+        </activity_containers>
+    </ae:configuration>
+</ae:configurations>

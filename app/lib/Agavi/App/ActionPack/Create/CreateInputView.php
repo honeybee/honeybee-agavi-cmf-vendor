@@ -23,6 +23,7 @@ class CreateInputView extends View
         $rendered_resource = $this->renderSubject($resource, $renderer_settings);
         $this->setAttribute('rendered_resource', $rendered_resource);
 
+        $this->setSubheaderActivities($request_data);
         $this->setPrimaryActivities($request_data);
 
         $this->setAttribute('create_url', $this->routing->gen(null));
@@ -35,23 +36,5 @@ class CreateInputView extends View
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
         return json_encode(__METHOD__);
-    }
-
-    protected function setPrimaryActivities(AgaviRequestDataHolder $request_data)
-    {
-        $activity_service = $this->getServiceLocator()->getActivityService();
-
-        $primary_activities_container = $activity_service->getContainer($this->getViewScope() . '.primary_activities');
-        $primary_activities = $primary_activities_container->getActivityMap();
-
-        $rendered_primary_activities = $this->renderSubject(
-            $primary_activities,
-            [],
-            'primary_activities'
-        );
-
-        $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
-
-        return $rendered_primary_activities;
     }
 }

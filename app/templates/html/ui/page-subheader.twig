@@ -1,3 +1,13 @@
+{% block subheader_activities %}<!--
+    -->{%- if rendered_subheader_activities is defined and rendered_subheader_activities is not empty -%}
+    <div class="subheader-activities-box">
+        <div class="subheader-activities">
+            {{ rendered_subheader_activities|raw }}
+        </div>
+    </div>
+    {%- endif -%}<!-- .subheader-activites-box
+-->{% endblock subheader_activities %}
+
 {%- block pagesubheader -%}
 <div class="page-subheader-layout">
     <div class="subheader-title-box">
