@@ -53,7 +53,7 @@
                     </sending>
                 </activity>
 
-                <activity name="back_to_collection">
+                <activity name="back_to_list">
                     <url type="route">module.collection</url>
                     <rels>
                         <rel>activity</rel>
