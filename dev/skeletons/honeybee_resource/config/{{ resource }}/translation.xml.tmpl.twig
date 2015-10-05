@@ -20,16 +20,20 @@
                 <message_translator class="AgaviSimpleTranslator">
 
                     <ae:parameter name="views">
-                        <ae:parameter name="de">
                         <!--
-                            Example view translation:
-
-                                <ae:parameter name="collection.page_title">List of {{ resource }} items</ae:parameter>
-                                <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
-                                <ae:parameter name="resource.modify.page_title">Edit {{ resource }} item</ae:parameter>
-
                             Translation here will be used by default also for the browser title.
                         -->
+                        <ae:parameter name="de">
+                            <ae:parameter name="collection.page_title">{{ resource }}</ae:parameter>
+                            <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
+                            <ae:parameter name="create.page_title">{{ resource }} hinzufügen</ae:parameter>
+                            <ae:parameter name="resource.modify.page_title">{{ resource }} bearbeiten</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="collection.page_title">{{ resource }} List</ae:parameter>
+                            <ae:parameter name="resource.page_title">{{ resource }} Detail</ae:parameter>
+                            <ae:parameter name="create.page_title">Create {{ resource }}</ae:parameter>
+                            <ae:parameter name="resource.modify.page_title">Modify {{ resource }}</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -132,9 +136,7 @@
                             <ae:parameter name="resource_hierarchy.description">{{ resource }} baumansicht</ae:parameter>
                             <ae:parameter name="search.description">Suchen</ae:parameter>
                             <ae:parameter name="search.label">Suche</ae:parameter>
-                            <ae:parameter name="subheader_create_resource.label">{{ resource }} hinzufügen</ae:parameter>
-                            <ae:parameter name="subheader_create_resource.description">Neuer {{ resource }} erstellen</ae:parameter>
-                            <ae:parameter name="create_resource.label">{{ resource }} erstellen</ae:parameter>
+                            <ae:parameter name="create_resource.label">{{ resource }} hinzufügen</ae:parameter>
                             <ae:parameter name="create_resource.description">{{ resource }} erstellen</ae:parameter>
                             <ae:parameter name="save_resource.label">Datensatz erstellen</ae:parameter>
                             <ae:parameter name="save_resource.description">Datensatz erstellen</ae:parameter>
@@ -168,8 +170,6 @@
                             <ae:parameter name="resource_hierarchy.description">{{ resource }} hierarchy</ae:parameter>
                             <ae:parameter name="search.description">Search</ae:parameter>
                             <ae:parameter name="search.label">Search</ae:parameter>
-                            <ae:parameter name="subheader_create_resource.label">Add {{ resource }}</ae:parameter>
-                            <ae:parameter name="subheader_create_resource.description">Add a new {{ resource }}</ae:parameter>
                             <ae:parameter name="create_resource.label">Create {{ resource }}</ae:parameter>
                             <ae:parameter name="create_resource.description">Create {{ resource }}</ae:parameter>
                             <ae:parameter name="save_resource.label">Save</ae:parameter>
