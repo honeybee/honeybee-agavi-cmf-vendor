@@ -65,8 +65,8 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
                 return true;
             }
         }
-        $module = $user_parameters['module']->getValue();
         if (array_key_exists('module', $user_parameters)) {
+            $module = $user_parameters['module']->getValue();
             if ($module instanceof EntityTypeInterface) {
                 $root_type = $module->getRoot() ?: $module;
                 $ro = $this->getContext()->getRouting();
