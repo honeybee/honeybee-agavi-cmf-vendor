@@ -607,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "54658dc70b0690c6475434655193f0256c67d811"
+                "reference": "b7f6185238470869193ee13b3b56b66d0b0b89a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/54658dc70b0690c6475434655193f0256c67d811",
-                "reference": "54658dc70b0690c6475434655193f0256c67d811",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b7f6185238470869193ee13b3b56b66d0b0b89a3",
+                "reference": "b7f6185238470869193ee13b3b56b66d0b0b89a3",
                 "shasum": ""
             },
             "require": {
@@ -692,7 +692,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2015-09-29 16:13:31"
+            "time": "2015-10-06 15:32:42"
         },
         {
             "name": "honeybee/trellis",
@@ -765,16 +765,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.14",
+            "version": "1.0.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "202c7775d959f377e2e302d93e7127c47604438a"
+                "reference": "31525caf9e8772683672fefd8a1ca0c0736020f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/202c7775d959f377e2e302d93e7127c47604438a",
-                "reference": "202c7775d959f377e2e302d93e7127c47604438a",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/31525caf9e8772683672fefd8a1ca0c0736020f4",
+                "reference": "31525caf9e8772683672fefd8a1ca0c0736020f4",
                 "shasum": ""
             },
             "require": {
@@ -845,7 +845,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-09-22 19:18:28"
+            "time": "2015-09-30 22:26:59"
         },
         {
             "name": "michelf/php-markdown",
