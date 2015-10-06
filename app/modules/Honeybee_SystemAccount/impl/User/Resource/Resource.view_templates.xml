@@ -13,15 +13,15 @@
                         <row css="">
                             <cell css="">
                                 <group name="primary">
-                                    <field name="created_at" attribute_path="created_at" />
-                                    <field name="modified_at" attribute_path="modified_at" />
-                                    <field name="workflow_state" attribute_path="workflow_state" />
                                     <field name="username" attribute_path="username" />
                                     <field name="firstname" attribute_path="firstname" />
                                     <field name="lastname" attribute_path="lastname" />
                                     <field name="tags" attribute_path="tags" />
                                     <field name="email" attribute_path="email" />
                                     <field name="role" attribute_path="role" />
+                                    <field name="created_at" attribute_path="created_at" />
+                                    <field name="modified_at" attribute_path="modified_at" />
+                                    <field name="workflow_state" attribute_path="workflow_state" />
                                 </group>
                             </cell>
                         </row>

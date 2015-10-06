@@ -85,60 +85,6 @@
                 </activity>
             </activity_container>
 
-            <activity_container scope="honeybee.system_account.user.resource.modify">
-            </activity_container>
-
-            <activity_container scope="honeybee.system_account.user.resource.modify.primary_activities">
-                <activity name="save_resource">
-                    <url type="route">null</url>
-                    <verb>write</verb>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>edit_resource</rel>
-                        <rel>edit_user</rel>
-                    </rels>
-                </activity>
-                <activity name="back_to_collection">
-                    <url type="route">honeybee.system_account.user.collection</url>
-                    <url_param name="sort">modified_at:desc</url_param>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>collection</rel>
-                        <rel>user_collection</rel>
-                    </rels>
-                </activity>
-            </activity_container>
-
-            <activity_container scope="honeybee.system_account.user.create.primary_activities">
-                <activity name="save_resource">
-                    <url type="route">honeybee.system_account.user.collection</url>
-                    <verb>write</verb>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>create_resource</rel>
-                        <rel>create_user</rel>
-                    </rels>
-                </activity>
-                <activity name="save_resource_and_continue">
-                    <url type="route">honeybee.system_account.user.create</url>
-                    <verb>write</verb>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>create_resource</rel>
-                        <rel>create_user</rel>
-                    </rels>
-                </activity>
-                <activity name="back_to_collection">
-                    <url type="route">honeybee.system_account.user.collection</url>
-                    <url_param name="sort">modified_at:desc</url_param>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>collection</rel>
-                        <rel>user_collection</rel>
-                    </rels>
-                </activity>
-            </activity_container>
-
             <activity_container scope="honeybee.system_account.user.subheader_activities" extends="default_subheader_activities">
                 <activity name="create_resource">
                     <url type="route">honeybee.system_account.user.create</url>
@@ -154,10 +100,6 @@
                         <rel>user_collection</rel>
                     </rels>
                 </activity>
-            </activity_container>
-
-
-            <activity_container scope="honeybee.system_account.user.create.subheader_activities" extends="honeybee.system_account.user.subheader_activities">
             </activity_container>
 
         </activity_containers>
