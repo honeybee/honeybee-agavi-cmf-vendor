@@ -8,6 +8,7 @@ $buttons-emphasized-padding: 0.5em !default;    // spacing defined in buttons li
     @include flyout--default-inline("#{$name}");
 
     display: inline-block;
+    vertical-align: top;
     position: relative;
 
     @include media-query(lap-and-up) {
