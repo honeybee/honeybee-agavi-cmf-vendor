@@ -10,7 +10,8 @@
 }
 
 // vars
-$buttons-emphasized-padding: 0.5em;
+$buttons-base-padding: 0.5em;
+$buttons-emphasized-padding: $buttons-base-padding;
 
 // definition
 @mixin button-shape() {

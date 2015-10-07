@@ -34,14 +34,14 @@
     --><label for="{{ trigger_id }}" class="{{ splitbutton_name ~ '__toggle' }} base-dropdown__toggle hb-js-flyout-toggle {{ toggle_css }} {% if toggle_disabled %} {{ splitbutton_name ~ '__toggle--disabled' }}{% endif %}" {% for attr, val in toggle_attr
         %} {{ attr }}="{{ val }}" {% endfor %}>{% block toggle %}<span class="{{ splitbutton_name~ '__toggle-icon'}} base-dropdown__toggle-icon">{{ toggle_content|raw }}</span>{% endblock %}</label><!--
     --><div class="{{ splitbutton_name ~ '__more' }} base-dropdown__more {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
-            {%- block more -%}
-            <ul>
-                {%- for rendered_activity in more_activities -%}
-                    <li>{{ rendered_activity|raw }}
-                {%- endfor -%}
-            </ul>
-            {%- endblock -%}
-        </div>
+        {%- block more -%}
+        <ul>
+            {%- for rendered_activity in more_activities -%}
+                <li>{{ rendered_activity|raw }}
+            {%- endfor -%}
+        </ul>
+        {%- endblock -%}
+    </div>
 </div>
 
 

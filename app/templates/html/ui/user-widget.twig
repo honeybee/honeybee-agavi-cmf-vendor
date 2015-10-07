@@ -1,19 +1,22 @@
 {%- block userwidget -%}
+{% if us.isAuthenticated() %}
 <div class="user-widget-wrapper">
-    <div class="user-widget " >
+    <div class="user-widget" >
         {% embed 'html/dropdown.twig' with {
-                name: 'user-dropdown'
+                name: 'user-dropdown',
+                toggle_disabled: false
             } only
         %}
             {% block default %}
-                <span class="user_email">{{
-                us.getAttribute('name')|trim|default(us.getAttribute('email')) }}</span>
+                {% set avatar_url = us.getAttribute('avatar_url') %}
+
+                {% if avatar_url is empty %}
+                    <img class="user-widget__avatar base-dropdown__toggle-icon" src="//www.gravatar.com/avatar/noavatar" />
+                {% else %}
+                    <img class="user-widget__avatar base-dropdown__toggle-icon" src="{{ avatar_url }}" />
+                {% endif %}
+                <span class="user-widget__email">{{ us.getAttribute('name')|trim|default(us.getAttribute('email')) }}</span>
             {% endblock %}
-            {% if avatar_url is defined %}
-                {% block toggle %}
-                    <img class="avatar" src="//www.gravatar.com/avatar/2c58cc61d2db42224cf41fdc18453261?s=31" />
-                {% endblock %}
-            {% endif %}
             {% block more %}
                 <ul>
                     {#<li><a href="javascript:void" rel="profile" class="activity navigational" title="{{ _('Change your profile') }}">{{ _('Profile') }}</a></li> #}
@@ -24,4 +27,5 @@
         {% endembed %}
     </div><!-- .user-widget -->
 </div><!-- .user-widget-wrapper -->
+{% endif %}
 {%- endblock userwidget -%}

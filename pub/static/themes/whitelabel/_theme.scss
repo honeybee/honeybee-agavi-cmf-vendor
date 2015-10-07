@@ -143,6 +143,41 @@ button {
 
 .page-header {
     background-color: color(white);
+
+    .user-widget-box {
+        @extend %lap-and-up-2-of-5;
+        @extend %palm-1-of-3;
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: $base-spacing/2;
+
+        @include media-query(lap-and-up) {
+            padding: $base-spacing/2 $base-spacing;
+        }
+
+        .base-dropdown__toggle {
+            // flex-direction: row-reverse;
+        }
+    }
+
+    .user-dropdown {
+        @include media-query(palm) {
+            display: inline-block;
+            &:active:hover {
+                box-shadow: none;
+            }
+            .base-dropdown__more {
+                // @include button-shadow-normal-navigational-hover;
+                width: auto;
+                margin-right: 0; // reset
+            }
+        }
+    }
+
+    .user-widget {
+        text-align: right;
+    }
 }
 
 .page-subheader {

@@ -59,7 +59,7 @@ $workflow_state_fieldname: "workflow_state";
                 &:last-child { border-bottom: 0; }
 
                 // override button styles
-                button, a {
+                .activity {
                     &,
                     &:hover,
                     &:active,

@@ -1,3 +1,4 @@
+$buttons-base-padding: 0.5em !default;
 
 .user-widget-wrapper {
     position: relative;
@@ -8,23 +9,44 @@
     .user-dropdown {
         @include dropdown-normal("user-dropdown");
 
+        // keep at minimum width
+        &, .user-dropdown__toggle {
+            display: inline-flex;
+        }
+
         .user-dropdown__toggle {
-            padding: 1px 2px 2px 0;
+            padding-top: 2px;
+            padding-bottom: 2px;
+
+            display: inline-flex;
+
+            // flex-grow: 0;
+            // flex-shrink: 1;
+
+            @include media-query(lap-and-up) {
+
+            }
         }
     }
 
+    .user-widget__email {
+        display: none;
 
-    .user_email {
-        display: block;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        width: auto;
-        overflow: hidden;
+        @include media-query(lap-and-up) {
+            display: block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: auto;
+            overflow: hidden;
+            margin-left: $base-spacing/2;
+        }
     }
 
-    .avatar{
+    .user-widget__avatar {
         vertical-align: middle;
         border-radius: 50%;
+        border: 1px solid color(lines);
+        height: $base-spacing*2;
     }
 
     .activity {
@@ -32,4 +54,3 @@
         //border-bottom: 2px solid #494949;
     }
 }
-

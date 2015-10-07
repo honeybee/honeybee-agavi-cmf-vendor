@@ -1,9 +1,9 @@
 // Base dropdown/splitbutton
 
 $dropdown-toggle-width: 1em !default;
-$buttons-emphasized-padding: 0.5em !default;    // spacing defined in buttons lib/object
+$buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/object
 
-@mixin base-dropdown($name: "dropdown") {
+@mixin init-dropdown($name: "dropdown") {
     @include flyout("#{$name}");
     @include flyout--default-inline("#{$name}");
 
@@ -58,7 +58,7 @@ $buttons-emphasized-padding: 0.5em !default;    // spacing defined in buttons li
 
         .#{$name}__toggle-icon {
             @include hb-icon-before(chevron-small-down, color(navigational-primary)) {
-                padding-left: 0.5em;
+                padding-left: $buttons-base-padding;
             };
             width: $dropdown-toggle-width;
             float: right;
@@ -85,8 +85,12 @@ $buttons-emphasized-padding: 0.5em !default;    // spacing defined in buttons li
     }
 }
 
-@mixin base-splitbutton($name: "splitbutton-normal") {
-    @include base-dropdown($name);
+@mixin base-dropdown($name: "dropdown") {
+    @include init-dropdown($name);
+}
+
+@mixin base-splitbutton($name: "splitbutton") {
+    @include init-dropdown($name);
     display: inline-flex; // inline-block doesn't keep splitbutton on a single line
     white-space: nowrap;
 
@@ -100,7 +104,7 @@ $buttons-emphasized-padding: 0.5em !default;    // spacing defined in buttons li
             .activity {
                 width: 100%;
                 // compensate splitbutton + default button padding sizes, to center text
-                padding-left: $dropdown-toggle-width + $buttons-emphasized-padding;
+                padding-left: $dropdown-toggle-width + $buttons-base-padding;
                 padding-right: 0;
             }
         }

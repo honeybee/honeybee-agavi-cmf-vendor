@@ -9,6 +9,9 @@
         {%- endblock brand -%}
         </div>
     </div><!-- .brand-box
+    --><div class="user-widget-box">
+        {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
+    </div><!-- .user-widget-box
     --><div class="menu-box">
         {%- block menu -%}
             {% if us.isAuthenticated() %}
@@ -19,10 +22,7 @@
                 <div class="menu__panel">
                     <label for="menu-trigger" class="menu__toggle">{{ _('menu') }}</label>
                     <div class="menu__panel-layout">
-                        <div class="user-widget-box">
-                            {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
-                        </div><!-- .user-widget-box
-                        --><div class="main-nav-box">
+                        <div class="main-nav-box">
                             <div class="main-nav-wrapper">
                                 {%- block mainnav -%}
                                     {{- _rendered_navigation|default('')|raw -}}
