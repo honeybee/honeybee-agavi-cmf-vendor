@@ -8,12 +8,19 @@ $buttons-base-padding: 0.5em !default;
 
     .user-dropdown {
         @include dropdown-normal("user-dropdown");
+
+        // hover area just on the toggle
         &:hover {
             box-shadow: none;
-
-            .user-dropdown__toggle, .user-widget__avatar, .user-dropdown__more {
+        }
+        .user-dropdown__toggle:hover {
+            &,
+            .user-widget__avatar {
                 @include button-shadow-normal-navigational-hover;
             }
+        }
+        .user-dropdown__more {
+            @include button-shadow-normal-navigational-hover;
         }
 
         // keep at minimum width
