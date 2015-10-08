@@ -1,0 +1,105 @@
+$workflow_state_fieldname: "workflow_state" !default;
+
+@mixin listitems-view() {
+
+    .hb-itemlist {
+
+        color: color(darkgrey2);
+
+        .hb-field__label {
+            font-size: 90%;
+            color: color(grey);
+
+            @include media-query (palm) {
+                &:after {
+                    content:':';
+                }
+            }
+        }
+
+        .hb-itemlist__titles {
+            background-color: color(panel-header-background);
+            color: color(darkgrey1);
+        }
+
+        .hb-itemlist__title {
+            font-weight: 700;
+            padding: $base-spacing;
+        }
+
+        @include media-query(palm) {
+            box-shadow: none;
+
+            .hb-item {
+                @include frame(color(lightgrey2));
+            }
+
+            // Custom splitbutton actions
+            .activity-map { background-color: color(lightgrey1); }
+
+            .base-dropdown__default {
+                &:hover     { background-color: color(grey2); }
+                .activity   {
+                    padding-top: $base-spacing/2;
+                    padding-bottom: $base-spacing/2;
+                }
+            }
+
+            .base-dropdown__more {
+                margin-top: 0;
+
+                li {
+                    margin: 0 $base-spacing;
+                    border-bottom: 1px solid color(lines);
+
+                    &:last-child { border-bottom: 0; }
+
+                    // override button styles
+                    .activity {
+                        &,
+                        &:hover,
+                        &:active,
+                        &:focus  {
+                            padding-top: $base-spacing/2;
+                            padding-bottom: $base-spacing/2;
+                        }
+                    }
+                }
+            }
+        }
+
+        @include media-query(lap-and-up) {
+            @include frame(color(lightgrey2));
+
+            .hb-field[data-hb-field-name="#{$workflow_state_fieldname}"] {
+                width: percentage(2/12);
+            }
+
+            .hb-actions {
+                width: percentage(2/12);
+                padding-right: $base-spacing;
+                text-align: right;
+            }
+
+            .hb-actions__content {
+                padding: 1px 10px 1px 1px;
+            }
+
+            .hb-itemlist__title-actions {
+                @include visuallyhidden;
+            }
+        }
+    }
+
+    .controls {
+        .primary-activities {
+            display: none;
+
+            @include media-query(lap-and-up) {
+                display: block;
+            }
+        }
+    }
+
+    @content;
+}

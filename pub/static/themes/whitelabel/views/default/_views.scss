@@ -1,11 +1,29 @@
-@import "modifyitem";
+// mixins
+@import "mixins/modifyitem";
+@import "mixins/listitems";
+@import "mixins/listitems-controls";
+@import "mixins/listitems-sidebar";
+// default views
 @import "collection/views.collection";
+@import "create/views.create";
+@import "hierarchy/views.hierarchy";
 @import "resource/views.resource";
+@import "resource/modify/views.resource-modify";
+
+$workflow_state_fieldname: "workflow_state";
 
 .view-create {
-    @include modifyitem-view();
+    @extend %view-create;
 }
 
 .view-resource-modify {
-    @include modifyitem-view();
+    @extend %view-resource-modify;
+}
+
+.view-collection {
+    @extend %view-collection;
+}
+
+.view-hierarchy  {
+    @extend %view-hierarchy;
 }

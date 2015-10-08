@@ -1,4 +1,4 @@
-$workflow_state_fieldname: "workflow_state";
+$workflow_state_fieldname: "workflow_state" !default;
 $hover-color: mix(color(blue), color(lightgrey1), 10%);
 
 .view-resource {
