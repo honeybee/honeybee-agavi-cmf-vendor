@@ -12,6 +12,9 @@
             <activity_container scope="honeybee.system_account.user.hierarchy.primary_activities" extends="honeybee.system_account.user.collection.primary_activities">
             </activity_container>
 
+            <activity_container scope="honeybee.system_account.user.hierarchy.subheader_activities" extends="honeybee.system_account.user.subheader_activities">
+            </activity_container>
+
             <activity_container scope="honeybee.system_account.user.hierarchy.sort_activities" extends="honeybee.system_account.user.collection.sort_activities">
             </activity_container>
 
