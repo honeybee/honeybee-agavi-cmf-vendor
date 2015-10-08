@@ -2,8 +2,20 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/translation/1.0">
     <ae:configuration>
         <translators default_domain="application.ui">
+            <!--
+                Package's translations go here
+            -->
             <translator domain="{{ vendor_prefix }}.{{ package_prefix }}">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
             </translator>
+
         </translators>
     </ae:configuration>
 </ae:configurations>

@@ -24,41 +24,46 @@
                             Translation here will be used by default also for the browser title.
                         -->
                         <ae:parameter name="de">
-                            <ae:parameter name="collection.page_title">{{ resource }} Liste</ae:parameter>
-                            <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
+                            <ae:parameter name="bulk.page_title"></ae:parameter>
+                            <ae:parameter name="collection.page_title">{{ resource }}</ae:parameter>
                             <ae:parameter name="create.page_title">{{ resource }} hinzufügen</ae:parameter>
-                            <ae:parameter name="resource.modify.page_title">{{ resource }} bearbeiten</ae:parameter>
+                            <ae:parameter name="embed.page_title"></ae:parameter>
+                            <ae:parameter name="files.page_title"></ae:parameter>
+                            <ae:parameter name="files.download.page_title"></ae:parameter>
+                            <ae:parameter name="files.upload.page_title"></ae:parameter>
+                            <ae:parameter name="hierarchy.page_title">{{ resource }} Hierarchie</ae:parameter>
+                            <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
+                            <ae:parameter name="resource.embed.page_title"></ae:parameter>
                             <ae:parameter name="resource.history.page_title">{{ resource }} Geschichte</ae:parameter>
+                            <ae:parameter name="resource.modify.page_title">{{ resource }} bearbeiten</ae:parameter>
+                            <ae:parameter name="resource.task.page_title"></ae:parameter>
+                            <ae:parameter name="resource.task.proceed.page_title"></ae:parameter>
+                            <ae:parameter name="suggestions.page_title"></ae:parameter>
+                            <ae:parameter name="summary.page_title"></ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
-                            <ae:parameter name="collection.page_title">{{ resource }} List</ae:parameter>
-                            <ae:parameter name="resource.page_title">{{ resource }} Detail</ae:parameter>
+                            <ae:parameter name="bulk.page_title"></ae:parameter>
+                            <ae:parameter name="collection.page_title">{{ resource }} list</ae:parameter>
                             <ae:parameter name="create.page_title">Create {{ resource }}</ae:parameter>
+                            <ae:parameter name="embed.page_title"></ae:parameter>
+                            <ae:parameter name="files.page_title"></ae:parameter>
+                            <ae:parameter name="files.download.page_title"></ae:parameter>
+                            <ae:parameter name="files.upload.page_title"></ae:parameter>
+                            <ae:parameter name="hierarchy.page_title">{{ resource }} hierarchie</ae:parameter>
+                            <ae:parameter name="resource.page_title">{{ resource }} detail</ae:parameter>
+                            <ae:parameter name="resource.embed.page_title"></ae:parameter>
+                            <ae:parameter name="resource.history.page_title">{{ resource }} history</ae:parameter>
                             <ae:parameter name="resource.modify.page_title">Modify {{ resource }}</ae:parameter>
-                            <ae:parameter name="resource.history.page_title">{{ resource }} History</ae:parameter>
+                            <ae:parameter name="resource.task.page_title"></ae:parameter>
+                            <ae:parameter name="resource.task.proceed.page_title"></ae:parameter>
+                            <ae:parameter name="suggestions.page_title"></ae:parameter>
+                            <ae:parameter name="summary.page_title"></ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
                     <!--
-                        {{ resource }} collection view's translations go here
+                        View-template Tabs translations
                     -->
-                    <ae:parameter name="collection">
-                        <ae:parameter name="de">
-                            <ae:parameter name="title">Titel</ae:parameter>
-                            <ae:parameter name="created_at">Erstellt</ae:parameter>
-                            <ae:parameter name="modified_at">Zuletzt bearbeitet</ae:parameter>
-                            <ae:parameter name="workflow_state">Status</ae:parameter>
-                            <ae:parameter name="actions">Aktionen</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="title">Title</ae:parameter>
-                            <ae:parameter name="created_at">Created at</ae:parameter>
-                            <ae:parameter name="modified_at">Modified at</ae:parameter>
-                            <ae:parameter name="workflow_state">Status</ae:parameter>
-                            <ae:parameter name="actions">Actions</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
                     <ae:parameter name="tabs">
                         <ae:parameter name="de">
                         <!--
@@ -71,6 +76,9 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        View-template Panels translations
+                    -->
                     <ae:parameter name="panels">
                         <ae:parameter name="de">
                         <!--
@@ -86,10 +94,31 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        {{ resource }} collection view's translations go here
+                    -->
+                    <ae:parameter name="collection">
+                        <ae:parameter name="de">
+                            <ae:parameter name="identifier">Identifier</ae:parameter>
+                            <ae:parameter name="created_at">Erstellt</ae:parameter>
+                            <ae:parameter name="modified_at">Zuletzt bearbeitet</ae:parameter>
+                            <ae:parameter name="workflow_state">Status</ae:parameter>
+                            <ae:parameter name="actions">Aktionen</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="identifier">Identifier</ae:parameter>
+                            <ae:parameter name="created_at">Created at</ae:parameter>
+                            <ae:parameter name="modified_at">Modified at</ae:parameter>
+                            <ae:parameter name="workflow_state">Status</ae:parameter>
+                            <ae:parameter name="actions">Actions</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <!--
+                        {{ resource }} fields translations go here
+                    -->
                     <ae:parameter name="fields">
                         <ae:parameter name="de">
-                            <!-- Custom fields -->
-
                             <!-- Default fields -->
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
@@ -99,10 +128,11 @@
                             <ae:parameter name="revision.field_name">Revision</ae:parameter>
                             <ae:parameter name="version.field_name">Version</ae:parameter>
                             <ae:parameter name="language.field_name">Sprache</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
+
                             <!-- Custom fields -->
 
+                        </ae:parameter>
+                        <ae:parameter name="en">
                             <!-- Default fields -->
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
@@ -112,16 +142,27 @@
                             <ae:parameter name="revision.field_name">Revision</ae:parameter>
                             <ae:parameter name="version.field_name">Version</ae:parameter>
                             <ae:parameter name="language.field_name">Language</ae:parameter>
+
+                            <!-- Custom fields -->
+
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        {{ resource }} activities translations
+                    -->
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
                             <!--
-                                Default actions names (used into the navigation)
+                                Default views names (used by default for the navigation items)
                             -->
                             <ae:parameter name="collection.label">{{ resource }} Liste</ae:parameter>
-                            <ae:parameter name="resource.page_title">{{ resource }} im Detail</ae:parameter>
+                            <ae:parameter name="collection.description">{{ resource }} Liste</ae:parameter>
+                            <ae:parameter name="resource.label">{{ resource }} Detail</ae:parameter>
+                            <ae:parameter name="resource.description">{{ resource }} im Detail</ae:parameter>
+                            <!--
+                                Default workflow events names
+                            -->
                             <ae:parameter name="edit.label">Bearbeiten</ae:parameter>
                             <ae:parameter name="edit.description">{{ resource }} bearbeiten</ae:parameter>
                             <ae:parameter name="delete.label">Löschen</ae:parameter>
@@ -130,61 +171,77 @@
                             <ae:parameter name="promote.description">{{ resource }} aktivieren</ae:parameter>
                             <ae:parameter name="demote.label">Deaktivieren</ae:parameter>
                             <ae:parameter name="demote.description">{{ resource }} deaktivieren</ae:parameter>
+                            <!--
+                                Default readonly activities
+                            -->
                             <ae:parameter name="view_resource.label">Anschauen</ae:parameter>
                             <ae:parameter name="view_resource.description">{{ resource }} anschauen</ae:parameter>
                             <ae:parameter name="resource_history.label">Historie</ae:parameter>
                             <ae:parameter name="resource_history.description">{{ resource }} historie</ae:parameter>
                             <ae:parameter name="resource_hierarchy.label">Baumansicht</ae:parameter>
                             <ae:parameter name="resource_hierarchy.description">{{ resource }} baumansicht</ae:parameter>
+                            <!--
+                                Other activities translations
+                            -->
                             <ae:parameter name="search.description">Suchen</ae:parameter>
                             <ae:parameter name="search.label">Suche</ae:parameter>
                             <ae:parameter name="create_resource.label">{{ resource }} hinzufügen</ae:parameter>
                             <ae:parameter name="create_resource.description">{{ resource }} erstellen</ae:parameter>
-                            <ae:parameter name="save_resource.label">Datensatz erstellen</ae:parameter>
-                            <ae:parameter name="save_resource.description">Datensatz erstellen</ae:parameter>
-                            <ae:parameter name="save_resource_and_continue.label">Datensatz erstellen und Neuen anlegen</ae:parameter>
-                            <ae:parameter name="save_resource_and_continue.description">Datensatz erstellen und neuen anlegen</ae:parameter>
+                            <ae:parameter name="save_resource.label">Speichern</ae:parameter>
+                            <ae:parameter name="save_resource.description">Speichern</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.label">Speichern und Neuen anlegen</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.description">Speichern und Neuen anlegen</ae:parameter>
                             <ae:parameter name="back_to_collection.label">Zurück zur Liste</ae:parameter>
                             <ae:parameter name="back_to_collection.description">Zurück zur Liste</ae:parameter>
-                            <ae:parameter name="back_to_list.label">Zurück zur Liste</ae:parameter>
-                            <ae:parameter name="back_to_list.description">Zurück zur Liste</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.description">Aufsteigend nach Status sortiert</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_modified_at.description">Aufsteigend nach Zuletzt bearbeitet sortiert</ae:parameter>
                             <ae:parameter name="sort_by_modified_at.label">Zuletzt bearbeitet</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
+                            <!--
+                                Default views names (used by default for the navigation items)
+                            -->
                             <ae:parameter name="collection.label">{{ resource }} List</ae:parameter>
+                            <ae:parameter name="collection.description">List of {{ resource }}</ae:parameter>
                             <ae:parameter name="resource.label">{{ resource }} Detail</ae:parameter>
+                            <ae:parameter name="resource.description">View detail of the {{ resource }}</ae:parameter>
+                            <!--
+                                Default workflow events names
+                            -->
                             <ae:parameter name="edit.label">Edit</ae:parameter>
-                            <ae:parameter name="edit.description">Edit {{ resource }}</ae:parameter>
+                            <ae:parameter name="edit.description">Edit the {{ resource }}</ae:parameter>
                             <ae:parameter name="delete.label">Delete</ae:parameter>
-                            <ae:parameter name="delete.description">Delete {{ resource }}</ae:parameter>
+                            <ae:parameter name="delete.description">Delete the {{ resource }}</ae:parameter>
                             <ae:parameter name="promote.label">Promote</ae:parameter>
-                            <ae:parameter name="promote.description">Promote {{ resource }}</ae:parameter>
+                            <ae:parameter name="promote.description">Promote the {{ resource }}</ae:parameter>
                             <ae:parameter name="demote.label">Demote</ae:parameter>
-                            <ae:parameter name="demote.description">Demote {{ resource }}</ae:parameter>
+                            <ae:parameter name="demote.description">Demote the {{ resource }}</ae:parameter>
+                            <!--
+                                Default readonly activities
+                            -->
                             <ae:parameter name="view_resource.label">View</ae:parameter>
-                            <ae:parameter name="view_resource.description">View {{ resource }}</ae:parameter>
+                            <ae:parameter name="view_resource.description">View the {{ resource }}</ae:parameter>
                             <ae:parameter name="resource_history.label">History</ae:parameter>
-                            <ae:parameter name="resource_history.description">{{ resource }} history</ae:parameter>
+                            <ae:parameter name="resource_history.description">Event history of the {{ resource }}</ae:parameter>
                             <ae:parameter name="resource_hierarchy.label">Hierarchy</ae:parameter>
                             <ae:parameter name="resource_hierarchy.description">{{ resource }} hierarchy</ae:parameter>
-                            <ae:parameter name="search.description">Search</ae:parameter>
+                            <!--
+                                Other activities translations
+                            -->
+                            <ae:parameter name="search.description">Search by term</ae:parameter>
                             <ae:parameter name="search.label">Search</ae:parameter>
                             <ae:parameter name="create_resource.label">Create {{ resource }}</ae:parameter>
-                            <ae:parameter name="create_resource.description">Create {{ resource }}</ae:parameter>
+                            <ae:parameter name="create_resource.description">Create a new {{ resource }}</ae:parameter>
                             <ae:parameter name="save_resource.label">Save</ae:parameter>
-                            <ae:parameter name="save_resource.description">Save {{ resource }}</ae:parameter>
+                            <ae:parameter name="save_resource.description">Save the {{ resource }}</ae:parameter>
                             <ae:parameter name="save_resource_and_continue.label">Save and continue</ae:parameter>
-                            <ae:parameter name="save_resource_and_continue.description">Save {{ resource }} and continue</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.description">Save the {{ resource }} and continue</ae:parameter>
                             <ae:parameter name="back_to_collection.label">Back to collection</ae:parameter>
-                            <ae:parameter name="back_to_collection.description">Back to collection</ae:parameter>
-                            <ae:parameter name="back_to_list.label">Back to list</ae:parameter>
-                            <ae:parameter name="back_to_list.description">Back to list</ae:parameter>
+                            <ae:parameter name="back_to_collection.description">Back to the collection</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
-                            <ae:parameter name="sort_by_workflow_state.description">Sort by status (Ascending)</ae:parameter>
-                            <ae:parameter name="sort_by_modified_at.description">Sort by last modified (Ascending)</ae:parameter>
+                            <ae:parameter name="sort_by_workflow_state.description">Sort by status</ae:parameter>
+                            <ae:parameter name="sort_by_modified_at.description">Sort by modification date</ae:parameter>
                             <ae:parameter name="sort_by_modified_at.label">Last modified</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
@@ -193,21 +250,7 @@
             </translator>
 
             <!--
-                Module's translations go here
-            -->
-            <translator domain="{{ vendor_prefix }}.{{ package_prefix }}">
-                <message_translator class="AgaviSimpleTranslator">
-                    <ae:parameter name="views">
-                        <ae:parameter name="de">
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                        </ae:parameter>
-                    </ae:parameter>
-                </message_translator>
-            </translator>
-
-            <!--
-                Default translation domain for generic translations
+                Resource related translations for the generic translation domain
             -->
             <translator domain="application">
                 <message_translator class="AgaviSimpleTranslator">
@@ -228,16 +271,6 @@
             <translator domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">
 
                 <message_translator class="AgaviSimpleTranslator">
-
-                    <ae:parameter name="module">
-                        <ae:parameter name="de">
-                            <ae:parameter name="name">{{ resource }}</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="name">{{ resource }}</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
-
                     <!--
                         {{ resource }}/Embed action's translations go here
                     -->
@@ -248,6 +281,9 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        View-template Groups translations
+                    -->
                     <ae:parameter name="groups">
                         <ae:parameter name="de">
                         </ae:parameter>

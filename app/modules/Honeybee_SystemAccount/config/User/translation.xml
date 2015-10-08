@@ -22,23 +22,52 @@
                         User module's view names translations go here
                     -->
                     <ae:parameter name="views">
+                        <!--
+                            Translation here will be used by default also for the browser title.
+                        -->
                         <ae:parameter name="de">
                             <ae:parameter name="login.page_title">Einloggen</ae:parameter>
                             <ae:parameter name="logout.page_title">Abmelden</ae:parameter>
-                            <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
-                            <ae:parameter name="hierarchy.page_title">Nutzerhierarchie</ae:parameter>
-                            <ae:parameter name="resource.modify.page_title">Nutzer bearbeiten</ae:parameter>
                             <ae:parameter name="set_password.page_title">Passwort ändern</ae:parameter>
-                            <ae:parameter name="collection.page_title">Nutzer Liste</ae:parameter>
+
+                            <ae:parameter name="bulk.page_title"></ae:parameter>
+                            <ae:parameter name="collection.page_title">Nutzer</ae:parameter>
+                            <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
+                            <ae:parameter name="embed.page_title"></ae:parameter>
+                            <ae:parameter name="files.page_title"></ae:parameter>
+                            <ae:parameter name="files.download.page_title"></ae:parameter>
+                            <ae:parameter name="files.upload.page_title"></ae:parameter>
+                            <ae:parameter name="hierarchy.page_title">Nutzer Hierarchie</ae:parameter>
+                            <ae:parameter name="resource.page_title">Nutzer im Detail</ae:parameter>
+                            <ae:parameter name="resource.embed.page_title"></ae:parameter>
+                            <ae:parameter name="resource.history.page_title">Nutzer Geschichte</ae:parameter>
+                            <ae:parameter name="resource.modify.page_title">Nutzer bearbeiten</ae:parameter>
+                            <ae:parameter name="resource.task.page_title"></ae:parameter>
+                            <ae:parameter name="resource.task.proceed.page_title"></ae:parameter>
+                            <ae:parameter name="suggestions.page_title"></ae:parameter>
+                            <ae:parameter name="summary.page_title"></ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="login.page_title">Log in</ae:parameter>
                             <ae:parameter name="logout.page_title">Log out</ae:parameter>
-                            <ae:parameter name="create.page_title">Create user</ae:parameter>
-                            <ae:parameter name="hierarchy.page_title">User hierarchy</ae:parameter>
-                            <ae:parameter name="resource.modify.page_title">Modify user</ae:parameter>
                             <ae:parameter name="set_password.page_title">Set password</ae:parameter>
-                            <ae:parameter name="collection.page_title">Document Collection</ae:parameter>
+
+                            <ae:parameter name="bulk.page_title"></ae:parameter>
+                            <ae:parameter name="collection.page_title">User list</ae:parameter>
+                            <ae:parameter name="create.page_title">Create User</ae:parameter>
+                            <ae:parameter name="embed.page_title"></ae:parameter>
+                            <ae:parameter name="files.page_title"></ae:parameter>
+                            <ae:parameter name="files.download.page_title"></ae:parameter>
+                            <ae:parameter name="files.upload.page_title"></ae:parameter>
+                            <ae:parameter name="hierarchy.page_title">User hierarchie</ae:parameter>
+                            <ae:parameter name="resource.page_title">User detail</ae:parameter>
+                            <ae:parameter name="resource.embed.page_title"></ae:parameter>
+                            <ae:parameter name="resource.history.page_title">User history</ae:parameter>
+                            <ae:parameter name="resource.modify.page_title">Modify User</ae:parameter>
+                            <ae:parameter name="resource.task.page_title"></ae:parameter>
+                            <ae:parameter name="resource.task.proceed.page_title"></ae:parameter>
+                            <ae:parameter name="suggestions.page_title"></ae:parameter>
+                            <ae:parameter name="summary.page_title"></ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -60,8 +89,12 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        User collection view's translations go here
+                    -->
                     <ae:parameter name="collection">
                         <ae:parameter name="de">
+                            <ae:parameter name="identifier">Identifier</ae:parameter>
                             <ae:parameter name="title">Titel</ae:parameter>
                             <ae:parameter name="created_at">Erstellt</ae:parameter>
                             <ae:parameter name="modified_at">Zuletzt bearbeitet</ae:parameter>
@@ -73,12 +106,25 @@
                             <ae:parameter name="role">Rolle</ae:parameter>
                             <ae:parameter name="email">Email</ae:parameter>
                             <ae:parameter name="tags">Tags</ae:parameter>
-                            <ae:parameter name="actions">Aktionen</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="identifier">Identifier</ae:parameter>
+                            <ae:parameter name="created_at">Created at</ae:parameter>
+                            <ae:parameter name="modified_at">Modified at</ae:parameter>
+                            <ae:parameter name="workflow_state">Status</ae:parameter>
+                            <ae:parameter name="actions">Actions</ae:parameter>
+                            <ae:parameter name="title">Title</ae:parameter>
+                            <ae:parameter name="username">Username</ae:parameter>
+                            <ae:parameter name="firstname">First name</ae:parameter>
+                            <ae:parameter name="lastname">Last name</ae:parameter>
+                            <ae:parameter name="role">Role</ae:parameter>
+                            <ae:parameter name="email">Email</ae:parameter>
+                            <ae:parameter name="tags">Tags</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
                     <!--
-                        Additional User module's fields translations go here
+                        User fields translations go here
                     -->
                     <ae:parameter name="fields">
                         <ae:parameter name="de">
@@ -174,23 +220,51 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <!--
+                        User activities translations
+                    -->
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
-                            <ae:parameter name="user_collection.label">Nutzer Liste</ae:parameter>
+                            <!--
+                                Default views names (used by default for the navigation items)
+                            -->
+                            <ae:parameter name="user_collection.label">Nutzer</ae:parameter>
+                            <ae:parameter name="user_collection.description">Nutzer Liste</ae:parameter>
+                            <ae:parameter name="resource.label">Nutzer Detail</ae:parameter>
+                            <ae:parameter name="resource.description">Nutzer im Detail</ae:parameter>
+                            <!--
+                                Default workflow events names
+                            -->
                             <ae:parameter name="edit.label">Bearbeiten</ae:parameter>
+                            <ae:parameter name="edit.description">Nutzer bearbeiten</ae:parameter>
                             <ae:parameter name="delete.label">Löschen</ae:parameter>
+                            <ae:parameter name="delete.description">Nutzer löschen</ae:parameter>
                             <ae:parameter name="promote.label">Aktivieren</ae:parameter>
+                            <ae:parameter name="promote.description">Nutzer aktivieren</ae:parameter>
                             <ae:parameter name="demote.label">Deaktivieren</ae:parameter>
+                            <ae:parameter name="demote.description">Nutzer deaktivieren</ae:parameter>
+                            <!--
+                                Default readonly activities
+                            -->
                             <ae:parameter name="view_resource.label">Anschauen</ae:parameter>
+                            <ae:parameter name="view_resource.description">Nutzer anschauen</ae:parameter>
                             <ae:parameter name="resource_history.label">Historie</ae:parameter>
+                            <ae:parameter name="resource_history.description">Nutzer historie</ae:parameter>
                             <ae:parameter name="resource_hierarchy.label">Baumansicht</ae:parameter>
+                            <ae:parameter name="resource_hierarchy.description">Nutzer baumansicht</ae:parameter>
+                            <!--
+                                Other activities translations
+                            -->
                             <ae:parameter name="search.description">Suchen</ae:parameter>
                             <ae:parameter name="search.label">Suche</ae:parameter>
                             <ae:parameter name="create_resource.label">Nutzer hinzufügen</ae:parameter>
-                            <ae:parameter name="save_resource.label">Datensatz erstellen</ae:parameter>
-                            <ae:parameter name="save_resource_and_continue.label">Datensatz erstellen und neuen anlegen</ae:parameter>
+                            <ae:parameter name="create_resource.description">Nutzer erstellen</ae:parameter>
+                            <ae:parameter name="save_resource.label">Speichern</ae:parameter>
+                            <ae:parameter name="save_resource.description">Speichern</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.label">Speichern und Neuen anlegen</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.description">Speichern und Neuen anlegen</ae:parameter>
                             <ae:parameter name="back_to_collection.label">Zurück zur Liste</ae:parameter>
-                            <ae:parameter name="back_to_list.label">Zurück zur Liste</ae:parameter>
+                            <ae:parameter name="back_to_collection.description">Zurück zur Liste</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sortiert aufsteigend nach Nutzernamen</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Nutzername</ae:parameter>
                             <ae:parameter name="sort_by_email.description">Sortiert aufsteigend nach Emailadresse des Nutzers</ae:parameter>
@@ -201,23 +275,50 @@
                             <ae:parameter name="sort_by_role.label">Nutzerrolle</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.description">Sortiert Nutzer aufsteigend nach Status</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
+                            <ae:parameter name="sort_by_username.label">Nutzername</ae:parameter>
+                            <ae:parameter name="sort_by_username.description">Sortiert Nutzer aufsteigend nach Nutzername</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
+                            <!--
+                                Default views names (used by default for the navigation items)
+                            -->
                             <ae:parameter name="user_collection.label">User List</ae:parameter>
+                            <ae:parameter name="user_collection.description">List of User</ae:parameter>
+                            <ae:parameter name="resource.label">User Detail</ae:parameter>
+                            <ae:parameter name="resource.description">View detail of the User</ae:parameter>
+                            <!--
+                                Default workflow events names
+                            -->
                             <ae:parameter name="edit.label">Edit</ae:parameter>
+                            <ae:parameter name="edit.description">Edit the User</ae:parameter>
                             <ae:parameter name="delete.label">Delete</ae:parameter>
+                            <ae:parameter name="delete.description">Delete the User</ae:parameter>
                             <ae:parameter name="promote.label">Promote</ae:parameter>
+                            <ae:parameter name="promote.description">Promote the User</ae:parameter>
                             <ae:parameter name="demote.label">Demote</ae:parameter>
-                            <ae:parameter name="view_resource.label">View resource</ae:parameter>
+                            <ae:parameter name="demote.description">Demote the User</ae:parameter>
+                            <!--
+                                Default readonly activities
+                            -->
+                            <ae:parameter name="view_resource.label">View</ae:parameter>
+                            <ae:parameter name="view_resource.description">View the User</ae:parameter>
                             <ae:parameter name="resource_history.label">History</ae:parameter>
+                            <ae:parameter name="resource_history.description">Event history of the User</ae:parameter>
                             <ae:parameter name="resource_hierarchy.label">Hierarchy</ae:parameter>
-                            <ae:parameter name="search.description">Search</ae:parameter>
+                            <ae:parameter name="resource_hierarchy.description">User hierarchy</ae:parameter>
+                            <!--
+                                Other activities translations
+                            -->
+                            <ae:parameter name="search.description">Search by term</ae:parameter>
                             <ae:parameter name="search.label">Search</ae:parameter>
                             <ae:parameter name="create_resource.label">Create User</ae:parameter>
-                            <ae:parameter name="save_resource.label">Save resource</ae:parameter>
-                            <ae:parameter name="save_resource_and_continue.label">Save resource and continue</ae:parameter>
+                            <ae:parameter name="create_resource.description">Create a new User</ae:parameter>
+                            <ae:parameter name="save_resource.label">Save</ae:parameter>
+                            <ae:parameter name="save_resource.description">Save the User</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.label">Save and continue</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.description">Save the User and continue</ae:parameter>
                             <ae:parameter name="back_to_collection.label">Back to collection</ae:parameter>
-                            <ae:parameter name="back_to_list.label">Back to list</ae:parameter>
+                            <ae:parameter name="back_to_collection.description">Back to the collection of Users</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sort by username</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
                             <ae:parameter name="sort_by_email.description">Sort by email address</ae:parameter>
@@ -229,9 +330,54 @@
                             <ae:parameter name="sort_by_workflow_state.description">Sort by status</ae:parameter>
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
+                            <ae:parameter name="sort_by_username.description">Sort by Username</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
+                </message_translator>
+            </translator>
+
+            <!--
+                Resource related translations for the generic translation domain
+            -->
+            <translator domain="application">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="navigations">
+                        <ae:parameter name="de">
+                            <ae:parameter name="main.honeybee.system_account.user">Honeybee-SystemAccount-User</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="main.honeybee.system_account.user">Honeybee-SystemAccount-User</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
+            <!--
+                Others translation domains
+            -->
+            <translator domain="honeybee.system_account.user">
+
+                <message_translator class="AgaviSimpleTranslator">
+                    <!--
+                        User/Embed action's translations go here
+                    -->
+                    <ae:parameter name="embed">
+                        <ae:parameter name="de">
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <!--
+                        View-template Groups translations
+                    -->
+                    <ae:parameter name="groups">
+                        <ae:parameter name="de">
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                        </ae:parameter>
+                    </ae:parameter>
                 </message_translator>
             </translator>
         </translators>
