@@ -53,13 +53,6 @@
                     </sending>
                 </activity>
 
-                <activity name="back_to_collection">
-                    <url type="route">module.collection</url>
-                    <rels>
-                        <rel>activity</rel>
-                        <rel>collection</rel>
-                    </rels>
-                </activity>
             </activity_container>
 
             <activity_container scope="converjon">
