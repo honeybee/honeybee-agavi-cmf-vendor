@@ -8,11 +8,10 @@ $buttons-base-padding: 0.5em !default;
 
     .user-dropdown {
         @include dropdown-normal("user-dropdown");
-
         &:hover {
             box-shadow: none;
 
-            .user-dropdown__toggle {
+            .user-dropdown__toggle, .user-widget__avatar, .user-dropdown__more {
                 @include button-shadow-normal-navigational-hover;
             }
         }
@@ -21,36 +20,26 @@ $buttons-base-padding: 0.5em !default;
         &, .user-dropdown__toggle {
             display: inline-flex;
         }
+    }
 
-        .user-dropdown__toggle {
-            padding-top: 2px;
-            padding-bottom: 2px;
+    .user-dropdown__toggle {
+        padding-top: 2px;
+        padding-bottom: 2px;
 
-            display: inline-flex;
+        @include media-query(lap-and-up) {
 
-            // flex-grow: 0;
-            // flex-shrink: 1;
-
-            @include media-query(lap-and-up) {
-
-            }
-        }
-
-        .user-dropdown__more {
-            @include button-shadow-normal-navigational-hover;
         }
     }
 
     .user-widget__email {
-        display: none;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: auto;
+        overflow: hidden;
+        margin-left: $base-spacing/2;
 
-        @include media-query(lap-and-up) {
-            display: block;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            width: auto;
-            overflow: hidden;
-            margin-left: $base-spacing/2;
+        @include media-query(palm) {
+            @include visuallyhidden;
         }
     }
 
@@ -63,6 +52,5 @@ $buttons-base-padding: 0.5em !default;
 
     .activity {
         padding: 0 $base-spacing;
-        //border-bottom: 2px solid #494949;
     }
 }

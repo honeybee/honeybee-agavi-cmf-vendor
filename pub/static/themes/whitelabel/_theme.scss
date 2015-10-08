@@ -202,11 +202,6 @@ button {
         width: auto;
     }
     text-align: right;
-
-    @include media-query(palm) {
-        text-align: center;
-        padding-top: $base-spacing/2;
-    }
 }
 
 .page-title {
