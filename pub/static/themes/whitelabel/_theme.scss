@@ -230,8 +230,8 @@ label {
     cursor: pointer;
 }
 
-.view-login {
-    .login-form {
+.view-login, .view-set_password, .view-logout {
+    form {
         legend {
             @include typography-headlines;
             width: 100%;
