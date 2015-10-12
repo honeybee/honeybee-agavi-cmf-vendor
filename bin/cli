@@ -1,12 +1,12 @@
 #!/usr/bin/env sh
 
-# set default value if local config is not set when this script is sourced
-if [ -z "$LOCAL_CONFIG_SH" ] ; then
-    LOCAL_CONFIG_SH=$(readlink -m "$(dirname $0)/../etc/local/config.sh")
-fi
-
 if [ -z "$APPLICATION_DIR" ] ; then
     APPLICATION_DIR=$(readlink -m "$(dirname $0)/../")
+fi
+
+# set default value if local config is not set when this script is sourced
+if [ -z "$LOCAL_CONFIG_SH" ] ; then
+    LOCAL_CONFIG_SH=$(readlink -m "$HOME/.local/$(basename $APPLICATION_DIR)/config.sh")
 fi
 
 # source the local config

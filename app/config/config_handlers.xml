@@ -6,7 +6,6 @@
     parent="%core.system_config_dir%/config_handlers.xml">
     <ae:configuration>
         <handlers>
-
             <handler pattern="%core.honeybee_config_dir%/recovery/routing.xml" class="AgaviRoutingConfigHandler">
                 <validation>%core.agavi_dir%/config/xsd/routing.xsd</validation>
                 <transformation>%core.agavi_dir%/config/xsl/routing.xsl</transformation>
@@ -94,6 +93,9 @@
                 <validation>%core.config_dir%/xsd/process.xsd</validation>
             </handler>
 
+            <handler pattern="%core.config_dir%/local_configuration.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\LocalConfigurationConfigHandler">
+                <validation>%core.config_dir%/xsd/local_configuration.xsd</validation>
+            </handler>
         </handlers>
     </ae:configuration>
 </ae:configurations>

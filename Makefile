@@ -8,7 +8,7 @@ MAKEFLAGS += --no-print-directory
 
 help:
 	@echo ""
-	@echo "Honeybee makefile, environment: `cat etc/local/environment`"
+	@echo "Honeybee makefile"
 	@echo ""
 	@echo "--------------"
 	@echo "COMMON TARGETS"
@@ -81,21 +81,17 @@ config:
 	@make cc
 
 configure:
-	@if [ ! -d etc/local/ ]; then mkdir etc/local; fi
 	@./vendor/bin/environaut check
 	@echo "-> environaut was successfully executed"
 
 info:
 	@echo ""
-	@echo "Environment"
-	@echo "  `cat etc/local/environment`"
 	@echo ""
 	@echo "Branches/Tags"
 	@echo "  honeybee : `git rev-parse --abbrev-ref HEAD`"
 	@echo ""
 	@echo "Directories"
 	@echo "  honeybee root : ${HONEYBEE_ROOT}"
-	@echo "  local config  : ${HONEYBEE_ROOT}/etc/local/"
 	@echo "  caching dir   : ${HONEYBEE_ROOT}/app/cache/"
 	@echo "  logging dir   : ${HONEYBEE_ROOT}/app/log/"
 	@echo ""

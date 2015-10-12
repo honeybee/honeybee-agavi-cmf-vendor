@@ -13,7 +13,7 @@ class Honeybee_SystemAccount_User_Create_CreateSuccessView extends CreateSuccess
         // this should be more sophisticated as it e.g. doesn't include a custom port
         $set_password_url = sprintf(
             '%shoneybee-system_account-user/password?token=%s',
-            Environment::getBaseHref(),
+            AgaviConfig::get('local.base_href'),
             $values['auth_token']
         );
 

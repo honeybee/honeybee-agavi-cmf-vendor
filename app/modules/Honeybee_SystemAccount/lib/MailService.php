@@ -56,7 +56,7 @@ class MailService
         // that's why this needs to be here for the moment:
         $user_password_link = sprintf(
             '%shoneybee-system_account-user/password?token=%s',
-            Environment::getBaseHref(),
+            AgaviConfig::get('local.base_href'),
             $auth_token
         );
 

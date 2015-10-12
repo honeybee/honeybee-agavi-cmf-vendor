@@ -1,30 +1,52 @@
 <?php
 
-// get application directory
-$application_dir = getenv('APPLICATION_DIR');
+// determine local configuration directory
+$local_config_dir = @$local_config_dir ?: getenv('HONEYBEE_LOCAL_CONFIG_DIR');
+if ($local_config_dir === false) {
+    throw new Exception('Environment variable "HONEYBEE_LOCAL_CONFIG_DIR" has not been set.');
+}
+// determine application directory
+$application_dir = @$application_dir ?: getenv('APPLICATION_DIR');
 if ($application_dir === false) {
-    throw new \Exception('APPLICATION_DIR not set. Application probably not set up correctly.');
+    throw new Exception('APPLICATION_DIR not set. Application probably not set up correctly.');
 }
 $application_dir = realpath($application_dir);
-$vendor_dir = $application_dir . DIRECTORY_SEPARATOR . 'vendor';
-$agavi_dir = $vendor_dir . str_replace('/', DIRECTORY_SEPARATOR, '/agavi/agavi/src');
-$honeybee_dir = $vendor_dir . str_replace('/', DIRECTORY_SEPARATOR, '/honeybee/honeybee-agavi-cmf-vendor');
+$local_config_dir = realpath($local_config_dir);
+$vendor_dir = $application_dir . '/vendor';
+$agavi_dir = $vendor_dir . '/agavi/agavi/src';
+$honeybee_dir = $vendor_dir . '/honeybee/honeybee-agavi-cmf-vendor';
 
-// autoload all vendor libs and agavi in particular
-require($vendor_dir . DIRECTORY_SEPARATOR . 'autoload.php');
-//require($agavi_dir . DIRECTORY_SEPARATOR . 'agavi.php');
+// register 'local.*' settings
+$local_config_file = $local_config_dir . '/config.php';
+if (!is_readable($local_config_file)) {
+    throw new Exception('Unable to read local config.php at: ' . $local_config_file);
+}
+$local_config = require $local_config_file;
+if (is_array($local_config)) {
+    foreach ($local_config as $setting => $value) {
+        AgaviConfig::set('local.'.$setting, $value);
+    }
+}
+if (!isset($environment_modifier)) {
+    $environment_modifier = '';
+}
+AgaviConfig::set('local.environment_modifier', $environment_modifier);
+$agavi_environment = getenv('AGAVI_ENVIRONMENT') ?: AgaviConfig::get('local.agavi_environment');
+$agavi_environment .= $environment_modifier;
 
-// basic settings necessary to run the application correctly
+// register 'core.*' settings
+AgaviConfig::set('core.environment', $agavi_environment);
 AgaviConfig::set('core.agavi_dir', $agavi_dir);
-AgaviConfig::set('core.app_dir', $application_dir . DIRECTORY_SEPARATOR . 'app');
-AgaviConfig::set('core.pub_dir', $application_dir . DIRECTORY_SEPARATOR . 'pub');
-AgaviConfig::set('core.config_dir', AgaviConfig::get('core.app_dir') . DIRECTORY_SEPARATOR . 'config');
-AgaviConfig::set('core.modules_dir', AgaviConfig::get('core.app_dir') . DIRECTORY_SEPARATOR . 'modules');
-AgaviConfig::set('core.module_dir', AgaviConfig::get('core.app_dir') . DIRECTORY_SEPARATOR . 'modules');
-AgaviConfig::set('core.model_dir', AgaviConfig::get('core.app_dir') . DIRECTORY_SEPARATOR . 'model');
-AgaviConfig::set('core.lib_dir', AgaviConfig::get('core.app_dir') . DIRECTORY_SEPARATOR . 'lib');
-AgaviConfig::set('core.template_dir', AgaviConfig::get('core.app_dir') . DIRECTORY_SEPARATOR . 'templates');
-
+AgaviConfig::set('core.app_dir', $application_dir . '/app');
+AgaviConfig::set('core.pub_dir', $application_dir . '/pub');
+AgaviConfig::set('core.local_config_dir', $local_config_dir);
+AgaviConfig::set('core.config_dir', AgaviConfig::get('core.app_dir') . '/config');
+AgaviConfig::set('core.modules_dir', AgaviConfig::get('core.app_dir') . '/modules');
+AgaviConfig::set('core.module_dir', AgaviConfig::get('core.app_dir') . '/modules');
+AgaviConfig::set('core.model_dir', AgaviConfig::get('core.app_dir') . '/model');
+AgaviConfig::set('core.lib_dir', AgaviConfig::get('core.app_dir') . '/lib');
+AgaviConfig::set('core.template_dir', AgaviConfig::get('core.app_dir') . '/templates');
+AgaviConfig::set('core.clean_environment', AgaviConfig::get('local.agavi_environment'));
 // e,g, necessary for RecoveryConsoleRouting (in factories.xml) to find correct app/config/recovery/routing.xml file
 if (__DIR__ === AgaviConfig::get('core.app_dir')) {
     AgaviConfig::set('core.honeybee_dir', $application_dir); //used in resourcepacker; has to be changed
@@ -35,32 +57,54 @@ if (__DIR__ === AgaviConfig::get('core.app_dir')) {
     AgaviConfig::set('core.cms_dir', $application_dir);
     AgaviConfig::set('project.dir', $application_dir);
 }
-
 // always points to the honeybee config dir (whether honeybee runs standalone or as vendor lib)
-AgaviConfig::set(
-    'core.honeybee_config_dir',
-    AgaviConfig::get('core.honeybee_dir') . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'config'
-);
-
+AgaviConfig::set('core.honeybee_config_dir', AgaviConfig::get('core.honeybee_dir') . '/app/config');
 // points to the templates that honeybee has built-in
-AgaviConfig::set('core.honeybee_template_dir', AgaviConfig::get('core.honeybee_dir') . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'templates');
-
-//AgaviConfig::set('project.templates_dir', AgaviConfig::get('project.dir') . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'templates'); // see twigrenderer
-
+AgaviConfig::set('core.honeybee_template_dir', AgaviConfig::get('core.honeybee_dir') . '/app/templates');
+// AgaviConfig::set('project.templates_dir', AgaviConfig::get('project.dir') . '/app/templates'); // see twigrenderer
 
 // always points to the honeybee skeleton templates lookup dir (whether honeybee runs standalone or as vendor lib)
-AgaviConfig::set(
-    'core.honeybee_skeleton_dir',
-    AgaviConfig::get('core.honeybee_dir') . DIRECTORY_SEPARATOR . 'dev' . DIRECTORY_SEPARATOR . 'skeletons'
-);
+AgaviConfig::set('core.honeybee_skeleton_dir', AgaviConfig::get('core.honeybee_dir') . '/dev/skeletons');
 // project's skeleton lookup dir
-AgaviConfig::set(
-    'core.skeleton_dir',
-    AgaviConfig::get('core.cms_dir') . DIRECTORY_SEPARATOR . 'dev' . DIRECTORY_SEPARATOR . 'skeletons'
-);
+AgaviConfig::set('core.skeleton_dir', AgaviConfig::get('core.cms_dir') . '/dev/skeletons');
 // all skeleton lookup locations
-AgaviConfig::set('core.skeleton_dirs', array(AgaviConfig::get('core.skeleton_dir'), AgaviConfig::get('core.honeybee_skeleton_dir')));
+AgaviConfig::set(
+    'core.skeleton_dirs',
+    [ AgaviConfig::get('core.skeleton_dir'), AgaviConfig::get('core.honeybee_skeleton_dir') ]
+);
+
+// allow a custom cache directory location
+$cache_dir = getenv('APPLICATION_CACHE_DIR');
+//$cache_dir = '/dev/shm/cache';
+if ($cache_dir === false) {
+    // default cache directory takes environment into account to mitigate cases
+    // where the environment on a server is switched and the cache isn't cleared
+    AgaviConfig::set(
+        'core.cache_dir',
+        AgaviConfig::get('core.app_dir') . '/cache/', // . AgaviConfig::get('core.environment'),
+        true, // overwrite
+        true // readonly
+    );
+    AgaviConfig::set(
+        'core.cache_dir_without_env',
+        AgaviConfig::get('core.app_dir') . '/cache',
+        true,
+        true
+    );
+} else {
+    // use cache directory given by environment variable
+    $cache_dir = realpath($cache_dir);
+    AgaviConfig::set('core.cache_dir', $cache_dir, true, true); // overwrite, readonly
+    AgaviConfig::set('core.cache_dir_without_env', $cache_dir, true, true);
+}
+
+// contexts are e.g. 'web', 'console', 'soap' or 'xmlrpc'
+$default_context = $default_context ?: getenv('AGAVI_CONTEXT');
+if (!$default_context) {
+    throw new RuntimeException("Missing default context setting.");
+}
+// this is one of the most important settings for agavi
+AgaviConfig::set('core.default_context', $default_context);
 
 // some default timezone should always be set
 date_default_timezone_set('Europe/Berlin');
-
