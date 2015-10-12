@@ -15,7 +15,7 @@
                 {% else %}
                     <img class="user-widget__avatar base-dropdown__toggle-icon" src="{{ avatar_url }}" />
                 {% endif %}
-                <span class="user-widget__email">{{ us.getAttribute('name')|trim|default(us.getAttribute('email')) }}</span>
+                <span class="user-widget__email">{{ us.getAttribute('name')|trim|default(us.getAttribute('login')) }}</span>
             {% endblock %}
             {% block more %}
                 <ul>
