@@ -13,21 +13,25 @@
 
     <ae:configuration>
         <storage_writers>
-            <!--
-                domain-events
-            -->
             <storage_writer name="honeybee::domain_event::view_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\DomainEvent\DomainEventWriter">
                 <connection>Default.ViewStore</connection>
                 <settings>
                     <setting name="type">domain_event</setting>
                 </settings>
             </storage_writer>
+
+            <storage_writer name="honeybee.core::process_state::process_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter">
+                <connection>ProcessState.Store</connection>
+            </storage_writer>
         </storage_writers>
 
+        <storage_readers>
+            <storage_reader name="honeybee.core::process_state::process_store::reader" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader">
+                <connection>ProcessState.Store</connection>
+            </storage_reader>
+        </storage_readers>
+
         <finders>
-            <!--
-                domain-events
-            -->
             <finder name="honeybee::domain_event::view_store::finder" class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\DomainEvent\DomainEventFinder">
                 <connection>Default.ViewStore</connection>
                 <settings>
