@@ -3,7 +3,7 @@
 {% set list_attr = (html_attributes | default({})) | cast_to_array %}
 {% set more_activities = more_activities | default([]) %}
 {% if not more_activities %}
-    {% set list_css = list_css ~ ' ' ~ list_name ~ '--empty' %}
+    {% set list_css = list_css ~ '  base-dropdown--empty ' ~ list_name ~ '--empty' %}
 {% endif %}
 
 {% set more_css = more_css | default("") %}

@@ -55,9 +55,6 @@
         .#{$name}__default .activity.activity {
             @include button-shape-emphasized-navigational-default();
             @include button-colors-emphasized-navigational-default();
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border-right-width: 0;
             &:hover { @include button-colors-emphasized-navigational-hover;}
             &:focus { @include button-colors-emphasized-navigational-focus;}
             &:active {
@@ -73,6 +70,15 @@
         .#{$name}__toggle {
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
+        }
+
+        // remove border when adjacent to a toggle
+        &:not(.#{$name}--empty) {
+            .#{$name}__default .activity {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right-width: 0;
+            }
         }
     }
 }

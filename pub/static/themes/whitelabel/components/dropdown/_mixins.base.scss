@@ -25,20 +25,8 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
         }
     }
 
-    .#{$name}__toggle--disabled {
-        border: 0;
-
-        .#{$name}__toggle-icon {
-            visibility: hidden;
-        }
-    }
-
     .#{$name}__toggle {
         width: auto;
-
-        // vertical-align child to middle
-        display: flex;
-        align-items: center;
     }
 
     @at-root {
@@ -87,6 +75,10 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 
 @mixin base-dropdown($name: "dropdown") {
     @include init-dropdown($name);
+
+    &.#{$name}--empty {
+        .#{$name}__toggle-icon { display: none !important; }
+    }
 }
 
 @mixin base-splitbutton($name: "splitbutton") {
@@ -108,6 +100,10 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
                 padding-right: 0;
             }
         }
+    }
+
+    &.#{$name}--empty {
+        .#{$name}__toggle { display: none !important; }
     }
 
     @at-root {

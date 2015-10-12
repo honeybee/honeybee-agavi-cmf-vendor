@@ -4,11 +4,4 @@
         text-align: center;
         padding-top: $base-spacing/2;
     }
-
-    @include media-query(lap-and-up) {
-        // subheader activities has just one item by default
-        .base-dropdown__toggle {
-            display: none;
-        }
-    }
 }

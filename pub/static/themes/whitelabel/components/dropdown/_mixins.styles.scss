@@ -1,8 +1,25 @@
 // Styles
+@mixin init-dropdown-style($name: "dropdown-normal") {
+    border-radius: 3px;
+
+    @at-root {
+        .#{$name}__toggle-icon {
+            padding-left: $buttons-base-padding;
+        }
+
+        // .#{$name}__trigger:checked ~ .#{$name}__toggle {
+        // }
+
+        // &.#{$name}--empty {
+        //     .#{$name}__toggle {
+        //     }
+        // }
+    }
+}
 
 @mixin base-dropdown-style-normal($name: "dropdown-normal") {
+    @include init-dropdown-style($name);
     &:hover {@include button-shadow-normal-navigational-hover;}
-    border-radius: 3px;
 
     @at-root {
         .#{$name}__toggle {
@@ -17,11 +34,6 @@
 
             vertical-align: top;
         }
-
-        .#{$name}__toggle-icon {
-            padding-left: $buttons-base-padding;
-        }
-
 
         .#{$name}__trigger:checked ~ .#{$name}__toggle {
             @include button-colors-normal-navigational-active();
@@ -42,7 +54,7 @@
 }
 
 @mixin base-dropdown-style-emphasized($name: "dropdown-emphasized") {
-    border-radius: 3px;
+    @include init-dropdown-style($name);
 
     @at-root {
         .#{$name}__toggle {
@@ -54,10 +66,6 @@
                 @include button-colors-emphasized-navigational-active;
                 @include button-shadow-emphasized-navigational-active;
             }
-        }
-
-        .#{$name}__toggle-icon {
-            padding-left: $buttons-base-padding;
         }
 
         .#{$name}__trigger:checked ~ .#{$name}__toggle {

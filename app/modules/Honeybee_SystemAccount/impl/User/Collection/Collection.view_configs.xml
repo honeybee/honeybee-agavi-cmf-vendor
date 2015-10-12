@@ -22,6 +22,7 @@
                             </renderer_config>
                             <renderer_config subject="user.inactive.activity_map">
                                 <settings>
+                                    <setting name="as_dropdown">true</setting>
                                     <!--<setting name="default_activity_name">promote</setting>-->
                                     <!-- <setting name="as_list">true</setting> -->
                                 </settings>
