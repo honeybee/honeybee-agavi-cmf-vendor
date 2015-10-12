@@ -32,6 +32,12 @@ $workflow_state_fieldname: "workflow_state" !default;
 
             .hb-item {
                 @include frame(color(lightgrey2));
+                padding: $base-spacing 0 0 0;
+            }
+
+            .hb-field {
+                padding-left: $base-spacing;
+                padding-right: $base-spacing;
             }
 
             // Custom splitbutton actions
@@ -46,6 +52,7 @@ $workflow_state_fieldname: "workflow_state" !default;
             }
 
             .base-dropdown__more {
+                background-color: color(background-heavy);
                 margin-top: 0;
 
                 li {
