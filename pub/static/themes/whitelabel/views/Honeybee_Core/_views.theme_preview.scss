@@ -35,7 +35,14 @@
                 }
             }
         }
+    }
 
+    .theme-preview__widgets {
+        .widget-user {
+            .user-widget-wrapper {
+                text-align: right;
+            }
+        }
     }
 
     .theme-preview__typography {

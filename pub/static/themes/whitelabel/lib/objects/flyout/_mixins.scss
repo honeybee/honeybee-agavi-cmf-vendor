@@ -83,12 +83,23 @@ $z-layer-popover: zindex("popover", 0) !default;
     }
 }
 
+/* the "more" box will expand to the left side instead of the (default) right side. */
+/* this has no effect without flyout--popover */
+@mixin flyout--popover-inverse($flyout_name) {
+    @at-root {
+        .#{$flyout_name}__more {
+            left: auto;
+            right: 0;
+        }
+    }
+}
+
 /* the popover will have equal width to the flyout container */
 @mixin flyout--fit($flyout_name) {
     $flyout_name: "flyout" !default;
 
     @at-root {
-            .#{$flyout_name}__more {
+        .#{$flyout_name}__more {
             width: 100%;
         }
     }

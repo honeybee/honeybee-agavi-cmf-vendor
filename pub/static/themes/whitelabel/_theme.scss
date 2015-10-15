@@ -155,24 +155,6 @@ button {
         @include media-query(lap-and-up) {
             padding: $base-spacing/2 $base-spacing;
         }
-
-        .base-dropdown__toggle {
-            // flex-direction: row-reverse;
-        }
-    }
-
-    .user-dropdown {
-        @include media-query(palm) {
-            display: inline-block;
-            &:active:hover {
-                box-shadow: none;
-            }
-            .base-dropdown__more {
-                // @include button-shadow-normal-navigational-hover;
-                width: auto;
-                margin-right: 0; // reset
-            }
-        }
     }
 
     .user-widget {

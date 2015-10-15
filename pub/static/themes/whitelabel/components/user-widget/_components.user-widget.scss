@@ -8,6 +8,8 @@ $buttons-base-padding: 0.5em !default;
 
     .user-dropdown {
         @include dropdown-normal("user-dropdown");
+        @include flyout--popover("user-dropdown");
+        @include flyout--popover-inverse("user-dropdown");
 
         // hover area just on the toggle
         &:hover {
