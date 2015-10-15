@@ -54,6 +54,7 @@ define([
         this.resource_type_name = this.$widget.data('resource-type-name');
         this.resource_type_prefix = this.$widget.data('resource-type-prefix');
         this.resource_identifier = this.$widget.data('resource-identifier');
+
         this.attribute_path = this.$widget.data('attribute-path');
         this.upload_input_name = this.$widget.data('upload-input-name') || 'uploadform['+self.attribute_path+']'; // uploadform[gallery]
         this.upload_url = this.$widget.data('upload-url');
@@ -216,8 +217,7 @@ define([
         this.$widget.on("click", ".imagelist__image-aoi-accept", function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
-            var id = $(this).attr("data-item-id");
-            self.acceptAoi(id);
+            self.acceptAoi();
             $(this).addClass("hide").
                 siblings(".imagelist__image-aoi-trigger").removeClass("hide").
                 siblings(".imagelist__image-aoi-cancel").addClass("hide");
@@ -226,7 +226,6 @@ define([
         this.$widget.on("click", ".imagelist__image-aoi-cancel", function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
-            var id = $(this).attr("data-item-id");
             self.cancelAoi();
             $(this).addClass("hide").
                 siblings(".imagelist__image-aoi-trigger").removeClass("hide").
@@ -535,18 +534,15 @@ define([
         this.updatePopupItems();
     };
 
-    ImageList.prototype.acceptAoi = function(id) {
-        this.logDebug(this.aoi_selectrect[id].selection);
-        this.aoi_selectrect[id].$input.val(this.aoi_selectrect[id].selection);
+    ImageList.prototype.acceptAoi = function() {
+        this.logDebug(this.aoi_selectrect.selection);
+        this.aoi_selectrect.$input.val(this.aoi_selectrect.selection);
         this.cancelAoi();
     };
 
     ImageList.prototype.cancelAoi = function() {
-        var i;
-        for (i in this.aoi_selectrect) {
-            if (this.aoi_selectrect.hasOwnProperty(i) ) {
-                this.aoi_selectrect[i].rect.cancel();
-            }
+        if (this.aoi_selectrect.rect) {
+            this.aoi_selectrect.rect.cancel();
         }
         this.aoi_selectrect = {};
         this.$widget.find(".imagelist__image-aoi").addClass("hide");
@@ -571,13 +567,13 @@ define([
         } catch (e) {
             aoi = undefined;
         }
-        this.aoi_selectrect[id] = {
+        this.aoi_selectrect = {
             rect: selectrect($img[0], aoi),
             selection: {},
             $input: $aoi_input
         };
-        this.aoi_selectrect[id].rect.onUpdate(function(aoi) {
-            self.aoi_selectrect[id].selection = JSON.stringify([
+        this.aoi_selectrect.rect.onUpdate(function(aoi) {
+            self.aoi_selectrect.selection = JSON.stringify([
                 aoi.x,
                 aoi.y,
                 aoi.w,
