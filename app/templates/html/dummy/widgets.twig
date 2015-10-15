@@ -1,0 +1,17 @@
+{% set user = {
+    is_authenticated: true,
+    avatar_url: "",
+    email: "clark.kent@example.com",
+    login: "clark.kent",
+    name: "Clark Kent",
+} %}
+
+<div class="sheet theme-preview__widgets">
+    <h1>Widget: User</h1>
+
+    <div class="widget-user">
+        {% include "html/ui/user-widget.twig" with {
+            user_data: user,
+        } %}
+    </div>
+</div>

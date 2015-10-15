@@ -1,21 +1,23 @@
 {%- block userwidget -%}
-{% if us.isAuthenticated() %}
+
 <div class="user-widget-wrapper">
     <div class="user-widget" >
         {% embed 'html/dropdown.twig' with {
                 name: 'user-dropdown',
-                toggle_disabled: false
+                user_data: user_data,
+                toggle_disabled: toggle_disabled|default(false),
+                emphasized: emphasized|default(true),
+                dropdown_css: css|default(''),
             } only
         %}
             {% block default %}
-                {% set avatar_url = us.getAttribute('avatar_url') %}
 
-                {% if avatar_url is empty %}
+                {% if user_data.avatar_url is empty %}
                     <img class="user-widget__avatar base-dropdown__toggle-icon" src="//www.gravatar.com/avatar/noavatar" />
                 {% else %}
-                    <img class="user-widget__avatar base-dropdown__toggle-icon" src="{{ avatar_url }}" />
+                    <img class="user-widget__avatar base-dropdown__toggle-icon" src="{{ user_data.avatar_url }}" />
                 {% endif %}
-                <span class="user-widget__email">{{ us.getAttribute('name')|trim|default(us.getAttribute('login')) }}</span>
+                <span class="user-widget__label">{{ user_data.name|trim|default(user_data.login) }}</span>
             {% endblock %}
             {% block more %}
                 <ul>
@@ -27,5 +29,4 @@
         {% endembed %}
     </div><!-- .user-widget -->
 </div><!-- .user-widget-wrapper -->
-{% endif %}
 {%- endblock userwidget -%}

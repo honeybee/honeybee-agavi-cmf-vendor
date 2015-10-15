@@ -10,7 +10,17 @@
         </div>
     </div><!-- .brand-box
     --><div class="user-widget-box">
-        {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
+        {% if us.isAuthenticated() %}
+
+            {%- set user_data = {
+                is_authenticated: us.isAuthenticated(),
+                avatar_url: us.getAttribute('avatar_url'),
+                name: us.getAttribute('name'),
+                login: us.getAttribute('login')
+            } -%}
+
+            {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
+        {% endif %}
     </div><!-- .user-widget-box
     --><div class="menu-box">
         {%- block menu -%}
