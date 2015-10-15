@@ -8,11 +8,31 @@ $thumb-size-default: 150px;
     background-color: white;
 }
 
+.imagelist-tabs {
+    @include hb-tabs("imagelist-tabs");
+
+    line-height: 0;
+    margin-top: $small-spacing;
+
+    .imagelist-tabs__toggles {
+        padding: $small-spacing $small-spacing 0 $small-spacing;
+    }
+
+    .imagelist-tabs__toggle {
+        margin: 0 $small-spacing $small-spacing 0;
+
+        img {
+            max-width: $thumb-size-default;
+            max-height: $thumb-size-default;
+        }
+    }
+}
+
 // what to do when js-behaviour was applied?
 .imagelist.widget-initialized {
 
     .imagelist-tabs__panel {
-        display: none;
+        display: none !important;
     }
 
     .imagelist__thumb.newitem {
@@ -41,33 +61,13 @@ $thumb-size-default: 150px;
     }
 }
 
-.imagelist-tabs {
-    @include hb-tabs("imagelist-tabs");
-
-    line-height: 0;
-    margin-top: $small-spacing;
-
-    .imagelist-tabs__toggles {
-        padding: $small-spacing $small-spacing 0 $small-spacing;
-    }
-
-    .imagelist-tabs__toggle {
-        margin: 0 $small-spacing $small-spacing 0;
-
-        img {
-            max-width: $thumb-size-default;
-            max-height: $thumb-size-default;
-        }
-    }
-}
-
 .imagelist__image-input,
 .imagelist__input-multiple-trigger {
     @include visuallyhidden;
 }
 
 .imagelist__input-multiple-label {
-    @include button-emphasized-navigational;;
+    @include button-emphasized-navigational;
 }
 
 .imagelist__delete-input {
