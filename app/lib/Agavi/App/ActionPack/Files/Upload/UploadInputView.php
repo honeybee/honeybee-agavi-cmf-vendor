@@ -11,19 +11,19 @@ class UploadInputView extends View
     {
         $this->setupHtml($request_data);
 
-        $this->prepareTemplateAttributes($request_data);
+        $this->prepareCustomTemplateAttributes($request_data);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
-        $this->prepareTemplateAttributes($request_data);
+        $this->prepareCustomTemplateAttributes($request_data);
 
         $payload = array_merge([], $this->getAttribute('file_attributes'));
 
         return json_encode($payload, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT);
     }
 
-    protected function prepareTemplateAttributes(AgaviRequestDataHolder $request_data)
+    protected function prepareCustomTemplateAttributes(AgaviRequestDataHolder $request_data)
     {
         $art = $this->getAttribute('aggregate_root_type');
 

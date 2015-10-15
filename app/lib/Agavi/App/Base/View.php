@@ -162,7 +162,7 @@ class View extends AgaviView
         if ($layout_name === null && $this->isSlot()) {
             $layout_name = self::DEFAULT_SLOT_LAYOUT_NAME;
         } else {
-            $this->prepareTemplateAttributes();
+            $this->prepareTemplateAttributes($request_data);
         }
 
         if ($add_fpf_info && $this->wasForwarded()) {
@@ -182,7 +182,7 @@ class View extends AgaviView
         $this->prepareViewConfigSlots();
     }
 
-    protected function prepareTemplateAttributes()
+    protected function prepareTemplateAttributes(AgaviRequestDataHolder $request_data)
     {
         if (!$this->hasAttribute(static::ATTRIBUTE_PAGE_TITLE)) {
             $this->setAttribute(static::ATTRIBUTE_PAGE_TITLE, $this->getPageTitle());
