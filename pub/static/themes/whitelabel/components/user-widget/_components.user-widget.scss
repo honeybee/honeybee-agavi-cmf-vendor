@@ -11,10 +11,16 @@ $buttons-base-padding: 0.5em !default;
         @include flyout--popover("user-dropdown");
         @include flyout--popover-inverse("user-dropdown");
 
-        // hover area just on the toggle
-        &:hover {
-            box-shadow: none;
-        }
+        // override default dropdown behaviour
+        // @include media-query(palm) {
+        //     .user-dropdown__toggle {
+        //         flex-grow: 0;
+        //     }
+        //     .user-dropdown__more {
+        //         width: auto;
+        //     }
+        // }
+
         .user-dropdown__toggle:hover {
             &,
             .user-widget__avatar {
@@ -28,6 +34,11 @@ $buttons-base-padding: 0.5em !default;
         // keep at minimum width
         &, .user-dropdown__toggle {
             display: inline-flex;
+            align-self: flex-end;
+
+            @include media-query(lap-and-up) {
+                align-self: auto;
+            }
         }
     }
 
@@ -40,12 +51,14 @@ $buttons-base-padding: 0.5em !default;
         }
     }
 
-    .user-widget__email {
+    .user-widget__label {
+        display: flex;
+        align-items: center;
+        margin-left: $base-spacing/2;
+
         text-overflow: ellipsis;
         white-space: nowrap;
-        width: auto;
         overflow: hidden;
-        margin-left: $base-spacing/2;
 
         @include media-query(palm) {
             @include visuallyhidden;

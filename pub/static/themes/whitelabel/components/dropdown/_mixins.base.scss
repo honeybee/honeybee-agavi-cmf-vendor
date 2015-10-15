@@ -8,23 +8,15 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
     @include flyout--default-inline("#{$name}");
 
     display: inline-flex;
+    flex-items: align-start;    // just on mobile?
 
     @include media-query(lap-and-up) {
         @include flyout--popover("#{$name}");
     }
+
     @include media-query(palm) {
         display: flex;
-        flex-flow: row wrap;
-        .#{$name}__toggle {
-            flex-grow: 1;
-        }
-        .#{$name}__more {
-            width: 100%;
-        }
-    }
-
-    .#{$name}__toggle {
-        width: auto;
+        flex-flow: row wrap;    // generic style?
     }
 
     @at-root {
@@ -36,9 +28,20 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             min-width: 8em;
 
             @include media-query(palm) {
-                width: auto;
+                width: 100%;
                 margin-top: 0;
             }
+        }
+
+        .#{$name}__default {
+            .activity {
+                width: 100%;
+            }
+        }
+
+        .#{$name}__toggle {
+            width: auto;
+            flex-grow: 0;
         }
 
         .#{$name}__toggle-icon {
@@ -73,6 +76,12 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 @mixin base-dropdown($name: "dropdown") {
     @include init-dropdown($name);
 
+    @include media-query(palm) {
+        .#{$name}__toggle {
+            width: 100%;
+        }
+    }
+
     &.#{$name}--empty {
         .#{$name}__toggle-icon { display: none !important; }
     }
@@ -80,6 +89,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 
 @mixin base-splitbutton($name: "splitbutton") {
     @include init-dropdown($name);
+    display: inline-flex; // inline-block doesn't keep splitbutton on a single line
     white-space: nowrap;
 
     @include media-query(palm) {
@@ -90,7 +100,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             flex-grow: 1;
             text-align: center;
             .activity {
-                width: 100%;
+                // width: 100%;
                 // compensate splitbutton + default button padding sizes, to center text
                 padding-left: $dropdown-toggle-width + $buttons-base-padding;
                 padding-right: 0;
