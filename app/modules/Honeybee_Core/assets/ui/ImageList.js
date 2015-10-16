@@ -57,6 +57,7 @@ define([
 
         this.attribute_path = this.$widget.data('attribute-path');
         this.upload_input_name = this.$widget.data('upload-input-name') || 'uploadform['+self.attribute_path+']'; // uploadform[gallery]
+        // this.logDebug('UploadInputName:', this.upload_input_name, self.attribute_path);
         this.upload_url = this.$widget.data('upload-url');
 
         if (!this.upload_url || !this.attribute_path) {
@@ -86,8 +87,6 @@ define([
             });
         }
 
-        this.$widget.find(".imagelist__input-multiple").removeClass("hide");
-        this.$widget.find(".imagelist__input-multiple-label").removeClass("hide");
         this.$popup_trigger = this.$widget.find('.hb-field__label');
         this.grouped_field_name = this.$widget.data('grouped-field-name');
 
@@ -121,7 +120,7 @@ define([
             var $li = $(this);
             var item_index = $li.index();
 
-            console.log(self.id, item_index, self.popup_options, self.$popup_trigger);
+            // console.log(self.id, item_index, self.popup_options, self.$popup_trigger);
                 self.$popup_trigger.magnificPopup('open'); // why does …('open', idx) not work?
                 self.$popup_trigger.magnificPopup('goTo', item_index-1);
                 /*
@@ -207,8 +206,7 @@ define([
         this.$widget.on("click", ".imagelist__image-aoi-trigger", function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
-            var id = $(this).attr("data-item-id");
-            self.selectAoi(id);
+            self.selectAoi($(ev.target));
             $(this).addClass("hide").
                 siblings(".imagelist__image-aoi-accept").removeClass("hide").
                 siblings(".imagelist__image-aoi-cancel").removeClass("hide");
@@ -275,13 +273,14 @@ define([
     ImageList.prototype.bindItemFileInput = function($item) {
         var self = this;
         var item_id = $item.attr("data-item-id");
+        // this.logDebug('bindItemFileInput', item_id, $item);
         $input = $item.find(".imagelist__image-input");
         $input.addClass("visuallyhidden");
         $input.removeAttr('name');
         $input.on("change", function(ev) {
             var $input = $(this);
             var files = $input[0].files;
-            self.logDebug('input onChange:', files);
+            // self.logDebug('input onChange:', files, $input);
             if (files.length == 1) {
                 if ($item.hasClass("newitem")) {
                     self.appendImageFile(files[0]);
@@ -296,7 +295,16 @@ define([
 
     ImageList.prototype.bindMultipleInput = function() {
         var self = this;
-        this.$widget.find(".imagelist__input-multiple-trigger").on("change", function(ev) {
+
+        var $multi = this.$widget.find(".imagelist__input-multiple");
+        var $multiinput = this.$widget.find(".imagelist__input-multiple-trigger");
+        var $multilabel = this.$widget.find(".imagelist__input-multiple-label");
+        var newid = this.getRandomString();
+        $multiinput.attr('id', newid);
+        $multilabel.attr('for', newid);
+        $multilabel.removeClass("hide");
+
+        $multiinput.on("change", function(ev) {
             self.appendMultipleFiles(this.files);
         });
     };
@@ -322,10 +330,10 @@ define([
         $body = $(':root');
 
         $body.on("dragenter", function(ev) {
-            self.logDebug('dragenter', ev.target);
+            // self.logDebug('dragenter', ev.target);
             if (self.dragevents.length === 0)
             {
-                self.logDebug('INITIAL DRAGENTER');
+                // self.logDebug('INITIAL DRAGENTER');
                 //self.dropbox.addClass('dragging');
                 $body.addClass('dragging');
             }
@@ -357,7 +365,7 @@ define([
         });
 
         $body.on('dragleave', function(ev) {
-            self.logDebug('dragleave', ev.target);
+            // self.logDebug('dragleave', ev.target);
 
             $target = $(ev.target);
             $target.removeClass('dragover');
@@ -367,18 +375,18 @@ define([
             }
 
             if (self.dragevents.length === 0) {
-                self.logDebug('FINAL DRAGLEAVE');
+                // self.logDebug('FINAL DRAGLEAVE');
                 $body.removeClass('dragging');
             }
         });
 
         $body.on('dragend', function(ev) {
-            self.logDebug('dragend', ev.target);
+            // self.logDebug('dragend', ev.target);
             $body.removeClass('dragging');
         });
 
         this.$widget.on("drop", function(ev) {
-            self.logDebug("list drop", ev.target);
+            // self.logDebug("list drop", ev.target);
             ev.stopPropagation();
             ev.preventDefault();
 
@@ -387,13 +395,13 @@ define([
 
             var files = ev.originalEvent.dataTransfer.files;
             if (files.length > 0) {
-                console.log("dropped multiple files on the image list", files.length, ev);
+                // console.log("dropped multiple files on the image list", files.length, ev);
                 self.appendMultipleFiles(files);
             }
         });
 
         this.$widget.on("drop", ".imagelist__thumb-img", function(ev) {
-            self.logDebug("replacement drop", ev.target);
+            // self.logDebug("replacement drop", ev.target);
             ev.stopPropagation();
             ev.preventDefault();
 
@@ -402,6 +410,7 @@ define([
 
             var $item = $(this).parents(".imagelist__thumb").first();
             var item_id = $item.attr("data-item-id");
+            // self.logDebug('dropOnThumb?', item_id, '$this=', $(this), 'item=', $item);
             var files = ev.originalEvent.dataTransfer.files;
             if (files.length == 1) {
                 console.log("dropped 1 file on an image item", item_id);
@@ -438,7 +447,7 @@ define([
                 return;
             }
 
-            self.logDebug('upload complete for replaceImageFile', response_json);
+            self.logDebug('upload complete for replaceImageFile', response_json, 'item_id=', item_id);
 
             var $thumb = self.$widget.find(".imagelist__thumb[data-item-id="+item_id+"] .imagelist__thumb-img");
             $thumb.attr("src", response_json.file.download_url||'');
@@ -455,7 +464,7 @@ define([
     ImageList.prototype.appendImageFile = function(file) {
         var self = this;
 
-        self.logDebug('Appending file', file);
+        // self.logDebug('Appending file', file);
 
 
         // create a new thumbnail
@@ -500,7 +509,6 @@ define([
                 });
                 $input.attr('name', $input.attr('name').replace(input_name_prefix, new_input_name_prefix));
             });
-
             $newitem.appendTo(self.$widget.find('.imagelist-tabs__content'));
 
             // create a new thumbnail
@@ -535,7 +543,7 @@ define([
     };
 
     ImageList.prototype.acceptAoi = function() {
-        this.logDebug(this.aoi_selectrect.selection);
+        // this.logDebug(this.aoi_selectrect.selection);
         this.aoi_selectrect.$input.val(this.aoi_selectrect.selection);
         this.cancelAoi();
     };
@@ -549,10 +557,10 @@ define([
         this.$widget.find(".imagelist__image-aoi-trigger").removeClass("hide");
     };
 
-    ImageList.prototype.selectAoi = function(id) {
+    ImageList.prototype.selectAoi = function($btn) {
         var self = this;
         this.cancelAoi();
-        var $item = this.$widget.find(".imagelist__image[data-item-id="+id+"]");
+        var $item = $btn.closest('.imagelist__image');
         var $img =  $item.find(".imagelist__image-img");
         var $aoi_input = $item.find(".imagelist__aoi-input");
         var aoi = $aoi_input.val();
@@ -584,5 +592,4 @@ define([
 
     return ImageList;
 });
-
 

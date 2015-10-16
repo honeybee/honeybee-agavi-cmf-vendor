@@ -5,7 +5,7 @@
 <div class="imagelist-tabs__panel imagelist__item {{newitem ? "newitem": "item"}}" data-item-id="{{item_id}}" data-grouped-base-path="{{grouped_base_path}}">
     {% embed "html/embed-actions.twig" with { 'grouped_base_path': grouped_base_path, 'add_item_to_parent_list_allowed': false } only %}{% endembed %}
     <div class="imagelist__item-content">
-        <div class="imagelist__image {{newitem ? "newitem": "item"}}" data-field-id="{{field_id}}" data-item-id="{{item_id}}">
+        <div class="imagelist__image {{newitem ? "newitem": "item"}}" data-item-id="{{item_id}}">
             <div class="imagelist__image-content">
                 <div class="imagelist__image-img-wrapper">
                     <div><img src="{{preview_url}}" title="{{title|default('')}}" alt="{{caption|default(title)|default('')}}" class="imagelist__image-img"/></div>
@@ -29,12 +29,12 @@
                     {% endif %}
                 </div><!-- imagelist__image-img-wrapper
                 --><div class="imagelist__inputs-wrapper">
-                    <label class="imagelist__label-title">Title <input type="text" id="{{item_id}}-title" name="{{grouped_base_path}}[title]" value="{{title}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-caption">Caption <input type="text" id="{{item_id}}-caption" name="{{grouped_base_path}}[caption]" value="{{caption}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-copyright">Copyright <input type="text" id="{{item_id}}-copyright" name="{{grouped_base_path}}[copyright]" value="{{copyright}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-copyright-url">Copyright URL <input type="url" id="{{item_id}}-copyright-url" name="{{grouped_base_path}}[copyright_url]" value="{{copyright_url}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-source">Source <input type="text" id="{{item_id}}-source" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-aoi">Area of Interest <input type="text" id="{{item_id}}-aoi" name="{{grouped_base_path}}[aoi]"
+                    <label class="imagelist__label-title">Title <input type="text" name="{{grouped_base_path}}[title]" value="{{title}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-caption">Caption <input type="text" name="{{grouped_base_path}}[caption]" value="{{caption}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-copyright">Copyright <input type="text" name="{{grouped_base_path}}[copyright]" value="{{copyright}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-copyright-url">Copyright URL <input type="url" name="{{grouped_base_path}}[copyright_url]" value="{{copyright_url}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-source">Source <input type="text" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-aoi">Area of Interest <input type="text" name="{{grouped_base_path}}[aoi]"
                         value="{{aoi}}" class="imagelist__aoi-input" value="{{ aoi }}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
                     {% if meta_data %}
                         <label class="" for="{{item_id}}_meta-data-trigger">

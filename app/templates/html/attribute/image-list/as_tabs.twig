@@ -61,7 +61,6 @@
                         {%- if isReadable -%}
                             {# add empty input elements to add a new image when javascript is not available or did not load #}
                             {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
-                                field_id: field_id,
                                 item_id: 'add-image-to-' ~ field_id,
                                 grouped_base_path: grouped_base_path ~"[0]",
                                 tabs_id: tabs_id,
@@ -79,7 +78,6 @@
                                 aoi: "",
                                 meta_data: {},
 
-                                checked: false,
                                 newitem: true,
 
                                 readonly: readonly,
@@ -89,7 +87,6 @@
                         {%- for image in images -%}
                             {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
 
-                                field_id: field_id,
                                 item_id: image.id,
                                 grouped_base_path: grouped_base_path ~"["~ loop.index ~"]",
                                 tabs_id: tabs_id,
@@ -104,10 +101,9 @@
                                 copyright: image.copyright,
                                 copyright_url: image.copyright_url,
                                 source: image.source,
-                                meta_data: image.meta_data,
                                 aoi: image.aoi,
+                                meta_data: image.meta_data,
 
-                                checked: false,
                                 newitem: false,
 
                                 readonly: readonly,
