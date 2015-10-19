@@ -1,3 +1,4 @@
+{%- block field -%} {# this block exists for whitespace control #}
 {%- if location is not defined %}{% set location = "" %}{% endif -%}
 {%- set alt = caption|default(title)|default('') -%}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
@@ -62,3 +63,4 @@
         </div><!-- imagelist__image -->
     </div><!-- imagelist__item-content -->
 </div>{# hb-tabs__panel / imagelist__item PLUS: comment to fix Twig whitespace problem #}
+{%- endblock field -%}

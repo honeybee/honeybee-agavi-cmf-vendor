@@ -1,6 +1,8 @@
+{%- block field -%} {# this block exists for whitespace control #}
 <div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}">
     <div class="hb-field__content">
         <div class="hb-field__label">{{ _(field_name~'.field_name', translation_domain) }}</div><!--
         --><div class="hb-field__value"><a href="mailto:{{ attribute_value|e('url') }}">{{ attribute_value }}</a></div>
     </div>
 </div>
+{%- endblock field -%}

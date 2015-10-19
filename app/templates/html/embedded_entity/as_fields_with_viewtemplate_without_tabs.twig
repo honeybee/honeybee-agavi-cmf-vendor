@@ -21,11 +21,11 @@
                             {%- for group in cell.getGroupList() -%}
                             <div class="hb-group hb-group-{{ group.name }} {{ group.css }}" data-group-name="{{ group.name }}">
                                 {%- for field in group.getFieldList() -%}
-                                    {% if is_new and field.name == 'identifier' %}
+                                    {%- if is_new and field.name == 'identifier' -%}
                                         {# skip #}
-                                    {% else %}
+                                    {%- else -%}
                                         {{- rendered_fields[field.name]|raw -}}
-                                    {% endif %}
+                                    {%- endif -%}
                                 {%- endfor -%}
                             </div>
                             {%- endfor -%}

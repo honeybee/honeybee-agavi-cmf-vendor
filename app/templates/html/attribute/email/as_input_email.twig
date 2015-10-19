@@ -1,3 +1,4 @@
+{%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
 {%- set input_help = translations.input_help | default('') -%}
 {%- set input_hint = translations.input_hint | default('') -%}
@@ -30,4 +31,4 @@
         </div>
     </div>
 </div>
-
+{%- endblock field -%}

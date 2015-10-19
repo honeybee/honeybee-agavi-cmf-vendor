@@ -1,3 +1,4 @@
+{%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
 {%- set add_images = translations.add_images | default('add_images') -%}
 <div class="hb-field {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} hb-js-imagelist jsb_Honeybee_Core/ui/ImageList{% endif %}"
@@ -118,3 +119,4 @@
         </div>
     </div>
 </div>
+{%- endblock field -%}

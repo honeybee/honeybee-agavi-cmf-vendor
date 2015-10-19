@@ -1,3 +1,4 @@
+{%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = (disabled is empty and readonly is empty) -%}
 {%- set min_count = widget_options.min_count | default(0) -%}
 {%- set input_help = translations.input_help | default('') -%}
@@ -39,3 +40,4 @@
         --><div class="hb-field__extra"></div>
     </div>
 </div>
+{%- endblock field -%}

@@ -1,3 +1,4 @@
+{%- block field -%} {# this block exists for whitespace control #}
 <a
     href="{{ attribute_value }}"
     class="{{ css|default('') }}"
@@ -5,3 +6,4 @@
     target="__blank"
     {% endif %}
 >{{ attribute_value }}</a>
+{%- endblock field -%}

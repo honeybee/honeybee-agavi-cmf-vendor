@@ -1,3 +1,5 @@
+{%- block field -%} {# this block exists for whitespace control #}
+
 {%- set input_help = translations.input_help | default('') -%}
 {%- set input_hint = translations.input_hint | default('') -%}
 {%- set input_focus_hint = translations.input_focus_hint | default('') -%}
@@ -47,3 +49,4 @@
     <div class="hb-field__extra">
     </div>
 </div>
+{%- endblock field -%}

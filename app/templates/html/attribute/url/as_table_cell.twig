@@ -1,3 +1,4 @@
+{%- block field -%} {# this block exists for whitespace control #}
 <td class="hb-field {{ css|default('') }}" data-title="{{ _(field_name~'.field_name', translation_domain) }}" {% for attr, val in
 html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <a
@@ -7,3 +8,4 @@ html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
         {% endif %}
     >{{ attribute_value }}</a>
 </td>
+{%- endblock field -%}
