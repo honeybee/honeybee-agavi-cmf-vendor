@@ -37,6 +37,8 @@
                     <label class="imagelist__label-source">Source <input type="text" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
                     <label class="imagelist__label-aoi">Area of Interest <input type="text" name="{{grouped_base_path}}[aoi]"
                         value="{{aoi}}" class="imagelist__aoi-input" value="{{ aoi }}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-width">Width <input type="hidden" name="{{grouped_base_path}}[width]" value="{{width}}" {{readonly}} {{disabled}} /></label>
+                    <label class="imagelist__label-height">Height <input type="hidden" name="{{grouped_base_path}}[height]" value="{{height}}" {{readonly}} {{disabled}} /></label>
                     {% if meta_data %}
                         <label class="" for="{{item_id}}_meta-data-trigger">
                             <h3>Meta data</h3>
