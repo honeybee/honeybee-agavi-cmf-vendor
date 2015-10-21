@@ -1,0 +1,46 @@
+{% set primary_activities_name = name | default("primary-activities")~"-list" %}
+{% set primary_activities_css = css | default("") %}
+{% if toggle_disabled %}
+    {% set primary_activities_css = primary_activities_css ~ " " ~ primary_activities_name ~ "--empty" %}
+    {% set more_activities = null %}
+{% endif %}
+{% set primary_activities_attr = (html_attributes | default({})) | cast_to_array %}
+
+{% set default_content = default_content | default("") %}
+{% set default_css = default_css | default("") %}
+{% set default_attr = (default_html_attributes | default({})) | cast_to_array %}
+
+{% set more_css = more_css | default("") %}
+{% set more_attr = (more_attr | default({})) | cast_to_array %}
+
+{% set trigger_id = trigger_id | default(primary_activities_name ~ random()) %}
+{% set trigger_css = trigger_css | default("") %}
+{% set trigger_attr = (trigger_html_attributes | default({})) | cast_to_array %}
+
+{% set toggle_content = toggle_content | default("&#8964;") %}
+{% set toggle_css = toggle_css | default("") %}
+{% set toggle_attr = (toggle_html_attributes | default({})) | cast_to_array %}
+
+
+<div
+    class="{{ primary_activities_name }} {{ primary_activities_css }}"
+    {% for attr, val in primary_activities_attr %} {{ attr }}="{{ val }}" {% endfor %}
+>
+    <input type="checkbox" id="{{ trigger_id }}" class="{{ primary_activities_name ~ '__trigger' }} hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %} {% if toggle_disabled %}disabled{% endif %} />
+    <div class="{{ primary_activities_name ~ '__default' }} {{ default_css }}" {% for attr, val in default_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+    {%- block default -%}{{ default_content|raw }}{%- endblock -%}
+    </div><!--
+    --><label for="{{ trigger_id }}" class="{{ primary_activities_name ~ '__toggle' }} hb-js-flyout-toggle {{ toggle_css }}" {% for attr, val in toggle_attr
+        %} {{ attr }}="{{ val }}" {% endfor %}>{% block toggle %}<span class="{{ primary_activities_name~ '__toggle-icon'}}">{{ toggle_content|raw }}</span>{% endblock %}</label><!--
+    --><div class="{{ primary_activities_name ~ '__more' }} {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+        {%- block more -%}
+        <ul>
+            {%- for rendered_activity in more_activities -%}
+                <li>{{ rendered_activity|raw }}
+            {%- endfor -%}
+        </ul>
+        {%- endblock -%}
+    </div>
+</div>
+
+

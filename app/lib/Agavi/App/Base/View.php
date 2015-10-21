@@ -20,6 +20,7 @@ use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Projection\ProjectionInterface;
 use Honeybee\Ui\Activity\ActivityInterface;
+use Honeybee\Ui\Activity\PrimaryActivityMap;
 use Honeybee\Ui\OutputFormat\OutputFormatInterface;
 use ReflectionClass;
 
@@ -834,7 +835,9 @@ class View extends AgaviView
         $activity_service = $this->getServiceLocator()->getActivityService();
 
         $primary_activities_container = $activity_service->getContainer($container_scope_key);
-        $primary_activities = $primary_activities_container->getActivityMap();
+        $primary_activities = new PrimaryActivityMap(
+            $primary_activities_container->getActivityMap()->getItems()
+        );
 
         $rendered_primary_activities = $this->renderSubject(
             $primary_activities,

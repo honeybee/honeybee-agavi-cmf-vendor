@@ -1,7 +1,7 @@
 $sidebar-size: 25% !default;
 
 .sidebar {
-    @include offcanvas('sidebar', 'bottom-right', 'right', $sidebar-size, .1s, 8000, 100);
+    @include offcanvas('sidebar', 'middle-right', 'right', $sidebar-size, .1s, 8000, 100);
 
     @include media-query(lap-and-up) {
         @include visuallyhidden;
@@ -45,6 +45,7 @@ $sidebar-size: 25% !default;
             margin: 0 $base-spacing/2 $base-spacing/2 $base-spacing;
             padding-left: $base-spacing/2 + $font-size*1.5;
             padding-right: $base-spacing/2;
+            line-height: $base-spacing*2; // @todo  temporary: remove after implementation of toggle-button specifications
         }
 
         // menu icon on the text side
@@ -55,10 +56,17 @@ $sidebar-size: 25% !default;
         width: auto;
         position: fixed;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+        right: -70px; // @todo  temporary: remove after implementation of toggle-button specifications
     }
 
-    .sidebar__trigger:checked ~ .sidebar__toggle {
-        z-index: 100;
+    .sidebar__trigger:checked {
+        & ~ .sidebar__panel .sidebar__toggle {
+            line-height: $base-spacing; // @todo  temporary: remove after implementation of toggle-button specifications
+        }
+        & ~ .sidebar__toggle {
+            z-index: 100;
+        }
     }
 }
 

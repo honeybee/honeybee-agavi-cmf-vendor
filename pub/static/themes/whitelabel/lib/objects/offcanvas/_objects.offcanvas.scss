@@ -202,6 +202,46 @@ $offcanvas-default-backdrop-selector: '.offcanvas__backdrop' !default;
     @content;
 }
 
+@mixin offcanvas-toggle-middle-left(
+    $zindex: $offcanvas-default-toggle-zindex
+) {
+    @include offcanvas-toggle($zindex);
+    bottom: 50%;
+    left: 0;
+
+    @content;
+}
+
+@mixin offcanvas-toggle-middle-right(
+    $zindex: $offcanvas-default-toggle-zindex
+) {
+    @include offcanvas-toggle($zindex);
+    bottom: 50%;
+    right: 0;
+
+    @content;
+}
+
+@mixin offcanvas-toggle-center-top(
+    $zindex: $offcanvas-default-toggle-zindex
+) {
+    @include offcanvas-toggle($zindex);
+    top: 0;
+    left: 50%;
+
+    @content;
+}
+
+@mixin offcanvas-toggle-center-bottom(
+    $zindex: $offcanvas-default-toggle-zindex
+) {
+    @include offcanvas-toggle($zindex);
+    bottom: 0;
+    left: 50%;
+
+    @content;
+}
+
 @mixin offcanvas-backdrop-visible(
     $zindex: $offcanvas-default-zindex
 ) {
@@ -296,10 +336,17 @@ $offcanvas-default-backdrop-selector: '.offcanvas__backdrop' !default;
             } @else if $toggle-position == 'bottom-right' {
                 @include offcanvas-toggle-bottom-right($toggle-zindex);
             } @else if $toggle-position == 'bottom-left' {
-                @include offcanvas-toggle-bottom-left($toggle-zindex) {
-                };
+                @include offcanvas-toggle-bottom-left($toggle-zindex);
+            } @else if $toggle-position == 'middle-right' {
+                @include offcanvas-toggle-middle-right($toggle-zindex);
+            } @else if $toggle-position == 'middle-left' {
+                @include offcanvas-toggle-middle-left($toggle-zindex);
+            } @else if $toggle-position == 'center-top' {
+                @include offcanvas-toggle-center-top($toggle-zindex);
+            } @else if $toggle-position == 'center-bottom' {
+                @include offcanvas-toggle-center-bottom($toggle-zindex);
             } @else {
-                @warn 'Only top-left, top-right, bottom-right or bottom-left are allowed for toggle position!'
+                @warn 'Only top-left, top-right, bottom-right, bottom-left, middle-right, middle-left, center-top or center-bottom are allowed for toggle position!'
             }
         }
 

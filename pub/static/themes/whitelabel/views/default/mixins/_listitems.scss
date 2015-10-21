@@ -114,15 +114,5 @@ $workflow_state_fieldname: "workflow_state" !default;
         }
     }
 
-    .controls {
-        .primary-activities {
-            display: none;
-
-            @include media-query(lap-and-up) {
-                display: block;
-            }
-        }
-    }
-
     @content;
 }

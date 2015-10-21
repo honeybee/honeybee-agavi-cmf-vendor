@@ -1,79 +1,144 @@
+/*
+    - basically primary-activities are a "list" of items
+    - when under "primary-content" they
+        - are a flyout on Mobile (with a modifier)
+        - are a list on Desk
+*/
+
 // Generic
 .primary-activities {
 
-    .activity-map {
-        background-color: color(transparent);
-    }
+//     .activity-map {
+//         background-color: color(transparent);
+//     }
 
     .activity {
         @include button-emphasized-mutating;
-        width: 100%;
     }
 
-    .activities-list__more li {
-        display: none;
-        margin: 0;
-        margin-bottom: $base-spacing/2;
+//     .activities-list__more li {
+//         display: none;
+//         margin: 0;
+//         margin-bottom: $base-spacing/2;
 
-        &:first-child {
-            display: block;
-        }
-    }
+//         &:first-child {
+//             display: block;
+//         }
+//     }
 
-    @include media-query(lap-and-up) {
-        @include zindex("overlay");
+//     @include media-query(lap-and-up) {
+//         @include zindex("overlay");
 
-        position: fixed;
-        bottom: $base-spacing/2;;
-        right: $base-spacing/2;
+//         position: fixed;
+//         bottom: $base-spacing/2;;
+//         right: $base-spacing/2;
 
-        .activities-list__more li {
-            display: inline-block;
-            vertical-align: top;
-            margin-right: $base-spacing/2;
-            margin-bottom: 0;
+//         .activities-list__more li {
+//             display: inline-block;
+//             vertical-align: top;
+//             margin-right: $base-spacing/2;
+//             margin-bottom: 0;
 
-            &:first-child {
-                display: inline-block;
-            }
+//             &:first-child {
+//                 display: inline-block;
+//             }
 
-            &:last-child {
-                margin-right: 0;
-            }
-        }
-    }
+//             &:last-child {
+//                 margin-right: 0;
+//             }
+//         }
+//     }
 }
 
 // Primary content activities
 .primary-content {
     .primary-activities {
-        // display: none;
+        @include zindex("overlay");
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        margin: $base-spacing/2;
+    }
 
-        @include media-query(lap-and-up) {
-            display: block;
-            position: fixed;
-            bottom: 0px;
-            right: 0px;
-            margin: $base-spacing/2;
-            .activity {
-                @include shadow-overlay;
+    .primary-activities-list {
+        ul { @include activitylist; }
+
+        // Show as flyout dropping up
+        @include media-query(palm) {
+            display: inline-block;
+            vertical-align: top;
+            white-space: nowrap;
+
+            @include flyout("primary-activities-list");
+            @include flyout--popover("primary-activities-list");
+            @include flyout--popover-up("primary-activities-list");
+            @include flyout--popover-inverse("primary-activities-list");
+
+            .primary-activities-list__default {
+                display: inline-block;
+
+                // override button styling
+                .activity {
+                    &,
+                    &:hover,
+                    &:focus,
+                    &:active {
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
+            }
+
+            .primary-activities-list__toggle {
+                display: inline-block;
+
+                @include button-emphasized-mutating;
+                width: $base-spacing;
+
+                // override button styling
+                &,
+                &:hover,
+                &:focus,
+                &:active {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                    border-left: 0;
+                }
+
+                @include hb-icon-before(chevron-small-up, color(emphasized-primary));
+            }
+
+            .primary-activities-list__more {
+                box-shadow: none;
+
+                ul { @include activitylist--vertical; }
+                li { margin-bottom: $base-spacing/2; }
             }
         }
-    }
-}
 
-// Sidebar activities
-.sidebar {
-    .primary-activities {
-        .activities-list__more li {
-            display: block;
-            margin-bottom: 0.5*$base-spacing;
-        }
-
+        // Show as inline list
         @include media-query(lap-and-up) {
-            position: relative;
-            right: 0;
+
+            .primary-activities-list__toggle,
+            .primary-activities-list__trigger {
+                display: none;
+            }
+            .primary-activities-list__default {
+                display: inline-block;
+            }
+
+            .primary-activities-list__more {
+                display: inline-block;
+
+                li {
+                    display: inline-block;
+                    margin-left: $base-spacing/2;
+                }
+            }
+        }
+
+        .activity {
+            @include shadow-overlay;
         }
     }
 }
-
