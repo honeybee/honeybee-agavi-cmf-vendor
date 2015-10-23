@@ -60,6 +60,11 @@
             }
         }
 
+        .primary-activities-list__trigger:checked ~ .primary-activities-list__toggle {
+            @include button-colors-emphasized-mutating-active();
+            @include button-shadow-emphasized-mutating-active();
+        }
+
         .primary-activities-list__toggle-icon {
             @include hb-icon-pseudo-el(chevron-small-down, color(emphasized-primary), false);
             // hide original content
