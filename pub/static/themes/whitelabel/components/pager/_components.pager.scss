@@ -96,10 +96,10 @@
 }
 
 .pager__first_page a {
-    @include hb-icon-before(controller-jump-to-start);
+    @include hb-icon-pseudo-el(controller-jump-to-start);
 }
 .pager__prev_page a {
-    @include hb-icon-before(controller-play);
+    @include hb-icon-pseudo-el(controller-play);
     // reversed 'play' icon
     transform: scaleX(-1);
     filter: fliph; /*IE*/
@@ -112,8 +112,8 @@
     }
 }
 .pager__next_page a {
-    @include hb-icon-before(controller-play);
+    @include hb-icon-pseudo-el(controller-play);
 }
 .pager__last_page a {
-    @include hb-icon-before(controller-next);
+    @include hb-icon-pseudo-el(controller-next);
 }

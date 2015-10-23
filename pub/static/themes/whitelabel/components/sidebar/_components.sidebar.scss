@@ -49,7 +49,7 @@ $sidebar-size: 25% !default;
         }
 
         // menu icon on the text side
-        @include hb-icon-before(align-left, color(text-primary), false) {
+        @include hb-icon-pseudo-el(align-left, color(text-primary), false) {
             margin-left: -$font-size*1.8;
         }
 

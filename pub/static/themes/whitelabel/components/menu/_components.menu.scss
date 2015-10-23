@@ -43,7 +43,7 @@ $menu-size: 20rem !default;
     }
 
     // menu icon on the text side
-    @include hb-icon-before(menu, color(emphasized-primary), false) {
+    @include hb-icon-pseudo-el(menu, color(emphasized-primary), false) {
         margin-left: -$icon-space;
     }
 
