@@ -85,10 +85,12 @@ $z-layer-popover: zindex("popover", 0) !default;
 
 /* the "more" box will expand to the left side instead of the (default) right side. */
 /* this has no effect without flyout--popover */
+
+/* @todo: there should be a modifier also for inverting when inline */
 @mixin flyout--popover-inverse($flyout_name) {
     @at-root {
         .#{$flyout_name}__more {
-            left: auto;
+            left: initial;
             right: 0;
         }
     }
