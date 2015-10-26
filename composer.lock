@@ -611,11 +611,12 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/497ff030b905896a63aa7114fd79f6686968b849",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/00598426a56add7b49df76d7a66308b9777c7235",
                 "reference": "497ff030b905896a63aa7114fd79f6686968b849",
                 "shasum": ""
             },
             "require": {
+                "beberlei/assert": "2.4.*",
                 "elasticsearch/elasticsearch": "1.4.*",
                 "guzzle/guzzle": "3.9.*",
                 "honeybee/trellis": "master@dev",
@@ -626,6 +627,7 @@
                 "psr/log": "1.0.0",
                 "ql/uri-template": "1.0.*",
                 "rdlowrey/auryn": "1.1.*",
+                "shrink0r/monatic": "master@dev",
                 "shrink0r/workflux": "master@dev",
                 "swiftmailer/swiftmailer": "5.4.*",
                 "symfony/expression-language": "2.7.*",
@@ -704,7 +706,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/eb5d52510cde9e9833796c9f1a283597dc8f46bf",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/ce23eec71f38849b93bff4f276f649e9791d3b42",
                 "reference": "eb5d52510cde9e9833796c9f1a283597dc8f46bf",
                 "shasum": ""
             },
@@ -1425,7 +1427,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shrink0r/workflux/zipball/f0be9d4bdaa577340b0cffe952d88001895713c2",
+                "url": "https://api.github.com/repos/shrink0r/workflux/zipball/313f3f1afef7761621303c12139df81ff5860e84",
                 "reference": "f0be9d4bdaa577340b0cffe952d88001895713c2",
                 "shasum": ""
             },
