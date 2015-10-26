@@ -8,6 +8,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
     @include flyout--default-inline("#{$name}");
 
     display: inline-flex;
+    vertical-align: top;
     flex-items: align-start;    // just on mobile?
 
     @include media-query(lap-and-up) {
