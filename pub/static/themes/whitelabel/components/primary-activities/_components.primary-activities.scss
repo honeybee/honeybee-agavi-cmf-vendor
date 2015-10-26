@@ -12,7 +12,6 @@
     white-space: nowrap;
 
     ul { @include activitylist; }
-    .activity { @include button-emphasized-mutating; }
 
     // Show as flyout dropping down
     @include media-query(palm) {
@@ -21,17 +20,17 @@
         @include flyout--default-inline("primary-activities-list");
     }
 
+    @include media-query(lap-and-up) {
+        .activity { @include button-emphasized-mutating; }
+    }
+
     @at-root {
         .primary-activities-list__default {
             display: inline-block;
 
             @include media-query(palm) {
-                // override button styling
                 .activity {
-                    &,
-                    &:hover,
-                    &:focus,
-                    &:active {
+                    @include button-emphasized-mutating {
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
                     }
@@ -78,10 +77,10 @@
 
         .primary-activities-list__more {
             @include media-query(palm) {
-                ul { @include activitylist--vertical; }
-                li { margin-top: $base-spacing/2; }
+                background-color: color(white);
+                margin-top: 5px;
 
-                box-shadow: none;
+                ul { @include activitylist--vertical; }
             }
 
             @include media-query(lap-and-up) {
@@ -105,8 +104,10 @@
         right: 0;
         margin: $base-spacing/2;
 
-        .activity {
-            @include shadow-overlay;
+        @include media-query(lap-and-up) {
+            .activity {
+                @include shadow-overlay;
+            }
         }
     }
 
@@ -123,10 +124,8 @@
     }
 
     .primary-activities-list__more {
-        li {
-            margin-top: 0;
-            margin-bottom: $base-spacing/2;
-        }
+        margin-top: 0;
+        margin-bottom: 5px;
     }
 }
 
