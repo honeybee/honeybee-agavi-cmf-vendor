@@ -62,7 +62,7 @@ class DownloadSuccessView extends View
 
         $resource = $fss->readStream($uri);
 
-        $this->logInfo('Download request for', $uri, $resource);
+        // $this->logInfo('Download request for', $uri, $resource);
 
         $response->setContent($resource);
     }

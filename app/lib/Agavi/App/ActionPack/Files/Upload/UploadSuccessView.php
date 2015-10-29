@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Upload;
 use AgaviRequestDataHolder;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Trellis\Runtime\Attribute\HandlesFileInterface;
 
 class UploadSuccessView extends View
 {
@@ -50,13 +51,22 @@ class UploadSuccessView extends View
             'success' => true,
             'filesystem' => $fss->getTempScheme($art),
             'attribute_name' => $attribute->getName(),
-            'attribute_path' => $attribute->getPath()
+            'attribute_path' => $attribute->getPath(),
+            'file' => [
+                'location' => $file->getLocation(),
+                'filename' => $file->getFilename(),
+                'filesize' => $file->getFilesize(),
+                'mimetype' => $file->getMimetype()
+            ]
         ];
 
-        $payload['file'] = [];
-        $payload['file']['location'] = $file->getLocation();
-        $payload['file']['filesize'] = $file->getFilesize();
-        $payload['file']['mimetype'] = $file->getMimetype();
+        if ($attribute instanceof HandlesFileInterface &&
+            $attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE
+        ) {
+            $payload['file']['width'] = $file->getWidth();
+            $payload['file']['height'] = $file->getHeight();
+        }
+
         $payload['file']['download_url'] = $this->routing->gen(
             'module.files.download',
             [

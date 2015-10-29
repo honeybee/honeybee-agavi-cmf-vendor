@@ -469,9 +469,11 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             $valid_files = $this->validateFilesForAttribute($attribute, $attribute_payload_path, $payload);
             foreach ($valid_files as $key => $file) {
                 $payload[$key] = array_merge($payload[$key], $file->getHoneybeeProperties());
-                $this->export($file->getHoneybeeProperties(), $attribute_payload_path->pushRetNew($key)->__toString());
+                // $this->logDebug('FILE PAYLOAD AFTER', $payload[$key]);
+                // $this->export($file->getHoneybeeProperties(), $attribute_payload_path->pushRetNew($key)->__toString());
             }
         } elseif ($attribute instanceof HandlesFileInterface) {
+            throw new RuntimeError('Please implement single file attribute handling in validation');
             // TODO fix this method call as it is no longer valid
             $valid_file = $this->validateFile($entity_type, $attribute_payload_path);
             if ($valid_file !== false &&
@@ -581,12 +583,12 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
     protected function validateFilesForAttribute(AttributeInterface $attribute, AgaviVirtualArrayPath $path, array $payload)
     {
-        $this->logDebug(
-            'Validating files for path', $path, 'of', $attribute->getType()->getName(), '=>', $attribute->getName()
-        );
+        //$this->logDebug(
+        //    'Validating files for path', $path, 'of', $attribute->getType()->getName(), '=>', $attribute->getName()
+        //);
         $files_from_request =& $this->validationParameters->getAll('files');
         if ($files_from_request === null) {
-            $this->logDebug('Nothing to validate for path', $path, 'as no files at all are in the request');
+            //$this->logDebug('Nothing to validate for path', $path, 'as no files at all are in the request');
             return [];
         }
 
@@ -599,9 +601,9 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             foreach ($files_on_this_path_level as $key => $uploaded_file) {
                 // TODO this has to change as it's a bit too simplistic as an approach
                 if ($uploaded_file[$input_field_name]->getError() === UPLOAD_ERR_NO_FILE) {
-                    $this->logDebug('no file uploaded for attr/argument', $attribute->getName(), 'key=', $key, 'path=', $path);
+                    //$this->logDebug('no file uploaded for attr/argument', $attribute->getName(), 'key=', $key, 'path=', $path);
                 } elseif ($uploaded_file[$input_field_name]->getError() === UPLOAD_ERR_OK) {
-                    $this->logDebug('file given/uploaded for path:', $path, 'key=', $key);
+                    //$this->logDebug('file given/uploaded for path:', $path, 'key=', $key);
                     $file = $this->validateFileForAttribute($uploaded_file[$input_field_name], $attribute, $path->pushRetNew($key)->pushRetNew($input_field_name));
                     if ($file !== false && $file instanceof HoneybeeUploadedFile) {
                         $valid_files[$key] = $file;
@@ -611,32 +613,31 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 }
             }
         } else {
+            // $this->logDebug('No uploaded binaries in the request for path', $path);
             foreach ($payload as $key => $image_payload) {
+                // $this->logDebug('payload key', $key, 'image payload', $image_payload);
                 $file = $this->createUploadedFile($attribute, $image_payload);
                 if ($file instanceof HoneybeeUploadedFile) {
                     $valid_files[$key] = $file;
                 }
             }
-            $this->logDebug(
-                'Nothing to validate as there are no files in the request for path, ',
-                $path,
-                ' - created following files from given payload locations: ',
-                $valid_files
-            );
+
         }
+
+        //$this->logDebug('For path', $path, ' the valid files are:', $valid_files);
 
         return $valid_files;
     }
 
     protected function validateFileForAttribute(HoneybeeUploadedFile $uploaded_file, AttributeInterface $attribute, AgaviVirtualArrayPath $path)
     {
-        $this->logDebug('Delegating file validation for path', $path, 'of entity type', $attribute->getType()->getName());
+        //$this->logDebug('Delegating file validation for path', $path, 'of entity type', $attribute->getType()->getName());
 
         $file_validator = $this->createFileValidatorForAttribute($attribute, $path);
         $file_validator->setParentContainer($this->getParentContainer());
 
         $result = $file_validator->execute($this->validationParameters); // (*)requestdataholder
-        $this->logDebug('argument name of filevalidator:', $file_validator->getArgument(), 'result:', $result);
+        //$this->logDebug('argument name of filevalidator:', $file_validator->getArgument(), 'result:', $result);
         if ($result === AgaviValidator::NOT_PROCESSED) {
             $this->logError('Validator for path', $path, 'was not processed');
             return false;
@@ -651,9 +652,10 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             //$this->throwError($file_validator->getArgument());
             return false;
         }
-        $this->logDebug('VALIDATION SUCCEEDED FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
+        //$this->logDebug('VALIDATION SUCCEEDED FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
 
         $fss = $this->getServiceLocator()->getFilesystemService();
+
         $extension = $fss->guessExtensionForLocalFile(
             $uploaded_file->getTmpName(),
             $this->getParameter('fallback_extension', '')
@@ -670,16 +672,15 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         // e.g. usertempfiles://user/image/random/uuid.jpg
         $target_tempfile_uri = $fss->createTempUri($file_identifier, $this->getAggregateRootType());
 
-        $this->logDebug(
-            sprintf(
-                'Stream copying "%s" to %s specific temporary location: %s',
-                $uploaded_file->getTmpName(),
-                $this->getAggregateRootType()->getName(),
-                $target_tempfile_uri
-            )
-        );
+        //$this->logDebug(
+        //    sprintf(
+        //        'Stream copying "%s" to %s specific temporary location: %s',
+        //        $uploaded_file->getTmpName(),
+        //        $this->getAggregateRootType()->getName(),
+        //        $target_tempfile_uri
+        //    )
+        //);
 
-        // $uploaded_file->move($asset->getUri())
         // get a stream for the actually uploaded and validated file (probably from /tmp/)
         $uploaded_file_stream = $uploaded_file->getStream($this->getParameter('stream_read_mode', 'rb'));
         if (false === $uploaded_file_stream) {
@@ -698,11 +699,24 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         }
 
         $uploaded_file->setLocation($file_identifier);
-        $uploaded_file->setMimetype($fss->getMimetype($target_tempfile_uri));
+        $uploaded_file->setFilename($uploaded_file->getName()); // beware! user provided original filename
         $uploaded_file->setFilesize($fss->getSize($target_tempfile_uri));
+        $uploaded_file->setMimetype($fss->getMimetype($target_tempfile_uri));
         $uploaded_file->setExtension($extension);
 
-        $this->logDebug('Uploaded temporary file for', $path, 'is:', $uploaded_file->getHoneybeeProperties());
+        // image attribute => determine image dimensions and add it to the uploaded file's properties
+        if ($attribute instanceof HandlesFileInterface &&
+            $attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE
+        ) {
+            // as this may silently fail now the resulting image value object will have zero width/height
+            $info = @getimagesize($uploaded_file->getTmpName());
+            if ($info !== false) {
+                $uploaded_file->setWidth($info[0]);
+                $uploaded_file->setHeight($info[1]);
+            }
+        }
+
+        //$this->logDebug('Uploaded temporary file for', $path, 'is:', $uploaded_file->getHoneybeeProperties());
 
         return $uploaded_file;
     }
@@ -790,20 +804,25 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             );
             return null;
         }
+        $location = $image_payload[$location_prop];
 
         $fss = $this->getServiceLocator()->getFilesystemService();
-        $file_identifier = $fss->createTempUri($image_payload[$location_prop], $this->getAggregateRootType());
-        $final_uri = $fss->createUri($image_payload[$location_prop], $this->getAggregateRootType());
+
+        $final_uri = $fss->createUri($location, $this->getAggregateRootType());
         if ($fss->has($final_uri)) {
             return null; // file is already handled and in place
         }
-        $size = $fss->getSize($file_identifier);
-        $mimetype = $fss->getMimetype($file_identifier);
+
+        $temp_uri = $fss->createTempUri($location, $this->getAggregateRootType());
+
+        $size = $fss->getSize($temp_uri);
+        $mimetype = $fss->getMimetype($temp_uri);
         $extension = $fss->guessExtensionByMimeType($mimetype);
 
-        return new HoneybeeUploadedFile(
+        $uploaded_file = new HoneybeeUploadedFile(
             [
-                HoneybeeUploadedFile::PROPERTY_LOCATION => $image_payload[$location_prop],
+                HoneybeeUploadedFile::PROPERTY_LOCATION => $location,
+                HoneybeeUploadedFile::PROPERTY_FILENAME => $image_payload[$attribute->getFileNamePropertyName()],
                 HoneybeeUploadedFile::PROPERTY_MIMETYPE => $mimetype,
                 HoneybeeUploadedFile::PROPERTY_FILESIZE => $size,
                 HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
@@ -811,6 +830,8 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 'is_uploaded_file' => false,
             ]
         );
+
+        return $uploaded_file;
     }
 
     protected function getServiceLocator()

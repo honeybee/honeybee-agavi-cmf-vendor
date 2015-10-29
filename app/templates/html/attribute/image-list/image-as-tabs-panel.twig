@@ -30,15 +30,18 @@
                     {% endif %}
                 </div><!-- imagelist__image-img-wrapper
                 --><div class="imagelist__inputs-wrapper">
-                    <label class="imagelist__label-title">Title <input type="text" name="{{grouped_base_path}}[title]" value="{{title}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-caption">Caption <input type="text" name="{{grouped_base_path}}[caption]" value="{{caption}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-copyright">Copyright <input type="text" name="{{grouped_base_path}}[copyright]" value="{{copyright}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-copyright-url">Copyright URL <input type="url" name="{{grouped_base_path}}[copyright_url]" value="{{copyright_url}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-source">Source <input type="text" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-title">Title <input type="text" name="{{grouped_base_path}}[title]" value="{{title}}" {{readonly}} {{disabled}} class="imagelist__image-title" /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-caption">Caption <input type="text" name="{{grouped_base_path}}[caption]" value="{{caption}}" {{readonly}} {{disabled}} class="imagelist__image-caption" /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-copyright">Copyright <input type="text" name="{{grouped_base_path}}[copyright]" value="{{copyright}}" {{readonly}} {{disabled}} class="imagelist__image-copyright" /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-copyright-url">Copyright URL <input type="url" name="{{grouped_base_path}}[copyright_url]" value="{{copyright_url}}" {{readonly}} {{disabled}} class="imagelist__image-copyright-url" /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-source">Source <input type="text" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} class="imagelist__image-source" /><ul class="errors"></ul></label>
                     <label class="imagelist__label-aoi">Area of Interest <input type="text" name="{{grouped_base_path}}[aoi]"
-                        value="{{aoi}}" class="imagelist__aoi-input" value="{{ aoi }}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
-                    <label class="imagelist__label-width">Width <input type="hidden" name="{{grouped_base_path}}[width]" value="{{width}}" {{readonly}} {{disabled}} /></label>
-                    <label class="imagelist__label-height">Height <input type="hidden" name="{{grouped_base_path}}[height]" value="{{height}}" {{readonly}} {{disabled}} /></label>
+                        value="{{aoi}}" class="imagelist__image-aoi" value="{{ aoi }}" {{readonly}} {{disabled}} /><ul class="errors"></ul></label>
+                    <label class="imagelist__label-filename">Filename <input type="text" name="{{grouped_base_path}}[filename]" value="{{filename}}" readonly class="imagelist__image-filename" /></label>
+                    <label class="imagelist__label-filesize">Filesize <input type="text" name="{{grouped_base_path}}[filesize]" value="{{filesize}}" readonly class="imagelist__image-filesize" /></label>
+                    <label class="imagelist__label-mimetype">Mimetype <input type="text" name="{{grouped_base_path}}[mimetype]" value="{{mimetype}}" readonly class="imagelist__image-mimetype" /></label>
+                    <label class="imagelist__label-width">Width <input type="text" name="{{grouped_base_path}}[width]" value="{{width}}" readonly class="imagelist__image-width" /></label>
+                    <label class="imagelist__label-height">Height <input type="text" name="{{grouped_base_path}}[height]" value="{{height}}" readonly class="imagelist__image-height" /></label>
                     {% if meta_data %}
                         <label class="" for="{{item_id}}_meta-data-trigger">
                             <h3>Meta data</h3>
@@ -54,6 +57,7 @@
                                     name="{{grouped_base_path}}[meta_data][{{meta_name}}]"
                                     value="{{meta_value}}"
                                     readonly
+                                    class="imagelist__image-meta-data-{{meta_name}}"
                                 />
                                 <ul class="errors"></ul>
                             </label>

@@ -3,16 +3,22 @@
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use AgaviArrayPathDefinition;
+use AgaviConfig;
 use AgaviImageFileValidator;
 use AgaviRequestDataHolder;
 use AgaviUploadedFile;
 use AgaviValidationIncident;
 use AgaviValidator;
 use AgaviVirtualArrayPath;
+use Honeybee\Common\Error\Error;
+use Honeybee\Common\Error\RuntimeError;
+use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeybee\Model\Aggregate\AggregateRootInterface;
+use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Trellis\Runtime\Attribute\AttributeInterface;
+use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
-use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\ImageList\ImageListAttribute;
 use Trellis\Runtime\Attribute\Image\Image;
 use Trellis\Runtime\Attribute\Image\ImageAttribute;
@@ -20,12 +26,7 @@ use Trellis\Runtime\EntityTypeInterface;
 use Trellis\Runtime\Entity\EntityInterface;
 use Trellis\Runtime\Entity\EntityList;
 use Trellis\Runtime\Validator\Result\IncidentInterface;
-use Honeybee\Common\Error\Error;
-use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Model\Aggregate\AggregateRootInterface;
-use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
-use AgaviConfig;
+use Trellis\Runtime\Validator\Rule\Type\SanitizedFilenameRule;
 
 class AggregateRootTypeFileUploadValidator extends AgaviValidator
 {
@@ -104,31 +105,78 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
 
         $fss = $this->getServiceLocator()->getFilesystemService();
 
+        $extension = $fss->guessExtensionForLocalFile(
+            $uploaded_file->getTmpName(),
+            $this->getParameter('fallback_extension', '')
+        );
+
         // create an unique identifier usable as a relative location for the file (on filesystems; in databases)
         $file_identifier = $fss->generatePath(
             $attribute,
             $this->getParameter('generated_path_prefix', AgaviConfig::get('core.app_prefix', '')),
-            $fss->guessExtensionForLocalFile($uploaded_file->getTmpName(), $this->getParameter('fallback_extension', ''))
+            $extension
         );
 
         // create a URI for a AR specific temporary target location with a relative filename
         // e.g. usertempfiles://user/image/random/uuid.jpg
         $target_tempfile_uri = $fss->createTempUri($file_identifier, $this->getAggregateRootType());
 
-        $this->logDebug(
-            sprintf(
-                'Stream copying "%s" to %s specific temporary location: %s',
-                $uploaded_file->getTmpName(),
-                $this->getAggregateRootType()->getName(),
-                $target_tempfile_uri
-            )
-        );
+        //$this->logDebug(
+        //    sprintf(
+        //        'Stream copying "%s" to %s specific temporary location: %s',
+        //        $uploaded_file->getTmpName(),
+        //        $this->getAggregateRootType()->getName(),
+        //        $target_tempfile_uri
+        //    )
+        //);
 
-        // $uploaded_file->move($asset->getUri())
         // get a stream for the actually uploaded and validated file (probably from /tmp/)
         $uploaded_file_stream = $uploaded_file->getStream($this->getParameter('stream_read_mode', 'rb'));
         if (false === $uploaded_file_stream) {
             throw new RuntimeError('Could not open read stream to uploaded file: ', $uploaded_file->getTmpName());
+        }
+
+        // try to get a sanitized filename from the user provided original uploaded file's name
+        $uploaded_file->setFilename(
+            $this->getSanitizedFilename($uploaded_file->getName())
+        );
+
+        /*
+        $user_provided_original_filename = $uploaded_file->getName();
+        // TODO this needs to be differen for HandlesFileInterface and HandlesFileListInterface
+        $payload = [
+            [
+                $attribute->getFileLocationPropertyName() => $file_identifier,
+                $attribute->getFileNamePropertyName() => $user_provided_original_filename
+            ]
+        ];
+        $value_holder = $attribute->createValueHolder();
+        $result = $value_holder->setValue($payload);
+        if ($result->getSeverity() <= IncidentInterface::NOTICE) {
+            // validation succeeded => use sanitized user provided filename
+            // TODO assumption getFilename exists on valueobject => should perhaps be get(VO::PROPERTY_FILENAME)?
+            // TODO assumption that validation fails due to filename, while it could be another rule failing
+            // TODO using SanitizingFilenameRule directly may be used here, but could have different rules from
+            //      the attribute in question here and would then lead to failing store later on in web form
+            //      => can we get the defined filename rule and its options from the attribute?
+            //      another option would be to use e.g. DOMPurifier clientside to prevent attack surface in form
+            //      prior to submitting the uploaded file metadata as ajax is being used instead of twig escaping
+            $uploaded_file->setFilename($value_holder->getValue()[0]->getFilename());
+        } else {
+            $uploaded_file->setFilename('');
+        }
+        */
+
+        // image attribute => determine image dimensions and add it to the uploaded file's properties
+        if ($attribute instanceof HandlesFileInterface &&
+            $attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE
+        ) {
+            // as this may silently fail now the resulting image value object will have zero width/height
+            $info = @getimagesize($uploaded_file->getTmpName());
+            if ($info !== false) {
+                $uploaded_file->setWidth($info[0]);
+                $uploaded_file->setHeight($info[1]);
+            }
         }
 
         // write uploaded file into temporary target location of that aggregate root type for later move into
@@ -145,24 +193,25 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         $uploaded_file->setLocation($file_identifier);
         $uploaded_file->setMimetype($fss->getMimetype($target_tempfile_uri));
         $uploaded_file->setFilesize($fss->getSize($target_tempfile_uri));
+        $uploaded_file->setExtension($extension);
 
         $this->export($attribute, 'attribute', AgaviRequestDataHolder::SOURCE_PARAMETERS);
         // $this->export($uploaded_file, $this->getBase() . '[%1$s]');
 
-        $this->logDebug('VALIDATION OF FILES:', $success ? 'SUCCESSFUL! \o/' : 'FAILED m(');
+        // $this->logDebug('VALIDATION OF FILES:', $success ? 'SUCCESSFUL! \o/' : 'FAILED m(');
 
         return $success;
     }
 
     protected function validateFileForAttribute(AgaviUploadedFile $uploaded_file, AttributeInterface $attribute, AgaviVirtualArrayPath $path)
     {
-        $this->logDebug('Delegating file validation for path', $path, 'of entity type', $attribute->getType()->getName());
+        // $this->logDebug('Delegating file validation for path', $path, 'of entity type', $attribute->getType()->getName());
 
         $file_validator = $this->createFileValidatorForAttribute($attribute, $path);
         $file_validator->setParentContainer($this->getParentContainer());
 
         $result = $file_validator->execute($this->validationParameters);
-        $this->logDebug('argument name of filevalidator:', $file_validator->getArgument(), 'result:', $result);
+        // $this->logDebug('argument name of filevalidator:', $file_validator->getArgument(), 'result:', $result);
         if ($result === AgaviValidator::NOT_PROCESSED) {
             $this->logDebug('validator for path', $path, 'was not processed');
             return false;
@@ -178,7 +227,7 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
             return false;
         }
 
-        $this->logDebug('VALIDATION SUCCEEDED FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
+        // $this->logDebug('VALIDATION SUCCEEDED FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
 
         return true;
     }
@@ -196,7 +245,7 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         $argument_path = clone $path;
         $argument_name = $argument_path->pop();
 
-        $this->logDebug($attribute->getType()->getName(), $attribute->getName(), $argument_name, $new_path);
+        // $this->logDebug($attribute->getType()->getName(), $attribute->getName(), $argument_name, $new_path);
 
         $validator_definition = array_merge([], $attribute->getOptions());
 
@@ -255,6 +304,17 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         }
 
         return $implementor;
+    }
+
+    protected function getSanitizedFilename($insecure_user_provided_filename)
+    {
+        $options = $this->getParameter('filename_sanitization_rule_options', []);
+        $rule = new SanitizedFilenameRule('filename', $options);
+        if ($rule->apply($insecure_user_provided_filename)) {
+            return $rule->getSanitizedValue();
+        }
+
+        return '';
     }
 
     protected function getAggregateRootType()

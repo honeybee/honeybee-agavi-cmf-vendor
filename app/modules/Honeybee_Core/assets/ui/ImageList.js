@@ -455,6 +455,18 @@ define([
             var $item = self.$widget.find(".imagelist__image[data-item-id="+item_id+"]");
             $item.find(".imagelist__image-img").attr("src", response_json.file.download_url||'')
             $item.find(".imagelist__image-location").val(response_json.file.location||'');
+            $item.find(".imagelist__image-filename").val(response_json.file.filename);
+            $item.find(".imagelist__image-filesize").val(response_json.file.filesize);
+            $item.find(".imagelist__image-mimetype").val(response_json.file.mimetype);
+            $item.find(".imagelist__image-aoi").val('');
+            $item.find(".imagelist__image-width").val('0');
+            $item.find(".imagelist__image-height").val('0');
+            if (response_json.file.width) {
+                $item.find(".imagelist__image-width").val(response_json.file.width);
+            }
+            if (response_json.file.height) {
+                $item.find(".imagelist__image-height").val(response_json.file.height);
+            }
 
             self.updatePopupItems();
             self.cancelAoi();
@@ -477,53 +489,68 @@ define([
         $progress.value=0;
         $newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
 
-        self.uploadFile(file, function(progress) {
-            console.log("progress", progress);
-            $progress.value=progress;
-        }, function(err, response_json){
-            if (err) {
-                $newthumbitem.remove();
-                console.log("upload error", err);
-                return;
-            }
+        self.uploadFile(
+            file,
+            function(progress) {
+                console.log("progress", progress);
+                $progress.value=progress;
+            }, function(err, response_json){
+                if (err) {
+                    $newthumbitem.remove();
+                    console.log("upload error", err);
+                    return;
+                }
 
-            self.current_index++;
+                self.current_index++;
 
-            self.logDebug('upload complete – new index='+self.current_index, response_json);
+                self.logDebug('upload complete – new index='+self.current_index, response_json);
 
-            // create a new image inputs docfragment
-            // TODO create and move the radio input of the template item around as well
-            var $item_tpl = self.$widget.find(".imagelist__item.newitem").first();
-            var input_name_prefix = $item_tpl.data('grouped-base-path');
-            var $newitem = $item_tpl.clone();
-            $newitem.find(".imagelist__image-location").val(response_json.file.location||'');
-            $newitem.find(".imagelist__image-img").attr('src', response_json.file.download_url||'');
-            $newitem.removeClass('newitem').find('.newitem').removeClass('newitem'); // the clone is not a template item
-            self.bindItemFileInput($newitem);
+                // create a new image inputs docfragment
+                // TODO create and move the radio input of the template item around as well
+                var $item_tpl = self.$widget.find(".imagelist__item.newitem").first();
+                var input_name_prefix = $item_tpl.data('grouped-base-path');
+                var $newitem = $item_tpl.clone();
+                $newitem.find(".imagelist__image-location").val(response_json.file.location||'');
+                $newitem.find(".imagelist__image-img").attr('src', response_json.file.download_url||'');
 
-            // all named input elements from the template need to get new names with the new index
-            $newitem.find(':input[name]').each(function(idx, input) {
-                var $input = $(input);
-                var new_input_name_prefix = input_name_prefix.replace(/\[(\d+)\]$/, function(matches) {
-                    return "[" + self.current_index + "]";
+                $newitem.find(".imagelist__image-filename").val(response_json.file.filename);
+                $newitem.find(".imagelist__image-filesize").val(response_json.file.filesize);
+                $newitem.find(".imagelist__image-mimetype").val(response_json.file.mimetype);
+
+                if (response_json.file.width) {
+                    $newitem.find(".imagelist__image-width").val(response_json.file.width);
+                }
+                if (response_json.file.height) {
+                    $newitem.find(".imagelist__image-height").val(response_json.file.height);
+                }
+
+                $newitem.removeClass('newitem').find('.newitem').removeClass('newitem'); // the clone is not a template item
+                self.bindItemFileInput($newitem);
+
+                // all named input elements from the template need to get new names with the new index
+                $newitem.find(':input[name]').each(function(idx, input) {
+                    var $input = $(input);
+                    var new_input_name_prefix = input_name_prefix.replace(/\[(\d+)\]$/, function(matches) {
+                        return "[" + self.current_index + "]";
+                    });
+                    $input.attr('name', $input.attr('name').replace(input_name_prefix, new_input_name_prefix));
                 });
-                $input.attr('name', $input.attr('name').replace(input_name_prefix, new_input_name_prefix));
-            });
-            $newitem.appendTo(self.$widget.find('.imagelist-tabs__content'));
+                $newitem.appendTo(self.$widget.find('.imagelist-tabs__content'));
 
-            // create a new thumbnail
-            //var $thumbitem_tpl = self.$widget.find(".imagelist__thumb.newitem"); // LI
-            //var $newthumbitem = $thumbitem_tpl.clone();
-            $newthumbitem.find(".imagelist__thumb-img").attr('src', response_json.file.download_url||'');
-            $newthumbitem.removeClass('hb-js-uploading');
-            $newthumbitem.find('progress').remove();
-            //$newthumbitem.removeClass("newitem");
-            //$newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
+                // create a new thumbnail
+                //var $thumbitem_tpl = self.$widget.find(".imagelist__thumb.newitem"); // LI
+                //var $newthumbitem = $thumbitem_tpl.clone();
+                $newthumbitem.find(".imagelist__thumb-img").attr('src', response_json.file.download_url||'');
+                $newthumbitem.removeClass('hb-js-uploading');
+                $newthumbitem.find('progress').remove();
+                //$newthumbitem.removeClass("newitem");
+                //$newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
 
-            // update popup items to contain the new image
-            self.updatePopupItems();
-            self.cancelAoi();
-        });
+                // update popup items to contain the new image
+                self.updatePopupItems();
+                self.cancelAoi();
+            }
+        );
     };
 
     ImageList.prototype.moveItem = function(from, to) {
@@ -553,7 +580,6 @@ define([
             this.aoi_selectrect.rect.cancel();
         }
         this.aoi_selectrect = {};
-        this.$widget.find(".imagelist__image-aoi").addClass("hide");
         this.$widget.find(".imagelist__image-aoi-trigger").removeClass("hide");
     };
 
@@ -562,7 +588,7 @@ define([
         this.cancelAoi();
         var $item = $btn.closest('.imagelist__image');
         var $img =  $item.find(".imagelist__image-img");
-        var $aoi_input = $item.find(".imagelist__aoi-input");
+        var $aoi_input = $item.find(".imagelist__image-aoi");
         var aoi = $aoi_input.val();
         try {
             aoi = JSON.parse(aoi);
