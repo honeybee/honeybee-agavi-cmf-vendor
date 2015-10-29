@@ -49,6 +49,7 @@
         "honeybee/honeybee": "master@dev",
         "honeybee/trellis": "master@dev",
         "shrink0r/workflux": "master@dev",
+        "shrink0r/monatic": "master@dev",
         "symfony/finder": "2.7.*",
         "symfony/process": "2.7.*",
         "graste/environaut": "0.5.*",
