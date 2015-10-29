@@ -4,6 +4,7 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
+use AgaviContext;
 use Auryn\Injector as DiContainer;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
@@ -197,7 +198,8 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
     protected function loadDbalConfig()
     {
         return include AgaviConfigCache::checkConfig(
-            AgaviConfig::get('core.config_dir') . DIRECTORY_SEPARATOR . self::DBAL_CONFIG_NAME
+            AgaviConfig::get('core.config_dir') . DIRECTORY_SEPARATOR . self::DBAL_CONFIG_NAME,
+            AgaviContext::getInstance()->getName()
         );
     }
 }
