@@ -152,6 +152,8 @@ define([
             items.eq(index).remove();
             thumbs.eq(index).remove();
 
+            self.updatePopupItems();
+
             $next.find('.imagelist__thumb-control.move').first().focus();
         });
     }
