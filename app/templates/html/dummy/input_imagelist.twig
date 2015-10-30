@@ -11,6 +11,9 @@ set samples = {
         preview_url: "http://lorempixel.com/400/400/nature/4/",
         download_url: "http://lorempixel.com/400/400/nature/4/",
         location: "400/400/nature/4/",
+        filename: "nature.jpg",
+        filesize: 123456,
+        mimetype: "image/jpeg",
         title: "An image of something",
         caption: "The image's caption",
         copyright: "© 2015 BerlinOnline",
@@ -30,6 +33,9 @@ set samples = {
         preview_url: "http://lorempixel.com/400/400/nature/3/",
         download_url: "http://lorempixel.com/400/400/nature/3/",
         location: "400/400/nature/3/",
+        filename: "asdfasdf.jpg",
+        filesize: 54987,
+        mimetype: "image/jpeg",
         title: "A totally different image",
         caption: "This also has a caption",
         copyright: "© 2015 BerlinOnline",
@@ -49,6 +55,9 @@ set samples = {
         preview_url: "http://lorempixel.com/400/400/nature/2/",
         download_url: "http://lorempixel.com/400/400/nature/2/",
         location: "400/400/nature/2/",
+        filename: "another_nature_image.jpg",
+        filesize: 167417,
+        mimetype: "image/jpeg",
         title: "An image of something",
         caption: "The image's caption",
         copyright: "© 2015 BerlinOnline",
@@ -68,6 +77,9 @@ set samples = {
         preview_url: "http://lorempixel.com/400/400/nature/1/",
         download_url: "http://lorempixel.com/400/400/nature/1/",
         location: "400/400/nature/1/",
+        filename: "nsdfature.jpg",
+        filesize: 54326,
+        mimetype: "image/jpeg",
         title: "A totally different image",
         caption: "This also has a caption",
         copyright: "© 2015 BerlinOnline",
@@ -106,6 +118,9 @@ set samples = {
                         preview_url: samples.image4.preview_url,
                         download_url: samples.image4.download_url,
                         location: samples.image4.location,
+                        filename: samples.image4.filename,
+                        filesize: samples.image4.filesize,
+                        mimetype: samples.image4.mimetype,
                         title: samples.image4.title,
                         caption: samples.image4.caption,
                         copyright: samples.image4.copyright,
@@ -121,6 +136,9 @@ set samples = {
                         preview_url: samples.image3.preview_url,
                         download_url: samples.image3.download_url,
                         location: samples.image3.location,
+                        filename: samples.image3.filename,
+                        filesize: samples.image3.filesize,
+                        mimetype: samples.image3.mimetype,
                         title: samples.image3.title,
                         caption: samples.image3.caption,
                         copyright: samples.image3.copyright,
@@ -136,7 +154,10 @@ set samples = {
                         thumb_url: samples.image2.thumb_url,
                         preview_url: samples.image2.preview_url,
                         download_url: samples.image2.download_url,
-                        storage_location: samples.image4.location,
+                        location: samples.image4.location,
+                        filename: samples.image3.filename,
+                        filesize: samples.image3.filesize,
+                        mimetype: samples.image3.mimetype,
                         title: samples.image4.title,
                         caption: samples.image4.caption,
                         copyright: samples.image4.copyright,
@@ -150,7 +171,10 @@ set samples = {
                         thumb_url: samples.image1.thumb_url,
                         preview_url: samples.image1.preview_url,
                         download_url: samples.image1.download_url,
-                        storage_location: samples.image3.location,
+                        location: samples.image3.location,
+                        filename: samples.image3.filename,
+                        filesize: samples.image3.filesize,
+                        mimetype: samples.image3.mimetype,
                         title: samples.image3.title,
                         caption: samples.image3.caption,
                         copyright: samples.image3.copyright,
@@ -163,72 +187,6 @@ set samples = {
                 grouped_field_name: "imagelist1",
                 grouped_base_path: "imagelist1[0]"
             } %}
-        </div>{#<!--
-        --><div class="layout__item u-1-of-2-lap-and-up">
-            {% include "html/attribute/image-list/as_tabs.twig" with {
-                field_name: "Image Input Two",
-                html_attributes: {},
-                field_id: "imagelist2",
-                attribute_path: "images",
-                resource_type_prefix: "doc_type",
-                resource_type_name: "docType",
-                resource_identifier: "doc_type-457c7bd4-b3bf-4948-a4ed-ef9b9a9018b6-de_DE-1",
-                upload_url: "http://uploadservice.local/honeybee/",
-                disabled: "",
-                required: "",
-                readonly: "readonly",
-                widget_enabled: true,
-                widget_options: { isRequired: false, isReadonly: true, isDisabled: false },
-                images: [
-                    {
-                        image_url: samples.image2.image_url,
-                        location: samples.image2.location,
-                        title: samples.image2.title,
-                        caption: samples.image2.caption,
-                        copyright: samples.image2.copyright,
-                        copyright_url: samples.image2.copyright_url,
-                        source: samples.image2.source,
-                        aoi: samples.image2.aoi,
-                        meta_data: samples.image2.meta_data
-                    },
-                    {
-                        image_url: samples.image1.image_url,
-                        location: samples.image1.location,
-                        title: samples.image1.title,
-                        caption: samples.image1.caption,
-                        copyright: samples.image1.copyright,
-                        copyright_url: samples.image1.copyright_url,
-                        source: samples.image1.source,
-                        aoi: samples.image1.aoi,
-                        meta_data: samples.image1.meta_data
-                    }
-                ],
-                attribute_value: [
-                    {
-                        image_url: samples.image2.image_url,
-                        storage_location: samples.image2.location,
-                        title: samples.image2.title,
-                        caption: samples.image2.caption,
-                        copyright: samples.image2.copyright,
-                        copyright_url: samples.image2.copyright_url,
-                        source: samples.image2.source,
-                        aoi: samples.image2.aoi,
-                        meta_data: samples.image2.meta_data
-                    },
-                    {
-                        image_url: samples.image1.image_url,
-                        storage_location: samples.image1.location,
-                        title: samples.image1.title,
-                        caption: samples.image1.caption,
-                        copyright: samples.image1.copyright,
-                        copyright_url: samples.image1.copyright_url,
-                        source: samples.image1.source,
-                        aoi: samples.image1.aoi,
-                        meta_data: samples.image1.meta_data
-                    }
-                ],
-                grouped_field_name: "imagelist2"
-            } %}
-        </div>#}
+        </div>
     </div>
 </div>
