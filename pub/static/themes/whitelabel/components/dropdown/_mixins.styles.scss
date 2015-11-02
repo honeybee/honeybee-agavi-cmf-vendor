@@ -1,6 +1,6 @@
 // Styles
 @mixin init-dropdown-style($name: "dropdown-normal") {
-    border-radius: 3px;
+    border-radius: $buttons-border-radius;
 
     @at-root {
         .#{$name}__toggle-icon {

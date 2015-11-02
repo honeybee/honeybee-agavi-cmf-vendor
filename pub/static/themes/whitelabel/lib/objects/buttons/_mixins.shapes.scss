@@ -11,6 +11,7 @@
 
 // vars
 $buttons-base-padding: 0.5em;
+$buttons-border-radius: 3px;
 
 // definition
 @mixin button-shape() {
@@ -18,7 +19,7 @@ $buttons-base-padding: 0.5em;
     padding-left: $buttons-base-padding;
     padding-right: $buttons-base-padding;
 
-    border-radius: 3px;
+    border-radius: $buttons-border-radius;
 
     outline: 0;
 

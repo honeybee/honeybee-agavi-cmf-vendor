@@ -1,12 +1,11 @@
 /*
     - basically primary-activities are a "list" of items
     - when under "primary-content" they floats
-        - as a flyout on Mobile (with a modifier)
+        - as a flyout upward on Mobile (with a modifier)
         - as a list on Desk
 */
 
 .primary-activities-list {
-    // .primary-activities-list {
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
@@ -111,8 +110,9 @@
         }
 
         @include media-query(lap-and-up) {
-            .activity {
+            li {
                 @include shadow-overlay;
+                border-radius: $buttons-border-radius;
             }
         }
     }
