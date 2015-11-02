@@ -104,12 +104,6 @@
         right: 0;
         margin: $base-spacing/2;
 
-        .primary-activities-list__default {
-            .activity {
-                @include shadow-overlay;
-            }
-        }
-
         @include media-query(lap-and-up) {
             .activity {
                 @include shadow-overlay;
