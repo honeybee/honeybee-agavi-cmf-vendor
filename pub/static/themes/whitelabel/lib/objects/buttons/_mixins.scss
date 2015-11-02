@@ -1,0 +1,113 @@
+@import "mixins.shapes";
+@import "mixins.colors";
+@import "mixins.shadows";
+
+@mixin button-normal {
+    @include button-binding("normal") { @content; }
+}
+
+@mixin button-emphasized {
+    @include button-binding("emphasized") { @content; }
+}
+
+
+// Applies the style (normal|emphasized) and maintains the binding with the rel attribute
+// Passed @content will be applied to all the buttons states
+//
+// @todo
+//      Make it configurable
+//      The binding should be explicit in the Theme partial
+@mixin button-binding($button-style: "normal") {
+
+    @if $button-style == "normal" {
+        /* default */
+        @include button-normal-navigational { @content };
+
+        &.navigational,
+        &[rel~="edit"] {
+            @include button-normal-navigational { @content };
+        }
+        &.mutating,
+        &[rel~="promote"],
+        &[rel~="save_resource"],
+        &[rel~="create_resource"] {
+            @include button-normal-mutating { @content };
+        }
+        &.positive {
+            @include button-normal-positive { @content };
+        }
+        &.warning,
+        &[rel~="demote"] {
+            @include button-normal-warning { @content };
+        }
+        &.destructive,
+        &[rel~="delete"] {
+            @include button-normal-destructive { @content };
+        }
+    } @else if $button-style == "emphasized" {
+        /* default */
+        @include button-emphasized-navigational { @content };
+
+        &.navigational,
+        &[rel~="edit"] {
+            @include button-emphasized-navigational { @content };
+        }
+        &.mutating,
+        &[rel~="promote"],
+        &[rel~="save_resource"],
+        &[rel~="create_resource"] {
+            @include button-emphasized-mutating { @content };
+        }
+        &.positive {
+            @include button-emphasized-positive { @content };
+        }
+        &.warning,
+        &[rel~="demote"] {
+            @include button-emphasized-warning { @content };
+        }
+        &.destructive,
+        &[rel~="delete"] {
+            @include button-emphasized-destructive { @content };
+        }
+    } @else {
+        // @todo There should be a default type here?
+
+        &.navigational,
+        &[rel~="edit"] {
+            &.normal { @include button-normal-navigational { @content }; }
+            &.emphasized { @include button-emphasized-navigational { @content }; }
+        }
+        &.mutating,
+        &[rel~="promote"],
+        &[rel~="save_resource"],
+        &[rel~="create_resource"] {
+            &.normal { @include button-normal-mutating { @content }; }
+            &.emphasized { @include button-emphasized-mutating { @content }; }
+        }
+        &.positive {
+            &.normal { @include button-normal-positive { @content }; }
+            &.emphasized { @include button-emphasized-positive { @content }; }
+        }
+        &.warning,
+        &[rel~="demote"] {
+            &.normal { @include button-normal-warning { @content }; }
+            &.emphasized { @include button-emphasized-warning { @content }; }
+        }
+        &.destructive,
+        &[rel~="delete"] {
+            &.normal { @include button-normal-destructive { @content }; }
+            &.emphasized { @include button-emphasized-destructive { @content }; }
+        }
+    }
+}
+
+// Alter a button in all its states, without redefining the whole styling
+@mixin button-states() {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &:disabled, &.disabled {
+        @content;
+    }
+}

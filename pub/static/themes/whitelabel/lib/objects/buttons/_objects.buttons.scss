@@ -1,6 +1,4 @@
-@import "mixins.shapes";
-@import "mixins.colors";
-@import "mixins.shadows";
+@import "mixins";
 
 @mixin button-normal-navigational-default {
     @include button-shape-normal-navigational-default;
