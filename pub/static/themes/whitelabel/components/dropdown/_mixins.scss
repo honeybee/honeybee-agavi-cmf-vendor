@@ -16,69 +16,11 @@
 @mixin splitbutton-normal($name: "splitbutton-normal") {
 
     @include base-splitbutton($name);
-    @include base-splitbutton-style-normal($name) {
-        // Additional @at-root content
-        .#{$name}__default .activity {
-            @include button-shape-normal-navigational-default();
-            @include button-colors-normal-navigational-default();
-            vertical-align: top;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            &:hover { @include button-colors-normal-navigational-hover;}
-            &:hover { @include button-colors-normal-navigational-focus;}
-            &:active {
-                @include button-colors-normal-navigational-active;
-                @include button-shadow-normal-navigational-active;
-            }
-        }
-
-        .#{$name}__toggle {
-            padding-left: 0;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-left: 1px solid transparent;
-        }
-
-        &:hover {
-            .#{$name}__toggle {
-                border-left-color: color(lines);
-            }
-        }
-    }
+    @include base-splitbutton-style-normal($name);
 }
 
 @mixin splitbutton-emphasized($name: "splitbutton-emphasized") {
 
     @include base-splitbutton($name);
-    @include base-splitbutton-style-emphasized($name) {
-        // Additional @at-root content
-        .#{$name}__default .activity.activity {
-            @include button-shape-emphasized-navigational-default();
-            @include button-colors-emphasized-navigational-default();
-            &:hover { @include button-colors-emphasized-navigational-hover;}
-            &:focus { @include button-colors-emphasized-navigational-focus;}
-            &:active {
-                @include button-colors-emphasized-navigational-active;
-                @include button-shadow-emphasized-navigational-active;
-            }
-        }
-
-        .#{$name}__toggle {
-            padding-left: 0;
-        }
-
-        .#{$name}__toggle {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        // remove border when adjacent to a toggle
-        &:not(.#{$name}--empty) {
-            .#{$name}__default .activity {
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-                border-right-width: 0;
-            }
-        }
-    }
+    @include base-splitbutton-style-emphasized($name);
 }

@@ -17,11 +17,14 @@
 // Passed @content will be applied to all the buttons states
 //
 // @todo The binding should be explicit in the Theme partial
-@mixin button-binding($button-style: null) {
+@mixin button-binding($button-style: null, $include-default: true) {
 
     @if $button-style == "normal" {
-        /* default */
-        @include button-normal-navigational { @content };
+
+        @if $include-default == true {
+            /* default */
+            @include button-normal-navigational { @content };
+        }
 
         &.navigational,
         &[rel~="edit"] {
@@ -45,8 +48,11 @@
             @include button-normal-destructive { @content };
         }
     } @else if $button-style == "emphasized" {
-        /* default */
-        @include button-emphasized-navigational { @content };
+
+        @if $include-default == true {
+            /* default */
+            @include button-emphasized-navigational { @content };
+        }
 
         &.navigational,
         &[rel~="edit"] {
@@ -70,8 +76,10 @@
             @include button-emphasized-destructive { @content };
         }
     } @else {
-        // Default style for general/unspecified activities
-        @include button-normal-navigational { @content };
+        @if $include-default == true {
+            /* Default style for general/unspecified activities */
+            @include button-normal-navigational { @content };
+        }
 
         &.normal { @include button-normal-navigational { @content }; }
         &.emphasized { @include button-emphasized-navigational { @content }; }
