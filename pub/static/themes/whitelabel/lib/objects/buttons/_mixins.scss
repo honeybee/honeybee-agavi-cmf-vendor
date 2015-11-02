@@ -2,6 +2,8 @@
 @import "mixins.colors";
 @import "mixins.shadows";
 
+// Convenient button mixins
+
 @mixin button-normal {
     @include button-binding("normal") { @content; }
 }
@@ -14,10 +16,8 @@
 // Applies the style (normal|emphasized) and maintains the binding with the rel attribute
 // Passed @content will be applied to all the buttons states
 //
-// @todo
-//      Make it configurable
-//      The binding should be explicit in the Theme partial
-@mixin button-binding($button-style: "normal") {
+// @todo The binding should be explicit in the Theme partial
+@mixin button-binding($button-style: null) {
 
     @if $button-style == "normal" {
         /* default */
@@ -70,7 +70,11 @@
             @include button-emphasized-destructive { @content };
         }
     } @else {
-        // @todo There should be a default type here?
+        // Default style for general/unspecified activities
+        @include button-normal-navigational { @content };
+
+        &.normal { @include button-normal-navigational { @content }; }
+        &.emphasized { @include button-emphasized-navigational { @content }; }
 
         &.navigational,
         &[rel~="edit"] {

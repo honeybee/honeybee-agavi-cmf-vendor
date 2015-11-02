@@ -1,12 +1,12 @@
 //copied from  inuit-buttons to avoid @extend (easier to work with media-queries)
 @mixin inuit-btn {
-    display: inline-block; /* [1] */
-    vertical-align: middle; /* [2] */
-    font: inherit; /* [3] */
-    text-align: center; /* [4] */
-    margin:  0; /* [4] */
-    cursor: pointer; /* [5] */
-    overflow: visible; /* [6] */
+    display: inline-block; // [1]
+    vertical-align: middle; // [2]
+    font: inherit; // [3]
+    text-align: center; // [4]
+    margin:  0; // [4]
+    cursor: pointer; // [5]
+    overflow: visible; // [6]
 }
 
 // vars
