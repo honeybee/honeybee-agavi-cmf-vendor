@@ -18,13 +18,17 @@
                 border-top-width: 0;
             }
 
-            a {
-                color: color(orange);
-                text-decoration: none;
+            .activity {
+                @include button-states {
+                    color: color(orange);
+                    text-decoration: none;
+                    background-color: color(transparent);
+                    box-shadow: none;
+                }
             }
         }
 
-        li li li .actiivity {
+        li li li .activity {
             padding-left: 2 * $base-spacing;
         }
     }
