@@ -104,9 +104,7 @@
         margin: $base-spacing/2;
 
         .primary-activities-list__default {
-            .activity {
-                @include shadow-overlay;
-            }
+            @include shadow-overlay;
         }
 
         @include media-query(lap-and-up) {
@@ -130,8 +128,10 @@
     }
 
     .primary-activities-list__more {
-        margin-top: 0;
-        margin-bottom: 5px;
+        @include media-query(palm) {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
     }
 }
 
@@ -139,12 +139,10 @@
 .primary-activities-list--empty {
     .primary-activities-list__toggle {
 
-        @include button-emphasized-mutating {
-            @include button-colors-emphasized-mutating-disabled;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-left: 0;
-        }
+        @include button-emphasized-mutating-disabled;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 0;
 
         @include media-query(lap-and-up) {
             display: none;
