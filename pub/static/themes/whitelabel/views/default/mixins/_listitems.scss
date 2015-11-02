@@ -46,17 +46,8 @@ $workflow_state_fieldname: "workflow_state" !default;
             .base-dropdown__default {
                 &:hover     { background-color: color(grey2); }
                 .activity   {
-                    &,
-                    &:focus,
-                    &:hover,
-                    &:active,
-                    &:disabled, &.disabled {
-                        padding-top: $base-spacing/2;
-                        padding-bottom: $base-spacing/2;
-
-                        border-top-right-radius: 0;         // @todo This should be automatic by the splitbutton :/
-                        border-bottom-right-radius: 0;
-                    }
+                    padding-top: $base-spacing/2;
+                    padding-bottom: $base-spacing/2;
                 }
             }
 

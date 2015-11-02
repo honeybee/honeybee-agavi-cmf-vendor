@@ -20,41 +20,7 @@
     }
 
     @include media-query(lap-and-up) {
-        .activity.activity {
-            @include button-binding("emphasized");
-            /*
-                // default (no activity type specified)
-                @include button-emphasized-navigational;
-
-                &.navigational,
-                &[rel~="edit"] {
-                    @include button-emphasized-navigational;
-                }
-                &.mutating,
-                &[rel~="promote"],
-                &[rel~="save_resource"],
-                &[rel~="create_resource"] {
-                    @include button-emphasized-mutating;
-                }
-                &.positive {
-                    @include button-emphasized-positive;
-                }
-                &.warning,
-                &[rel~="demote"] {
-                    @include button-emphasized-warning;
-                }
-                &.destructive,
-                &[rel~="delete"] {
-                    @include button-emphasized-destructive;
-                }
-            */
-        }      // @todo Here should recreate manually the button without inheriting a speficic one?
-               //       Probably shouldn't event be defined here?
-               //
-               //       Here it would need to specify the emphasized-shape,emphasized-shadow,emphasized
-
-               // actually with the emphasized class in the markup is not possible to switch to normal
-               // just working on the style
+        .activity { @include button-emphasized-mutating; }
     }
 
     @at-root {
@@ -62,12 +28,11 @@
             display: inline-block;
 
             @include media-query(palm) {
-                .activity.activity {
-                    // @include button-shape-emphasized;
-                    @include button-binding("emphasized") {
+                .activity {
+                    @include button-emphasized-mutating {
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
-                    };
+                    }
                 }
             }
         }
@@ -139,7 +104,9 @@
         margin: $base-spacing/2;
 
         .primary-activities-list__default {
-            @include shadow-overlay;
+            .activity {
+                @include shadow-overlay;
+            }
         }
 
         @include media-query(lap-and-up) {
@@ -163,10 +130,8 @@
     }
 
     .primary-activities-list__more {
-        @include media-query(palm) {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
+        margin-top: 0;
+        margin-bottom: 5px;
     }
 }
 
@@ -174,10 +139,12 @@
 .primary-activities-list--empty {
     .primary-activities-list__toggle {
 
-        @include button-emphasized-mutating-disabled;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-left: 0;
+        @include button-emphasized-mutating {
+            @include button-colors-emphasized-mutating-disabled;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: 0;
+        }
 
         @include media-query(lap-and-up) {
             display: none;

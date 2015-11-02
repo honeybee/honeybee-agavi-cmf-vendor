@@ -138,12 +138,11 @@
             }
         }
 
-        // @todo This should not need to define the button mixin
         .button-search {
             @include button-emphasized-navigational;
             @include flex-grow(0);
 
-            // max-width: 3 * $base-spacing;
+            max-width: 3 * $base-spacing;
             min-width: 3 * $base-spacing;
 
             background-color: color(lightgrey1);

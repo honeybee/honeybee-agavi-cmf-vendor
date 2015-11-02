@@ -18,19 +18,13 @@
                 border-top-width: 0;
             }
 
-            .activity {
-                &,
-                &:hover,
-                &:focus,
-                &:active,
-                &:disabled, &.disabled {
-                    color: color(orange);
-                    text-decoration: none;
-                }
+            a {
+                color: color(orange);
+                text-decoration: none;
             }
         }
 
-        li li li .activity {
+        li li li .actiivity {
             padding-left: 2 * $base-spacing;
         }
     }

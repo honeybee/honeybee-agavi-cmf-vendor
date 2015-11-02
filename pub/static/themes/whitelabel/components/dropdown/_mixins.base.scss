@@ -36,7 +36,6 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 
         .#{$name}__default {
             .activity {
-                vertical-align: top; // fix spacing from inline-block
                 width: 100%;
             }
         }
