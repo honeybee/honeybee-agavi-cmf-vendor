@@ -20,6 +20,12 @@
             //     @include activity-binding("normal");
             // }
 
+            @include button-shape-normal-navigational;
+            @include button-states {
+                border-radius: 0;
+            }
+            @include button-shadow-normal-navigational;
+
             &.navigational,
             &[rel~="edit"] {
                 @include button-colors-normal-mutating;
@@ -41,7 +47,6 @@
             &[rel~="delete"] {
                 @include button-colors-normal-destructive;
             }
-            border-radius: 0;
         }
 
         // merge adjacent border with toggle

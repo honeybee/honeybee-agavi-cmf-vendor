@@ -126,10 +126,9 @@ button {
 }
 
 .subheader-activities {
-    .activity-map .activity {
-        width: auto;
+    @include media-query(lap-and-up) {
+        text-align: right;
     }
-    text-align: right;
 }
 
 .page-title {
@@ -158,6 +157,7 @@ label {
     cursor: pointer;
 }
 
+// @todo Move view styles in <theme>/views/
 .view-login, .view-set_password, .view-logout {
     form {
         legend {
@@ -170,6 +170,15 @@ label {
 
         button {
             @include button-emphasized-navigational;
+        }
+    }
+}
+
+.view-theme_preview {
+    .theme-preview_activity-groups {
+        h4, h5 {
+            
+            margin-bottom: 0;
         }
     }
 }
