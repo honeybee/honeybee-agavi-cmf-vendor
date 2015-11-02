@@ -17,7 +17,7 @@
             // and use the following new button mixins instead of manual binding
             //
             // .#{$name}__more .activity {
-            //     @include button-binding("normal");
+            //     @include activity-binding("normal");
             // }
 
             &.navigational,
@@ -116,7 +116,7 @@
 
         // Additional @at-root content
         .#{$name}__default .activity.activity {
-            @include button-normal {
+            @include activity-normal {
                 vertical-align: top; // fix spacing caused from display:inline-block, inherited from button
             };
         }
@@ -137,7 +137,7 @@
 
         // Additional @at-root content
         .#{$name}__default .activity.activity {
-            @include button-emphasized;
+            @include activity-emphasized;
         }
 
         .#{$name}__toggle {
