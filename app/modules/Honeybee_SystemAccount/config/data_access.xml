@@ -8,7 +8,7 @@
     <ae:configuration>
         <storage_writers>
             <storage_writer name="honeybee.system_account::version_list::event_source::writer" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListWriter">
-                <connection>Default.EventSource</connection>
+                <connection>Honeybee_SystemAccount.EventSource</connection>
             </storage_writer>
 
             <storage_writer name="honeybee.system_account::version_list::view_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListWriter">
@@ -22,7 +22,7 @@
 
         <storage_readers>
             <storage_reader name="honeybee.system_account::version_list::event_source::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\StructureVersionList\StructureVersionListReader">
-                <connection>Default.EventSource</connection>
+                <connection>Honeybee_SystemAccount.EventSource</connection>
             </storage_reader>
 
             <storage_reader name="honeybee.system_account::version_list::view_store::reader" class="Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\StructureVersionList\StructureVersionListReader">

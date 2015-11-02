@@ -8,13 +8,6 @@
 
     <ae:configuration>
         <connections>
-            <connection name="Default.EventSource" class="Honeybee\Infrastructure\DataAccess\Connector\GuzzleConnector">
-                <setting name="host">%couchdb.host%</setting>
-                <setting name="port">%couchdb.port%</setting>
-                <setting name="transport">http</setting>
-                <setting name="database">%core.db_prefix%%2Bdomain_events</setting>
-            </connection>
-
             <connection name="Default.ViewStore" class="Honeybee\Infrastructure\DataAccess\Connector\ElasticsearchConnector">
                 <setting name="transport">http</setting>
                 <setting name="host">%elasticsearch.host%</setting>

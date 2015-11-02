@@ -8,7 +8,7 @@
     <ae:configuration>
         <storage_writers>
             <storage_writer name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::domain_event::event_source::writer" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamAppender">
-                <connection>Default.EventSource</connection>
+                <connection>{{ vendor }}{{ package }}.EventSource</connection>
             </storage_writer>
 
             <storage_writer name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::projection.standard::view_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\Projection\ProjectionWriter">
@@ -30,13 +30,13 @@
 
         <storage_readers>
             <storage_reader name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::event_stream::event_source::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamReader">
-                <connection>Default.EventSource</connection>
+                <connection>{{ vendor }}{{ package }}.EventSource</connection>
                 <settings>
                     <setting name="design_doc">%{{ vendor_prefix }}-{{ package_prefix }}-{{ resource_prefix }}.type%</setting>
                 </settings>
             </storage_reader>
             <storage_reader name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::domain_event::event_source::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\DomainEvent\DomainEventReader">
-                <connection>Default.EventSource</connection>
+                <connection>{{ vendor }}{{ package }}.EventSource</connection>
                 <settings>
                     <setting name="design_doc">%{{ vendor_prefix }}-{{ package_prefix }}-{{ resource_prefix }}.type%</setting>
                 </settings>
@@ -77,7 +77,7 @@
                 </dependencies>
             </finder>
         </finders>
-        
+
         <query_services>
             <query_service name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::query_service" class="Honeybee\Infrastructure\DataAccess\Query\QueryService">
                 <setting name="default_mapping">{{ resource_prefix }}.standard</setting>

@@ -8,7 +8,7 @@
     <ae:configuration>
         <storage_writers>
             <storage_writer name="honeybee.system_account.user::domain_event::event_source::writer" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamAppender">
-                <connection>Default.EventSource</connection>
+                <connection>Honeybee_SystemAccount.EventSource</connection>
             </storage_writer>
 
             <storage_writer name="honeybee.system_account.user::projection.standard::view_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Elasticsearch\Projection\ProjectionWriter">
@@ -30,13 +30,13 @@
 
         <storage_readers>
             <storage_reader name="honeybee.system_account.user::event_stream::event_source::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\EventStream\EventStreamReader">
-                <connection>Default.EventSource</connection>
+                <connection>Honeybee_SystemAccount.EventSource</connection>
                 <settings>
                     <setting name="design_doc">%honeybee-system_account-user.type%</setting>
                 </settings>
             </storage_reader>
             <storage_reader name="honeybee.system_account.user::domain_event::event_source::reader" class="Honeybee\Infrastructure\DataAccess\Storage\CouchDb\DomainEvent\DomainEventReader">
-                <connection>Default.EventSource</connection>
+                <connection>Honeybee_SystemAccount.EventSource</connection>
                 <settings>
                     <setting name="design_doc">%honeybee-system_account-user.type%</setting>
                 </settings>

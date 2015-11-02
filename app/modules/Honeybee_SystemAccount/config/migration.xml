@@ -6,18 +6,17 @@
 >
     <ae:configuration>
         <migration_targets>
-
             <migration_target name="honeybee.system_account::migration::event_source" active="true">
                 <settings>
                     <setting name="version_list_reader">honeybee.system_account::version_list::event_source::reader</setting>
                     <setting name="version_list_writer">honeybee.system_account::version_list::event_source::writer</setting>
-                    <setting name="target_connection">Default.EventSource</setting>
+                    <setting name="target_connection">Honeybee_SystemAccount.EventSource</setting>
                 </settings>
                 <migration_loader class="Honeybee\Infrastructure\Migration\FileSystemLoader">
                     <setting name="directory">%core.module_dir%/Honeybee_SystemAccount/migration/couchdb</setting>
                 </migration_loader>
             </migration_target>
-            
+
             <migration_target name="honeybee.system_account::migration::view_store" active="true">
                 <settings>
                     <setting name="version_list_reader">honeybee.system_account::version_list::view_store::reader</setting>
@@ -29,7 +28,6 @@
                     <setting name="directory">%core.module_dir%/Honeybee_SystemAccount/migration/elasticsearch</setting>
                 </migration_loader>
             </migration_target>
-
         </migration_targets>
     </ae:configuration>
 </ae:configurations>
