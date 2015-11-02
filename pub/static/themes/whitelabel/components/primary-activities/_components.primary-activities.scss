@@ -20,7 +20,9 @@
     }
 
     @include media-query(lap-and-up) {
-        .activity { @include button-emphasized-mutating; }
+        .activity.activity {
+            @include button-binding("emphasized");
+        }
     }
 
     @at-root {
@@ -28,18 +30,20 @@
             display: inline-block;
 
             @include media-query(palm) {
-                .activity {
-                    @include button-emphasized-mutating {
+                border-radius: 3px;
+
+                .activity.activity {
+                    @include button-binding("emphasized") {
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
-                    }
+                    };
                 }
             }
         }
 
         .primary-activities-list__trigger {
             @include media-query(lap-and-up) {
-                display: none;      // @todo visuallyhidden would be better?
+                display: none;
             }
         }
 
