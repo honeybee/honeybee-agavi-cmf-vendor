@@ -1,3 +1,4 @@
+{%- set emphasized = emphasized | default(false) -%}
 <div class="search__content">
     <label for="{{ form_id }}search" class="search-description">{{ _('search.description', translation_domain) }}</label>
     <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|join(' ') }}" id="{{ form_id }}" data-hb-translation-domain="{{ translation_domain }}">
@@ -5,6 +6,6 @@
         <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
         {% endfor %}
         <input type="search" id="{{ form_id }}search" name="search" value="{{ options.search_value|default('') }}" placeholder="{{ _(activity.label, translation_domain) }}" maxlength="500" autocomplete spellcheck autosave/><!--
-        --><button type="submit" title="{{ _(activity.description, translation_domain) }}" class="{{ css|join(' ') }}" rel="{{ activity.rels|join(' ') }}" data-form-id="{{ form_id }}">{{ _(activity.label, translation_domain) }}</button>
+        --><button type="submit" title="{{ _(activity.description, translation_domain) }}" class="{{ css|join(' ') }} {{emphasized ? 'emphasized' : 'normal'}}" rel=" {{ activity.rels|join(' ') }} " data-form-id="{{ form_id }}">{{ _(activity.label, translation_domain) }}</button>
     </form>
 </div>

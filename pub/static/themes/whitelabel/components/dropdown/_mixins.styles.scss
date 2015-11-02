@@ -7,6 +7,43 @@
             padding-left: $buttons-base-padding;
         }
 
+        // keep activities styled as 'normal'
+        .#{$name}__more .activity.activity {
+            // @todo Decrease specificity and use new button mixins
+            &.navigational,
+            &[rel~="edit"] {
+                @include button-colors-normal-mutating;
+            }
+            &.mutating,
+            &[rel~="save"],
+            &[rel~="promote"]{
+                @include button-colors-normal-mutating;
+            }
+            &.positive {
+                @include button-colors-normal-positive;
+            }
+            &.warning,
+            &[rel~="demote"] {
+                @include button-colors-normal-warning;
+            }
+            &.destructive,
+            &[rel~="delete"] {
+                @include button-colors-normal-destructive;
+            }
+            border-radius: 0;
+        }
+
+        // merge adjacent border with toggle
+        &:not(.#{$name}--empty) {
+            // Repeat class to override:
+            // 1 - General .activity
+            // 2 - General splitbutton/dropdown .activity
+            .#{$name}__default .activity.activity.activity {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+
         // .#{$name}__trigger:checked ~ .#{$name}__toggle {
         // }
 
@@ -23,15 +60,18 @@
 
     @at-root {
         .#{$name}__toggle {
-            @include button-shape-normal-navigational-default();
-            @include button-colors-normal-navigational-default();
-            &:hover { @include button-colors-normal-navigational-hover;}
-            &:focus { @include button-colors-normal-navigational-focus;}
-            &:active {
-                @include button-colors-normal-navigational-active;
-                @include button-shadow-normal-navigational-active;
-            }
-
+            @include button-normal-navigational;
+            // @include button-shape-normal-navigational;
+            // @include button-colors-normal-navigational;
+            // @include button-shape-normal-navigational-default();
+            // @include button-colors-normal-navigational;
+            // // @include button-colors-normal-navigational-default();
+            // // &:hover { @include button-colors-normal-navigational-hover;}
+            // // &:focus { @include button-colors-normal-navigational-focus;}
+            // &:active {
+            //     @include button-colors-normal-navigational-active;
+            //     @include button-shadow-normal-navigational-active;
+            // }
             vertical-align: top;
         }
 
@@ -58,14 +98,16 @@
 
     @at-root {
         .#{$name}__toggle {
-            @include button-shape-emphasized-navigational-default();
-            @include button-colors-emphasized-navigational-default();
-            &:hover { @include button-colors-emphasized-navigational-hover;}
-            &:focus { @include button-colors-emphasized-navigational-focus;}
-            &:active {
-                @include button-colors-emphasized-navigational-active;
-                @include button-shadow-emphasized-navigational-active;
-            }
+            @include button-emphasized-navigational;
+            // @include button-shape-emphasized-navigational-default();
+            // @include button-colors-emphasized-navigational;
+            // @include button-colors-emphasized-navigational-default();
+            // &:hover { @include button-colors-emphasized-navigational-hover;}
+            // &:focus { @include button-colors-emphasized-navigational-focus;}
+            // &:active {
+            //     @include button-colors-emphasized-navigational-active;
+            //     @include button-shadow-emphasized-navigational-active;
+            // }
         }
 
         .#{$name}__trigger:checked ~ .#{$name}__toggle {
@@ -83,12 +125,52 @@
 
 @mixin base-splitbutton-style-normal($name: "dropdown-normal") {
     @include base-dropdown-style-normal($name) {
-        @content;
+
+        // Additional @at-root content
+        .#{$name}__default .activity.activity {
+            @include button-normal;
+        }
+
+        .#{$name}__toggle {
+            @include button-states {
+                padding-left: 0;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                border-left-color: color(transparent);
+            }
+        }
+
+        // &:hover {
+        //     .#{$name}__toggle {
+        //         border-left-color: color(lines);
+        //     }
+        // }
+
+        // @content;
     };
 }
 
 @mixin base-splitbutton-style-emphasized($name: "dropdown-emphasized") {
     @include base-dropdown-style-emphasized($name) {
-        @content;
+
+        // Additional @at-root content
+        .#{$name}__default .activity.activity {
+            @include button-emphasized;
+        }
+
+        .#{$name}__toggle {
+            @include button-states {
+                padding-left: 0;
+                border-left-width: 0;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+
+        &:hover {
+            .#{$name}__toggle {
+                border-left-color: color(lines);
+            }
+        }
     };
 }

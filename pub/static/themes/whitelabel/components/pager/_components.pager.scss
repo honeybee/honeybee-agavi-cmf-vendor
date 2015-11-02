@@ -25,7 +25,7 @@
     }
 }
 
-.pager a {
+.pager .activity {
     @include button-normal-navigational;
 }
 
@@ -36,31 +36,43 @@
         form {
             padding: 0 $small-spacing;
 
-            input,
-            button {
+            .pager__current_page,
+            .pager__go {
                 display: inline-block;
-                border-style: solid;
-                border-color: color(lines);
-                border-width: 1px;
-                box-sizing: border-box;
-                padding: $small-spacing;
+                // border-style: solid;
+                // border-color: color(lines);
+                // border-width: 1px;
+                // box-sizing: border-box;
+                // padding: $small-spacing;
             }
 
-            input, input:hover {
-                width: 1em; // as small as possible
-                min-width: 5em;
+            .pager__current_page {
+                &,
+                &:hover,
+                &:focus,
+                &:active,
+                &:disabled, &.disabled {
+                    width: 1em; // as small as possible
+                    min-width: 5em;
 
-                vertical-align: middle;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
+                    vertical-align: middle;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                    border-right: 0;
+                }
             }
 
-            button, button:hover {
-                vertical-align: middle;
+            .pager__go {
+                &,
+                &:hover,
+                &:focus,
+                &:active,
+                &:disabled, &.disabled {
+                    vertical-align: middle;
 
-                border-left: 0;
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
             }
         }
     }
@@ -70,8 +82,11 @@
     .pager__next_page,
     .pager__last_page {
         a {
+            color: color(black);
             font-size: $font-size*1.5;
-            padding: auto $small-spacing;
+            padding: $small-spacing;
+            padding-top: auto;
+            padding-bottom: auto;
         }
     }
 }

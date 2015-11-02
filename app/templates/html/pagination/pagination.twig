@@ -17,7 +17,7 @@
                 <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
                 {% endfor %}
                 <input type="number" min="1" max="{{ number_of_pages }}" step="1" value="{{ current_page_number }}" name="page" id="pager__current_page" class="pager__current_page" /><!--
-                --><button name="jumpToPage" class="pager__go" title="{{_('pager.jump_to_page.title', translation_domain)}}">{{ _('pager.jump_to_page.title', translation_domain) }}</button>
+                --><button name="jumpToPage" class="activity emphasized navigational pager__go" title="{{_('pager.jump_to_page.title', translation_domain)}}">{{ _('pager.jump_to_page.title', translation_domain) }}</button>
                 <span class="pager__total">{{ _('pager.of_total.title', translation_domain, null, [ number_of_pages ]) }}</span>
             </form>
         <li class="pager__next_page">
