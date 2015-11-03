@@ -158,7 +158,7 @@ label {
 }
 
 // @todo Move view styles in <theme>/views/
-.view-login, .view-set_password, .view-logout {
+.view-login, .view-set_password, .view-reset_password, .view-logout {
     form {
         legend {
             @include typography-headlines;
@@ -177,7 +177,6 @@ label {
 .view-theme_preview {
     .theme-preview_activity-groups {
         h4, h5 {
-            
             margin-bottom: 0;
         }
     }

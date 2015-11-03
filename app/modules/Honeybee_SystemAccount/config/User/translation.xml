@@ -29,7 +29,7 @@
                             <ae:parameter name="login.page_title">Einloggen</ae:parameter>
                             <ae:parameter name="logout.page_title">Abmelden</ae:parameter>
                             <ae:parameter name="set_password.page_title">Passwort ändern</ae:parameter>
-
+                            <ae:parameter name="reset_password.page_title">Kennwort zurücksetzen</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
                             <ae:parameter name="collection.page_title">Nutzer</ae:parameter>
                             <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
@@ -51,7 +51,7 @@
                             <ae:parameter name="login.page_title">Log in</ae:parameter>
                             <ae:parameter name="logout.page_title">Log out</ae:parameter>
                             <ae:parameter name="set_password.page_title">Set password</ae:parameter>
-
+                            <ae:parameter name="reset_password.page_title">Reset password</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
                             <ae:parameter name="collection.page_title">User list</ae:parameter>
                             <ae:parameter name="create.page_title">Create User</ae:parameter>
@@ -173,8 +173,9 @@
                             <ae:parameter name="username_placeholder">clark.kent</ae:parameter>
                             <ae:parameter name="password">Kennwort</ae:parameter>
                             <ae:parameter name="password_placeholder">passwort</ae:parameter>
-                            <ae:parameter name="reset_password">Kennwort zurücksetzen</ae:parameter>
+                            <ae:parameter name="forgot_password">Kennwort zurücksetzen</ae:parameter>
                             <ae:parameter name="repeat_password">Kennwort wiederholen</ae:parameter>
+                            <ae:parameter name="reset_password">Zurücksetzen</ae:parameter>
                             <ae:parameter name="Please sign in">Bitte Nutzernamen und Kennwort eingeben</ae:parameter>
                             <ae:parameter name="Please enter your email or username."><![CDATA[Bitte Nutzernamen <b>oder</b> Emailadresse eingeben.]]></ae:parameter>
                             <ae:parameter name="Min. %d characters long">Mind. %d Zeichen lang</ae:parameter>
@@ -202,8 +203,9 @@
                             <ae:parameter name="username_placeholder">clark.kent</ae:parameter>
                             <ae:parameter name="password">Password</ae:parameter>
                             <ae:parameter name="password_placeholder">Type your password</ae:parameter>
-                            <ae:parameter name="reset_password">Forgot password?</ae:parameter>
+                            <ae:parameter name="forgot_password">Forgot password?</ae:parameter>
                             <ae:parameter name="repeat_password">Repeat the password</ae:parameter>
+                            <ae:parameter name="reset_password">Reset password</ae:parameter>
                             <ae:parameter name="Please sign in">Please sign in</ae:parameter>
                             <ae:parameter name="Please enter your email or username."><![CDATA[Please enter your email <b>oder</b> username.]]></ae:parameter>
                             <ae:parameter name="Min. %d characters long">Min. %d characters long</ae:parameter>
