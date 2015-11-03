@@ -18,7 +18,7 @@
                 border-top-width: 0;
             }
 
-            .activity {
+            .activity.activity {
                 @include button-states {
                     color: color(orange);
                     text-decoration: none;
@@ -28,17 +28,17 @@
             }
         }
 
-        li li li .activity {
-            padding-left: 2 * $base-spacing;
+        li li li .activity.activity {
+            @include button-states {
+                padding-left: 2 * $base-spacing;
+            }
         }
     }
 
-    .grouptitle, .activity {
+    .grouptitle {
         padding-left: $base-spacing;
         padding-right: $base-spacing;
-    }
 
-    .grouptitle {
         margin-top: $base-spacing;
         margin-bottom: 0;
 
@@ -46,8 +46,13 @@
         color: color(white);
     }
 
-    .activity {
-        display: block;
-        text-align: left;
+    .activity.activity {
+        @include button-states {
+            padding-left: $base-spacing;
+            padding-right: $base-spacing;
+
+            display: block;
+            text-align: left;
+        }
     }
 }
