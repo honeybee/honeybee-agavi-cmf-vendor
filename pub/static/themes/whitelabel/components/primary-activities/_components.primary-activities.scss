@@ -1,12 +1,11 @@
 /*
     - basically primary-activities are a "list" of items
     - when under "primary-content" they floats
-        - as a flyout on Mobile (with a modifier)
+        - as a flyout upward on Mobile (with a modifier)
         - as a list on Desk
 */
 
 .primary-activities-list {
-    // .primary-activities-list {
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
@@ -21,7 +20,9 @@
     }
 
     @include media-query(lap-and-up) {
-        .activity { @include button-emphasized-mutating; }
+        .activity.activity {
+            @include activity-binding("emphasized");
+        }
     }
 
     @at-root {
@@ -29,18 +30,20 @@
             display: inline-block;
 
             @include media-query(palm) {
-                .activity {
-                    @include button-emphasized-mutating {
+                border-radius: 3px;
+
+                .activity.activity {
+                    @include activity-binding("emphasized") {
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
-                    }
+                    };
                 }
             }
         }
 
         .primary-activities-list__trigger {
             @include media-query(lap-and-up) {
-                display: none;      // @todo visuallyhidden would be better?
+                display: none;
             }
         }
 
@@ -104,9 +107,14 @@
         right: 0;
         margin: $base-spacing/2;
 
+        .primary-activities-list__default {
+            @include shadow-overlay;
+        }
+
         @include media-query(lap-and-up) {
-            .activity {
+            li {
                 @include shadow-overlay;
+                border-radius: $buttons-border-radius;
             }
         }
     }
@@ -124,8 +132,10 @@
     }
 
     .primary-activities-list__more {
-        margin-top: 0;
-        margin-bottom: 5px;
+        @include media-query(palm) {
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
     }
 }
 
@@ -133,12 +143,10 @@
 .primary-activities-list--empty {
     .primary-activities-list__toggle {
 
-        @include button-emphasized-mutating {
-            @include button-colors-emphasized-mutating-disabled;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-left: 0;
-        }
+        @include button-emphasized-mutating-disabled;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 0;
 
         @include media-query(lap-and-up) {
             display: none;

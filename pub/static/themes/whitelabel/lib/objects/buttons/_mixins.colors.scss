@@ -20,6 +20,13 @@
     @include button-colors-normal-navigational-default;
     color: color(text-secondary);
 }
+@mixin button-colors-normal-navigational {
+    & { @include button-colors-normal-navigational-default; }
+    &:hover { @include button-colors-normal-navigational-hover; }
+    &:focus { @include button-colors-normal-navigational-focus; }
+    &:active { @include button-colors-normal-navigational-active; }
+    &:disabled { @include button-colors-normal-navigational-disabled; }
+}
 
 //mutating
 @mixin button-colors-normal-mutating-default {
@@ -40,6 +47,13 @@
 @mixin button-colors-normal-mutating-disabled {
     @include button-colors-normal-mutating-default;
     color: color(text-secondary);
+}
+@mixin button-colors-normal-mutating {
+    & { @include button-colors-normal-mutating-default; }
+    &:hover { @include button-colors-normal-mutating-hover; }
+    &:focus { @include button-colors-normal-mutating-focus; }
+    &:active { @include button-colors-normal-mutating-active; }
+    &:disabled { @include button-colors-normal-mutating-disabled; }
 }
 
 //positive
@@ -62,6 +76,13 @@
     @include button-colors-normal-positive-default;
     color: color(text-secondary);
 }
+@mixin button-colors-normal-positive {
+    & { @include button-colors-normal-positive-default; }
+    &:hover { @include button-colors-normal-positive-hover; }
+    &:focus { @include button-colors-normal-positive-focus; }
+    &:active { @include button-colors-normal-positive-active; }
+    &:disabled { @include button-colors-normal-positive-disabled; }
+}
 
 //warning
 @mixin button-colors-normal-warning-default {
@@ -83,6 +104,13 @@
     @include button-colors-normal-warning-default;
     color: color(text-secondary);
 }
+@mixin button-colors-normal-warning {
+    & { @include button-colors-normal-warning-default; }
+    &:hover { @include button-colors-normal-warning-hover; }
+    &:focus { @include button-colors-normal-warning-focus; }
+    &:active { @include button-colors-normal-warning-active; }
+    &:disabled { @include button-colors-normal-warning-disabled; }
+}
 
 //destructive
 @mixin button-colors-normal-destructive-default {
@@ -103,6 +131,13 @@
 @mixin button-colors-normal-destructive-disabled {
     @include button-colors-normal-destructive-default;
     color: color(text-secondary);
+}
+@mixin button-colors-normal-destructive {
+    & { @include button-colors-normal-destructive-default; }
+    &:hover { @include button-colors-normal-destructive-hover; }
+    &:focus { @include button-colors-normal-destructive-focus; }
+    &:active { @include button-colors-normal-destructive-active; }
+    &:disabled { @include button-colors-normal-destructive-disabled; }
 }
 
 
@@ -133,6 +168,13 @@
     background-color: color(background-heavy);
     border-color: color(lines);
 }
+@mixin button-colors-emphasized-navigational {
+    & { @include button-colors-emphasized-navigational-default; }
+    &:hover { @include button-colors-emphasized-navigational-hover; }
+    &:focus { @include button-colors-emphasized-navigational-focus; }
+    &:active { @include button-colors-emphasized-navigational-active; }
+    &:disabled { @include button-colors-emphasized-navigational-disabled; }
+}
 
 //mutating
 @mixin button-colors-emphasized-mutating-default {
@@ -155,6 +197,13 @@
 }
 @mixin button-colors-emphasized-mutating-disabled {
     @include button-colors-emphasized-navigational-disabled;
+}
+@mixin button-colors-emphasized-mutating {
+    & { @include button-colors-emphasized-mutating-default; }
+    &:hover { @include button-colors-emphasized-mutating-hover; }
+    &:focus { @include button-colors-emphasized-mutating-focus; }
+    &:active { @include button-colors-emphasized-mutating-active; }
+    &:disabled { @include button-colors-emphasized-mutating-disabled; }
 }
 
 //positive
@@ -179,6 +228,13 @@
 @mixin button-colors-emphasized-positive-disabled {
     @include button-colors-emphasized-navigational-disabled;
 }
+@mixin button-colors-emphasized-positive {
+    & { @include button-colors-emphasized-positive-default; }
+    &:hover { @include button-colors-emphasized-positive-hover; }
+    &:focus { @include button-colors-emphasized-positive-focus; }
+    &:active { @include button-colors-emphasized-positive-active; }
+    &:disabled { @include button-colors-emphasized-positive-disabled; }
+}
 
 //warning
 @mixin button-colors-emphasized-warning-default {
@@ -202,6 +258,13 @@
 @mixin button-colors-emphasized-warning-disabled {
     @include button-colors-emphasized-navigational-disabled;
 }
+@mixin button-colors-emphasized-warning {
+    & { @include button-colors-emphasized-warning-default; }
+    &:hover { @include button-colors-emphasized-warning-hover; }
+    &:focus { @include button-colors-emphasized-warning-focus; }
+    &:active { @include button-colors-emphasized-warning-active; }
+    &:disabled { @include button-colors-emphasized-warning-disabled; }
+}
 
 //destructive
 @mixin button-colors-emphasized-destructive-default {
@@ -224,4 +287,11 @@
 }
 @mixin button-colors-emphasized-destructive-disabled {
     @include button-colors-emphasized-navigational-disabled;
+}
+@mixin button-colors-emphasized-destructive {
+    & { @include button-colors-emphasized-destructive-default; }
+    &:hover { @include button-colors-emphasized-destructive-hover; }
+    &:focus { @include button-colors-emphasized-destructive-focus; }
+    &:active { @include button-colors-emphasized-destructive-active; }
+    &:disabled { @include button-colors-emphasized-destructive-disabled; }
 }

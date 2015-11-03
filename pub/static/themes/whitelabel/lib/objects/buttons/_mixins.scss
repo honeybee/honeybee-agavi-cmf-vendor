@@ -1,0 +1,16 @@
+@import "mixins.shapes";
+@import "mixins.colors";
+@import "mixins.shadows";
+
+// Convenient button mixins
+
+// Alter a button in all its states, without redefining the whole styling
+@mixin button-states() {
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &:disabled, &.disabled {
+        @content;
+    }
+}

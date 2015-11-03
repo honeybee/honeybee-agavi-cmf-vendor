@@ -7,11 +7,15 @@
 } %}
 
 <div class="sheet theme-preview__widgets">
-    <h1>Widget: User</h1>
+    <h1>Widget &amp; Components</h1>
 
-    <div class="widget-user">
-        {% include "html/ui/user-widget.twig" with {
-            user_data: user,
-        } %}
+    <div class="widget-user-box u-1-of-3-lap-and-up u-1-of-1-palm">
+        <h2>User</h2>
+
+        <div class="widget-user">
+            {% include "html/ui/user-widget.twig" with {
+                user_data: user,
+            } %}
+        </div>
     </div>
 </div>

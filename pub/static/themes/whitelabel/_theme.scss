@@ -29,62 +29,8 @@ button {
 }
 
 .activity {
-    &.navigational {
-        @include button-colors-normal-navigational-default;
-    }
-    &.mutating {
-        @include button-colors-normal-mutating-default;
-    }
-    &.positive {
-        @include button-colors-normal-positive-default;
-    }
-    &.warning {
-        @include button-colors-normal-warning-default;
-    }
-    &.destructive {
-        @include button-colors-normal-destructive-default;
-    }
-}
-
-.button, button {
-    &.normal {
-        &.navigational { @include button-normal-navigational;}
-        &.mutating { @include button-normal-mutating;}
-        &.positive { @include button-normal-positive;}
-        &.warning { @include button-normal-warning;}
-        &.destructive { @include button-normal-destructive;}
-    }
-
-    &.emphasized {
-        &.navigational { @include button-emphasized-navigational;}
-        &.mutating { @include button-emphasized-mutating;}
-        &.positive { @include button-emphasized-positive;}
-        &.warning { @include button-emphasized-warning;}
-        &.destructive { @include button-emphasized-destructive;}
-    }
-}
-
-.button, button {
-    &[rel="save"], 
-    &[rel="promote"],
-    &[rel="demote"] {
-        &.normal {@include button-normal-mutating;}
-        &.emphasized {@include button-emphasized-mutating;}
-    }
-    &[rel="demote"] {
-        &.normal {@include button-normal-warning;}
-        &.emphasized {@include button-emphasized-warning;}
-    }
-
-    &[rel="edit"] {
-        &.normal {@include button-normal-navigational;}
-        &.emphasized {@include button-emphasized-navigational;}
-    }
-
-    &[rel="delete"] {
-        &.normal {@include button-normal-destructive;}
-        &.emphasized {@include button-emphasized-destructive;}
-    }
+    // Definition of activity's Styles and Types and binding with Honeybee Activities
+    @include activity-binding();
 }
 
 .activities-list {
@@ -180,10 +126,9 @@ button {
 }
 
 .subheader-activities {
-    .activity-map .activity {
-        width: auto;
+    @include media-query(lap-and-up) {
+        text-align: right;
     }
-    text-align: right;
 }
 
 .page-title {
@@ -212,6 +157,7 @@ label {
     cursor: pointer;
 }
 
+// @todo Move view styles in <theme>/views/
 .view-login, .view-set_password, .view-logout {
     form {
         legend {
@@ -224,6 +170,15 @@ label {
 
         button {
             @include button-emphasized-navigational;
+        }
+    }
+}
+
+.view-theme_preview {
+    .theme-preview_activity-groups {
+        h4, h5 {
+            
+            margin-bottom: 0;
         }
     }
 }
