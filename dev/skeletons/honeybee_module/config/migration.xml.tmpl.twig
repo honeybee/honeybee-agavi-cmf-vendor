@@ -11,7 +11,7 @@
                 <settings>
                     <setting name="version_list_reader">{{ vendor_prefix }}.{{ package_prefix }}::version_list::event_source::reader</setting>
                     <setting name="version_list_writer">{{ vendor_prefix }}.{{ package_prefix }}::version_list::event_source::writer</setting>
-                    <setting name="target_connection">{{ vendor }}{{ package }}.EventSource</setting>
+                    <setting name="target_connection">{{ vendor }}_{{ package }}.EventSource</setting>
                 </settings>
                 <migration_loader class="Honeybee\Infrastructure\Migration\FileSystemLoader">
                     <setting name="directory">%core.module_dir%/{{ vendor }}_{{ package }}/migration/couchdb</setting>
