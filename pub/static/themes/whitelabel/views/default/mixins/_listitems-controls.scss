@@ -140,7 +140,6 @@
 
         .activity-search {
             @include button-emphasized-navigational {
-                @include flex-grow(0);
                 overflow: visible;
             };
         }

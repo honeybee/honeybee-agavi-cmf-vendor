@@ -1,2 +1,1 @@
-{%- set emphasized = emphasized | default(false) -%}
-<button type="submit" name="__submit" value="{{ activity.name }}" title="{{ _(activity.description, translation_domain) }}" class="{{ css|join(' ') }} {{emphasized ? 'emphasized' : 'normal'}}" rel="{{ activity.rels|join(' ') }}" data-hb-translation-domain="{{ translation_domain }}">{{ _(activity.label, translation_domain) }}</button>
+<button type="submit" name="__submit" value="{{ activity.name }}" title="{{ _(activity.description, translation_domain) }}" class="{{ css|join(' ') }}" rel="{{ activity.rels|join(' ') }}" data-hb-translation-domain="{{ translation_domain }}">{{ _(activity.label, translation_domain) }}</button>

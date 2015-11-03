@@ -63,7 +63,7 @@
 
     <p>
         {% for _a in activities %}
-            {% set a = _a|merge({emphasized: false}) %}
+            {% set a = _a|merge({css: _a.css ~" normal"}) %}
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>
@@ -74,13 +74,13 @@
 
     <p>
         {% for _a in activities %}
-            {% set a = _a|merge({emphasized: true}) %}
+            {% set a = _a|merge({css: _a.css ~" emphasized"}) %}
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>
     <p>
         {% for _a in activities %}
-            {% set a = _a|merge({emphasized: true, css: _a.css ~" disabled"}) %}
+            {% set a = _a|merge({css: _a.css ~" emphasized disabled"}) %}
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>
@@ -233,6 +233,7 @@
                 {% block more %}
                     <ul>
                         {% for a in activities %}
+                            {% set a = a|merge({css: a.css ~" emphasized"}) %}
                             <li>{% include "html/activity/link.twig" with a %}</li>
                         {% endfor %}
                     </ul>
