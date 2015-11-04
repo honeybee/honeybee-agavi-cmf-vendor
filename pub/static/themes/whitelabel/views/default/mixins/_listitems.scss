@@ -49,11 +49,13 @@ $workflow_state_fieldname: "workflow_state" !default;
                 border-bottom-right-radius: 0;
 
                 &:hover     { background-color: color(grey2); }
-                .activity   {
-                    @include button-states {
-                        padding-top: $base-spacing/2;
-                        padding-bottom: $base-spacing/2;
-                    }
+            }
+
+            .base-dropdown__toggle,
+            .base-dropdown__default .activity {
+                @include button-states {
+                    padding-top: $base-spacing/2;
+                    padding-bottom: $base-spacing/2;
                 }
             }
 
