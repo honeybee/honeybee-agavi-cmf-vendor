@@ -86,7 +86,9 @@
                         <finder>honeybee.system_account.user::projection.standard::view_store::finder</finder>
                         <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation">
                             <setting name="multi_fields">
-                                <setting>title</setting>
+                                <setting>username</setting>
+                                <setting>firstname</setting>
+                                <setting>lastname</setting>
                             </setting>
                             <setting name="query_filters">
                                 <setting name="workflow_state">!deleted</setting>
