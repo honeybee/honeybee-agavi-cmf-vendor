@@ -28,11 +28,6 @@ button {
     background-color: transparent;
 }
 
-.activity {
-    // Definition of activity's Styles and Types and binding with Honeybee Activities
-    @include activity-binding();
-}
-
 .activities-list {
     ul {
         @include activitylist;

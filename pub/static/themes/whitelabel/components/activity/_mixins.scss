@@ -1,0 +1,103 @@
+/* 
+    // Activities can have
+
+    // # Importance:
+    // - normal
+    // - emphasize
+    //
+    // That is related to the importance of the activity in the visual presentation
+
+    // # Type:
+    // - Navigational
+    //      These are activities tha take the user somewhere. They are safe to click.
+    // - Mutating
+    //      These are activities that change the data. The user should pay attention to eventual
+    //      effects and check the data before submitting it
+    // - Positive
+    //      These are activities that confirm something. Usually they are safe to click.
+    // - Warning
+    //      These are activities that should be used with caution. Think twice before proceeding with them.
+    // - Destructive
+    //      These are activities that can potentially destroy data irreversively. Always think twice before using them.
+    //      This kind of activities should be used just if the user is absolutely sure of the effects they have.
+    //
+    // That is related to the semantic importance of the activity
+    //
+    // (e.g. in our case we rely on information into the 'rel' attribute to understand the level of criticality
+    // of the activity and provide a corresponding style to the user to warn about potential effects in using the activity)
+
+
+    // The following mixins define 
+
+    // The purpose of the 'activity-binding' mixin is to maintain consistence (and provide a single point of definition)
+    // of the style for the activites through the different views or components of the application.
+    // It is suggested to define here the binding between Styles and Honeybee Activities and rely on this mixin when needed.
+    
+    // This has the advantage to have similar/repeated rules around the application that can be easily gizipped in a way to reduce
+    // the size of the resulting CSS file.
+
+    // Anyway is it possible to ignore this mixin and define custom rules or rely on just specific mixins to inherit style from, especially when the
+    // 'activity-binding' mixin provides too much rules relative to the needs of the designer.
+*/
+
+@mixin activity-default {
+    @include activity-normal { @content; }
+}
+
+@mixin activity-normal($include-default: true) {
+     @if $include-default == true {
+        /* default */
+        @include button-normal-navigational { @content };
+    }
+
+    &.navigational,
+    &[rel~="edit"] {
+        @include button-normal-navigational { @content };
+    }
+    &.mutating,
+    &[rel~="promote"],
+    &[rel~="save_resource"],
+    &[rel~="create_resource"] {
+        @include button-normal-mutating { @content };
+    }
+    &.positive {
+        @include button-normal-positive { @content };
+    }
+    &.warning,
+    &[rel~="demote"] {
+        @include button-normal-warning { @content };
+    }
+    &.destructive,
+    &[rel~="delete"] {
+        @include button-normal-destructive { @content };
+    }
+}
+
+@mixin activity-emphasized($include-default: true) {
+    @if $include-default == true {
+        /* default */
+        @include button-emphasized-navigational { @content };
+    }
+
+    &.navigational,
+    &[rel~="edit"] {
+        @include button-emphasized-navigational { @content };
+    }
+    &.mutating,
+    &[rel~="promote"],
+    &[rel~="save_resource"],
+    &[rel~="create_resource"] {
+        @include button-emphasized-mutating { @content };
+    }
+    &.positive {
+        @include button-emphasized-positive { @content };
+    }
+    &.warning,
+    &[rel~="demote"] {
+        @include button-emphasized-warning { @content };
+    }
+    &.destructive,
+    &[rel~="delete"] {
+        @include button-emphasized-destructive { @content };
+    }
+}

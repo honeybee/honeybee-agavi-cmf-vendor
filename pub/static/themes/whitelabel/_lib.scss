@@ -19,17 +19,14 @@
 @import "lib/objects/lists/objects.lists";
 @import "lib/objects/flyout/objects.flyout";
 @import "lib/objects/offcanvas/objects.offcanvas";
-//@import "lib/objects/activity/objects.activity";
 @import "lib/objects/sheet/objects.sheet";
 @import "lib/objects/inputs/objects.inputs";
 @import "lib/objects/tabs/objects.tabs";
 @import "lib/objects/buttons/objects.buttons";
 @import "lib/objects/embed-actions/objects.embed-actions";
 
-// activity binding
-@import "activity.binding";
-
 // components are parts of a page and may combine objects with different layout and styling
+@import "components/activity/components.activity";
 @import "components/selectize/components.selectize";
 @import "components/text_input/components.text_input";
 @import "components/field/components.field";

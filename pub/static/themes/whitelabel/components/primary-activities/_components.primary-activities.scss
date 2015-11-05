@@ -21,7 +21,7 @@
 
     @include media-query(lap-and-up) {
         .activity.activity {
-            @include activity-binding("emphasized");
+            @include activity-emphasized;
         }
     }
 
@@ -33,7 +33,7 @@
                 border-radius: 3px;
 
                 .activity.activity {
-                    @include activity-binding("emphasized") {
+                    @include activity-emphasized {
                         border-top-right-radius: 0;
                         border-bottom-right-radius: 0;
                     };

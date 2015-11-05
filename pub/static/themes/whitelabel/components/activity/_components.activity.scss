@@ -1,0 +1,11 @@
+@import "mixins";
+
+/* default */
+%activity,
+.activity { @include activity-default; }
+
+%activity-normal,
+.activity.normal { @include activity-normal; }
+
+%activity-emphasized,
+.activity.emphasized { @include activity-emphasized; }

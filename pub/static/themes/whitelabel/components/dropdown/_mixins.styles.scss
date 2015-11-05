@@ -11,42 +11,8 @@
             padding-left: $buttons-base-padding;
         }
 
-        // keep activities styled as 'normal'
         .#{$name}__more .activity.activity {
-            // @todo Decrease specificity (removing the normal/emphasized class from markup)
-            // and use the following new button mixins instead of manual binding
-            //
-            // .#{$name}__more .activity {
-            //     @include activity-binding("normal");
-            // }
-
-            @include button-shape-normal-navigational;
-            @include button-states {
-                border-radius: 0;
-            }
-            @include button-shadow-normal-navigational;
-
-            &.navigational,
-            &[rel~="edit"] {
-                @include button-colors-normal-mutating;
-            }
-            &.mutating,
-            &[rel~="promote"],
-            &[rel~="save_resource"],
-            &[rel~="create_resource"] {
-                @include button-colors-normal-mutating;
-            }
-            &.positive {
-                @include button-colors-normal-positive;
-            }
-            &.warning,
-            &[rel~="demote"] {
-                @include button-colors-normal-warning;
-            }
-            &.destructive,
-            &[rel~="delete"] {
-                @include button-colors-normal-destructive;
-            }
+            @include button-shape-emphasized;
         }
 
         // merge adjacent border with toggle
@@ -120,12 +86,6 @@
     @include base-dropdown-style-normal($name) {
 
         // Additional @at-root content
-        .#{$name}__default .activity.activity {
-            @include activity-normal {
-                vertical-align: top; // fix spacing caused from display:inline-block, inherited from button
-            };
-        }
-
         .#{$name}__toggle {
             @include button-states {
                 padding-left: 0;
