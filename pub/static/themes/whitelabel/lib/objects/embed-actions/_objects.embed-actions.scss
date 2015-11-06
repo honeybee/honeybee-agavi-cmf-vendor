@@ -36,9 +36,27 @@
     }
 }
 
+.hb-embed-action__icon {
+    vertical-align: middle;
+}
+
 %hb-embed-actions--small,
 .hb-embed-actions--small {
     label {
-        @include inuit-font-size(10px, 15px);
+        @include inuit-font-size(10px, 1.5);
+    }
+}
+
+%hb-embed-actions--large,
+.hb-embed-actions--large {
+    label {
+        @include inuit-font-size(18px, 1.5);
+    }
+}
+
+%hb-embed-actions--huge,
+.hb-embed-actions--huge {
+    label {
+        @include inuit-font-size(24px, 1.5);
     }
 }

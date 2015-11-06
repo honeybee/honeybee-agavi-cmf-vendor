@@ -13,25 +13,25 @@
 <ul class="{{ name }} {{ css }}">
     <li class="hb-embed-action hb-embed-action__delete">
         <input type="radio" value="__delete" name="{{ grouped_base_path }}[__action]" id="{{ label_id ~ "-delete" }}" />
-        <label for="{{ label_id ~ "-delete" }}" title="delete">&#10060;</label>
+        <label for="{{ label_id ~ "-delete" }}" title="delete"><span class="hb-embed-action__icon">&#10060;</span></label>
     </li>
     {% if add_item_to_parent_list_allowed %}
     <li class="hb-embed-action hb-embed-action__duplicate">
         <input type="radio" value="__duplicate" name="{{ grouped_base_path }}[__action]" id="{{ label_id ~ "-duplicate" }}" />
-        <label for="{{ label_id ~ "-duplicate" }}" title="duplicate">&#8634;</label>
+        <label for="{{ label_id ~ "-duplicate" }}" title="duplicate"><span class="hb-embed-action__icon">&#8634;</span></label>
     </li>
     {% endif %}
     <li class="hb-embed-action hb-embed-action__up">
         <input type="radio" value="__move-up" name="{{ grouped_base_path }}[__action]" id="{{ label_id ~ "-moveup" }}" />
-        <label for="{{ label_id ~ "-moveup" }}" title="move up">&#9650;</label>
+        <label for="{{ label_id ~ "-moveup" }}" title="move up"><span class="hb-embed-action__icon">&#9650;</span></label>
     </li>
     <li class="hb-embed-action hb-embed-action__down">
         <input type="radio" value="__move-down" name="{{ grouped_base_path }}[__action]" id="{{ label_id ~ "-movedown" }}" />
-        <label for="{{ label_id ~ "-movedown" }}" title="move down">&#9660;</label>
+        <label for="{{ label_id ~ "-movedown" }}" title="move down"><span class="hb-embed-action__icon">&#9660;</span></label>
     </li>
     <li class="hb-embed-action hb-embed-action__none">
         <input type="radio" value="" name="{{ grouped_base_path }}[__action]" id="{{ label_id ~ "-none" }}" />
-        <label for="{{ label_id ~ "-none" }}" title="do nothing">–</label>
+        <label for="{{ label_id ~ "-none" }}" title="do nothing"><span class="hb-embed-action__icon">–</span></label>
     </li>
 </ul>
 {% endspaceless %}

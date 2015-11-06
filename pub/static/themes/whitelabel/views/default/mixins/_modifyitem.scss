@@ -90,7 +90,7 @@
                     //display: none;
                     width: 100%;
 
-                    @extend %hb-embed-actions--small;
+                    @extend %hb-embed-actions--large;
 
                     & .hb-embed-action__none {
                         display: none;
@@ -121,6 +121,18 @@
                 display: none;
             }
         }
+
+        .hb-embed-action__up label,
+        .hb-embed-action__down label,
+        .hb-embed-action__none label,
+        .hb-embed-action__duplicate label { @include button-normal-mutating;}
+        .hb-embed-action__delete label { @include button-normal-destructive; }
+
+        .hb-embed-action__up .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: triangle-up)); }
+        .hb-embed-action__down .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: triangle-down)); }
+        .hb-embed-action__none .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: minus)); }
+        .hb-embed-action__delete .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: cross)); }
+        .hb-embed-action__duplicate .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: copy)); }
 
         &.jsb_ {
             .hb-entity-templates {
