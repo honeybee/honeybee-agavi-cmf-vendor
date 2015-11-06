@@ -11,8 +11,16 @@
             padding-left: $buttons-base-padding;
         }
 
-        .#{$name}__more .activity.activity {
-            @include button-shape-emphasized;
+        .#{$name}__more {
+            .activity.activity {
+                @include button-shape-emphasized;
+                @include button-states {
+                    border-radius: 0;
+                }
+                // remove gaps with container
+                &:first-child { border-top-width: 0; }
+                &:last-child { border-bottom-width: 0; }
+            }
         }
 
         // merge adjacent border with toggle
@@ -50,9 +58,9 @@
 
         .#{$name}__more {
             background-color: color(white);
-            border-top: 1px solid color(lines);
 
             @include media-query(palm) {
+                border-top: 1px solid color(lines);
                 background-color: opacify(color(white), 0.9);
             }
         }
