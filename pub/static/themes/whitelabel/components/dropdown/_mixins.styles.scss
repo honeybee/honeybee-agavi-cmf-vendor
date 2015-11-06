@@ -8,7 +8,10 @@
 
     @at-root {
         .#{$name}__toggle-icon {
-            padding-left: $buttons-base-padding;
+            @include hb-icon-pseudo-el(( icon-name: chevron-small-down, color: color(navigational-primary) )) {
+                padding-left: $buttons-base-padding;
+            };
+            width: $dropdown-toggle-width;
         }
 
         .#{$name}__more {

@@ -46,10 +46,6 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
         }
 
         .#{$name}__toggle-icon {
-            @include hb-icon-pseudo-el(chevron-small-down, color(navigational-primary)) {
-                padding-left: $buttons-base-padding;
-            };
-            width: $dropdown-toggle-width;
             float: right;
         }
 

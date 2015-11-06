@@ -68,7 +68,11 @@
         }
 
         .primary-activities-list__toggle-icon {
-            @include hb-icon-pseudo-el(chevron-small-down, color(emphasized-primary), false);
+            @include hb-icon-pseudo-el((
+                icon-name: 'chevron-small-down',
+                color: color(emphasized-primary),
+                hide-content: false
+            ));
             // hide original content
             display: block;
             text-indent: -9999em;
@@ -128,7 +132,10 @@
     }
 
     .primary-activities-list__toggle-icon {
-        @include hb-icon-pseudo-el(chevron-small-up, "auto", false);
+        @include hb-icon-pseudo-el((
+            icon-name: 'chevron-small-up',
+            hide-content: false
+        ));
     }
 
     .primary-activities-list__more {

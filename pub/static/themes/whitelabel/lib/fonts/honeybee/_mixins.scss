@@ -11,24 +11,41 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-
-    @content;
 }
 
-@mixin hb-icon($icon-name, $color: "auto") {
+@mixin hb-icon($params) {
+    $icon-name: $params;
+    $color: null;
+    $size: null;
+
+    @if type-of($params) == map {
+
+        @if map-has-key($params, 'icon-name') == true {
+            $icon-name: map-get($params, 'icon-name');
+            // additional parameters
+            $color:  if(map-has-key($params, 'color'), map-get($params, 'color'), null);
+            $size:  if(map-has-key($params, 'size'), map-get($params, 'size'), null);
+        } @else {
+            @warn "An 'icon-name' is required. It can be provided as a string or into a map of parameters.";
+        }
+    }
+
     @include hb-icon-base;
 
+    // set icon
     $content: $icon-name;
     @if map-has-key($hb-icon, $icon-name) {
         $content: map-get($hb-icon, $icon-name);
     }
-
     content: "#{$content}" !important;
-    @if $color != "auto" {
+
+    // additional parameters
+    @if $color != null {
         color: $color;
     }
-
-    @content;
+    @if $size != null {
+        font-size: $size;
+    }
 }
 
 /*  Render the icon as pseudo-element and hide the parent container.
@@ -36,10 +53,14 @@
     Note: pseudo-element icon styling should be more important than its parent styling.
           Use @content to overwrite conflicting rules with '!important'.
 */
-@mixin hb-icon-pseudo-el($icon-name, $color: "auto", $hide-content: true, $pseudo: "before") {
+@mixin hb-icon-pseudo-el($params: (pseudo: 'before')) {
+    $pseudo: if(type-of($params) == map and map-has-key($params, 'pseudo'), map-get($params, 'pseudo'), 'before');
+    $hide-content: if(type-of($params) == map and map-has-key($params, 'hide-content'), map-get($params, 'hide-content'), true);
+    $size: if(type-of($params) == map and map-has-key($params, 'size'), map-get($params, 'size'), 1em);
+
     @if $pseudo == "after" or $pseudo == "before" {
         &:#{$pseudo} {
-            @include hb-icon($icon-name, $color);
+            @include hb-icon($params);
             position: absolute;
             left: 50%;
             top: 50%;
@@ -61,6 +82,7 @@
             overflow: hidden !important;
             white-space: nowrap !important;
             speak: none !important;
+            min-width: $size;
         }
     }
 }
