@@ -224,9 +224,25 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
-        </div><!--
-        --><div class="layout__item u-1-of-2-lap">
+        </div>
+    </div>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap u-1-of-1-palm">
             <h4>List</h4>
+            {% embed 'html/activity_map/as_list.twig' with {
+                emphasized: true
+            } %}
+                {% block more %}
+                    <ul>
+                        {% for a in activities %}
+                            <li>{% include "html/activity/link.twig" with a %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endblock %}
+            {% endembed %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap u-1-of-1-palm">
+            <h4>List - Emphasized</h4>
             {% embed 'html/activity_map/as_list.twig' with {
                 emphasized: true
             } %}
