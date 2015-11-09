@@ -10,9 +10,14 @@ if ($application_dir === false || !is_dir(realpath($application_dir))) {
 
 // load regular composer autoload
 require($application_dir . '/vendor/autoload.php');
-// load local-config
-$root_dir = dirname(dirname(__FILE__));
-require($root_dir . str_replace('/', DIRECTORY_SEPARATOR, '/app/config.php'));
+
+// load config from this folder
+require(dirname(dirname(__FILE__)). '/app/config.php');
+
+// load config from application that uses this as-vendor-application
+if (is_readable($application_dir . '/app/config.php')) {
+    require($application_dir . '/app/config.php');
+}
 // load autoload registry for our module namespaces
 $autoloads_include = $application_dir . str_replace('/', DIRECTORY_SEPARATOR, '/app/config/includes/autoload.php');
 if (is_readable($autoloads_include)) {
@@ -27,5 +32,6 @@ if (preg_match('/.*development.*/', AgaviConfig::get('core.clean_environment')))
 
 // bootstrap the app
 Agavi::bootstrap(AgaviConfig::get('core.environment'));
+
 // load local settings
 require AgaviConfigCache::checkConfig($application_dir . '/app/config/local_configuration.xml');
