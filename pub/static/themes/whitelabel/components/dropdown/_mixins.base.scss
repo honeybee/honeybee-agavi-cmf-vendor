@@ -25,12 +25,20 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             left: auto;
             right: 0;
             top: 100%;
-            margin-top: 5px;
             min-width: 8em;
 
             @include media-query(palm) {
                 width: 100%;
-                margin-top: 0;
+            }
+
+            ul {
+                @include activitylist;
+                @include activitylist--vertical;
+            }
+
+            .activity {
+                width: 100%;
+                text-align: center;
             }
         }
 
@@ -47,18 +55,6 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 
         .#{$name}__toggle-icon {
             float: right;
-        }
-
-        .#{$name}__more {
-            ul {
-                @include activitylist;
-                @include activitylist--vertical;
-            }
-
-            .activity {
-                width: 100%;
-                text-align: center;
-            }
         }
 
         .#{$name}__trigger:focus {

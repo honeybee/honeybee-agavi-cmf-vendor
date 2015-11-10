@@ -50,12 +50,12 @@
         @include button-normal-navigational { @content };
     }
 
-    &.navigational,
-    &[rel~="edit"] {
+    &.navigational {
         @include button-normal-navigational { @content };
     }
     &.mutating,
     &[rel~="promote"],
+    &[rel~="edit_resource"],
     &[rel~="save_resource"],
     &[rel~="create_resource"] {
         @include button-normal-mutating { @content };
@@ -79,12 +79,12 @@
         @include button-emphasized-navigational { @content };
     }
 
-    &.navigational,
-    &[rel~="edit"] {
+    &.navigational {
         @include button-emphasized-navigational { @content };
     }
     &.mutating,
     &[rel~="promote"],
+    &[rel~="edit_resource"],
     &[rel~="save_resource"],
     &[rel~="create_resource"] {
         @include button-emphasized-mutating { @content };

@@ -9,18 +9,13 @@
         @extend %list-bare;
 
         li li {
-            border-top: 1px solid #474747;
+            padding-top: $base-spacing;
+            padding-left: $base-spacing;
 
-            color: color(orange);
-            padding: $base-spacing;
-
-            &:first-child {
-                border-top-width: 0;
-            }
+            &:first-child { padding-top: 0; }
 
             .activity.activity {
                 @include button-states {
-                    color: color(orange);
                     text-decoration: none;
                     background-color: color(transparent);
                     box-shadow: none;
@@ -29,9 +24,9 @@
         }
 
         li li li .activity.activity {
-            @include button-states {
-                padding-left: 2 * $base-spacing;
-            }
+            // @include button-states {
+            //     padding-left: 2 * $base-spacing;
+            // }
         }
     }
 
@@ -40,19 +35,25 @@
         padding-right: $base-spacing;
 
         margin-top: $base-spacing;
-        margin-bottom: 0;
 
-        font-weight: 400;
-        color: color(white);
+        @include typography-headlines(1.1);
+        color: color(darkgrey2);
     }
 
     .activity.activity {
         @include button-states {
-            padding-left: $base-spacing;
-            padding-right: $base-spacing;
-
-            display: block;
             text-align: left;
+
+            padding-right: 0;
+            padding-left: $base-spacing;
+        }
+        // icon
+        @include hb-icon-pseudo-el((
+            icon-name: dot-single,
+            hide-content: false,
+            size: 1.5
+        )) {
+            left: 4px; // align button without hiding it
         }
     }
 }

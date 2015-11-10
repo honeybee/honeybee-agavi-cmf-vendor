@@ -1,78 +1,87 @@
-$buttons-base-padding: 0.5em !default;
-
-.user-widget-wrapper {
-    position: relative;
-}
+$user-widget-avatar-size: $base-spacing*3 !default;
 
 .user-widget {
+    display: inline-block;
+}
 
-    .user-dropdown {
-        @include dropdown-normal("user-dropdown");
-        @include flyout--popover("user-dropdown");
-        @include flyout--popover-inverse("user-dropdown");
+.user-widget__avatar {
+    position: absolute;
+    left: $base-spacing;
+    bottom: $base-spacing/3;
+    @include zindex('base', 1);
 
-        // override default dropdown behaviour
-        // @include media-query(palm) {
-        //     .user-dropdown__toggle {
-        //         flex-grow: 0;
-        //     }
-        //     .user-dropdown__more {
-        //         width: auto;
-        //     }
-        // }
+    border-radius: 50%;
+    border: 1px solid color(white);
+    height: $base-spacing*3;
+}
 
-        .user-dropdown__toggle:hover {
-            &,
-            .user-widget__avatar {
-                @include button-shadow-normal-navigational-hover;
-            }
-        }
-        .user-dropdown__more {
-            @include button-shadow-normal-navigational-hover;
-        }
+.user-dropdown {
+    @include base-dropdown("user-dropdown");
+    @include flyout--default-inline("user-dropdown");
+    @include flyout--popover("user-dropdown");
+    display: flex;
 
-        // keep at minimum width
-        &, .user-dropdown__toggle {
+    @at-root {
+        @include init-dropdown-icon-style("user-dropdown");
+
+        .user-dropdown__toggle {
+            @include button-shape-emphasized;
+            padding-left: $base-spacing + $user-widget-avatar-size;
+            text-align: left;
+            border-radius: 0;
+            width: 100%;
+
+            color: color(navigational-emphasized-primary);
+            background-color: rgba(color(white), 0.7);
+            border-color: color(clear);
+
+            // keep inner elements on the same line (inline-block doesn't)
             display: inline-flex;
-            align-self: flex-end;
-
-            @include media-query(lap-and-up) {
-                align-self: auto;
-            }
+            white-space: nowrap;
         }
+
+        .user-dropdown__toggle-icon {
+            font-size: $font-size*1.5;
+        }
+
+        .user-widget__label {
+            padding-left: $base-spacing/2;
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .user-dropdown__more {
+            background-color: color(white);
+
+            // .user-dropdown__trigger:checked ~ & {
+            // }
+        }
+
+    }
+}
+
+.user-area {
+    .user-widget {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
     }
 
-    .user-dropdown__toggle {
-        padding-top: 2px;
-        padding-bottom: 2px;
+    // .user-dropdown__toggle {
+    //     &,
+    //     .user-dropdown__trigger:checked ~ & {
+    //         background-color: rgba(color(white), 0.7);
+    //     }
+    // }
+}
 
-        @include media-query(lap-and-up) {
 
-        }
-    }
-
+%user-widget--palm-minimized,
+.user-widget--palm-minimized {
     .user-widget__label {
-        display: flex;
-        align-items: center;
-        margin-left: $base-spacing/2;
-
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-
         @include media-query(palm) {
             @include visuallyhidden;
         }
-    }
-
-    .user-widget__avatar {
-        vertical-align: middle;
-        border-radius: 50%;
-        border: 1px solid color(lines);
-        height: $base-spacing*2;
-    }
-
-    .activity {
-        padding: 0 $base-spacing;
     }
 }

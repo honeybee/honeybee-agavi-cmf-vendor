@@ -1,7 +1,5 @@
 @mixin typography-default() {
     font-size: $font-size;
-
-    @content;
 }
 
 @mixin typography-interactive() {

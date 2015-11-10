@@ -85,22 +85,17 @@ button {
 .page-header {
     background-color: color(white);
 
-    .user-widget-box {
-        @extend %lap-and-up-2-of-5;
-        @extend %palm-1-of-3;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: $base-spacing/2;
+    // .user-widget-box {
+    //     padding: $base-spacing/2;
 
-        @include media-query(lap-and-up) {
-            padding: $base-spacing/2 $base-spacing;
-        }
-    }
+    //     @include media-query(lap-and-up) {
+    //         padding: $base-spacing/2 $base-spacing;
+    //     }
+    // }
 
-    .user-widget {
-        text-align: right;
-    }
+    // .user-widget {
+    //     text-align: right;
+    // }
 }
 
 .page-subheader {

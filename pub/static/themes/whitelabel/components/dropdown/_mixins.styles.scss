@@ -1,4 +1,13 @@
 // Styles
+@mixin init-dropdown-icon-style($name: "dropdown-normal") {
+    .#{$name}__toggle-icon {
+        @include hb-icon-pseudo-el(chevron-small-down) {
+            padding-left: $buttons-base-padding;
+        };
+        width: $dropdown-toggle-width;
+    }
+}
+
 @mixin init-dropdown-style($name: "dropdown-normal") {
     border-radius: $buttons-border-radius;
 
@@ -7,14 +16,14 @@
     }
 
     @at-root {
-        .#{$name}__toggle-icon {
-            @include hb-icon-pseudo-el(( icon-name: chevron-small-down, color: color(navigational-primary) )) {
-                padding-left: $buttons-base-padding;
-            };
-            width: $dropdown-toggle-width;
-        }
+        @include init-dropdown-icon-style($name);
 
         .#{$name}__more {
+            margin-top: 5px;
+            @include media-query(palm) {
+                margin-top: 0;
+            }
+
             .activity.activity {
                 @include button-shape-emphasized;
                 @include button-states {

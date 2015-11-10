@@ -9,37 +9,43 @@
         {%- endblock brand -%}
         </div>
     </div><!-- .brand-box
-    --><div class="user-widget-box">
-        {% if us.isAuthenticated() %}
-
-            {%- set user_data = {
-                is_authenticated: us.isAuthenticated(),
-                avatar_url: us.getAttribute('avatar_url'),
-                name: us.getAttribute('name'),
-                login: us.getAttribute('login')
-            } -%}
-
-            {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
-        {% endif %}
-    </div><!-- .user-widget-box
     --><div class="menu-box">
         {%- block menu -%}
             {% if us.isAuthenticated() %}
             <div class="menu">
                 <input type="checkbox" id="menu-trigger" class="menu__trigger">
-                <label for="menu-trigger" class="menu__toggle">{{ _('menu') }}</label>
+                <label for="menu-trigger" class="menu__toggle menu__toggle-open">
+                    <span class="menu__toggle-button">{{ _('menu') }}</span>
+                </label>
                 <label for="menu-trigger" class="menu__backdrop"></label>
                 <div class="menu__panel">
-                    <label for="menu-trigger" class="menu__toggle">{{ _('menu') }}</label>
-                    <div class="menu__panel-layout">
-                        <div class="main-nav-box">
-                            <div class="main-nav-wrapper">
-                                {%- block mainnav -%}
-                                    {{- _rendered_navigation|default('')|raw -}}
-                                {%- endblock mainnav -%}
-                            </div><!-- .main-nav-wrapper -->
-                        </div><!-- .main-nav-box -->
-                    </div><!-- .menu__panel-layout -->
+                    <div class="menu__panel-content">
+                        <div class="menu__panel-layout">
+                            <div class="user-area-box">
+                                <label for="menu-trigger" class="menu__toggle-close">
+                                    <span class="menu__toggle-button">{{ _('menu') }}</span>
+                                </label>
+                                <div class="user-area">
+                                    <div class="user-area__background" style="background-image: url({{ us.getAttribute('background_image_url') }})"></div>
+
+                                    {%- set user_data = {
+                                        is_authenticated: us.isAuthenticated(),
+                                        avatar_url: us.getAttribute('avatar_url'),
+                                        name: us.getAttribute('name'),
+                                        login: us.getAttribute('login')
+                                    } -%}
+                                    {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
+                                </div>
+                            </div><!-- .user-widget-box
+                        --><div class="main-nav-box">
+                                <div class="main-nav-wrapper">
+                                    {%- block mainnav -%}
+                                        {{- _rendered_navigation|default('')|raw -}}
+                                    {%- endblock mainnav -%}
+                                </div><!-- .main-nav-wrapper -->
+                            </div><!-- .main-nav-box -->
+                        </div><!-- .menu__panel-layout -->
+                    </div>
                 </div><!-- .menu__panel -->
             </div><!-- .menu -->
             {% endif %}

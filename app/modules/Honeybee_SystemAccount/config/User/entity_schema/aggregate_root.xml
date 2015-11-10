@@ -60,6 +60,9 @@
             <attribute name="biography" type="textarea">
                 <option name="max_length">1000</option>
             </attribute>
+            <attribute name="background_images" type="image-list">
+                <option name="max_count">5</option>
+            </attribute>
             <attribute name="auth_token" type="text">
                 <option name="max_length">40</option>
             </attribute>

@@ -1,3 +1,5 @@
+$font-size: 14px !default;
+
 @mixin hb-icon-base() {
     font-family: 'honeybee' !important;
     speak: none;
@@ -16,7 +18,7 @@
 @mixin hb-icon($params) {
     $icon-name: $params;
     $color: null;
-    $size: null;
+    $size: null;    // multiplier
 
     @if type-of($params) == map {
 
@@ -44,7 +46,7 @@
         color: $color;
     }
     @if $size != null {
-        font-size: $size;
+        font-size: $font-size * $size;
     }
 }
 
@@ -56,7 +58,7 @@
 @mixin hb-icon-pseudo-el($params: (pseudo: 'before')) {
     $pseudo: if(type-of($params) == map and map-has-key($params, 'pseudo'), map-get($params, 'pseudo'), 'before');
     $hide-content: if(type-of($params) == map and map-has-key($params, 'hide-content'), map-get($params, 'hide-content'), true);
-    $size: if(type-of($params) == map and map-has-key($params, 'size'), map-get($params, 'size'), 1em);
+    $size: if(type-of($params) == map and map-has-key($params, 'size'), map-get($params, 'size'), 1);
 
     @if $pseudo == "after" or $pseudo == "before" {
         &:#{$pseudo} {
@@ -73,16 +75,17 @@
         @warn 'Only after or before pseudo-element are allowed for icons!';
     }
 
-    @if $hide-content {
-        & {
-            position: relative !important;
+    & {
+        position: relative !important;
+        min-width: $font-size * $size;
+
+        @if $hide-content {
             display: inline-block !important;
             text-indent: -9999em !important;
             text-overflow: clip !important;
             overflow: hidden !important;
             white-space: nowrap !important;
             speak: none !important;
-            min-width: $size;
         }
     }
 }
