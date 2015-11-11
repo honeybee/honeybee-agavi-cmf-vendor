@@ -73,6 +73,10 @@ for($i=0;$i<5;$i++) {
     {
         $vts_node = $node->getChild('view_templates');
 
+        if (!$vts_node) {
+            return [];
+        }
+
         $scope = $vts_node->hasAttribute('scope') ? trim($vts_node->getAttribute('scope')) : '';
         if (empty($scope)) {
             throw new ConfigError(
