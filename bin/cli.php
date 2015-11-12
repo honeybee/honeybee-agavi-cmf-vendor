@@ -18,7 +18,8 @@ if ($application_dir === false || realpath($application_dir) === false || !is_re
 
 $local_config_dir = getenv('HONEYBEE_LOCAL_CONFIG_DIR');
 if ($local_config_dir === false || realpath($local_config_dir) === false || !is_readable($local_config_dir)) {
-    $local_config_dir = getenv("HOME") . '/.local/' . basename($application_dir);
+    #$local_config_dir = getenv("HOME") . '/.local/' . basename($application_dir);
+    $local_config_dir = '/usr/local/' . basename($application_dir);
     if (!putenv('HONEYBEE_LOCAL_CONFIG_DIR=' . realpath($local_config_dir))) {
         error_log('Local config directory could not be set via putenv.');
         throw new Exception('Local config directory could not be set.');

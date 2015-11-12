@@ -12,7 +12,7 @@ if ($application_dir === false || !is_dir(realpath($application_dir))) {
 require($application_dir . '/vendor/autoload.php');
 
 // load config from this folder
-require(dirname(dirname(__FILE__)). '/app/config.php');
+require(__DIR__ . '/config.php');
 
 // load config from application that uses this as-vendor-application
 if (is_readable($application_dir . '/app/config.php')) {
