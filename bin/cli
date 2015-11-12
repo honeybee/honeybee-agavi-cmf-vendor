@@ -40,13 +40,13 @@ fi
 
 # set php script to dispatch application
 if [ -z "$CLI_PHP_FILE" ] ; then
-    CLI_PHP_FILE=$( cd "$( dirname "${BASH_SOURCE[0]}" )/cli.php" && pwd )
+    CLI_PHP_FILE=$APPLICATION_DIR/bin/cli.php
     #CLI_PHP_FILE=$(readlink -m "$(dirname $0)/cli.php")
 fi
 
 # set php script to use as a bootstrap file prior to dispatching the application
 if [ -z "$BOOTSTRAP_PHP_FILE" ] ; then
-    BOOTSTRAP_PHP_FILE=$( cd "$( dirname "${BASH_SOURCE[0]}" )/../app/bootstrap.php" && pwd )
+    BOOTSTRAP_PHP_FILE=$APPLICATION_DIR/app/bootstrap.php
     #BOOTSTRAP_PHP_FILE=$(readlink -m "$(dirname $0)/../app/bootstrap.php")
 fi
 
