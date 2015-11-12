@@ -1,8 +1,9 @@
 {
     "name": "honeybee",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "license": "MIT",
     "private": true,
+    "main": "pub/static/require.js",
     "dependencies": {
         "jquery": "~2",
         "jsb": "~2",
@@ -60,6 +61,11 @@
     "devDependencies": {
     },
     "ignore": [
-        "*"
+        "*",
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
     ]
 }
