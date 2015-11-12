@@ -1,6 +1,6 @@
-@import "../../../../pub/static/themes/honeybee/vars";
-@import "../../../../pub/static/themes/honeybee/vendor/inuit-responsive-settings/settings.responsive";
-@import "../../../../pub/static/themes/honeybee/vendor/inuit-responsive-tools/tools.responsive";
+@import "../../../../pub/static/themes/whitelabel/vars";
+@import "../../../../pub/static/themes/whitelabel/vendor/inuit-responsive-settings/settings.responsive";
+@import "../../../../pub/static/themes/whitelabel/vendor/inuit-responsive-tools/tools.responsive";
 
 .itemlist {
 @include media-query(desk) {
