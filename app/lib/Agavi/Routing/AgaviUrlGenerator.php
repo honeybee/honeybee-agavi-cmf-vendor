@@ -4,7 +4,10 @@ namespace Honeybee\FrameworkBinding\Agavi\Routing;
 
 use AgaviRouting;
 use Honeybee\Infrastructure\Config\ConfigInterface;
+use Honeybee\Ui\Activity\ActivityInterface;
+use Honeybee\Ui\Activity\Url;
 use Honeybee\Ui\UrlGeneratorInterface;
+use QL\UriTemplate\UriTemplate;
 
 class AgaviUrlGenerator implements UrlGeneratorInterface
 {
@@ -66,7 +69,7 @@ class AgaviUrlGenerator implements UrlGeneratorInterface
      * Please note, that ATM the 'path' option is not supported. The 'prefix' option
      * instead allows to set the path part that is fixed for your docroot.
      *
-     * @param string $name route name or lookup key to generate an URL for
+     * @param mixed $name route-name, lookup-key, or object to generate an URL for
      * @param array $parameters pairs of placeholder names and values
      * @param array $options array of options to influence URL generation
      *
@@ -74,7 +77,28 @@ class AgaviUrlGenerator implements UrlGeneratorInterface
      */
     public function generateUrl($name, array $parameters = [], array $options = [])
     {
-        return $this->routing->gen($name, $parameters, $options);
+        $url = '';
+        if ($name instanceof ActivityInterface) {
+            $url = $name->getUrl();
+        } elseif ($name instanceof Url) {
+            $url = $name;
+        } else {
+            $url = Url::createRoute($name, $parameters);
+        }
+
+        if ($url->getType() === Url::TYPE_ROUTE) {
+            $route_params = $parameters;
+            $route_params = array_replace_recursive($url->getParameters(), $parameters);
+            $link = $this->routing->gen($url->getValue(), $route_params, $options);
+        } elseif ($url->getType() === Url::TYPE_URI_TEMPLATE) {
+            $uri_template = new UriTemplate($url->getValue());
+            $template_params = array_replace_recursive($url->getParameters(), $parameters);
+            $link = $uri_template->expand($template_params);
+        } else {
+            $link = $url->__toString(); // TODO apply params as query params?
+        }
+
+        return $link;
     }
 }
 
