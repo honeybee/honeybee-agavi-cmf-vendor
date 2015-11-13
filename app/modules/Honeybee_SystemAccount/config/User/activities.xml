@@ -5,6 +5,24 @@
 >
     <ae:configuration>
         <activity_containers>
+
+            <activity_container scope="converjon">
+                <activity name="user_area_background_image">
+                    <url type="uri_template"><![CDATA[%local.base_href%converjon/?url=https%3A%2F%2Fpopula-middleware.s3.amazonaws.com%2F{file}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}&width={width}]]></url>
+                    <url_params>
+                        <url_param name="crop">aoi_auto</url_param>
+                        <url_param name="width">620</url_param>
+                        <url_param name="format">jpg</url_param>
+                        <url_param name="quality">35</url_param>
+                        <url_param name="strip_metadata">strip_metadata</url_param>
+                    </url_params>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>view_user_area_background_image</rel>
+                    </rels>
+                </activity>
+            </activity_container>
+
             <activity_container scope="honeybee.system_account.user" extends="default_resource_activities">
 
                 <activity name="view_resource" type="workflow">

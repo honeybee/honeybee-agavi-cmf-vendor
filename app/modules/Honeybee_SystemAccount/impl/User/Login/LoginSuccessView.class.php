@@ -154,18 +154,27 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
         // default image
         $background_image_url = AgaviConfig::get('honeybee-system_account.default_background_url');
 
+        $service_locator = $this->getServiceLocator();
+        $activity_service = $service_locator->getActivityService();
+        $url_generator_service = $service_locator->getUrlGenerator();
+
         if ($this->user->hasAttribute('background_images')) {
             $background_images = $this->user->getAttribute('background_images');
 
             if (count($background_images)) {
-                $service_locator = $this->getServiceLocator();
-                $url_generator_service = $service_locator->getUrlGenerator();
-
-                // @todo Use converjon
+                $background_image_location = $background_images[0]->getLocation();
                 $background_image_url = $url_generator_service->generateUrl(
                     'honeybee.system_account.user.files.download',
                     [ 'file' => $background_images[0]->getLocation() ]
                 );
+
+                $background_image_activity = null;
+                if (AgaviConfig::get('converjon.enabled', false)) {
+                    $background_image_activity = $activity_service->getActivity('converjon', 'user_area_background_image');
+                    $url_params = [ 'file' => $background_image_location ];
+
+                    $background_image_url = $url_generator_service->generateUrl($background_image_activity, $url_params);
+                }
             }
         }
 
