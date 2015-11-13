@@ -17,16 +17,6 @@
                                     <setting name="template">html/resource/as_fields_with_viewtemplate.twig</setting>
                                 </settings>
                             </renderer_config>
-                            <renderer_config subject="honeybee.system_account.user.comments.comment">
-                                <settings>
-                                    <setting name="template">html/embedded_entity/as_fields_with_viewtemplate_without_tabs.twig</setting>
-                                </settings>
-                            </renderer_config>
-                            <renderer_config subject="honeybee.system_account.user.friends.friend">
-                                <settings>
-                                    <setting name="template">html/embedded_entity/as_fields_with_viewtemplate_without_tabs.twig</setting>
-                                </settings>
-                            </renderer_config>
                             <renderer_config subject="primary_activities">
                                 <settings>
                                     <setting name="default_activity_name">save_resource</setting>

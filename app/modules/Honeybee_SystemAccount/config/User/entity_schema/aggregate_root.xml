@@ -11,7 +11,7 @@
         <options>
             <option name="vendor">Honeybee</option>
             <option name="package">SystemAccount</option>
-            <option name="is_hierarchical">true</option>
+            <option name="is_hierarchical">false</option>
         </options>
         <!-- attribute definitions -->
         <attributes>
@@ -22,12 +22,6 @@
             </attribute>
             <attribute name="email" type="email">
                 <option name="mandatory">true</option>
-            </attribute>
-            <attribute name="url" type="url">
-                <option name="allowed_schemes">
-                    <option>http</option>
-                    <option>https</option>
-                </option>
             </attribute>
             <attribute name="role" type="choice">
                 <option name="mandatory">true</option>
@@ -49,17 +43,6 @@
                 <option name="min_length">50</option>
                 <option name="max_length">100</option>
             </attribute>
-            <attribute name="birth_year" type="integer">
-                <option name="min_value">1900</option>
-                <option name="max_value">2020</option>
-            </attribute>
-            <attribute name="hourly_rate" type="float">
-                <option name="min_value">8.5</option>
-                <option name="max_value">120</option>
-            </attribute>
-            <attribute name="biography" type="textarea">
-                <option name="max_length">1000</option>
-            </attribute>
             <attribute name="background_images" type="image-list">
                 <option name="max_count">5</option>
             </attribute>
@@ -69,53 +52,6 @@
             <attribute name="token_expire_date" type="timestamp">
                 <option name="format_native">Y-m-d\TH:i:s.uP</option>
             </attribute>
-            <attribute name="tags" type="text-list">
-                <option name="max_count">50</option>
-                <option name="min_length">1</option>
-                <option name="max_length">40</option>
-            </attribute>
-            <attribute name="images" type="image-list">
-                <option name="max_count">50</option>
-            </attribute>
-            <attribute name="comments" type="embedded-entity-list">
-                <description>Holds the current workflow state.</description>
-                <option name="entity_types">
-                    <option>Comment</option>
-                </option>
-            </attribute>
-            <attribute name="friends" type="entity-reference-list">
-                <description>Represents a list user-references which relate as friends.</description>
-                <option name="entity_types">
-                    <option>Friend</option>
-                </option>
-            </attribute>
         </attributes>
     </type_definition>
-    <!-- embed definitions -->
-    <embed_definitions>
-        <embed_definition name="Comment">
-            <implementor>\Honeybee\Model\Aggregate\EmbeddedEntityType</implementor>
-            <entity_implementor>\Honeybee\Model\Aggregate\EmbeddedEntity</entity_implementor>
-            <attributes>
-                <attribute name="title" type="text">
-                    <description>title of a comment</description>
-                    <option name="max_length">110</option>
-                    <option name="min_length">1</option>
-                    <option name="mandatory">true</option>
-                </attribute>
-                <attribute name="text" type="textarea">
-                    <description>actual comment text</description>
-                    <option name="max_length">10000</option>
-                </attribute>
-            </attributes>
-        </embed_definition>
-    </embed_definitions>
-    <reference_definitions>
-        <reference_definition name="Friend">
-            <implementor>\Honeybee\Model\Aggregate\ReferencedEntityType</implementor>
-            <entity_implementor>\Honeybee\Model\Aggregate\ReferencedEntity</entity_implementor>
-            <option name="referenced_type">\Honeybee\SystemAccount\User\Model\Aggregate\UserType</option>
-            <option name="identifying_attribute">identifier</option>
-        </reference_definition>
-    </reference_definitions>
 </type_schema>

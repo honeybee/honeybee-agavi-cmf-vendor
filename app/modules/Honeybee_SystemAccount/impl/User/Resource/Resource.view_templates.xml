@@ -16,7 +16,6 @@
                                     <field name="username" attribute_path="username" />
                                     <field name="firstname" attribute_path="firstname" />
                                     <field name="lastname" attribute_path="lastname" />
-                                    <field name="tags" attribute_path="tags" />
                                     <field name="email" attribute_path="email" />
                                     <field name="role" attribute_path="role" />
                                     <field name="created_at" attribute_path="created_at" />

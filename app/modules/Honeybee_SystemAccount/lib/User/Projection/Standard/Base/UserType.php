@@ -64,16 +64,6 @@ abstract class UserType extends ProjectionType
                         'mandatory' => true,
                     )
                 ),
-                new \Trellis\Runtime\Attribute\Url\UrlAttribute(
-                    'url',
-                    $this,
-                    array(
-                        'allowed_schemes' => array(
-                            'http',
-                            'https',
-                        ),
-                    )
-                ),
                 new \Trellis\Runtime\Attribute\Choice\ChoiceAttribute(
                     'role',
                     $this,
@@ -110,29 +100,6 @@ abstract class UserType extends ProjectionType
                         'max_length' => 100,
                     )
                 ),
-                new \Trellis\Runtime\Attribute\Integer\IntegerAttribute(
-                    'birth_year',
-                    $this,
-                    array(
-                        'min_value' => 1900,
-                        'max_value' => 2020,
-                    )
-                ),
-                new \Trellis\Runtime\Attribute\Float\FloatAttribute(
-                    'hourly_rate',
-                    $this,
-                    array(
-                        'min_value' => '8.5',
-                        'max_value' => 120,
-                    )
-                ),
-                new \Trellis\Runtime\Attribute\Textarea\TextareaAttribute(
-                    'biography',
-                    $this,
-                    array(
-                        'max_length' => 1000,
-                    )
-                ),
                 new \Trellis\Runtime\Attribute\ImageList\ImageListAttribute(
                     'background_images',
                     $this,
@@ -152,40 +119,6 @@ abstract class UserType extends ProjectionType
                     $this,
                     array(
                         'format_native' => 'Y-m-d\\TH:i:s.uP',
-                    )
-                ),
-                new \Trellis\Runtime\Attribute\TextList\TextListAttribute(
-                    'tags',
-                    $this,
-                    array(
-                        'max_count' => 50,
-                        'min_length' => 1,
-                        'max_length' => 40,
-                    )
-                ),
-                new \Trellis\Runtime\Attribute\ImageList\ImageListAttribute(
-                    'images',
-                    $this,
-                    array(
-                        'max_count' => 50,
-                    )
-                ),
-                new \Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute(
-                    'comments',
-                    $this,
-                    array(
-                        'entity_types' => array(
-                            '\\Honeybee\\SystemAccount\\User\\Projection\\Standard\\Embed\\CommentType',
-                        ),
-                    )
-                ),
-                new \Trellis\Runtime\Attribute\EntityReferenceList\EntityReferenceListAttribute(
-                    'friends',
-                    $this,
-                    array(
-                        'entity_types' => array(
-                            '\\Honeybee\\SystemAccount\\User\\Projection\\Standard\\Reference\\FriendType',
-                        ),
                     )
                 ),
             ],

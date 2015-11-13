@@ -17,7 +17,6 @@
                                     <field name="email" attribute_path="email" />
                                     <field name="firstname" attribute_path="firstname" />
                                     <field name="lastname" attribute_path="lastname" />
-                                    <field name="tags" attribute_path="tags" />
                                     <field name="role" attribute_path="role" />
                                     <field name="workflow_state" attribute_path="workflow_state" />
                                 </group>

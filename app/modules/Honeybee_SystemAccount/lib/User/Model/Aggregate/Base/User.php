@@ -66,19 +66,6 @@ abstract class User extends AggregateRoot
     }
 
     /**
-     * Returns the current value of the 'url' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'url'. Null value otherwise (defaults to NULL).
-     */
-    public function getUrl()
-    {
-        return $this->getValue('url');
-    }
-
-    /**
      * Returns the current value of the 'role' attribute on this
      * 'User' entity. The 'default_value' option set for
      * this attribute is returned if no value was set. If neither a value nor
@@ -131,45 +118,6 @@ abstract class User extends AggregateRoot
     }
 
     /**
-     * Returns the current value of the 'birth_year' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'birth_year'. Null value otherwise (defaults to NULL).
-     */
-    public function getBirthYear()
-    {
-        return $this->getValue('birth_year');
-    }
-
-    /**
-     * Returns the current value of the 'hourly_rate' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'hourly_rate'. Null value otherwise (defaults to NULL).
-     */
-    public function getHourlyRate()
-    {
-        return $this->getValue('hourly_rate');
-    }
-
-    /**
-     * Returns the current value of the 'biography' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'biography'. Null value otherwise (defaults to NULL).
-     */
-    public function getBiography()
-    {
-        return $this->getValue('biography');
-    }
-
-    /**
      * Returns the current value of the 'background_images' attribute on this
      * 'User' entity. The 'default_value' option set for
      * this attribute is returned if no value was set. If neither a value nor
@@ -206,57 +154,5 @@ abstract class User extends AggregateRoot
     public function getTokenExpireDate()
     {
         return $this->getValue('token_expire_date');
-    }
-
-    /**
-     * Returns the current value of the 'tags' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'tags'. Null value otherwise (defaults to NULL).
-     */
-    public function getTags()
-    {
-        return $this->getValue('tags');
-    }
-
-    /**
-     * Returns the current value of the 'images' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'images'. Null value otherwise (defaults to NULL).
-     */
-    public function getImages()
-    {
-        return $this->getValue('images');
-    }
-
-    /**
-     * Returns the current value of the 'comments' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'comments'. Null value otherwise (defaults to NULL).
-     */
-    public function getComments()
-    {
-        return $this->getValue('comments');
-    }
-
-    /**
-     * Returns the current value of the 'friends' attribute on this
-     * 'User' entity. The 'default_value' option set for
-     * this attribute is returned if no value was set. If neither a value nor
-     * default value was set the 'null_value' option value is returned.
-     *
-     * @return mixed Value or default value of attribute 'friends'. Null value otherwise (defaults to NULL).
-     */
-    public function getFriends()
-    {
-        return $this->getValue('friends');
     }
 }
