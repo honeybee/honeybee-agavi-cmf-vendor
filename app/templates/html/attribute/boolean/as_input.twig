@@ -7,6 +7,7 @@
     <div class="hb-field__content">
         <div class="hb-field__label"></div><!--
         --><div class="hb-field__value">
+            <input type="hidden" value="0" id="{{ field_id }}_hidden" name="{{ grouped_field_name }}" class="" {{ readonly }} {{ disabled }}>
             <div class="input-checkbox">
                 <input type="checkbox" value="1" id="{{ field_id }}" name="{{ grouped_field_name }}" class=""
                     {{ readonly }} {{ disabled }} {{ required }} {{ pattern|raw }} placeholder="{{ placeholder }}"
