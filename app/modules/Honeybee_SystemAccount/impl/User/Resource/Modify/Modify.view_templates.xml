@@ -53,6 +53,13 @@
                                     <field name="role" attribute_path="role" template="html/attribute/choice/as_input_select.twig" />
                                 </group>
                             </cell>
+                            <cell css="desk-wide-3/4">
+                                <group name="userimages">
+                                    <field name="images" attribute_path="background_images" template="html/attribute/image-list/as_tabs.twig">
+                                        <setting name="use_converjon">true</setting>
+                                    </field>
+                                 </group>
+                             </cell>
                         </row>
                     </panel>
                 </tab>
