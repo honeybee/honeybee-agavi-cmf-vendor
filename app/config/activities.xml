@@ -57,7 +57,7 @@
 
             <activity_container scope="converjon">
                 <activity name="thumbnail">
-                    <url type="uri_template"><![CDATA[%core.base_href%converjon/?file={alias}:{file}&width={width}&height={height}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
+                    <url type="uri_template"><![CDATA[%local.base_href%converjon/?file={alias}:{file}&width={width}&height={height}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
                     <url_params>
                         <url_param name="alias">dev</url_param>
                         <url_param name="width">150</url_param>
@@ -73,7 +73,7 @@
                     </rels>
                 </activity>
                 <activity name="preview">
-                    <url type="uri_template"><![CDATA[%core.base_href%converjon/?file={alias}:{file}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
+                    <url type="uri_template"><![CDATA[%local.base_href%converjon/?file={alias}:{file}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
                     <url_params>
                         <url_param name="alias">dev</url_param>
                         <url_param name="crop">aoi_auto</url_param>
