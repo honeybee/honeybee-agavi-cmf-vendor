@@ -98,9 +98,27 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
             $view_name = 'Success';
 
             $user->setAuthenticated(true);
+
+            // set additional attributes
+            $data_access_service = $this->getServiceLocator()->getDataAccessService();
+            $query_service_map = $data_access_service->getQueryServiceMap();
+            $query_service = $query_service_map->getByProjectionType($this->getProjectionType());
+            $query_result = $query_service->findByIdentifier($auth_response->getAttribute('identifier'));
+
+            if (1 === $query_result->getTotalCount()) {
+                $user_resource = $query_result->getFirstResult();
+            } else {
+                $error_message = "Unable to retrieve an existing user";
+
+                throw new RuntimeException($error_message);
+            }
+
             $user->setAttributes(
                 array_merge(
-                    array('acl_role' => AclService::ROLE_NON_PRIV),
+                    [
+                        'acl_role' => AclService::ROLE_NON_PRIV,
+                        'background_images' => $user_resource->getBackgroundImages()
+                    ],
                     $auth_response->getAttributes()
                 )
             );

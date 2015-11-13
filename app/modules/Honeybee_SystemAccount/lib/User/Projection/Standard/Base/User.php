@@ -170,6 +170,19 @@ abstract class User extends Projection
     }
 
     /**
+     * Returns the current value of the 'background_images' attribute on this
+     * 'User' entity. The 'default_value' option set for
+     * this attribute is returned if no value was set. If neither a value nor
+     * default value was set the 'null_value' option value is returned.
+     *
+     * @return mixed Value or default value of attribute 'background_images'. Null value otherwise (defaults to NULL).
+     */
+    public function getBackgroundImages()
+    {
+        return $this->getValue('background_images');
+    }
+
+    /**
      * Returns the current value of the 'auth_token' attribute on this
      * 'User' entity. The 'default_value' option set for
      * this attribute is returned if no value was set. If neither a value nor

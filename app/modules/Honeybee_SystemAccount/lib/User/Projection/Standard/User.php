@@ -40,4 +40,13 @@ class User extends BaseUser
     //        // here be dragons
     //   }
     //}
+
+    public function getDefaultBackgroundImage()
+    {
+        $background_images = $this->getBackgroundImages();
+
+        if (count($background_images)) {
+            return $background_images[0];
+        }
+    }
 }

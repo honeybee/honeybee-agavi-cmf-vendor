@@ -133,6 +133,13 @@ abstract class UserType extends AggregateRootType
                         'max_length' => 1000,
                     )
                 ),
+                new \Trellis\Runtime\Attribute\ImageList\ImageListAttribute(
+                    'background_images',
+                    $this,
+                    array(
+                        'max_count' => 5,
+                    )
+                ),
                 new \Trellis\Runtime\Attribute\Text\TextAttribute(
                     'auth_token',
                     $this,

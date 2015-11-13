@@ -82,6 +82,10 @@
         "biography": {
             "type": "string"
         },
+        "background_images": {
+            "type": "object",
+            "enabled": false
+        },
         "auth_token": {
             "type": "string",
             "index": "not_analyzed"

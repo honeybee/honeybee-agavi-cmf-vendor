@@ -148,6 +148,7 @@
                             <ae:parameter name="comments.field_name">Kommentare</ae:parameter>
                             <ae:parameter name="comment">Kommentar</ae:parameter>
                             <ae:parameter name="images.field_name">Bild</ae:parameter>
+                            <ae:parameter name="background_images.field_name">Hintergrundbild</ae:parameter>
                             <ae:parameter name="add_images">Bild hinzufügen</ae:parameter>
                             <ae:parameter name="title.field_name">Titel</ae:parameter>
                             <ae:parameter name="text.field_name">Text</ae:parameter>

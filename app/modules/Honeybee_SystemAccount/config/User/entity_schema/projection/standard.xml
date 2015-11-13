@@ -4,14 +4,14 @@
     xmlns="http://berlinonline.net/trellis/1.0/schema">
     <type_definition name="User">
         <implementor>\Honeybee\Projection\ProjectionType</implementor>
-        <entity_implementor>\Honeybee\Projection\Resource</entity_implementor>
+        <entity_implementor>\Honeybee\Projection\Projection</entity_implementor>
         <description>
             Defines the (normalized) strucuture of a default user projection.
         </description>
         <options>
             <option name="vendor">Honeybee</option>
             <option name="package">SystemAccount</option>
-            <option name="is_hierarchical">true</option>
+            <option name="is_hierarchical">false</option>
         </options>
         <!-- attribute definitions -->
         <xi:include href="../aggregate_root.xml" xpointer="xmlns(dt=http://berlinonline.net/trellis/1.0/schema)

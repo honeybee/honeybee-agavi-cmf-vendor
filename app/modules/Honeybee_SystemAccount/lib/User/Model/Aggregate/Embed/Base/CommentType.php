@@ -16,7 +16,7 @@
  * default options modify the schema definition file of
  * the 'Comment' type.
  *
- * @see https://github.com/honeybee/Trellis
+ * @see https://github.com/honeybee/trellis
  */
 
 namespace Honeybee\SystemAccount\User\Model\Aggregate\Embed\Base;
