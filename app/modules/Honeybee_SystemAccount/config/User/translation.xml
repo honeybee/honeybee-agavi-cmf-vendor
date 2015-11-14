@@ -78,7 +78,7 @@
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="main">Main information</ae:parameter>
-                            <ae:parameter name="meta">Metadata</ae:parameter>
+                            <ae:parameter name="meta">Meta-data</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -86,6 +86,10 @@
                         <ae:parameter name="de">
                             <ae:parameter name="content">Stammdaten</ae:parameter>
                             <ae:parameter name="meta">Metadaten</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="content">User infos</ae:parameter>
+                            <ae:parameter name="meta">Meta-data</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -119,7 +123,6 @@
                             <ae:parameter name="lastname">Last name</ae:parameter>
                             <ae:parameter name="role">Role</ae:parameter>
                             <ae:parameter name="email">Email</ae:parameter>
-                            <ae:parameter name="tags">Tags</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -138,25 +141,34 @@
                             <ae:parameter name="email.placeholder">beispiel@domäne.de</ae:parameter>
                             <ae:parameter name="email.input_focus_hint">Please, type a valid email address</ae:parameter>
                             <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
-                            <ae:parameter name="url.field_name">URL</ae:parameter>
-                            <ae:parameter name="url.placeholder">http://</ae:parameter>
-                            <ae:parameter name="url.pattern_value"><![CDATA[^http\:\/\/.*]]></ae:parameter>
-                            <ae:parameter name="tags.field_name">Tags</ae:parameter>
-                            <ae:parameter name="birth_year.field_name">Geburtsjahr</ae:parameter>
-                            <ae:parameter name="hourly_rate.field_name">Stundenlohn</ae:parameter>
-                            <ae:parameter name="biography.field_name">Biografie</ae:parameter>
-                            <ae:parameter name="comments.field_name">Kommentare</ae:parameter>
-                            <ae:parameter name="comment">Kommentar</ae:parameter>
-                            <ae:parameter name="images.field_name">Bild</ae:parameter>
                             <ae:parameter name="background_images.field_name">Hintergrundbild</ae:parameter>
                             <ae:parameter name="add_images">Bild hinzufügen</ae:parameter>
                             <ae:parameter name="title.field_name">Titel</ae:parameter>
                             <ae:parameter name="text.field_name">Text</ae:parameter>
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
-                            <ae:parameter name="friends.field_name">Freunden</ae:parameter>
                             <ae:parameter name="language.field_name">Sprache</ae:parameter>
                             <ae:parameter name="token_expire_date.field_name">Tokenablaufdatum</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="username.field_name">Username</ae:parameter>
+                            <ae:parameter name="username.placeholder_value">Marc.Smith</ae:parameter>
+                            <ae:parameter name="firstname.field_name">Firstname</ae:parameter>
+                            <ae:parameter name="lastname.field_name">Surname</ae:parameter>
+                            <ae:parameter name="state.field_name">State</ae:parameter>
+                            <ae:parameter name="role.field_name">Role</ae:parameter>
+                            <ae:parameter name="email.field_name">Email</ae:parameter>
+                            <ae:parameter name="email.placeholder">email@example.com</ae:parameter>
+                            <ae:parameter name="email.input_focus_hint">Please, type a valid email address</ae:parameter>
+                            <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
+                            <ae:parameter name="background_images.field_name">Background-image</ae:parameter>
+                            <ae:parameter name="add_images">Add image</ae:parameter>
+                            <ae:parameter name="title.field_name">Title</ae:parameter>
+                            <ae:parameter name="text.field_name">Text</ae:parameter>
+                            <ae:parameter name="uuid.field_name">UUID</ae:parameter>
+                            <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
+                            <ae:parameter name="language.field_name">Language</ae:parameter>
+                            <ae:parameter name="token_expire_date.field_name">Token expire-date</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -336,7 +348,6 @@
                             <ae:parameter name="sort_by_username.description">Sort by Username</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
-
                 </message_translator>
             </translator>
 

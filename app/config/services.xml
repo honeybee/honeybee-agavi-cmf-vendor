@@ -65,7 +65,7 @@
                 </service>
 
                 <service name="honeybee.infrastructure.auth_service">
-                    <class>Honeybee\Infrastructure\Security\Auth\StandardAuthService</class>
+                    <class>Honeybee\SystemAccount\StandardAuthService</class>
                 </service>
 
                 <service name="honeybee.infrastructure.expression_service">

@@ -40,17 +40,9 @@
                                         </setting>
                                     </field>
                                     <field name="email" attribute_path="email" template="html/attribute/email/as_input_email.twig" />
-                                </group>
-                            </cell>
-                            <cell css="desk-wide-1/4">
-                                <group name="stammdaten">
+                                    <field name="role" attribute_path="role" template="html/attribute/choice/as_input_select.twig" />
                                     <field name="firstname" attribute_path="firstname" template="html/attribute/as_input_text.twig" />
                                     <field name="lastname" attribute_path="lastname" template="html/attribute/as_input_text.twig" />
-                                </group>
-                            </cell>
-                            <cell css="desk-wide-1/4">
-                                <group name="secondary">
-                                    <field name="role" attribute_path="role" template="html/attribute/choice/as_input_select.twig" />
                                 </group>
                             </cell>
                             <cell css="desk-wide-3/4">
@@ -68,17 +60,17 @@
                         <row>
                             <cell>
                                 <group name="meta_content">
-                                    <field name="uuid" attribute_path="uuid" />
-                                    <field name="workflow_state" attribute_path="workflow_state" template="html/attribute/as_input_text.twig"/>
-                                    <field name="language" attribute_path="language" />
+                                    <field name="uuid" attribute_path="uuid" template="html/attribute/as_input_text.twig">
+                                        <setting name="readonly">true</setting>
+                                    </field>
+                                    <field name="workflow_state" attribute_path="workflow_state" template="html/attribute/as_input_text.twig">
+                                        <setting name="readonly">true</setting>
+                                    </field>
+                                    <field name="language" attribute_path="language" template="html/attribute/as_input_text.twig">
+                                        <setting name="readonly">true</setting>
+                                    </field>
                                     <field name="identifier" attribute_path="identifier" template="html/attribute/as_input_hidden.twig" />
                                     <field name="revision" attribute_path="revision" template="html/attribute/as_input_hidden.twig" />
-                                    <field name="token_expire_date" attribute_path="token_expire_date" template="html/attribute/datetime/as_input.twig">
-                                        <setting name="widget_options">
-                                            <setting name="display_format">L LTS</setting>
-                                            <setting name="display_mode">table</setting>
-                                        </setting>
-                                    </field>
                                 </group>
                             </cell>
                         </row>
