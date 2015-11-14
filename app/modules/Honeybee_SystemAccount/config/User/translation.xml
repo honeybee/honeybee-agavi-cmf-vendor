@@ -53,8 +53,8 @@
                             <ae:parameter name="set_password.page_title">Set password</ae:parameter>
                             <ae:parameter name="reset_password.page_title">Reset password</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
-                            <ae:parameter name="collection.page_title">User list</ae:parameter>
-                            <ae:parameter name="create.page_title">Create User</ae:parameter>
+                            <ae:parameter name="collection.page_title">Users</ae:parameter>
+                            <ae:parameter name="create.page_title">Add a user</ae:parameter>
                             <ae:parameter name="embed.page_title"></ae:parameter>
                             <ae:parameter name="files.page_title"></ae:parameter>
                             <ae:parameter name="files.download.page_title"></ae:parameter>
@@ -63,7 +63,7 @@
                             <ae:parameter name="resource.page_title">User detail</ae:parameter>
                             <ae:parameter name="resource.embed.page_title"></ae:parameter>
                             <ae:parameter name="resource.history.page_title">User history</ae:parameter>
-                            <ae:parameter name="resource.modify.page_title">Modify User</ae:parameter>
+                            <ae:parameter name="resource.modify.page_title">Modify user</ae:parameter>
                             <ae:parameter name="resource.task.page_title"></ae:parameter>
                             <ae:parameter name="resource.task.proceed.page_title"></ae:parameter>
                             <ae:parameter name="suggestions.page_title"></ae:parameter>
@@ -119,8 +119,8 @@
                             <ae:parameter name="actions">Actions</ae:parameter>
                             <ae:parameter name="title">Title</ae:parameter>
                             <ae:parameter name="username">Username</ae:parameter>
-                            <ae:parameter name="firstname">First name</ae:parameter>
-                            <ae:parameter name="lastname">Last name</ae:parameter>
+                            <ae:parameter name="firstname">Firstname</ae:parameter>
+                            <ae:parameter name="lastname">Surname</ae:parameter>
                             <ae:parameter name="role">Role</ae:parameter>
                             <ae:parameter name="email">Email</ae:parameter>
                         </ae:parameter>
@@ -297,28 +297,28 @@
                             <!--
                                 Default views names (used by default for the navigation items)
                             -->
-                            <ae:parameter name="user_collection.label">User List</ae:parameter>
-                            <ae:parameter name="user_collection.description">List of User</ae:parameter>
-                            <ae:parameter name="resource.label">User Detail</ae:parameter>
-                            <ae:parameter name="resource.description">View detail of the User</ae:parameter>
+                            <ae:parameter name="user_collection.label">Users</ae:parameter>
+                            <ae:parameter name="user_collection.description">Overview on exisitng users</ae:parameter>
+                            <ae:parameter name="resource.label">User details</ae:parameter>
+                            <ae:parameter name="resource.description">View detail's of the given user</ae:parameter>
                             <!--
                                 Default workflow events names
                             -->
                             <ae:parameter name="edit.label">Edit</ae:parameter>
-                            <ae:parameter name="edit.description">Edit the User</ae:parameter>
+                            <ae:parameter name="edit.description">Edit the given user</ae:parameter>
                             <ae:parameter name="delete.label">Delete</ae:parameter>
-                            <ae:parameter name="delete.description">Delete the User</ae:parameter>
+                            <ae:parameter name="delete.description">Delete the given User</ae:parameter>
                             <ae:parameter name="promote.label">Promote</ae:parameter>
-                            <ae:parameter name="promote.description">Promote the User</ae:parameter>
+                            <ae:parameter name="promote.description">Promote the given user</ae:parameter>
                             <ae:parameter name="demote.label">Demote</ae:parameter>
-                            <ae:parameter name="demote.description">Demote the User</ae:parameter>
+                            <ae:parameter name="demote.description">Demote the given user</ae:parameter>
                             <!--
                                 Default readonly activities
                             -->
                             <ae:parameter name="view_resource.label">View</ae:parameter>
-                            <ae:parameter name="view_resource.description">View the User</ae:parameter>
+                            <ae:parameter name="view_resource.description">View the given user</ae:parameter>
                             <ae:parameter name="resource_history.label">History</ae:parameter>
-                            <ae:parameter name="resource_history.description">Event history of the User</ae:parameter>
+                            <ae:parameter name="resource_history.description">Event history of the given user</ae:parameter>
                             <ae:parameter name="resource_hierarchy.label">Hierarchy</ae:parameter>
                             <ae:parameter name="resource_hierarchy.description">User hierarchy</ae:parameter>
                             <!--
@@ -326,14 +326,14 @@
                             -->
                             <ae:parameter name="search.description">Search by term</ae:parameter>
                             <ae:parameter name="search.label">Search</ae:parameter>
-                            <ae:parameter name="create_resource.label">Create User</ae:parameter>
-                            <ae:parameter name="create_resource.description">Create a new User</ae:parameter>
+                            <ae:parameter name="create_resource.label">Add a user</ae:parameter>
+                            <ae:parameter name="create_resource.description">Add a new user to the system</ae:parameter>
                             <ae:parameter name="save_resource.label">Save</ae:parameter>
-                            <ae:parameter name="save_resource.description">Save the User</ae:parameter>
+                            <ae:parameter name="save_resource.description">Save the current user</ae:parameter>
                             <ae:parameter name="save_resource_and_continue.label">Save and continue</ae:parameter>
-                            <ae:parameter name="save_resource_and_continue.description">Save the User and continue</ae:parameter>
+                            <ae:parameter name="save_resource_and_continue.description">Save the current user and continue</ae:parameter>
                             <ae:parameter name="back_to_collection.label">Back to collection</ae:parameter>
-                            <ae:parameter name="back_to_collection.description">Back to the collection of Users</ae:parameter>
+                            <ae:parameter name="back_to_collection.description">Back to user overview</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sort by username</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
                             <ae:parameter name="sort_by_email.description">Sort by email address</ae:parameter>
@@ -358,10 +358,10 @@
                 <message_translator class="AgaviSimpleTranslator">
                     <ae:parameter name="navigations">
                         <ae:parameter name="de">
-                            <ae:parameter name="main.honeybee.system_account.user">Honeybee-SystemAccount-User</ae:parameter>
+                            <ae:parameter name="main.honeybee.system_account.user">User</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
-                            <ae:parameter name="main.honeybee.system_account.user">Honeybee-SystemAccount-User</ae:parameter>
+                            <ae:parameter name="main.honeybee.system_account.user">User</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>
