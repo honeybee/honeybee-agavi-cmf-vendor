@@ -8,7 +8,7 @@
 
             <activity_container scope="converjon">
                 <activity name="user_area_background_image">
-                    <url type="uri_template"><![CDATA[%local.base_href%converjon/?file={alias}:{file}&width={width}&height={height}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
+                    <url type="uri_template"><![CDATA[%local.base_href%converjon/?file={alias}:{file}&width={width}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
                     <url_params>
                         <url_param name="alias">dev</url_param>
                         <url_param name="width">620</url_param>
