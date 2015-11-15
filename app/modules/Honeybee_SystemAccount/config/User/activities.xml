@@ -11,7 +11,7 @@
                     <url type="uri_template"><![CDATA[%local.base_href%converjon/?file={alias}:{file}&width={width}&crop={crop}&format={format}&interlace=plane&quality={quality}&{strip_metadata}]]></url>
                     <url_params>
                         <url_param name="alias">dev</url_param>
-                        <url_param name="width">620</url_param>
+                        <url_param name="width">640</url_param>
                         <url_param name="crop">aoi_auto</url_param>
                         <url_param name="format">jpg</url_param>
                         <url_param name="quality">35</url_param>

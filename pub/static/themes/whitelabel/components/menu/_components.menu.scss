@@ -116,9 +116,20 @@ $menu-size: 20rem !default;
 .user-area__background {
     width: inherit;
     height: inherit;
-
     background-color: color(lightgrey1);
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    background-size: cover;
+
+    .user-area__background_tile {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        background-size: cover;
+        transition: opacity 1s ease-in-out;
+        opacity: 0;
+
+        &.active {
+            opacity: 1;
+        }
+    }
 }

@@ -25,7 +25,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
         // set user additional attributes
         $user->setAttributes([
             'avatar_url' => $this->generateAvatarUrl(),
-            'background_image_url' => $this->getBackgroundImageUrl()
+            'background_image_urls' => $this->getBackgroundImageUrls()
         ]);
 
         $default_target_url = $this->routing->gen('index');  // dashboard a.k.a. homepage
@@ -138,46 +138,39 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
         } else {
             // generate Gravatar url
             $gravatar_template = AgaviConfig::get('core.gravatar_template', self::GRAVATAR_TEMPLATE);
-
             $user_email = trim($this->user->getAttribute('email'));
             $user_email_md5 = md5(strtolower($user_email));
             $user_avatar_url = str_replace('{MD5_HASH}', $user_email_md5, $gravatar_template);
-
             // @todo add additional gravatar options as 'size' and 'default'
         }
 
         return $user_avatar_url;
     }
 
-    protected function getBackgroundImageUrl()
+    protected function getBackgroundImageUrls()
     {
-        // default image
-        $background_image_url = AgaviConfig::get('honeybee-system_account.default_background_url');
-
-        $service_locator = $this->getServiceLocator();
-        $activity_service = $service_locator->getActivityService();
-        $url_generator_service = $service_locator->getUrlGenerator();
+        $activity_service = $this->getServiceLocator()->getActivityService();
+        $url_generator = $this->getServiceLocator()->getUrlGenerator();
 
         if ($this->user->hasAttribute('background_images')) {
-            $background_images = $this->user->getAttribute('background_images');
-
-            if (count($background_images)) {
-                $background_image_location = $background_images[0]->getLocation();
-                $background_image_url = $url_generator_service->generateUrl(
-                    'honeybee.system_account.user.files.download',
-                    [ 'file' => $background_images[0]->getLocation() ]
-                );
-
-                $background_image_activity = null;
+            $background_image_urls = [];
+            $bg_image_activity = $activity_service->getActivity('converjon', 'user_area_background_image');
+            $first = true;
+            foreach ($this->user->getAttribute('background_images', null, []) as $bg_image) {
                 if (AgaviConfig::get('converjon.enabled', false)) {
-                    $background_image_activity = $activity_service->getActivity('converjon', 'user_area_background_image');
-                    $url_params = [ 'file' => $background_image_location ];
-
-                    $background_image_url = $url_generator_service->generateUrl($background_image_activity, $url_params);
+                    $url_params = [ 'file' => $bg_image->getLocation() ];
+                    $background_image_urls[] = $url_generator->generateUrl($bg_image_activity, $url_params);
+                } else {
+                    $background_image_urls[] = $url_generator->generateUrl(
+                        'honeybee.system_account.user.files.download',
+                        [ 'file' => $bg_image->getLocation() ]
+                    );
                 }
             }
+        } else {
+            $background_image_urls = [ AgaviConfig::get('honeybee-system_account.default_background_url', false) ];
         }
 
-        return $background_image_url;
+        return $background_image_urls;
     }
 }

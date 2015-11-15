@@ -21,19 +21,21 @@
                 <div class="menu__panel">
                     <div class="menu__panel-content">
                         <div class="menu__panel-layout">
-                            <div class="user-area-box">
+                            {%- set user_data = {
+                                is_authenticated: us.isAuthenticated(),
+                                avatar_url: us.getAttribute('avatar_url'),
+                                name: us.getAttribute('name'),
+                                login: us.getAttribute('login'),
+                                bg_images: us.getAttribute('background_image_urls')
+                            } -%}
+                            <div class="user-area-box jsb_ jsb_Honeybee_Core/ui/UserWidget" data-jsb="{{ user_data|json_encode }}">
                                 <label for="menu-trigger" class="menu__toggle-close">
                                     <span class="menu__toggle-button">{{ _('menu') }}</span>
                                 </label>
                                 <div class="user-area">
-                                    <div class="user-area__background" style="background-image: url({{ us.getAttribute('background_image_url') }})"></div>
-
-                                    {%- set user_data = {
-                                        is_authenticated: us.isAuthenticated(),
-                                        avatar_url: us.getAttribute('avatar_url'),
-                                        name: us.getAttribute('name'),
-                                        login: us.getAttribute('login')
-                                    } -%}
+                                    <div class="user-area__background">
+                                        <div class="user-area__background_tile active" style="background-image: url({{ us.getAttribute('background_image_urls')[0] }})"></div>
+                                    </div>
                                     {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
                                 </div>
                             </div><!-- .user-widget-box
