@@ -34,7 +34,9 @@
                                 </label>
                                 <div class="user-area">
                                     <div class="user-area__background">
+                                        {% if user_data.bg_images|length > 0 %}
                                         <div class="user-area__background_tile active" style="background-image: url({{ us.getAttribute('background_image_urls')[0] }})"></div>
+                                        {% endif %}
                                     </div>
                                     {%- block userwidget -%}{{ parent() }}{%- endblock userwidget -%}
                                 </div>
