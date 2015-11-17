@@ -4,11 +4,9 @@
     xmlns="http://berlinonline.de/schemas/honeybee/config/filesystems/1.0"
     xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
 >
-
     <ae:configuration>
         <filesystems>
-            <!-- <filesystem scheme="userfiles" connection="User.Files.Dropbox" /> -->
+            <filesystem scheme="honeybee.system_account.user.files" connection="Files.Local" />
         </filesystems>
     </ae:configuration>
-
 </ae:configurations>
