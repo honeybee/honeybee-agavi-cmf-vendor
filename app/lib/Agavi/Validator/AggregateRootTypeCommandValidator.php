@@ -26,6 +26,7 @@ use Honeybee\Projection\ProjectionInterface;
 use Trellis\Common\Collection\Map;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
+use Trellis\Runtime\Attribute\GeoPoint\GeoPointAttribute;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 use Trellis\Runtime\Attribute\HasComplexValueInterface;
@@ -496,9 +497,20 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         // will always fail – thus we return the default valueholder here and thus the value
         // should not be changed in the calling method when the empty value is the same
         if ($attribute instanceof HasComplexValueInterface) {
-            $payload = ArrayToolkit::filterEmptyValues($payload);
-            if (empty($payload)) {
-                return [ true, $value_holder ];
+            if ($attribute instanceof GeoPointAttribute && is_array($payload)) {
+                // cases: [0,0] or one of lon/lat is 0 – the filterEmptyValues unfortunately removes the array entries
+                // and thus one or both values being zero is not possible while still might be valid for the attribute
+                $payload = ArrayToolkit::filterEmptyValues($payload, function($val) {
+                    if ($val === '0' || $val === 0) {
+                        return true; // 0 and '0' are valid (non-empty) values for lon/lat
+                    }
+                    return !empty($val);
+                });
+            } else {
+                $payload = ArrayToolkit::filterEmptyValues($payload);
+                if (empty($payload)) {
+                    return [ true, $value_holder ];
+                }
             }
         }
 
