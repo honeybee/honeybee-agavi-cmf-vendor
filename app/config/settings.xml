@@ -69,7 +69,7 @@
             <setting name="min_uppercase_chars">0</setting>
             <setting name="min_lowercase_chars">1</setting>
             <setting name="min_string_length">10</setting>
-            <setting name="max_string_length">32</setting>
+            <setting name="max_string_length">255</setting>
             <setting name="similarity_percentage_threshold">70</setting>
             <setting name="minimum_levenshtein_distance">5</setting>
         </settings>
