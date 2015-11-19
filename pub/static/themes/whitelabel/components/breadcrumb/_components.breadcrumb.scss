@@ -1,0 +1,71 @@
+$breadcrumb-line-height: $base-spacing !default;
+$breadcrumb-items-color: color(lightgrey2) !default;
+$breadcrumb-arrow-color: color(lines) !default;
+$breadcrumb-arrow-width: $small-spacing !default;
+$breadcrumb-arrow-border-width: 2px;
+
+.breadcrumb {
+    @include activitylist;
+    white-space: nowrap;
+    overflow-x: scroll;
+
+    background-color: $breadcrumb-items-color;
+    color: color(darkgrey2);
+
+    @include media-query(palm) {
+        text-align: center;
+    }
+}
+
+.breadcrumb__item {
+    // style
+    padding: $small-spacing;
+
+    // layout
+    display: inline-block;
+    position: relative;
+    padding-left: $small-spacing + $breadcrumb-arrow-width + $breadcrumb-arrow-border-width;    // compensate arrow
+}
+
+// separator
+.breadcrumb__item:after,
+.breadcrumb__item:before {
+    content: ' ';
+    width: 0;
+    height: 0;
+    // display: block;
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+
+    // arrow
+    border-top: $breadcrumb-line-height solid color(clear);
+    border-bottom: $breadcrumb-line-height solid color(clear);
+    border-left: $breadcrumb-arrow-width solid $breadcrumb-items-color;
+}
+
+.breadcrumb__item:after {
+    @include zindex(base);
+}
+
+.breadcrumb__item:last-child:after,
+.breadcrumb__item:last-child:before {
+    display: none;
+    margin: 0;
+}
+
+.breadcrumb__item:before {
+    margin-left: $breadcrumb-arrow-border-width;
+    border-color: color(clear);
+    border-left-color: $breadcrumb-arrow-color;    // arrow border color
+    @include zindex(base, -1);
+}
+
+// hover effect
+// .breadcrumb__item:hover {
+//     $breadcrumb-items-color-hover: darken($breadcrumb-items-color, 20%);
+//
+//     & { background-color: $breadcrumb-items-color-hover; }
+//     &:after { border-left-color: $breadcrumb-items-color-hover }
+// }

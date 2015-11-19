@@ -1,7 +1,19 @@
+$subheader-height: $base-spacing*2 !default;
+
 .subheader-activities {
+    height: $subheader-height;
 
     @include media-query(palm) {
         text-align: center;
-        padding-top: $base-spacing/2;
+        border-top: 1px solid color(lines);
+        padding-top: $small-spacing;
+        padding-bottom: $small-spacing;
+    }
+
+    // center vertically
+    .activity-map {
+        @include media-query(lap-and-up) {
+            transform: translateY(50%);
+        }
     }
 }
