@@ -2,14 +2,7 @@
 
 {%- block pageheader -%}
 <div class="page-header-layout">
-    <div class="brand-box">
-        <div class="brand">
-        {%- block brand -%}
-            <h1><a href="{{ ro.gen('index') }}" title="{{ _('go_to_dashboard', 'application.ui') }}"><span class="brand__entity">{{ _('brand_entity', 'application.ui') }}</span><span class="brand__title">{{ _('brand_title', 'application.ui') }}</span></a></h1>
-        {%- endblock brand -%}
-        </div>
-    </div><!-- .brand-box
-    --><div class="menu-box">
+    <div class="menu-box">
         {%- block menu -%}
             {% if us.isAuthenticated() %}
             <div class="menu">
@@ -54,6 +47,13 @@
             </div><!-- .menu -->
             {% endif %}
         {%- endblock menu -%}
-    </div><!-- .menu-box -->
+    </div><!-- .menu-box
+    --><div class="brand-box">
+        <div class="brand">
+        {%- block brand -%}
+            <h1><a href="{{ ro.gen('index') }}" title="{{ _('go_to_dashboard', 'application.ui') }}"><span class="brand__entity">{{ _('brand_entity', 'application.ui') }}</span><span class="brand__title">{{ _('brand_title', 'application.ui') }}</span></a></h1>
+        {%- endblock brand -%}
+        </div>
+    </div><!-- .brand-box -->
 </div><!-- .page-header-layout -->
 {%- endblock pageheader -%}

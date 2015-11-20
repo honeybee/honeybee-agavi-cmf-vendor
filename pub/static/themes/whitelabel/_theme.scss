@@ -42,30 +42,46 @@ button {
 
 // brand
 .brand {
-    padding: 10px 20px 10px 20px;
+    // style
+    padding-top: $small-spacing;
+    padding-right: $base-spacing;
+    padding-bottom: $small-spacing;
+
+    // layout
+    height: $page-header-height;
+    padding-left: $base-spacing+$menu-toggle-open-size;
 
     h1 {
+        // style
+        font-size: $font-size * 1.285; // 18px
+        color: color(darkgrey2);
+        font-weight: normal;
+
+        // layout
         margin: 0;
+        transform: translateY(50%);
     }
 
     a {
-        background: url('binaries/icons/honeybee-logo.png');
-        background-repeat: no-repeat;
-
+        color: inherit;
         display: inline-block;
-        padding-left: 26px + 10px; // logo width + padding
         text-decoration: none;
 
-        span {
-            font-size: $font-size * 1.285; // 18px
-            font-weight: normal;
-            color: color(darkgrey2);
-            padding: 0;
-        }
+        // // logo
+        // $brand-logo-width: 26px;
+        // background: url('binaries/icons/honeybee-logo.png');
+        // background-repeat: no-repeat;
+        // padding-left: $brand-logo-width + $small-spacing; // logo width + padding
+    }
+
+    span {
+        padding: 0;
     }
 }
 
 .brand__entity {
+    display: inline-block;
+    &:first-letter { text-transform: capitalize; }
     font-weight: bold;
 }
 
@@ -84,22 +100,10 @@ button {
 
 .page-header {
     background-color: color(white);
-
-    // .user-widget-box {
-    //     padding: $base-spacing/2;
-
-    //     @include media-query(lap-and-up) {
-    //         padding: $base-spacing/2 $base-spacing;
-    //     }
-    // }
-
-    // .user-widget {
-    //     text-align: right;
-    // }
 }
 
 .page-subheader {
-    padding: $base-spacing/2 $base-spacing;
+    // padding: $small-spacing $base-spacing;
     border-width: 1px 0px;
     border-style: solid;
     border-color: color(grey2);
@@ -107,7 +111,7 @@ button {
     background-color: color(lightgrey2);
 }
 
-.subheader-title-box {
+.subheader-context-box {
     @extend %lap-and-up-3-of-5;
 }
 
@@ -117,6 +121,7 @@ button {
 
 .subheader-activities {
     @include media-query(lap-and-up) {
+        margin-right: $base-spacing;
         text-align: right;
     }
 }
@@ -153,7 +158,7 @@ label {
         legend {
             @include typography-headlines;
             width: 100%;
-            padding-bottom: $base-spacing/2;
+            padding-bottom: $small-spacing;
             border-bottom: 1px solid color(lines);
             margin-bottom: $base-spacing;
         }

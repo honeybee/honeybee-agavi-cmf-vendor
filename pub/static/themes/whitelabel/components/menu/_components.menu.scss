@@ -1,9 +1,11 @@
 // offcanvas menu on the left with user widget and main navigation
 
+$page-header-height: 60px !default;
 $menu-size: 20rem !default;
+$menu-toggle-open-size: $page-header-height !default;
 
 .menu {
-    @include offcanvas('menu', 'bottom-left', 'left', $menu-size, 0.2s, 9000, 100);
+    @include offcanvas('menu', 'top-left', 'left', $menu-size, 0.2s, 9000, 100);
 
     .menu__panel {
         background: color(white);
@@ -24,29 +26,39 @@ $menu-size: 20rem !default;
 }
 
 .menu__toggle-open {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+    position: absolute; // move with scroll
+    width: $menu-toggle-open-size;
+    height: $menu-toggle-open-size;
     display: inline-block;
-    width: auto;
-    margin: 0 $base-spacing $base-spacing/2 $base-spacing/2;
-    @include shadow-overlay;
 
-    transition: width 0.2s ease-out;
+    // margin: 0 $base-spacing $base-spacing/2 $base-spacing/2;
+    // @include shadow-overlay;
+
+    // transition: width 0.2s ease-out;
 
     .menu__toggle-button {
-        $icon-space: $font-size*1.5;
+        display: block; // exapand
+        padding: $base-spacing;
 
-        @include button-emphasized-warning {
-            padding-left: $base-spacing/2 + $icon-space;
-            padding-right: $base-spacing/2;
-            width: 100%;
-        }
+        color: color(navigational-primary);
+        background-color: white;
+        border: 0;
+        border-right-width: 1px;
+        border-color: color(lines);
+        border-style: solid;
+        // $icon-space: $font-size*1.5;
+
+        // @include button-emphasized-warning {
+        //     padding-left: $base-spacing/2 + $icon-space;
+        //     padding-right: $base-spacing/2;
+        //     width: 100%;
+        // }
 
         // menu icon on the text side
-        @include hb-icon-pseudo-el( (icon-name: 'menu', color: color(emphasized-primary), hide-content: false) ) {
-            margin-left: -$icon-space;
-        }
+        @include hb-icon-pseudo-el(( icon-name: 'menu', size: 2, hide-content: false ));
+        text-indent: 100%;
+        white-space: nowrap;
+        overflow: hidden;
     }
 }
 
