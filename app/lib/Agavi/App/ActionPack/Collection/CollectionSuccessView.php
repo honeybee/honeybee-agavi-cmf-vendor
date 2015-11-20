@@ -215,6 +215,33 @@ EOT;
         return $rendered_sort_activities;
     }
 
+    public function getBreadcrumbActivities()
+    {
+        $collection_activity = $this->getServiceLocator()->getActivityService()->getActivity(
+            $this->getAttribute('resource_type')->getPrefix(),
+            'collection'
+        );
+
+        return [ $collection_activity ];
+    }
+
+    protected function getBreadcrumbTitle()
+    {
+        $number_of_results = $this->getAttribute('number_of_results', 0);
+        $translation_domain = $this->getTranslationDomainPrefix() . '.views';
+        $default_translation = sprintf('(%s)', $number_of_results);
+
+        $number_of_results = $this->getServiceLocator()->getTranslator()->translate(
+            'collection.number_of_results',
+            $translation_domain,
+            null,
+            [ $number_of_results ],
+            $default_translation
+        );
+
+        return sprintf('%s (%s)', $this->getPageTitle(), $number_of_results);
+    }
+
     protected function setPagination(AgaviRequestDataHolder $request_data, array $settings = [])
     {
         $number_of_results = $this->getAttribute('number_of_results', 0);

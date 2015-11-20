@@ -19,10 +19,8 @@ use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\Activity\Activity;
 use Honeybee\Ui\Activity\ActivityInterface;
 use Honeybee\Ui\Activity\PrimaryActivityMap;
-use Honeybee\Ui\Activity\Url;
 use Honeybee\Ui\OutputFormat\OutputFormatInterface;
 use ReflectionClass;
 
@@ -35,9 +33,12 @@ class View extends AgaviView
 
     const ATTRIBUTE_PAGE_TITLE = '_page_title';
     const ATTRIBUTE_BREADCRUMBS = '_breadcrumbs';
+    const ATTRIBUTE_BREADCRUMB_TITLE = '_breadcrumb_title';
     const ATTRIBUTE_BROWSER_TITLE = '_browser_title';
     const ATTRIBUTE_BODY_CSS = '_bodycss';
     const ATTRIBUTE_RENDERED_NAVIGATION = '_rendered_navigation';
+    const ATTRIBUTE_RENDERED_SUBHEADER_ACTIVITIES = '_rendered_subheader_activities';
+    const ATTRIBUTE_RENDERED_PRIMARY_ACTIVITIES = '_rendered_primary_activities';
     const ATTRIBUTE_IS_SLOT = '_is_slot';
     const ATTRIBUTE_LAYOUT = '_layout';
 
@@ -212,7 +213,11 @@ class View extends AgaviView
         }
 
         if (!$this->hasAttribute(static::ATTRIBUTE_BREADCRUMBS)) {
-            $this->setAttribute(static::ATTRIBUTE_BREADCRUMBS, $this->getBreadcrumbs());
+            $this->setAttribute(static::ATTRIBUTE_BREADCRUMBS, $this->getRenderedBreadcrumbs());
+        }
+
+        if (!$this->hasAttribute(static::ATTRIBUTE_BREADCRUMB_TITLE)) {
+            $this->setAttribute(static::ATTRIBUTE_BREADCRUMB_TITLE, $this->getBreadcrumbTitle());
         }
     }
 
@@ -789,54 +794,32 @@ class View extends AgaviView
         return $view_title;
     }
 
-    protected function getBreadcrumbs()
+    protected function getRenderedBreadcrumbs()
     {
-        // get context scope parts
-        $class_name_parts = explode('_', static::CLASS);
-
-        $vendor = strtolower(array_shift($class_name_parts));
-        $package = StringToolkit::asSnakeCase(array_shift($class_name_parts));
-        $resource = StringToolkit::asSnakeCase(array_shift($class_name_parts));
-
-        $activity_service = $this->getServiceLocator()->getActivityService();
-        $breadcrumbs = [];
-        $breadcrumbs_activities = [];
-
-        // context module
-        $breadcrumbs[] = [
-            'name' => $this->container->getViewModuleName(),
-            'route' => sprintf('%s.%s', $vendor, $package),
-            'type' => Activity::TYPE_GENERAL
-        ];
-
-        // generate activities
-        foreach ($breadcrumbs as $crumb) {
-            $activity_name = $crumb['name'];
-            $activity_type = $crumb['type'];
-            $activity_route = $crumb['route'];
-
-            $activity = new Activity(
-                [
-                    'name' => $activity_name,
-                    'label' => sprintf('%s.label', $activity_name),
-                    'type' => Activity::TYPE_GENERAL,
-                    'description' => sprintf('%s.description', $activity_name),
-                    'verb' => 'read',
-                    'rels' => [ $activity_name ],
-                    'settings' => new Settings([]),
-                    'url' => new Url(
-                        [
-                            'type' => Url::TYPE_ROUTE,
-                            'value' => $activity_route
-                        ]
-                    )
-                ]
-            );
-
-            $breadcrumbs_activities[] = $this->renderSubject($activity);
+        if (!$this->user->isAuthenticated()) {
+            // no breadcrumbs for users that are not logged in
+            return '';
         }
 
-        return $breadcrumbs_activities;
+        $breadcrumbs_activities = $this->getBreadcrumbActivities();
+
+        // render activities
+        $rendererd_breadcrumbs = [];
+        foreach ($breadcrumbs_activities as $breadcrumbs_activity) {
+            $rendererd_breadcrumbs[] = $this->renderSubject($breadcrumbs_activity);
+        }
+
+        return $rendererd_breadcrumbs;
+    }
+
+    protected function getBreadcrumbActivities()
+    {
+        return [];
+    }
+
+    protected function getBreadcrumbTitle()
+    {
+        return $this->getPageTitle();
     }
 
     protected function getTranslationDomainPrefix($join_char = '.')
@@ -881,7 +864,7 @@ class View extends AgaviView
             'subheader_activities'
         );
 
-        $this->setAttribute('rendered_subheader_activities', $rendered_subheader_activities);
+        $this->setAttribute(static::ATTRIBUTE_RENDERED_SUBHEADER_ACTIVITIES, $rendered_subheader_activities);
 
         return $rendered_subheader_activities;
     }
@@ -902,7 +885,7 @@ class View extends AgaviView
             'primary_activities'
         );
 
-        $this->setAttribute('rendered_primary_activities', $rendered_primary_activities);
+        $this->setAttribute(static::ATTRIBUTE_RENDERED_PRIMARY_ACTIVITIES, $rendered_primary_activities);
 
         return $rendered_primary_activities;
     }

@@ -37,4 +37,20 @@ class CreateInputView extends View
     {
         return json_encode(__METHOD__);
     }
+
+    public function getBreadcrumbActivities()
+    {
+        $breadcrumbs_root_activities = $this->getBreadcrumbsRootActivities();
+
+        return $breadcrumbs_root_activities;
+    }
+
+    public function getBreadcrumbsRootActivities()
+    {
+        $resource_type = $this->getAttribute('resource')->getType();
+
+        return [
+            $this->getServiceLocator()->getActivityService()->getActivity($resource_type->getPrefix(), 'collection')
+        ];
+    }
 }

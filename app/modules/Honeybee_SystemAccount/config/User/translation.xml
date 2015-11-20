@@ -32,6 +32,7 @@
                             <ae:parameter name="reset_password.page_title">Kennwort zurücksetzen</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
                             <ae:parameter name="collection.page_title">Nutzer</ae:parameter>
+                            <ae:parameter name="collection.number_of_results">Ergebnisse: %s</ae:parameter>
                             <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
                             <ae:parameter name="embed.page_title"></ae:parameter>
                             <ae:parameter name="files.page_title"></ae:parameter>
@@ -54,6 +55,7 @@
                             <ae:parameter name="reset_password.page_title">Reset password</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
                             <ae:parameter name="collection.page_title">Users</ae:parameter>
+                            <ae:parameter name="collection.number_of_results">Results: %s</ae:parameter>
                             <ae:parameter name="create.page_title">Add a user</ae:parameter>
                             <ae:parameter name="embed.page_title"></ae:parameter>
                             <ae:parameter name="files.page_title"></ae:parameter>
@@ -243,7 +245,7 @@
                             <!--
                                 Default views names (used by default for the navigation items)
                             -->
-                            <ae:parameter name="user_collection.label">Nutzer</ae:parameter>
+                            <ae:parameter name="user_collection.label">Alle Nutzer</ae:parameter>
                             <ae:parameter name="user_collection.description">Nutzer Liste</ae:parameter>
                             <ae:parameter name="resource.label">Nutzer Detail</ae:parameter>
                             <ae:parameter name="resource.description">Nutzer im Detail</ae:parameter>
@@ -297,7 +299,7 @@
                             <!--
                                 Default views names (used by default for the navigation items)
                             -->
-                            <ae:parameter name="user_collection.label">Users</ae:parameter>
+                            <ae:parameter name="user_collection.label">All users</ae:parameter>
                             <ae:parameter name="user_collection.description">Overview on exisitng users</ae:parameter>
                             <ae:parameter name="resource.label">User details</ae:parameter>
                             <ae:parameter name="resource.description">View detail's of the given user</ae:parameter>
@@ -307,7 +309,7 @@
                             <ae:parameter name="edit.label">Edit</ae:parameter>
                             <ae:parameter name="edit.description">Edit the given user</ae:parameter>
                             <ae:parameter name="delete.label">Delete</ae:parameter>
-                            <ae:parameter name="delete.description">Delete the given User</ae:parameter>
+                            <ae:parameter name="delete.description">Delete the given user</ae:parameter>
                             <ae:parameter name="promote.label">Promote</ae:parameter>
                             <ae:parameter name="promote.description">Promote the given user</ae:parameter>
                             <ae:parameter name="demote.label">Demote</ae:parameter>

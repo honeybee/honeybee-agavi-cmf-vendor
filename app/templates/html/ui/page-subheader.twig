@@ -1,8 +1,8 @@
 {% block subheader_activities %}<!--
-    -->{%- if rendered_subheader_activities is defined and rendered_subheader_activities is not empty -%}
+    -->{%- if _rendered_subheader_activities is defined and _rendered_subheader_activities is not empty -%}
     <div class="subheader-activities-box">
         <div class="subheader-activities">
-            {{ rendered_subheader_activities|raw }}
+            {{ _rendered_subheader_activities|raw }}
         </div>
     </div>
     {%- endif -%}<!-- .subheader-activites-box
@@ -11,13 +11,12 @@
 {%- block pagesubheader -%}
 <div class="page-subheader-layout">
     <div class="subheader-context-box">
-        <!-- <span class="page-title">{{ _page_title }}</span> -->
 
         <ul class="breadcrumb">
             {% for crumb in _breadcrumbs %}
                 <li class="breadcrumb__item">{{ crumb|raw }}
             {% endfor %}
-            <li class="breadcrumb__item page__title"><span>{{ _page_title }}</span>
+            <li class="breadcrumb__item page__title"><span>{{ _breadcrumb_title }}</span>
         </ul>
 
     </div><!-- .subheader-title-box
