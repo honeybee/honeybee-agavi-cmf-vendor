@@ -245,7 +245,7 @@
                             <!--
                                 Default views names (used by default for the navigation items)
                             -->
-                            <ae:parameter name="user_collection.label">Alle Nutzer</ae:parameter>
+                            <ae:parameter name="user_collection.label">Nutzerübersicht</ae:parameter>
                             <ae:parameter name="user_collection.description">Nutzer Liste</ae:parameter>
                             <ae:parameter name="resource.label">Nutzer Detail</ae:parameter>
                             <ae:parameter name="resource.description">Nutzer im Detail</ae:parameter>
@@ -299,7 +299,7 @@
                             <!--
                                 Default views names (used by default for the navigation items)
                             -->
-                            <ae:parameter name="user_collection.label">All users</ae:parameter>
+                            <ae:parameter name="user_collection.label">List of users</ae:parameter>
                             <ae:parameter name="user_collection.description">Overview on exisitng users</ae:parameter>
                             <ae:parameter name="resource.label">User details</ae:parameter>
                             <ae:parameter name="resource.description">View detail's of the given user</ae:parameter>
