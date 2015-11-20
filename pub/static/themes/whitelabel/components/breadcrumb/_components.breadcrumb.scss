@@ -7,13 +7,13 @@ $breadcrumb-arrow-border-width: 2px;
 .breadcrumb {
     @include activitylist;
     white-space: nowrap;
-    overflow-x: scroll;
 
     background-color: $breadcrumb-items-color;
     color: color(darkgrey2);
 
     @include media-query(palm) {
         text-align: center;
+        overflow-x: scroll;
     }
 }
 
