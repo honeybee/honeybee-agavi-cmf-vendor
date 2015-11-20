@@ -19,8 +19,10 @@ use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Projection\ProjectionInterface;
+use Honeybee\Ui\Activity\Activity;
 use Honeybee\Ui\Activity\ActivityInterface;
 use Honeybee\Ui\Activity\PrimaryActivityMap;
+use Honeybee\Ui\Activity\Url;
 use Honeybee\Ui\OutputFormat\OutputFormatInterface;
 use ReflectionClass;
 
@@ -32,6 +34,7 @@ class View extends AgaviView
     use LogTrait;
 
     const ATTRIBUTE_PAGE_TITLE = '_page_title';
+    const ATTRIBUTE_BREADCRUMBS = '_breadcrumbs';
     const ATTRIBUTE_BROWSER_TITLE = '_browser_title';
     const ATTRIBUTE_BODY_CSS = '_bodycss';
     const ATTRIBUTE_RENDERED_NAVIGATION = '_rendered_navigation';
@@ -206,6 +209,10 @@ class View extends AgaviView
                 static::ATTRIBUTE_RENDERED_NAVIGATION,
                 $this->isSlot() ? '' : $this->getRenderedNavigation()
             );
+        }
+
+        if (!$this->hasAttribute(static::ATTRIBUTE_BREADCRUMBS)) {
+            $this->setAttribute(static::ATTRIBUTE_BREADCRUMBS, $this->getBreadcrumbs());
         }
     }
 
@@ -780,6 +787,56 @@ class View extends AgaviView
         $view_title = $this->getServiceLocator()->getTranslator()->translate($page_title_key, $translation_domain);
 
         return $view_title;
+    }
+
+    protected function getBreadcrumbs()
+    {
+        // get context scope parts
+        $class_name_parts = explode('_', static::CLASS);
+
+        $vendor = strtolower(array_shift($class_name_parts));
+        $package = StringToolkit::asSnakeCase(array_shift($class_name_parts));
+        $resource = StringToolkit::asSnakeCase(array_shift($class_name_parts));
+
+        $activity_service = $this->getServiceLocator()->getActivityService();
+        $breadcrumbs = [];
+        $breadcrumbs_activities = [];
+
+        // context module
+        $breadcrumbs[] = [
+            'name' => $this->container->getViewModuleName(),
+            'route' => sprintf('%s.%s', $vendor, $package),
+            'type' => Activity::TYPE_GENERAL
+        ];
+
+        // generate activities
+        foreach ($breadcrumbs as $crumb) {
+            $activity_name = $crumb['name'];
+            $activity_type = $crumb['type'];
+            $activity_route = $crumb['route'];
+
+            $activity = new Activity(
+                [
+                    'name' => $activity_name,
+                    'label' => sprintf('%s.label', $activity_name),
+                    'type' => Activity::TYPE_GENERAL,
+                    'description' => sprintf('%s.description', $activity_name),
+                    'verb' => 'read',
+                    'rels' => [ $activity_name ],
+                    'settings' => new Settings([]),
+                    'url' => new Url(
+                        [
+                            'type' => Url::TYPE_ROUTE,
+                            'value' => $activity_route
+                        ]
+                    )
+                ]
+            );
+
+            $breadcrumbs_activities[] = $this->renderSubject($activity);
+        }
+
+        return $breadcrumbs_activities;
     }
 
     protected function getTranslationDomainPrefix($join_char = '.')

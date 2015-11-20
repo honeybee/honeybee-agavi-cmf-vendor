@@ -10,8 +10,16 @@
 
 {%- block pagesubheader -%}
 <div class="page-subheader-layout">
-    <div class="subheader-title-box">
-        <span class="page-title">{{ _page_title }}</span>
+    <div class="subheader-context-box">
+        <!-- <span class="page-title">{{ _page_title }}</span> -->
+
+        <ul class="breadcrumb">
+            {% for crumb in _breadcrumbs %}
+                <li class="breadcrumb__item">{{ crumb|raw }}
+            {% endfor %}
+            <li class="breadcrumb__item page__title"><span>{{ _page_title }}</span>
+        </ul>
+
     </div><!-- .subheader-title-box
 -->{{ block('subheader_activities') }}
 </div>
