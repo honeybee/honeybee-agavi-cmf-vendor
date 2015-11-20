@@ -32,7 +32,7 @@
                             <ae:parameter name="reset_password.page_title">Kennwort zurücksetzen</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
                             <ae:parameter name="collection.page_title">Nutzer</ae:parameter>
-                            <ae:parameter name="collection.number_of_results">Ergebnisse: %s</ae:parameter>
+                            <ae:parameter name="collection.number_of_results">%s</ae:parameter>
                             <ae:parameter name="create.page_title">Nutzer hinzufügen</ae:parameter>
                             <ae:parameter name="embed.page_title"></ae:parameter>
                             <ae:parameter name="files.page_title"></ae:parameter>
@@ -55,7 +55,7 @@
                             <ae:parameter name="reset_password.page_title">Reset password</ae:parameter>
                             <ae:parameter name="bulk.page_title"></ae:parameter>
                             <ae:parameter name="collection.page_title">Users</ae:parameter>
-                            <ae:parameter name="collection.number_of_results">Results: %s</ae:parameter>
+                            <ae:parameter name="collection.number_of_results">%s</ae:parameter>
                             <ae:parameter name="create.page_title">Add a user</ae:parameter>
                             <ae:parameter name="embed.page_title"></ae:parameter>
                             <ae:parameter name="files.page_title"></ae:parameter>

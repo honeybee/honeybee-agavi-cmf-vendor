@@ -229,7 +229,7 @@ EOT;
     {
         $number_of_results = $this->getAttribute('number_of_results', 0);
         $translation_domain = $this->getTranslationDomainPrefix() . '.views';
-        $default_translation = sprintf('(%s)', $number_of_results);
+        $default_translation = sprintf('%s', $number_of_results);
 
         $number_of_results = $this->getServiceLocator()->getTranslator()->translate(
             'collection.number_of_results',
