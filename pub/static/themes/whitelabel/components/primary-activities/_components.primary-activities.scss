@@ -55,6 +55,8 @@
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
                 border-left: 0;
+                padding-left: 0;
+                padding-right: 0;
             }
 
             @include media-query(lap-and-up) {
@@ -131,13 +133,6 @@
         }
     }
 
-    .primary-activities-list__toggle-icon {
-        @include hb-icon-pseudo-el((
-            icon-name: 'chevron-small-up',
-            hide-content: false
-        ));
-    }
-
     .primary-activities-list__more {
         @include media-query(palm) {
             margin-top: 0;
@@ -154,6 +149,8 @@
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border-left: 0;
+        padding-left: 0;
+        padding-right: 0;
 
         @include media-query(lap-and-up) {
             display: none;
