@@ -17,9 +17,9 @@
     generateSourceMaps: false,      {# generate source maps? #}
     inlineText: true,               {# inline text plugin resources if specified as requirements in defines #}
     keepBuildDir: true,             {# do not remove build dir on subsequent runs as the page would be without resources during builds #}
-    optimizeCss: "standard",        {# optimize all .css files (removing newlines etc.); use "none" to disable css compilation #}
+    optimizeCss: "none",            {# don't optimize all .css files (removing newlines etc.); use "standard" to optimize, "none" to disable css compilation #}
     removeCombined: false,          {# do not remove files from output folder that have been combined #}
-    skipDirOptimize: false,         {# do optimize all files in all folders #}
+    skipDirOptimize: true,          {# do not optimize all files in all folders #}
     skipModuleInsertion: false,     {# add define() calls to non AMD files #}
     skipSemiColonInsertion: false,  {# do insert semicolons when concat'ing files #}
     useSourceUrl: false,
