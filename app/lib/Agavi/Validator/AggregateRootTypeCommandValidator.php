@@ -30,6 +30,7 @@ use Trellis\Runtime\Attribute\GeoPoint\GeoPointAttribute;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 use Trellis\Runtime\Attribute\HasComplexValueInterface;
+use Trellis\Runtime\Attribute\Image\Image;
 use Trellis\Runtime\Attribute\ListAttribute;
 use Trellis\Runtime\EntityTypeInterface;
 use Trellis\Runtime\Entity\EntityInterface;
@@ -469,8 +470,18 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             $payload = ArrayToolkit::filterEmptyValues($payload);
             $valid_files = $this->validateFilesForAttribute($attribute, $attribute_payload_path, $payload);
             foreach ($valid_files as $key => $file) {
-                //$this->logDebug('FILE', $key, $payload[$key], (array)$file);
-                $payload[$key] = array_merge((array)$payload[$key], $file->getHoneybeeProperties());
+                if (array_key_exists($key, $payload)) {
+                    $payload[$key] = array_merge((array)$payload[$key], $file->getHoneybeeProperties());
+                } else {
+                    $payload[$key] = $file->getHoneybeeProperties();
+                }
+
+                // on Image there's width/height properties in addition to the HandlesFileList::DEFAULT_* properties
+                if ($attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE) {
+                    $payload[$key][Image::PROPERTY_WIDTH] = $file->getWidth();
+                    $payload[$key][Image::PROPERTY_HEIGHT] = $file->getHeight();
+                }
+
                 //$this->logDebug('FILE PAYLOAD AFTER', $payload[$key]);
                 // $this->export($file->getHoneybeeProperties(), $attribute_payload_path->pushRetNew($key)->__toString());
             }
@@ -637,7 +648,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
         }
 
-        //$this->logDebug('For path', $path, ' the valid files are:', $valid_files);
+        // $this->logDebug('For path', $path, ' the valid files are:', $valid_files);
 
         return $valid_files;
     }
@@ -719,7 +730,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
         // image attribute => determine image dimensions and add it to the uploaded file's properties
         if ($attribute instanceof HandlesFileInterface &&
-            $attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE
+            ($attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE)
         ) {
             // as this may silently fail now the resulting image value object will have zero width/height
             $info = @getimagesize($uploaded_file->getTmpName());
@@ -843,6 +854,21 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 'is_uploaded_file' => false,
             ]
         );
+
+        // convention here is, that the temp filesystem is always a local filesystem (flysystem LocalAdapter variant)
+        $local_fs = $fss->getFilesystem($fss->getTempScheme($this->getAggregateRootType()));
+        $local_file_path = $local_fs->applyPathPrefix($location);
+        // image attribute => determine image dimensions and add it to the uploaded file's properties
+        if ($attribute instanceof HandlesFileInterface &&
+            ($attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE)
+        ) {
+            // as this may silently fail now the resulting image value object will have zero width/height
+            $info = @getimagesize($local_file_path);
+            if ($info !== false) {
+                $uploaded_file->setWidth($info[0]);
+                $uploaded_file->setHeight($info[1]);
+            }
+        }
 
         return $uploaded_file;
     }
