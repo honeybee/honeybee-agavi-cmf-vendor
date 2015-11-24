@@ -469,8 +469,9 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             $payload = ArrayToolkit::filterEmptyValues($payload);
             $valid_files = $this->validateFilesForAttribute($attribute, $attribute_payload_path, $payload);
             foreach ($valid_files as $key => $file) {
-                $payload[$key] = array_merge($payload[$key], $file->getHoneybeeProperties());
-                // $this->logDebug('FILE PAYLOAD AFTER', $payload[$key]);
+                //$this->logDebug('FILE', $key, $payload[$key], (array)$file);
+                $payload[$key] = array_merge((array)$payload[$key], $file->getHoneybeeProperties());
+                //$this->logDebug('FILE PAYLOAD AFTER', $payload[$key]);
                 // $this->export($file->getHoneybeeProperties(), $attribute_payload_path->pushRetNew($key)->__toString());
             }
         } elseif ($attribute instanceof HandlesFileInterface) {
