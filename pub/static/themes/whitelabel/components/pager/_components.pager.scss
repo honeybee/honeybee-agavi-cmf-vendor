@@ -12,9 +12,9 @@
         @include flexbox;
         @include flex(1, 0, auto);
 
-        vertical-align: middle;
-        text-align: center;
-        @include justify-content(center);    // for display:flex
+        @include flex-direction(column);
+        @include justify-content(center);
+        @include align-items(center);
     }
 }
 

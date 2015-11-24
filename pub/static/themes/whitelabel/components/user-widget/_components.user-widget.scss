@@ -1,6 +1,7 @@
 $user-widget-avatar-size: $base-spacing*3 !default;
 
 .user-widget {
+    position: relative;
     display: inline-block;
 }
 
@@ -8,7 +9,7 @@ $user-widget-avatar-size: $base-spacing*3 !default;
     position: absolute;
     left: $base-spacing;
     bottom: $base-spacing/3;
-    @include zindex('base', 1);
+    @include zindex('base', 10);
 
     border-radius: 50%;
     border: 1px solid color(white);
