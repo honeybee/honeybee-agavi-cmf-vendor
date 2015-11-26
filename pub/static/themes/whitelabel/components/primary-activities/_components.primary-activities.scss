@@ -47,6 +47,7 @@
             .activity.activity {
                 @include activity-emphasized;
             }
+            border-radius: $buttons-border-radius;
         }
 
         .primary-activities-list__trigger {

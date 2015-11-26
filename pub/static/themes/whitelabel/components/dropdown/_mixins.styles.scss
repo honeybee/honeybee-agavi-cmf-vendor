@@ -23,6 +23,14 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
     }
 
     @at-root {
+        .#{$name}__default {
+            border-radius: $buttons-border-radius;
+
+            .activity.activity {
+                vertical-align: top; // remove 1px from inline-block
+            }
+        }
+
         .#{$name}__more {
             margin-top: 5px;
             @include media-query(palm) {

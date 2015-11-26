@@ -48,7 +48,9 @@ $menu-toggle-transition-time: .3s !default;
         @include hb-icon-pseudo-el(( icon-name: 'menu', size: 2));
 
         // animation
-        transition: color $menu-toggle-transition-time, background-color $menu-toggle-transition-time, ease-out;
+        transition-property: color, background-color, border;
+        transition-duration: $menu-toggle-transition-time;
+        transition-timing-function: ease-out;
 
         &:hover {
             background-color: color(navigational-secondary);
