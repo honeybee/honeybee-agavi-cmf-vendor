@@ -19,9 +19,24 @@
         @include flyout--default-inline("primary-activities-list");
     }
 
+    // list of activities
     @include media-query(lap-and-up) {
         .activity.activity {
             @include activity-emphasized;
+        }
+    }
+
+    // activity map
+    @include media-query(palm) {
+        // merge adjacent border with toggle
+        &:not(.primary-activities-list--empty) {
+
+            .primary-activities-list__default .activity.activity {
+                @include button-states {
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                };
+            }
         }
     }
 
@@ -29,15 +44,8 @@
         .primary-activities-list__default {
             display: inline-block;
 
-            @include media-query(palm) {
-                border-radius: 3px;
-
-                .activity.activity {
-                    @include activity-emphasized {
-                        border-top-right-radius: 0;
-                        border-bottom-right-radius: 0;
-                    };
-                }
+            .activity.activity {
+                @include activity-emphasized;
             }
         }
 
@@ -78,7 +86,6 @@
         .primary-activities-list__more {
             @include media-query(palm) {
                 background-color: color(white);
-                margin-top: 5px;
 
                 ul { @include activitylist--vertical; }
             }
@@ -92,6 +99,10 @@
                 }
             }
         }
+    }
+
+    &.primary-activities-list--empty {
+        .primary-activities-list__toggle { display: none !important; }
     }
 }
 
@@ -121,36 +132,6 @@
         @include media-query(palm) {
             @include flyout--popover-up("primary-activities-list");
             @include flyout--popover-inverse("primary-activities-list");
-        }
-    }
-
-    .primary-activities-list__more {
-        @include media-query(palm) {
-            margin-top: 0;
-            margin-bottom: 5px;
-        }
-    }
-}
-
-// Modifiers
-.primary-activities-list--empty {
-    .primary-activities-list__toggle {
-
-        @include button-emphasized-mutating-disabled;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-left: 0;
-        padding-left: 0;
-        padding-right: 0;
-
-        @include media-query(lap-and-up) {
-            display: none;
-        }
-    }
-    .primary-activities-list__toggle-icon {
-        &,
-        &:before {
-            color: color(text-secondary);
         }
     }
 }
