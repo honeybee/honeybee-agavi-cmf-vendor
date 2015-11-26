@@ -1,8 +1,5 @@
 // Base dropdown/splitbutton
 
-$dropdown-toggle-width: 1em !default;
-$buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/object
-
 @mixin init-dropdown($name: "dropdown") {
     @include flyout("#{$name}");
     @include flyout--default-inline("#{$name}");
@@ -93,9 +90,6 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             flex-grow: 1;
             text-align: center;
             .activity {
-                // width: 100%;
-                // compensate splitbutton + default button padding sizes, to center text
-                padding-left: $dropdown-toggle-width + $buttons-base-padding;
                 padding-right: 0;
             }
         }

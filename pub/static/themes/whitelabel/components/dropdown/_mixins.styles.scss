@@ -1,10 +1,17 @@
+$buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/object
+
 // Styles
 @mixin init-dropdown-icon-style($name: "dropdown-normal") {
+    // toggle button paddings (except when toggle is disabled)
+    .#{$name}:not(.#{$name}--empty) .#{$name}__toggle {
+        @include button-states {
+            padding-right: $buttons-base-padding/2;
+        }
+    }
     .#{$name}__toggle-icon {
         @include hb-icon-pseudo-el(chevron-small-down) {
-            padding-left: $buttons-base-padding;
+            padding-left: $buttons-base-padding/2;
         };
-        width: $dropdown-toggle-width;
     }
 }
 
@@ -16,8 +23,6 @@
     }
 
     @at-root {
-        @include init-dropdown-icon-style($name);
-
         .#{$name}__more {
             margin-top: 5px;
             @include media-query(palm) {
@@ -62,6 +67,8 @@
             @include button-normal-navigational;
             vertical-align: top;
         }
+        // override paddings and icon
+        @include init-dropdown-icon-style($name);
 
         .#{$name}__trigger:checked ~ .#{$name}__toggle {
             @include button-colors-normal-navigational-active();
@@ -88,6 +95,11 @@
         .#{$name}__toggle {
             @include button-emphasized-navigational;
         }
+        // override paddings and icon
+        @include init-dropdown-icon-style($name);
+
+        // icon size
+        .#{$name}__toggle-icon:before { font-size: 1.3rem; }
 
         .#{$name}__trigger:checked ~ .#{$name}__toggle {
             @include button-colors-emphasized-navigational-active();
@@ -133,6 +145,9 @@
                 border-bottom-left-radius: 0;
             }
         }
+
+        // icon size
+        .#{$name}__toggle-icon:before { font-size: 1.3rem; }
 
         &:hover {
             .#{$name}__toggle {
