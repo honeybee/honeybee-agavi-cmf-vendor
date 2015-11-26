@@ -1,4 +1,5 @@
 $sidebar-size: 25% !default;
+$buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/object
 
 .sidebar {
     @include offcanvas('sidebar', 'middle-right', 'right', $sidebar-size, .1s, 8000, 100);
@@ -7,67 +8,64 @@ $sidebar-size: 25% !default;
         @include visuallyhidden;
     }
 
-    .sidebar__panel {
-        width: 20rem;
-        background-color: color(white);
+    @at-root {
+        .sidebar__trigger {
+            position: fixed;
+            top: 0;
+        }
 
         .sidebar__toggle {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            // override button spacings
-            &,
-            &:focus,
-            &:hover,
-            &:active,
-            &:disabled,
-            &.disabled {
-                margin: 0;
+            @include button-emphasized-navigational;
+            width: auto; // override label default
+        }
+
+        .sidebar__panel {
+            width: 20rem;
+            background-color: color(white);
+
+            .sidebar__toggle-close {
+                position: absolute;
+                bottom: 0;
+                // set 100% width
+                left: 0;
+                right: 0;
+
+                // icon before label description
+                @include hb-icon-pseudo-el((
+                    icon-name: align-right,
+                    hide-content: false
+                )) {
+                    margin-right: $buttons-base-padding;
+                };
             }
         }
-    }
 
-    .sidebar__trigger {
-        position: fixed;
-        top: 0;
-    }
+        .sidebar__toggle-open {
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 
-    .sidebar__toggle {
-        @include button-emphasized-navigational;
-        // override button spacings
-        &,
-        &:focus,
-        &:hover,
-        &:active,
-        &:disabled,
-        &.disabled {
-            margin: 0 $base-spacing/2 $base-spacing/2 $base-spacing;
-            padding-left: $base-spacing/2 + $font-size*1.5;
-            padding-right: $base-spacing/2;
-            line-height: $base-spacing*2; // @todo  temporary: remove after implementation of toggle-button specifications
+            @include hb-icon-pseudo-el((
+                icon-name: align-left,
+                size: 1.5
+            ));
+            color: color(text-primary);
+
+            // override button defaults
+            @include button-states {
+                border-bottom-right-radius: 0;
+                border-top-right-radius: 0;
+                border-right-width: 0;
+
+                padding-top: $base-spacing;
+                padding-bottom: $base-spacing;
+                padding-left: $small-spacing;
+                padding-right: $small-spacing/2;
+            }
         }
 
-        // menu icon on the text side
-        @include hb-icon-pseudo-el(( icon-name: 'align-left', color: color(text-primary), hide-content: false )) {
-            margin-left: -$font-size*1.8;
-        }
-
-        width: auto;
-        position: fixed;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
-        right: -70px; // @todo  temporary: remove after implementation of toggle-button specifications
-    }
-
-    .sidebar__trigger:checked {
-        & ~ .sidebar__panel .sidebar__toggle {
-            line-height: $base-spacing; // @todo  temporary: remove after implementation of toggle-button specifications
-        }
+        .sidebar__trigger:checked {
         & ~ .sidebar__toggle {
             z-index: 100;
         }
     }
+    }
 }
-
-
