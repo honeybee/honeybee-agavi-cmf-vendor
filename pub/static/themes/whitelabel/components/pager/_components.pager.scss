@@ -1,3 +1,5 @@
+$pager-icon-size: 1.5 !default;
+
 .pager__list {
     @extend %list-bare; // remove list default styling
     @extend %pack;  // ie9 fallback to display:table
@@ -68,17 +70,17 @@
 .pager__last_page {
     a {
         color: color(black);
-        font-size: $font-size*1.5;
-        padding: $small-spacing;
-        padding-top: auto;
-        padding-bottom: auto;
+            // padding: $small-spacing;
+            // padding-top: auto;
+            // padding-bottom: auto;
+
     }
 }
 .pager__first_page a {
-    @include hb-icon-pseudo-el(controller-jump-to-start);
+    @include hb-icon-pseudo-el(( icon-name: controller-jump-to-start, size: $pager-icon-size ));
 }
 .pager__prev_page a {
-    @include hb-icon-pseudo-el(controller-play);
+    @include hb-icon-pseudo-el(( icon-name: controller-play, size: $pager-icon-size ));
     // reversed 'play' icon
     transform: scaleX(-1);
     filter: fliph; /*IE*/
@@ -90,8 +92,8 @@
     };
 }
 .pager__next_page a {
-    @include hb-icon-pseudo-el(controller-play);
+    @include hb-icon-pseudo-el(( icon-name: controller-play, size: $pager-icon-size ));
 }
 .pager__last_page a {
-    @include hb-icon-pseudo-el(controller-next);
+    @include hb-icon-pseudo-el(( icon-name: controller-next, size: $pager-icon-size ));
 }

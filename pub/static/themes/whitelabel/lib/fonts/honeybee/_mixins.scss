@@ -1,5 +1,3 @@
-$font-size: 14px !default;
-
 @mixin hb-icon-base() {
     font-family: 'honeybee' !important;
     speak: none;
@@ -17,16 +15,11 @@ $font-size: 14px !default;
 
 @mixin hb-icon($params) {
     $icon-name: $params;
-    $color: null;
-    $size: null;    // multiplier
 
     @if type-of($params) == map {
 
         @if map-has-key($params, 'icon-name') == true {
             $icon-name: map-get($params, 'icon-name');
-            // additional parameters
-            $color:  if(map-has-key($params, 'color'), map-get($params, 'color'), null);
-            $size:  if(map-has-key($params, 'size'), map-get($params, 'size'), null);
         } @else {
             @warn "An 'icon-name' is required. It can be provided as a string or into a map of parameters.";
         }
@@ -40,20 +33,23 @@ $font-size: 14px !default;
         $content: map-get($hb-icon, $icon-name);
     }
     content: "#{$content}" !important;
-
-    // additional parameters
-    @if $color != null {
-        color: $color;
-    }
-    @if $size != null {
-        font-size: $font-size * $size;
-    }
 }
 
 /*  Render the icon as pseudo-element and hide the parent container.
 
-    Note: pseudo-element icon styling should be more important than its parent styling.
-          Use @content to overwrite conflicting rules with '!important'.
+    ## Usage
+
+    @include(
+        $params: string icon-name, or map of parameters
+            - icon-name:    name of the icon, as defined in the font 'vars' partial
+            - pseudo:   'before'/'after'; choose the type of pseudo-element.
+            - hide-content:   true/false; hide the content of the pseudo-element's parent.
+
+                Note: if enabled then the positioning has to be manually done (eg. pseudo-element
+                      with absolute position to middle/center and parent element with non-static position)
+
+            - size: multiplier for base font-size (eg. 1.5).
+    )
 */
 @mixin hb-icon-pseudo-el($params: (pseudo: 'before')) {
     $pseudo: if(type-of($params) == map and map-has-key($params, 'pseudo'), map-get($params, 'pseudo'), 'before');
@@ -63,12 +59,19 @@ $font-size: 14px !default;
     @if $pseudo == "after" or $pseudo == "before" {
         &:#{$pseudo} {
             @include hb-icon($params);
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            text-indent: 0;
+                // center vertically/horizontally
+                @if $hide-content {
+                    // keep in-flow
+                    display: table-cell;
+                    vertical-align: middle;
+                    text-align: center;
 
+                    @if $size != null {
+                        font-size: #{$size}rem;
+                    }
+                } @else {
+                    // custom position relative to parent (static|absolute|relative|fixed)
+                }
             @content;
         }
     } @else {
@@ -76,18 +79,17 @@ $font-size: 14px !default;
     }
 
     & {
-        position: relative !important;
-        min-width: $font-size * $size;
-
         @if $hide-content {
-            display: inline-block !important;
-            text-indent: -9999em !important;
-            text-overflow: clip !important;
-            overflow: hidden !important;
-            white-space: nowrap !important;
-            speak: none !important;
+            box-sizing: content-box;    // width as the pseudo-element
+            display: table !important;  // allow easy alignment
 
+            // hide content
+            font-size: 0 !important;
             text-decoration: none;
+
+            & > * { font-size: 1rem; }  // restore into children
+        } @else {
+            // custom positioning (non-static values for keeping pseudo-element relative)
         }
     }
 }

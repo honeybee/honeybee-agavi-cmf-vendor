@@ -25,6 +25,7 @@
 
         li li li .activity.activity {
             // @include button-states {
+            //     // indent sub-items
             //     padding-left: 2 * $base-spacing;
             // }
         }
@@ -45,7 +46,7 @@
             text-align: left;
 
             padding-right: 0;
-            padding-left: $base-spacing;
+            padding-left: 0;
         }
         // icon
         @include hb-icon-pseudo-el((

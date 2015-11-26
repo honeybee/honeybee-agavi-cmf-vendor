@@ -36,10 +36,8 @@
             color: color(white);
 
             &::after {
-                @include hb-icon((
-                    icon-name: 'cross',
-                    color: color(white)
-                ));
+                @include hb-icon(cross);
+                color: color(white);
             }
         }
     }

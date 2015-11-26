@@ -70,18 +70,9 @@
         }
 
         .primary-activities-list__toggle-icon {
-            @include hb-icon-pseudo-el((
-                icon-name: 'chevron-small-down',
-                color: color(emphasized-primary),
-                hide-content: false
-            ));
-            // hide original content
-            display: block;
-            text-indent: -9999em;
-            text-overflow: clip;
-            overflow: hidden;
-            white-space: nowrap;
-            speak: none;
+            @include hb-icon-pseudo-el(chevron-small-down);
+            color: color(emphasized-primary);
+            margin: auto; // align to center
         }
 
         .primary-activities-list__more {
