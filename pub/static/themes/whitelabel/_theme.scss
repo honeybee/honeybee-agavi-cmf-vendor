@@ -14,10 +14,6 @@ body {
     line-height: $base-spacing;
 }
 
-[hidden] {
-   @include visuallyhidden;
-}
-
 a {
     color: color(blue);
 }
@@ -26,6 +22,23 @@ button {
     @include inuit-btn;
     border: 0;
     background-color: transparent;
+}
+
+label {
+    cursor: pointer;
+}
+
+[hidden] {
+   @include visuallyhidden;
+}
+
+.disabled {
+    opacity: 1.0; //reset inuits disabled opacity
+}
+
+.sheet {
+    @extend %sheet;
+    margin-bottom: $base-spacing;
 }
 
 .activities-list {
@@ -40,7 +53,18 @@ button {
     display: block;
 }
 
+
 // brand
+
+.brand-box .brand{
+    padding-left: $base-spacing;
+
+    // make space for absolute positioned menu button, if present
+    .menu-box ~ & {
+        padding-left: $base-spacing + $menu-toggle-open-size;
+    }
+}
+
 .brand {
     // style
     padding-top: $small-spacing;
@@ -49,7 +73,6 @@ button {
 
     // layout
     height: $page-header-height;
-    padding-left: $base-spacing+$menu-toggle-open-size;
 
     h1 {
         // style
@@ -102,6 +125,8 @@ button {
     background-color: color(white);
 }
 
+// subheader
+
 .page-subheader {
     // padding: $small-spacing $base-spacing;
     border-width: 1px 0px;
@@ -139,19 +164,7 @@ button {
     }
 }
 
-.disabled {
-    opacity: 1.0; //reset inuits disabled opacity
-}
-
-.sheet {
-    @extend %sheet;
-    margin-bottom: $base-spacing;
-}
-
-label {
-    cursor: pointer;
-}
-
+// views
 // @todo Move view styles in <theme>/views/
 .view-login, .view-set_password, .view-reset_password, .view-logout {
     form {

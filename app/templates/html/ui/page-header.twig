@@ -2,9 +2,9 @@
 
 {%- block pageheader -%}
 <div class="page-header-layout">
+    {% if us.isAuthenticated() %}
     <div class="menu-box">
         {%- block menu -%}
-            {% if us.isAuthenticated() %}
             <div class="menu">
                 <input type="checkbox" id="menu-trigger" class="menu__trigger">
                 <label for="menu-trigger" class="menu__toggle menu__toggle-open">
@@ -45,9 +45,9 @@
                     </div>
                 </div><!-- .menu__panel -->
             </div><!-- .menu -->
-            {% endif %}
         {%- endblock menu -%}
     </div><!-- .menu-box
+    -->{% endif %}<!--
     --><div class="brand-box">
         <div class="brand">
         {%- block brand -%}
