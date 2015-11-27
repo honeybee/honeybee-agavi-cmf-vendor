@@ -24,6 +24,7 @@
 
 <div
     class="{{ primary_activities_name }} {{ primary_activities_css }}"
+    data-default-activity-rels="{{ default_activity_rels|join(' ') }}"
     {% for attr, val in primary_activities_attr %} {{ attr }}="{{ val }}" {% endfor %}
 >
     <input type="checkbox" id="{{ trigger_id }}" class="{{ primary_activities_name ~ '__trigger' }} hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %} {% if toggle_disabled %}disabled{% endif %} />
