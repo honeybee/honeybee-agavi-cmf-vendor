@@ -299,7 +299,7 @@
                             <!--
                                 Default views names (used by default for the navigation items)
                             -->
-                            <ae:parameter name="user_collection.label">List of users</ae:parameter>
+                            <ae:parameter name="user_collection.label">View existing accounts</ae:parameter>
                             <ae:parameter name="user_collection.description">Overview on exisitng users</ae:parameter>
                             <ae:parameter name="resource.label">User details</ae:parameter>
                             <ae:parameter name="resource.description">View detail's of the given user</ae:parameter>
@@ -328,7 +328,7 @@
                             -->
                             <ae:parameter name="search.description">Search by term</ae:parameter>
                             <ae:parameter name="search.label">Search</ae:parameter>
-                            <ae:parameter name="create_resource.label">Add a user</ae:parameter>
+                            <ae:parameter name="create_resource.label">Add a new user-account</ae:parameter>
                             <ae:parameter name="create_resource.description">Add a new user to the system</ae:parameter>
                             <ae:parameter name="save_resource.label">Save</ae:parameter>
                             <ae:parameter name="save_resource.description">Save the current user</ae:parameter>
