@@ -1,6 +1,15 @@
 {% set activities = [
     {
         activity: {
+            label: "Default",
+            description: "An activity without a specific type (should fallback to a default one).",
+            rels: []
+        },
+        css: "activity navigational",
+        link: "javascript:void(0);"
+    },
+    {
+        activity: {
             label: "Navigational",
             description: "An activity that takes users somewhere.",
             rels: []
@@ -70,6 +79,13 @@
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>
+    <!-- disabled activities -->
+    <p>
+        {% for _a in activities %}
+            {% set a = _a|merge({css: _a.css ~" normal disabled"}) %}
+            {% include "html/activity/link.twig" with a %}
+        {% endfor %}
+    </p>
 </div>
 
 <div class="sheet">
@@ -81,6 +97,7 @@
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>
+    <!-- disabled emphasized activities -->
     <p>
         {% for _a in activities %}
             {% set a = _a|merge({css: _a.css ~" emphasized disabled"}) %}
