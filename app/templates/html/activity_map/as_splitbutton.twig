@@ -25,6 +25,7 @@
 
 <div
     class="{{ splitbutton_name }} {{ splitbutton_css }} {{splitbutton_name}}"
+    data-default-activity-rels="{{ default_activity_rels|join(' ') }}"
     {% for attr, val in splitbutton_attr %} {{ attr }}="{{ val }}" {% endfor %}
 >
     <input type="checkbox" id="{{ trigger_id }}" class="{{ splitbutton_name ~ '__trigger' }} base-dropdown__trigger hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %} {% if toggle_disabled %}disabled{% endif %} />
