@@ -39,7 +39,7 @@
         <header class="page-header" role="banner">
             {%- block pageheader -%}{{ parent() }}{%- endblock -%}
             <div class="page-subheader">{%- block pagesubheader -%}{{ parent() }}{%- endblock pagesubheader -%}</div>
-            {#<div class="page-subheader">{%- block pageerrors -%}{{ parent() }}{%- endblock pageerrors -%}</div>#}
+            <div class="page-errors">{%- block pageerrors -%}{{ parent() }}{%- endblock pageerrors -%}</div>
         </header><!-- .page-header -->
     </div><!-- .page-header-box
     --><div class="page-main-box">

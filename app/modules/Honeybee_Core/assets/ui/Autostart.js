@@ -5,7 +5,7 @@ define([
 
     appendRequiredAttributeToAllDataRequiredFields();
     handleFlyoutSpecifics();
-
+    handleGlobalErrors();
 
     function appendRequiredAttributeToAllDataRequiredFields() {
         $('[data-required]').each(function() {
@@ -47,4 +47,17 @@ define([
         });
     };
 
+    function handleGlobalErrors() {
+        /**
+         * handle click events on error messages and focus the respective input element
+         */
+        $(document).on('click', '.globalerrors li', function(ev) {
+            var $target = $(ev.target);
+            var input_id = $target.data('field-id');
+            var $elm = $('#' + input_id);
+            if ($elm.length > 0) {
+                $elm.focus();
+            }
+        });
+    };
 });

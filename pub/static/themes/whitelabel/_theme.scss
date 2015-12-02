@@ -189,3 +189,20 @@ label {
         }
     }
 }
+
+
+.globalerrors > .error {
+    display: block;
+    margin-top: 0.35em; // 5/14
+    color: color(destructive-primary);
+
+    &.specific:hover {
+        background-color: color(background-neutral);
+        cursor: pointer;
+    }
+
+    &::before {
+        @include hb-icon(warning);
+        padding-right: 0.357em; // 5/14
+    }
+}

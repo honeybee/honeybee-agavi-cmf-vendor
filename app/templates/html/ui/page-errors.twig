@@ -1,15 +1,7 @@
 {%- block pageerrors -%}
-<div class="page-subheader-layout">
-    <div class="subheader-context-box">
-        <ul class="breadcrumb">
-            {% for crumb in _breadcrumbs %}
-                <li class="breadcrumb__item">{{ crumb|raw }}
-            {% endfor %}
-            <li class="breadcrumb__item page__title"><span>{{ _breadcrumb_title }}</span>
-        </ul>
-
-    </div>
-    {%- block pageerrors_activities -%}
+<div class="page-errors-layout">
+    <div class="box"><ul class="globalerrors"></ul></div>
+    {#%- block pageerrors_activities -%}
         {%- if _rendered_subheader_activities is defined and _rendered_subheader_activities is not empty -%}
             <div class="subheader-activities-box">
                 <div class="subheader-activities">
@@ -17,6 +9,6 @@
                 </div>
             </div>
         {%- endif -%}
-    {%- endblock pageerrors_activities -%}
+    {%- endblock pageerrors_activities -%#}
 </div>
 {%- endblock pageerrors -%}

@@ -17,10 +17,12 @@
                     .control-group
                         %label(for="user_input") = _('username', 'honeybee.system_account.user.ui')
                         %input#user_input(type="text" name="username" placeholder=_('username_placeholder', 'honeybee.system_account.user.ui'))
+                        %ul.errors
 
                     .control-group
                         %label(for="password_input") = _('password', 'honeybee.system_account.user.ui')
                         %input#password_input(type="password" name="password" placeholder=_('password_placeholder', 'honeybee.system_account.user.ui'))
+                        %ul.errors
 
                     .control-group
                         %button(type="submit" rel="login") = _('login', 'honeybee.system_account.user.ui')
