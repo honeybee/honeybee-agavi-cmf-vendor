@@ -6,7 +6,7 @@
         type="submit"
         name="submit-{{ form_id }}"
         title="{{ _(activity.description, translation_domain) }}"
-        class="{{ css|join(' ') }}"
+        class="{{ css|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}"
         rel="{{ activity.rels|join(' ') }}"
         data-form-id="{{ form_id }}"
     >{{ _(activity.label, translation_domain) }}</button>
