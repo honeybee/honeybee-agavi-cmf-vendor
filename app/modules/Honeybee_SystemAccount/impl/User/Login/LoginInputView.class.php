@@ -41,6 +41,8 @@ class Honeybee_SystemAccount_User_Login_LoginInputView extends View
                 // when users submit wrong credentials we don't want to forget his original target url
             }
         }
+
+        $this->setAttribute('reset_password_enabled', AgaviConfig::get('core.reset_password_enabled', true));
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)
