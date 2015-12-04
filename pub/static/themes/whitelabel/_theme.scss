@@ -166,7 +166,10 @@ label {
 
 // views
 // @todo Move view styles in <theme>/views/
-.view-login, .view-set_password, .view-reset_password, .view-logout {
+.view-login,
+.view-set_password,
+.view-reset_password,
+.view-logout {
     form {
         legend {
             @include typography-headlines;
@@ -190,19 +193,23 @@ label {
     }
 }
 
-
-.globalerrors > .error {
+.error {
     display: block;
     margin-top: 0.35em; // 5/14
     color: color(destructive-primary);
 
-    &.specific:hover {
-        background-color: color(background-neutral);
-        cursor: pointer;
+    label {
+        color: color(destructive-primary);
     }
 
-    &::before {
+}
+
+.globalerrors {
+    background-color: color(background-blank);
+
+    label::before {
         @include hb-icon(warning);
         padding-right: 0.357em; // 5/14
     }
 }
+

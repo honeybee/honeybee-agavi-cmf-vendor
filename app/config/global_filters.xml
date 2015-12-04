@@ -86,7 +86,7 @@
                         self::${htmlnsPrefix}*/../${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')]
                     ">
                         <ae:parameter name="location">child</ae:parameter>
-                        <ae:parameter name="markup"><![CDATA[<li class="error specific fielderror-${elementName}" data-field-name="${elementName}" data-field-id="${elementId}">${errorMessage}</li>]]></ae:parameter>
+                        <ae:parameter name="markup"><![CDATA[<li class="error specific fielderror-${elementName}" data-field-name="${elementName}" data-field-id="${elementId}"><label for="${elementId}">${errorMessage}</label></li>]]></ae:parameter>
                     </ae:parameter>
                 </ae:parameter>
 
@@ -100,7 +100,7 @@
                     ">
                         <ae:parameter name="location">child</ae:parameter>
                         <!-- <ae:parameter name="container"><![CDATA[<ul class="sheet hb-validation-messages invalid">${errorMessages}</ul>]]></ae:parameter> -->
-                        <ae:parameter name="markup"><![CDATA[<li class="error global"><!--<span>${elementName}:</span>-->${errorMessage}</li>]]></ae:parameter>
+                        <ae:parameter name="markup"><![CDATA[<li class="error global">${errorMessage}</li>]]></ae:parameter>
                         <!-- <ae:parameter name="markup">Honeybee\FrameworkBinding\Agavi\FpfToolkit::getDynamicMarkup</ae:parameter> -->
                     </ae:parameter>
                 </ae:parameter>

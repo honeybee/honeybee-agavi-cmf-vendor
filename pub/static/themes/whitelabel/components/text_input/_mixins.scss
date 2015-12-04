@@ -15,6 +15,12 @@
 
     &.readonly {
     }
+
+    //@include media-query(lap-and-up) {
+    //    display: inline-block;
+    //    width: auto;
+    //    vertical-align: middle;
+    //}
 }
 
 @mixin textarea {
