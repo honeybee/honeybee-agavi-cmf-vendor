@@ -1,3 +1,5 @@
+$hb-activity-group-splitbutton--styled-toggle: true !default;
+
 /*
     - basically primary-activities are a "list" of items
     - when under "primary-content" they floats
@@ -60,6 +62,34 @@
             width: $base-spacing;
             display: inline-block;
 
+            @if $hb-activity-group-splitbutton--styled-toggle {
+                .primary-activities-list.navigational & {
+                    @include button-colors-emphasized-navigational;
+                }
+
+                .primary-activities-list[data-default-activity-rels~="promote"] &,
+                .primary-activities-list[data-default-activity-rels~="edit_resource"] &,
+                .primary-activities-list[data-default-activity-rels~="save_resource"] &,
+                .primary-activities-list[data-default-activity-rels~="create_resource"] &,
+                .primary-activities-list.mutating & {
+                    @include button-colors-emphasized-mutating;
+                }
+
+                .primary-activities-list.positive & {
+                    @include button-colors-emphasized-positive;
+                }
+
+                .primary-activities-list[data-default-activity-rels~="demote"] &,
+                .primary-activities-list.warning & {
+                    @include button-colors-emphasized-warning;
+                }
+
+                .primary-activities-list[data-default-activity-rels~="delete"] &,
+                .primary-activities-list.destructive & {
+                    @include button-colors-emphasized-destructive;
+                }
+            }
+
             @include button-emphasized-mutating {
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
@@ -74,7 +104,36 @@
         }
 
         .primary-activities-list__trigger:checked ~ .primary-activities-list__toggle {
-            @include button-colors-emphasized-mutating-active();
+            @if $hb-activity-group-splitbutton--styled-toggle {
+                .primary-activities-list.navigational & {
+                    @include button-colors-emphasized-navigational-active;
+                }
+
+                .primary-activities-list[data-default-activity-rels~="promote"] &,
+                .primary-activities-list[data-default-activity-rels~="edit_resource"] &,
+                .primary-activities-list[data-default-activity-rels~="save_resource"] &,
+                .primary-activities-list[data-default-activity-rels~="create_resource"] &,
+                .primary-activities-list.mutating & {
+                    @include button-colors-emphasized-mutating-active;
+                }
+
+                .primary-activities-list.positive & {
+                    @include button-colors-emphasized-positive-active;
+                }
+
+                .primary-activities-list[data-default-activity-rels~="demote"] &,
+                .primary-activities-list.warning & {
+                    @include button-colors-emphasized-warning-active;
+                }
+
+                .primary-activities-list[data-default-activity-rels~="delete"] &,
+                .primary-activities-list.destructive & {
+                    @include button-colors-emphasized-destructive-active;
+                }
+            } @else {
+                @include button-colors-emphasized-mutating-active();
+            }
+            // mutating shadow - assume shadowing is the same for all button types
             @include button-shadow-emphasized-mutating-active();
         }
 

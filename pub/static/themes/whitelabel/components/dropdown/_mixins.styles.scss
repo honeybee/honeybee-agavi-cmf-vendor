@@ -1,3 +1,5 @@
+$hb-activity-group-splitbutton--styled-toggle: true !default;
+
 $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/object
 
 // Styles
@@ -23,7 +25,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
     }
 
     @at-root {
-        .#{$name}__default {
+        .#{$name}__default {        // @todo move into splitbutton. Dropdown doesn't use it
             border-radius: $buttons-border-radius;
 
             .activity.activity {
@@ -83,6 +85,14 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             @include button-shadow-normal-navigational-active();
         }
 
+        .#{$name}__toggle {
+            .#{$name}.navigational & { @include button-colors-normal-navigational; }
+            .#{$name}.mutating & { @include button-colors-normal-mutating; }
+            .#{$name}.positive & { @include button-colors-normal-positive; }
+            .#{$name}.warning & { @include button-colors-normal-warning; }
+            .#{$name}.destructive & { @include button-colors-normal-destructive; }
+        }
+
         .#{$name}__more {
             background-color: color(white);
 
@@ -114,6 +124,14 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             @include button-shadow-emphasized-navigational-active();
         }
 
+        .#{$name}__toggle {
+            .#{$name}.navigational & { @include button-colors-emphasized-navigational; }
+            .#{$name}.mutating & { @include button-colors-emphasized-mutating; }
+            .#{$name}.positive & { @include button-colors-emphasized-positive; }
+            .#{$name}.warning & { @include button-colors-emphasized-warning; }
+            .#{$name}.destructive & { @include button-colors-emphasized-destructive; }
+        }
+
         .#{$name}__more {
             background-color: color(white);
         }
@@ -122,11 +140,40 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
     }
 }
 
-@mixin base-splitbutton-style-normal($name: "dropdown-normal") {
+@mixin base-splitbutton-style-normal($name: "splitbutton-normal") {
     @include base-dropdown-style-normal($name) {
 
         // Additional @at-root content
         .#{$name}__toggle {
+            @if $hb-activity-group-splitbutton--styled-toggle {
+                .#{$name}.navigational & {
+                    @include button-colors-normal-navigational;
+                }
+
+                .#{$name}[data-default-activity-rels~="promote"],
+                .#{$name}[data-default-activity-rels~="edit_resource"],
+                .#{$name}[data-default-activity-rels~="save_resource"],
+                .#{$name}[data-default-activity-rels~="create_resource"],
+                .#{$name}.mutating & {
+                    @include button-colors-normal-mutating;
+                }
+
+                .#{$name}.positive & {
+                    @include button-colors-normal-positive;
+                }
+
+                .#{$name}[data-default-activity-rels~="demote"] &,
+                .#{$name}.warning & {
+                    @include button-colors-normal-warning;
+                }
+
+                .#{$name}[data-default-activity-rels~="delete"] &,
+                .#{$name}.destructive & {
+                    @include button-colors-normal-destructive;
+                }
+            }
+
+            // good looking default+toggle merging
             @include button-states {
                 padding-left: 0;
                 border-top-left-radius: 0;
@@ -137,7 +184,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
     };
 }
 
-@mixin base-splitbutton-style-emphasized($name: "dropdown-emphasized") {
+@mixin base-splitbutton-style-emphasized($name: "splitbutton-emphasized") {
     @include base-dropdown-style-emphasized($name) {
 
         // Additional @at-root content
@@ -146,6 +193,35 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
         }
 
         .#{$name}__toggle {
+            @if $hb-activity-group-splitbutton--styled-toggle {
+                .#{$name}.navigational & {
+                    @include button-colors-emphasized-navigational;
+                }
+
+                .#{$name}[data-default-activity-rels~="promote"] &,
+                .#{$name}[data-default-activity-rels~="edit_resource"] &,
+                .#{$name}[data-default-activity-rels~="save_resource"] &,
+                .#{$name}[data-default-activity-rels~="create_resource"] &,
+                .#{$name}.mutating & {
+                    @include button-colors-emphasized-mutating;
+                }
+
+                .#{$name}.positive & {
+                    @include button-colors-emphasized-positive;
+                }
+
+                .#{$name}[data-default-activity-rels~="demote"] &,
+                .#{$name}.warning & {
+                    @include button-colors-emphasized-warning;
+                }
+
+                .#{$name}[data-default-activity-rels~="delete"] &,
+                .#{$name}.destructive & {
+                    @include button-colors-emphasized-destructive;
+                }
+            }
+
+            // good looking default+toggle merging
             @include button-states {
                 padding-left: 0;
                 border-left-width: 0;
