@@ -1,0 +1,164 @@
+{% set columns_number = 3 %}
+<div class="activity_groups">
+    <h4>{{ activity_type_name|capitalize }}</h4>
+    {% for group_name, activity_group in activity_group_bucket %}
+        {%- set close_layout = loop.index is divisible by(columns_number) or loop.last -%}
+        {%- set new_layout = loop.index0 is divisible by(columns_number) or loop.first -%}
+
+        {%- if new_layout %}
+            <div class="layout">
+        {% endif -%}
+
+            <div class="layout__item lap-and-up-1/{{ columns_number }} palm-1/1">
+                <h6>{{ group_name|replace('-',' ') }}</h6>
+                {{ activity_group|raw }}
+            </div>
+
+        {%- if close_layout %}
+            </div>
+        {% endif -%}
+    {% endfor %}
+{#
+        {% embed 'html/activity_map/as_splitbutton.twig' with {
+            toggle_disabled: false,
+            default_activity_rels: type.rel,
+        } %}
+            {% block default %}
+                {% include "html/activity/link.twig" with activities[0] %}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+        <h4>Splitbutton {{ type.name }}</h4>
+        <h5>(with single activity)</h5>
+        {% embed 'html/activity_map/as_splitbutton.twig' with {
+            toggle_disabled: true,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {% include "html/activity/link.twig" with activities[0] %}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+    </div><!--
+    --><div class="layout__item u-1-of-4-lap-and-up">
+        <h4>Dropdown {{ type.name }}</h4>
+        {% embed 'html/activity_map/as_dropdown.twig' with {
+            toggle_disabled: false,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {{ activities[0].activity.label }}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+        <h4>Dropdown {{ type.name }}</h4>
+        <h5>(with single activity)</h5>
+        {% embed 'html/activity_map/as_dropdown.twig' with {
+            toggle_disabled: true,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {{ activities[0].activity.label }}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+    </div><!--
+    --><div class="layout__item u-1-of-4-lap-and-up">
+        <h4>Splitbutton {{ type.name }} - Emphasized</h4>
+        {% embed 'html/activity_map/as_splitbutton.twig' with {
+            emphasized: true,
+            toggle_disabled: false,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {% include "html/activity/link.twig" with activities[0] %}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+        <h4>Splitbutton {{ type.name }} - Emphasized</h4>
+        <h5>(with single activity)</h5>
+        {% embed 'html/activity_map/as_splitbutton.twig' with {
+            emphasized: true,
+            toggle_disabled: true,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {% include "html/activity/link.twig" with activities[0] %}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+    </div><!--
+    --><div class="layout__item u-1-of-4-lap-and-up">
+        <h4>Dropdown {{ type.name }} - Emphasized</h4>
+        {% embed 'html/activity_map/as_dropdown.twig' with {
+            emphasized: true,
+            toggle_disabled: false,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {{ activities[0].activity.label }}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+        <h4>Dropdown {{ type.name }} - Emphasized</h4>
+        <h5>(with single activity)</h5>
+        {% embed 'html/activity_map/as_dropdown.twig' with {
+            emphasized: true,
+            toggle_disabled: true,
+            default_activity_rels: "",
+        } %}
+            {% block default %}
+                {{ activities[0].activity.label }}
+            {% endblock %}
+            {% block more %}
+                <ul>
+                    {% for a in activities %}
+                        <li>{% include "html/activity/link.twig" with a %}</li>
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        {% endembed %}
+#}
+</div>

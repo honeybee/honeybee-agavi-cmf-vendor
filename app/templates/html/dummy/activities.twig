@@ -108,11 +108,14 @@
 
 <div class="sheet theme-preview_activity-groups">
     <h1>Activity Groups</h1>
+
+    <!-- Generic group types -->
     <div class="layout">
         <div class="layout__item u-1-of-4-lap-and-up">
-            <h4>Splitbutton</h4>
+            <h5>Splitbutton</h5>
             {% embed 'html/activity_map/as_splitbutton.twig' with {
                 toggle_disabled: false,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {% include "html/activity/link.twig" with activities[0] %}
@@ -125,10 +128,11 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
-            <h4>Splitbutton</h4>
+            <h5>Splitbutton</h5>
             <h5>(with single activity)</h5>
             {% embed 'html/activity_map/as_splitbutton.twig' with {
                 toggle_disabled: true,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {% include "html/activity/link.twig" with activities[0] %}
@@ -143,9 +147,10 @@
             {% endembed %}
         </div><!--
         --><div class="layout__item u-1-of-4-lap-and-up">
-            <h4>Dropdown</h4>
+            <h5>Dropdown</h5>
             {% embed 'html/activity_map/as_dropdown.twig' with {
                 toggle_disabled: false,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {{ activities[0].activity.label }}
@@ -158,10 +163,11 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
-            <h4>Dropdown</h4>
+            <h5>Dropdown</h5>
             <h5>(with single activity)</h5>
             {% embed 'html/activity_map/as_dropdown.twig' with {
                 toggle_disabled: true,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {{ activities[0].activity.label }}
@@ -175,11 +181,12 @@
                 {% endblock %}
             {% endembed %}
         </div><!--
-        --><div class="layout__item u-1-of-4-lap">
-            <h4>Splitbutton - Emphasized</h4>
+        --><div class="layout__item u-1-of-4-lap-and-up">
+            <h5>Splitbutton - Emphasized</h5>
             {% embed 'html/activity_map/as_splitbutton.twig' with {
                 emphasized: true,
                 toggle_disabled: false,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {% include "html/activity/link.twig" with activities[0] %}
@@ -192,11 +199,12 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
-            <h4>Splitbutton - Emphasized</h4>
+            <h5>Splitbutton - Emphasized</h5>
             <h5>(with single activity)</h5>
             {% embed 'html/activity_map/as_splitbutton.twig' with {
                 emphasized: true,
                 toggle_disabled: true,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {% include "html/activity/link.twig" with activities[0] %}
@@ -210,11 +218,12 @@
                 {% endblock %}
             {% endembed %}
         </div><!--
-        --><div class="layout__item u-1-of-4-lap">
-            <h4>Dropdown - Emphasized</h4>
+        --><div class="layout__item u-1-of-4-lap-and-up">
+            <h5>Dropdown - Emphasized</h5>
             {% embed 'html/activity_map/as_dropdown.twig' with {
                 emphasized: true,
                 toggle_disabled: false,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {{ activities[0].activity.label }}
@@ -227,11 +236,12 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
-            <h4>Dropdown - Emphasized</h4>
+            <h5>Dropdown - Emphasized</h5>
             <h5>(with single activity)</h5>
             {% embed 'html/activity_map/as_dropdown.twig' with {
                 emphasized: true,
                 toggle_disabled: true,
+                default_activity_rels: "",
             } %}
                 {% block default %}
                     {{ activities[0].activity.label }}
@@ -246,9 +256,10 @@
             {% endembed %}
         </div>
     </div>
+
     <div class="layout">
         <div class="layout__item u-1-of-2-lap u-1-of-1-palm">
-            <h4>List</h4>
+            <h5>List</h5>
             {% embed 'html/activity_map/as_list.twig' with {
                 emphasized: true
             } %}
@@ -262,7 +273,7 @@
             {% endembed %}
         </div><!--
         --><div class="layout__item u-1-of-2-lap u-1-of-1-palm">
-            <h4>List - Emphasized</h4>
+            <h5>List - Emphasized</h5>
             {% embed 'html/activity_map/as_list.twig' with {
                 emphasized: true
             } %}
@@ -275,6 +286,91 @@
                     </ul>
                 {% endblock %}
             {% endembed %}
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Activity group types -->
+    <div class="activity_group_types">
+        <h3>Types</h3>
+        {% for type_name, activity_group_bucket in _typed_activity_groups %}
+            {% include 'html/dummy/activity_groups.twig' with {
+                activity_group_bucket: activity_group_bucket,
+                activity_type_name: type_name
+            } %}
+        {% endfor %}
+    </div>
+
+    <hr>
+
+    <!-- Activity group types -->
+    <div class="activity_group_custom">
+        <h3>Custom settings</h3>
+        <p>
+            Inner activities can have specific settings
+        </p>
+        <div class="layout">
+            <div class="layout__item u-1-of-2-lap-and-up">
+                <h5>Typed splitbutton + differently typed default-activity </h5>
+                {% embed 'html/activity_map/as_splitbutton.twig' with {
+                    emphasized: true,
+                    toggle_disabled: false,
+                    default_activity_rels: "promote",
+                } %}
+                    {% block default %}
+                        {% include "html/activity/link.twig" with activities[0]|merge({
+                            activity: {
+                                label: "Positive",
+                                description: "An activity that confirms something.",
+                                rels: []
+                            },
+                            css: "activity positive"
+                        }) %}
+                    {% endblock %}
+                    {% block more %}
+                        <ul>
+                            {% for a in activities %}
+                                <li>{% include "html/activity/link.twig" with a %}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endblock %}
+                {% endembed %}
+            </div><!--
+            --><div class="layout__item u-1-of-2-lap-and-up">
+                <h5>Splitbutton warns on destructive activities</h5>
+                {% embed 'html/activity_map/as_splitbutton.twig' with {
+                    emphasized: true,
+                    toggle_disabled: false,
+                    default_activity_rels: "demote",
+                    css: "warning"
+                } %}
+                    {% block default %}
+                        {% include "html/activity/link.twig" with activities[0]|merge({
+                            activity: {
+                                label: "Custom",
+                                description: "An custom activity.",
+                                rels: []
+                            }
+                        }) %}
+                    {% endblock %}
+                    {% block more %}
+                        <ul>
+                            {% for a in _destructive_activities %}
+                                <li>{% include "html/activity/link.twig" with a %}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endblock %}
+                {% endembed %}
+            </div>
+        </div>
+        <div class="layout">
+            <div class="layout__item u-1-of-2-lap-and-up">
+                <h5>Splitbutton + activities with custom template</h5>
+                {{ _activity_custom_template_activity_group|raw }}
+            </div><!--
+            --><div class="layout__item u-1-of-2-lap-and-up">
+            </div>
         </div>
     </div>
 </div>
