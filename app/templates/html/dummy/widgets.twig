@@ -108,4 +108,25 @@
             user_data: user,
         } %}
     </div>
+
+    <div class="sheet component-pager">
+        <h1>Component: Pager</h1>
+        <div class="lap-and-up-1/3 palm-1/1">
+            {% include "html/pagination/pagination.twig" with {
+                number_of_pages: 42,
+                current_page_number: 15,
+                translation_domain: 'application.pagination',
+                is_first_page: false,
+                has_prev_page: true,
+                has_next_page: true,
+                is_last_page: false,
+                first_page_url: 'javascript:void(0);',
+                prev_page_url: 'javascript:void(0);',
+                current_page_url: 'javascript:void(0);',
+                next_page_url: 'javascript:void(0);',
+                last_page_url: 'javascript:void(0);',
+                url_parameters: {}
+            } %}
+        </div>
+    </div>
 </div>
