@@ -37,25 +37,6 @@
         }
     }
 
-    .theme-preview_activity-groups {
-        hr { margin: 1em; }
-
-        h3, h4, h5, h6 {
-            margin-top: .5em;
-            margin-bottom: .5em;
-        }
-
-        .activity_group_types {
-            h4 { text-align: center; }
-        }
-    }
-
-    .theme-preview__widgets {
-        .widget-user {
-            margin-top: $base-spacing*2;
-        }
-    }
-
     .theme-preview__typography {
         .interactive {
             @include typography-interactive();
@@ -65,5 +46,32 @@
         .headline-2 { @extend h2; }
         .headline-3 { @extend h3; }
 
+    }
+
+    // custom spacings
+    .theme-preview_activity-groups,
+    .theme-preview__widgets {
+        hr { margin: 1em; }
+
+        h2, h3, h4, h5, h6 {
+            margin-top: .7em;
+            margin-bottom: .5em;
+        }
+    }
+
+    .theme-preview_activity-groups {
+        .activity_group_types {
+            h4 { text-align: center; }
+        }
+    }
+
+    .theme-preview__widgets {
+        .component-primary-activities {
+            .layout__item { margin-bottom: 1em; }
+        }
+
+        .user-widget {
+            margin-top: 2em;
+        }
     }
 }

@@ -1,3 +1,33 @@
+{% set activities = [
+    {
+        activity: {
+            label: "Save",
+            description: "An activity to save some data",
+            rels: [ 'save_resource' ]
+        },
+        css: "activity",
+        link: "javascript:void(0);"
+    },
+    {
+        activity: {
+            label: "Delete data",
+            description: "An activity to delete data.",
+            rels: [ "delete" ]
+        },
+        css: "activity destructive",
+        link: "javascript:void(0);"
+    },
+    {
+        activity: {
+            label: "Show details",
+            description: "An activity to go somewhere",
+            rels: []
+        },
+        css: "activity",
+        link: "javascript:void(0);"
+    }
+] %}
+
 {% set user = {
     is_authenticated: true,
     avatar_url: "",
@@ -6,16 +36,76 @@
     name: "Clark Kent",
 } %}
 
-<div class="sheet theme-preview__widgets">
-    <h1>Widget &amp; Components</h1>
+<div class="theme-preview__widgets">
 
-    <div class="widget-user-box u-1-of-3-lap-and-up u-1-of-1-palm">
-        <h2>User</h2>
+    <div class="sheet component-primary-activities">
+        <h1>Component: Primary activities</h1>
+        <h5>Supports same style variations of Activity Groups</h5>
 
-        <div class="widget-user">
-            {% include "html/ui/user-widget.twig" with {
-                user_data: user,
-            } %}
+        <div class="layout">
+            <div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                {% embed "html/activity_map/primary_activities.twig" with {
+                    toggle_disabled: false,
+                    default_activity_rels: ""
+                } %}
+                    {% block default %}
+                        {% include "html/activity/link.twig" with activities[0] %}
+                    {% endblock %}
+                    {% block more %}
+                        <ul>
+                            <li>{% include "html/activity/link.twig" with activities[1] %}</li>
+                        </ul>
+                    {% endblock %}
+                {% endembed %}
+            </div><!--
+            --><div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                {% embed "html/activity_map/primary_activities.twig" with {
+                    toggle_disabled: false,
+                    default_activity_rels: "",
+                    css: "warning"
+                } %}
+                    {% block default %}
+                        {% include "html/activity/link.twig" with activities[2] %}
+                    {% endblock %}
+                    {% block more %}
+                        <ul>
+                            <li>{% include "html/activity/link.twig" with activities[1] %}</li>
+                        </ul>
+                    {% endblock %}
+                {% endembed %}
+            </div><!--
+            --><div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                {% embed "html/activity_map/primary_activities.twig" with {
+                    toggle_disabled: true,
+                    default_activity_rels: "",
+                    css: ""
+                } %}
+                    {% block default %}
+                        {% include "html/activity/link.twig" with {
+                            activity: {
+                                label: "Single activity",
+                                description: "A unique primary activity available",
+                                rels: []
+                            },
+                            css: "activity mutating",
+                            link: "javascript:void(0);"
+                        } %}
+                    {% endblock %}
+                    {% block more %}
+                        <ul>
+                            <!-- no additional activities -->
+                        </ul>
+                    {% endblock %}
+                {% endembed %}
+            </div>
         </div>
+    </div>
+
+    <div class="sheet component-user">
+        <h1>Component: User</h1>
+
+        {% include "html/ui/user-widget.twig" with {
+            user_data: user,
+        } %}
     </div>
 </div>
