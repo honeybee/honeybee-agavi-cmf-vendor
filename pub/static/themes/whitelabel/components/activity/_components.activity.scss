@@ -9,3 +9,16 @@
 
 %activity-emphasized,
 .activity.emphasized { @include activity-emphasized; }
+
+/* specific activites */
+%activity-normal-navigational { @include button-normal-navigational; }
+%activity-normal-mutating { @include button-normal-mutating; }
+%activity-normal-positive { @include button-normal-positive; }
+%activity-normal-warning { @include button-normal-warning; }
+%activity-normal-destructive { @include button-normal-destructive; }
+
+%activity-emphasized-navigational { @include button-emphasized-navigational; }
+%activity-emphasized-mutating { @include button-emphasized-mutating; }
+%activity-emphasized-positive { @include button-emphasized-positive; }
+%activity-emphasized-warning { @include button-emphasized-warning; }
+%activity-emphasized-destructive { @include button-emphasized-destructive; }
