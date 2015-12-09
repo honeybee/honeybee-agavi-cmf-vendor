@@ -23,17 +23,15 @@ button {
 
     // <button> element looks alike buttons (lib/object) but doesn't support
     // button type (navigational, positive, warning, etc.) when it is not an activity
-    &:not(.activity) {
-        &,
-        &.normal {
-            @include inuit-btn;
-            background-color: transparent;
+    &,
+    &.normal {
+        @include inuit-btn;
+        background-color: transparent;
 
-            @include button-shadow-normal-navigational;
-        }
-        &.emphasized {
-            @include button-emphasized-navigational;
-        }
+        @include button-shadow-normal-navigational;
+    }
+    &.emphasized {
+        @include button-emphasized-navigational;
     }
 }
 
