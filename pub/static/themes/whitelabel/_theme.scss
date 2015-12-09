@@ -176,21 +176,3 @@ label {
         padding-top: 0;
     }
 }
-
-// views
-// @todo Move view styles in <theme>/views/
-.view-login, .view-set_password, .view-reset_password, .view-logout {
-    form {
-        legend {
-            @include typography-headlines;
-            width: 100%;
-            padding-bottom: $small-spacing;
-            border-bottom: 1px solid color(lines);
-            margin-bottom: $base-spacing;
-        }
-
-        button {
-            @include button-emphasized-navigational;
-        }
-    }
-}

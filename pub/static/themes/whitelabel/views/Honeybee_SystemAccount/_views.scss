@@ -18,18 +18,23 @@
     }
 }
 
-.honeybee-system_account-user-login {
-    @extend %single-box-as-sheet;
-}
-
-.honeybee-system_account-user-logout {
-    @extend %single-box-as-sheet;
-}
-
-.honeybee-system_account-user-reset_password {
-    @extend %single-box-as-sheet;
-}
-
+.honeybee-system_account-user-login,
+.honeybee-system_account-user-logout,
+.honeybee-system_account-user-reset_password,
 .honeybee-system_account-user-set_password {
     @extend %single-box-as-sheet;
+
+    form {
+        legend {
+            @include typography-headlines;
+            width: 100%;
+            padding-bottom: $small-spacing;
+            border-bottom: 1px solid color(lines);
+            margin-bottom: $base-spacing;
+        }
+
+        button {
+            @extend %activity-emphasized-navigational;
+        }
+    }
 }
