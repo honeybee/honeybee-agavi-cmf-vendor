@@ -151,5 +151,75 @@
                 }
             } %}
         </div>
+        {# Date input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/datetime/as_input.twig" with {
+                field_name: "Date Input One",
+                css: "jsb_ jsb_Honeybee_Core/ui/DatePicker",
+                html_attributes: {},
+                widget_enabled: true,
+                widget_options: {"isReadonly":false,"isDisabled":false,"isRequired":false,"display_format":"L LTS","display_mode":"table"},
+                field_id: "dateinput1",
+                attribute_value: "",
+                grouped_field_name: "dateinput1",
+                readonly: "",
+                disabled: "",
+                required: "",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Date",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/datetime/as_input.twig" with {
+                field_name: "Date Input Two (Invalid Value)",
+                css: "jsb_ jsb_Honeybee_Core/ui/DatePicker",
+                html_attributes: {},
+                widget_enabled: true,
+                widget_options: {"isReadonly":false,"isDisabled":false,"isRequired":true,"display_format":"L LTS","display_mode":"table"},
+                field_id: "dateinput2",
+                attribute_value: "66:66:66",
+                grouped_field_name: "dateinput2",
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Date",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/datetime/as_input.twig" with {
+                field_name: "Date Input Three (Valid Value)",
+                css: "jsb_ jsb_Honeybee_Core/ui/DatePicker valid",
+                html_attributes: {},
+                widget_enabled: true,
+                widget_options: {"isReadonly":false,"isDisabled":false,"isRequired":true,"display_format":"L LTS","display_mode":"table"},
+                field_id: "dateinput2",
+                attribute_value: "21.07.1969 02:56:00",
+                grouped_field_name: "dateinput2",
+                readonly: "",
+                disabled: "",
+                required: "required",
+                pattern: "",
+                translations: {
+                    placeholder: "Insert Valid Date",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div>
     </div>
 </div>

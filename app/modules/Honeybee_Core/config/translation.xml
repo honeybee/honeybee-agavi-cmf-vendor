@@ -48,6 +48,9 @@
                             <ae:parameter name="Text List One.field_name">Text List One</ae:parameter>
                             <ae:parameter name="Text List Two.field_name">Text List Two</ae:parameter>
                             <ae:parameter name="Text List Three.field_name">Text List Three</ae:parameter>
+                            <ae:parameter name="Date Input Two (Invalid Value).field_name">Date Input Two (Invalid Value)</ae:parameter>
+                            <ae:parameter name="Date Input One.field_name">Date Input One</ae:parameter>
+                            <ae:parameter name="Date Input Three (Valid Value).field_name">Date Input Three (Valid Value)</ae:parameter>
                             <ae:parameter name="Image Input One.field_name">Image Input One</ae:parameter>
                             <ae:parameter name="add_images">Add Images</ae:parameter>
                         </ae:parameter>
