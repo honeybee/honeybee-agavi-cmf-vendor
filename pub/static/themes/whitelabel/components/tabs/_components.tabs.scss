@@ -25,6 +25,20 @@
 
 .hb-tabs__toggles {
     margin-bottom: $base-spacing;
+    display: inline-block;
     @include shadow-container;
 }
 
+.hb-tabs--stack {
+    .hb-tabs__toggles {
+        display: block;
+    }
+    .hb-tabs__toggle {
+        label {
+            @include tabs-toggle-states {
+                padding-right: 7px;
+                padding-left:  20px;
+            }
+        }
+    }
+}

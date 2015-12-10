@@ -40,3 +40,14 @@
     &:active:hover, &.selected:hover { @include tabs-toggle-active-hover; }
     &:disabled, &.disabled { @include tabs-toggle-disabled; }
 }
+
+@mixin tabs-toggle-states {
+    &,
+    &:focus,
+    &:active, &.selected,
+    &:hover,
+    &:active:hover, &.selected:hover,
+    &:disabled, &.disabled {
+        @content
+    }
+}

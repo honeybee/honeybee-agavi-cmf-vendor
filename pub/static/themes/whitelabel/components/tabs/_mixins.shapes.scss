@@ -16,7 +16,8 @@
 
 @mixin tabs-toggle-shape {
     @include tabs-toggle-base-shape;
-    padding: 10px 7px 7px 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     border-width: 0;
     border-bottom-width: 1px;
     border-style: solid;
