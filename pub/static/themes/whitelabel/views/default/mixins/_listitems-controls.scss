@@ -125,6 +125,7 @@
         form {
             @include flexbox;
             @include flex-flow(row);
+            @include align-items(center);
         }
 
         input[type=search] {
@@ -142,6 +143,8 @@
             @include button-emphasized-navigational {
                 overflow: visible;
             };
+            // avoid text wrapping
+            @include flex-shrink(0);
         }
 
         .search-description {
