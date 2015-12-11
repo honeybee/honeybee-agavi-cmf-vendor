@@ -41,12 +41,16 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 
             .activity.activity {
                 @include button-shape-emphasized;
+
+                // more activities custom style
                 @include button-states {
                     border-radius: 0;
+                    border-width: 0;
                 }
-                // remove gaps with container
-                &:first-child { border-top-width: 0; }
-                &:last-child { border-bottom-width: 0; }
+                &:hover:not(:active) {
+                    background-color: color(lightgrey2);
+                    box-shadow: none;
+                }
             }
         }
 
