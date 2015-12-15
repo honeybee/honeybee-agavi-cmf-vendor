@@ -2,6 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
+use AgaviContext;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
@@ -15,6 +16,12 @@ class DefaultProvisioner extends AbstractProvisioner
         $state = [
             ':config' => $service_definition->getConfig()
         ];
+
+        if ($provisioner_settings->has('logger')) {
+            $logger_name = $provisioner_settings->get('logger', 'default');
+            $logger = AgaviContext::getInstance()->getLoggerManager()->getLogger($logger_name)->getPsr3Logger();
+            $state[':logger'] = $logger;
+        }
 
         $this->di_container->define($service, $state);
 
