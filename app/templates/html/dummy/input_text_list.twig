@@ -3,7 +3,7 @@
     <div class="layout">
         <div class="layout__item u-1-of-2-lap-and-up">
             {% include "html/attribute/text-list/as_input.twig" with {
-                field_name: "Text List One",
+                field_name: "Text List",
                 html_attributes: {},
                 field_id: "textlist1",
                 attribute_value: ["foo", "bar", "batz"],
@@ -27,7 +27,7 @@
         </div><!--
         --><div class="layout__item u-1-of-2-lap-and-up">
             {% include "html/attribute/text-list/as_input.twig" with {
-                field_name: "Text List Two",
+                field_name: "Text List Invalid",
                 html_attributes: {},
                 field_id: "textlist2",
                 attribute_value: [],
@@ -51,10 +51,10 @@
         </div><!--
         --><div class="layout__item u-1-of-2-lap-and-up">
             {% include "html/attribute/text-list/as_input.twig" with {
-                field_name: "Text List Three",
+                field_name: "Text List Full Width",
                 html_attributes: {},
                 field_id: "textlist3",
-                attribute_value: [],
+                attribute_value: ["Full", "width", "text-list"],
                 grouped_field_name: "Grouped Field Name",
                 widget_enabled: true,
                 readonly: "",
@@ -64,6 +64,37 @@
                 css: "jsb_ jsb_Honeybee_Core/ui/TextList input-text-list--full-width",
                 widget_enabled: true,
                 widget_options: { isRequired: false, isReadonly: false, isDisabled: false, min_count: 2, max_count: 3, remove_label: "&#xe807;" },
+                translations: {
+                    placeholder: "Insert Text",
+                    pattern: "",
+                    input_help: "",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
+            } %}
+        </div>
+    </div>
+</div>
+
+
+<div class="sheet">
+<h1>Input: Choice Select</h1>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/choice/as_input_select.twig" with {
+                field_name: "Choice Select One",
+                html_attributes: {},
+                field_id: "textlist1",
+                attribute_value: ["foo", "bar", "batz"],
+                grouped_field_name: "Grouped Field Name",
+                widget_enabled: true,
+                readonly: "",
+                disabled: "",
+                required: "",
+                widget_enabled: true,
+                css: "jsb_ jsb_Honeybee_Core/ui/SelectBox",
+                allowed_values: [ 'Choice 1', 'Choice 2', 'Choice 3', 'Choice 4' ],
+                widget_options: { isRequired: false, isReadonly: false, isDisabled: false },
                 translations: {
                     placeholder: "Insert Text",
                     pattern: "",

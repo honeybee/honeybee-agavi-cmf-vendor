@@ -2,7 +2,7 @@
 {%- set input_help = translations.input_help | default('') -%}
 {%- set input_hint = translations.input_hint | default('') -%}
 {%- set input_focus_hint = translations.input_focus_hint | default('') -%}
-<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}"
+<div class="hb-field input-choice {{ css|default('') }}" data-hb-field-name="{{ field_name }}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
