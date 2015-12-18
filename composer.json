@@ -50,6 +50,7 @@
         "honeybee/trellis": "master@dev",
         "shrink0r/workflux": "master@dev",
         "shrink0r/monatic": "master@dev",
+        "graste/environaut": "^0.5",
         "michelf/php-markdown": "~1.5",
         "monolog/monolog": "~1.0",
         "mthaml/mthaml": "~1.7",
