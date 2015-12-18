@@ -4,6 +4,7 @@
     xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
     <ae:configuration context="web">
         <route pattern="^theme_preview$" name=".theme_preview" action="ThemePreview" />
+        <route pattern="^status$" name=".status" action="System.Status" />
         <route pattern="" module="%actions.default_module%" action="%actions.error_404%" />
     </ae:configuration>
 
