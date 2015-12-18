@@ -50,14 +50,13 @@
         "honeybee/trellis": "master@dev",
         "shrink0r/workflux": "master@dev",
         "shrink0r/monatic": "master@dev",
-        "symfony/finder": "2.7.*",
-        "symfony/process": "2.7.*",
-        "graste/environaut": "0.5.*",
-        "michelf/php-markdown": "1.5.*",
-        "monolog/monolog": "1.16.*",
-        "mthaml/mthaml": "1.7.*",
+        "michelf/php-markdown": "~1.5",
+        "monolog/monolog": "~1.0",
+        "mthaml/mthaml": "~1.7",
         "swiftmailer/swiftmailer": "5.4.*",
-        "symfony/validator": "2.7.*",
-        "willdurand/negotiation": "1.4.*"
+        "symfony/finder": "~2.7",
+        "symfony/process": "~2.7",
+        "symfony/validator": "~2.7",
+        "willdurand/negotiation": "~1.4"
     }
 }
