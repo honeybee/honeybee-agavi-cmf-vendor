@@ -2,12 +2,13 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Logging;
 
-use Psr\Log\LogLevel;
-use Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender;
-use AgaviLoggerMessage;
 use AgaviLogger;
-use InvalidArgumentException;
 use AgaviLoggerAppender;
+use AgaviLoggerMessage;
+use AgaviLoggingException;
+use Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender;
+use InvalidArgumentException;
+use Psr\Log\LogLevel;
 
 /**
  * Extends AgaviLogger with some convenience methods and the possibility to
