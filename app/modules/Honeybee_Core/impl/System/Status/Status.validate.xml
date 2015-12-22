@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+    parent="%core.module_dir%/Honeybee_Core/config/validators.xml"
+>
+    <ae:configuration>
+
+        <validators translation_domain="honeybee.core.errors">
+
+            <validator class="boolean" required="false">
+                <argument>verbose</argument>
+            </validator>
+            <validator class="boolean" required="false">
+                <argument>v</argument>
+            </validator>
+
+        </validators>
+
+    </ae:configuration>
+</ae:configurations>

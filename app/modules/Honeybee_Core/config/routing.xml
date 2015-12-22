@@ -9,6 +9,7 @@
     </ae:configuration>
 
     <ae:configuration context="console">
+        <route pattern="^status$" name=".status" action="System.Status" method="read" />
         <route pattern="^util" name=".util" method="write">
             <route pattern="^.compile_js$" name=".compile_js" action="Util.CompileJs">
                 <ae:parameter name="description">Run r.js to build optimized javascript files in the "pub/static/modules-built" folder.</ae:parameter>
