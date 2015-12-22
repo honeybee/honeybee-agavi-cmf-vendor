@@ -12,6 +12,16 @@
                 <ae:parameter name="values">command,event</ae:parameter>
             </validator>
 
+            <validator class="string" name="invalid_queue" required="false">
+                <argument>queue</argument>
+                <error>Invalid or missing 'queue' parameter.</error>
+            </validator>
+
+            <validator class="string" name="invalid_binding" required="false">
+                <argument>binding</argument>
+                <error>Invalid or missing 'binding' parameter.</error>
+            </validator>
+
         </validators>
     </ae:configuration>
 </ae:configurations>
