@@ -39,11 +39,15 @@ class Honeybee_Core_Worker_StartAction extends Action
             $bindings = $this->buildCommandBindings();
         } else {
             $default_exchange = self::DEFAULT_EVENT_EXCHANGE;
-            $bindings = [];
+            if ($request_data->hasParameter('binding')) {
+                $bindings = [ trim($request_data->getParameter('binding')) ];
+            } else {
+                $bindings = [];
+            }
         }
 
         $exchange = $request_data->getParameter('exchange', $default_exchange);
-        $queue = $exchange . self::GLOBAL_QUEUE;
+        $queue = $request_data->getParameter('queue', $exchange . self::GLOBAL_QUEUE);
 
         return new ArrayConfig(
             [
