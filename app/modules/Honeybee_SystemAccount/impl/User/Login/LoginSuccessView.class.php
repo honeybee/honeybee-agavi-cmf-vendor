@@ -15,7 +15,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
     {
         if (!session_regenerate_id(true)) {
             $error_message = "[SESSIONID_REGENERATION_FAILED] SessionId could not be regenerated.";
-            $this->logFatal($error_message);
+            $this->logCritical($error_message);
 
             throw new RuntimeException($error_message);
         }
@@ -61,7 +61,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
     {
         if (!session_regenerate_id(true)) {
             $error_message = "[SESSIONID_REGENERATION_FAILED] SessionId could not be regenerated.";
-            $this->logFatal($error_message);
+            $this->logCritical($error_message);
 
             throw new RuntimeException($error_message);
         }
@@ -117,7 +117,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
         }
 
         $error_message = "[MISSING_FORWARD_TARGET] No internal forward container found.";
-        $this->logFatal($error_message);
+        $this->logError($error_message);
 
         throw new RuntimeException($error_message);
     }

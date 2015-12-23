@@ -2,7 +2,6 @@
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use Honeybee\Common\Error\RuntimeError;
-use \AgaviView;
 
 class Honeybee_SystemAccount_User_ApiLogin_ApiLoginSuccessView extends View
 {
@@ -44,7 +43,7 @@ class Honeybee_SystemAccount_User_ApiLogin_ApiLoginSuccessView extends View
         }
 
         $error_message = "[MISSING_FORWARD_TARGET] No internal forward container found.";
-        $this->logFatal($error_message);
+        $this->logError($error_message);
 
         throw new RuntimeError($error_message);
     }

@@ -21,7 +21,7 @@ class DownloadSuccessView extends View
 
         $uri = $request_data->getParameter('file_uri');
         if (empty($uri)) {
-            $this->logFatal('Necessary request parameter from validation not provided: file_uri');
+            $this->logError('Necessary request parameter from validation not provided: file_uri');
             $response->setHttpStatusCode(500);
             return;
         }
