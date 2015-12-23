@@ -9,140 +9,172 @@ class Honeybee_Core_System_Status_StatusSuccessView extends View
 
     public function executeHtml(AgaviRequestDataHolder $request_data)
     {
-        // $this->setAttribute('_title', 'Status');
+        $this->setAttribute('_title', 'Status');
 
-        $message = $this->getInfosAsString();
+        $this->setupHtml($request_data);
 
-        return '<html><head><title>Status</title></head><body><pre>' . $message . '</pre></body></html>';
+        $this->setAttribute('report_as_string', $this->getReportAsString($request_data));
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
-        return json_encode($this->getBody($request_data), self::JSON_OPTIONS);
+        return json_encode($this->prepareReport($request_data), self::JSON_OPTIONS);
     }
 
     public function executeXml(AgaviRequestDataHolder $request_data)
     {
-        $body = $this->getBody($request_data);
+        $report = $this->prepareReport($request_data);
 
-        $dom = new DOMDocument('1.0', 'UTF-8');
-        $dom->formatOutput = true;
+        $xml = new XmlWriter();
+        $xml->openMemory();
+        $xml->setIndent(true);
+        $xml->startDocument('1.0', 'UTF-8');
 
-        $root = $dom->createElement('application');
+        $xml->startElement('application');
+        $xml->writeAttribute('name', $report['application']);
 
-        $attr = $dom->createAttribute('name');
-        $attr->value = $body['application'];
-        $root->appendChild($attr);
+        $xml->startElement('status');
+        $xml->text($report['status']);
+        $xml->endElement();
 
-        $attr = $dom->createAttribute('status');
-        $attr->value = $body['status'];
-        $root->appendChild($attr);
-
-        $summary = $dom->createElement('summary');
-        $summary->appendChild(new DOMText($body['message']));
-        foreach ($body['summary'] as $name => $value) {
-            $attr = $dom->createAttribute($name);
-            $attr->value = $value;
-            $summary->appendChild($attr);
+        $connections = $report['connections'];
+        $xml->startElement('connections');
+        foreach ($connections['stats'] as $name => $value) {
+            $xml->writeAttribute($name, $value);
         }
-        $root->appendChild($summary);
+        $xml->writeElement('status', $connections['status']);
+        $xml->startElement('stats');
+        foreach ($connections['stats'] as $name => $value) {
+            $xml->writeElement($name, $value);
+        }
+        $xml->endElement(); // connections/stats
+        foreach ($connections['details'] as $name => $value) {
+            $xml->startElement('connection');
+            $xml->writeAttribute('name', $name);
+            if (is_array($value)) {
+                $this->array2xml($value, $xml);
+            } else {
+                $xml->writeCData((string)$value);
+            }
+            $xml->endElement();
+        }
+        $xml->endElement(); // connections
 
-        $dom->appendChild($root);
+        $xml->endElement(); // application
 
-        return $dom->saveXML();
+        $xml->endDocument();
+
+        return $xml->outputMemory();
     }
 
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
-        $message = $this->getInfosAsString();
+        $report = $this->getReportAsString($request_data);
 
-        if ($this->getAttribute('failing', 0) > 0) {
-            return $this->cliError($message);
+        if ($this->getAttribute('status') === Status::FAILING) {
+            return $this->cliError($report);
         }
 
-        return $this->cliMessage($message);
+        return $this->cliMessage($report);
     }
 
-    protected function getInfosAsString()
+    protected function getReportAsString($request_data)
     {
         $verbose = $this->getAttribute('verbose', false);
-        $infos = $this->getAttribute('infos', []);
+        $report = $this->prepareReport($request_data);
 
-        $message = sprintf("Status for application: %s\n\n", AgaviConfig::get('core.app_name'));
+        $appstatus = sprintf("Status for application '%s': %s", $report['application'], $report['status']);
 
-        foreach ($infos as $status) {
-            if ($verbose) {
+        $message = $appstatus . "\n\nConnections:\n\n";
+
+        foreach ($report['connections']['details'] as $connection_name => $connection_status) {
+            if (is_array($connection_status)) {
                 $message .= sprintf(
                     "- %s = %s (%s) %s\n",
-                    $status->getConnectionName(),
-                    $status->getStatus(),
-                    $status->getImplementor(),
-                    json_encode($status->getInfo(), self::JSON_OPTIONS)
+                    $connection_status['connection_name'],
+                    $connection_status['status'],
+                    $connection_status['implementor'],
+                    json_encode($connection_status['details'], self::JSON_OPTIONS)
                 );
             } else {
                 $message .= sprintf(
                     "- %s = %s\n",
-                    $status->getConnectionName(),
-                    $status->getStatus()
+                    $connection_name,
+                    $connection_status
                 );
             }
         }
 
         $message .= sprintf(
-            "\nConnection status summary: failing=%d working=%d unknown=%d",
-            $this->getAttribute('failing'),
-            $this->getAttribute('working'),
-            $this->getAttribute('unknown')
+            "\nConnections status: %s (failing=%d working=%d unknown=%d of %d overall)\n\n",
+            $report['connections']['status'],
+            $report['connections']['stats']['failing'],
+            $report['connections']['stats']['working'],
+            $report['connections']['stats']['unknown'],
+            $report['connections']['stats']['overall']
         );
+
+        $message .= $appstatus;
 
         return $message;
     }
 
-    protected function getBody(AgaviRequestDataHolder $request_data)
+    protected function prepareReport(AgaviRequestDataHolder $request_data)
     {
         $verbose = $this->getAttribute('verbose', false);
-        $infos = $this->getAttribute('infos', []);
+        $connections_report = $this->getAttribute('connections_report', []);
 
-        $details = [];
-        foreach ($infos as $status) {
-            if ($verbose) {
-                $details[$status->getConnectionName()] = $status;
-            } else {
-                $details[$status->getConnectionName()] = $status->getStatus();
+        $conninfo = $connections_report;
+        foreach ($connections_report['details'] as $name => $conn) {
+            // remove verbose connection info details when not explicitely asked for
+            if (!$verbose) {
+                $conninfo['details'][$name] = $conn['status'];
             }
         }
 
-        $message = sprintf(
-            "Connection status summary: failing=%d working=%d unknown=%d",
-            $this->getAttribute('failing'),
-            $this->getAttribute('working'),
-            $this->getAttribute('unknown')
-        );
-
-        $body = [
+        $report = [
             'application' => AgaviConfig::get('core.app_name'),
-            'status' => ($this->getAttribute('failing', 0) > 0) ? 'failing' : 'working',
-            'message' => $message,
-            'summary' => [
-                'failing' => $this->getAttribute('failing'),
-                'working' => $this->getAttribute('working'),
-                'unknown' => $this->getAttribute('unknown')
-            ],
-            'connections' => $details
+            'status' => $this->getAttribute('status', Status::UNKNOWN),
+            'connections' => $conninfo
         ];
 
-        return $body;
+        $this->setAttribute('report', $report);
+
+        return $report;
     }
 
-/*
-    public function executeAtomxml(AgaviRequestDataHolder $request_data)
+    protected function array2xml($data, XMLWriter $xml)
     {
-        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><feed xmlns=\"http://www.w3.org/2005/Atom\"><title>status?</title></feed>";
-    }
+        foreach ($data as $key => $value) {
+            if (is_array($value) && isset($value[0])) {
+                $xml->startElement($key);
+                foreach ($value as $item) {
+                    if (is_array($item)) {
+                        $this->array2xml($item, $xml);
+                    } else {
+                        $xml->writeElement($key, (string)$item);
+                    }
+                }
+                $xml->endElement();
+            } elseif (is_array($value)) {
+                $xml->startElement($key);
+                $this->array2xml($value, $xml);
+                $xml->endElement();
+                continue;
+            }
 
+            if (!is_array($value)) {
+                if (is_numeric($key)) {
+                    $xml->writeElement('item_'.$key, (string)$value);
+                } else {
+                    $xml->writeElement($key, (string)$value);
+                }
+            }
+        }
+    }
+/*
     public function executeBinary(AgaviRequestDataHolder $request_data)
     {
-        $this->getResponse()->setHttpStatusCode('406');
         $this->getResponse()->setContentType('text/plain');
         $this->getResponse()->setHttpHeader('Content-Disposition', 'inline');
         $this->getResponse()->setContent('status?');
@@ -150,10 +182,9 @@ class Honeybee_Core_System_Status_StatusSuccessView extends View
 
     public function executePdf(AgaviRequestDataHolder $request_data)
     {
-        $this->getResponse()->setHttpStatusCode('406');
         $this->getResponse()->setContentType('text/plain');
         $this->getResponse()->setHttpHeader('Content-Disposition', 'inline');
         $this->getResponse()->setContent('status?');
     }
-*/
+ */
 }

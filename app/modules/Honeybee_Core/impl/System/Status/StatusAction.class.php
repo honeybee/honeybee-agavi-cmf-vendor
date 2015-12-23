@@ -7,31 +7,20 @@ class Honeybee_Core_System_StatusAction extends Action
 {
     public function executeRead(AgaviRequestDataHolder $request_data)
     {
+        $status = Status::UNKNOWN;
         try {
-            $infos = $this->getConnectorStatus();
-            ksort($infos);
+            $connector_service = $this->getServiceLocator()->getConnectorService();
+            $connections_report = $connector_service->getStatusReport()->toArray();
+            if ($connections_report['status'] !== Status::FAILING) {
+                $status = Status::WORKING;
+            }
         } catch (Exception $e) {
-            $this->logFatal('Error while getting system status:', $e);
+            $this->logError('Error while getting system status:', $e);
             return 'Error';
         }
 
-        $failing = 0;
-        $unknown = 0;
-        $working = 0;
-        foreach ($infos as $name => $status) {
-            if ($status->isFailing()) {
-                $failing++;
-            } elseif ($status->isWorking()) {
-                $working++;
-            } else {
-                $unknown++;
-            }
-        }
-
-        $this->setAttribute('infos', $infos);
-        $this->setAttribute('failing', $failing);
-        $this->setAttribute('working', $working);
-        $this->setAttribute('unknown', $unknown);
+        $this->setAttribute('connections_report', $connections_report);
+        $this->setAttribute('status', $status);
 
         $verbose = $request_data->getParameter('v', false) || $request_data->getParameter('verbose', false);
         $this->setAttribute('verbose', $verbose);
@@ -47,26 +36,5 @@ class Honeybee_Core_System_StatusAction extends Action
     public function isSecure()
     {
         return false;
-    }
-
-    protected function getConnectorStatus()
-    {
-        $connector_service = $this->getServiceLocator()->getConnectorService();
-        $connector_map = $connector_service->getConnectorMap();
-
-        $infos = [];
-        foreach ($connector_map as $name => $connector) {
-            try {
-                $infos[$name] = $connector->getStatus();
-            } catch (Exception $e) {
-                $infos[$name] = Status::failing(
-                    $connector,
-                    [ 'message' => 'Exception on getStatus(): ' . $e->getMessage() ]
-                );
-                $this->logError('Error while getting status of connection "' . $name . '":', $e);
-            }
-        }
-
-        return $infos;
     }
 }

@@ -1,0 +1,39 @@
+{% extends _layout %}
+
+{% block primary %}
+
+<div class="sysstatus hb-panel hb-panel-dummy" data-panel-name="sysstatus">
+    <div class="hb-panel__header">
+        <div class="hb-panel__title">Status information for {{ report.application }}</div>
+        <p class="hb-panel__description">
+            <span class="sysstatus__appname">{{ report.application }}</span> is
+            <span class="sysstatus__status" data-sysstatus="{{ report.status }}">{{ report.status }}</span>
+        </p>
+    </div>
+    <div class="hb-panel__content">
+<dl>
+    <dt>Application</dt>
+    <dd class="sysstatus__appname">{{ report.application }}</dd>
+    <dt>Status</dt>
+    <dd class="sysstatus__status" data-sysstatus="{{ report.status }}">{{ report.status }}</dd>
+    <dt>Connections</dt>
+    <dd class="sysstatus__connections">{{ report.connections.status }}
+        (failing=<span class="connections-failing">{{ report.connections.stats.failing | default("n/a") }}</span>
+        working=<span class="connections-working">{{ report.connections.stats.working | default("n/a") }}</span>
+        unknown=<span class="connections-unknown">{{ report.connections.stats.unknown | default("n/a") }}</span>
+        of <span class="connections-overall">{{ report.connections.stats.overall | default("n/a") }}</span> overall)
+    </dd>
+</dl>
+
+<details class="sysstatus__details">
+    <summary>{{ report.application }}: {{ report.status }}</summary>
+<pre class="sysstatus__textreport">
+{{ report_as_string }}
+</pre>
+</details>
+    </div>
+
+
+</div>
+
+{% endblock %}
