@@ -5,7 +5,7 @@
     <ae:configuration context="web">
         <route pattern="^theme_preview$" name=".theme_preview" action="ThemePreview" />
         <route pattern="^status$" name=".status" action="System.Status" />
-        <route pattern="" module="%actions.default_module%" action="%actions.error_404%" />
+        <route pattern="" module="%actions.error_404_module%" action="%actions.error_404_action%" />
     </ae:configuration>
 
     <ae:configuration context="console">
