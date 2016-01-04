@@ -27,7 +27,7 @@ if (is_readable($autoloads_include)) {
 // make sure that we are always shown errors within dev environments
 if (preg_match('/.*development.*/', AgaviConfig::get('core.clean_environment'))) {
     ini_set('display_errors', '1');
-    error_reporting(E_ALL ^ E_STRICT);
+    error_reporting(E_ALL);
 }
 
 // bootstrap the app
