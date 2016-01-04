@@ -8,7 +8,7 @@
 {% set territory = locale.getLocaleTerritory() %}
 {% set theme_url = ro.getBaseHref() ~ 'static/themes/' ~ ac('themes.default', 'honeybee-minimal') ~ '/binaries/icons/' %}
 <!DOCTYPE html>
-<html lang="{{ language }}" data-territory="{{ territory }}" data-moment-locale-identifier="{{ language }}{% if territory %}{{ '-' ~ territory|lower }}{% endif %}" dir="{{ direction }}">
+<html class="{{ _globalcss|default('') }}" lang="{{ language }}" data-territory="{{ territory }}" data-moment-locale-identifier="{{ language }}{% if territory %}{{ '-' ~ territory|lower }}{% endif %}" dir="{{ direction }}">
 <head>
 {%- block htmlhead -%}
     <meta charset="utf-8">
@@ -29,7 +29,7 @@
     {% block stylesheets %}<!-- %%STYLESHEETS%% -->{% endblock stylesheets %}
 {%- endblock htmlhead -%}
 </head>
-<body class="{{_bodycss|default('')}}">
+<body>
 {%- block htmlbody -%}
 {%- block page -%}
 <div class="page-layout">

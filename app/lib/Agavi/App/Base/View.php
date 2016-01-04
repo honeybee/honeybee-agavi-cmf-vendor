@@ -35,7 +35,7 @@ class View extends AgaviView
     const ATTRIBUTE_BREADCRUMBS = '_breadcrumbs';
     const ATTRIBUTE_BREADCRUMB_TITLE = '_breadcrumb_title';
     const ATTRIBUTE_BROWSER_TITLE = '_browser_title';
-    const ATTRIBUTE_BODY_CSS = '_bodycss';
+    const ATTRIBUTE_GLOBAL_CSS = '_globalcss';
     const ATTRIBUTE_RENDERED_NAVIGATION = '_rendered_navigation';
     const ATTRIBUTE_RENDERED_SUBHEADER_ACTIVITIES = '_rendered_subheader_activities';
     const ATTRIBUTE_RENDERED_PRIMARY_ACTIVITIES = '_rendered_primary_activities';
@@ -201,8 +201,8 @@ class View extends AgaviView
             );
         }
 
-        if (!$this->hasAttribute(static::ATTRIBUTE_BODY_CSS)) {
-            $this->setAttribute(static::ATTRIBUTE_BODY_CSS, $this->getBodyCss());
+        if (!$this->hasAttribute(static::ATTRIBUTE_GLOBAL_CSS)) {
+            $this->setAttribute(static::ATTRIBUTE_GLOBAL_CSS, $this->getGlobalCss());
         }
 
         if (!$this->hasAttribute(static::ATTRIBUTE_RENDERED_NAVIGATION)) {
@@ -720,7 +720,7 @@ class View extends AgaviView
         return preg_replace('~\.[a-z\_]+view$~', '', $short_name);
     }
 
-    protected function getBodyCss()
+    protected function getGlobalCss()
     {
         // view's php class name, e.g. "Honeybee_SystemAccount_User_ApiLogin_ApiLoginErrorView"
         $class_name_parts = explode('_', static::CLASS);
