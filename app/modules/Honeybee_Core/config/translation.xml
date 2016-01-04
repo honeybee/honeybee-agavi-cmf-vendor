@@ -49,6 +49,7 @@
                             <ae:parameter name="Text List Invalid.field_name">Text List Invalid</ae:parameter>
                             <ae:parameter name="Text List Full Width.field_name">Text List Full-width</ae:parameter>
                             <ae:parameter name="Choice Select One.field_name">Choice Select One</ae:parameter>
+                            <ae:parameter name="Choice Select Disabled.field_name">Choice Select Disabled</ae:parameter>
                             <ae:parameter name="Date Input Two (Invalid Value).field_name">Date Input Two (Invalid Value)</ae:parameter>
                             <ae:parameter name="Date Input One.field_name">Date Input One</ae:parameter>
                             <ae:parameter name="Date Input Three (Valid Value).field_name">Date Input Three (Valid Value)</ae:parameter>

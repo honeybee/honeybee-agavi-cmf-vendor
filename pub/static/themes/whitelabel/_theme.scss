@@ -43,6 +43,10 @@ label {
    @include visuallyhidden;
 }
 
+.focus, :focus {
+    outline-offset: 0px;
+}
+
 .disabled {
     opacity: 1.0; //reset inuits disabled opacity
 }

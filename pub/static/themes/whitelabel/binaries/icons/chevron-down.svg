@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="60px" height="52px" viewBox="0 0 60 52" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>chevron-down</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="chevron-down" sketch:type="MSArtboardGroup" fill="#000000">
+            <g sketch:type="MSLayerGroup" transform="translate(30.000000, 26.500000) rotate(90.000000) translate(-30.000000, -26.500000) translate(14.500000, 0.500000)" id="Page-1">
+                <g transform="translate(0.000000, -0.000000)" sketch:type="MSShapeGroup">
+                    <g>
+                        <g id="chevron-down" transform="translate(0.000000, -0.000000)">
+                            <path d="M1.6305702,1.50481232 C-0.365038682,3.45567622 -0.521646132,6.17174928 1.6305702,8.55660458 L18.3964814,26.0429799 L1.6305702,43.5293553 C-0.521646132,45.914298 -0.365038682,48.6347407 1.6305702,50.5722335 C3.62172206,52.5230974 6.98651003,52.3978639 8.85688539,50.5722335 C10.7272607,48.7556046 29.001043,29.5644628 29.001043,29.5644628 C29.9988911,28.5935315 30.5,27.3182994 30.5,26.0430673 C30.5,24.7678352 29.9988911,23.4926032 29.001043,22.5126705 C29.001043,22.5126705 10.7271734,3.33053009 8.85688539,1.50489971 C6.98651003,-0.325187679 3.62172206,-0.445964183 1.6305702,1.50489971 L1.6305702,1.50481232 L1.6305702,1.50481232 Z" id="Chevron-1"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

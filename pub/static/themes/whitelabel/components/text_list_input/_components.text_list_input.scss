@@ -1,7 +1,6 @@
 .input-text-list {
 
     .text-list__item {
-        display: inline-block;
         width: auto;
 
         margin: 0.5 * $base-spacing;
@@ -23,6 +22,7 @@
             color: color(black);
 
             &::after {
+                // @todo Use entypo icon
                 content: "+";
                 display: inline-block;
                 width: $base-spacing;
@@ -40,9 +40,13 @@
                 color: color(white);
             }
         }
+
+        input:focus ~ span {
+            outline-color: color(outline);
+            outline-width: 2px;
+            outline-style: solid;
+        }
     }
-
-
 }
 
 .input-text-list--full-width {

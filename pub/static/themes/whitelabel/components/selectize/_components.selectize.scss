@@ -3,32 +3,10 @@
     .selectize-input {
         @include input-textual-default();
         padding: $p 0 0 $p;
-    }
-
-    .selectize-input.selectize-input {
-        margin-bottom: 1.43em; // 20/14
-
-        > input {
-            @include strip-box;
-            @include strip-background;
-            padding: 7px 0 7px $p;
-            margin: 0 $p $p 0;
-        }
-
-        &.invalid, &:invalid {
-            @include input-textual-colors-invalid;
-        }
 
         .item,
         input {
             display: inline-block;
-        }
-
-        .item {
-            @include button-shape-emphasized-navigational-default;
-            @include button-colors-emphasized-navigational-default;
-            margin: 0 $p $p 0;
-            line-height: 1em;
         }
 
         .remove {
@@ -42,9 +20,68 @@
         }
     }
 
+    // Multi selectize (Text-List)
+    &.multi {
+        .selectize-input.selectize-input {
+            .item {
+                @include button-shape-emphasized-navigational-default;
+                @include button-colors-emphasized-navigational-default;
+                margin: 0 $p $p 0;
+                line-height: 1em;
+            }
+        }
+    }
+
+    // Single selectize (Single choice select)
+    &.single {
+        .selectize-input.selectize-input {
+            padding: 0;
+
+            // hide caret
+            > input { display: none; }
+
+            .item {
+                @include input-textual-shape-default;
+                line-height: normal;
+                text-align: left;
+                margin: 0;
+
+                background-color: color(transparent);
+                border-color: color(transparent);
+                outline-color: color(transparent);
+
+                // icon
+                background-image: url(binaries/icons/chevron-down.svg);
+                background-size: auto 80%;
+                background-repeat: no-repeat;
+                background-origin: content-box;
+                background-position: right 50%;
+            }
+        }
+    }
+
+    .selectize-input.selectize-input {
+        // new-item input caret
+        > input {
+            @include strip-box;
+            @include strip-background;
+            padding: 7px 0 7px $p;
+            margin: 0 $p $p 0;
+        }
+
+        // states
+        &.invalid { @include input-textual-colors-invalid; }
+        &.disabled {
+            @include input-textual-colors-disabled;
+            .item { color: inherit; }
+        }
+        &.focus { @include input-textual-colors-focus; }
+    }
+
     .selectize-dropdown {
         @include zindex(popover);
         margin-top: $p;
+        margin-bottom: 0;
         box-shadow: 0 2px 5px rgba(color(black), 0.1);
 
         @include media-query(desk) {
