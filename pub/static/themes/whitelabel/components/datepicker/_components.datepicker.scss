@@ -1,4 +1,5 @@
-$datepicker-toggle-width: 3.86em; // 54/14
+$datepicker-toggle-width: 3.86em !default; // 54/14
+$line-height: 1.2em !default;
 
 .datepicker-controls-wrapper {
     position: relative;
@@ -49,7 +50,6 @@ $datepicker-toggle-width: 3.86em; // 54/14
 
 .datepicker {
     @include zindex(modal);
-    $line-height: 1.2em;
 
     &.calendar--list {
         .datepicker__content {

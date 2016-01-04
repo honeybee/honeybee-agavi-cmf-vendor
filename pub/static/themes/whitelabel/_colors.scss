@@ -28,6 +28,7 @@ $semantic-colors: (
     text-secondary: map-get($colors, darkgrey2),            //help texts and annotations
 
     clear: map-get($colors, transparent),
+    outline: rgba(map-get($colors, blue), 0.5),
     background-neutral: map-get($colors, lightgrey2),       //BG for large UI containers
     background-highlight: map-get($colors, lightgrey3),     //BG for e.g. UI element titles
     background-heavy: map-get($colors, lightgrey1),         //BG for small thigns like tags, pressed buttons

@@ -13,7 +13,7 @@
 }
 @mixin input-textual-colors-focus {
     @include input-textual-colors-default;
-    outline-color: rgba(color(blue), 0.5);
+    outline-color: color(outline);
 }
 @mixin input-textual-colors-active {
     @include input-textual-colors-default;
