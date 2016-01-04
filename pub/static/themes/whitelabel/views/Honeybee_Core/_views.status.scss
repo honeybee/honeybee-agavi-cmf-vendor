@@ -1,0 +1,17 @@
+[data-sysstatus="WORKING"],
+.connections-working {
+    color: color(greendarker);
+}
+
+[data-sysstatus="UNKNOWN"],
+.connections-unknown {
+    color: color(bluedarker);
+}
+
+[data-sysstatus="FAILING"],
+.connections-failing {
+    color: color(reddarker);
+}
+
+.connections-overall {
+}
