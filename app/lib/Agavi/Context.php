@@ -161,12 +161,11 @@ class Context extends AgaviContext
         $logger_manager = $this->getLoggerManager();
         if (empty($logger_manager)) {
             error_log('[AGAVI SHUTDOWN] ' . print_r($error, true));
-            return;
+        } else {
+            $logger_manager->logTo('error', $log_level, 'SHUTDOWN', print_r($error, true));
         }
 
-        $logger_manager->logTo('error', $log_level, 'SHUTDOWN', print_r($error, true));
-
-        // just return if there's no critical error
+        // return if there's no critical error
         if (!in_array($error['type'], self::$critical_errors)) {
             return;
         }
@@ -179,16 +178,16 @@ class Context extends AgaviContext
             }
 
             if ($listener['scope'] === ShutdownListenerInterface::NOTIFY_SCOPE_GLOBAL) {
-                $logger_manager->logTo(
-                    null,
-                    Logger::DEBUG,
-                    'SHUTDOWN',
-                    sprintf(
-                        'Notifying global listener "%s" " about shutdown because of critical error of type "%s".',
-                        get_class($listener['listener']),
-                        $error['type']
-                    )
+                $message = sprintf(
+                    'Notifying global listener "%s" " about shutdown because of critical error of type "%s".',
+                    get_class($listener['listener']),
+                    $error['type']
                 );
+                if (empty($logger_manager)) {
+                    error_log('[AGAVI SHUTDOWN] ' . $message);
+                } else {
+                    $logger_manager->logTo(null, Logger::DEBUG, 'SHUTDOWN', $message);
+                }
                 $abort_propagation = $listener['listener']->onShutdown($error);
             } else {
                 // instance scope listeners
@@ -202,16 +201,16 @@ class Context extends AgaviContext
                 if (is_subclass_of($fatal_classname, $listener['listener'])
                     || is_a($fatal_classname, $listener['listener'])
                 ) {
-                    $logger_manager->logTo(
-                        'default',
-                        Logger::DEBUG,
-                        'SHUTDOWN',
-                        sprintf(
-                            'Notifying instance listener "%s" about shutdown because of critical error of type "%s".',
-                            get_class($listener['listener']),
-                            $error['type']
-                        )
+                    $message = sprintf(
+                        'Notifying instance listener "%s" about shutdown because of critical error of type "%s".',
+                        get_class($listener['listener']),
+                        $error['type']
                     );
+                    if (empty($logger_manager)) {
+                        error_log('[AGAVI SHUTDOWN] ' . $message);
+                    } else {
+                        $logger_manager->logTo('default', Logger::DEBUG, 'SHUTDOWN', $message);
+                    }
                     $abort_propagation = $listener['listener']->onShutdown($error);
                 }
             }
