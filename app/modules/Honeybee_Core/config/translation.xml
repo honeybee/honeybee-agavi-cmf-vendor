@@ -22,14 +22,10 @@
                         <ae:parameter name="de">
                             <ae:parameter name="index.page_title">Honeybee</ae:parameter>
                             <ae:parameter name="theme_preview.page_title">Vorschau Theme</ae:parameter>
-                            <ae:parameter name="system.status.page_title">Applikationsstatus</ae:parameter>
-                            <ae:parameter name="system.error404.error404_success_view.page_title">404 Nicht gefunden</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
-                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
                             <ae:parameter name="theme_preview.page_title">Preview Theme</ae:parameter>
-                            <ae:parameter name="system.status.page_title">Application Status</ae:parameter>
-                            <ae:parameter name="system.error404.error404_success_view.page_title">404 Not Found</ae:parameter>
+                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                     <ae:parameter name="activity">
@@ -57,6 +53,8 @@
                             <ae:parameter name="Date Input Two (Invalid Value).field_name">Date Input Two (Invalid Value)</ae:parameter>
                             <ae:parameter name="Date Input One.field_name">Date Input One</ae:parameter>
                             <ae:parameter name="Date Input Three (Valid Value).field_name">Date Input Three (Valid Value)</ae:parameter>
+                            <ae:parameter name="Textarea Input.field_name">Textarea Input</ae:parameter>
+                            <ae:parameter name="Textarea Input Disabled.field_name">Textarea Input Disabled</ae:parameter>
                             <ae:parameter name="Image Input One.field_name">Image Input One</ae:parameter>
                             <ae:parameter name="add_images">Add Images</ae:parameter>
                         </ae:parameter>

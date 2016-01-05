@@ -1,5 +1,5 @@
 <div class="sheet">
-<h1>Input: Text</h1>
+    <h1>Input: Text</h1>
     <div class="layout">
         {# Text input #}
         <div class="layout__item u-1-of-2-lap-and-up">
@@ -219,6 +219,46 @@
                     input_hint: "",
                     input_focus_hint: ""
                 }
+            } %}
+        </div>
+    </div>
+</div>
+<div class="sheet">
+    {# Textarea #}
+    <h1>Input: Textarea</h1>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/textarea/as_input.twig" with {
+                disabled: "",
+                readonly: "",
+                required: "",
+                maxlength: "200",
+                wrap: "soft",
+                cols: 10,
+                rows: 12,
+                attribute_value: "Lorem ipsum dolor sit amet, nisl fusce dolor magna tellus. Est venenatis id. Interdum luctus aliquam ut quisque eu non, pellentesque ultricies neque. Dignissim bibendum rhoncus. Metus arcu a, lacinia accumsan dignissim posuere, sed convallis magna tincidunt nulla dui dui, cras a justo, felis hendrerit tristique nascetur. Euismod odio congue. Vestibulum turpis ante elit, nibh vitae eros, suspendisse tristique, eu laoreet consectetuer tempore. Mauris ullamcorper semper elit ullamcorper, feugiat metus augue a wisi.",
+                field_name: "Textarea Input",
+                field_id: "textarea1",
+                html_attributes: {},
+                grouped_field_name: "textarea1",
+                syntax_enabled: false
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/textarea/as_input.twig" with {
+                disabled: "disabled",
+                readonly: "",
+                required: false,
+                maxlength: "",
+                wrap: "soft",
+                cols: 10,
+                rows: 12,
+                attribute_value: "Lorem ipsum dolor sit amet, nisl fusce dolor magna tellus. Est venenatis id. Interdum luctus aliquam ut quisque eu non, pellentesque ultricies neque. Dignissim bibendum rhoncus. Metus arcu a, lacinia accumsan dignissim posuere, sed convallis magna tincidunt nulla dui dui, cras a justo, felis hendrerit tristique nascetur. Euismod odio congue. Vestibulum turpis ante elit, nibh vitae eros, suspendisse tristique, eu laoreet consectetuer tempore. Mauris ullamcorper semper elit ullamcorper, feugiat metus augue a wisi.",
+                field_name: "Textarea Input Disabled",
+                field_id: "textarea2",
+                html_attributes: {},
+                grouped_field_name: "textarea2",
+                syntax_enabled: false
             } %}
         </div>
     </div>

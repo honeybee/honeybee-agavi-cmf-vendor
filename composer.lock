@@ -607,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "0b28f7b5bf89c3625d8ec319be70b12058b22765"
+                "reference": "999480d0ff6294b7bc5a8f14673bd19a89f394f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/0b28f7b5bf89c3625d8ec319be70b12058b22765",
-                "reference": "0b28f7b5bf89c3625d8ec319be70b12058b22765",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/999480d0ff6294b7bc5a8f14673bd19a89f394f1",
+                "reference": "999480d0ff6294b7bc5a8f14673bd19a89f394f1",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +694,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-01-05 17:33:43"
+            "time": "2016-01-05 17:44:32"
         },
         {
             "name": "honeybee/trellis",
