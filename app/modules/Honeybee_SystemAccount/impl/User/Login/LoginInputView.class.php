@@ -46,14 +46,11 @@ class Honeybee_SystemAccount_User_Login_LoginInputView extends View
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode(401);
-        return json_encode(
-            array(
-                'result'  => 'success',
-                'message' => $this->translation_manager->_(
-                    'You may post a username and a password to this uri in order to login to the application.'
-                )
-            )
-        );
+
+        return json_encode([
+            'result' => 'failure',
+            'message' => $this->translation_manager->_('Authentication needed.')
+        ]);
     }
 
     public function executeConsole(AgaviRequestDataHolder $request_data)
