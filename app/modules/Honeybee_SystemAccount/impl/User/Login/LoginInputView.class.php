@@ -45,6 +45,7 @@ class Honeybee_SystemAccount_User_Login_LoginInputView extends View
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
+        $this->getResponse()->setHttpStatusCode(401);
         return json_encode(
             array(
                 'result'  => 'success',
