@@ -21,7 +21,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
                     'css' => '',
                 ]
             ],
-            'link' => 'javascript:void(0);'
+            'link' => 'javascript:void(0);',
+            'disabled' => false
         ],
         'navigational' => [
             'activity' => [
@@ -32,7 +33,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
                     'css' => 'navigational',
                 ]
             ],
-            'link' => 'javascript:void(0);'
+            'link' => 'javascript:void(0);',
+            'disabled' => false
         ],
         'mutating' => [
             'activity' => [
@@ -43,7 +45,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
                     'css' => 'mutating',
                 ]
             ],
-            'link' => 'javascript:void(0);'
+            'link' => 'javascript:void(0);',
+            'disabled' => false
         ],
         'positive' => [
             'activity' => [
@@ -54,7 +57,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
                     'css' => 'positive',
                 ]
             ],
-            'link' => 'javascript:void(0);'
+            'link' => 'javascript:void(0);',
+            'disabled' => false
         ],
         'warning' => [
             'activity' => [
@@ -65,7 +69,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
                     'css' => 'warning',
                 ]
             ],
-            'link' => 'javascript:void(0);'
+            'link' => 'javascript:void(0);',
+            'disabled' => false
         ],
         'destructive' => [
             'activity' => [
@@ -76,7 +81,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
                     'css' => 'destructive',
                 ]
             ],
-            'link' => 'javascript:void(0);'
+            'link' => 'javascript:void(0);',
+            'disabled' => false
         ],
     ];
 

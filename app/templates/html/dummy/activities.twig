@@ -6,7 +6,8 @@
             rels: []
         },
         css: "activity navigational",
-        link: "javascript:void(0);"
+        link: "javascript:void(0);",
+        disabled: false
     },
     {
         activity: {
@@ -15,7 +16,8 @@
             rels: []
         },
         css: "activity navigational",
-        link: "javascript:void(0);"
+        link: "javascript:void(0);",
+        disabled: false
     },
     {
         activity: {
@@ -24,7 +26,8 @@
             rels: []
         },
         css: "activity mutating",
-        link: "javascript:void(0);"
+        link: "javascript:void(0);",
+        disabled: false
     },
     {
         activity: {
@@ -33,7 +36,8 @@
             rels: []
         },
         css: "activity positive",
-        link: "javascript:void(0);"
+        link: "javascript:void(0);",
+        disabled: false
     },
     {
         activity: {
@@ -42,7 +46,8 @@
             rels: []
         },
         css: "activity warning",
-        link: "javascript:void(0);"
+        link: "javascript:void(0);",
+        disabled: false
     },
     {
         activity: {
@@ -51,7 +56,8 @@
             rels: []
         },
         css: "activity destructive",
-        link: "javascript:void(0);"
+        link: "javascript:void(0);",
+        disabled: false
     },
 ] %}
 
@@ -82,7 +88,7 @@
     <!-- disabled activities -->
     <p>
         {% for _a in activities %}
-            {% set a = _a|merge({css: _a.css ~" normal disabled"}) %}
+            {% set a = _a|merge({ css: _a.css ~" normal disabled", disabled: true }) %}
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>
@@ -100,7 +106,7 @@
     <!-- disabled emphasized activities -->
     <p>
         {% for _a in activities %}
-            {% set a = _a|merge({css: _a.css ~" emphasized disabled"}) %}
+            {% set a = _a|merge({ css: _a.css ~" emphasized disabled", disabled: true }) %}
             {% include "html/activity/link.twig" with a %}
         {% endfor %}
     </p>

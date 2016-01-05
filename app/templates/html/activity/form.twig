@@ -9,5 +9,6 @@
         class="{{ css|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}"
         rel="{{ activity.rels|join(' ') }}"
         data-form-id="{{ form_id }}"
+        {% if disabled %}disabled="disabled"{% endif %}
     >{{ _(activity.label, translation_domain) }}</button>
 </form>

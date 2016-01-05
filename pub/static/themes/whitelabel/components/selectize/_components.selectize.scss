@@ -38,7 +38,7 @@
             padding: 0;
 
             // hide caret
-            > input { display: none; }
+            > input { @include visuallyhidden; }
 
             .item {
                 @include input-textual-shape-default;
