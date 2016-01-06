@@ -1,0 +1,14 @@
+{%- block pageerrors -%}
+<div class="page-errors-layout">
+    <div class="box"><ul class="globalerrors jsb_ jsb_Honeybee_Core/ui/GlobalErrors"></ul></div>
+    {#%- block pageerrors_activities -%}
+        {%- if _rendered_subheader_activities is defined and _rendered_subheader_activities is not empty -%}
+            <div class="subheader-activities-box">
+                <div class="subheader-activities">
+                    {{ _rendered_subheader_activities|raw }}
+                </div>
+            </div>
+        {%- endif -%}
+    {%- endblock pageerrors_activities -%#}
+</div>
+{%- endblock pageerrors -%}

@@ -1,5 +1,6 @@
 {% use 'html/ui/page-header.twig' %}
 {% use 'html/ui/page-subheader.twig' %}
+{% use 'html/ui/page-errors.twig' %}
 {% use 'html/ui/page-content.twig' %}
 {% use 'html/ui/page-footer.twig' %}
 {% set locale = tm.getCurrentLocale() %}
@@ -16,7 +17,8 @@
     <title>{{ _browser_title|default('Honeybee') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <base href="{{ ro.getBaseHref() }}" id="base_href">
-    {% block favicons %}
+    {%- block more_meta %}{% endblock more_meta -%}
+    {%- block favicons -%}
     <meta name="msapplication-TileColor" content="{{ ac('themes.tilecolor', '#FFFFFF') }}">
     <meta name="msapplication-TileImage" content="{{ theme_url }}favicon-144.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{ theme_url }}favicon.ico">
@@ -25,8 +27,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ theme_url }}favicon-144.png">
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{ theme_url }}favicon-120.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ theme_url }}favicon-114.png">
-    {% endblock favicons %}
-    {% block stylesheets %}<!-- %%STYLESHEETS%% -->{% endblock stylesheets %}
+    {%- endblock favicons -%}
+    {%- block stylesheets -%}<!-- %%STYLESHEETS%% -->{%- endblock stylesheets -%}
 {%- endblock htmlhead -%}
 </head>
 <body>
@@ -36,9 +38,8 @@
     <div class="page-header-box">
         <header class="page-header" role="banner">
             {%- block pageheader -%}{{ parent() }}{%- endblock -%}
-            <div class="page-subheader">
-                {%- block pagesubheader -%}{{ parent() }}{%- endblock -%}
-            </div>
+            <div class="page-subheader">{%- block pagesubheader -%}{{ parent() }}{%- endblock pagesubheader -%}</div>
+            <div class="page-errors">{%- block pageerrors -%}{{ parent() }}{%- endblock pageerrors -%}</div>
         </header><!-- .page-header -->
     </div><!-- .page-header-box
     --><div class="page-main-box">

@@ -79,9 +79,14 @@
                 -->
 
                 <ae:parameter name="field_error_messages">
-                    <ae:parameter name="self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}form/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'hb-validation-messages')]/${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')] | self::${htmlnsPrefix}*/../${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')]">
+                    <!-- <ae:parameter name="self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}form/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'hb-validation-messages')]/${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')] | self::${htmlnsPrefix}*/../${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')]"> -->
+                    <ae:parameter name="
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'globalerrors')]
+                        |
+                        self::${htmlnsPrefix}*/../${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')]
+                    ">
                         <ae:parameter name="location">child</ae:parameter>
-                        <ae:parameter name="markup"><![CDATA[<li class="error specific fielderror-${elementName}" data-field-name="${elementName}" data-field-id="${elementId}"><span>${elementName}</span>: <a href="javascript:void" onclick="document.location.hash='${elementId}';return false;">${errorMessage}</a></li>]]></ae:parameter>
+                        <ae:parameter name="markup"><![CDATA[<li class="error specific fielderror-${elementName}" data-field-name="${elementName}" data-field-id="${elementId}"><label for="${elementId}">${errorMessage}</label></li>]]></ae:parameter>
                     </ae:parameter>
                 </ae:parameter>
 
@@ -90,10 +95,12 @@
                     can be an input, or a form, if the error does not belong to a field or didn't match anywhere else
                 -->
                 <ae:parameter name="error_messages">
-                    <ae:parameter name="self::${htmlnsPrefix}form">
-                        <ae:parameter name="location">before</ae:parameter>
-                        <ae:parameter name="container"><![CDATA[<ul class="sheet hb-validation-messages invalid">${errorMessages}</ul>]]></ae:parameter>
-                        <ae:parameter name="markup"><![CDATA[<li class="error global"><span>${elementName}</span>: ${errorMessage}</li>]]></ae:parameter>
+                    <ae:parameter name="
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'globalerrors')]
+                    ">
+                        <ae:parameter name="location">child</ae:parameter>
+                        <!-- <ae:parameter name="container"><![CDATA[<ul class="sheet hb-validation-messages invalid">${errorMessages}</ul>]]></ae:parameter> -->
+                        <ae:parameter name="markup"><![CDATA[<li class="error global">${errorMessage}</li>]]></ae:parameter>
                         <!-- <ae:parameter name="markup">Honeybee\FrameworkBinding\Agavi\FpfToolkit::getDynamicMarkup</ae:parameter> -->
                     </ae:parameter>
                 </ae:parameter>

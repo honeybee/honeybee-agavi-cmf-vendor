@@ -178,3 +178,23 @@ label {
         padding-top: 0;
     }
 }
+
+.error {
+    display: block;
+    margin-top: 0.35em; // 5/14
+    color: color(destructive-primary);
+
+    label {
+        color: color(destructive-primary);
+    }
+
+}
+
+.globalerrors {
+    background-color: color(background-blank);
+
+    label::before {
+        @include hb-icon(warning);
+        padding-right: 0.357em; // 5/14
+    }
+}

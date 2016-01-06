@@ -45,6 +45,7 @@
     &:active { @include input-textual-active; }
     &:disabled, &.disabled { @include input-textual-disabled; }
     &.valid { @include input-textual-valid;}
+    &.invalid, &:invalid { @include input-textual-invalid; }
 }
 
 @mixin input-error {

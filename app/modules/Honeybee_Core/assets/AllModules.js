@@ -8,6 +8,7 @@ define([
 
     "magnific-popup",
     "selectize",
+    "stickyfill",
     "moment",
     "ldsh!Honeybee_Core/lib/calendar.tmpl",
     "Honeybee_Core/lib/lodash",

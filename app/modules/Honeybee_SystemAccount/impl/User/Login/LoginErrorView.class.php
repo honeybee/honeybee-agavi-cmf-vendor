@@ -15,6 +15,7 @@ class Honeybee_SystemAccount_User_Login_LoginErrorView extends View
         $this->setupHtml($request_data);
 
         $this->setAttribute('error_messages', $this->getContainer()->getValidationManager()->getErrorMessages());
+        $this->setAttribute('reset_password_enabled', AgaviConfig::get('core.reset_password_enabled', true));
 
         $this->getResponse()->setHttpStatusCode(401);
 

@@ -1,8 +1,8 @@
 @import "mixins";
 
+
 label {
     @include input-label();
-
 }
 
 .hb-field__label + .hb-field__value {
@@ -53,14 +53,18 @@ input[type="password"][readonly] {
 }
 
 input, textarea {
-    &+ .errors {
+    & + .errors {
         display: none;
         margin-left: 0;
         margin-bottom: 0;
     }
 
     &.invalid, &:invalid {
-        @include input-textual-invalid;
+        //@include input-textual-invalid;
+
+        &:focus {
+            @include input-textual-colors-default;
+        }
 
         + .errors {
             display: block;
@@ -71,10 +75,10 @@ input, textarea {
             margin-top: 0.35em; // 5/14
             color: color(destructive-primary);
 
-            &::before {
-                @include hb-icon(warning);
-                padding-right: 0.357em; // 5/14
-            }
+            //&::before {
+            //    @include hb-icon(warning);
+            //    padding-right: 0.357em; // 5/14
+            //}
         }
     }
 }

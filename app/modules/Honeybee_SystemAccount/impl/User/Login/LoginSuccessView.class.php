@@ -13,22 +13,21 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
      */
     public function executeHtml(AgaviRequestDataHolder $request_data) // @codingStandardsIgnoreEnd
     {
-        if (!session_regenerate_id(true)) {
-            $error_message = "[SESSIONID_REGENERATION_FAILED] SessionId could not be regenerated.";
-            $this->logCritical($error_message);
+        $default_target_url = $this->routing->gen('index');  // dashboard a.k.a. homepage
 
-            throw new RuntimeException($error_message);
+        if (!session_regenerate_id(true)) {
+            $this->logCritical('[SESSIONID_REGENERATION_FAILED] SessionId could not be regenerated.');
+            $this->user->clearAttributes();
+            $this->user->setAuthenticated(false);
+            $this->setRedirect($default_target_url);
+            return;
         }
 
-        $user = $this->getContext()->getUser();
-
         // set user additional attributes
-        $user->setAttributes([
+        $this->user->setAttributes([
             'avatar_url' => $this->generateAvatarUrl(),
             'background_image_urls' => $this->getBackgroundImageUrls()
         ]);
-
-        $default_target_url = $this->routing->gen('index');  // dashboard a.k.a. homepage
 
         // login after input view - redirect to previous original target or referring URL
         if ($this->user->hasAttribute('redirect_url', 'de.honeybee-cms.login')) {
