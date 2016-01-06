@@ -58,11 +58,11 @@
         .hb-field,
         .hb-actions,
         .hb-itemlist__title {
-            padding-left: $base-spacing;
+            padding-left: $small-spacing;
         }
 
         .hb-field__content {
-            padding-right: $base-spacing;
+            padding-right: $small-spacing;
         }
 
         $w: percentage(1/12);

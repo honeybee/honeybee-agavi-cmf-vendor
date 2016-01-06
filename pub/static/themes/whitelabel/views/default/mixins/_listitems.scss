@@ -1,5 +1,3 @@
-$workflow_state_fieldname: "workflow_state" !default;
-
 @mixin listitems-view() {
 
     .hb-itemlist {
@@ -24,7 +22,7 @@ $workflow_state_fieldname: "workflow_state" !default;
 
         .hb-itemlist__title {
             font-weight: 700;
-            padding: $base-spacing;
+            padding: $small-spacing;
         }
 
         @include media-query(palm) {
@@ -83,13 +81,40 @@ $workflow_state_fieldname: "workflow_state" !default;
         @include media-query(lap-and-up) {
             @include frame(color(lightgrey2));
 
-            .hb-field[data-hb-field-name="#{$workflow_state_fieldname}"] {
-                width: percentage(2/12);
+            .hb-itemlist__title {
+                white-space: nowrap;
             }
 
+            [data-hb-field-name$="email"],
+            [data-hb-field-name$="name"],
+            [data-hb-field-name="alias"],
+
+            [data-hb-field-name="datetime"],
+            [data-hb-field-name="timestamp"],
+            [data-hb-field-name$="date"],
+            [data-hb-field-name$="_at"],
+
+            [data-hb-field-name="title"],
+            [data-hb-field-name="identifier"],
+            [data-hb-field-name="uuid"],
+            [data-hb-field-name="version"],
+            [data-hb-field-name="language"],
+            [data-hb-field-name="workflow_state"],
+            [data-hb-field-name="role"] {
+                .hb-field__value {
+                    white-space: nowrap;
+                }
+            }
+
+            .hb-itemlist__title-actions {
+                @include visuallyhidden;
+            }
+            .hb-itemlist__title-role { width: 10em; }
+            .hb-itemlist__title-workflow_state { width: 11em; }
+
             .hb-actions {
-                width: percentage(2/12);
-                padding-right: $base-spacing;
+                width: 12em;
+                padding-right: $small-spacing;
                 text-align: right;
 
                 // keep button aligned when no additional activity is present
@@ -111,10 +136,6 @@ $workflow_state_fieldname: "workflow_state" !default;
 
             .hb-actions__content {
                 padding: 1px 10px 1px 1px;
-            }
-
-            .hb-itemlist__title-actions {
-                @include visuallyhidden;
             }
         }
     }

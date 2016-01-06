@@ -1,6 +1,6 @@
 @mixin itemlist-table() {
     display: table;
-    table-layout: fixed;
+    table-layout: auto;
     border-collapse: collapse;
 
     .hb-itemlist__items,
