@@ -86,17 +86,16 @@
             }
 
             [data-hb-field-name$="email"],
-            [data-hb-field-name$="name"],
+            [data-hb-field-name="username"],
+            [data-hb-field-name="nickname"],
             [data-hb-field-name="alias"],
 
+            [data-hb-field-name$="date"],
             [data-hb-field-name="datetime"],
             [data-hb-field-name="timestamp"],
-            [data-hb-field-name$="date"],
-            [data-hb-field-name$="_at"],
 
-            [data-hb-field-name="title"],
-            [data-hb-field-name="identifier"],
-            [data-hb-field-name="uuid"],
+            [data-hb-field-name="modified_at"],
+            [data-hb-field-name="created_at"],
             [data-hb-field-name="version"],
             [data-hb-field-name="language"],
             [data-hb-field-name="workflow_state"],
@@ -109,11 +108,12 @@
             .hb-itemlist__title-actions {
                 @include visuallyhidden;
             }
-            .hb-itemlist__title-role { width: 10em; }
-            .hb-itemlist__title-workflow_state { width: 11em; }
+
+            .hb-itemlist__title-role,
+            .hb-itemlist__title-workflow_state { width: 8em; }
 
             .hb-actions {
-                width: 12em;
+                width: 9em;
                 padding-right: $small-spacing;
                 text-align: right;
 
