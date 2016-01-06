@@ -1,8 +1,26 @@
+/*
+
+This is an example of a module specific SCSS file. By default this file
+
+app/modules/[Vendor_Package]/assets/styles.scss
+
+will be compiled and added as a stylesheet link after the main.css file
+in the master layout automatically.
+
+As the module specific scss files are added as standalone stylesheets
+any libraries, mixins etc. are not available and have to be imported.
+
+In most projects it's probably advisable to copy and change the default
+theme as that's most probably adjusted anyways.
+
+*/
+
+
 @import "../../../../pub/static/themes/whitelabel/vars";
 @import "../../../../pub/static/themes/whitelabel/vendor/inuit-responsive-settings/settings.responsive";
 @import "../../../../pub/static/themes/whitelabel/vendor/inuit-responsive-tools/tools.responsive";
 
-.itemlist {
+.hb-itemlist {
 @include media-query(desk) {
         $w: percentage(1/12);
         .hb-field[data-hb-field-name="username"] {
