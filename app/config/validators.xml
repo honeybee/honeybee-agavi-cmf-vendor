@@ -59,8 +59,11 @@
                     <argument>__submit</argument>
                 </arguments>
             </validator>
-            <validator class="isset" name="valid_editform_tab" required="false">
-                <argument>tabs_as_fields_with_viewtemplate</argument>
+            <validator class="arraylength" name="valid_tab_trigger" required="false">
+                <arguments base="hb-tabs__trigger[]"></arguments>
+                <error>Couldn't find tab to open</error>
+                <ae:parameter name="min">1</ae:parameter>
+                <ae:parameter name="max">1</ae:parameter>
             </validator>
         </validators>
 

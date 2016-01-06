@@ -12,7 +12,6 @@ class ModifySuccessView extends View
         $this->getResponse()->setRedirect(
             $this->getContext()->getRouting()->gen(null, [], [ 'relative' => false ])
         );
-
         return;
     }
 }

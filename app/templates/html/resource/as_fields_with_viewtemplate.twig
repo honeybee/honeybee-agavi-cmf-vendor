@@ -1,8 +1,10 @@
 <div class="{{ css }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-tabs hb-tabs--stack jsb_ jsb_Honeybee_Core/ui/Tabs">
-        {# set tabs_id = view_template.getName()|default('as_fields_with_viewtemplate')|random() #}
+        {# {% set tabs_id = random() %} #}
         {# this name must be validated to repopulate the tab the user was on when submitting the form - see app/config/validators.xml #}
-        {% set tabs_id = random() %}
+        {# {% set tabs_id = 'tabs_as_fields_with_viewtemplate' %} #}
+        {# tabs_id should be given to this template #}
+        {% set tabs_id = view_template.getName()|default('tabs_as_fields_with_viewtemplate') %}
         <div class="hb-tabs__header">
             <ul class="hb-tabs__toggles">
                 {% for tab in view_template.getTabList() %}
@@ -14,7 +16,7 @@
             {% for tab in view_template.getTabList() %}
             <input
                 type="radio"
-                name="{{tabs_id}}[]"
+                name="hb-tabs__trigger[{{tabs_id}}][]"
                 id="{{tabs_id}}-{{tab.name}}"
                 value="{{tabs_id}}-{{tab.name}}"
                 class="hb-tabs__trigger"
