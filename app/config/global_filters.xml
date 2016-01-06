@@ -51,7 +51,6 @@
                         self::${htmlnsPrefix}* |
                         self::${htmlnsPrefix}*/../..//${htmlnsPrefix}label |
                         self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}form |
-                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}form/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'hb-validation-messages')] |
                         self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'page-errors')]
                     ">invalid</ae:parameter>
                 </ae:parameter>
@@ -82,8 +81,7 @@
                 <ae:parameter name="field_error_messages">
                     <!-- <ae:parameter name="self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}form/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'hb-validation-messages')]/${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')] | self::${htmlnsPrefix}*/../${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')]"> -->
                     <ae:parameter name="
-                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'globalerrors')]
-                        |
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'hb-errors__fields')] |
                         self::${htmlnsPrefix}*/../${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'errors')]
                     ">
                         <ae:parameter name="location">child</ae:parameter>
@@ -97,7 +95,7 @@
                 -->
                 <ae:parameter name="error_messages">
                     <ae:parameter name="
-                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'globalerrors')]
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}ul[contains(concat(' ', @class, ' '), 'hb-errors__global')]
                     ">
                         <ae:parameter name="location">child</ae:parameter>
                         <!-- <ae:parameter name="container"><![CDATA[<ul class="sheet hb-validation-messages invalid">${errorMessages}</ul>]]></ae:parameter> -->

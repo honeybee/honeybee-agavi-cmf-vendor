@@ -1,6 +1,13 @@
 {%- block pageerrors -%}
 <div class="page-errors-layout">
-    <div class="box"><ul class="globalerrors jsb_ jsb_Honeybee_Core/ui/GlobalErrors"></ul></div>
+    <div class="box">
+        {%- spaceless -%}
+        <div class="hb-errors jsb_ jsb_Honeybee_Core/ui/GlobalErrors">
+            <ul class="hb-errors__global"></ul>
+            <ul class="hb-errors__fields"></ul>
+        </div>
+        {%- endspaceless -%}
+    </div>
     {#%- block pageerrors_activities -%}
         {%- if _rendered_subheader_activities is defined and _rendered_subheader_activities is not empty -%}
             <div class="subheader-activities-box">

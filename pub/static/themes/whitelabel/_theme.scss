@@ -179,19 +179,15 @@ label {
     }
 }
 
-.error {
-    display: block;
-    margin-top: 0.35em; // 5/14
-    color: color(destructive-primary);
-
-    label {
-        color: color(destructive-primary);
-    }
-
+.page-errors:not(.invalid) {
+    display: none;
 }
 
-.globalerrors {
+.hb-errors {
     background-color: color(background-blank);
+}
+
+.hb-errors > ul {
     margin-left: 0;
     margin-bottom: 0.35em;
 
@@ -201,6 +197,13 @@ label {
     }
 }
 
-.page-errors:not(.invalid) {
-    display: none;
+.error {
+    display: block;
+    margin-top: 0.35em; // 5/14
+    color: color(destructive-primary);
+
+    label {
+        color: color(destructive-primary);
+    }
+
 }
