@@ -51,7 +51,7 @@ class ResourceValidator extends AgaviValidator
 
                 $head_revision = $history->getLast()->getSeqNumber();
                 $resource = $this->loadSpecificResourceRevision($history, $revision);
-            } else if ($this->getArgument()) {
+            } elseif ($this->getArgument()) {
                 if ($resource = $this->loadCurrentResourceProjection()) {
                     $head_revision = $resource->getRevision();
                 }
@@ -62,7 +62,7 @@ class ResourceValidator extends AgaviValidator
             $this->logError('Resource does not exist', $argument);
             $this->throwError('non_existant');
             return false;
-        } else if ($this->getParameter('allow_default_payload', false)) {
+        } elseif ($this->getParameter('allow_default_payload', false)) {
             $resource = $this->addPayloadToResource($resource);
         }
 

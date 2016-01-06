@@ -21,6 +21,7 @@
                 <error>Invalid command payload given.</error>
                 <error for="email.invalid_format">Email has an invalid format.</error>
                 <error for="username.min_length">Username is too short.</error>
+                <error for="username.max_length">Username is too long.</error>
                 <error for="comments.comment.title.min_length">Comment-Title is too short.</error>
             </validator>
 
@@ -28,6 +29,7 @@
                 <arguments base="create_user" />
                 <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="export">resource</ae:parameter>
+                <ae:parameter name="create_fresh_resource">true</ae:parameter>
                 <ae:parameter name="allow_default_payload">true</ae:parameter>
             </validator>
 
