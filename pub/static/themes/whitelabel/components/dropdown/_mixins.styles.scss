@@ -62,6 +62,11 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
             }
         }
 
+        // toggle focus
+        .#{$name}__trigger:focus ~ .#{$name}__toggle {
+            @include button-shadow-normal-navigational-focus;
+        }
+
         // .#{$name}__trigger:checked ~ .#{$name}__toggle {
         // }
 
@@ -138,6 +143,11 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
 
         .#{$name}__more {
             background-color: color(white);
+        }
+
+        // toggle focus
+        .#{$name}__trigger:focus ~ .#{$name}__toggle {
+            @include button-shadow-emphasized-navigational-focus;
         }
 
         @content;
@@ -232,6 +242,11 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
                 border-top-left-radius: 0;
                 border-bottom-left-radius: 0;
             }
+        }
+
+        // toggle focus
+        .#{$name}__trigger:focus ~ .#{$name}__toggle {
+            @include button-shadow-emphasized-navigational-focus;
         }
 
         // icon size

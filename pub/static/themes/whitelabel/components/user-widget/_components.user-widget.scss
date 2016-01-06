@@ -59,6 +59,10 @@ $user-widget-avatar-size: $base-spacing*3 !default;
             // }
         }
 
+        // toggle focus
+        .user-dropdown__trigger:focus ~ .user-dropdown__toggle {
+            @include button-shadow-emphasized-navigational-focus;
+        }
     }
 }
 

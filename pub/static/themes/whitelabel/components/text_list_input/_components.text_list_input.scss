@@ -42,9 +42,7 @@
         }
 
         input:focus ~ span {
-            outline-color: color(outline);
-            outline-width: 2px;
-            outline-style: solid;
+            @include outline;
         }
     }
 }

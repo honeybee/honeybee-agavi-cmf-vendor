@@ -83,7 +83,7 @@
     box-shadow: none;
 }
 @mixin button-shadow-emphasized-navigational-focus {
-    box-shadow: 0 0 2px color(outline);
+    box-shadow: 0 0 1px 2px color(outline);
 }
 @mixin button-shadow-emphasized-navigational-active {
     box-shadow: inset 0 3px 3px rgba(color(black), 0.12);

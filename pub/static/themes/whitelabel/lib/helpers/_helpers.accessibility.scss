@@ -105,3 +105,9 @@
         left: initial !important;
     }
 }
+
+@mixin outline($outline-width: 2px) {
+    outline-color: color(outline);
+    outline-width: $outline-width;
+    outline-style: solid;
+}
