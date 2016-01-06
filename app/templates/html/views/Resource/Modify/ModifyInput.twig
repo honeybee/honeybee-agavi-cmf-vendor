@@ -13,11 +13,6 @@
 {% block primary %}
 <form method="post" action="{{ ro.gen(null) }}" name="editform" id="editform" enctype="multipart/form-data">
 
-    <div class="hb-validation-messages">
-        <h4>Unfortunately…</h4>
-        <ul class="errors"></ul>
-    </div>
-
     <div class="hb-modifyitem-wrapper">
         {{ rendered_resource|raw }}
     </div>
