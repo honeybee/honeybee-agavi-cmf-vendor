@@ -192,9 +192,15 @@ label {
 
 .globalerrors {
     background-color: color(background-blank);
+    margin-left: 0;
+    margin-bottom: 0.35em;
 
     label::before {
         @include hb-icon(warning);
         padding-right: 0.357em; // 5/14
     }
+}
+
+.page-errors:not(.invalid) {
+    display: none;
 }
