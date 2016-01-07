@@ -51,7 +51,9 @@
                         self::${htmlnsPrefix}* |
                         self::${htmlnsPrefix}*/../..//${htmlnsPrefix}label |
                         self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}form |
-                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'page-errors')]
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}body/descendant::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'page-errors')] |
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'hb-tabs')] |
+                        self::${htmlnsPrefix}*/ancestor::${htmlnsPrefix}div[contains(concat(' ', @class, ' '), 'hb-panel')]
                     ">invalid</ae:parameter>
                 </ae:parameter>
 
