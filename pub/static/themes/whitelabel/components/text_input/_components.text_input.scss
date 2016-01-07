@@ -48,7 +48,9 @@ input[type="password"][readonly] {
     input[type="url"],
     input[type="email"],
     input[type="password"] {
-        @include input-textual-colors-valid;
+        &:not(:focus) {
+            @include input-textual-colors-valid;
+        }
     }
 }
 
@@ -63,7 +65,7 @@ input, textarea {
         //@include input-textual-invalid;
 
         &:focus {
-            @include input-textual-colors-default;
+            @include input-textual-colors-focus;
         }
 
         + .errors {
