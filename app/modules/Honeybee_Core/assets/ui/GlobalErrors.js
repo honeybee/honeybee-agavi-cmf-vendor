@@ -38,6 +38,20 @@ define([
         $(window).on('scroll.' + this.prefix, function() { self.onScroll(self.$widget); });
         $(window).on('orientationchange.' + this.prefix, function() { self.onScroll(self.$widget); });
         $(window).on('resize.' + this.prefix, function() { self.onResize(self.$widget); });
+
+
+        /**
+         * handle click events on error messages and focus the respective input element
+         */
+        $(document).on('click', '.hb-errors__fields .error.specific label', function(ev) {
+            var $target = $(ev.target);
+            var elm_id = $target.closest('.error.specific').data('field-id');
+            var $elm = $('#' + elm_id);
+            if ($elm.length > 0) {
+                jsb.fireEvent('GLOBALERRORS:CLICKED_LABEL_FOR_ELEMENT', { 'element_id': elm_id });
+            }
+        });
+
     };
 
     // depending on scroll position of $el switch to position:fixed for clone of that element

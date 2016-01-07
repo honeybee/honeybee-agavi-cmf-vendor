@@ -29,26 +29,42 @@ define([
              * applying the new focus state.
              */
             setTimeout(function() {
-                self.highlight();
+                self.selectTab();
+                self.focusTab();
             }, 0);
         });
-        self.highlight();
+
+        self.selectTab();
+
+        jsb.whenFired('GLOBALERRORS:CLICKED_LABEL_FOR_ELEMENT', function(values, event_name) {
+            // open/select the tab that contains the element to focus
+            if (values.element_id) {
+                var $panels = self.$widget.find('> .hb-tabs__content > .hb-tabs__panel');
+                var $panel = $panels.has('#' + values.element_id);
+                if ($panel.length > 0) {
+                    $panel.prev('.hb-tabs__trigger').prop("checked", true);
+                    self.selectTab();
+                }
+            }
+        });
     }
 
     Tabs.prototype = new Widget();
     Tabs.prototype.constructor = Tabs;
 
-    Tabs.prototype.highlight = function() {
-        var active_id = this.$widget.find(".hb-tabs__trigger:checked").attr("id");
-        var $selected_label = this.$widget.find(".hb-tabs__header label[for='"+active_id+"']");
+    Tabs.prototype.selectTab = function() {
+        var active_id = this.$widget.find("> .hb-tabs__content > .hb-tabs__trigger:checked").attr("id");
+        var $selected_label = this.$widget.find("> .hb-tabs__header label[for='"+active_id+"']");
 
-        this.$widget.find(".hb-tabs__header label").removeClass("selected");
+        this.$widget.find("> .hb-tabs__header label").removeClass("selected");
         $selected_label.addClass("selected");
+    };
 
-        var focus_id = this.$widget.find(".hb-tabs__trigger:focus").attr("id");
-        //console.log("focus id", focus_id);
-        var $focus_label = this.$widget.find(".hb-tabs__header label[for='"+focus_id+"']");
-        this.$widget.find(".hb-tabs__header label").removeClass("focus");
+    Tabs.prototype.focusTab = function() {
+        var focus_id = this.$widget.find("> hb-tabs__content > .hb-tabs__trigger:focus").attr("id");
+        //this.log("focus id", focus_id);
+        var $focus_label = this.$widget.find("> .hb-tabs__header label[for='"+focus_id+"']");
+        this.$widget.find("> .hb-tabs__header label").removeClass("focus");
         $focus_label.addClass("focus");
     };
 

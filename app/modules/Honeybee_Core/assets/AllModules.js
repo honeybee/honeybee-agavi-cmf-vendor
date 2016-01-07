@@ -22,7 +22,8 @@ define([
     "Honeybee_Core/ui/Tabs",
     "Honeybee_Core/ui/ActionGroup",
     "Honeybee_Core/ui/EmbeddedEntityList",
-    "Honeybee_Core/ui/EntityReferenceList"
+    "Honeybee_Core/ui/EntityReferenceList",
+    "Honeybee_Core/ui/GlobalErrors"
 ], function($, jsb) {
 
     // nothing to do here, only use to load all stuff at once
