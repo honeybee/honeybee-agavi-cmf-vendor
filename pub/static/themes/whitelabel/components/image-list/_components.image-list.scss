@@ -68,6 +68,10 @@ $thumb-size-default: 150px;
 
 .imagelist__input-multiple-label {
     @include button-emphasized-navigational;
+
+    input:focus ~ & {
+        @include button-emphasized-navigational-focus;
+    }
 }
 
 .imagelist__delete-input {
@@ -249,8 +253,8 @@ $thumb-size-default: 150px;
     }
 }
 
-
 .imagelist__image-input:focus ~ .imagelist__upload-label {
+    @include button-emphasized-mutating-focus;
 }
 
 
