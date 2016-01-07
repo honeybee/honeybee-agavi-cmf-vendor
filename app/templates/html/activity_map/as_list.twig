@@ -10,7 +10,7 @@
 {% set more_attr = (more_html_attributes | default({})) | cast_to_array %}
 
 {%- block activities_list -%}
-<div class="{{ list_name }} {{ list_css }}" {% for attr, val in list_attr %} {{ attr }}="{{ val }}" {% endfor %}>
+<div class="{{ list_name }} {{ list_css }} actvity-group" {% for attr, val in list_attr %} {{ attr }}="{{ val }}" {% endfor %}>
     {%- block more -%}
     {%- if more_activities -%}
     <ul class="{{ list_name ~ '__more' }} {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>

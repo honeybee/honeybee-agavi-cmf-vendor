@@ -22,3 +22,9 @@
 %activity-emphasized-positive { @include button-emphasized-positive; }
 %activity-emphasized-warning { @include button-emphasized-warning; }
 %activity-emphasized-destructive { @include button-emphasized-destructive; }
+
+// avoid partial hiding of focusing border caused by adjacent activities
+.actvity-group .activity:focus {
+    @include zindex("base", 1);
+    position: relative;
+}
