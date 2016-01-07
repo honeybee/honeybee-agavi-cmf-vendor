@@ -89,6 +89,9 @@ $pager-icon-size: 1.5 !default;
     @include button-emphasized-navigational {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+        // same hight of adjacent input
+        line-height: normal;
+        padding: 0.71em; // (10/14)
     };
 }
 .pager__next_page a {

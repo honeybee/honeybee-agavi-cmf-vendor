@@ -16,6 +16,11 @@ body {
 
 a {
     color: color(blue);
+
+    &:focus {
+        outline-width: 0;
+        @include button-shadow-normal-navigational-focus;
+    }
 }
 
 button {
