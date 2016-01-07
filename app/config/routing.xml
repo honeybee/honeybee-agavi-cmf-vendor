@@ -30,7 +30,7 @@
                 <ignore>ext</ignore>
             </route>
 
-            <route name="status" pattern="^/status$" module="%actions.status_module%" action="%actions.status_action%" constraint="read" stop="true" />
+            <route name="status" pattern="^/status$" module="%actions.status_module%" action="%actions.status_action%"  stop="true" />
 
             <!-- matches "/de" or "/en" at the beginning of the URL and uses either value to set the locale,
                  with British Pounds Sterling as the currency. Execution will not stop if this route matches.
