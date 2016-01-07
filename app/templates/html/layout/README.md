@@ -1,6 +1,6 @@
 # MasterLayout
 
-The twig block structure used in the ```html/layout/MasterLayout.twig``` is as follows:
+The *twig block structure* used in the ```html/layout/MasterLayout.twig``` is as follows:
 
 - `htmlhead`
     - ```more_meta```
@@ -15,6 +15,7 @@ The twig block structure used in the ```html/layout/MasterLayout.twig``` is as f
             - `brand`
         - `pagesubheader`
             - ```subheader_activities```
+        - `pageerrors`
         - `pagecontent`
             - `pageinfo`
                 - `toc`
