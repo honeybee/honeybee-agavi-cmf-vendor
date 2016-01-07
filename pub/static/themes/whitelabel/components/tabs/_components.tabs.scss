@@ -14,7 +14,10 @@
 
         &:focus,
         &.focus {
-            outline: 1px solid color(grey1);
+            &,
+            &.selected {
+                @include outline;
+            }
         }
     }
 }
