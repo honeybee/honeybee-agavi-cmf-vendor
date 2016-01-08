@@ -2,13 +2,13 @@
 
 {% block primary %}
 <div class="primary-content-box">
-    {% include "html/dummy/colors_typography.twig" %}
-    {% include "html/dummy/activities.twig" %}
-    {% include "html/dummy/widgets.twig" %}
-    {% include "html/dummy/input_text.twig" %}
-    {% include "html/dummy/input_checkable.twig" %}
-    {% include "html/dummy/input_text_list.twig" %}
-    {% include "html/dummy/input_imagelist.twig" %}
-    {% include "html/dummy/layout.twig" %}
+    {% include "html/dummy/colors_typography.twig" with { translation_domain: translation_domain } %}
+    {% include "html/dummy/activities.twig" with { translation_domain: translation_domain ~ '.activity' } %}
+    {% include "html/dummy/widgets.twig" with { translation_domain: translation_domain } %}
+    {% include "html/dummy/input_text.twig" with { translation_domain: translation_domain ~ '.fields' } %}
+    {% include "html/dummy/input_checkable.twig" with { translation_domain: translation_domain ~ '.fields' }  %}
+    {% include "html/dummy/input_text_list.twig" with { translation_domain: translation_domain ~ '.fields' }  %}
+    {% include "html/dummy/input_imagelist.twig" with { translation_domain: translation_domain ~ '.fields' }  %}
+    {% include "html/dummy/layout.twig" with { translation_domain: translation_domain } %}
 </div>
 {%- endblock -%}

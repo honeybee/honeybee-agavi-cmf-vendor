@@ -73,5 +73,18 @@
         .user-widget {
             margin-top: 2em;
         }
+
+        .component-menu {
+            .menu__toggle {
+                position: relative;
+            }
+        }
+
+        .component-navigation__wrapper {
+            background: color(white);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            padding-top: 1em;
+            padding-bottom: 1em;
+        }
     }
 }

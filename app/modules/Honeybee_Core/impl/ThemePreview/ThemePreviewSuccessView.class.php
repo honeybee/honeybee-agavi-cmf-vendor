@@ -116,6 +116,7 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
             AgaviConfig::get('core.theme_preview_translation_domain', $tm->getDefaultDomain())
         );
 
+        $this->setAttribute('_rendererd_sample_navigation', $this->renderSampleNavigation());
         $this->setAttribute('_typed_activity_groups', $this->getRendererdActivityMaps());
         $this->setAttribute('_destructive_activities', $this->getDestructiveActivities());
         $this->setAttribute(
@@ -335,5 +336,14 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
             $activity_map,
             $render_settings
         );
+    }
+
+    public function renderSampleNavigation()
+    {
+        $navigation_service = $this->getServiceLocator()->getNavigationService();
+
+        $navigation = $navigation_service->getNavigation('theme_preview');
+
+        return $this->renderSubject($navigation);
     }
 }

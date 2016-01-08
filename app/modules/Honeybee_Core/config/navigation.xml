@@ -11,13 +11,26 @@
             <items name="honeybee.core">
                 <activity scope="honeybee.core">theme_preview</activity>
             </items>
+            <items name="honeybee.core.theme_preview">
+                <activity scope="honeybee.core.theme_preview">sample_activity_1</activity>
+                <activity scope="honeybee.core.theme_preview">sample_activity_2</activity>
+                <activity scope="honeybee.core.theme_preview">sample_activity_3</activity>
+            </items>
         </available_items>
-        
+
         <navigations default="main">
             <navigation name="main">
                 <groups>
                     <group name="honeybee.core">
                         <include>honeybee.core</include>
+                    </group>
+                </groups>
+            </navigation>
+
+            <navigation name="theme_preview">
+                <groups>
+                    <group name="sample_navigation_group">
+                        <include>honeybee.core.theme_preview</include>
                     </group>
                 </groups>
             </navigation>

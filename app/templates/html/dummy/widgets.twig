@@ -133,4 +133,33 @@
             } %}
         </div>
     </div>
+
+    {% if not us.isAuthenticated() %}
+    <div class="sheet component-menu">
+        <h1>Component: Menu button</h1>
+
+        <div class="layout">
+            <div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                <div class="menu__wrapper">
+                    <input type="checkbox" id="menu-trigger" class="menu__trigger">
+                    <label for="menu-trigger" class="menu__toggle menu__toggle-open">
+                        <span class="menu__toggle-button">{{ _('menu') }}</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="sheet component-navigation">
+        <h1>Component: Navigation</h1>
+
+        <div class="layout">
+            <div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                <div class="component-navigation__wrapper">
+                    {{ _rendererd_sample_navigation|raw }}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

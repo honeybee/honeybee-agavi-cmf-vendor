@@ -7,9 +7,11 @@
                     <ae:parameter name="navigations">
                         <ae:parameter name="de">
                             <ae:parameter name="main.honeybee.core">System</ae:parameter>
+                            <ae:parameter name="theme_preview.sample_navigation_group">Navigation group</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="main.honeybee.core">System</ae:parameter>
+                            <ae:parameter name="theme_preview.sample_navigation_group">Navigation group</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>
@@ -40,7 +42,22 @@
                             <ae:parameter name="theme_preview.label">Honeybee</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
-                    <ae:parameter name="theme_preview">
+                </message_translator>
+            </translator>
+
+            <translator domain="honeybee.core.theme_preview">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="activity">
+                        <ae:parameter name="de">
+                            <ae:parameter name="sample_activity_1.label">Navigation item 1</ae:parameter>
+                            <ae:parameter name="sample_activity_2.label">Navigation item 2</ae:parameter>
+                            <ae:parameter name="sample_activity_3.label">Navigation item 3</ae:parameter>
+                            <ae:parameter name="sample_activity_1.description">Each navigation item is connected to a simple activity</ae:parameter>
+                            <ae:parameter name="sample_activity_2.description">Each navigation item is connected to a simple activity</ae:parameter>
+                            <ae:parameter name="sample_activity_3.description">Each navigation item is connected to a simple activity</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                    <ae:parameter name="fields">
                         <ae:parameter name="de">
                             <ae:parameter name="Text Input One.field_name">Text Input One</ae:parameter>
                             <ae:parameter name="Text Input Two (Invalid Value).field_name">Text Input Two (Invalid Value)</ae:parameter>

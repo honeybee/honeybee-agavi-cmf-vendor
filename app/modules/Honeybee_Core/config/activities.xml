@@ -13,6 +13,27 @@
                     </rels>
                 </activity>
             </activity_container>
+
+            <activity_container scope="honeybee.core.theme_preview">
+                <activity name="sample_activity_1">
+                    <url type="route">null</url>
+                    <rels>
+                        <rel>activity</rel>
+                    </rels>
+                </activity>
+                <activity name="sample_activity_2">
+                    <url type="route">null</url>
+                    <rels>
+                        <rel>activity</rel>
+                    </rels>
+                </activity>
+                <activity name="sample_activity_3">
+                    <url type="route">null</url>
+                    <rels>
+                        <rel>activity</rel>
+                    </rels>
+                </activity>
+            </activity_container>
         </activity_containers>
     </ae:configuration>
 </ae:configurations>
