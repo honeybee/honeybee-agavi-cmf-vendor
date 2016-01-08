@@ -2,13 +2,23 @@
     display: none;
 }
 
-.hb-errors {
+.hb-errors,
+.hb-errors__global,
+.hb-errors__fields {
     background-color: color(background-blank);
 }
 
 .hb-errors > ul {
     margin-left: 0;
     margin-bottom: 0.35em;
+}
+
+.fixed-to-top .hb-errors__global {
+    display: none;
+}
+
+.fixed-to-top {
+    @include shadow-overlay;
 }
 
 .hb-errors .error__message::before {

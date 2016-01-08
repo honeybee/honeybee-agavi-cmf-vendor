@@ -1,6 +1,7 @@
 define([
     "Honeybee_Core/Widget",
-], function(Widget) {
+    "lodash"
+], function(Widget, _) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/GlobalErrors",
@@ -10,6 +11,8 @@ define([
             'width': '100%',
             'left': 0
         },
+        selector: undefined, // e.g. '.hb-errors__fields',
+        debounce: 50, // milliseconds
         datakey: 'globalerrors'
     };
 
@@ -17,16 +20,27 @@ define([
         this.init(dom_element, default_options);
         this.addOptions(options);
 
-        var data = this.$widget.data(this.options.datakey);
-        if (!data) {
-            data = {
-                offsetTop: this.$widget.offset().top,
-                top: parseInt(this.options.offset || 0, 10)
-            };
-            this.$widget.data(this.options.datakey, data);
+        // use the widget element as the one to fix-to-top or the given selector from options
+        this.$fix = this.$widget;
+        if (this.options.selector) {
+            this.$fix = this.$widget.find(this.options.selector).first();
         }
 
-        this.onScroll(this.$widget);
+        if (this.$fix.length !== 1) {
+            this.logError('Given selector does not match an element.');
+            return;
+        }
+
+        var data = this.$fix.data(this.options.datakey);
+        if (!data) {
+            data = {
+                offsetTop: this.$fix.offset().top,
+                top: parseInt(this.options.offset || 0, 10)
+            };
+            this.$fix.data(this.options.datakey, data);
+        }
+
+        this.onScroll();
         this.attachEventHandlers();
     };
 
@@ -35,24 +49,32 @@ define([
 
     GlobalErrors.prototype.attachEventHandlers = function() {
         var self = this;
-        $(window).on('scroll.' + this.prefix, function() { self.onScroll(self.$widget); });
-        $(window).on('orientationchange.' + this.prefix, function() { self.onScroll(self.$widget); });
-        $(window).on('resize.' + this.prefix, function() { self.onResize(self.$widget); });
+
+        $(window).on(
+            'scroll.' + this.prefix + ' orientationchange.' + this.prefix,
+            _.debounce(
+                function() { self.onScroll(); },
+                this.options.debounce
+            )
+        );
+
+        $(window).on('resize.' + this.prefix, _.debounce(function() { self.onResize(); }, this.options.debounce));
 
         // handle click events on error messages and focus the respective input element
-        $(document).on('click', '.hb-errors__fields .error.specific label', function(ev) {
+        $(document).on('click.' + this.prefix, '.hb-errors__fields .error.specific label', function(ev) {
             var $target = $(ev.target);
             var elm_id = $target.closest('.error.specific').data('field-id');
             var $elm = $('#' + elm_id);
             if ($elm.length > 0) {
-                jsb.fireEvent('GLOBALERRORS:CLICKED_LABEL_FOR_ELEMENT', { 'element_id': elm_id });
+                jsb.fireEvent('TABS:OPEN_TAB_THAT_CONTAINS', { 'element_id': elm_id });
             }
         });
-
     };
 
-    // depending on scroll position of $el switch to position:fixed for clone of that element
-    GlobalErrors.prototype.onScroll = function($el) {
+    // depending on scroll position of $elem switch to position:fixed for clone of that element
+    GlobalErrors.prototype.onScroll = function($elem) {
+        var $el = $elem || this.$fix;
+
         var data = $el.data(this.options.datakey);
         if (!data) {
             return;
@@ -86,7 +108,9 @@ define([
     };
 
     // recalculate dimensions of the hidden element and update the clone dimensions if necessary
-    GlobalErrors.prototype.onResize = function($el) {
+    GlobalErrors.prototype.onResize = function($elem) {
+        var $el = $elem || this.$fix;
+
         var data = $el.data(this.options.datakey);
 
         if (data && data.$clone) {

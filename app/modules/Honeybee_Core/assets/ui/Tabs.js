@@ -36,10 +36,10 @@ define([
 
         self.selectTab();
 
-        jsb.whenFired('GLOBALERRORS:CLICKED_LABEL_FOR_ELEMENT', function(values, event_name) {
+        jsb.whenFired('TABS:OPEN_TAB_THAT_CONTAINS', function(values, event_name) {
             if (values.element_id) {
-                // open/select the tab that contains the element to focus
-                self.openTabThatContains('#' + values.element_id);
+                // $(id) would need escaping for ids with dots…
+                self.openTabThatContains(document.getElementById(values.element_id));
             }
         });
 
@@ -52,9 +52,9 @@ define([
     Tabs.prototype = new Widget();
     Tabs.prototype.constructor = Tabs;
 
-    Tabs.prototype.openTabThatContains = function(selector) {
+    Tabs.prototype.openTabThatContains = function(element) {
         var $panels = this.$widget.find('> .hb-tabs__content > .hb-tabs__panel');
-        var $panel = $panels.has(selector);
+        var $panel = $panels.has(element);
         if ($panel.length > 0) {
             $panel.prev('.hb-tabs__trigger').prop("checked", true);
             this.selectTab();
