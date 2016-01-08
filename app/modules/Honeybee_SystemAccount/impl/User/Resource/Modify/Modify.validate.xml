@@ -34,7 +34,9 @@
                 </ae:parameter>
                 <error>Invalid command payload given.</error>
                 <error for="conflict_detected">Data has changed and conflicts with your attempt to modify it (same fields being changed).</error>
-                <error for="email.invalid_format">Invalid format for an email.</error>
+                <error for="email.invalid_format">Email has an invalid format.</error>
+                <error for="username.min_length">Username is too short.</error>
+                <error for="username.max_length">Username is too long.</error>
                 <error for="images.copyright_url.host_missing">Missing host for copyright-url.</error>
             </validator>
 

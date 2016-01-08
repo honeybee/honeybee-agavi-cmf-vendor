@@ -195,20 +195,19 @@ label {
 .hb-errors > ul {
     margin-left: 0;
     margin-bottom: 0.35em;
+}
 
-    label::before {
-        @include hb-icon(warning);
-        padding-right: 0.357em; // 5/14
-    }
+.hb-errors .error__message::before {
+    @include hb-icon(warning);
+    padding-right: 0.35em;
 }
 
 .error {
     display: block;
-    margin-top: 0.35em; // 5/14
+    margin-top: 0.35em;
     color: color(destructive-primary);
 
     label {
         color: color(destructive-primary);
     }
-
 }
