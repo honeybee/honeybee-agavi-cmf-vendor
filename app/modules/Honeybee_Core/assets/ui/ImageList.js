@@ -73,7 +73,7 @@ define([
 
         this.bindKeyEvents();
 
-        this.current_index = 0;
+        this.current_index = -1;
 
         if (this.isReadable) {
             this.bindDropEvents();
@@ -151,6 +151,10 @@ define([
 
             items.eq(index).remove();
             thumbs.eq(index).remove();
+
+            // TODO reindex the form fields to prevent gaps and update self.current_index
+            // the FormPopulationFilter uses the index provided here to repopulate
+            // while the rendering of the images on serverside reindexes from 0-n without gaps
 
             self.updatePopupItems();
 

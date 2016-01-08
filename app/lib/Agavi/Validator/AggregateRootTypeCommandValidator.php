@@ -846,7 +846,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         $uploaded_file = new HoneybeeUploadedFile(
             [
                 HoneybeeUploadedFile::PROPERTY_LOCATION => $location,
-                HoneybeeUploadedFile::PROPERTY_FILENAME => $image_payload[$attribute->getFileNamePropertyName()],
+                HoneybeeUploadedFile::PROPERTY_FILENAME => $image_payload[$attribute->getFileNamePropertyName()] ?: '',
                 HoneybeeUploadedFile::PROPERTY_MIMETYPE => $mimetype,
                 HoneybeeUploadedFile::PROPERTY_FILESIZE => $size,
                 HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
