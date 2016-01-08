@@ -183,31 +183,3 @@ label {
         padding-top: 0;
     }
 }
-
-.page-errors:not(.invalid) {
-    display: none;
-}
-
-.hb-errors {
-    background-color: color(background-blank);
-}
-
-.hb-errors > ul {
-    margin-left: 0;
-    margin-bottom: 0.35em;
-}
-
-.hb-errors .error__message::before {
-    @include hb-icon(warning);
-    padding-right: 0.35em;
-}
-
-.error {
-    display: block;
-    margin-top: 0.35em;
-    color: color(destructive-primary);
-
-    label {
-        color: color(destructive-primary);
-    }
-}

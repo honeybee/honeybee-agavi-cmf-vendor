@@ -39,10 +39,7 @@ define([
         $(window).on('orientationchange.' + this.prefix, function() { self.onScroll(self.$widget); });
         $(window).on('resize.' + this.prefix, function() { self.onResize(self.$widget); });
 
-
-        /**
-         * handle click events on error messages and focus the respective input element
-         */
+        // handle click events on error messages and focus the respective input element
         $(document).on('click', '.hb-errors__fields .error.specific label', function(ev) {
             var $target = $(ev.target);
             var elm_id = $target.closest('.error.specific').data('field-id');
@@ -68,23 +65,21 @@ define([
                 data.$clone = $el.clone().css({
                     position: 'fixed',
                     top: data.top
-                })
-                .addClass('fixed-to-top')
-                .appendTo('body');
+                }).addClass('fixed-to-top').appendTo('body');
 
                 $el.css("visibility", "hidden");
 
                 this.onResize($el);
             } else {
                 data.$clone.css({
-                    'display': 'block'}
-                );
+                    'display': 'block'
+                });
             }
         } else {
             if (data.$clone) {
                 data.$clone.css({
-                    'display': 'none'}
-                );
+                    'display': 'none'
+                });
                 $el.css("visibility", "visible");
             }
         }
