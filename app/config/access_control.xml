@@ -7,6 +7,11 @@
 >
 
     <ae:configuration>
+        <roles>
+            <role name="non-authenticated" parent="non-privileged">
+                <description>Default role for non authenticated users</description>
+            </role>
+        </roles>
     </ae:configuration>
 
     <xi:include href="./includes/access_control.xml"

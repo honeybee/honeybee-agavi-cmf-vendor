@@ -87,7 +87,9 @@
             <!-- <ae:parameter name="session_cookie_httponly">true</ae:parameter> --> <!-- set httponly flag (beware of XMLHttpRequest issues) -->
         </storage>
 
-        <user class="Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser" />
+        <user class="Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser">
+            <ae:parameter name="default_acl_role">non-authenticated</ae:parameter>
+        </user>
 
         <translation_manager class="AgaviTranslationManager" />
 
