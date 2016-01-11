@@ -13,7 +13,7 @@ $breadcrumb-arrow-border-width: 2px;
 
     @include media-query(palm) {
         text-align: center;
-        overflow-x: scroll;
+        // overflow-x: scroll;
     }
 }
 
