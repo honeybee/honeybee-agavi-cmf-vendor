@@ -76,7 +76,9 @@ define([
         var $el = $elem || this.$fix;
 
         var data = $el.data(this.options.datakey);
-        if (!data) {
+        if (!data || !$el.is(':visible')) {
+            // not an element we're interested in ot the element might be hidden via display:none or similar
+            // :visible => visibility:hidden/opacity:0 are considered visible as layout space is used
             return;
         }
 
