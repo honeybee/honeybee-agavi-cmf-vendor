@@ -4,18 +4,16 @@
         {%- spaceless -%}
         <div class="hb-errors jsb_ jsb_Honeybee_Core/ui/GlobalErrors">
             <ul class="hb-errors__global"></ul>
-            <ul class="hb-errors__fields"></ul>
+            <div class="hb-errors__specific">
+                <ul class="hb-errors__fields"></ul>
+                <div class="hb-errors__switch">
+                    <span class="hb-errors__switch-count"><span class="hb-errors__switch-count-current">1</span> / <span class="hb-errors__switch-count-total">10</span></span>
+                    <span class="hb-errors__switch-prev"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-prev" title="{{_('errors.prev_title')}}">&larr;</a></span>
+                    <span class="hb-errors__switch-next"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-next" title="{{_('errors.next_title')}}">&rarr;</a></span>
+                </div>
+            </div>
         </div>
         {%- endspaceless -%}
     </div>
-    {#%- block pageerrors_activities -%}
-        {%- if _rendered_subheader_activities is defined and _rendered_subheader_activities is not empty -%}
-            <div class="subheader-activities-box">
-                <div class="subheader-activities">
-                    {{ _rendered_subheader_activities|raw }}
-                </div>
-            </div>
-        {%- endif -%}
-    {%- endblock pageerrors_activities -%#}
 </div>
 {%- endblock pageerrors -%}

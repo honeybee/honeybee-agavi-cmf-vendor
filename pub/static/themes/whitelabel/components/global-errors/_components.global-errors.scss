@@ -4,13 +4,18 @@
 
 .hb-errors,
 .hb-errors__global,
+.hb-errors__specific,
 .hb-errors__fields {
     background-color: color(background-blank);
 }
 
-.hb-errors > ul {
+.hb-errors ul {
     margin-left: 0;
     margin-bottom: 0.35em;
+
+    &:empty {
+        display: none;
+    }
 }
 
 .fixed-to-top .hb-errors__global {
@@ -18,7 +23,13 @@
 }
 
 .fixed-to-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: zindex(popover, -1);
     @include shadow-overlay;
+    transition: all 0.25s ease-in-out;
 }
 
 .hb-errors .error__message::before {
@@ -45,4 +56,67 @@
     border-radius: 50%;
     color: color(white);
     background: color(destructive-primary);
+}
+
+.hb-errors__specific {
+    position: relative;
+}
+
+.hb-errors__fields {
+    display: block;
+}
+
+.hb-errors__fields .error {
+    display: none;
+    //position: absolute;
+    //left: 0;
+    //top: 0;
+    //margin-left: 200%;
+    //transition: margin-left 0.25s ease-in-out;
+    //background-color: color(background-blank);
+}
+
+.hb-errors__fields .error.is-visible {
+    display: block;
+    //margin-left: 0;
+}
+
+// when no javascript is enabled or jsb_ did not run: make it usable w/ css only
+.jsb_ .hb-errors__fields .error {
+    display: block;
+}
+.jsb_ .hb-errors__specific {
+    height: auto;
+}
+
+// don't show switch by default, GlobalErrors widget will take care of this
+.hb-errors__switch {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.hb-errors__switch > span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.hb-errors__switch-link-prev {
+    @include hb-icon-pseudo-el((
+        icon-name: chevron-left,
+        size: 1.5
+    ));
+}
+
+.hb-errors__switch-link-next {
+    @include hb-icon-pseudo-el((
+        icon-name: chevron-right,
+        size: 1.5
+    ));
+}
+
+.hb-errors__switch-count {
+    color: color(text-secondary);
+    padding-left: 1em;
 }

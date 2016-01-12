@@ -6,12 +6,7 @@ define([
     var default_options = {
         prefix: "Honeybee_Core/ui/GlobalErrors",
         offset: 0,
-        css: {
-            'top': 0,
-            'width': '100%',
-            'left': 0
-        },
-        selector: undefined, // e.g. '.hb-errors__fields',
+        selector: undefined, // what to fix-to-top? e.g. '.hb-errors__fields' – defaults to widget element
         debounce: 50, // milliseconds
         datakey: 'globalerrors'
     };
@@ -42,6 +37,7 @@ define([
 
         this.onScroll();
         this.attachEventHandlers();
+        this.enableSpecificErrorSwitching();
     };
 
     GlobalErrors.prototype = new Widget();
@@ -58,8 +54,6 @@ define([
             )
         );
 
-        $(window).on('resize.' + this.prefix, _.debounce(function() { self.onResize(); }, this.options.debounce));
-
         // handle click events on error messages and focus the respective input element
         $(document).on('click.' + this.prefix, '.hb-errors__fields .error.specific label', function(ev) {
             var $target = $(ev.target);
@@ -68,6 +62,16 @@ define([
             if ($elm.length > 0) {
                 jsb.fireEvent('TABS:OPEN_TAB_THAT_CONTAINS', { 'element_id': elm_id });
             }
+        });
+
+        $(document).on('invalid.' + this.prefix, function(ev) {
+            jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
+        });
+
+        // other candidate events: input, copy, paste, cut etc.
+        $(document).on('change.' + this.prefix, function(ev) {
+            // only update when turning valid or invalid? track it? … if ($(ev.target).is(':invalid')) {}
+            jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
         });
     };
 
@@ -84,47 +88,68 @@ define([
 
         var partly_hidden = $(window).scrollTop() >= (data.offsetTop - data.top);
         if (partly_hidden) {
-            if (!data.$clone) {
-                // TODO deep clone with events and data? display:none the original element?
-                data.$clone = $el.clone().css({
-                    position: 'fixed',
-                    top: data.top
-                }).addClass('fixed-to-top').appendTo('body');
-
-                $el.css("visibility", "hidden");
-
-                this.onResize($el);
-            } else {
-                data.$clone.css({
-                    'display': 'block'
-                });
-            }
+            $el.addClass('fixed-to-top').css({
+                top: data.top
+            });
         } else {
-            if (data.$clone) {
-                data.$clone.css({
-                    'display': 'none'
-                });
-                $el.css("visibility", "visible");
-            }
+            $el.removeClass('fixed-to-top');
         }
     };
 
-    // recalculate dimensions of the hidden element and update the clone dimensions if necessary
-    GlobalErrors.prototype.onResize = function($elem) {
-        var $el = $elem || this.$fix;
+    // prev/next links to switch through errors and focus the invliad input element
+    GlobalErrors.prototype.enableSpecificErrorSwitching = function() {
+        var self = this;
 
-        var data = $el.data(this.options.datakey);
+        this.$error_list = this.$widget.find('.hb-errors__fields');
 
-        if (data && data.$clone) {
-            var offset = $el.offset();
-            data.offsetTop = offset.top;
-            data.$clone.css(this.options.css);
-            // TODO do this? option?
-            //data.$clone.css({
-            //    left: offset.left,
-            //    width: $el.width()
-            //});
+        this.$errors = this.$error_list.children('.error');
+        if (!(this.$errors.length > 0)) {
+            return;
         }
+
+        this.current_idx = 0;
+
+        this.$error_switch = this.$widget.find('.hb-errors__switch');
+        this.$error_switch.show();
+
+        this.$count_current = this.$error_switch.find('.hb-errors__switch-count-current');
+        this.$count_current.text(1);
+
+        this.$count_total = this.$error_switch.find('.hb-errors__switch-count-total');
+        this.$count_total.text(this.$errors.length);
+
+        this.$errors.removeClass('is-visible');
+        $(this.$errors.get(this.current_idx)).addClass('is-visible');
+
+        $(document).on('click.' + this.prefix, '.hb-errors__switch-link', function(ev) {
+            self.$errors.removeClass('is-visible');
+
+            var $target = $(ev.target);
+
+            if ($target.hasClass('hb-errors__switch-link-prev')) {
+                self.current_idx--;
+                if (self.current_idx < 0) {
+                    self.current_idx = self.$errors.length - 1;
+                }
+            } else if ($target.hasClass('hb-errors__switch-link-next')) {
+                self.current_idx++;
+                if (self.current_idx > (self.$errors.length - 1)) {
+                    self.current_idx = 0;
+                }
+            }
+
+            self.$count_current.text(self.current_idx + 1);
+
+            var $error = $(self.$errors.get(self.current_idx));
+            $error.addClass('is-visible').find('label[for]').trigger('click');
+
+            jsb.fireEvent('GLOBALERRORS:SHOW_FIELD_ERROR', { 'current': self.current_idx, 'element': $error });
+        });
+    };
+
+    GlobalErrors.prototype.removeEventHandlers = function() {
+        $(window).off('.' + this.prefix);
+        $(document).off('.' + this.prefix);
     };
 
     return GlobalErrors;

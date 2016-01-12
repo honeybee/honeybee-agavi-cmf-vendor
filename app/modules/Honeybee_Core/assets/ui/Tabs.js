@@ -84,8 +84,8 @@ define([
             var trigger = document.getElementById(trigger_id); // $(id) would mean we need to escape the id for jquery
             if (trigger) {
                 var $invalid = $(trigger).next('.hb-tabs__panel').find('.invalid,:invalid').filter(":input");
-                // put number of invalid inputs into a error-bubble span into the tab toggle
                 if ($invalid.length > 0) {
+                    // put number of invalid inputs into a error-bubble span into the tab toggle
                     var $bubble = $toggle.find('.error-bubble');
                     if ($bubble.length > 0) {
                         // update bubble error count
@@ -99,7 +99,7 @@ define([
                         $toggle.children('label').append(span);
                     }
                 } else {
-                    // no erroneous elements -> remove error bubble from tab toggle
+                    // no erroneous inputs -> remove error bubble from tab toggle
                     $toggle.find('.error-bubble').remove();
                 }
             }
