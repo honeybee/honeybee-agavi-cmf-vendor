@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://berlinonline.de/schemas/honeybee/config/access_control/1.0"
+    xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+    <ae:configuration>
+        <roles>
+            <role name="non-authenticated" parent="non-privileged">
+                <description>Role to display Theme Preview</description>
+                <acl>
+                    <permissions scope="honeybee.core.theme_preview">
+                        <allow>activity::sample_activity_1</allow>
+                        <allow>activity::sample_activity_2</allow>
+                        <allow>activity::sample_activity_3</allow>
+                    </permissions>
+                </acl>
+            </role>
+        </roles>
+
+    </ae:configuration>
+</ae:configurations>
