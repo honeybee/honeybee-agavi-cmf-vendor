@@ -18,6 +18,16 @@
             font-family: entypo;
             color: color(text-primary);
         }
+
+        // maintain minimum height (of line-height + padding) when empty
+        &.not-full {
+            overflow: auto; // create block formatting context
+            &:after {
+                content: '\00a0';
+                float: right;
+                padding: $input-padding;
+            }
+        }
     }
 
     // Multi selectize (Text-List)
@@ -84,9 +94,9 @@
         margin-bottom: 0;
         box-shadow: 0 2px 5px rgba(color(black), 0.1);
 
-        @include media-query(desk) {
-            position: absolute;
-        }
+        // prevent expanding the parent and keep overlaid
+        position: absolute;
+        top: 100%;
 
         .create,
         .option {
