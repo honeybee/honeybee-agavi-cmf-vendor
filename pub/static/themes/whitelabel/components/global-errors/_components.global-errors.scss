@@ -5,6 +5,7 @@
 .hb-errors,
 .hb-errors__global,
 .hb-errors__specific,
+.hb-errors__switch,
 .hb-errors__fields {
     background-color: color(background-blank);
 }
@@ -16,20 +17,6 @@
     &:empty {
         display: none;
     }
-}
-
-.fixed-to-top .hb-errors__global {
-    display: none;
-}
-
-.fixed-to-top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: zindex(popover, -1);
-    @include shadow-overlay;
-    transition: all 0.25s ease-in-out;
 }
 
 .hb-errors .error__message::before {
@@ -118,5 +105,24 @@
 
 .hb-errors__switch-count {
     color: color(text-secondary);
-    padding-left: 1em;
+    padding-left: 0.35em;
+}
+
+.fixed-to-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: zindex(popover, -1);
+    @include shadow-overlay;
+    transition: all 0.25s ease-in-out;
+}
+
+.fixed-to-top .hb-errors__global {
+    display: none;
+}
+
+.fixed-to-top .hb-errors__specific label {
+    overflow: hidden;
+    height: 1em;
 }

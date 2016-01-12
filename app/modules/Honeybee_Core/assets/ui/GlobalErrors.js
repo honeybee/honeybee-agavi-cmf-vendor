@@ -58,7 +58,7 @@ define([
         $(document).on('click.' + this.prefix, '.hb-errors__fields .error.specific label', function(ev) {
             var $target = $(ev.target);
             var elm_id = $target.closest('.error.specific').data('field-id');
-            var $elm = $('#' + elm_id);
+            var $elm = $(document.getElementById(elm_id));
             if ($elm.length > 0) {
                 jsb.fireEvent('TABS:OPEN_TAB_THAT_CONTAINS', { 'element_id': elm_id });
             }
@@ -103,7 +103,11 @@ define([
         this.$error_list = this.$widget.find('.hb-errors__fields');
 
         this.$errors = this.$error_list.children('.error');
-        if (!(this.$errors.length > 0)) {
+        if (this.$errors.length < 2) {
+            // only show the item, but no prev/next switch when there's only one error message
+            if (this.$errors.length === 1) {
+                this.$errors.addClass('is-visible');
+            }
             return;
         }
 
