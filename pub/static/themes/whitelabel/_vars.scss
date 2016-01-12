@@ -12,6 +12,7 @@ $line-height: $base-spacing;
 $border-thick: 0.125*$base-spacing; //2.5px
 $border-thin: 1px;
 $menu-size: 22rem;
+$input-padding: 0.71em; // 10/14
 
 // should inuit classes and mixins be prefixed?
 $inuit-namespace: null !default;

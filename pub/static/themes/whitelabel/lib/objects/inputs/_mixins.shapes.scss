@@ -1,7 +1,9 @@
+$input-padding: 0.71em !default; // 10/14
+
 @mixin input-textual-shape-default {
     width: 100%;
     border: 1px solid;
-    padding: 0.71em; // 10/14
+    padding: $input-padding;
     border-radius: 3px;
     outline-width: 2px;
     outline-style: solid;
