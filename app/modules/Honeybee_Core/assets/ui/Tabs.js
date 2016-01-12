@@ -98,6 +98,9 @@ define([
                         span.setAttribute('class', 'error-bubble');
                         $toggle.children('label').append(span);
                     }
+                } else {
+                    // no erroneous elements -> remove error bubble from tab toggle
+                    $toggle.find('.error-bubble').remove();
                 }
             }
         });
