@@ -33,7 +33,7 @@ class View extends AgaviView
 
     const ATTRIBUTE_PAGE_TITLE = '_page_title';
     const ATTRIBUTE_BREADCRUMBS = '_breadcrumbs';
-    const ATTRIBUTE_BREADCRUMB_TITLE = '_breadcrumb_title';
+    const ATTRIBUTE_BREADCRUMBS_TITLE = '_breadcrumbs_title';
     const ATTRIBUTE_BROWSER_TITLE = '_browser_title';
     const ATTRIBUTE_GLOBAL_CSS = '_globalcss';
     const ATTRIBUTE_RENDERED_NAVIGATION = '_rendered_navigation';
@@ -216,8 +216,8 @@ class View extends AgaviView
             $this->setAttribute(static::ATTRIBUTE_BREADCRUMBS, $this->getRenderedBreadcrumbs());
         }
 
-        if (!$this->hasAttribute(static::ATTRIBUTE_BREADCRUMB_TITLE)) {
-            $this->setAttribute(static::ATTRIBUTE_BREADCRUMB_TITLE, $this->getBreadcrumbTitle());
+        if (!$this->hasAttribute(static::ATTRIBUTE_BREADCRUMBS_TITLE)) {
+            $this->setAttribute(static::ATTRIBUTE_BREADCRUMBS_TITLE, $this->getBreadcrumbsTitle());
         }
     }
 
@@ -801,7 +801,7 @@ class View extends AgaviView
             return '';
         }
 
-        $breadcrumbs_activities = $this->getBreadcrumbActivities();
+        $breadcrumbs_activities = $this->getBreadcrumbsActivities();
 
         // render activities
         $rendererd_breadcrumbs = [];
@@ -812,12 +812,12 @@ class View extends AgaviView
         return $rendererd_breadcrumbs;
     }
 
-    protected function getBreadcrumbActivities()
+    protected function getBreadcrumbsActivities()
     {
         return [];
     }
 
-    protected function getBreadcrumbTitle()
+    protected function getBreadcrumbsTitle()
     {
         return $this->getPageTitle();
     }

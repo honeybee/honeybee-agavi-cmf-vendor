@@ -1,6 +1,8 @@
-<ul class="breadcrumb">
+{%- block breadcrumbs -%}
+<ul class="breadcrumbs">
     {% for crumb in _breadcrumbs %}
-        <li class="breadcrumb__item">{{ crumb|raw }}
+        <li class="breadcrumbs__item">{{ crumb|raw }}
     {% endfor %}
-    <li class="breadcrumb__item page__title"><span>{{ _breadcrumb_title }}</span>
+    <li class="breadcrumbs__item page__title"><span>{{ _breadcrumbs_title }}</span>
 </ul>
+{%- endblock -%}
