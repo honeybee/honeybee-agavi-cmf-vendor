@@ -18,20 +18,10 @@
             font-family: entypo;
             color: color(text-primary);
         }
-
-        // maintain minimum height (of line-height + padding) when empty
-        &.not-full {
-            overflow: auto; // create block formatting context
-            &:after {
-                content: '\00a0';
-                float: right;
-                padding: $input-padding;
-            }
-        }
     }
 
-    // Multi selectize (Text-List)
-    &.multi {
+    // Multi selectize (Multiple choice select & Text-List)
+    select[multiple] ~ & {
         .selectize-input.selectize-input {
             .item {
                 @include button-shape-emphasized-navigational-default;
@@ -43,12 +33,9 @@
     }
 
     // Single selectize (Single choice select)
-    &.single {
+    select:not([multiple]) ~ & {
         .selectize-input.selectize-input {
             padding: 0;
-
-            // hide caret
-            > input { @include visuallyhidden; }
 
             .item {
                 @include input-textual-shape-default;
@@ -59,13 +46,6 @@
                 background-color: color(transparent);
                 border-color: color(transparent);
                 outline-color: color(transparent);
-
-                // icon
-                background-image: url(binaries/icons/chevron-down.svg);
-                background-size: auto 80%;
-                background-repeat: no-repeat;
-                background-origin: content-box;
-                background-position: right 50%;
             }
         }
     }
@@ -75,7 +55,13 @@
         > input {
             @include strip-box;
             @include strip-background;
-            padding: 7px 0 7px $p;
+            box-sizing: content-box;
+
+            // same spacing as .item
+            padding-top: $buttons-base-padding;
+            padding-bottom: $buttons-base-padding;
+            border: 1px solid color(transparent);
+            line-height: normal;
             margin: 0 $p $p 0;
         }
 
@@ -117,5 +103,37 @@
         overflow-y: auto;
 
         border: 1px solid color(grey1);
+    }
+}
+
+// single-choice select
+.input-choice {
+    .selectize-input.selectize-input {
+        // hide caret
+        > input { @include visuallyhidden; }
+
+        // maintain minimum height (of line-height + padding) when empty and without caret
+        &.not-full {
+            overflow: auto; // create block formatting context
+            &:after {
+                content: '\00a0';
+                float: right;
+                padding: $input-padding;
+            }
+
+            // fix flickering issue (Selectize append .dropdown-active for some milliseconds when focused)
+            & ~ .selectize-dropdown { margin-left: -9999px; }
+        }
+    }
+
+    select:not([multiple]) ~ .selectize-control {
+        .item {
+            // icon
+            background-image: url(binaries/icons/chevron-down.svg);
+            background-size: auto 80%;
+            background-repeat: no-repeat;
+            background-origin: content-box;
+            background-position: right 50%;
+        }
     }
 }

@@ -6,14 +6,18 @@ select {
          -o-appearance: none;
             appearance: none;
 
-    // icon
-    background-image: url(binaries/icons/chevron-down.svg);
-    background-size: auto 80%;
-    background-repeat: no-repeat;
-    background-origin: content-box;
-    background-position: right 50%;
-
     &:checked {
         box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+}
+
+.input-choice {
+    select {
+        // icon
+        background-image: url(binaries/icons/chevron-down.svg);
+        background-size: auto 80%;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-position: right 50%;
     }
 }
