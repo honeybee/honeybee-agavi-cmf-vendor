@@ -23,6 +23,28 @@
 %activity-emphasized-warning { @include button-emphasized-warning; }
 %activity-emphasized-destructive { @include button-emphasized-destructive; }
 
+/* search activity */
+.search__content {
+    form {
+        @include flexbox;
+        @include flex-flow(row);
+        @include align-items(center);
+    }
+
+    input[type=search] {
+        @include flex-grow(1);
+        margin-right: $small-spacing;
+    }
+
+    .activity-search {
+        @include button-emphasized-navigational {
+            overflow: visible;
+        };
+        // avoid text wrapping
+        @include flex-shrink(0);
+    }
+}
+
 // avoid partial hiding of focusing border caused by adjacent activities
 .actvity-group .activity:focus {
     @include zindex("base", 1);

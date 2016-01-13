@@ -121,35 +121,12 @@
         }
     }
 
-    .search-box {
-        form {
-            @include flexbox;
-            @include flex-flow(row);
-            @include align-items(center);
-        }
-
+    .search__content {
         input[type=search] {
-            @include flex-grow(1);
-
-            @include media-query(palm) {
-                margin-right: $small-spacing;
-            }
-            @include media-query(lap-and-up) {
-                margin-right: $base-spacing;
-            }
+            @include media-query(lap-and-up) { margin-right: $base-spacing; }
         }
 
-        .activity-search {
-            @include button-emphasized-navigational {
-                overflow: visible;
-            };
-            // avoid text wrapping
-            @include flex-shrink(0);
-        }
-
-        .search-description {
-            display: none;
-        }
+        .search-description { display: none; }
     }
 
     @content;

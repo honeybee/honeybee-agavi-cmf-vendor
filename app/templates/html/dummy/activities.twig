@@ -61,6 +61,22 @@
     },
 ] %}
 
+{% set search_activity = {
+    activity: {
+        label: "Search",
+        description: "An activity that takes users to a search result.",
+        rels: []
+    },
+    css: "activity activity-search",
+    link: "javascript:void(0);",
+    disabled: false,
+    form_id: "search_form",
+    form_css: "",
+    form_method: "GET",
+    form_parameters: []
+}
+%}
+
 <div class="sheet">
     <h1>Clickable</h1>
 
@@ -78,20 +94,27 @@
 
 <div class="sheet">
     <h1>Activities</h1>
-
-    <p>
-        {% for _a in activities %}
-            {% set a = _a|merge({css: _a.css ~" normal"}) %}
-            {% include "html/activity/link.twig" with a %}
-        {% endfor %}
-    </p>
-    <!-- disabled activities -->
-    <p>
-        {% for _a in activities %}
-            {% set a = _a|merge({ css: _a.css ~" normal disabled", disabled: true }) %}
-            {% include "html/activity/link.twig" with a %}
-        {% endfor %}
-    </p>
+    <div class="layout">
+        <div class="layout__item u-1-of-2-lap-and-up">
+            <p>
+                {% for _a in activities %}
+                    {% set a = _a|merge({css: _a.css ~" normal"}) %}
+                    {% include "html/activity/link.twig" with a %}
+                {% endfor %}
+            </p>
+            <!-- disabled activities -->
+            <p>
+                {% for _a in activities %}
+                    {% set a = _a|merge({ css: _a.css ~" normal disabled", disabled: true }) %}
+                    {% include "html/activity/link.twig" with a %}
+                {% endfor %}
+            </p>
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            <!-- search activity -->
+            {% include "html/activity/search_form.twig" with search_activity %}
+        </div>
+    </div>
 </div>
 
 <div class="sheet">
