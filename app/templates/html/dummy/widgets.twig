@@ -162,4 +162,19 @@
             </div>
         </div>
     </div>
+
+    <div class="sheet component-navigation">
+        <h1>Component: Breadcrumbs</h1>
+
+        <div class="layout">
+            <div class="layout__item">
+                <div class="component-breadcrumbs__wrapper">
+                    {% include "html/ui/breadcrumbs.twig" with {
+                        _breadcrumb_title: "Page Title",
+                        _breadcrumbs: _rendererd_sample_breadcrumbs
+                    } %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

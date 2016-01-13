@@ -12,9 +12,9 @@
                 <activity scope="honeybee.core">theme_preview</activity>
             </items>
             <items name="honeybee.core.theme_preview">
-                <activity scope="honeybee.core.theme_preview">sample_activity_1</activity>
-                <activity scope="honeybee.core.theme_preview">sample_activity_2</activity>
-                <activity scope="honeybee.core.theme_preview">sample_activity_3</activity>
+                <activity scope="honeybee.core.theme_preview.navigation">sample_activity_1</activity>
+                <activity scope="honeybee.core.theme_preview.navigation">sample_activity_2</activity>
+                <activity scope="honeybee.core.theme_preview.navigation">sample_activity_3</activity>
             </items>
         </available_items>
 

@@ -116,7 +116,8 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
             AgaviConfig::get('core.theme_preview_translation_domain', $tm->getDefaultDomain())
         );
 
-        $this->setAttribute('_rendererd_sample_navigation', $this->renderSampleNavigation());
+        $this->setAttribute('_rendererd_sample_navigation', $this->getRenderedSampleNavigation());
+        $this->setAttribute('_rendererd_sample_breadcrumbs', $this->getRenderedSampleBreadcrumbs());
         $this->setAttribute('_typed_activity_groups', $this->getRendererdActivityMaps());
         $this->setAttribute('_destructive_activities', $this->getDestructiveActivities());
         $this->setAttribute(
@@ -338,12 +339,36 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
         );
     }
 
-    public function renderSampleNavigation()
+    public function getRenderedSampleNavigation()
     {
         $navigation_service = $this->getServiceLocator()->getNavigationService();
 
         $navigation = $navigation_service->getNavigation('theme_preview');
 
         return $this->renderSubject($navigation);
+    }
+
+    protected function getRenderedSampleBreadcrumbs()
+    {
+        $breadcrumbs_activities = $this->getSampleBreadcrumbActivities();
+
+        // render activities
+        $rendererd_breadcrumbs = [];
+        foreach ($breadcrumbs_activities as $breadcrumbs_activity) {
+            $rendererd_breadcrumbs[] = $this->renderSubject($breadcrumbs_activity);
+        }
+
+        return $rendererd_breadcrumbs;
+    }
+
+    protected function getSampleBreadcrumbActivities()
+    {
+        $breadcrumb_activity_map = $this->getServiceLocator()->getActivityService()->getActivityMap(
+            $this->getViewScope() . '.breadcrumbs'
+        );
+
+        $breadcrumb_activities = $breadcrumb_activity_map->getItems();
+
+        return $breadcrumb_activities;
     }
 }

@@ -49,12 +49,19 @@
                 <message_translator class="AgaviSimpleTranslator">
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
+                            <ae:parameter name="search.description">Search activity</ae:parameter>
+                            <!-- Navigation activities -->
                             <ae:parameter name="sample_activity_1.label">Navigation item 1</ae:parameter>
                             <ae:parameter name="sample_activity_2.label">Navigation item 2</ae:parameter>
                             <ae:parameter name="sample_activity_3.label">Navigation item 3</ae:parameter>
                             <ae:parameter name="sample_activity_1.description">Each navigation item is connected to a simple activity</ae:parameter>
                             <ae:parameter name="sample_activity_2.description">Each navigation item is connected to a simple activity</ae:parameter>
                             <ae:parameter name="sample_activity_3.description">Each navigation item is connected to a simple activity</ae:parameter>
+                            <!-- Breadcrumbs activities -->
+                            <ae:parameter name="breadcrumb_activity_1.label">Breadcrumb 1</ae:parameter>
+                            <ae:parameter name="breadcrumb_activity_2.label">Breadcrumb 2</ae:parameter>
+                            <ae:parameter name="breadcrumb_activity_1.description">Each breadcrumb item is connected to a simple activity</ae:parameter>
+                            <ae:parameter name="breadcrumb_activity_2.description">Each breadcrumb item is connected to a simple activity</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                     <ae:parameter name="fields">
@@ -71,6 +78,7 @@
                             <ae:parameter name="Text List Full Width.field_name">Text List Full-width</ae:parameter>
                             <ae:parameter name="Choice Select One.field_name">Choice Select One</ae:parameter>
                             <ae:parameter name="Choice Select Disabled.field_name">Choice Select Disabled</ae:parameter>
+                            <ae:parameter name="Choice Select Empty.field_name">Choice Select Empty</ae:parameter>
                             <ae:parameter name="Date Input Two (Invalid Value).field_name">Date Input Two (Invalid Value)</ae:parameter>
                             <ae:parameter name="Date Input One.field_name">Date Input One</ae:parameter>
                             <ae:parameter name="Date Input Three (Valid Value).field_name">Date Input Three (Valid Value)</ae:parameter>

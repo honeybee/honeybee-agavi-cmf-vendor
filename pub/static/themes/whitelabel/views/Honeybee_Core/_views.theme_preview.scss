@@ -86,5 +86,13 @@
             padding-top: 1em;
             padding-bottom: 1em;
         }
+
+        .component-breadcrumbs__wrapper {
+            border-width: 1px;
+            border-style: solid;
+            border-color: color(grey2);
+            border-bottom-color: color(grey1);
+            background-color: color(lightgrey2);
+        }
     }
 }
