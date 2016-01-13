@@ -3,9 +3,9 @@
     <div class="box">
         {%- spaceless -%}
         <div class="hb-errors jsb_ jsb_Honeybee_Core/ui/GlobalErrors">
-            <ul class="hb-errors__global"></ul>
+            <ul class="hb-errors__global">{%- block pageerrors_global -%}{% endblock %}</ul>
             <div class="hb-errors__specific">
-                <ul class="hb-errors__fields"></ul>
+                <ul class="hb-errors__fields">{%- block pageerrors_specific -%}{% endblock %}</ul>
                 <div class="hb-errors__switch">
                     <span class="hb-errors__switch-count"><span class="hb-errors__switch-count-current">1</span> / <span class="hb-errors__switch-count-total">10</span></span>
                     <span class="hb-errors__switch-prev"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-prev" title="{{_('errors.prev_title')}}">&larr;</a></span>

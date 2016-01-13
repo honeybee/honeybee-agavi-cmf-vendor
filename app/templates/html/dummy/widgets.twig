@@ -183,7 +183,16 @@
         <div class="layout">
             <div class="layout__item">
                 <div class="component-errors__wrapper">
-                    {% include 'html/ui/page-errors.twig' %}
+                    {% embed 'html/ui/page-errors.twig' %}
+                        {%- block pageerrors_global -%}
+                            <li class="error global"><span class="error__message">Generic error message</span></li>
+                        {% endblock %}
+                        {%- block pageerrors_specific -%}
+                            <li class="error specific fielderror-textinput2 is-visible" data-field-name="textinput2" data-field-id="textinput2"><label for="textinput2"><span class="error__message">This field is mandatory</span></label></li>
+                            <li class="error specific fielderror-emailinput2 is-visible" data-field-name="emailinput2" data-field-id="emailinput2"><label for="emailinput2"><span class="error__message">This is a specific input error</span></label></li>
+                            <li class="error specific fielderror-emailinput2 is-visible" data-field-name="emailinput2" data-field-id="emailinput2"><label for="emailinput2"><span class="error__message">This is another specific input error</span></label></li>
+                        {% endblock %}
+                    {% endembed %}
                 </div>
             </div>
         </div>
