@@ -1,6 +1,7 @@
 .input-text-list {
 
     .text-list__item {
+        display: inline-block;
         width: auto;
 
         margin: 0.5 * $base-spacing;
