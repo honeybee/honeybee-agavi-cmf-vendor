@@ -1,19 +1,28 @@
+$font-size: 14px !default;
+$base-spacing: 1.42*$font-size !default;
+$line-height: $base-spacing !default;
+$buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/object
+$input-padding: 10px !default;
+
+$selectize-spacing: 3px;
+
 .selectize-control {
-    $p: 3px;
     .selectize-input {
         @include input-textual-default();
-        padding: $p 0 0 $p;
+        padding: 0;
+        padding-left: $selectize-spacing;
 
         .item,
         input {
             display: inline-block;
+            vertical-align: top;
         }
 
         .remove {
             display: inline-block;
             width: $base-spacing;
             text-align: center;
-            padding-left: 0.5 * $base-spacing;
+            padding-left: $small-spacing;
             text-decoration: none;
             font-family: entypo;
             color: color(text-primary);
@@ -26,8 +35,15 @@
             .item {
                 @include button-shape-emphasized-navigational-default;
                 @include button-colors-emphasized-navigational-default;
-                margin: 0 $p $p 0;
+                margin: $selectize-spacing $selectize-spacing $selectize-spacing 0;
                 line-height: 1em;
+            }
+
+            // some browsers need an explicit height
+            .item,
+            input {
+                box-sizing: content-box;
+                height: $font-size;
             }
         }
     }
@@ -39,7 +55,7 @@
 
             .item {
                 @include input-textual-shape-default;
-                line-height: normal;
+                line-height: 1em;
                 text-align: left;
                 margin: 0;
 
@@ -55,14 +71,14 @@
         > input {
             @include strip-box;
             @include strip-background;
-            box-sizing: content-box;
 
-            // same spacing as .item
+            // same spacing as the adjacent .item (lib/buttons emphasized)
             padding-top: $buttons-base-padding;
             padding-bottom: $buttons-base-padding;
             border: 1px solid color(transparent);
-            line-height: normal;
-            margin: 0 $p $p 0;
+            margin: $selectize-spacing $selectize-spacing $selectize-spacing 0;
+
+            &:only-child { padding-left: $buttons-base-padding; }
         }
 
         // states
@@ -76,7 +92,7 @@
 
     .selectize-dropdown {
         @include zindex(popover);
-        margin-top: $p;
+        margin-top: $selectize-spacing;
         margin-bottom: 0;
         box-shadow: 0 2px 5px rgba(color(black), 0.1);
 
@@ -118,7 +134,10 @@
             &:after {
                 content: '\00a0';
                 float: right;
-                padding: $input-padding;
+                padding-top: $input-padding;
+                padding-bottom: $input-padding;
+                padding-right: 0;
+                padding-left: 0;
             }
 
             // fix flickering issue (Selectize append .dropdown-active for some milliseconds when focused)
