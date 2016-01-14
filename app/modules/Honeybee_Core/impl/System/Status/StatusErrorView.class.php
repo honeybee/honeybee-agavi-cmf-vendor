@@ -25,6 +25,12 @@ class Honeybee_Core_System_Status_StatusErrorView extends View
         return '<?xml version="1.0" encoding="UTF-8"?><error>Error while retrieving status information</error>';
     }
 
+    public function executeText(AgaviRequestDataHolder $request_data)
+    {
+        $this->getResponse()->setHttpStatusCode('500');
+        return 'Error while retrieving status information';
+    }
+
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
         return $this->cliError('Error while retrieving status information', 127);

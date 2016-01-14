@@ -89,6 +89,11 @@ class NegotiateOutputTypeRoutingCallback extends AgaviRoutingCallback
 
         $matching_output_type = $negotiator->getBestFormat($accept_header_value, $all_supported_media_types);
 
+        // TODO the negotiator v1 has predefined stuff we don't want; perhaps changing to v2 helps
+        if ($matching_output_type === 'txt') {
+            $matching_output_type = 'text';
+        }
+
         // set the current output type to the matching one
         if ($matching_output_type !== null) {
             $new_output_type = $this->controller->getOutputType($matching_output_type);

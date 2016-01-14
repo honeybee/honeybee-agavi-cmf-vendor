@@ -36,6 +36,10 @@
                 <module>Honeybee_Core</module>
                 <action>System/Status</action>
             </system_action>
+            <system_action name="health">
+                <module>Honeybee_Core</module>
+                <action>System/Health</action>
+            </system_action>
         </system_actions>
 
         <settings>

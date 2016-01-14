@@ -25,12 +25,14 @@
                         </ae:parameter>
                         <ae:parameter name="xml">xml</ae:parameter>
                         <ae:parameter name="json">json</ae:parameter>
+                        <ae:parameter name="text">txt</ae:parameter>
                     </ae:parameter>
                 </callback>
                 <ignore>ext</ignore>
             </route>
 
-            <route name="status" pattern="^/status$" module="%actions.status_module%" action="%actions.status_action%"  stop="true" />
+            <route name="status" pattern="^/status$" module="%actions.status_module%" action="%actions.status_action%" stop="true" />
+            <route name="health" pattern="^/status/health$" module="%actions.health_module%" action="%actions.health_action%" stop="true" />
 
             <!-- matches "/de" or "/en" at the beginning of the URL and uses either value to set the locale,
                  with British Pounds Sterling as the currency. Execution will not stop if this route matches.
@@ -78,7 +80,13 @@
     <!-- default CLI routes -->
     <ae:configuration context="console">
         <routes>
-            <route name="status" pattern="^status$" module="%actions.status_module%" action="%actions.status_action%" method="read" stop="true" />
+            <route name="status" pattern="^status$" module="%actions.status_module%" action="%actions.status_action%" method="read" stop="true">
+                <ae:parameter name="description">Application status report</ae:parameter>
+            </route>
+            <route name="health" pattern="^health$" module="%actions.health_module%" action="%actions.health_action%" method="read" stop="true">
+                <ae:parameter name="description">Application health check</ae:parameter>
+            </route>
+
             <!-- global type-unspecific default gen-only routes for use in renderers etc. -->
             <route name="module" pattern="^({module:[A-Za-z\-\/_]{3,128}}).">
                 <callbacks>

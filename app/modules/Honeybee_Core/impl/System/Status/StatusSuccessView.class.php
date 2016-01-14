@@ -3,6 +3,15 @@
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use Honeybee\Infrastructure\DataAccess\Connector\Status;
 
+/**
+ * Text output format is ideal for monitoring system to use as text for emails etc.
+ * thus we return HTTP status 500 for TEXT output format. With that a HTTP Status
+ * 200 vs. 500 check can be used by e.g. icinga to determine the application's status.
+ * The 500 error is not returned for the other output types as the report compilation
+ * succeeded and thus HTTP status 200 is appropriate. Further on triggering a 500 error
+ * could lead to default error pages of other infrastructure components that are in front
+ * of this application (load balancers, web servers etc.).
+ */
 class Honeybee_Core_System_Status_StatusSuccessView extends View
 {
     const JSON_OPTIONS = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE;
@@ -65,6 +74,20 @@ class Honeybee_Core_System_Status_StatusSuccessView extends View
         $xml->endDocument();
 
         return $xml->outputMemory();
+    }
+
+    public function executeText(AgaviRequestDataHolder $request_data)
+    {
+        $report = $this->getReportAsString($request_data);
+
+        $this->getResponse()->setHttpHeader('Content-Disposition', 'inline');
+
+        // on failing status => text output format with 500 http status for easier monitoring/alerting
+        if ($this->getAttribute('status') === Status::FAILING) {
+            $this->getResponse()->setHttpStatusCode('500');
+        }
+
+        return $report;
     }
 
     public function executeConsole(AgaviRequestDataHolder $request_data)
@@ -172,19 +195,4 @@ class Honeybee_Core_System_Status_StatusSuccessView extends View
             }
         }
     }
-/*
-    public function executeBinary(AgaviRequestDataHolder $request_data)
-    {
-        $this->getResponse()->setContentType('text/plain');
-        $this->getResponse()->setHttpHeader('Content-Disposition', 'inline');
-        $this->getResponse()->setContent('status?');
-    }
-
-    public function executePdf(AgaviRequestDataHolder $request_data)
-    {
-        $this->getResponse()->setContentType('text/plain');
-        $this->getResponse()->setHttpHeader('Content-Disposition', 'inline');
-        $this->getResponse()->setContent('status?');
-    }
- */
 }

@@ -5,13 +5,13 @@ use Honeybee\FrameworkBinding\Agavi\ShutdownListenerInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\Status;
 
 /**
- * Compile information about the application's status.
+ * Compile information about the application's status and return success or error without further info.
  */
-class Honeybee_Core_System_StatusAction extends Action implements ShutdownListenerInterface
+class Honeybee_Core_System_HealthAction extends Action implements ShutdownListenerInterface
 {
     public function executeRead(AgaviRequestDataHolder $request_data)
     {
-        $this->getContext()->addShutdownListener($this); // try to catch fatal errors while status checks run
+        $this->getContext()->addShutdownListener($this);
 
         $status = Status::UNKNOWN;
         try {
@@ -25,11 +25,7 @@ class Honeybee_Core_System_StatusAction extends Action implements ShutdownListen
             return 'Error';
         }
 
-        $this->setAttribute('connections_report', $connections_report);
         $this->setAttribute('status', $status);
-
-        $verbose = $request_data->getParameter('v', false) || $request_data->getParameter('verbose', false);
-        $this->setAttribute('verbose', $verbose);
 
         $this->getContext()->removeShutdownListener($this);
 
@@ -42,15 +38,13 @@ class Honeybee_Core_System_StatusAction extends Action implements ShutdownListen
     }
 
     /**
-     * Set the "app_status.is_secure" setting to FALSE, when you want to make the status page accessible to EVERYONE
-     * without requiring a login. Please be sure to secure the URL via other means (webserver, load balancer etc.)
-     * when you set the above setting to false.
+     * Set the "app_health.is_secure" setting to TRUE when you want to prevent unauthenticated access of that page.
      *
-     * @return bool true by default to require a login for the status page as it contains sensitive information
+     * @return boolean
      */
     public function isSecure()
     {
-        return AgaviConfig::get('app_status.is_secure', true);
+        return AgaviConfig::get('app_health.is_secure', false);
     }
 
     /**

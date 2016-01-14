@@ -253,6 +253,16 @@
                 </ae:parameter>
             </output_type>
 
+            <output_type name="text">
+                <ae:parameter name="http_headers">
+                    <ae:parameter name="Content-Type">text/plain</ae:parameter>
+                    <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />
+                </ae:parameter>
+                <ae:parameter name="acceptable_media_types">
+                    <ae:parameter>text/plain</ae:parameter>
+                </ae:parameter>
+            </output_type>
+
              <output_type name="zip">
                 <ae:parameter name="http_headers">
                     <ae:parameter name="Content-Type">application/octet-stream</ae:parameter>
