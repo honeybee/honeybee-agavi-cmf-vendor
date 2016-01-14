@@ -1,4 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
 {%- set isReadable = (disabled is empty and readonly is empty) -%}
 {%- set min_count = widget_options.min_count | default(0) -%}
 {%- set input_help = translations.input_help | default('') -%}
@@ -25,7 +26,13 @@
                     <input type="text" name="{{ grouped_field_name }}" id="{{ field_id }}"
                         {{ readonly }} {{ disabled }} {% if attribute_value|length < min_count %}{{ required }}{% endif %} {{ pattern|raw }} placeholder="{{ placeholder }}" />
                 </div>
-                <ul class="errors"></ul>
+                <ul class="errors">
+                    {%- block field_errors  -%}
+                        {%- for error in errors -%}
+                            <li class="error">{{error}}</li>
+                        {%- endfor -%}
+                    {%- endblock  -%}
+                </ul>
                 {% if input_help %}
                     <div class="input_help">{{ input_help|raw }}</div>
                 {% endif %}

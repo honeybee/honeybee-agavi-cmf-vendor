@@ -1,4 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
 {%- set input_help = translations.input_help | default('') -%}
 {%- set input_hint = translations.input_hint | default('') -%}
 {%- set input_focus_hint = translations.input_focus_hint | default('') -%}
@@ -11,7 +12,13 @@
         --><div class="hb-field__value">
             <input type="url" value="{{ attribute_value }}" id="{{ field_id }}" name="{{ grouped_field_name }}" class=""
                 {{ readonly }} {{ disabled }} {{ required }} {{ pattern|raw }} placeholder="{{ placeholder }}" />
-            <ul class="errors"></ul>
+            <ul class="errors">
+                {%- block field_errors  -%}
+                    {%- for error in errors -%}
+                        <li class="error">{{error}}</li>
+                    {%- endfor -%}
+                {%- endblock  -%}
+            </ul>
             {% if input_help %}
                 <div class="input_help">{{ input_help|raw }}</div>
             {% endif %}

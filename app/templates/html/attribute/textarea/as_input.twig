@@ -1,4 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
 {%- set input_help = translations.input_help | default('') -%}
 {%- set input_hint = translations.input_hint | default('') -%}
 {%- set input_focus_hint = translations.input_focus_hint | default('') -%}
@@ -16,7 +17,13 @@
                 {{ readonly }} {{ disabled }} {{ required }}>{#
                     #}{{ attribute_value }}{#
                 #}</textarea>
-            <ul class="errors"></ul>
+            <ul class="errors">
+                {%- block field_errors  -%}
+                    {%- for error in errors -%}
+                        <li class="error">{{error}}</li>
+                    {%- endfor -%}
+                {%- endblock  -%}
+            </ul>
             {% if syntax_enabled and syntax_preview %}
                 <div class="input_preview" {{ field_id~'-preview' }}></div>
             {% endif %}

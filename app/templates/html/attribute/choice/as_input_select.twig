@@ -1,4 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
 {%- set input_help = translations.input_help | default('') -%}
 {%- set input_hint = translations.input_hint | default('') -%}
 {%- set input_focus_hint = translations.input_focus_hint | default('') -%}
@@ -15,7 +16,13 @@
                     >{{ _(allowed_value, translation_domain) }}</option>
                 {% endfor %}
             </select>
-            <ul class="errors"></ul>
+            <ul class="errors">
+                {%- block field_errors  -%}
+                    {%- for error in errors -%}
+                        <li class="error">{{error}}</li>
+                    {%- endfor -%}
+                {%- endblock  -%}
+            </ul>
             {% if input_help %}
                 <div class="input_help">{{ input_help|raw }}</div>
             {% endif %}
