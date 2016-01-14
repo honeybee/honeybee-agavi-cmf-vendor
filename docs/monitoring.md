@@ -18,13 +18,12 @@ The health check is accessible without being authenticated by default. Changing 
 
 ## Application Status
 
-The status page is accessible via commandline and via URL. The report can provide more details by specifying the `v` or `verbose` parameter.
-
-The status page compiles all status reports of defined connections (`connections.xml`) and when one is `FAILING` the status of the application is `FAILING`. Otherwise the application's status is `WORKING`. More detailed information is output as well.
+The status page is accessible via commandline and via URL. More detailed information will be returned when the `v` or `verbose` parameter is provided. The status page compiles all status reports of defined connections (`connections.xml`) and when one is `FAILING` the status of the application is `FAILING`. Otherwise the application's status is `WORKING`.
 
 - CLI:
     - ```bin/cli status``` (exitcode 0 for `WORKING` and 1 for `FAILING`, exitcode 127 for unexpected errors)
     - ```bin/cli status -v``` or ```bin/cli status -verbose```
+    - ideal for monitoring tools
 - URL as HTML:
     - ```/status```
     - ```/status?v=1``` or ```/status?verbose=true```
