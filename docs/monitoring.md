@@ -14,7 +14,7 @@ The health check is accessible via commandline or URL. It returns `WORKING` or `
 - CLI: ```bin/cli health``` (exitcode 0 for `WORKING` and 1 for `FAILING`)
 - URL: ```/status/health``` (HTTP status code 200 for `WORKING` or 500 for `FAILING`)
 
-The health check is accessible without be authenticated by default. Changing the ```app_health.is_secure``` setting to `true` in `settings.xml` enables authentication.
+The health check is accessible without being authenticated by default. Changing the ```app_health.is_secure``` setting to `true` in `settings.xml` enables authentication.
 
 ## Application Status
 
