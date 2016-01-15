@@ -86,6 +86,7 @@ define([
         this.$picker_toggle_element = this.$widget.find(datepicker_toggle_selector);
         if (this.$picker_toggle_element.length > 0) {
             this.initial_picker_settings.toggleElement = this.$picker_toggle_element;
+            this.$picker_toggle_element.css('display', 'inline-block');
         }
 
         if ( (this.$picker_toggle_element.length === 0) && (this.$picker_input_element.length === 0) ) {
