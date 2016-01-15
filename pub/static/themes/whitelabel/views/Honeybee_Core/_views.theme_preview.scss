@@ -26,7 +26,7 @@
             li {
                 position: relative;
                 display: inline-block;
-                width: 7*$base-spacing;
+                width: 8*$base-spacing;
 
                 line-height: $base-spacing;
                 padding-top: 3*$base-spacing;
@@ -50,6 +50,12 @@
                     bottom: $base-spacing;
 
                     border-bottom: 1px solid black;
+                }
+
+                &::after {
+                    white-space: nowrap;
+                    @include ellipsis;
+                    width: inherit;
                 }
             }
 
