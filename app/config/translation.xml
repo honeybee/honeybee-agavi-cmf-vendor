@@ -43,11 +43,11 @@
                     <ae:parameter name="pagination">
                         <ae:parameter name="de">
                             <ae:parameter name="pager.description">Seite %s von %s</ae:parameter>
-                            <ae:parameter name="pager.first_page.title">(DE) First</ae:parameter>
-                            <ae:parameter name="pager.prev_page.title">(DE) Previous</ae:parameter>
+                            <ae:parameter name="pager.first_page.title">Erste</ae:parameter>
+                            <ae:parameter name="pager.prev_page.title">Vorherige</ae:parameter>
                             <ae:parameter name="pager.jump_to_page.title">Los</ae:parameter>
-                            <ae:parameter name="pager.next_page.title">(DE) Next</ae:parameter>
-                            <ae:parameter name="pager.last_page.title">(DE) Last</ae:parameter>
+                            <ae:parameter name="pager.next_page.title">Nächste</ae:parameter>
+                            <ae:parameter name="pager.last_page.title">Letzte</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="pager.description">Page %s of %s</ae:parameter>
