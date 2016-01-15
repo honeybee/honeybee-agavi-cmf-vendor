@@ -56,6 +56,10 @@ $hb-activity-group-splitbutton--styled-toggle: true !default;
             @include media-query(lap-and-up) {
                 display: none;
             }
+
+            &:focus ~ .primary-activities-list__toggle {
+                @include button-default-focus;
+            }
         }
 
         .primary-activities-list__toggle {
@@ -156,6 +160,18 @@ $hb-activity-group-splitbutton--styled-toggle: true !default;
                 li {
                     display: inline-block;
                     margin-left: $base-spacing/2;
+                }
+            }
+
+            .activity.activity {
+                // more activities custom style
+                @include button-states {
+                    border-radius: 0;
+                    border-width: 0;
+                }
+                &:hover:not(:active) {
+                    background-color: color(lightgrey2);
+                    box-shadow: none;
                 }
             }
         }
