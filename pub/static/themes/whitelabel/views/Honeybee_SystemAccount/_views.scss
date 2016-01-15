@@ -36,5 +36,10 @@
         button {
             @extend %activity-emphasized-navigational;
         }
+
+        .reset_password {
+            float: right;
+            padding: $buttons-base-padding;
+        }
     }
 }

@@ -16,7 +16,7 @@
         &.focus {
             &,
             &.selected {
-                @include outline;
+                @include button-default-focus;
             }
         }
     }
