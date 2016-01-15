@@ -19,7 +19,7 @@ a {
 
     &:focus {
         outline-width: 0;
-        @include button-shadow-normal-navigational-focus;
+        @include button-default-focus;
     }
 }
 

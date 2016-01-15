@@ -14,3 +14,7 @@
         @content;
     }
 }
+
+@mixin button-default-focus {
+    @include button-shadow-emphasized-navigational-focus;
+}
