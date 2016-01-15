@@ -22,6 +22,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
         .sidebar__panel {
             width: 20rem;
             background-color: color(white);
+            @include shadow-offcanvas;
 
             .sidebar__toggle-close {
                 position: absolute;
@@ -41,8 +42,6 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
         }
 
         .sidebar__toggle-open {
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-
             @include hb-icon-pseudo-el((
                 icon-name: align-left,
                 size: 1.5
@@ -59,6 +58,8 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
                 padding-bottom: $base-spacing;
                 padding-left: $small-spacing;
                 padding-right: $small-spacing/2;
+
+                @include shadow-offcanvas;
             }
         }
 

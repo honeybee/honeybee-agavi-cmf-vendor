@@ -10,7 +10,7 @@ $menu-toggle-transition-time: .3s !default;
 
     .menu__panel {
         background: color(white);
-        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        @include shadow-offcanvas;
 
         overflow: none;
     }
