@@ -5,6 +5,11 @@
             margin: 0;
             list-style: none;
 
+            span {
+                display: block;
+                background-color: color(white);
+            }
+
             li {
                 position: relative;
                 display: inline-block;
@@ -34,6 +39,30 @@
                     border-bottom: 1px solid black;
                 }
             }
+
+            .text { background-color: color(text-primary); }
+            .background { background-color: color(text-secondary); }
+
+            .navigational,
+            .navigational-shadow { @include button-colors-emphasized-navigational-default; }
+            .navigational-hover { @include button-colors-emphasized-navigational-hover; }
+            .navigational-shadow { @include button-shadow-normal-navigational-active; }
+            .mutating,
+            .mutating-shadow { @include button-colors-emphasized-mutating-default; }
+            .mutating-hover { @include button-colors-emphasized-mutating-hover; }
+            .mutating-shadow { @include button-shadow-normal-navigational-active; }
+            .positive,
+            .positive-shadow { @include button-colors-emphasized-positive-default; }
+            .positive-hover { @include button-colors-emphasized-positive-hover; }
+            .positive-shadow { @include button-shadow-normal-navigational-active; }
+            .warning,
+            .warning-shadow { @include button-colors-emphasized-warning-default; }
+            .warning-hover { @include button-colors-emphasized-warning-hover; }
+            .warning-shadow { @include button-shadow-normal-navigational-active; }
+            .destructive,
+            .destructive-shadow { @include button-colors-emphasized-destructive-default; }
+            .destructive-hover { @include button-colors-emphasized-destructive-hover; }
+            .destructive-shadow { @include button-shadow-normal-navigational-active; }
         }
     }
 
