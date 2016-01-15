@@ -1,3 +1,16 @@
+@mixin auto-colors-list($color-map) {
+    @each $color-name, $color-value in $color-map {
+        $i: index($color-map, ($color-name $color-value));
+
+        :nth-child(#{$i}) {
+            display: inline-block !important;
+
+            &:after { content: "#{$color-name}"; }
+            &:before { background-color: #{$color-value}; }
+        }
+    }
+}
+
 .honeybee-core-theme_preview {
     .theme-preview__colors {
         .color-list {
@@ -40,9 +53,6 @@
                 }
             }
 
-            .text { background-color: color(text-primary); }
-            .background { background-color: color(text-secondary); }
-
             .navigational,
             .navigational-shadow { @include button-colors-emphasized-navigational-default; }
             .navigational-hover { @include button-colors-emphasized-navigational-hover; }
@@ -64,6 +74,11 @@
             .destructive-hover { @include button-colors-emphasized-destructive-hover; }
             .destructive-shadow { @include button-shadow-normal-navigational-active; }
         }
+
+        .auto-colors-list { @include auto-colors-list($colors); }
+        .auto-semantic-colors-list { @include auto-colors-list($semantic-colors); }
+
+        .auto-colors-list__item { display: none !important; }
     }
 
     .theme-preview__typography {

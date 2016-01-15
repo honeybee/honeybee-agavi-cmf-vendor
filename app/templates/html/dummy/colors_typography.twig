@@ -2,32 +2,21 @@
     <div class="layout">
         <div class="layout__item">
             <h1>Colors</h1>
-            <ul class="color-list">
-                <li class="text"><span>text<span></li><!--
-                --><li class="background"><span>background</span></li>
+            <ul class="color-list auto-colors-list">
+                {% for i in 0..40 %} {# max number dependand on the number of colors defined in the SCSS _colors partial #}
+                    <li class="auto-colors-list__item"></li>
+                {% endfor %}
             </ul>
 
-            <h2>Neutral</h2>
-            <ul class="color-list">
-                <li class="neutral" data-text="neutral">neutral</li><!--
-                --><li class="neutral-shadow">neutral shadow</li><!--
-                --><li class="neutral-neutral">neutral neutral</li><!--
-                --><li class="neutral-medium">neutral medium</li><!--
-                --><li class="neutral-light">neutral light</li><!--
-                --><li class="neutral-super-light">neutral super-light</li><!--
-                --><li class="neutral-warm-light">neutral warm-light</li>
+            <h1>Semantic Colors</h1>
+            <ul class="color-list auto-semantic-colors-list">
+                {% for i in 0..40 %} {# max number dependand on the number of colors defined in the SCSS _colors partial #}
+                    <li class="auto-colors-list__item"></li>
+                {% endfor %}
             </ul>
 
             <div class="layout">
                 <div class="layout__item u-1-of-2-lap-and-up">
-                    <h2>Action</h2>
-                    <ul class="color-list">
-                        <li class="action">action</li><!--
-                        --><li class="action-hover">action hover</li><!--
-                        --><li class="action-shadow">action shadow</li>
-                    </ul>
-                </div><!--
-                --><div class="layout__item u-1-of-2-lap-and-up">
                     <h2>Navigational</h2>
                     <ul class="color-list">
                         <li class="navigational">navigational</li><!--
