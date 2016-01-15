@@ -59,26 +59,26 @@
                 }
             }
 
-            .navigational,
-            .navigational-shadow { @include button-colors-emphasized-navigational-default; }
-            .navigational-hover { @include button-colors-emphasized-navigational-hover; }
-            .navigational-shadow { @include button-shadow-normal-navigational-active; }
-            .mutating,
-            .mutating-shadow { @include button-colors-emphasized-mutating-default; }
-            .mutating-hover { @include button-colors-emphasized-mutating-hover; }
-            .mutating-shadow { @include button-shadow-normal-navigational-active; }
-            .positive,
-            .positive-shadow { @include button-colors-emphasized-positive-default; }
-            .positive-hover { @include button-colors-emphasized-positive-hover; }
-            .positive-shadow { @include button-shadow-normal-navigational-active; }
-            .warning,
-            .warning-shadow { @include button-colors-emphasized-warning-default; }
-            .warning-hover { @include button-colors-emphasized-warning-hover; }
-            .warning-shadow { @include button-shadow-normal-navigational-active; }
-            .destructive,
-            .destructive-shadow { @include button-colors-emphasized-destructive-default; }
-            .destructive-hover { @include button-colors-emphasized-destructive-hover; }
-            .destructive-shadow { @include button-shadow-normal-navigational-active; }
+            .navigational::before,
+            .navigational-shadow::before { @include button-colors-emphasized-navigational-default; }
+            .navigational-hover::before { @include button-colors-emphasized-navigational-hover; }
+            .navigational-shadow::before { @include button-shadow-normal-navigational-active; }
+            .mutating::before,
+            .mutating-shadow::before { @include button-colors-emphasized-mutating-default; }
+            .mutating-hover::before { @include button-colors-emphasized-mutating-hover; }
+            .mutating-shadow::before { @include button-shadow-normal-navigational-active; }
+            .positive::before,
+            .positive-shadow::before { @include button-colors-emphasized-positive-default; }
+            .positive-hover::before { @include button-colors-emphasized-positive-hover; }
+            .positive-shadow::before { @include button-shadow-normal-navigational-active; }
+            .warning::before,
+            .warning-shadow::before { @include button-colors-emphasized-warning-default; }
+            .warning-hover::before { @include button-colors-emphasized-warning-hover; }
+            .warning-shadow::before { @include button-shadow-normal-navigational-active; }
+            .destructive::before,
+            .destructive-shadow::before { @include button-colors-emphasized-destructive-default; }
+            .destructive-hover::before { @include button-colors-emphasized-destructive-hover; }
+            .destructive-shadow::before { @include button-shadow-normal-navigational-active; }
         }
 
         .auto-colors-list { @include auto-colors-list($colors); }
