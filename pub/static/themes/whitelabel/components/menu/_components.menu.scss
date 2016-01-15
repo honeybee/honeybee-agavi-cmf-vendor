@@ -25,6 +25,11 @@ $menu-toggle-transition-time: .3s !default;
     animation: MENU_BACKDROP 0.2s 1;
 }
 
+.menu__trigger:focus ~ .menu__toggle,
+.menu__trigger:focus ~ .menu__panel .menu__toggle {
+    @include button-default-focus;
+}
+
 .menu__toggle-open {
     position: absolute; // move with scroll
     width: $menu-toggle-open-size;
@@ -64,6 +69,7 @@ $menu-toggle-transition-time: .3s !default;
     position: absolute;
     top: $base-spacing/2;
     right: $base-spacing/2;
+    left: auto; // override offcanvas for .menu__toggle 
     z-index: zindex(base, 1);
     margin: 0;
     width: $base-spacing*1.5;
