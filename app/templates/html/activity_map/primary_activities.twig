@@ -27,10 +27,10 @@
     data-default-activity-rels="{{ default_activity_rels|join(' ') }}"
     {% for attr, val in primary_activities_attr %} {{ attr }}="{{ val }}" {% endfor %}
 >
-    <input type="checkbox" id="{{ trigger_id }}" class="{{ primary_activities_name ~ '__trigger' }} hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %} {% if toggle_disabled %}disabled{% endif %} />
     <div class="{{ primary_activities_name ~ '__default' }} {{ default_css }}" {% for attr, val in default_attr %} {{ attr }}="{{ val }}" {% endfor %}>
     {%- block default -%}{{ default_content|raw }}{%- endblock -%}
     </div><!--
+    --><input type="checkbox" id="{{ trigger_id }}" class="{{ primary_activities_name ~ '__trigger' }} hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %} {% if toggle_disabled %}disabled{% endif %} /><!--
     --><label for="{{ trigger_id }}" class="{{ primary_activities_name ~ '__toggle' }} hb-js-flyout-toggle {{ toggle_css }}" {% for attr, val in toggle_attr
         %} {{ attr }}="{{ val }}" {% endfor %}>{% block toggle %}<span class="{{ primary_activities_name~ '__toggle-icon'}}">{{ toggle_content|raw }}</span>{% endblock %}</label><!--
     --><div class="{{ primary_activities_name ~ '__more' }} {{ more_css }}" {% for attr, val in more_attr %} {{ attr }}="{{ val }}" {% endfor %}>
