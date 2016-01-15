@@ -124,4 +124,10 @@
             background-color: color(lightgrey2);
         }
     }
+
+    .theme-preview__input-text {
+        .invalid input:not(:focus) {
+            @include input-textual-invalid;
+        }
+    }
 }
