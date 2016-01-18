@@ -2,7 +2,7 @@
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Infrastructure\Job\JobService;
+use Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport;
 use Honeybee\Infrastructure\Job\Worker\Worker;
 
 class Honeybee_Core_Worker_StartAction extends Action
@@ -43,20 +43,18 @@ class Honeybee_Core_Worker_StartAction extends Action
             if ($request_data->hasParameter('binding')) {
                 $bindings = [ trim($request_data->getParameter('binding')) ];
             } else {
-                $bindings = [ JobService::DEFAULT_ROUTE_KEY ];
+                $bindings = [ JobQueueTransport::DEFAULT_MSG_ROUTE ];
             }
         }
 
         $exchange = $request_data->getParameter('exchange', $default_exchange);
         $queue = $request_data->getParameter('queue', $exchange . self::GLOBAL_QUEUE);
 
-        return new ArrayConfig(
-            [
-                'exchange' => $exchange,
-                'queue' => $queue,
-                'bindings' => $bindings
-            ]
-        );
+        return new ArrayConfig([
+            'exchange' => $exchange,
+            'queue' => $queue,
+            'bindings' => $bindings
+        ]);
     }
 
     protected function buildCommandBindings()
