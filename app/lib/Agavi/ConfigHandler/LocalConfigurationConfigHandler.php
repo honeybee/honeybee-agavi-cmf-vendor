@@ -43,7 +43,7 @@ class LocalConfigurationConfigHandler extends BaseConfigHandler
         foreach ($local_settings as $key => $value) {
             $configuration_code .= sprintf("AgaviConfig::set('%s', %s);\n", $key, var_export($value, true));
         }
-
+var_dump($configuration_code);die;
         return $this->generate($configuration_code, $document->documentURI);
     }
 
@@ -77,11 +77,12 @@ class LocalConfigurationConfigHandler extends BaseConfigHandler
     {
         $settings = [];
 
+        $file_path = AgaviConfig::get('core.local_config_dir') . '/' . $local_setting_info['path'];
+        if (!is_readable($file_path)) {
+            throw new RuntimeError('Unable to read local config file at: ' . $file_path);
+        }
+
         if ($local_setting_info['type'] === 'yaml') {
-            $file_path = AgaviConfig::get('core.local_config_dir') . '/' . $local_setting_info['path'];
-            if (!is_readable($file_path)) {
-                throw new RuntimeError('Unable to read local config file at: ' . $file_path);
-            }
             $yaml_string = file_get_contents($file_path);
             if (!$yaml_string) {
                 throw new Exception('Failed to read local configuration at: ' . $file_path);
@@ -95,13 +96,23 @@ class LocalConfigurationConfigHandler extends BaseConfigHandler
                     'Error: ' . $parse_error->getMessage()
                 );
             }
-            if (!isset($local_setting_info['settings']['flatten'])
-                || $local_setting_info['settings']['flatten'] === true
-            ) {
-                $settings = ArrayToolkit::flatten($settings);
+        } elseif ($local_setting_info['type'] === 'json') {
+            $json_string = file_get_contents($file_path);
+            if (!$json_string) {
+                throw new Exception('Failed to read local configuration at: ' . $file_path);
+            }
+            $settings = json_decode($json_string, true);
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                throw new RuntimeError('Failed to parse json from file "' . $file_path . '": ' . json_last_error_msg());
             }
         } else {
-            throw new RuntimeError('Only "yaml" supported for local config file type atm.');
+            throw new RuntimeError('Only "yaml" or "json" are supported for "type" setting of local configs.');
+        }
+
+        if (!isset($local_setting_info['settings']['flatten'])
+            || $local_setting_info['settings']['flatten'] === true
+        ) {
+            $settings = ArrayToolkit::flatten($settings);
         }
 
         return $settings;
