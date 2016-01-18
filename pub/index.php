@@ -1,31 +1,36 @@
 <?php
 
 $default_context = @$default_context ?: 'web';
-$environment_modifier = @$environment_modifier ?: '';
 
-$application_dir = getenv('APPLICATION_DIR');
-if ($application_dir === false || realpath($application_dir) === false || !is_readable($application_dir)) {
-    if (!putenv('APPLICATION_DIR=' . realpath(__DIR__ . '/../'))) {
-        error_log('Application directory could not be set via putenv.');
-        throw new Exception('Application directory could not be set.');
+// application dir is either set via (env) variable or will be ./../
+$application_dir = @$application_dir ?: getenv('APP_DIR');
+if (empty($application_dir) || realpath($application_dir) === false || !is_readable($application_dir)) {
+    $application_dir = realpath(__DIR__ . '/../');
+    if (empty($application_dir) || !putenv('APP_DIR=' . $application_dir)) {
+        throw new Exception('APP_DIR not set');
     }
 }
 
-$local_config_dir = getenv('HONEYBEE_LOCAL_CONFIG_DIR');
-if ($local_config_dir === false || realpath($local_config_dir) === false || !is_readable($local_config_dir)) {
-    $local_config_dir = '/usr/local/' . basename($application_dir);
-    if (!putenv('HONEYBEE_LOCAL_CONFIG_DIR=' . realpath($local_config_dir))) {
-        error_log('Local config directory could not be set via putenv.');
-        throw new Exception('Local config directory could not be set.');
+// bootstrap file sets initial configuration
+$bootstrap_file = @$bootstrap_file ?: getenv('APP_BOOTSTRAP_PHP_FILE');
+if (empty($bootstrap_file) || realpath($bootstrap_file) === false || !is_readable($bootstrap_file)) {
+    $bootstrap_file = realpath(__DIR__ . '/../app/bootstrap.php');
+    if ($bootstrap_file === false || !is_readable($bootstrap_file)) {
+        throw new Exception('Application bootstrap file could not be read.');
     }
 }
 
-$bootstrap_file = getenv('BOOTSTRAP_PHP_FILE') ?: realpath(__DIR__ . '/../app/bootstrap.php');
-if (realpath($bootstrap_file) === false || !is_readable($bootstrap_file)) {
-    throw new Exception('No bootstrap file configured for application.');
-}
-
+// bootstrap application
 require($bootstrap_file);
-unset($application_dir, $bootstrap_file, $default_context, $environment_modifier);
+unset(
+    $application_dir,
+    $bootstrap_file,
+    $local_config_dir,
+    $default_context,
+    $environment,
+    $environment_modifier,
+    $msg,
+    $environment_file
+);
 
 AgaviContext::getInstance()->getController()->dispatch();
