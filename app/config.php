@@ -1,41 +1,43 @@
 <?php
 
 // determine local configuration directory
-$local_config_dir = @$local_config_dir ?: getenv('HONEYBEE_LOCAL_CONFIG_DIR');
-if ($local_config_dir === false) {
-    throw new Exception('Environment variable "HONEYBEE_LOCAL_CONFIG_DIR" has not been set.');
+$local_config_dir = @$local_config_dir ?: getenv('APP_LOCAL_CONFIG_DIR');
+if (empty($local_config_dir)) {
+    throw new Exception('Environment variable "APP_LOCAL_CONFIG_DIR" has not been set.');
 }
+
 // determine application directory
-$application_dir = @$application_dir ?: getenv('APPLICATION_DIR');
-if ($application_dir === false) {
-    throw new Exception('APPLICATION_DIR not set. Application probably not set up correctly.');
+$application_dir = @$application_dir ?: getenv('APP_DIR');
+if (empty($application_dir)) {
+    throw new Exception('APP_DIR not set. Application probably not set up correctly.');
 }
+
 $application_dir = realpath($application_dir);
 $local_config_dir = realpath($local_config_dir);
 $vendor_dir = $application_dir . '/vendor';
 $agavi_dir = $vendor_dir . '/agavi/agavi/src';
 $honeybee_dir = $vendor_dir . '/honeybee/honeybee-agavi-cmf-vendor';
 
-// register 'local.*' settings
-$local_config_file = $local_config_dir . '/config.php';
-if (!is_readable($local_config_file)) {
-    throw new Exception('Unable to read local config.php at: ' . $local_config_file);
+// environment name to use
+$environment = @$environment ?: getenv('APP_ENV');
+if (empty($environment)) {
+    throw new Exception('APP_ENV is not set.');
 }
-$local_config = require $local_config_file;
-if (is_array($local_config)) {
-    foreach ($local_config as $setting => $value) {
-        AgaviConfig::set('local.'.$setting, $value);
-    }
-}
-if (!isset($environment_modifier)) {
+AgaviConfig::set('core.clean_environment', $environment);
+
+// environment modifier (suffix)
+$environment_modifier = @$environment_modifier ?: getenv('APP_ENV_MODIFIER');
+if (empty($environment_modifier)) {
     $environment_modifier = '';
 }
+AgaviConfig::set('core.environment_modifier', $environment_modifier);
 AgaviConfig::set('local.environment_modifier', $environment_modifier);
-$agavi_environment = getenv('AGAVI_ENVIRONMENT') ?: AgaviConfig::get('local.agavi_environment');
-$agavi_environment .= $environment_modifier;
+
+// complete environment name
+$environment .= $environment_modifier;
 
 // register 'core.*' settings
-AgaviConfig::set('core.environment', $agavi_environment);
+AgaviConfig::set('core.environment', $environment);
 AgaviConfig::set('core.agavi_dir', $agavi_dir);
 AgaviConfig::set('core.app_dir', $application_dir . '/app');
 AgaviConfig::set('core.pub_dir', $application_dir . '/pub');
@@ -74,7 +76,7 @@ AgaviConfig::set(
 );
 
 // allow a custom cache directory location
-$cache_dir = getenv('APPLICATION_CACHE_DIR');
+$cache_dir = getenv('APP_CACHE_DIR');
 //$cache_dir = '/dev/shm/cache';
 if ($cache_dir === false) {
     // default cache directory takes environment into account to mitigate cases
@@ -99,9 +101,9 @@ if ($cache_dir === false) {
 }
 
 // contexts are e.g. 'web', 'console', 'soap' or 'xmlrpc'
-$default_context = $default_context ?: getenv('AGAVI_CONTEXT');
+$default_context = @$default_context ?: getenv('APP_CONTEXT');
 if (!$default_context) {
-    throw new RuntimeException("Missing default context setting.");
+    throw new RuntimeException('Missing default context setting or APP_CONTEXT environment variable.');
 }
 // this is one of the most important settings for agavi
 AgaviConfig::set('core.default_context', $default_context);
