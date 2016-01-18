@@ -7,12 +7,16 @@
 >
     <ae:configuration>
         <local_settings>
-            <from_file type="yaml">
-                <path>couchdb.yml</path>
+            <from_file type="json">
+                <path>config.json</path>
             </from_file>
 
-            <from_file type="yaml">
-                <path>elasticsearch.yml</path>
+            <from_file type="json">
+                <path>couchdb.json</path>
+            </from_file>
+
+            <from_file type="json">
+                <path>elasticsearch.json</path>
             </from_file>
 
             <!--
