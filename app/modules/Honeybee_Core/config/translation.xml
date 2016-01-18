@@ -58,10 +58,10 @@
                             <ae:parameter name="sample_activity_2.description">Each navigation item is connected to a simple activity</ae:parameter>
                             <ae:parameter name="sample_activity_3.description">Each navigation item is connected to a simple activity</ae:parameter>
                             <!-- Breadcrumbs activities -->
-                            <ae:parameter name="breadcrumb_activity_1.label">Breadcrumb 1</ae:parameter>
-                            <ae:parameter name="breadcrumb_activity_2.label">Breadcrumb 2</ae:parameter>
-                            <ae:parameter name="breadcrumb_activity_1.description">Each breadcrumb item is connected to a simple activity</ae:parameter>
-                            <ae:parameter name="breadcrumb_activity_2.description">Each breadcrumb item is connected to a simple activity</ae:parameter>
+                            <ae:parameter name="breadcrumbs_activity_1.label">Breadcrumb 1</ae:parameter>
+                            <ae:parameter name="breadcrumbs_activity_2.label">Breadcrumb 2</ae:parameter>
+                            <ae:parameter name="breadcrumbs_activity_1.description">Each breadcrumb item is connected to a simple activity</ae:parameter>
+                            <ae:parameter name="breadcrumbs_activity_2.description">Each breadcrumb item is connected to a simple activity</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                     <ae:parameter name="fields">

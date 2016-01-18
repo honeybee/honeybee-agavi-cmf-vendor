@@ -215,7 +215,7 @@ EOT;
         return $rendered_sort_activities;
     }
 
-    public function getBreadcrumbActivities()
+    public function getBreadcrumbsActivities()
     {
         $collection_activity = $this->getServiceLocator()->getActivityService()->getActivity(
             $this->getAttribute('resource_type')->getPrefix(),
@@ -225,7 +225,7 @@ EOT;
         return [ $collection_activity ];
     }
 
-    protected function getBreadcrumbTitle()
+    protected function getBreadcrumbsTitle()
     {
         $number_of_results = $this->getAttribute('number_of_results', 0);
         $translation_domain = $this->getTranslationDomainPrefix() . '.views';

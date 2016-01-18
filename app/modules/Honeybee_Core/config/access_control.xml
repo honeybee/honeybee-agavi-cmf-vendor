@@ -15,8 +15,8 @@
                         <allow>activity::sample_activity_3</allow>
                     </permissions>
                     <permissions scope="honeybee.core.theme_preview.breadcrumbs">
-                        <allow>activity::breadcrumb_activity_1</allow>
-                        <allow>activity::breadcrumb_activity_2</allow>
+                        <allow>activity::breadcrumbs_activity_1</allow>
+                        <allow>activity::breadcrumbs_activity_2</allow>
                     </permissions>
                 </acl>
             </role>

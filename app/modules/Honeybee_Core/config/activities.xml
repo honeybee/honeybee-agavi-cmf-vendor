@@ -36,13 +36,13 @@
             </activity_container>
 
             <activity_container scope="honeybee.core.theme_preview.breadcrumbs">
-                <activity name="breadcrumb_activity_1">
+                <activity name="breadcrumbs_activity_1">
                     <url type="route">null</url>
                     <rels>
                         <rel>activity</rel>
                     </rels>
                 </activity>
-                <activity name="breadcrumb_activity_2">
+                <activity name="breadcrumbs_activity_2">
                     <url type="route">null</url>
                     <rels>
                         <rel>activity</rel>

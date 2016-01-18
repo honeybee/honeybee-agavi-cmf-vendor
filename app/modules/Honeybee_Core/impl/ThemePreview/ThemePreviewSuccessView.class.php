@@ -350,7 +350,7 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
 
     protected function getRenderedSampleBreadcrumbs()
     {
-        $breadcrumbs_activities = $this->getSampleBreadcrumbActivities();
+        $breadcrumbs_activities = $this->getSampleBreadcrumbsActivities();
 
         // render activities
         $rendererd_breadcrumbs = [];
@@ -361,14 +361,14 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
         return $rendererd_breadcrumbs;
     }
 
-    protected function getSampleBreadcrumbActivities()
+    protected function getSampleBreadcrumbsActivities()
     {
-        $breadcrumb_activity_map = $this->getServiceLocator()->getActivityService()->getActivityMap(
+        $breadcrumbs_activity_map = $this->getServiceLocator()->getActivityService()->getActivityMap(
             $this->getViewScope() . '.breadcrumbs'
         );
 
-        $breadcrumb_activities = $breadcrumb_activity_map->getItems();
+        $breadcrumbs_activities = $breadcrumbs_activity_map->getItems();
 
-        return $breadcrumb_activities;
+        return $breadcrumbs_activities;
     }
 }
