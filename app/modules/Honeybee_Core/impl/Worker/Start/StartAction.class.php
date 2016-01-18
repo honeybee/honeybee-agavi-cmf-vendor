@@ -2,6 +2,7 @@
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\Infrastructure\Config\ArrayConfig;
+use Honeybee\Infrastructure\Job\JobService;
 use Honeybee\Infrastructure\Job\Worker\Worker;
 
 class Honeybee_Core_Worker_StartAction extends Action
@@ -42,7 +43,7 @@ class Honeybee_Core_Worker_StartAction extends Action
             if ($request_data->hasParameter('binding')) {
                 $bindings = [ trim($request_data->getParameter('binding')) ];
             } else {
-                $bindings = [];
+                $bindings = [ JobService::DEFAULT_ROUTE_KEY ];
             }
         }
 
