@@ -43,7 +43,7 @@ class LocalConfigurationConfigHandler extends BaseConfigHandler
         foreach ($local_settings as $key => $value) {
             $configuration_code .= sprintf("AgaviConfig::set('%s', %s);\n", $key, var_export($value, true));
         }
-var_dump($configuration_code);die;
+
         return $this->generate($configuration_code, $document->documentURI);
     }
 
