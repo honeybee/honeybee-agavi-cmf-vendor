@@ -87,7 +87,7 @@ define([
             });
         }
 
-        this.$popup_trigger = this.$widget.find('.hb-field__label');
+        this.$popup_trigger = this.$widget.find('.hb-field-label__name');
         this.grouped_field_name = this.$widget.data('grouped-field-name');
 
         this.popup_options = {
@@ -347,7 +347,7 @@ define([
             self.dragevents.push(ev.target); // add the target element to our stack
 
             $target = $(ev.target);
-            if ($target.hasClass('imagelist-tabs__toggles') || $target.hasClass('imagelist__thumb-img')) {
+            if ($target.hasClass('imagelist-tabs__toggles-placeholder') || $target.hasClass('imagelist__thumb-img')) {
                 $target.addClass('dragover');
             }
 
@@ -361,7 +361,7 @@ define([
 
             $target = $(ev.target);
 
-            if ($target.hasClass('imagelist-tabs__toggles') || $target.hasClass('imagelist__thumb-img')) {
+            if ($target.hasClass('imagelist-tabs__toggles-placeholder') || $target.hasClass('imagelist__thumb-img')) {
                 ev.originalEvent.dataTransfer.dropEffect = 'copy';
             }
 

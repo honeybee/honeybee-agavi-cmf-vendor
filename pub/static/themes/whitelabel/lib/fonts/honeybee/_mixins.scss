@@ -59,19 +59,21 @@
     @if $pseudo == "after" or $pseudo == "before" {
         &:#{$pseudo} {
             @include hb-icon($params);
-                // center vertically/horizontally
-                @if $hide-content {
-                    // keep in-flow
-                    display: table-cell;
-                    vertical-align: middle;
-                    text-align: center;
 
-                    @if $size != null {
-                        font-size: #{$size}rem;
-                    }
-                } @else {
-                    // custom position relative to parent (static|absolute|relative|fixed)
+            // center vertically/horizontally
+            @if $hide-content {
+                // keep in-flow
+                display: table-cell;
+                vertical-align: middle;
+                text-align: center;
+
+                @if $size != null {
+                    font-size: #{$size}rem;
                 }
+            } @else {
+                // custom position relative to parent (static|absolute|relative|fixed)
+            }
+
             @content;
         }
     } @else {

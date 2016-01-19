@@ -112,7 +112,7 @@ set samples = {
                 resource_type_prefix: "doc_type",
                 resource_type_name: "docType",
                 resource_identifier: "doc_type-457c7bd4-b3bf-4948-a4ed-ef9b9a9018b6-de_DE-1",
-                upload_url: "http://uploadservice.local/honeybee/",
+                upload_url: "https://whitelabel-cms.local/de/honeybee-system_account-user/files/",
                 disabled: '',
                 required: '',
                 readonly: '',
@@ -200,6 +200,28 @@ set samples = {
                         meta_data: samples.image3.meta_data
                     }
                 ],
+                grouped_field_name: "imagelist1",
+                grouped_base_path: "imagelist1[0]"
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/image-list/as_tabs.twig" with {
+                field_name: "Image Input Empty",
+                html_attributes: {},
+                is_embedded: false,
+                field_id: "imagelist1",
+                attribute_path: "images",
+                resource_type_prefix: "doc_type",
+                resource_type_name: "docType",
+                resource_identifier: "doc_type-457c7bd4-b3bf-4948-a4ed-ef9b9a9018b6-de_DE-1",
+                upload_url: "https://whitelabel-cms.local/de/honeybee-system_account-user/files/",
+                disabled: '',
+                required: '',
+                readonly: '',
+                widget_enabled: true,
+                widget_options: { isRequired: false, isReadonly: false, isDisabled: false },
+                images: [],
+                attribute_value: [],
                 grouped_field_name: "imagelist1",
                 grouped_base_path: "imagelist1[0]"
             } %}

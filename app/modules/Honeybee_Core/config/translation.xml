@@ -85,7 +85,9 @@
                             <ae:parameter name="Textarea Input.field_name">Textarea Input</ae:parameter>
                             <ae:parameter name="Textarea Input Disabled.field_name">Textarea Input Disabled</ae:parameter>
                             <ae:parameter name="Image Input One.field_name">Image Input One</ae:parameter>
+                            <ae:parameter name="Image Input Empty.field_name">Image Input Empty</ae:parameter>
                             <ae:parameter name="add_images">Add Images</ae:parameter>
+                            <ae:parameter name="dragndrop_description">Simply drag and drop here</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>

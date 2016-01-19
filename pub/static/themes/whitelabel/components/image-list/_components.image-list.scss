@@ -1,18 +1,9 @@
 $thumb-size-default: 150px;
 
-.imagelist {
-    padding: $small-spacing;
-
-    /* @toremove */
-    border: 1px solid grey;
-    background-color: white;
-}
-
 .imagelist-tabs {
     @include hb-tabs("imagelist-tabs");
 
     line-height: 0;
-    margin-top: $small-spacing;
 
     .imagelist-tabs__toggles {
         padding: $small-spacing $small-spacing 0 $small-spacing;
@@ -26,6 +17,80 @@ $thumb-size-default: 150px;
             max-height: $thumb-size-default;
         }
     }
+
+    .imagelist-tabs__toggles-placeholder {
+        margin-bottom: $small-spacing;
+
+        // hidden by default
+        display: none;
+    }
+
+    // when list is empty
+    .imagelist-tabs__toggles-placeholder:last-child {
+        // show placeholder 
+        line-height: normal;
+        display: block;
+
+        color: color(grey1);
+        * { display: block; text-align: center; }
+
+        &:before {
+            display: block;
+            content: '\00a0';
+            background-image: url('binaries/imagelist-placeholder.png');
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            min-height: 50px;
+        }
+
+        .imagelist-toggles-placeholder__title {
+            @include typography-headlines;
+            margin-bottom: $small-spacing/2;
+        }
+    }
+}
+
+.imagelist {
+    border: 1px dotted color(lines);
+}
+
+.imagelist__inputs-wrapper {
+    label { line-height: $base-spacing; }
+}
+
+.hb-js-imagelist {
+    .hb-field__label {
+        display: flex;
+        flex-wrap: wrap;
+
+        .hb-field-label__name,
+        .imagelist__input-multiple {
+            width: auto;
+            flex: 1 0 auto;
+            white-space: nowrap;
+            margin-bottom: $small-spacing;
+        }
+
+        .imagelist__input-multiple-label {
+            text-align: right;
+            color: color(blue); // as a link
+
+            @include hb-icon-pseudo-el(
+                (
+                    icon-name: circle-with-plus,
+                    hide-content: false,
+                )
+            ) {
+                font-size: 1.5rem;
+                margin-right: $small-spacing/2;
+            };
+        }
+    }
+
+    .hb-field__value {
+        @include input-textual-shape-default;
+        @include input-textual-colors-default;
+    }
 }
 
 // what to do when js-behaviour was applied?
@@ -36,7 +101,8 @@ $thumb-size-default: 150px;
     }
 
     .imagelist__thumb.newitem {
-        display: none;
+        // display: none;
+        @include visuallyhidden;
     }
 
     .imagelist-tabs__toggles {
@@ -66,13 +132,13 @@ $thumb-size-default: 150px;
     @include visuallyhidden;
 }
 
-.imagelist__input-multiple-label {
-    @include button-emphasized-navigational;
+// .imagelist__input-multiple-label {
+//     @include button-emphasized-navigational;
 
-    input:focus ~ & {
-        @include button-emphasized-navigational-focus;
-    }
-}
+//     input:focus ~ & {
+//         @include button-emphasized-navigational-focus;
+//     }
+// }
 
 .imagelist__delete-input {
     @include visuallyhidden;
@@ -260,7 +326,7 @@ $thumb-size-default: 150px;
 
 // when drag-and-drop operation is ongoing
 .dragging .imagelist {
-    .imagelist-tabs__toggles {
+    .imagelist-tabs__toggles-placeholder {
         background-color: color(background-highlight);
         border: 1px solid color(positive);
 
