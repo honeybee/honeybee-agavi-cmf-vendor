@@ -20,7 +20,9 @@ if (empty($local_config_dir) || realpath($local_config_dir) === false || !is_rea
     // convention here: the application_dir is thought to be a FQDN like "myapp.local"
     $local_config_dir = realpath('/usr/local/' . basename($application_dir));
     if (empty($local_config_dir) || !is_readable($local_config_dir)) {
-        throw new Exception('Local configuration directory not readable.');
+        throw new Exception(
+            'Local configuration directory non-existant or not readable: ' . '/usr/local/' . basename($application_dir)
+        );
     }
     if (!putenv('APP_LOCAL_CONFIG_DIR=' . $local_config_dir)) {
         throw new Exception('Local configuration directory could not be set via putenv.');
@@ -33,11 +35,13 @@ if (empty($environment)) {
     $environment_file = $local_config_dir . '/environment';
     // try to read environment name from a file in the application's local configuration directory
     if (!is_readable($environment_file)) {
-        throw new Exception('Environment name not specified via APP_ENV or file');
+        throw new Exception(
+            'Environment name not specified via APP_ENV or available in file: ' . $environment_file
+        );
     }
-    $environment = file_get_contents($environment_file);
+    $environment = trim(file_get_contents($environment_file));
     if (empty($environment)) {
-        throw new Exception('Empty environment name read from file.');
+        throw new Exception('Empty environment name read from file: ' . $environment_file);
     }
 }
 
