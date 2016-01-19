@@ -1,7 +1,8 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
 {%- set add_images = translations.add_images | default('add_images') -%}
-<div class="hb-field {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} hb-js-imagelist jsb_Honeybee_Core/ui/ImageList{% endif %}"
+{%- set dragndrop_description = translations.dragndrop_description | default('dragndrop_description') -%}
+<div class="hb-field hb-imagelist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/ImageList{% endif %}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
     data-attribute-path="{{ attribute_path }}" data-resource-type-prefix="{{ resource_type_prefix }}" data-resource-type-name="{{ resource_type_name }}"
@@ -9,14 +10,14 @@
     <div class="popup-content-here"></div>
     <div class="hb-field__content">
         <div class="hb-field__label">
-            <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+            <label for="{{ field_id }}" class="hb-field-label__name">{{ _(field_name~'.field_name', translation_domain) }}</label>
+            <div class="imagelist__input-multiple">
+                <input id="{{field_id}}_multiple" type="file" multiple class="imagelist__input-multiple-trigger" {{ disabled }} />
+                <label class="hb-imagelist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(add_images, translation_domain) }}</label>
+            </div>
         </div><!--
         --><div class="hb-field__value">
             <div class="imagelist">
-                <div class="imagelist_input-multiple">
-                    <input id="{{field_id}}_multiple" type="file" multiple class="imagelist__input-multiple-trigger" {{ disabled }} />
-                    <label class="imagelist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(add_images, translation_domain) }}</label>
-                </div>
                 <div class="imagelist-tabs">
                     {% set tabs_id = 'hb-tabs-' ~ field_id %}
                     <div class="imagelist-tabs__header">
@@ -39,6 +40,10 @@
                                     </ul>
                                 </div>
                                 {% endif %}
+                            </li>
+                            <li class="imagelist-tabs__toggles-placeholder">
+                                <span class="imagelist-toggles-placeholder__title">{{ _('add_images', translation_domain) }}</span>
+                                <span class="imagelist-toggles-placeholder__description">Simply drag and drop here</span>
                             </li>
                             {%- for image in images -%}
                             <li class="imagelist-tabs__toggle imagelist__thumb" data-item-id="{{image.id}}">
