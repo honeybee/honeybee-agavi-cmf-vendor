@@ -1,14 +1,13 @@
 #!/usr/bin/env sh
 
-CURRENT_DIR=$(readlink -m $(dirname $0))
-
-if [ -z "$APPLICATION_DIR" ] ; then
-    APPLICATION_DIR=$(readlink -m "${CURRENT_DIR}/../")
+# determine application dir if necessary
+if [ -z "$APP_DIR" ] ; then
+    APP_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )/../" && pwd )
 fi
 
 # default packackes file for honeybee
 if [ -z "$WGET_PACKAGES_FILE" ] ; then
-    WGET_PACKAGES_FILE=$(readlink -m "${APPLICATION_DIR}/package.txt")
+    WGET_PACKAGES_FILE="${APP_DIR}/package.txt"
 fi
 
 echo "[INFO] Downloading packages listed in:" $WGET_PACKAGES_FILE

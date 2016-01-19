@@ -24,12 +24,13 @@ Create XInclude files to enable the modules:
 
 * ```bin/cli honeybee.core.util.build_config --recovery```
 
-Download and compile assets:
+Download and compile assets and additional packages:
 
 * `npm install`
 * ```./node_modules/.bin/bower install```
 * ```bin/cli honeybee.core.util.compile_scss``` to create css files
 * ```bin/cli honeybee.core.util.compile_js``` to run `r.js` and create `pub/static/modules-built`
+* ```bin/wget_packages```
 
 Run status test:
 
