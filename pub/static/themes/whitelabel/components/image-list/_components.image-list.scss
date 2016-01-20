@@ -58,32 +58,17 @@ $thumb-size-default: 150px;
     label { line-height: $base-spacing; }
 }
 
-.hb-js-imagelist {
+.hb-imagelist {
     .hb-field__label {
         display: flex;
         flex-wrap: wrap;
 
         .hb-field-label__name,
-        .imagelist__input-multiple {
+        .hb-imagelist__input-multiple {
             width: auto;
             flex: 1 0 auto;
             white-space: nowrap;
             margin-bottom: $small-spacing;
-        }
-
-        .imagelist__input-multiple-label {
-            text-align: right;
-            color: color(blue); // as a link
-
-            @include hb-icon-pseudo-el(
-                (
-                    icon-name: circle-with-plus,
-                    hide-content: false,
-                )
-            ) {
-                font-size: 1.5rem;
-                margin-right: $small-spacing/2;
-            };
         }
     }
 
@@ -92,6 +77,22 @@ $thumb-size-default: 150px;
         @include input-textual-colors-default;
     }
 }
+
+.hb-imagelist__input-multiple-label {
+    text-align: right;
+    color: color(blue); // as a link
+
+    @include hb-icon-pseudo-el(
+        (
+            icon-name: circle-with-plus,
+            hide-content: false,
+        )
+    ) {
+        font-size: 1.5rem;
+        margin-right: $small-spacing/2;
+    };
+}
+
 
 // what to do when js-behaviour was applied?
 .imagelist.widget-initialized {
@@ -111,7 +112,7 @@ $thumb-size-default: 150px;
 }
 
 // what to do when js-behaviour did not load?
-.hb-js-imagelist.jsb_ {
+.hb-imagelist.jsb_ {
     .imagelist__image-img-wrapper {
         text-align: center;
     }
@@ -128,11 +129,11 @@ $thumb-size-default: 150px;
 }
 
 .imagelist__image-input,
-.imagelist__input-multiple-trigger {
+.hb-imagelist__input-multiple-trigger {
     @include visuallyhidden;
 }
 
-// .imagelist__input-multiple-label {
+// .hb-imagelist__input-multiple-label {
 //     @include button-emphasized-navigational;
 
 //     input:focus ~ & {
@@ -214,7 +215,7 @@ $thumb-size-default: 150px;
 }
 
 
-.hb-js-imagelist {
+.hb-imagelist {
 
     // when displayed in popup
     .mfp-container {
