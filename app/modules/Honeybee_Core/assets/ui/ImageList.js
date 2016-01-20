@@ -302,9 +302,9 @@ define([
     ImageList.prototype.bindMultipleInput = function() {
         var self = this;
 
-        var $multi = this.$widget.find(".imagelist__input-multiple");
-        var $multiinput = this.$widget.find(".imagelist__input-multiple-trigger");
-        var $multilabel = this.$widget.find(".imagelist__input-multiple-label");
+        var $multi = this.$widget.find(".hb-imagelist__input-multiple");
+        var $multiinput = this.$widget.find(".hb-imagelist__input-multiple-trigger");
+        var $multilabel = this.$widget.find(".hb-imagelist__input-multiple-label");
         var newid = this.getRandomString();
         $multiinput.attr('id', newid);
         $multilabel.attr('for', newid);

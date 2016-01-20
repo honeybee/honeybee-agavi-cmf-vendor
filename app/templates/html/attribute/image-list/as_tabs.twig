@@ -11,8 +11,8 @@
     <div class="hb-field__content">
         <div class="hb-field__label">
             <label for="{{ field_id }}" class="hb-field-label__name">{{ _(field_name~'.field_name', translation_domain) }}</label>
-            <div class="imagelist__input-multiple">
-                <input id="{{field_id}}_multiple" type="file" multiple class="imagelist__input-multiple-trigger" {{ disabled }} />
+            <div class="hb-imagelist__input-multiple">
+                <input id="{{field_id}}_multiple" type="file" multiple class="hb-imagelist__input-multiple-trigger" {{ disabled }} />
                 <label class="hb-imagelist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(add_images, translation_domain) }}</label>
             </div>
         </div><!--
