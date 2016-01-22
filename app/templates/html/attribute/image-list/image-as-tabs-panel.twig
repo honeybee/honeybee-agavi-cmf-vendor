@@ -16,15 +16,15 @@
                             <input id="{{item_id}}_file" type="file" class="imagelist__image-input" name="{{grouped_base_path}}[file]" {{ disabled }} {{ required }} /><!--
                             --><input id="{{item_id}}_location" type="hidden" class="imagelist__image-location"
                             name="{{grouped_base_path}}[location]" placeholder="location" value="{{ location }}" {{ disabled }} /><!--
-                            --><label class="imagelist__upload-label" for="{{item_id}}_file">Change Image</label>
+                            --><label class="imagelist__upload-label" for="{{item_id}}_file" title="Change Image">Change Image</label>
                         </div>
                         <div class="imagelist__item-controls-aoi">
-                            <button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-trigger hide" tabindex="-1">Area of interest</button><!--
-                            --><button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-accept hide" tabindex="-1">Accept</button><!--
-                            --><button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-cancel hide" tabindex="-1">Cancel</button>
+                            <button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-trigger hide" tabindex="-1" title="Area of interest">Area of interest</button><!--
+                            --><button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-accept hide" tabindex="-1" title="Accept">Accept</button><!--
+                            --><button data-item-id="{{item_id}}" {{ disabled }} class="imagelist__image-aoi imagelist__image-aoi-cancel hide" tabindex="-1" title="Cancel">Cancel</button>
                         </div>
                         <div class="imagelist__item-controls-download">
-                            <a href="{{download_url}}" target="_blank" class="btn imagelist__image-download" download="download">Download</a>
+                            <a href="{{download_url}}" target="_blank" class="btn imagelist__image-download" download="download" title="Download">Download</a>
                         </div>
                     </div>
                     {% endif %}

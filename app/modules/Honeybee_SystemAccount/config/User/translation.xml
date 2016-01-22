@@ -144,7 +144,8 @@
                             <ae:parameter name="email.input_focus_hint">Please, type a valid email address</ae:parameter>
                             <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
                             <ae:parameter name="background_images.field_name">Hintergrundbild</ae:parameter>
-                            <ae:parameter name="add_images">Bild hinzufügen</ae:parameter>
+                            <ae:parameter name="add_images">Dateien hinzufügen</ae:parameter>
+                            <ae:parameter name="dragndrop_description">Einfach hier hereinziehen</ae:parameter>
                             <ae:parameter name="title.field_name">Titel</ae:parameter>
                             <ae:parameter name="text.field_name">Text</ae:parameter>
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
@@ -165,6 +166,7 @@
                             <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
                             <ae:parameter name="background_images.field_name">Background-image</ae:parameter>
                             <ae:parameter name="add_images">Add image</ae:parameter>
+                            <ae:parameter name="dragndrop_description">Simply drag and drop here</ae:parameter>
                             <ae:parameter name="title.field_name">Title</ae:parameter>
                             <ae:parameter name="text.field_name">Text</ae:parameter>
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>

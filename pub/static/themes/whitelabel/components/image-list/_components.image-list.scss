@@ -17,41 +17,6 @@ $thumb-size-default: 150px;
             max-height: $thumb-size-default;
         }
     }
-
-    .imagelist-tabs__toggles-placeholder {
-        margin-bottom: $small-spacing;
-
-        // hidden by default
-        display: none;
-    }
-
-    // when list is empty
-    .imagelist-tabs__toggles-placeholder:last-child {
-        // show placeholder 
-        line-height: normal;
-        display: block;
-
-        color: color(grey1);
-        * { display: block; text-align: center; }
-
-        &:before {
-            display: block;
-            content: '\00a0';
-            background-image: url('binaries/imagelist-placeholder.png');
-            background-repeat: no-repeat;
-            background-position: 50% 50%;
-            min-height: 50px;
-        }
-
-        .imagelist-toggles-placeholder__title {
-            @include typography-headlines;
-            margin-bottom: $small-spacing/2;
-        }
-    }
-}
-
-.imagelist {
-    border: 1px dotted color(lines);
 }
 
 .imagelist__inputs-wrapper {
@@ -93,17 +58,44 @@ $thumb-size-default: 150px;
     };
 }
 
+.imagelist__dropzone-placeholder {
+    // state
+    display: none;
+    .widget-initialized & { display: block; }
+
+    // style
+    border: 1px solid color(transparent);
+    padding: $small-spacing;
+    text-align: center;
+    color: color(grey1);
+
+    * { display: block; }
+
+    &:before {
+        display: block;
+        content: '\00a0';
+        background-image: url('binaries/dropzone-placeholder.png');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        min-height: 50px;
+        width: 100%;
+    }
+}
+
+.imagelist__placeholder-title {
+    @include typography-headlines;
+    margin-bottom: $small-spacing/2;
+}
 
 // what to do when js-behaviour was applied?
-.imagelist.widget-initialized {
+.hb-imagelist.widget-initialized {
 
     .imagelist-tabs__panel {
         display: none !important;
     }
 
     .imagelist__thumb.newitem {
-        // display: none;
-        @include visuallyhidden;
+        display: none;
     }
 
     .imagelist-tabs__toggles {
@@ -324,29 +316,121 @@ $thumb-size-default: 150px;
     @include button-emphasized-mutating-focus;
 }
 
+// animation
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    // visibility: visible;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    // visibility: hidden;
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+%slideInDown,
+.slideInDown {
+    animation-name: slideInDown;
+    animation-duration: .25s;
+    animation-timing-function: ease;
+}
+
+%slideOutUp,
+.slideOutUp {
+    animation-name: slideOutUp;
+    animation-duration: .55s;
+    animation-timing-function: ease;
+}
+
+// dragging dropzone
+.imagelist--dropzone {
+    position: relative;
+    border: 1px dotted color(lines);
+}
 
 // when drag-and-drop operation is ongoing
-.dragging .imagelist {
-    .imagelist-tabs__toggles-placeholder {
-        background-color: color(background-highlight);
-        border: 1px solid color(positive);
+.dragging {
+    .imagelist--dropzone {
+        border: 1px solid color(mutating-secondary);
+        overflow: hidden; // keep animations in dropzone boundaries
+    }
 
-        &.dragover {
-            background-color: color(positive-primary);
-            border: 1px solid color(positive-secondary);
-        }
+    .imagelist__dropzone-placeholder {
+        animation-fill-mode: forwards;
+        background-color: color(background-highlight);
     }
 
     .imagelist__thumb-img {
         border: 1px solid color(lines);
 
-        &.dragover {
-            border: 3px solid color(lines);
-            outline: 3px solid color(black);
+        .dragover & {
+            border: 1px solid color(lines);
+            outline: 1px solid color(black);
+        }
+    }
+
+    .hb-imagelist.has-items {
+        .dragover .imagelist__dropzone-placeholder {
+            // animation IN
+            @extend %slideInDown;
+        }
+
+        .dragout .imagelist__dropzone-placeholder {
+            // animation OUT
+            @extend %slideOutUp;
+        }
+
+        .dragout .imagelist__dropzone-placeholder,
+        .dragover .imagelist__dropzone-placeholder {
+            // ready to be shown when dragging
+            display: flex;
+        }
+
+        .imagelist__dropzone-placeholder {
+            // vertically centered
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    .hb-imagelist.is-empty .dragover,
+    .hb-imagelist.has-items {
+        .imagelist__dropzone-placeholder {
+            background-color: color(positive-primary);
+            border: 1px solid color(positive-secondary);
+            color: color(white);
         }
     }
 }
 
+// empty list
+.hb-imagelist.is-empty {
+    .imagelist-tabs { display: none; }
+}
+
+// list with items
+.hb-imagelist.has-items {
+    .imagelist__dropzone-placeholder {
+        display: none;  // when drag'n'drop is not active
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        @include zindex("base", 10);
+    }
+}
 
 
 .imagelist__thumb {
@@ -366,7 +450,13 @@ $thumb-size-default: 150px;
     }
 }
 
+.imagelist__thumb-img {
+    min-height: 100px;
+    border: 1px solid color(transparent);
+}
 
+
+// progress
 progress:not(value) {
 }
 

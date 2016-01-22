@@ -17,14 +17,18 @@
             </div>
         </div><!--
         --><div class="hb-field__value">
-            <div class="imagelist">
+            <div class="imagelist imagelist--dropzone">
+                <div class="imagelist__dropzone-placeholder">
+                    <span class="imagelist__placeholder-title">{{ _('add_images', translation_domain) }}</span>
+                    <span class="imagelist__placeholder-description">{{ _('dragndrop_description', translation_domain) }}</span>
+                </div>
                 <div class="imagelist-tabs">
                     {% set tabs_id = 'hb-tabs-' ~ field_id %}
                     <div class="imagelist-tabs__header">
                         <ul class="imagelist-tabs__toggles">
                             <li class="imagelist-tabs__toggle imagelist__thumb newitem" data-item-id="{{ 'add-image-to-' ~ field_id }}">
                                 <label for="{{tabs_id}}-add-image-to-{{ field_id }}">
-                                    <img src="static/themes/whitelabel/binaries/150x150.gif" alt="" class="imagelist__thumb-img"/>
+                                    <img src="static/themes/whitelabel/binaries/150x150.gif" alt="" class="imagelist__thumb-img imagelist--dropzone"/>
                                 </label>
 <progress max="100" value="50">
     <div class="progress-bar">
@@ -41,14 +45,10 @@
                                 </div>
                                 {% endif %}
                             </li>
-                            <li class="imagelist-tabs__toggles-placeholder">
-                                <span class="imagelist-toggles-placeholder__title">{{ _('add_images', translation_domain) }}</span>
-                                <span class="imagelist-toggles-placeholder__description">Simply drag and drop here</span>
-                            </li>
                             {%- for image in images -%}
                             <li class="imagelist-tabs__toggle imagelist__thumb" data-item-id="{{image.id}}">
                                 <label for="{{tabs_id}}-{{image.id}}">
-                                    <img src="{{image.thumb_url}}" title="{{image.title|default('')}}" alt="Thumbnail: {{image.caption|default(image.title)|default('')}}" class="imagelist__thumb-img"/>
+                                    <img src="{{image.thumb_url}}" title="{{image.title|default('')}}" alt="Thumbnail: {{image.caption|default(image.title)|default('')}}" class="imagelist__thumb-img imagelist--dropzone"/>
                                 </label>
                                 {% if isReadable %}
                                 <div class="imagelist__thumb-controls">
