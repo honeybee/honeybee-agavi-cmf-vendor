@@ -42,7 +42,7 @@ define([
     function ImageList(dom_element, options) {
         var self = this;
 
-        this.init(dom_element, default_options);
+        this.init(dom_element, default_options, true);
         this.addOptions(options);
 
         this.isReadable = !(this.isReadonly() || this.isDisabled());
@@ -50,6 +50,8 @@ define([
         this.id = this.$widget.data('id');
         this.form_name = this.$widget.data('form-name');
         this.aoi_selectrect = {};
+        this.dummy_items = ['.newitem'];
+        this.dropzone_selector = '.imagelist--dropzone';
 
         this.resource_type_name = this.$widget.data('resource-type-name');
         this.resource_type_prefix = this.$widget.data('resource-type-prefix');
@@ -112,9 +114,10 @@ define([
             }
         }
 
+        self.updateItemsCount();
         this.updatePopupItems();
 
-        this.$widget.find('.imagelist').addClass('widget-initialized');
+        this.$widget.addClass('widget-initialized');
 
         this.$widget.on("click", ".imagelist__thumb", function(ev) {
             var $li = $(this);
@@ -157,6 +160,7 @@ define([
             // while the rendering of the images on serverside reindexes from 0-n without gaps
 
             self.updatePopupItems();
+            self.updateItemsCount();
 
             $next.find('.imagelist__thumb-control.move').first().focus();
         });
@@ -164,6 +168,18 @@ define([
 
     ImageList.prototype = new Widget();
     ImageList.prototype.constructor = ImageList;
+
+    ImageList.prototype.updateItemsCount = function() {
+        $items = this.$widget.find('.imagelist-tabs__toggle');
+        console.log(this.$widget.context, $items);
+        if (this.$widget.find('.imagelist-tabs__toggle').length - this.dummy_items.length) {
+            this.$widget.addClass('has-items');
+            this.$widget.removeClass('is-empty');
+        } else {
+            this.$widget.addClass('is-empty');
+            this.$widget.removeClass('has-items');
+        }
+    }
 
     ImageList.prototype.updatePopupItems = function() {
         var items = [];
@@ -335,21 +351,31 @@ define([
          */
         $body = $(':root');
 
-        $body.on("dragenter", function(ev) {
+        $body.on("dragenter."+this.prefix, function(ev) {
+            self.log(self.$widget.prefix);
+            return;
+            $target = $(ev.target);
+            $parent_dropzone = $target.closest(self.dropzone_selector, self.$widget);
+
+            console.log('Entering '+$target.context);
+
             // self.logDebug('dragenter', ev.target);
             if (self.dragevents.length === 0)
             {
                 // self.logDebug('INITIAL DRAGENTER');
                 //self.dropbox.addClass('dragging');
                 $body.addClass('dragging');
+                self.$widget.find('.dragover, .dragout').removeClass('dragover dragout');
+            }
+
+            if ($parent_dropzone.length) {
+                $parent_dropzone.removeClass('dragout').addClass('dragover');
+            } else {
+                $parent_dropzone.removeClass('dragover');
+                console.log('REMOVED', 'no-addClass on '+self.dropzone_selector+ '. Target is ', $target);
             }
 
             self.dragevents.push(ev.target); // add the target element to our stack
-
-            $target = $(ev.target);
-            if ($target.hasClass('imagelist-tabs__toggles-placeholder') || $target.hasClass('imagelist__thumb-img')) {
-                $target.addClass('dragover');
-            }
 
             ev.preventDefault();
             ev.stopPropagation();
@@ -358,10 +384,9 @@ define([
 
         $body.on("dragover", function(ev) {
             // stop the event to notify browser, that a drop operation may be possible here
-
             $target = $(ev.target);
-
-            if ($target.hasClass('imagelist-tabs__toggles-placeholder') || $target.hasClass('imagelist__thumb-img')) {
+            $parent_dropzone = $target.closest(self.dropzone_selector, self.$widget);
+            if ($parent_dropzone.length) {
                 ev.originalEvent.dataTransfer.dropEffect = 'copy';
             }
 
@@ -371,10 +396,24 @@ define([
         });
 
         $body.on('dragleave', function(ev) {
+            return;
             // self.logDebug('dragleave', ev.target);
-
             $target = $(ev.target);
-            $target.removeClass('dragover');
+            $parent_dropzone = $target.closest(self.dropzone_selector, self.$widget);
+            $last_entered = $(self.dragevents[self.dragevents.length - 1]);
+            $local_last_entered = self.$widget.find(self.dragevents[self.dragevents.length - 1]);
+            if($last_entered != $local_last_entered) {
+                console.log('Last entered elements is not part of the widget', $local_last_entered.context, $last_entered.context, '-----------------------');
+            }
+
+            console.log('Leaving ', $target.context);
+
+            if($last_entered.closest(self.dropzone_selector, self.$widget).length === 0) {
+                $parent_dropzone.removeClass('dragover').addClass('dragout');
+                console.log('REMOVED');
+            } else {
+                console.log('after entering ', $last_entered);
+            }
 
             for (var i = self.dragevents.length; i--; i) {
                 if (self.dragevents[i] === ev.target) self.dragevents.splice(i, 1); // remove the target element from our stack
@@ -383,12 +422,14 @@ define([
             if (self.dragevents.length === 0) {
                 // self.logDebug('FINAL DRAGLEAVE');
                 $body.removeClass('dragging');
+                self.$widget.find('.dragover, .dragout').removeClass('dragover dragout');
             }
         });
 
         $body.on('dragend', function(ev) {
-            // self.logDebug('dragend', ev.target);
+            self.logDebug('dragend', ev.target);
             $body.removeClass('dragging');
+            self.$widget.find('.dragover, .dragout').removeClass('dragover dragout');
         });
 
         this.$widget.on("drop", function(ev) {
@@ -398,6 +439,7 @@ define([
 
             self.dragevents = []; // re-init
             $body.removeClass('dragging');
+            self.$widget.find('.dragover, .dragout').removeClass('dragover dragout');
 
             var files = ev.originalEvent.dataTransfer.files;
             if (files.length > 0) {
@@ -413,6 +455,7 @@ define([
 
             self.dragevents = []; // re-init
             $body.removeClass('dragging');
+            self.$widget.find('.dragover, .dragout').removeClass('dragover dragout');
 
             var $item = $(this).parents(".imagelist__thumb").first();
             var item_id = $item.attr("data-item-id");
@@ -494,6 +537,7 @@ define([
         var $progress = $newthumbitem.find('progress').first()[0];
         $progress.value=0;
         $newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
+        self.updateItemsCount();
 
         self.uploadFile(
             file,
@@ -503,6 +547,7 @@ define([
             }, function(err, response_json){
                 if (err) {
                     $newthumbitem.remove();
+                    self.updateItemsCount();
                     console.log("upload error", err);
                     return;
                 }
