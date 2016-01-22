@@ -31,8 +31,6 @@ define([
         if (!options.randomize_prefix || options.randomize_prefix === true || options.prefix === "") {
             this.prefix += "#" + this.getRandomString();
         }
-        delete(options.prefix);
-        delete(options.randomize_prefix);
 
         Logging.applyLogging(this, this.prefix, log_tracing_enabled);
 
