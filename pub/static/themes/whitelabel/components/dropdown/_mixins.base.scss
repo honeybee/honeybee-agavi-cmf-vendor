@@ -9,7 +9,7 @@
     flex-items: align-start;    // just on mobile?
 
     @include media-query(lap-and-up) {
-        @include flyout--popover("#{$name}");
+        @include flyout--popover("#{$name}", map-get($zindex, "overlay") + 1);
     }
 
     @include media-query(palm) {

@@ -182,28 +182,20 @@
     .hb-field__entity-reference-list {
         > .hb-field__content {
             > .hb-field__label {
-                position: relative;
+                .hb-embed-type-selector {
+                    text-align: right;
+                }
 
                 .hb-autocomplete {
                     margin-bottom: 0.5*$base-spacing;
-                }
-                .hb-embed-type-selector {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
                 }
             }
         }
     }
     .hb-field__embedded-entity-list {
         > .hb-field__content {
-            position: relative;
-            padding-top: 2em;
-
             .hb-embed-type-selector {
-                position: absolute;
-                right: 0;
-                top: 0;
+                text-align: right;
             }
         }
     }
