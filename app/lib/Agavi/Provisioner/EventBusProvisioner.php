@@ -75,12 +75,22 @@ class EventBusProvisioner extends AbstractProvisioner
                     return $this->buildEventFilters($subscription_config['filters']);
                 };
 
-                $event_transport_callback = function() use ($subscription_config, $event_bus_config, $event_bus) {
-                    return $this->buildTransport(
-                        $event_bus_config['transports'],
-                        $subscription_config['transport'],
-                        $event_bus
-                    );
+                $event_transport_callback = function() use (
+                    $subscription_config,
+                    $event_bus_config,
+                    $event_bus,
+                    &$built_transports
+                ) {
+                    $transport_name = $subscription_config['transport'];
+                    if (!isset($built_transports[$transport_name])) {
+                        $built_transports[$transport_name] = $this->buildTransport(
+                            $event_bus_config['transports'],
+                            $subscription_config['transport'],
+                            $event_bus
+                        );
+                    }
+
+                    return $built_transports[$transport_name];
                 };
 
                 $event_bus->subscribe(
@@ -111,10 +121,7 @@ class EventBusProvisioner extends AbstractProvisioner
             $transport_state[':' . $prop_name] = $prop_value;
         }
 
-        $this->di_container->define($transport_config['implementor'], $transport_state)
-            ->share($transport_config['implementor']);
-
-        return $this->di_container->make($transport_config['implementor']);
+        return $this->di_container->make($transport_config['implementor'], $transport_state);
     }
 
     protected function buildEventHandlers(array $handler_configs)
