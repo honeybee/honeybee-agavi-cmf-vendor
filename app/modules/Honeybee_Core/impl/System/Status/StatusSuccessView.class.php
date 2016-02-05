@@ -14,8 +14,6 @@ use Honeybee\Infrastructure\DataAccess\Connector\Status;
  */
 class Honeybee_Core_System_Status_StatusSuccessView extends View
 {
-    const JSON_OPTIONS = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE;
-
     public function executeHtml(AgaviRequestDataHolder $request_data)
     {
         $this->setAttribute('_title', 'Status');
@@ -27,7 +25,10 @@ class Honeybee_Core_System_Status_StatusSuccessView extends View
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
-        return json_encode($this->prepareReport($request_data), self::JSON_OPTIONS);
+        return json_encode(
+            $this->prepareReport($request_data),
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE
+        );
     }
 
     public function executeXml(AgaviRequestDataHolder $request_data)
@@ -117,7 +118,10 @@ class Honeybee_Core_System_Status_StatusSuccessView extends View
                     $connection_status['connection_name'],
                     $connection_status['status'],
                     $connection_status['implementor'],
-                    json_encode($connection_status['details'], self::JSON_OPTIONS)
+                    json_encode(
+                        $connection_status['details'],
+                        JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE
+                    )
                 );
             } else {
                 $message .= sprintf(
