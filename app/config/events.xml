@@ -31,13 +31,6 @@
                 <transport name="sync">
                     <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\SynchronousTransport</implementor>
                 </transport>
-                <transport name="file_worker">
-                    <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport</implementor>
-                    <settings>
-                        <setting name="exchange">honeybee.domain.events</setting>
-                        <setting name="msg_route">file_worker</setting>
-                    </settings>
-                </transport>
             </transports>
 
             <channels>
@@ -76,7 +69,7 @@
                 <channel name="honeybee.events.files">
                     <subscriptions>
                         <subscription enabled="true">
-                            <transport>file_worker</transport>
+                            <transport>sync</transport>
                             <filter>
                                 <setting name="expression"><![CDATA[event.getType() matches "/.*(?<!\.noop)$/"]]></setting>
                             </filter>
