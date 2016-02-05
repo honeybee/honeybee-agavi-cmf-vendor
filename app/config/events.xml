@@ -31,6 +31,13 @@
                 <transport name="sync">
                     <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\SynchronousTransport</implementor>
                 </transport>
+                <transport name="file_worker">
+                    <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport</implementor>
+                    <settings>
+                        <setting name="exchange">honeybee.domain.events</setting>
+                        <setting name="msg_route">file_worker</setting>
+                    </settings>
+                </transport>
             </transports>
 
             <channels>
@@ -62,6 +69,18 @@
                                     <setting name="storage_writer">honeybee::domain_event::view_store::writer</setting>
                                 </settings>
                             </handler>
+                        </subscription>
+                    </subscriptions>
+                </channel>
+
+                <channel name="honeybee.events.files">
+                    <subscriptions>
+                        <subscription enabled="true">
+                            <transport>file_worker</transport>
+                            <filter>
+                                <setting name="expression"><![CDATA[event.getType() matches "/.*(?<!\.noop)$/"]]></setting>
+                            </filter>
+                            <handler implementor="\Honeybee\Projection\EventHandler\ProjectionFileHandler" />
                         </subscription>
                     </subscriptions>
                 </channel>
