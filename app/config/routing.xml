@@ -26,6 +26,7 @@
                         <ae:parameter name="xml">xml</ae:parameter>
                         <ae:parameter name="json">json</ae:parameter>
                         <ae:parameter name="text">txt</ae:parameter>
+                        <ae:parameter name="csv">csv</ae:parameter>
                     </ae:parameter>
                 </callback>
                 <ignore>ext</ignore>
