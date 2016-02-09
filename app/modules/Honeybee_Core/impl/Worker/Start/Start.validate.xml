@@ -9,12 +9,17 @@
             <validator class="inarray" name="invalid_type" required="true">
                 <argument>type</argument>
                 <error>Invalid or missing 'type' parameter. Expecting one of 'command' or 'event'.</error>
-                <ae:parameter name="values">command,event</ae:parameter>
+                <ae:parameter name="values">command,event,job</ae:parameter>
             </validator>
 
             <validator class="string" name="invalid_queue" required="false">
                 <argument>queue</argument>
                 <error>Invalid or missing 'queue' parameter.</error>
+            </validator>
+
+            <validator class="string" name="invalid_exchange" required="false">
+                <argument>exchange</argument>
+                <error>Invalid or missing 'exchange' parameter.</error>
             </validator>
 
             <validator class="string" name="invalid_binding" required="false">
