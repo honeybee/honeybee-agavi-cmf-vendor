@@ -8,6 +8,7 @@ use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
 use Honeybee\Infrastructure\DataAccess\Query\Query;
+use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Model\Event\AggregateRootEventInterface;
 use Honeybee\Model\Event\AggregateRootEventList;
 use Honeybee\Projection\ProjectionInterface;
@@ -147,7 +148,10 @@ class ResourceValidator extends AgaviValidator
                 new Query(
                     new CriteriaList,
                     new CriteriaList([
-                        new AttributeCriteria($filter_attribute, $this->getData($this->getArgument()))
+                        new AttributeCriteria(
+                            $filter_attribute,
+                            new Equals($this->getData($this->getArgument()))
+                        )
                     ]),
                     new CriteriaList,
                     0,

@@ -7,6 +7,7 @@ use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
 use Honeybee\Infrastructure\DataAccess\Query\Query;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
+use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Infrastructure\Security\Auth\AuthResponse;
 use Honeybee\Infrastructure\Security\Auth\AuthServiceInterface;
 use Honeybee\Infrastructure\Security\Auth\CryptedPasswordHandler;
@@ -51,7 +52,7 @@ class StandardAuthService implements AuthServiceInterface
         $query_result = $this->getQueryService()->find(
             new Query(
                 new CriteriaList,
-                new CriteriaList([ new AttributeCriteria('username', $username) ]),
+                new CriteriaList([ new AttributeCriteria('username', new Equals($username)) ]),
                 new CriteriaList,
                 0,
                 1
