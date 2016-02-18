@@ -1,0 +1,8 @@
+{%- set glance_image_url = glance_image_url|default(ac('entity_glance.image_placeholder', 'static/themes/whitelabel/binaries/glance-placeholder.png')) -%}
+{% spaceless %}
+<div class="hb-glance {{ glance_css }}">
+    <img class="hb-glance__image" src="{{ glance_image_url }}" width="{{ glance_image_width }}" height="{{ glance_image_height }}" />
+    <h1 class="hb-glance__title">{{ glance_title }}</h1>
+    <div class="hb-glance__description">{{ glance_description|default('') }}</div>
+</div>
+{% endspaceless %}

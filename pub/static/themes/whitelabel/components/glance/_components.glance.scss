@@ -1,0 +1,29 @@
+    /* Glance style */
+
+    .hb-glance {
+        overflow: auto;
+        padding-right: $small-spacing;
+    }
+
+    .hb-glance__title {
+        @include typography-headlines;
+        font-weight: normal;
+
+        margin-top: $small-spacing;
+        margin-bottom: 0;
+    }
+
+    .hb-glance__description {
+        margin-bottom: $small-spacing;
+        padding-left: $small-spacing;
+        color: color(darkgrey2);
+    }
+
+    .hb-glance__image {
+        float: left;
+        margin-right: $small-spacing;
+        max-height: $base-spacing * 10;
+        max-width: $base-spacing * 10;
+    }
+
+    .hb-glance--hidden { @include visuallyhidden; }
