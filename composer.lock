@@ -607,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "06c2351f7d376657e866b3f6bd8585eb92a5691d"
+                "reference": "e4bef57e77a2a515f421c9e2ef4590cea67ce6ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/06c2351f7d376657e866b3f6bd8585eb92a5691d",
-                "reference": "06c2351f7d376657e866b3f6bd8585eb92a5691d",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e4bef57e77a2a515f421c9e2ef4590cea67ce6ae",
+                "reference": "e4bef57e77a2a515f421c9e2ef4590cea67ce6ae",
                 "shasum": ""
             },
             "require": {
@@ -650,8 +650,8 @@
                 "league/flysystem-aws-s3-v3": "to handle files with amazon aws s3 storage",
                 "league/flysystem-dropbox": "to handle files via dropbox api",
                 "league/flysystem-sftp": "to handle files via sftp",
-                "react/zmq": "0.3.* to handle messages async with zeromq",
-                "videlalvaro/php-amqplib": "2.5.* as AMQP implementing message queue in async setups with e.g. rabbitmq"
+                "php-amqplib/php-amqplib": "2.6.* as AMQP implementing message queue in async setups with e.g. rabbitmq",
+                "react/zmq": "0.3.* to handle messages async with zeromq"
             },
             "type": "library",
             "autoload": {
@@ -694,7 +694,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-02-15 12:21:07"
+            "time": "2016-02-22 13:10:59"
         },
         {
             "name": "honeybee/trellis",
@@ -702,12 +702,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "369c9450c9d387141de1a6c98b6cf72cb744c3fb"
+                "reference": "1ed1a81a6c486e75acdd97a5eb9c7193da0eacf0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/da608dd59a755c2fb5304e6f8a228fef71ef6a5b",
-                "reference": "369c9450c9d387141de1a6c98b6cf72cb744c3fb",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/1ed1a81a6c486e75acdd97a5eb9c7193da0eacf0",
+                "reference": "1ed1a81a6c486e75acdd97a5eb9c7193da0eacf0",
                 "shasum": ""
             },
             "require": {
@@ -763,7 +763,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2015-12-18 09:26:14"
+            "time": "2016-02-19 16:47:21"
         },
         {
             "name": "league/flysystem",

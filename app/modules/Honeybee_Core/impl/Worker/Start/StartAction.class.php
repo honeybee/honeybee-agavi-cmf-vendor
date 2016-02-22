@@ -15,6 +15,10 @@ class Honeybee_Core_Worker_StartAction extends Action
 
     const DEFAULT_COMMAND_EXCHANGE = 'honeybee.domain.commands';
 
+    const DEFAULT_WAIT_EXCHANGE = 'honeybee.domain.waiting';
+
+    const DEFAULT_WAIT_QUEUE = 'honeybee.events.waiting';
+
     const GLOBAL_QUEUE = '.global';
 
     public function execute(AgaviRequestDataHolder $request_data)
@@ -53,6 +57,8 @@ class Honeybee_Core_Worker_StartAction extends Action
         return new ArrayConfig([
             'exchange' => $exchange,
             'queue' => $queue,
+            'wait_exchange' => self::DEFAULT_WAIT_EXCHANGE,
+            'wait_queue' => self::DEFAULT_WAIT_QUEUE,
             'bindings' => $bindings
         ]);
     }
