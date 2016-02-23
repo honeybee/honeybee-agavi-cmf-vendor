@@ -61,6 +61,7 @@ define([
             var $elm = $(document.getElementById(elm_id));
             if ($elm.length > 0) {
                 jsb.fireEvent('TABS:OPEN_TAB_THAT_CONTAINS', { 'element_id': elm_id });
+                jsb.fireEvent('ENTITY_LIST:OPEN_ENTITY_THAT_CONTAINS', { 'element_id': elm_id });
             }
         });
 

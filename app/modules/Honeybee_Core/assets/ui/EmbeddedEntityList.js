@@ -29,11 +29,41 @@ define([
 
     EmbeddedEntityList.prototype.initUi = function() {
         var self = this;
+
+        jsb.whenFired('ENTITY_LIST:OPEN_ENTITY_THAT_CONTAINS', function(values, event_name) {
+            if (values.element_id) {
+                // $(id) would need escaping for ids with dots…
+                self.openItemThatContains(document.getElementById(values.element_id));
+            }
+        });
+
         if (this.isWriteable()) {
             this.registerEmbedTypeSelector();
         }
         this.updateUi();
     };
+
+    EmbeddedEntityList.prototype.openItemThatContains = function(element) {
+        if(!element) {
+            this.logError('Please, provide an element to search for.');
+            return;
+        }
+        var $items = this.$widget.find('> .hb-field__value > .hb-entity-list > .hb-embed-item');
+        var $item = $items.has(element);
+        if ($item.length > 0) {
+            this.expandItem($item);
+        }
+    };
+
+    EmbeddedEntityList.prototype.expandItem = function(item) {
+        $target_item = this.$widget.find(item);
+        $target_item.find('> .hb-embed-item__trigger').prop("checked", true);
+    }
+
+    EmbeddedEntityList.prototype.collapseItem = function(item) {
+        $target_item = this.$widget.find(item);
+        $target_item.find('> .hb-embed-item__trigger').prop("checked", false);
+    }
 
     EmbeddedEntityList.prototype.registerEmbedTypeSelector = function() {
         var self = this;
@@ -110,6 +140,7 @@ define([
             self.handleAction(event, $item);
             return false;
         });
+        trigger_id = $item.data('input-group') + '-' + Math.floor(Math.random() * 100000);
     };
 
     EmbeddedEntityList.prototype.handleAction = function(event, $target_item) {
