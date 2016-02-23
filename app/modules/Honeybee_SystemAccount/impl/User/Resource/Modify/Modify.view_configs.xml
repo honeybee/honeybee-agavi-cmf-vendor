@@ -12,6 +12,11 @@
                 <output_formats>
                     <output_format name="html">
                         <renderer_configs>
+                            <renderer_config subject="#glance">
+                                <settings>
+                                    <setting name="enabled">true</setting>
+                                </settings>
+                            </renderer_config>
                             <renderer_config subject="honeybee.system_account.user">
                                 <settings>
                                     <setting name="template">html/resource/as_fields_with_viewtemplate.twig</setting>
