@@ -17,9 +17,6 @@
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
-        <div class="hb-embed-type-selector">
-            {{ rendered_embed_selector|raw }}
-        </div>
         {% if options.hide_attribute_label is not defined or not options.hide_attribute_label %}
         <div class="hb-field__label">
             <label for="{{ field_id }}" class="{#mandatory#}">
@@ -27,6 +24,9 @@
             </label>
         </div>
         {% endif %}
+        <div class="hb-embed-type-selector">
+            {{ rendered_embed_selector|raw }}
+        </div>
     </div>
     <div class="hb-field__value">
         <ul class="errors">
