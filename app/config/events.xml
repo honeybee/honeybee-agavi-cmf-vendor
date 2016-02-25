@@ -49,6 +49,18 @@
                         </subscription>
                     </subscriptions>
                 </channel>
+                
+                <channel name="honeybee.events.failed">
+                    <subscriptions>
+                        <subscription enabled="true">
+                            <transport>sync</transport>
+                            <filter>
+                                <setting name="expression">event.getType() matches "/.*\.failed$/"</setting>
+                            </filter>
+                            <handler implementor="\Honeybee\Infrastructure\Event\FailedJobEventHandler" />
+                        </subscription>
+                    </subscriptions>
+                </channel>
 
                 <channel name="honeybee.events.replay">
                     <subscriptions>
