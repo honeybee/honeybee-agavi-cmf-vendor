@@ -1,55 +1,74 @@
 # Entity glance
 
 The **glance** is a brief preview of an entity content.
-Disabled by default, it can be enabled in the *view_config.xml* on the subject *#glance*.
+Disabled by default, it can be enabled in the *view_config.xml* or in the *view_templates.xml*, specifying a *"glance_config"* setting.
 
 The glance supports configuration at different levels of the application:
 
-* **globally**, in the generic *'application'* view-scope:
+* **globally**, in the *view_configs.xml*, on the generic *'application'* view-scope:
 ```
 <view_config scope="application">
-    <output_formats>
-        <output_format name="html">
-            <renderer_configs>
-                <renderer_config subject="#glance">
-                    <settings>
-                        <setting name="enabled">true</setting>
-                    </settings>
-                </renderer_config>
-            </renderer_configs>
-        </output_format>
-    </output_formats>
+    <settings>
+        <setting name="glance_config">
+            <settings>
+                <setting name="enabled">true</setting>
+            </settings>
+        </setting>
+    </settings>
 </view_config>
 ```
-* **per-view**, in the specific view-scope:
+* **per-view**, as setting for the specific view-scope in the *view_configs.xml*:
 ```
 <view_config scope="honeybee.system_account.user.resource.modify">
-    <output_formats>
-        <output_format name="html">
-            <renderer_configs>
-                <renderer_config subject="#glance">
-                    <settings>
-                        <setting name="enabled">true</setting>
-                    </settings>
-                </renderer_config>
-            </renderer_configs>
-        </output_format>
-    </output_formats>
+    <settings>
+        <setting name="glance_config">
+            <settings>
+                <setting name="enabled">true</setting>
+            </settings>
+        </setting>
+    </settings>
 </view_config>
 ```
-* **per-list-attribute**, as additional suffixed *view_config* for an embed-list:
+* **per-entity-list-attribute**, as field setting in the *view_templates.xml*:
 ```
-<renderer_config subject="honeybee.system_account.user.contacts.#glance">
+<view_templates scope="honeybee.system_account.user.resource.modify">
+    <view_template name="honeybee.system_account.user.html">
+        ...
+        <field name="contacts" attribute_path="contacts" template="html/attribute/embedded-entity-list/as_input.twig">
+            <settings>
+                <setting name="glance_config">
+                    <setting name="enabled">true</setting>
+                </setting>
+                <setting name="expand_items_content_by_default">true</setting>
+            </settings>
+        </field>
+        ...
+    </view_template>
+</view_templates>
+```
+or as *render_config*, in the *view_configs.xml*, for an embed-list:
+```
+<renderer_config subject="honeybee.system_account.user.contacts">
     <settings>
-        <setting name="enabled">true</setting>
+        <setting name="glance_config">
+            <settings>
+                <setting name="enabled">true</setting>
+            </settings>
+        </setting>
     </settings>
 </renderer_config>
 ```
-* **per-entity-type**, as additional suffixed *view_config* for an embed-list entity type:
+**Note:** *"honeybee.system_account.user.contacts"* is not a real rendering subject. The option to specify a *glance_config* in the *view_configs.xml* is just a convenience.
+
+* **per-entity-type**, as *renderer_config*, in the *view_configs.xml*, for an embedded entity type:
 ```
-<renderer_config subject="honeybee.system_account.user.contacts.colleague_contact.#glance">
+<renderer_config subject="honeybee.system_account.user.contacts.colleague_contact">
     <settings>
-        <setting name="enabled">true</setting>
+        <setting name="glance_config">
+            <settings>
+                <setting name="enabled">true</setting>
+            </settings>
+        </setting>
     </settings>
 </renderer_config>
 ```
@@ -103,10 +122,8 @@ This will reset the less specific configuration.
 Common options from the base renderer (*e.g.* **template**, **renderer_locator_modifier**) can be obviously used to customize the rendering of the glance (*e.g.* to use a custom renderer with different logic for retrieving the default attribute values, or to use a custom template.
 
 ### Entity renderer
-* **glance_enabled** - Tells wether to render or not the glance for the entity.
-* **glance_config** - A default renderer config to be merged with the configurations listed above.
+* **glance_config** - The glance configuration used for the glance rendering.
 The option **expand_content_by_default** is set to display/expand the entity details when there is no glance to click on.
 
-### Entity-list renderer
-* **glance_enabled** - Tells wether to render or not the glance for the list entities.
-* **glance_config** - A default renderer config for the list entities.
+### Embedded-Entity-List attribute renderer
+* **glance_config** - The *per-entity-list-attribute* glance configuration.

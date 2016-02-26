@@ -3,6 +3,7 @@
     .hb-glance {
         overflow: auto;
         padding-right: $small-spacing;
+        min-height: $base-spacing * 2.5;
     }
 
     .hb-glance__title {

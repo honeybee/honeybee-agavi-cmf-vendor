@@ -78,8 +78,12 @@
                 position: relative;
                 padding-top: 0;
                 padding-bottom: 0;
-                margin-bottom: 3px;
-                border-top: 1px solid color(lines);
+                margin-top: 3px;
+
+                &:focus {
+                    outline: 0;
+                    box-shadow: 0 0 1px 3px color(outline);
+                }
 
                 .hb-cell {
                     @extend %layout__item;
@@ -88,7 +92,6 @@
                 }
 
                 .hb-embed-actions {
-                    //display: none;
                     width: 100%;
 
                     @extend %hb-embed-actions--large;
@@ -142,7 +145,12 @@
         .hb-embed-item__controls {
         }
 
-        .hb-embed-item__content { display: none; }
+        .hb-embed-item__content {
+            // collapsed by default
+            display: none;
+
+            background-color: color(lightgrey2);
+        }
 
         // Embed-item expand/collapse
         .hb-embed-item__trigger { display: none; }
