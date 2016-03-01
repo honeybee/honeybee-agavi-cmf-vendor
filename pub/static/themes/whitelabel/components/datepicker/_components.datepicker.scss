@@ -40,7 +40,7 @@ $line-height: 1.2em !default;
 .datepicker-toggle__icon {
     &::before {
         @include hb-icon(calendar);
-        font-size: 1.2;
+        font-size: 1.2rem;
     }
 }
 .datepicker-toggle__label {
