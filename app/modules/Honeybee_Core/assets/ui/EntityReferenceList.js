@@ -39,7 +39,7 @@ define([
         if (this.options.inline_mode === true) {
             this.$entities_list.empty();
             this.cloneItem(this.templates[this.getActiveReferenceType()]);
-            this.$entities_list.find('> .hb-embed-item > .hb-embed-actions').remove();
+            this.$entities_list.find('> .hb-embed-item > .hb-embed-item__content > .hb-embed-actions').remove();
             this.purgeSelectizeQueryCache();
         }
     };
