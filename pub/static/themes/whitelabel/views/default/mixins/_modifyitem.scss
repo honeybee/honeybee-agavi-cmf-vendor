@@ -135,6 +135,7 @@
 
             // style
             background-color: color(white);
+            border-left: $small-spacing/2 solid color(bluedark);
         }
         .hb-embed-item__toggle,
         .hb-embed-item__controls {
@@ -155,6 +156,12 @@
         // Embed-item expand/collapse
         .hb-embed-item__trigger { display: none; }
         .hb-embed-item__trigger:checked ~ .hb-embed-item__content { display: block; }
+
+        .hb-embed-item__trigger:checked ~ .hb-embed-item__header {
+            background-color: color(lightgrey1);
+            border-left-color: color(bluedarker);
+            @include button-shadow-emphasized-navigational-active;
+        }
 
         .hb-embed-item__toggle {
             display: inline-block;
