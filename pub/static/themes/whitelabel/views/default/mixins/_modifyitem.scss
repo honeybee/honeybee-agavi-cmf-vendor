@@ -92,12 +92,18 @@
                 }
 
                 .hb-embed-actions {
+                    background-color: color(lightgrey1);
                     width: 100%;
 
                     @extend %hb-embed-actions--large;
 
                     & .hb-embed-action__none {
                         display: none;
+                    }
+                    @include media-query(lap-and-up) {
+                        display: inline-flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
                     }
                 }
 
@@ -158,7 +164,7 @@
         .hb-embed-item__trigger:checked ~ .hb-embed-item__content { display: block; }
 
         .hb-embed-item__trigger:checked ~ .hb-embed-item__header {
-            background-color: color(lightgrey1);
+            background-color: color(grey2);
             border-left-color: color(bluedarker);
             @include button-shadow-emphasized-navigational-active;
         }
@@ -170,17 +176,28 @@
         }
 
         // Embed actions
-        .hb-embed-action__up label,
-        .hb-embed-action__down label,
-        .hb-embed-action__none label,
-        .hb-embed-action__duplicate label { @include button-normal-mutating;}
-        .hb-embed-action__delete label { @include button-normal-destructive; }
+        .hb-embed-action__icon {
+            position: relative;
 
-        .hb-embed-action__up .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: triangle-up)); }
-        .hb-embed-action__down .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: triangle-down)); }
-        .hb-embed-action__none .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: minus)); }
-        .hb-embed-action__delete .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: cross)); }
-        .hb-embed-action__duplicate .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: copy)); }
+            @include media-query(palm) {
+                width: 100%;
+            }
+        }
+        .hb-embed-action__up .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: arrow-bold-up, size: 1.5 )); }
+        .hb-embed-action__down .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: arrow-bold-down, size: 1.5 )); }
+        .hb-embed-action__none .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: minus, size: 1.5 )); }
+        .hb-embed-action__delete .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: cross, size: 1.5 )); }
+        .hb-embed-action__duplicate .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: copy, size: 1.5 )); }
+
+        @include media-query(lap-and-up) {
+            .hb-embed-action__icon:after {
+                content: attr(data-action-caption);
+                // restore font-size set to 0 from icon mixin
+                font-size: 1rem !important;
+                // align vertically to icon
+                display: inline-table;
+            }
+        }
 
         &.jsb_ {
             .hb-entity-templates {
@@ -208,7 +225,7 @@
 
         &.hb-entity-list__inline-mode {
             .hb-field__content {
-                padding-top: 0;
+                padding: 0;
             }
 
             .hb-embed-type-selector {
@@ -239,6 +256,12 @@
     }
     .hb-field__embedded-entity-list {
         @include shadow-container;
+
+        .hb-embed-actions {
+            border: 1px solid color(grey1);
+            border-left-width: 0;
+            border-right-width: 0;
+        }
 
         > .hb-field__content {
             display: flex;
