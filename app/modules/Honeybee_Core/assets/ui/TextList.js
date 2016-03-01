@@ -48,7 +48,7 @@ define([
 
             $option.attr("value", $checkbox.attr("value"));
             $option.text($label.children("span").text());
-            $option.attr("selected", true);
+            $option.attr("selected", $checkbox.attr("checked"));
 
             $select.append($option);
         });
@@ -67,7 +67,7 @@ define([
                 "restore_on_backspace": {
                 }
             },
-            create: this.isReadable,
+            create: this.isReadable && this.options.allowed_values.length === 0,
             render: {
                 option_create: function(data, escape) {
                     return '<div class="create">+ <strong>' + escape(data.input) + '</strong>&hellip;</div>';

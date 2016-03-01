@@ -22,6 +22,12 @@
                         <span>{{value}}</span>
                     </label>
                 {% endfor %}
+                {% for unchecked_option in unchecked_options %}
+                    <label class="text-list__item">
+                        <input type="checkbox" value="{{unchecked_option}}" name="{{ grouped_field_name }}" {% if not isReadable %}disabled{% endif %} />
+                        <span>{{unchecked_option}}</span>
+                    </label>
+                {% endfor %}
                 <div class="input-text-list__box">
                     <input type="text" name="{{ grouped_field_name }}" id="{{ field_id }}"
                         {{ readonly }} {{ disabled }} {% if attribute_value|length < min_count %}{{ required }}{% endif %} {{ pattern|raw }} placeholder="{{ placeholder }}" />
