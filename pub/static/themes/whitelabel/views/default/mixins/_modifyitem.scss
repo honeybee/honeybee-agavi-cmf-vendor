@@ -92,7 +92,6 @@
                 }
 
                 .hb-embed-actions {
-                    background-color: color(lightgrey1);
                     width: 100%;
 
                     @extend %hb-embed-actions--large;
@@ -233,7 +232,7 @@
             }
 
             .hb-embed-item {
-                > .hb-embed-actions {
+                > .hb-embed-item__content > .hb-embed-actions {
                     display: none;
                 }
 
@@ -258,6 +257,7 @@
         @include shadow-container;
 
         .hb-embed-actions {
+            background-color: color(lightgrey1);
             border: 1px solid color(grey1);
             border-left-width: 0;
             border-right-width: 0;
