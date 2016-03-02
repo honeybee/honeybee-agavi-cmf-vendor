@@ -3,12 +3,13 @@
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use AgaviValidator;
+use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
+use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
 use Honeybee\Infrastructure\DataAccess\Query\Query;
-use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Model\Event\AggregateRootEventInterface;
 use Honeybee\Model\Event\AggregateRootEventList;
 use Honeybee\Projection\ProjectionInterface;
