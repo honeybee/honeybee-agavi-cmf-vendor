@@ -43,13 +43,21 @@
         @extend %desk-wide-1-of-3;
     }
 
+    .hb-field {
+        // reset padding, except when the panel is hidden to make a "component/field" look like a "object/sheet"
+        // not achievable with the more explicit selector (waiting for CSS4):
+        //      .hb-panel--hidden:not(.hb-field .hb-panel) > .hb-panel__content
+        .hb-panel--hidden > .hb-panel__content {
+            padding: $base-spacing;
+        }
+    }
+
     /**
         embed/reference styles start here
         @todo move to a dedicated component files
     */
     .hb-field__embedded-entity-list,
     .hb-field__entity-reference-list {
-        margin-bottom: 0;
 
         &.jsb_ {
             > .hb-field__content {
@@ -82,7 +90,6 @@
 
                 &:focus {
                     outline: 0;
-                    box-shadow: 0 0 1px 3px color(outline);
                 }
 
                 .hb-cell {
@@ -252,9 +259,25 @@
                 margin-bottom: 0.5*$base-spacing;
             }
         }
+
+        .hb-embed-item {
+            box-shadow: none; // remove focusing
+            > .hb-embed-item__content {
+                > .hb-embed-actions { display: none; }
+            }
+        }
+
+        .hb-panel--hidden { display: none; }
     }
     .hb-field__embedded-entity-list {
+        margin-bottom: 0;
         @include shadow-container;
+
+        .hb-embed-item {
+            &:focus {
+                box-shadow: 0 0 1px 3px color(outline);
+            }
+        }
 
         .hb-embed-actions {
             background-color: color(lightgrey1);

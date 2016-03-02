@@ -183,3 +183,8 @@ label {
         padding-top: 0;
     }
 }
+
+/* Working on */
+
+// The "duplicate" action button is hidden because it is not working correctly at the moment.
+.hb-embed-action__duplicate { display: none !important; }

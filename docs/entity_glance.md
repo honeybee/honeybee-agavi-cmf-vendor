@@ -150,14 +150,14 @@ To use a defined view-template just specify its name in the glance config.
 * **enabled** - Enable glance rendering.
 * **image_url** - Static URL. [there is no auto-retriving when it is set]
 * **image_width**/**image_height** - Custom width/height for the image.
-* **image_value_path** - Attribute value path to an image-list attribute used for the glance image auto-retrieving. [requires *image_url* option to be empty]
+* **image_value_path** - Attribute value path to an image-list existing attribute used for the glance image auto-retrieving. [requires *image_url* option to be empty]
 * **image_value_path_index** - Index of the image-list specified in the previous option (by default gets the first image of the attribute value).
 * **image_activity_scope** - Converjon activity scope.
 * **image_activity_name** - Converjon activity scope.
 * **title** - Static value. [there is no auto-retriving when it is set]
-* **title_value_path** - Attribute value path to the attribute used for the glance title auto-retrieving. [requires *title* option to be empty]
+* **title_value_path** - Attribute value path to the existing attribute used for the glance title auto-retrieving. [requires *title* option to be empty]
 * **description** - Static value. [there is no auto-retriving when it is set]
-* **description_value_path** - Attribute value path to the attribute used for the glance description auto-retrieving. [requires *description* option to be empty]
+* **description_value_path** - Attribute value path to the existing attribute used for the glance description auto-retrieving. [requires *description* option to be empty]
 * **view_template** - Tells whether to use the *view_template_name* or not.
 * **view_template_name** - The name of the *view_template* to use for rendering the glance.
 
