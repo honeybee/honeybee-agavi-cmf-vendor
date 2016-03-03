@@ -139,15 +139,13 @@
         }
 
         // Embed-item parts
-
         .hb-embed-item__header {
             // layout
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
 
             // style
             background-color: color(white);
-            border-left: $small-spacing/2 solid color(bluedark);
         }
         .hb-embed-item__toggle,
         .hb-embed-item__controls {
@@ -166,19 +164,21 @@
         }
 
         // Embed-item expand/collapse
-        .hb-embed-item__trigger { display: none; }
+        .hb-embed-item__trigger { @include visuallyhidden; }
         .hb-embed-item__trigger:checked ~ .hb-embed-item__content { display: block; }
 
-        .hb-embed-item__trigger:checked ~ .hb-embed-item__header {
-            background-color: color(grey2);
-            border-left-color: color(bluedarker);
-            @include button-shadow-emphasized-navigational-active;
+        .hb-embed-item__trigger:focus ~ .hb-embed-item__header {
+            box-shadow: -5px 0px 2px 0px color(outline);
         }
 
         .hb-embed-item__toggle {
             display: inline-block;
             vertical-align: top;
             position: initial;
+        }
+
+        .hb-embed-item--expanded {
+            box-shadow: 0 0 1px 3px color(outline);
         }
 
         // Embed actions
@@ -272,12 +272,6 @@
     .hb-field__embedded-entity-list {
         margin-bottom: 0;
         @include shadow-container;
-
-        .hb-embed-item {
-            &:focus {
-                box-shadow: 0 0 1px 3px color(outline);
-            }
-        }
 
         .hb-embed-actions {
             background-color: color(lightgrey1);

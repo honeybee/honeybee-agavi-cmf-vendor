@@ -24,7 +24,7 @@
     }
 
     input:focus ~ label {
-//        @include activity-underline;
+        @include outline;
     }
 
     &.hb-embed-action__delete input:checked ~ label {
