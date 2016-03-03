@@ -1,40 +1,25 @@
-<div class="hb-glance hb-glance--view_template {{ css }}" {#data-embed-type="{{ entity_type }}" data-input-group="{{ grouped_base_path }}" data-hb-glance-identifier="{{ resource.identifier }}"#} {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
-    <div class="">
-        {% for tab in view_template.getTabList() %}
-        {#<div class="{{ tab.css }}" data-tab-name="{{ tab.name }}">#}
-            {%- for panel in tab.getPanelList() -%}
-            {#{%- set panel_title = _(panel.name, translation_domain_panels, null, null, '') -%}
-            <div class="hb-panel hb-panel-{{ panel.name }} {{ panel.css }} {% if panel_title is empty %} hb-panel__header--hidden {% endif %}" data-panel-name="{{ panel.name }}">
-                <div class="hb-panel__content">#}
-                    {%- for row in panel.getRowList() -%}
-                    <div class="hb-row {{ row.css }}">
-                        {%- for cell in row.getCellList() -%}
-                        <div class="hb-cell {{ cell.css }}">
-                            {%- for group in cell.getGroupList() -%}
-                                <div class="hb-group hb-group-{{ group.name }} {{ group.css }}" data-group-name="{{ group.name }}">
-                                {%- for field in group.getFieldList() -%}
-                                    {%- if is_new and field.name == 'identifier' -%}
-                                        {# skip #}
-                                    {%- else -%}
-                                        {{- rendered_fields[field.name]|raw -}}
-                                    {%- endif -%}
-                                {%- endfor -%}
-                                </div>
+<div class="hb-glance hb-glance--view_template {{ css }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    {% for tab in view_template.getTabList() %}
+        {%- for panel in tab.getPanelList() -%}
+                {%- for row in panel.getRowList() -%}
+                <div class="hb-row {{ row.css }}">
+                    {%- for cell in row.getCellList() -%}
+                    <div class="hb-cell {{ cell.css }}">
+                        {%- for group in cell.getGroupList() -%}
+                            <div class="hb-group hb-group-{{ group.name }} {{ group.css }}" data-group-name="{{ group.name }}">
+                            {%- for field in group.getFieldList() -%}
+                                {%- if is_new and field.name == 'identifier' -%}
+                                    {# skip #}
+                                {%- else -%}
+                                    {{- rendered_fields[field.name]|raw -}}
+                                {%- endif -%}
                             {%- endfor -%}
-                        </div>
+                            </div>
                         {%- endfor -%}
                     </div>
                     {%- endfor -%}
-            {#    </div>
-            </div>#}
-            {%- endfor -%}
-        {#</div>#}
+                </div>
+                {%- endfor -%}
         {%- endfor -%}
-    </div>
-{#
-    <input type="hidden" name="{{ grouped_base_path }}[@type]" value="{{ entity_type }}" />
-    {% if is_embed_template %}
-    <input type="hidden" class="hb-js-tpl-marker" name="{{ grouped_base_path }}[__template]" value="true" />
-    {% endif %}
-#}
+    {%- endfor -%}
 </div>
