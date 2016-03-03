@@ -43,13 +43,21 @@
         @extend %desk-wide-1-of-3;
     }
 
+    .hb-field {
+        // reset padding, except when the panel is hidden to make a "component/field" look like a "object/sheet"
+        // not achievable with the more explicit selector (waiting for CSS4):
+        //      .hb-panel--hidden:not(.hb-field .hb-panel) > .hb-panel__content
+        .hb-panel--hidden > .hb-panel__content {
+            padding: $base-spacing;
+        }
+    }
+
     /**
         embed/reference styles start here
         @todo move to a dedicated component files
     */
     .hb-field__embedded-entity-list,
     .hb-field__entity-reference-list {
-        margin-bottom: 0;
 
         &.jsb_ {
             > .hb-field__content {
@@ -82,7 +90,6 @@
 
                 &:focus {
                     outline: 0;
-                    box-shadow: 0 0 1px 3px color(outline);
                 }
 
                 .hb-cell {
@@ -98,6 +105,11 @@
 
                     & .hb-embed-action__none {
                         display: none;
+                    }
+                    @include media-query(lap-and-up) {
+                        display: inline-flex;
+                        flex-direction: row;
+                        justify-content: flex-end;
                     }
                 }
 
@@ -127,11 +139,10 @@
         }
 
         // Embed-item parts
-
         .hb-embed-item__header {
             // layout
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
 
             // style
             background-color: color(white);
@@ -153,8 +164,12 @@
         }
 
         // Embed-item expand/collapse
-        .hb-embed-item__trigger { display: none; }
+        .hb-embed-item__trigger { @include visuallyhidden; }
         .hb-embed-item__trigger:checked ~ .hb-embed-item__content { display: block; }
+
+        .hb-embed-item__trigger:focus ~ .hb-embed-item__header {
+            box-shadow: -5px 0px 2px 0px color(outline);
+        }
 
         .hb-embed-item__toggle {
             display: inline-block;
@@ -162,18 +177,33 @@
             position: initial;
         }
 
-        // Embed actions
-        .hb-embed-action__up label,
-        .hb-embed-action__down label,
-        .hb-embed-action__none label,
-        .hb-embed-action__duplicate label { @include button-normal-mutating;}
-        .hb-embed-action__delete label { @include button-normal-destructive; }
+        .hb-embed-item--expanded {
+            box-shadow: 0 0 1px 3px color(outline);
+        }
 
-        .hb-embed-action__up .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: triangle-up)); }
-        .hb-embed-action__down .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: triangle-down)); }
-        .hb-embed-action__none .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: minus)); }
-        .hb-embed-action__delete .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: cross)); }
-        .hb-embed-action__duplicate .hb-embed-action__icon { @include hb-icon-pseudo-el((icon-name: copy)); }
+        // Embed actions
+        .hb-embed-action__icon {
+            position: relative;
+
+            @include media-query(palm) {
+                width: 100%;
+            }
+        }
+        .hb-embed-action__up .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: arrow-bold-up, size: 1.5 )); }
+        .hb-embed-action__down .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: arrow-bold-down, size: 1.5 )); }
+        .hb-embed-action__none .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: minus, size: 1.5 )); }
+        .hb-embed-action__delete .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: cross, size: 1.5 )); }
+        .hb-embed-action__duplicate .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: copy, size: 1.5 )); }
+
+        @include media-query(lap-and-up) {
+            .hb-embed-action__icon:after {
+                content: attr(data-action-caption);
+                // restore font-size set to 0 from icon mixin
+                font-size: 1rem !important;
+                // align vertically to icon
+                display: inline-table;
+            }
+        }
 
         &.jsb_ {
             .hb-entity-templates {
@@ -201,7 +231,7 @@
 
         &.hb-entity-list__inline-mode {
             .hb-field__content {
-                padding-top: 0;
+                padding: 0;
             }
 
             .hb-embed-type-selector {
@@ -209,7 +239,7 @@
             }
 
             .hb-embed-item {
-                > .hb-embed-actions {
+                > .hb-embed-item__content > .hb-embed-actions {
                     display: none;
                 }
 
@@ -229,9 +259,26 @@
                 margin-bottom: 0.5*$base-spacing;
             }
         }
+
+        .hb-embed-item {
+            box-shadow: none; // remove focusing
+            > .hb-embed-item__content {
+                > .hb-embed-actions { display: none; }
+            }
+        }
+
+        .hb-panel--hidden { display: none; }
     }
     .hb-field__embedded-entity-list {
+        margin-bottom: 0;
         @include shadow-container;
+
+        .hb-embed-actions {
+            background-color: color(lightgrey1);
+            border: 1px solid color(grey1);
+            border-left-width: 0;
+            border-right-width: 0;
+        }
 
         > .hb-field__content {
             display: flex;

@@ -1,0 +1,25 @@
+<div class="hb-glance hb-glance--view_template {{ css }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    {% for tab in view_template.getTabList() %}
+        {%- for panel in tab.getPanelList() -%}
+                {%- for row in panel.getRowList() -%}
+                <div class="hb-row {{ row.css }}">
+                    {%- for cell in row.getCellList() -%}
+                    <div class="hb-cell {{ cell.css }}">
+                        {%- for group in cell.getGroupList() -%}
+                            <div class="hb-group hb-group-{{ group.name }} {{ group.css }}" data-group-name="{{ group.name }}">
+                            {%- for field in group.getFieldList() -%}
+                                {%- if is_new and field.name == 'identifier' -%}
+                                    {# skip #}
+                                {%- else -%}
+                                    {{- rendered_fields[field.name]|raw -}}
+                                {%- endif -%}
+                            {%- endfor -%}
+                            </div>
+                        {%- endfor -%}
+                    </div>
+                    {%- endfor -%}
+                </div>
+                {%- endfor -%}
+        {%- endfor -%}
+    {%- endfor -%}
+</div>

@@ -92,6 +92,12 @@
                             <!-- View: sumary -->
                             <ae:parameter name="summary">Summary</ae:parameter>
                             <ae:parameter name="summary_error">Summary/SummaryError</ae:parameter>
+                            <!-- Component: embed_actions -->
+                            <ae:parameter name="delete_action">Löschen</ae:parameter>
+                            <ae:parameter name="duplicate_action">duplizieren</ae:parameter>
+                            <ae:parameter name="move_up_action">nach oben</ae:parameter>
+                            <ae:parameter name="move_down_action">nach unten</ae:parameter>
+                            <ae:parameter name="none_action">keine Action</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="brand-name">Honeybee</ae:parameter>
@@ -114,6 +120,12 @@
                             <!-- View: sumary -->
                             <ae:parameter name="summary">Summary</ae:parameter>
                             <ae:parameter name="summary_error">Summary/SummaryError</ae:parameter>
+                            <!-- Component: embed_actions -->
+                            <ae:parameter name="delete_action">Delete</ae:parameter>
+                            <ae:parameter name="duplicate_action">Duplicate</ae:parameter>
+                            <ae:parameter name="move_up_action">Move up</ae:parameter>
+                            <ae:parameter name="move_down_action">Move down</ae:parameter>
+                            <ae:parameter name="none_action">Do nothing</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>

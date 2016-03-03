@@ -1,13 +1,14 @@
-<li class="{{ css }}" data-embed-type="{{ entity_type }}" data-input-group="{{ grouped_base_path }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %} tabindex="0">
+<li class="{% if has_parent_attribute %}hb-embed-item{% endif %} {{ css }}" data-embed-type="{{ entity_type }}" data-input-group="{{ grouped_base_path }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <input type="checkbox" id="{{ trigger_id }}" class="hb-embed-item__trigger" {% if expand_content_disabled %} disabled{% endif %} {% if expand_content_by_default %} checked{% endif %} />
     <div class="hb-embed-item__header">
         <label for="{{ trigger_id }}" class="hb-embed-item__toggle">
             <div class="hb-embed-item__glance">{{ rendered_glance_content|raw }}</div>
         </label>
-        <div class="hb-embed-item__controls"></div>
+        <div class="hb-embed-item__controls">
+            {% embed "html/embed-actions.twig" with { 'grouped_base_path': grouped_base_path, 'add_item_to_parent_list_allowed': add_item_to_parent_list_allowed } only %}{% endembed %}
+        </div>
     </div>
     <div class="hb-embed-item__content">
-        {% embed "html/embed-actions.twig" with { 'grouped_base_path': grouped_base_path, 'add_item_to_parent_list_allowed': add_item_to_parent_list_allowed } only %}{% endembed %}
         <div class="">
             {% for tab in view_template.getTabList() %}
             <div class="{{ tab.css }}" data-tab-name="{{ tab.name }}">

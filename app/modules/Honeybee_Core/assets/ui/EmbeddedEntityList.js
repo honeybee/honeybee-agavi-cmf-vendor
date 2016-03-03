@@ -136,9 +136,13 @@ define([
             }
         });
         jsb.applyBehaviour($item);
-        $item.find('> .hb-embed-item__content > .hb-embed-actions .hb-embed-action').on('click', function(event) {
+        $item.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-embed-action').on('click', function(event) {
             self.handleAction(event, $item);
             return false;
+        });
+
+        $item.find('.hb-embed-item__trigger').first().on('change', function(event) {
+            $item.toggleClass('hb-embed-item--expanded');
         });
 
         // unique id for the collapse/expand CSS behaviour for the current item and inner ones
@@ -174,9 +178,9 @@ define([
 
     EmbeddedEntityList.prototype.updateUi = function() {
         if(this.isClonable()) {
-            this.$widget.find('> .hb-embed-item__content > .hb-embed-actions .hb-action__add-embed').removeClass('visuallyhidden');
+            this.$widget.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-action__add-embed').removeClass('visuallyhidden');
         } else {
-            this.$widget.find('> .hb-embed-item__content > .hb-embed-actions .hb-action__add-embed').addClass('visuallyhidden');
+            this.$widget.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-action__add-embed').addClass('visuallyhidden');
         }
 
         if(this.options.min_count !== null &&
