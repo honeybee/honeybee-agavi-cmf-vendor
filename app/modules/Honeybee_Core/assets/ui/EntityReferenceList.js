@@ -46,6 +46,10 @@ define([
 
     ReferenceEntityList.prototype.appendEntityReference = function(reference_embed_data, type_prefix) {
         var self = this;
+
+        $activities = $('.activity:not(.disabled)');
+        $activities.addClass('disabled');
+
         $.ajax({
             url: this.buildRenderUrl(type_prefix),
             type: 'POST',
@@ -53,6 +57,7 @@ define([
             data: this.buildRenderPostData(reference_embed_data, type_prefix),
             error: function() {
                 self.logError("An unexpected error occured while rendering reference-embed serverside.", arguments);
+                $activities.removeClass('disabled');
             },
             success: function(html_item) {
                 if (self.options.inline_mode === true) {
@@ -61,6 +66,7 @@ define([
                     self.$entities_list.append(html_item);
                 }
                 self.registerItem(self.$entities_list.find('> li:last-child'));
+                $activities.removeClass('disabled');
             }
         });
     };

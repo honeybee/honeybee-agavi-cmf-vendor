@@ -23,7 +23,7 @@ define([
             }
         };
 
-        $activities = $('.activity');
+        $activities = $('.activity:not(.disabled)');
         $activities.addClass('disabled');
 
         xhr.onload = function() {
