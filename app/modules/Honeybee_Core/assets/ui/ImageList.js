@@ -23,7 +23,13 @@ define([
             }
         };
 
+        $activities = $('.activity');
+        $activities.addClass('disabled');
+
         xhr.onload = function() {
+
+            $activities.removeClass('disabled');
+
             if (this.status == 200) {
                 if (this.getResponseHeader('Content-Type').indexOf('application/json') !== 0) {
                     end(new Error('Server response Content-Type is not application/json'), null);
