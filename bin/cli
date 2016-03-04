@@ -17,5 +17,5 @@ if [ -z "$CLI_PHP_FILE" ] ; then
 fi
 
 # dispatch application
-#APP_DIR=${APP_DIR} php ${CLI_PHP_INI_SETTINGS} -f ${CLI_PHP_FILE} -- $@
-php ${CLI_PHP_INI_SETTINGS} -f ${CLI_PHP_FILE} -- $@
+#APP_DIR=${APP_DIR} php ${CLI_PHP_INI_SETTINGS} -f ${CLI_PHP_FILE} -- "$@"
+php ${CLI_PHP_INI_SETTINGS} -f ${CLI_PHP_FILE} -- "$@"
