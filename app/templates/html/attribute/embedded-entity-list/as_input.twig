@@ -13,7 +13,7 @@
 {% endif %}
 
 <div
-    class="hb-field hb-field__embedded-entity-list {{ css|default('') }}"
+    class="hb-field hb-field__embedded-entity-list {% if widget_enabled %} hb-js-embedded-entity-list{% endif %} {{ css|default('') }}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">

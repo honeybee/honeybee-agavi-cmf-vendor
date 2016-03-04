@@ -179,8 +179,12 @@
             position: initial;
         }
 
-        &:not(.hb-entity-list__inline-mode) > .hb-field__value > .hb-entity-list > .hb-embed-item--expanded {
-            box-shadow: 0 0 1px 3px color(outline);
+        &:not(.hb-entity-list__inline-mode) {
+            > .hb-field__value > .hb-entity-list {
+                > .hb-js-embed-item--is_focused {
+                    box-shadow: 0 0 1px 3px color(outline);
+                }
+            }
         }
 
         // Embed actions

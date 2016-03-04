@@ -40,8 +40,23 @@ define([
         if (this.isWriteable()) {
             this.registerEmbedTypeSelector();
         }
+        this.registerItemsHighlighting();
         this.updateUi();
+
+        $('body').addClass('hb-js-embedded-entity-list--is_loaded');
     };
+
+    EmbeddedEntityList.prototype.registerItemsHighlighting = function(element) {
+        if ($('body.hb-js-embedded-entity-list--is_loaded').length) {
+            return;
+        }
+        // manage highlighting of list items
+        $(document).on('focus', ':input, label, a', function(ev){
+            $item = $(ev.target).parents('.hb-embed-item').first();
+            $('.hb-embed-item').not($item).removeClass('hb-js-embed-item--is_focused')
+            $item.addClass('hb-js-embed-item--is_focused');
+        })
+    }
 
     EmbeddedEntityList.prototype.openItemThatContains = function(element) {
         if(!element) {
@@ -138,7 +153,6 @@ define([
         jsb.applyBehaviour($item);
         $item.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-embed-action').on('click', function(event) {
             self.handleAction(event, $item);
-            return false;
         });
 
         $item.find('.hb-embed-item__trigger').first().on('change', function(event) {
