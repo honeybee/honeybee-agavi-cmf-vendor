@@ -45,7 +45,6 @@
         {% if input_focus_hint %}
             <div class="input_hint focus">{{ input_focus_hint|raw }}</div>
         {% endif %}
-        <input type="checkbox" class="hb-field__list-validity visuallyhidden" required checked />
         <input type="hidden" name="{{ grouped_field_name }}" value="" />
         <ul class="hb-entity-list">
         {%- for rendered_entity in rendered_entities -%}

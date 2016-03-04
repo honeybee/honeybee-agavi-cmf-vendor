@@ -14,7 +14,7 @@ define([
         }
 
         this.init(dom_element, _.merge({}, default_options, options));
-        this.$validity_input = this.$widget.find('> .hb-field__value > .hb-field__list-validity');
+        this.is_valid = false;
         this.cur_item_index = -1;
         this.templates = this.loadEmbedTemplates();
         this.$entities_list = this.$widget.find('> .hb-field__value > .hb-entity-list:not(.hb-entity-templates)');
@@ -186,9 +186,9 @@ define([
         if(this.options.min_count !== null &&
             this.$entities_list.find('> .hb-embed-item').length < this.options.min_count
         ) {
-            this.$validity_input.prop('checked', false);
+            this.is_valid = false;
         } else {
-            this.$validity_input.prop('checked', true);
+            this.is_valid = true;
         }
     };
 
