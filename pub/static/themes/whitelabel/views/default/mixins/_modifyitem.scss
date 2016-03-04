@@ -55,6 +55,8 @@
     /**
         embed/reference styles start here
         @todo move to a dedicated component files
+
+        note: be specific with the child selectors to avoid recursion issues on nested lists
     */
     .hb-field__embedded-entity-list,
     .hb-field__entity-reference-list {
@@ -177,7 +179,7 @@
             position: initial;
         }
 
-        .hb-embed-item--expanded {
+        &:not(.hb-entity-list__inline-mode) > .hb-field__value > .hb-entity-list > .hb-embed-item--expanded {
             box-shadow: 0 0 1px 3px color(outline);
         }
 
@@ -239,8 +241,12 @@
             }
 
             .hb-embed-item {
-                > .hb-embed-item__content > .hb-embed-actions {
-                    display: none;
+                > .hb-embed-item__header {
+                    > .hb-embed-item__controls {
+                        > .hb-embed-actions {
+                            display: none;
+                        }
+                    }
                 }
 
                 .hb-entity-header {
@@ -262,8 +268,11 @@
 
         .hb-embed-item {
             box-shadow: none; // remove focusing
-            > .hb-embed-item__content {
-                > .hb-embed-actions { display: none; }
+
+            > .hb-embed-item__header {
+                > .hb-embed-item__controls {
+                    > .hb-embed-actions { display: none; }
+                }
             }
         }
 
