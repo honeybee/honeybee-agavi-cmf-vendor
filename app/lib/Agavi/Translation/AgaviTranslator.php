@@ -136,4 +136,3 @@ class AgaviTranslator implements TranslatorInterface
         return $this->tm->_n($number, $domain, $locale);
     }
 }
-

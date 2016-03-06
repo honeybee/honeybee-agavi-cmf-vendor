@@ -34,7 +34,6 @@ class CollectionSuccessView extends View
 
         $resource_collection = $this->getAttribute('resource_collection');
         $resource_type = $this->getAttribute('resource_type');
-        //$rendered_resource_collection = $this->renderSubject($resource_collection, [], null, [], 'default.resource_collection', null);
         $rendered_resource_collection = $this->renderSubject($resource_collection);
         $this->setAttribute('rendered_resource_collection', $rendered_resource_collection);
         $this->setAttribute('resource_type_name', $resource_type->getName());

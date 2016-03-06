@@ -20,7 +20,7 @@ class MigrationServiceProvisioner extends AbstractProvisioner
     {
         $that = $this;
 
-        $factory_delegate = function() use ($that, $service_definition) {
+        $factory_delegate = function () use ($that, $service_definition) {
             $migration_config = $that->loadMigrationConfig();
             $migration_target_map = $that->buildMigrationTargetMap($migration_config['targets']);
 

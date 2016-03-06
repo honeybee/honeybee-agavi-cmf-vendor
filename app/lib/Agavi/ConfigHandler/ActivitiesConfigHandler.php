@@ -122,8 +122,8 @@ class ActivitiesConfigHandler extends BaseConfigHandler
         AgaviXmlConfigDomElement $container_node,
         AgaviXmlConfigDomDocument $document,
         $scope
-    )
-    {
+    ) {
+    
         $activities = [];
 
         foreach ($container_node->get('activity') as $activity_node) {

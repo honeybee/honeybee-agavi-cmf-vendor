@@ -30,7 +30,7 @@ class MigrationTargetValidator extends ConsoleDialogValidator
             ->getServiceLocator()
             ->getMigrationService()
             ->getMigrationTargetMap()
-            ->filter(function(MigrationTargetInterface $fixture_target) {
+            ->filter(function (MigrationTargetInterface $fixture_target) {
                 return $fixture_target->isActivated();
             })
             ->getKeys();

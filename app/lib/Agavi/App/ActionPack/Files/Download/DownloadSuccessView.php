@@ -42,8 +42,7 @@ class DownloadSuccessView extends View
         }
 
         $disposition = 'inline';
-        if ($request_data->getParameter('download') !== null)
-        {
+        if ($request_data->getParameter('download') !== null) {
             $disposition = 'attachment';
         }
 

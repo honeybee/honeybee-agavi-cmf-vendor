@@ -82,7 +82,10 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
             $attribute = $art->getAttribute($attribute_path);
         } catch (Exception $e) {
             $this->logInfo(
-                'Attribute path specified for AggregateRootType', $art->getName(), 'does not exist:', $attribute_path
+                'Attribute path specified for AggregateRootType',
+                $art->getName(),
+                'does not exist:',
+                $attribute_path
             );
             $this->throwError('invalid_attribute_path');
             return false;
@@ -203,9 +206,12 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         return $success;
     }
 
-    protected function validateFileForAttribute(AgaviUploadedFile $uploaded_file, AttributeInterface $attribute, AgaviVirtualArrayPath $path)
-    {
-        // $this->logDebug('Delegating file validation for path', $path, 'of entity type', $attribute->getType()->getName());
+    protected function validateFileForAttribute(
+        AgaviUploadedFile $uploaded_file,
+        AttributeInterface $attribute,
+        AgaviVirtualArrayPath $path
+    ) {
+        // $this->logDebug('Delegating validation for path', $path, 'of entity type', $attribute->getType()->getName());
 
         $file_validator = $this->createFileValidatorForAttribute($attribute, $path);
         $file_validator->setParentContainer($this->getParentContainer());
@@ -218,7 +224,7 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         }
 
         if ($result > AgaviValidator::SILENT) {
-            //$this->throwErrorInParent($index = null, $affected_argument = null, $arguments_relative = false, $set_affected = false)
+            //$this->throwErrorInParent($index=null, $affected_arg=null, $arg_relative=false, $set_affected=false)
             $this->logDebug('VALIDATION FAILED FOR FILE:', $file_validator->getArgument());
             foreach ($this->getParentContainer()->getErrorMessages() as $error_message) {
                 $this->logDebug('error', $error_message);
@@ -227,7 +233,7 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
             return false;
         }
 
-        // $this->logDebug('VALIDATION SUCCEEDED FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
+        // $this->logDebug('YEH FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
 
         return true;
     }

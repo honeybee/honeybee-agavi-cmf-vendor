@@ -27,7 +27,7 @@ class FixtureTargetValidator extends ConsoleDialogValidator
             ->getServiceLocator()
             ->getFixtureService()
             ->getFixtureTargetMap()
-            ->filter(function(FixtureTargetInterface $fixture_target) {
+            ->filter(function (FixtureTargetInterface $fixture_target) {
                 return $fixture_target->isActivated();
             })
             ->getKeys();

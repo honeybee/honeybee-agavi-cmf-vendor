@@ -60,7 +60,7 @@ class ConsoleRequestDataHolder extends AgaviConsoleRequestDataHolder implements 
     public function &getOutputtype($name, $default = null)
     {
         $name = str_replace('-', '_', strtoupper($name));
-        if(isset($this->outputtypes[$name]) || array_key_exists($name, $this->outputtypes)) {
+        if (isset($this->outputtypes[$name]) || array_key_exists($name, $this->outputtypes)) {
             return $this->outputtypes[$name];
         }
 
@@ -123,7 +123,7 @@ class ConsoleRequestDataHolder extends AgaviConsoleRequestDataHolder implements 
     {
         $retval = null;
         $name = str_replace('-', '_', strtoupper($name));
-        if(isset($this->outputtypes[$name]) || array_key_exists($name, $this->outputtypes)) {
+        if (isset($this->outputtypes[$name]) || array_key_exists($name, $this->outputtypes)) {
             $retval =& $this->outputtypes[$name];
             unset($this->outputtypes[$name]);
         }
@@ -145,7 +145,7 @@ class ConsoleRequestDataHolder extends AgaviConsoleRequestDataHolder implements 
      */
     public function mergeOutputtypes(AgaviRequestDataHolder $other)
     {
-        if($other instanceof OutputtypesRequestDataHolderInterface) {
+        if ($other instanceof OutputtypesRequestDataHolderInterface) {
             $this->setOutputtypes($other->getOutputtypes());
         }
     }

@@ -25,10 +25,13 @@ class CommandBusProvisioner extends AbstractProvisioner
         );
 
         $that = $this;
-        $callback = function(
+        $callback = function (
             CommandBusInterface $command_bus,
             DiContainer $di_container
-        ) use ($command_bus_config, $that) {
+        ) use (
+            $command_bus_config,
+            $that
+) {
             if (!$that->prepare_executed) {
                 $that->prepareCommandBus($command_bus, $command_bus_config);
                 $this->prepare_executed = true;
@@ -66,7 +69,7 @@ class CommandBusProvisioner extends AbstractProvisioner
                         [
                             ':command_type' => $command_type,
                             ':command_transport' => $built_transports[$transport_name],
-                            ':command_handler_callback' => function() use ($di_container, $command_config) {
+                            ':command_handler_callback' => function () use ($di_container, $command_config) {
                                 return $di_container->make($command_config['handler']);
                             }
                         ]

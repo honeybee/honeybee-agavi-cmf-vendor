@@ -29,29 +29,29 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  * - dialog[confirm]: display question and ask for a boolean value via y/n.
  *
  * @example
- *     <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ConsoleDialogValidator" name="skeleton" required="false">
-            <argument>skeleton</argument>
-            <error>You must specify a valid skeleton name (that is, a folder name from dev/templates/).</error>
-            <ae:parameter name="pattern">/^[A-Za-z_]+$/</ae:parameter>
-            <ae:parameter name="match">true</ae:parameter>
-            <ae:parameter name="dialog">
-                <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
-                <ae:parameter name="question">Please input the skeleton you want</ae:parameter>
-                <ae:parameter name="default">honeybee_module</ae:parameter>
-                <ae:parameter name="choices">
-                    <ae:parameter>honeybee_module</ae:parameter>
-                    <ae:parameter>omgomg1234</ae:parameter>
-                    <ae:parameter>trololo</ae:parameter>
-                </ae:parameter>
-                <ae:parameter name="ignore_choices">
-                    <ae:parameter>unavailable_skeleton</ae:parameter>
-                </ae:parameter>
-                <ae:parameter name="attempts">2</ae:parameter>
-                <ae:parameter name="introduction"><![CDATA[
+ * <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ConsoleDialogValidator" name="skeleton" required="false">
+        <argument>skeleton</argument>
+        <error>You must specify a valid skeleton name (that is, a folder name from dev/templates/).</error>
+        <ae:parameter name="pattern">/^[A-Za-z_]+$/</ae:parameter>
+        <ae:parameter name="match">true</ae:parameter>
+        <ae:parameter name="dialog">
+            <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+            <ae:parameter name="question">Please input the skeleton you want</ae:parameter>
+            <ae:parameter name="default">honeybee_module</ae:parameter>
+            <ae:parameter name="choices">
+                <ae:parameter>honeybee_module</ae:parameter>
+                <ae:parameter>omgomg1234</ae:parameter>
+                <ae:parameter>trololo</ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="ignore_choices">
+                <ae:parameter>unavailable_skeleton</ae:parameter>
+            </ae:parameter>
+            <ae:parameter name="attempts">2</ae:parameter>
+            <ae:parameter name="introduction"><![CDATA[
 Some <info>informational</info> text presented only once before the first display of a question.
 ]]></ae:parameter>
-            </ae:parameter>
-        </validator>
+        </ae:parameter>
+    </validator>
  */
 class ConsoleDialogValidator extends AgaviValidator
 {

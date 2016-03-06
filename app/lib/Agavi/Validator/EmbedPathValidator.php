@@ -24,7 +24,7 @@ class EmbedPathValidator extends AgaviValidator
 
         if ($embedded_entity_or_embed_path instanceof EntityInterface) {
             $embedded_entity = $embedded_entity_or_embed_path;
-        } else if (is_string($embedded_entity_or_embed_path)) {
+        } elseif (is_string($embedded_entity_or_embed_path)) {
             $embedded_entity = $this->fetchEmbeddedEntity($root_entity, $embedded_entity_or_embed_path);
             if (!$embedded_entity) {
                 $this->throwError('unknown_embed');
@@ -66,7 +66,9 @@ class EmbedPathValidator extends AgaviValidator
             throw new RuntimeError('Missing required "resource_type" parameter.');
         }
 
-        $this->resource_type = $this->getServiceLocator()->getProjectionTypeByPrefix($this->getParameter('resource_type'));
+        $this->resource_type = $this->getServiceLocator()->getProjectionTypeByPrefix(
+            $this->getParameter('resource_type')
+        );
 
         return $this->resource_type;
     }

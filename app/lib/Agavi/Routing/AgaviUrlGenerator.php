@@ -101,4 +101,3 @@ class AgaviUrlGenerator implements UrlGeneratorInterface
         return $link;
     }
 }
-

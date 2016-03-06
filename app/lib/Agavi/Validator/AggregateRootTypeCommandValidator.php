@@ -73,7 +73,11 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             foreach ($this->parentContainer->getValidatorIncidents($this->getParameter('name')) as $incident) {
                 //$this->logDebug($incident->getFields());
                 foreach ($incident->getErrors() as $error) {
-                    $this->logDebug('Validator "' . $this->getParameter('name') . '" error: ', $error->getName(), $error->getMessage());
+                    $this->logDebug(
+                        'Validator "' . $this->getParameter('name') . '" error: ',
+                        $error->getName(),
+                        $error->getMessage()
+                    );
                 }
             }
             $this->logDebug('About to throw "invalid_payload" error in validator: ' . $this->getParameter('name'));
@@ -129,7 +133,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             $attribute = $this->getAggregateRootType()->getAttribute($attribute_name);
             if ($attribute instanceof EmbeddedEntityListAttribute) {
                 $embedded_entities_data[$attribute_name] = $attribute_post_data;
-                // error_log(__METHOD__ . " - Data for embed: " . $attribute_name . " - " . print_r($attribute_post_data, true));
+                // error_log(__METHOD__ . " - embed: " . $attribute_name . " - " . print_r($attribute_post_data, true));
             } else {
                 list($is_valid, $value_holder) = $this->sanitizeAttributePayload(
                     $attribute,
@@ -364,7 +368,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                     'parent_attribute_name' => $attribute_name
                 ]
             );
-        } else if (!empty($changed_values) || !empty($embedded_commands) || $old_position !== $position) {
+        } elseif (!empty($changed_values) || !empty($embedded_commands) || $old_position !== $position) {
             return new ModifyEmbeddedEntityCommand(
                 [
                     'embedded_entity_type' => $embedded_entity_type->getPrefix(),
@@ -483,7 +487,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 }
 
                 //$this->logDebug('FILE PAYLOAD AFTER', $payload[$key]);
-                // $this->export($file->getHoneybeeProperties(), $attribute_payload_path->pushRetNew($key)->__toString());
+                //$this->export($file->getHoneybeeProperties(),$attribute_payload_path->pushRetNew($key)->__toString());
             }
         } elseif ($attribute instanceof HandlesFileInterface) {
             throw new RuntimeError('Please implement single file attribute handling in validation');
@@ -512,7 +516,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             if ($attribute instanceof GeoPointAttribute && is_array($payload)) {
                 // cases: [0,0] or one of lon/lat is 0 – the filterEmptyValues unfortunately removes the array entries
                 // and thus one or both values being zero is not possible while still might be valid for the attribute
-                $payload = ArrayToolkit::filterEmptyValues($payload, function($val) {
+                $payload = ArrayToolkit::filterEmptyValues($payload, function ($val) {
                     if ($val === '0' || $val === 0) {
                         return true; // 0 and '0' are valid (non-empty) values for lon/lat
                     }
@@ -543,7 +547,13 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                     $argument_name = $argument->__toString();
                     $this->throwErrorInParent($error_key, $argument_name);
                     // $this->throwErrorInParent($error_key, $argument_name.'-nonexistant-global');
-                    $this->logDebug('Invalid attribute value: ' . $argument_name . ' => ' . $error_key, 'Payload:', $payload, ', Incident: ', $incident->getParameters());
+                    $this->logDebug(
+                        'Invalid attribute value: ' . $argument_name . ' => ' . $error_key,
+                        'Payload:',
+                        $payload,
+                        ', Incident: ',
+                        $incident->getParameters()
+                    );
                 }
             }
         } else {
@@ -605,8 +615,11 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return $payload_path;
     }
 
-    protected function validateFilesForAttribute(AttributeInterface $attribute, AgaviVirtualArrayPath $path, array $payload)
-    {
+    protected function validateFilesForAttribute(
+        AttributeInterface $attribute,
+        AgaviVirtualArrayPath $path,
+        array $payload
+    ) {
         //$this->logDebug(
         //    'Validating files for path', $path, 'of', $attribute->getType()->getName(), '=>', $attribute->getName()
         //);
@@ -625,10 +638,14 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             foreach ($files_on_this_path_level as $key => $uploaded_file) {
                 // TODO this has to change as it's a bit too simplistic as an approach
                 if ($uploaded_file[$input_field_name]->getError() === UPLOAD_ERR_NO_FILE) {
-                    //$this->logDebug('no file uploaded for attr/argument', $attribute->getName(), 'key=', $key, 'path=', $path);
+                    //$this->logDebug('no file uploaded for', $attribute->getName(), 'key=', $key, 'path=', $path);
                 } elseif ($uploaded_file[$input_field_name]->getError() === UPLOAD_ERR_OK) {
                     //$this->logDebug('file given/uploaded for path:', $path, 'key=', $key);
-                    $file = $this->validateFileForAttribute($uploaded_file[$input_field_name], $attribute, $path->pushRetNew($key)->pushRetNew($input_field_name));
+                    $file = $this->validateFileForAttribute(
+                        $uploaded_file[$input_field_name],
+                        $attribute,
+                        $path->pushRetNew($key)->pushRetNew($input_field_name)
+                    );
                     if ($file !== false && $file instanceof HoneybeeUploadedFile) {
                         $valid_files[$key] = $file;
                     }
@@ -653,9 +670,12 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return $valid_files;
     }
 
-    protected function validateFileForAttribute(HoneybeeUploadedFile $uploaded_file, AttributeInterface $attribute, AgaviVirtualArrayPath $path)
-    {
-        //$this->logDebug('Delegating file validation for path', $path, 'of entity type', $attribute->getType()->getName());
+    protected function validateFileForAttribute(
+        HoneybeeUploadedFile $uploaded_file,
+        AttributeInterface $attribute,
+        AgaviVirtualArrayPath $path
+    ) {
+        //$this->logDebug('Delegating validation for path', $path, 'of entity type', $attribute->getType()->getName());
 
         $file_validator = $this->createFileValidatorForAttribute($attribute, $path);
         $file_validator->setParentContainer($this->getParentContainer());
@@ -668,7 +688,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         }
 
         if ($result > AgaviValidator::SILENT) {
-            //$this->throwErrorInParent($index = null, $affected_argument = null, $arguments_relative = false, $set_affected = false)
+            //$this->throwErrorInParent($index=null, $affected_arg=null, $args_relative=false, $set_affected=false)
             $this->logDebug('VALIDATION FAILED FOR FILE:', $file_validator->getArgument());
             foreach ($this->getParentContainer()->getErrorMessages() as $error_message) {
                 $this->logDebug('error', $error_message);
@@ -676,7 +696,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             //$this->throwError($file_validator->getArgument());
             return false;
         }
-        //$this->logDebug('VALIDATION SUCCEEDED FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
+        //$this->logDebug('SUCCES FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
 
         $fss = $this->getServiceLocator()->getFilesystemService();
 
@@ -898,8 +918,12 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return $command_implementor;
     }
 
-    protected function throwError($index = null, $affectedArgument = null, $argumentsRelative = false, $setAffected = false)
-    {
+    protected function throwError(
+        $index = null,
+        $affectedArgument = null,
+        $argumentsRelative = false,
+        $setAffected = false
+    ) {
         parent::throwError($index, $affectedArgument, $argumentsRelative, $setAffected);
 
         $this->logDebug(

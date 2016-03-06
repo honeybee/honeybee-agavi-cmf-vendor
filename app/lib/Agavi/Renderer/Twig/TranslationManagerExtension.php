@@ -32,8 +32,13 @@ class TranslationManagerExtension extends Twig_Extension
      *
      * @return string translated message.
      */
-    public function translate($message, $domain = null, $locale = null, array $parameters = null, $defaultTranslation = null)
-    {
+    public function translate(
+        $message,
+        $domain = null,
+        $locale = null,
+        array $parameters = null,
+        $defaultTranslation = null
+    ) {
         $tm = AgaviContext::getInstance()->getTranslationManager();
         $translation = $tm->_($message, $domain, $locale, $parameters);
         if ($translation === $message && !is_null($defaultTranslation)) {

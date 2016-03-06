@@ -31,7 +31,7 @@ class LocalConfigurationConfigHandler extends BaseConfigHandler
                 $env_var_value = getenv($env_var_name);
                 if ($env_var_value) {
                     $local_settings[$setting_name] = $env_var_value;
-                } else if (isset($env_setting['settings']['required'])
+                } elseif (isset($env_setting['settings']['required'])
                     && $env_setting['settings']['required'] === true
                 ) {
                     throw new RuntimeError('Required environment variable "' . $env_var_name . '" has not been set.');

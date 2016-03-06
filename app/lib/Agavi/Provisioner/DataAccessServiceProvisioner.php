@@ -41,8 +41,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
     {
         $this->di_container->share(StorageWriterMap::CLASS)->delegate(
             StorageWriterMap::CLASS,
-            function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($storage_writers)
-            {
+            function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($storage_writers) {
                 $map = new StorageWriterMap();
                 foreach ($storage_writers as $map_key => $config) {
                     $object_state = [
@@ -64,8 +63,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
     {
         $this->di_container->share(StorageReaderMap::CLASS)->delegate(
             StorageReaderMap::CLASS,
-            function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($storage_readers)
-            {
+            function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($storage_readers) {
                 $map = new StorageReaderMap();
                 foreach ($storage_readers as $map_key => $config) {
                     $object_state = [
@@ -87,8 +85,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
     {
         $this->di_container->share(FinderMap::CLASS)->delegate(
             FinderMap::CLASS,
-            function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($finders)
-            {
+            function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($finders) {
                 $map = new FinderMap();
                 foreach ($finders as $map_key => $config) {
                     $object_state = [
@@ -137,8 +134,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
     {
         $this->di_container->share(QueryServiceMap::CLASS)->delegate(
             QueryServiceMap::CLASS,
-            function (DiContainer $di_container, FinderMap $finder_map) use ($query_services)
-            {
+            function (DiContainer $di_container, FinderMap $finder_map) use ($query_services) {
                 $query_service_map = new QueryServiceMap();
                 foreach ($query_services as $service_key => $service_config) {
                     $finder_mappings = [];

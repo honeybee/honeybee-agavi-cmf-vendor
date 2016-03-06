@@ -24,10 +24,13 @@ class FilesystemServiceProvisioner extends AbstractProvisioner
 
         $config = $this->loadFilesystemsConfig();
 
-        $factory_delegate = function(
+        $factory_delegate = function (
             AggregateRootTypeMap $art_map,
             ConnectorServiceInterface $connector_service
-        ) use ($service, $config) {
+        ) use (
+            $service,
+            $config
+) {
             $filesystems = [];
             $connectors = [];
             $schemes = [];

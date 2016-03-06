@@ -39,7 +39,10 @@ class AggregateRootTypeAttributeValidator extends AgaviValidator
             $attribute = $art->getAttribute($attribute_path);
         } catch (Exception $e) {
             $this->logInfo(
-                'Attribute path specified for AggregateRootType', $art->getName(), 'does not exist:', $attribute_path
+                'Attribute path specified for AggregateRootType',
+                $art->getName(),
+                'does not exist:',
+                $attribute_path
             );
             $this->throwError('invalid_attribute_path');
             return false;

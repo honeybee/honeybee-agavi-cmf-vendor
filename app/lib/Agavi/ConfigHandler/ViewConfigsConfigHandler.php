@@ -38,28 +38,28 @@ class ViewConfigsConfigHandler extends BaseConfigHandler
             $view_configs = self::mergeSettings($view_configs, $new_view_configs);
         }
 
-// TODO recursively extend view_configs
-for($i=0;$i<5;$i++) {
-        // when a view_config has an "extends" attribute with a valid scope name, we merge scopes
-        foreach ($view_configs as $view_scope => &$view_config) {
-            if (!empty($view_config['extends'])) {
-                if (empty($view_configs[$view_config['extends']])) {
-                    throw new ConfigError(
-                        sprintf(
-                            'The "extends" attribute value of the view_config with scope "%s" is invalid. ' .
-                            'No view_config with scope "%s" found in configuration file "%s".',
-                            $view_scope,
-                            $view_config['extends'],
-                            $document->documentURI
-                        )
-                    );
+        // TODO recursively extend view_configs
+        for ($i=0; $i<5; $i++) {
+            // when a view_config has an "extends" attribute with a valid scope name, we merge scopes
+            foreach ($view_configs as $view_scope => &$view_config) {
+                if (!empty($view_config['extends'])) {
+                    if (empty($view_configs[$view_config['extends']])) {
+                        throw new ConfigError(
+                            sprintf(
+                                'The "extends" attribute value of the view_config with scope "%s" is invalid. ' .
+                                'No view_config with scope "%s" found in configuration file "%s".',
+                                $view_scope,
+                                $view_config['extends'],
+                                $document->documentURI
+                            )
+                        );
+                    }
+                    $view_config = self::mergeSettings($view_configs[$view_config['extends']], $view_config);
                 }
-                $view_config = self::mergeSettings($view_configs[$view_config['extends']], $view_config);
+                //unset($view_config['extends']);
             }
-            //unset($view_config['extends']);
         }
-}
-// var_dump($view_configs);die;
+        // var_dump($view_configs);die;
         $config_code = sprintf('return %s;', var_export($view_configs, true));
 
         return $this->generate($config_code, $document->documentURI);
@@ -257,7 +257,10 @@ for($i=0;$i<5;$i++) {
         $renderer_configs = [];
 
         foreach ($current_node->get('renderer_configs') as $renderer_config) {
-            $subject_name = $renderer_config->hasAttribute('subject') ? trim($renderer_config->getAttribute('subject')) : '';
+            $subject_name = '';
+            if ($renderer_config->hasAttribute('subject')) {
+                $subject_name = trim($renderer_config->getAttribute('subject'));
+            }
             if (empty($subject_name)) {
                 throw new ConfigError(
                     sprintf(
@@ -270,7 +273,10 @@ for($i=0;$i<5;$i++) {
             $settings_node = $renderer_config->getChild('settings');
             $settings = $settings_node ? $this->parseSettings($settings_node) : [];
 
-            $implementor = $renderer_config->hasAttribute('implementor') ? trim($renderer_config->getAttribute('implementor')) : '';
+            $implementor = '';
+            if ($renderer_config->hasAttribute('implementor')) {
+                $implementor = trim($renderer_config->getAttribute('implementor'));
+            }
             if (!empty($implementor)) {
                 $settings['implementor'] = $implementor;
             }

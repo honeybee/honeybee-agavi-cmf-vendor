@@ -74,7 +74,12 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         );
 
         if (!$conflicting_events->isEmpty()) {
-            $this->populateAggregateRootTaskConflict($aggregate_root, $aggregate_root_history, $conflicting_events, $conflicting_changes);
+            $this->populateAggregateRootTaskConflict(
+                $aggregate_root,
+                $aggregate_root_history,
+                $conflicting_events,
+                $conflicting_changes
+            );
             $this->export($conflicting_events, 'conflict_detected');
             $this->throwError('conflict_detected');
             return false;

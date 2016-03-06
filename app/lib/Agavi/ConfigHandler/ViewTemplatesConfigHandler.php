@@ -41,29 +41,31 @@ class ViewTemplatesConfigHandler extends BaseConfigHandler
             );
         }
 
-// TODO recursively extend view_configs
-for($i=0;$i<5;$i++) {
-        // when view_templates have an "extends" attribute with a valid scope name, we merge scopes
-        foreach ($all_view_templates as $view_scope => &$view_templates) {
-            if (!empty($view_templates['extends'])) {
-                if (empty($all_view_templates[$view_templates['extends']])) {
-                    throw new ConfigError(
-                        sprintf(
-                            'The "extends" attribute value of the view_templates node with scope "%s" is invalid. ' .
-                            'No view_templates node with scope "%s" found in configuration file "%s".',
-                            $view_scope,
-                            $view_templates['extends'],
-                            $document->documentURI
-                        )
+        // TODO recursively extend view_configs
+        for ($i=0; $i<5; $i++) {
+            // when view_templates have an "extends" attribute with a valid scope name, we merge scopes
+            foreach ($all_view_templates as $view_scope => &$view_templates) {
+                if (!empty($view_templates['extends'])) {
+                    if (empty($all_view_templates[$view_templates['extends']])) {
+                        throw new ConfigError(
+                            sprintf(
+                                'The "extends" attribute value of the scope "%s" view_templates node is invalid. ' .
+                                'No view_templates node with scope "%s" found in configuration file "%s".',
+                                $view_scope,
+                                $view_templates['extends'],
+                                $document->documentURI
+                            )
+                        );
+                    }
+                    $view_templates = ArrayToolkit::mergeScalarSafe(
+                        $all_view_templates[$view_templates['extends']],
+                        $view_templates
                     );
                 }
-                $view_templates = ArrayToolkit::mergeScalarSafe($all_view_templates[$view_templates['extends']], $view_templates);
+                // unset($view_templates['extends']);
             }
-            // unset($view_templates['extends']);
         }
-}
-//        var_dump($all_view_templates);die;
-
+        // var_dump($all_view_templates);die;
         $config_code = sprintf('return %s;', var_export($all_view_templates, true));
 
         return $this->generate($config_code, $document->documentURI);

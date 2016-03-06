@@ -113,9 +113,12 @@ class Context extends AgaviContext
      * Adds given listener to current chain of shutdown listeners registered.
      *
      * @param ShutdownListenerInterface $listener instance of class that wants to be called upon fatal errors
+     * @param string $scope scope for listeing to fatal errors (defaults to 'global')
      */
-    public function addShutdownListener(ShutdownListenerInterface $listener, $scope = ShutdownListenerInterface::NOTIFY_SCOPE_GLOBAL)
-    {
+    public function addShutdownListener(
+        ShutdownListenerInterface $listener,
+        $scope = ShutdownListenerInterface::NOTIFY_SCOPE_GLOBAL
+    ) {
         $this->shutdown_listeners[] = array('listener' => $listener, 'scope' => $scope);
     }
 

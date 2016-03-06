@@ -17,7 +17,7 @@ class JobServiceProvisioner extends AbstractProvisioner
     {
         $service = $service_definition->getClass();
 
-        $factory_delegate = function(
+        $factory_delegate = function (
             ConnectorServiceInterface $connector_service,
             ServiceLocatorInterface $service_locator,
             LoggerInterface $logger

@@ -24,8 +24,7 @@ class ProcessMapProvisioner extends AbstractProvisioner
         $process_map_class = $service_definition->getClass();
         $this->di_container->share($process_map_class)->delegate(
             $process_map_class,
-            function (DiContainer $di_container) use ($process_map_class, $process_map_config)
-            {
+            function (DiContainer $di_container) use ($process_map_class, $process_map_config) {
                 $process_map = new $process_map_class();
                 foreach ($process_map_config as $process_name => $process_config) {
                     $builder_settings = $process_config['builder']['settings'];
@@ -44,7 +43,8 @@ class ProcessMapProvisioner extends AbstractProvisioner
                         $di_container->make(
                             $process_implementor,
                             [ ':name' => $process_name,  ':state_machine' => $state_machine_builder->build()
-                        ])
+                            ]
+                        )
                     );
                 }
 

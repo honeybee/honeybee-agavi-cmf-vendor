@@ -41,7 +41,10 @@ class EventBusProvisioner extends AbstractProvisioner
         }
 
         $that = $this;
-        $callback = function (EventBusInterface $event_bus, DiContainer $di_container) use (
+        $callback = function (
+            EventBusInterface $event_bus,
+            DiContainer $di_container
+        ) use (
             $event_bus_config,
             $that
         ) {
@@ -67,15 +70,15 @@ class EventBusProvisioner extends AbstractProvisioner
 
         foreach ($event_bus_config['channels'] as $channel_name => $channel_config) {
             foreach ($channel_config['subscriptions'] as $subscription_config) {
-                $event_handlers_callback = function() use ($subscription_config) {
+                $event_handlers_callback = function () use ($subscription_config) {
                     return $this->buildEventHandlers($subscription_config['handlers']);
                 };
 
-                $event_filters_callback = function() use ($subscription_config) {
+                $event_filters_callback = function () use ($subscription_config) {
                     return $this->buildEventFilters($subscription_config['filters']);
                 };
 
-                $event_transport_callback = function() use (
+                $event_transport_callback = function () use (
                     $subscription_config,
                     $event_bus_config,
                     $event_bus,

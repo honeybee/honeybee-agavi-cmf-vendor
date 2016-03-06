@@ -145,7 +145,7 @@ class AssetCompiler
         $cmd = $this->getAutoprefixerCommand($output_file, $output_file);
         $report[$theme_directory]['autoprefixer'] = self::runCommand($cmd, $theme_directory);
 
-        if (!$report[$theme_directory]['success'] || !$report[$theme_directory]['autoprefixer']['success'] ) {
+        if (!$report[$theme_directory]['success'] || !$report[$theme_directory]['autoprefixer']['success']) {
             $success = false;
         }
 

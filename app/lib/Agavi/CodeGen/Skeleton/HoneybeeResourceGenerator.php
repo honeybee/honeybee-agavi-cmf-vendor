@@ -103,9 +103,9 @@ class HoneybeeResourceGenerator extends SkeletonGenerator
         if ($exit_code != 0) {
             throw new RuntimeError(sprintf(
                 'Trellis execution failed for target "%s" with exit code %s',
-                 $trellis_target,
-                 $exit_code
-             ));
+                $trellis_target,
+                $exit_code
+            ));
         }
     }
 

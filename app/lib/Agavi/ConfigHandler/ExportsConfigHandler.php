@@ -34,8 +34,7 @@ class ExportsConfigHandler extends BaseConfigHandler
         foreach ($document->getConfigurationElements() as $config_node) {
             $exports_node = $config_node->getChild('exports');
 
-            foreach ($exports_node->get('export') as $export_node)
-            {
+            foreach ($exports_node->get('export') as $export_node) {
                 $export_name = $export_node->getAttribute('name');
                 $export_class = $export_node->getAttribute('class');
                 $export_description = $export_node->getChild('description')->nodeValue;

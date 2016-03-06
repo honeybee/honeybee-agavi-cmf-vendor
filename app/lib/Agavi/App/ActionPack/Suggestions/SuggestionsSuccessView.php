@@ -9,7 +9,8 @@ class SuggestionsSuccessView extends View
 {
     public function executeHtml(AgaviRequestDataHolder $parameters)
     {
-        var_dump($this->getAttribute('suggestions', []));exit;
+        var_dump($this->getAttribute('suggestions', []));
+        exit;
     }
 
     public function executeJson(AgaviRequestDataHolder $parameters)

@@ -9,7 +9,8 @@ class SuggestionsErrorView extends View
 {
     public function executeHtml(AgaviRequestDataHolder $parameters)
     {
-        var_dump($this->getAttribute('errors'));exit;
+        var_dump($this->getAttribute('errors'));
+        exit;
     }
 
     public function executeJson(AgaviRequestDataHolder $parameters)

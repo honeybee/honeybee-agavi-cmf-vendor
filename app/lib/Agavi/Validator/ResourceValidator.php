@@ -46,7 +46,13 @@ class ResourceValidator extends AgaviValidator
             if ($revision) {
                 $history = $this->loadHistory();
                 if (!$history || $history->getLast()->getSeqNumber() < $revision) {
-                    $this->logError('Resource history for revision', $revision, 'of resource', $argument, 'does not exist');
+                    $this->logError(
+                        'Resource history for revision',
+                        $revision,
+                        'of resource',
+                        $argument,
+                        'does not exist'
+                    );
                     $this->throwError('non_existant');
                     return false;
                 }
@@ -79,15 +85,20 @@ class ResourceValidator extends AgaviValidator
         $resource_payload = [];
         foreach ($resource->getType()->getAttributes() as $attribute) {
             $attribute_payload = $this->getData($attribute->getName());
-            //$this->logDebug('addPayloadToResource for', $attribute->getName(), 'with incoming payload:', $attribute_payload);
+            //$this->logDebug('addPayloadToResource for', $attribute->getName(), 'with payload:', $attribute_payload);
             if ($attribute instanceof EmbeddedEntityListAttribute) {
                 if (is_array($attribute_payload)) {
-                    $attribute_payload = $this->filterEmptyPayloadComingFromEmbedTemplates($attribute, $attribute_payload);
+                    $attribute_payload = $this->filterEmptyPayloadComingFromEmbedTemplates(
+                        $attribute,
+                        $attribute_payload
+                    );
                 } else {
                     $attribute_payload = [];
                 }
             }
-            if (is_array($attribute_payload) && ($attribute instanceof HandlesFileListInterface || $attribute instanceof HandlesFileInterface)) {
+            if (is_array($attribute_payload) &&
+                ($attribute instanceof HandlesFileListInterface || $attribute instanceof HandlesFileInterface)
+            ) {
                 $attribute_payload = $this->filterEmptyPayloadComingFromFiles($attribute, $attribute_payload);
             }
             if (!empty($attribute_payload)) {
@@ -224,7 +235,9 @@ class ResourceValidator extends AgaviValidator
             throw new RuntimeError('Missing required "resource_type" parameter.');
         }
 
-        $this->resource_type = $this->getServiceLocator()->getProjectionTypeByPrefix($this->getParameter('resource_type'));
+        $this->resource_type = $this->getServiceLocator()->getProjectionTypeByPrefix(
+            $this->getParameter('resource_type')
+        );
 
         return $this->resource_type;
     }

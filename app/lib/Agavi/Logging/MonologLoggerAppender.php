@@ -107,13 +107,11 @@ class MonologLoggerAppender extends AgaviLoggerAppender
             $level = $levels[$log_level_or_severity];
         } else {
             // default (unpatched) Agavi versions <= v1.0.7
-            if (
-                $log_level_or_severity > AgaviLogger::FATAL
+            if ($log_level_or_severity > AgaviLogger::FATAL
                 && $log_level_or_severity <= AgaviLogger::ALL
             ) {
                 $level = MonologLogger::ALERT; // integer values above FATAL are ALERTs for us
-            } elseif (
-                $log_level_or_severity > AgaviLogger::INFO
+            } elseif ($log_level_or_severity > AgaviLogger::INFO
                 && $log_level_or_severity < AgaviLogger::WARN
             ) {
                 $level = MonologLogger::NOTICE; // integer values between INFO and WARNING are NOTICEs for us

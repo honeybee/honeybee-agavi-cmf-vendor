@@ -43,5 +43,4 @@ class NewSkeletonGenerator extends SkeletonGenerator
         $finder->files()->in($source_path);
         return $finder;
     }
-
 }

@@ -24,8 +24,7 @@ class ConnectorServiceProvisioner extends AbstractProvisioner
             ->share(ConnectorMap::CLASS)
             ->prepare(
                 ConnectorMap::CLASS,
-                function (ConnectorMap $connector_map, DiContainer $di_container) use ($that)
-                {
+                function (ConnectorMap $connector_map, DiContainer $di_container) use ($that) {
                     $connections_config = $that->loadConnectionsConfig();
                     $that->registerConnectors($connector_map, $connections_config);
                 }

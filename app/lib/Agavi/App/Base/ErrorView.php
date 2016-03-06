@@ -170,7 +170,10 @@ class ErrorView extends View
         $this->logMatchedRoute();
         $this->setDefaultAttributes();
         $this->setHttpStatusCode();
-        return '<?xml version="1.0" encoding="UTF-8"?><resource><title>' . $this->getAttribute('_title') . '</title><message>' . $this->getAttribute('_message') . '</message></resource>';
+        return '<?xml version="1.0" encoding="UTF-8"?>' .
+            '<resource><title>' . $this->getAttribute('_title') . '</title>' .
+            '<message>' . $this->getAttribute('_message') . '</message>' .
+            '</resource>';
     }
 
     /**
@@ -189,7 +192,10 @@ class ErrorView extends View
         $this->logMatchedRoute();
         $this->setDefaultAttributes();
         $this->setHttpStatusCode();
-        return '<?xml version="1.0" encoding="UTF-8"?><feed xmlns="http://www.w3.org/2005/Atom"><title>' . $this->getAttribute('_title') . '</title></feed>';
+        return '<?xml version="1.0" encoding="UTF-8"?>' .
+            '<feed xmlns="http://www.w3.org/2005/Atom">' .
+            '<title>' . $this->getAttribute('_title') . '</title>' .
+            '</feed>';
     }
 
     /**
@@ -212,7 +218,7 @@ class ErrorView extends View
 
         $uri = '';
         if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
-            $uri = "for request URI '" . $_SERVER['REQUEST_URI'] . "'";
+            $uri = 'for request URI "' . $_SERVER['REQUEST_URI'] . '"';
         } else {
             $uri = 'for input: ' . $this->routing->getInput();
         }
@@ -223,9 +229,24 @@ class ErrorView extends View
             $main_route = $this->routing->getRoute(reset($route_names_array));
             $main_module = $main_route['opt']['module'];
             $main_action = $main_route['opt']['action'];
-            $log_message = "main module='$main_module' main action='$main_action' output_type='$output_type' request_method='$request_method' matched $uri - matched_routes were:" . implode(', ', $route_names_array) . $origin;
+            $log_message = sprintf(
+                'module="%s" action="%s" outputType="%s" requestMethod="%s" matchedUri="%s" - matchedRoutes: "%s" %s',
+                $main_module,
+                $main_action,
+                $output_type,
+                $request_method,
+                $uri,
+                implode(', ', $route_names_array),
+                $origin
+            );
         } else {
-            $log_message = "No route matched (request method '$request_method', output type '$output_type') $uri" . $origin;
+            $log_message = sprintf(
+                'No route matched (requestMethod "%s", outputType "%s") matchedUri="%s" %s',
+                $request_method,
+                $output_type,
+                $uri,
+                $origin
+            );
         }
 
         $this->logDebug($log_message);
@@ -326,7 +347,11 @@ class ErrorView extends View
 
     protected function getHttpStatusCodeFromContainer()
     {
-        return $this->getContainer()->getAttribute('http_status_code', 'org.honeybee.error', $this->getHttpStatusCode());
+        return $this->getContainer()->getAttribute(
+            'http_status_code',
+            'org.honeybee.error',
+            $this->getHttpStatusCode()
+        );
     }
 
     protected function getLogrefFromContainer()
