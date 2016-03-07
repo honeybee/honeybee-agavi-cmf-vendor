@@ -27,4 +27,20 @@ class ModifyInputView extends View
             $this->getLayer('content')->setTemplate($template);
         }
     }
+
+    public function getBreadcrumbsActivities()
+    {
+        $breadcrumbs_root_activities = $this->getBreadcrumbsRootActivities();
+
+        return $breadcrumbs_root_activities;
+    }
+
+    public function getBreadcrumbsRootActivities()
+    {
+        $resource_type = $this->getAttribute('resource')->getType();
+
+        return [
+            $this->getServiceLocator()->getActivityService()->getActivity($resource_type->getPrefix(), 'collection')
+        ];
+    }
 }
