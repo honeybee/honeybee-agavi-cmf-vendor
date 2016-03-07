@@ -6,6 +6,7 @@
 {%- set input_hint = translations.input_hint | default('') -%}
 {%- set input_focus_hint = translations.input_focus_hint | default('') -%}
 {%- set placeholder = translations.placeholder | default('') -%}
+{%- set unchecked_options = unchecked_options | default([]) -%}
 <div
     class="hb-field {{ css|default('') }}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}

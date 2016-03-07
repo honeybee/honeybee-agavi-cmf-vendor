@@ -67,7 +67,7 @@ define([
                 "restore_on_backspace": {
                 }
             },
-            create: this.isReadable && this.options.allowed_values.length === 0,
+            create: this.isReadable && this.options.allowed_values && this.options.allowed_values.length === 0,
             render: {
                 option_create: function(data, escape) {
                     return '<div class="create">+ <strong>' + escape(data.input) + '</strong>&hellip;</div>';
