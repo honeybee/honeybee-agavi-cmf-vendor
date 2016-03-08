@@ -47,9 +47,6 @@ define([
     ReferenceEntityList.prototype.appendEntityReference = function(reference_embed_data, type_prefix) {
         var self = this;
 
-        $activities = $('.activity:not(.disabled)');
-        $activities.addClass('disabled');
-
         $.ajax({
             url: this.buildRenderUrl(type_prefix),
             type: 'POST',
@@ -65,9 +62,6 @@ define([
                     self.$entities_list.append(html_item);
                 }
                 self.registerItem(self.$entities_list.find('> li:last-child'));
-            },
-            complete: function() {
-                $activities.removeClass('disabled');
             }
         });
     };
