@@ -5,7 +5,7 @@ Disabled by default, it can be enabled in the *view_config.xml* or in the *view_
 
 The glance supports configuration at different levels of the application:
 
-* **globally**, in the *view_configs.xml*, on the generic *'application'* view-scope:
+* **globally**, in the *view_configs.xml*, as setting of the generic *'application'* view-scope:
 ```
 <view_config scope="application">
     <settings>
@@ -17,7 +17,7 @@ The glance supports configuration at different levels of the application:
     </settings>
 </view_config>
 ```
-* **per-view**, as setting for the specific view-scope in the *view_configs.xml*:
+* **per-view**, in the *view_configs.xml*, as setting of the specific view-scope :
 ```
 <view_config scope="honeybee.system_account.user.resource.modify">
     <settings>
@@ -29,7 +29,7 @@ The glance supports configuration at different levels of the application:
     </settings>
 </view_config>
 ```
-* **per-entity-list-attribute**, as field setting in the *view_templates.xml*:
+* **per-entity-list-attribute**, in the *view_templates.xml*, as field setting:
 ```
 <view_templates scope="honeybee.system_account.user.resource.modify">
     <view_template name="honeybee.system_account.user.html">
@@ -46,7 +46,7 @@ The glance supports configuration at different levels of the application:
     </view_template>
 </view_templates>
 ```
-* **per-entity-type**, as *renderer_config*, in the *view_configs.xml*, for an embedded entity type:
+* **per-entity-type**, in the *view_configs.xml*, as *renderer_config* for an embedded entity type:
 ```
 <renderer_config subject="honeybee.system_account.user.contacts.colleague_contact">
     <settings>
@@ -106,8 +106,7 @@ It is suggested to implement an own solution without touching the default templa
 
 ### Custom view-template
 A glance is just another way to render the entity so it can have its own view-template definition.
-A default template and default styling are provided for it.
-Eventual additional stylings should go into the SCSS located at "*pub/static/themes/<theme_name>/components/glance/_view-template.scss*"
+When relying on that, eventual additional stylings should go into the SCSS located at "*pub/static/themes/<theme_name>/components/glance/_view-template.scss*"
 
 To use a defined view-template just specify its name in the glance config.
 ```
@@ -158,7 +157,6 @@ To use a defined view-template just specify its name in the glance config.
 * **title_value_path** - Attribute value path to the existing attribute used for the glance title auto-retrieving. [requires *title* option to be empty]
 * **description** - Static value. [there is no auto-retriving when it is set]
 * **description_value_path** - Attribute value path to the existing attribute used for the glance description auto-retrieving. [requires *description* option to be empty]
-* **view_template** - Tells whether to use the *view_template_name* or not.
 * **view_template_name** - The name of the *view_template* to use for rendering the glance.
 
 Common options from the base-renderer and the entity-renderer (*e.g.* **template**, **renderer_locator_modifier**, **css**, **view_scope**) can be obviously used to customize the rendering of the glance (*e.g.* to use a custom renderer with different logic for retrieving the default attribute values, or to use a custom template).

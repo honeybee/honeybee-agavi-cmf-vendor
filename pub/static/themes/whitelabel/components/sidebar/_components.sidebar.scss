@@ -42,6 +42,7 @@ $buttons-base-padding: 0.5em !default;    // spacing defined in buttons lib/obje
         }
 
         .sidebar__toggle-open {
+            @include zindex("overlay", 10);
             @include hb-icon-pseudo-el((
                 icon-name: align-left,
                 size: 1.5

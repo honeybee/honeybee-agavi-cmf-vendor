@@ -1,23 +1,11 @@
-/*
-    Define here the styles for the glance, when it's rendered as an entity using a view_template.
-
-    The styles should be defined inside the modifier '.hb-glance--view_template'
-*/
-
-.hb-glance--view_template {
-    padding: $small-spacing;
-
-    .hb-field {
-        margin-bottom: $small-spacing;
-    }
-
-    .hb-field__label {
-        font-weight: bolder;
-    }
-}
-
-/* Custom CSS classes added in view_template */
-
+// -------------------------------------------------------------------------
+// #view-template styling
+// -------------------------------------------------------------------------
+//
+//  Define here the styles for the glances, when they are rendered using a view_template definition.
+//
+//  It is possible to have custom styling relying on additional CSS classes specified on rows/cells/groups.
+//
 //  Example: assign a specific class to the row, in the view_template definition
 //      (e.g. "honeybee-system_account-user-contacts-colleague_contact-glance")
 //      to style the descendants of that row (e.g. hide the label of the fields

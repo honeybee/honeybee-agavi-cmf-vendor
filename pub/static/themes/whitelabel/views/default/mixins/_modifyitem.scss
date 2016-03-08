@@ -88,10 +88,14 @@
                 position: relative;
                 padding-top: 0;
                 padding-bottom: 0;
-                margin-top: 3px;
+                border-top: 1px solid color(lines);
 
                 &:focus {
                     outline: 0;
+                }
+
+                .hb-panel {
+                    margin: 0;
                 }
 
                 .hb-cell {
@@ -155,8 +159,12 @@
             flex: 1 1 auto;
         }
 
-        .hb-embed-item__controls {
+        .hb-embed-item__toggle {
+            display: block; // keep markup valid
         }
+
+        // .hb-embed-item__glance {
+        // }
 
         .hb-embed-item__content {
             // collapsed by default
@@ -169,9 +177,7 @@
         .hb-embed-item__trigger { @include visuallyhidden; }
         .hb-embed-item__trigger:checked ~ .hb-embed-item__content { display: block; }
 
-        .hb-embed-item__trigger:focus ~ .hb-embed-item__header {
-            box-shadow: -5px 0px 2px 0px color(outline);
-        }
+        // .hb-embed-item__trigger:focus ~ .hb-embed-item__header { // embed-item trigger styling }
 
         .hb-embed-item__toggle {
             display: inline-block;
@@ -182,7 +188,17 @@
         &:not(.hb-entity-list__inline-mode) {
             > .hb-field__value > .hb-entity-list {
                 > .hb-js-embed-item--is_focused {
-                    box-shadow: 0 0 1px 3px color(outline);
+                    position: relative;
+                    @include zindex("base", 1);
+
+                    // pseudo-element prevents siblings from hiding outline on adjacent sides
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: 0; right: 0; bottom: 0; left: 0;
+                        z-index: -1;
+                        box-shadow: 0 0 1px 3px color(outline);
+                    }
                 }
             }
         }
@@ -288,9 +304,6 @@
 
         .hb-embed-actions {
             background-color: color(lightgrey1);
-            border: 1px solid color(grey1);
-            border-left-width: 0;
-            border-right-width: 0;
         }
 
         > .hb-field__content {

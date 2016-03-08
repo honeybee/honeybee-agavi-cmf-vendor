@@ -4,30 +4,36 @@
 
 .hb-glance {
     overflow: auto;
-    padding-right: $small-spacing;
+    padding: $base-spacing;
     min-height: $base-spacing * 2.5;
 }
 
 // Default fields
 .hb-glance__title {
     @include typography-headlines;
-    font-weight: normal;
-
-    margin-top: $small-spacing;
-    margin-bottom: 0;
+    display: inline-block;
 }
 
 .hb-glance__description {
-    margin-bottom: $small-spacing;
-    padding-left: $small-spacing;
     color: color(darkgrey2);
 }
 
 .hb-glance__image {
     float: left;
-    margin-right: $small-spacing;
+    margin-right: $base-spacing;
     max-height: $base-spacing * 10;
     max-width: $base-spacing * 10;
+    border: 1px solid color(lines);
 }
 
+// Modifiers
 .hb-glance--hidden { @include visuallyhidden; }
+
+.hb-glance--remove_spacing {
+    padding: 0;
+
+    .hb-glance__title,
+    .hb-glance__description {
+        margin-top: $small-spacing;
+    }
+}

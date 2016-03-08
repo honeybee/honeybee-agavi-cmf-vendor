@@ -2,7 +2,7 @@
 {% spaceless %}
 <div class="hb-glance {{ css }}">
     <img class="hb-glance__image" src="{{ image_url }}" width="{{ image_width }}" height="{{ image_height }}" />
-    <h1 class="hb-glance__title">{{ title }}</h1>
+    <span class="hb-glance__title">{{ title }}</span>
     <div class="hb-glance__description">{{ description|default('') }}</div>
 </div>
 {% endspaceless %}
