@@ -19,17 +19,17 @@
     <div class="hb-field__content">
         {% if options.hide_attribute_label is not defined or not options.hide_attribute_label %}
         <div class="hb-field__label">
-            {%- set label_title = _(field_name~'.label_title', translation_domain, null, null, '') -%}
-            {%- if label_title is empty -%}
-                {%- set label_title =  _(field_name~'.field_name', translation_domain, null, null, '') -%}
-                {%- set label_title = '%s %s'|format(label_title, field_constraints) -%}
+            {%- set field_title = _(field_name~'.field_title', translation_domain, null, null, '') -%}
+            {%- if field_title is empty -%}
+                {%- set field_title =  _(field_name~'.field_name', translation_domain, null, null, '') -%}
+                {%- set field_title = '%s %s'|format(field_title, field_constraints) -%}
             {%- endif -%}
-            {%- set label_description = _(field_name~'.label_description', translation_domain, null, null, '') -%}
-            <h3 class="hb-field__label-title">
-                {{ label_title }}
+            {%- set field_description = _(field_name~'.field_description', translation_domain, null, null, '') -%}
+            <h3 class="hb-field__title">
+                {{ field_title }}
             </h3>
-            <p class="hb-field__label-description">
-                {{ label_description }}
+            <p class="hb-field__description">
+                {{ field_description }}
             </p>
         </div>
         {% endif %}

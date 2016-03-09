@@ -325,8 +325,8 @@
                 flex: 1 1 auto;
                 align-self: flex-start;
 
-                .hb-field__label-title { @extend %hb-panel__title; }
-                .hb-field__label-description { @extend %hb-panel__description; }
+                .hb-field__title { @extend %hb-panel__title; }
+                .hb-field__description { @extend %hb-panel__description; }
             }
 
             @include media-query(lap-and-up) {
@@ -346,14 +346,14 @@
                 > .hb-field__label { display: none; }
             }
         }
-        &.hb-field__label-title--hidden {
+        &.hb-field__title--hidden {
             > .hb-field__content {
-                .hb-field__label-title { display: none; }
+                .hb-field__title { display: none; }
             }
         }
-        &.hb-field__label-description--hidden {
+        &.hb-field__description--hidden {
             > .hb-field__content {
-                .hb-field__label-description { display: none; }
+                .hb-field__description { display: none; }
             }
         }
     }
