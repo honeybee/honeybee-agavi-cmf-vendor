@@ -1,7 +1,10 @@
-{%- set image_url = image_url|default(ac('entity_glance.image_placeholder', 'static/themes/whitelabel/binaries/glance-placeholder.png')) -%}
+{%- set image_placeholder = 'static/themes/whitelabel/binaries/glance-placeholder.png' -%}
 {% spaceless %}
 <div class="hb-glance {{ css }}">
-    <img class="hb-glance__image" src="{{ image_url }}" width="{{ image_width }}" height="{{ image_height }}" />
+    {% if not image_disabled %}
+        {%- set image_url = image_url|default(ac('entity_glance.image_placeholder', image_placeholder)) -%}
+        <img class="hb-glance__image" src="{{ image_url }}" width="{{ image_width }}" height="{{ image_height }}" />
+    {% endif %}
     <span class="hb-glance__title">{{ title }}</span>
     <div class="hb-glance__description">{{ description|default('') }}</div>
 </div>

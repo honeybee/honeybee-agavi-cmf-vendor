@@ -153,6 +153,7 @@ To use a defined view-template just specify its name in the glance config.
 * **image_value_path_index** - Index of the image-list specified in the previous option (by default gets the first image of the attribute value).
 * **image_activity_scope** - Converjon activity scope.
 * **image_activity_name** - Converjon activity scope.
+* **image_disabled** - Disables the rendering of the image in the default glance template.
 * **title** - Static value. [there is no auto-retriving when it is set]
 * **title_value_path** - Attribute value path to the existing attribute used for the glance title auto-retrieving. [requires *title* option to be empty]
 * **description** - Static value. [there is no auto-retriving when it is set]

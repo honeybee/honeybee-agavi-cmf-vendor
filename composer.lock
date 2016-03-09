@@ -607,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "184591cb5cde05df3682d637c2496edcd62ae6bd"
+                "reference": "b0a5e7d0da3f9325ef1887a7cb81a543430ec90c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/184591cb5cde05df3682d637c2496edcd62ae6bd",
-                "reference": "184591cb5cde05df3682d637c2496edcd62ae6bd",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b0a5e7d0da3f9325ef1887a7cb81a543430ec90c",
+                "reference": "b0a5e7d0da3f9325ef1887a7cb81a543430ec90c",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +694,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-03-06 15:09:13"
+            "time": "2016-03-09 12:47:31"
         },
         {
             "name": "honeybee/trellis",
@@ -706,7 +706,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/0c7b81eab68c54511eb882fc35cfcd90774cce96",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/8ca2c5a9a85b24c5df1904742f615a6b88ae4f65",
                 "reference": "0c7b81eab68c54511eb882fc35cfcd90774cce96",
                 "shasum": ""
             },
@@ -2740,7 +2740,7 @@
                     "name": "Manuel Pichler",
                     "email": "github@manuel-pichler.de",
                     "homepage": "https://github.com/manuelpichler",
-                    "role": "Project founder"
+                    "role": "Project Founder"
                 },
                 {
                     "name": "Other contributors",
