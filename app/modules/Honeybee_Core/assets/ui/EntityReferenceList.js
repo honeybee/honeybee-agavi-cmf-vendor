@@ -173,10 +173,6 @@ define([
     ReferenceEntityList.prototype.initUi = function() {
         var self = this;
         var suggest_options = this.getSuggestOptionsFor(this.getActiveReferenceType());
-        var selectize_plugins = {};
-        if (this.options.inline_mode === true) {
-            selectize_plugins["remove_button"] = { label: "-" };
-        }
 
         this.$select = this.buildSelectForInitalValues();
         this.$widget.find('> .hb-field__content > .hb-autocomplete').replaceWith(this.$select);
@@ -190,11 +186,10 @@ define([
             valueField: suggest_options.value_field,
             labelField: suggest_options.suggest_field,
             searchField: suggest_options.suggest_field,
-            plugins: selectize_plugins,
+            plugins: { "remove_button": { label: "-" } },
             load: this.loadSuggestions.bind(this),
             onItemAdd: this.onItemAdded.bind(this),
-            onItemRemove: this.onItemRemoved.bind(this),
-            onDelete: function() { return self.options.inline_mode === true; }
+            onItemRemove: this.onItemRemoved.bind(this)
         });
     };
 
