@@ -3,6 +3,7 @@
     margin: 0 0px $base-spacing 0px;
 }
 
+%hb-panel__header,
 .hb-panel__header {
     padding: $base-spacing;
     background-color: color(panel-header-background);
@@ -11,12 +12,14 @@
     border-style: solid;
 }
 
+%hb-panel__title,
 .hb-panel__title {
     @include typography-headlines;
     color: color(panel-header-text);
     margin: 0;
 }
 
+%hb-panel__description,
 .hb-panel__description {
     margin: 0 5px 0 0;
     color: color(darkgrey2);

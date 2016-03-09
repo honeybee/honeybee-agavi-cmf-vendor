@@ -89,6 +89,7 @@
                 padding-top: 0;
                 padding-bottom: 0;
                 border-top: 1px solid color(lines);
+                &:first-child { border-top-width: 0; }
 
                 &:focus {
                     outline: 0;
@@ -307,39 +308,52 @@
         }
 
         > .hb-field__content {
+            @extend %hb-panel__header;
+
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
 
-            padding: $small-spacing;
-            background-color: color(lightgrey3);
-
             > .hb-embed-type-selector,
             > .hb-field__label {
-                flex: 1 0 auto;
-                white-space: nowrap;
-
-                text-align: center;
+                flex: 1 1 auto;
+                align-self: center; // vertically
+                width: 100%;
             }
 
             > .hb-field__label {
-                @include typography-headlines;
-                font-weight: normal;
-                color: color(black);
+                flex: 1 1 auto;
+                align-self: flex-start;
+
+                .hb-field__label-title { @extend %hb-panel__title; }
+                .hb-field__label-description { @extend %hb-panel__description; }
             }
 
             @include media-query(lap-and-up) {
                 flex-wrap: nowrap;
                 flex-direction: row;
 
-                padding: $base-spacing;
-
+                > .hb-field__label { text-align: left; }
                 > .hb-embed-type-selector {
                     text-align: right;
+                    width: auto;
                 }
-                > .hb-field__label {
-                    text-align: left;
-                }
+            }
+        }
+
+        &.hb-field__label--hidden {
+            > .hb-field__content {
+                > .hb-field__label { display: none; }
+            }
+        }
+        &.hb-field__label-title--hidden {
+            > .hb-field__content {
+                .hb-field__label-title { display: none; }
+            }
+        }
+        &.hb-field__label-description--hidden {
+            > .hb-field__content {
+                .hb-field__label-description { display: none; }
             }
         }
     }
