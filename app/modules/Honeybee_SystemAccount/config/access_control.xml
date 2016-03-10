@@ -5,28 +5,9 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     xmlns:xi="http://www.w3.org/2001/XInclude">
     <ae:configuration>
-        <roles>
-            <role name="test-role-additiv" parent="administrator">
-                <description>Role to test different permission scenarios.</description>
-                <acl>
-                    <permissions scope="honeybee.system_account.entity.user.inactive">
-                        <deny>plugin::delete</deny>
-                    </permissions>
-                </acl>
-            </role>
-
-            <role name="test-two" parent="test-role-additiv">
-                <description>Role to test different permission scenarios.</description>
-                <acl>
-                    <permissions scope="honeybee.system_account.module.user">
-                        <deny>activity::create_resource</deny>
-                    </permissions>
-                    <permissions scope="honeybee.system_account.entity.user.inactive">
-                        <deny>plugin::promote</deny>
-                    </permissions>
-                </acl>
-            </role>
 <!--
+        <roles>
+
             <role name="test-role" parent="administrator">
                 <description>Role to test different permission scenarios.</description>
                 <acl>
@@ -43,8 +24,7 @@
                     </permissions>
                 </acl>
             </role>
--->
         </roles>
-
+-->
     </ae:configuration>
 </ae:configurations>

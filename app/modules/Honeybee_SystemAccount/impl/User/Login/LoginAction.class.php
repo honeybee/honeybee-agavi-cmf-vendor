@@ -97,13 +97,13 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
         if ($auth_response->getState() === AuthResponse::STATE_AUTHORIZED) {
             $view_name = 'Success';
 
-            $user->setAuthenticated(true);
             $user->setAttributes(
                 array_merge(
                     [ 'acl_role' => AclService::ROLE_NON_PRIV ],
                     $auth_response->getAttributes()
                 )
             );
+            $user->setAuthenticated(true);
 
             $this->logInfo("[AUTHORIZED] Successful authentication attempt " . $log_message_part);
         } elseif ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {

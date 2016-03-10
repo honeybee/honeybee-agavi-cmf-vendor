@@ -38,6 +38,7 @@ class ActivityServiceProvisioner extends AbstractProvisioner
     {
         $activity_container_map = new ActivityContainerMap();
         foreach ($this->loadActivitiesConfig() as $scope => $container_data) {
+
             $activity_map = new ActivityMap();
             foreach ($container_data['activities'] as $name => $activity) {
                 $activity['settings'] = new Settings($activity['settings']);
@@ -45,6 +46,7 @@ class ActivityServiceProvisioner extends AbstractProvisioner
                 $activity_map->setItem($name, new Activity($activity));
             }
             $container_data['activity_map'] = $activity_map;
+            $container_data['scope'] = $scope;
             $activity_container_map->setItem($scope, new ActivityContainer($container_data));
         }
 

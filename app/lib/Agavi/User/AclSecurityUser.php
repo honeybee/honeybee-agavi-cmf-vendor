@@ -114,6 +114,13 @@ class AclSecurityUser extends AgaviSecurityUser implements RoleInterface
         return $this->raw_referer;
     }
 
+    public function setAuthenticated($authenticated)
+    {
+        parent::setAuthenticated($authenticated);
+
+        $this->acl = $this->acl_service->getAclForRole($this->getRoleId());
+    }
+
     protected function hydrateHeaderInformation()
     {
         if ($this->getContext()->getName() == 'console') {
