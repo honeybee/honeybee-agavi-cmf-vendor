@@ -83,18 +83,25 @@ define([
             var trigger_id = $toggle.find('label').attr('for');
             var trigger = document.getElementById(trigger_id); // $(id) would mean we need to escape the id for jquery
             if (trigger) {
-                var $invalid = $(trigger).next('.hb-tabs__panel').find('.invalid,:invalid').filter(":input");
-                if ($invalid.length > 0) {
+                var invalid_inputs = [];
+                $(trigger).next('.hb-tabs__panel').find('.invalid,:invalid').filter(":input").each(
+                    function(idx, invalid_input) {
+                        if ($(invalid_input).parents('.hb-entity-templates').length === 0) {
+                            invalid_inputs.push(invalid_input);
+                        }
+                    }
+                );
+                if (invalid_inputs.length > 0) {
                     // put number of invalid inputs into a error-bubble span into the tab toggle
                     var $bubble = $toggle.find('.error-bubble');
                     if ($bubble.length > 0) {
                         // update bubble error count
-                        $bubble.text($invalid.length);
+                        $bubble.text(invalid_inputs.length);
                     } else {
                         // create bubble with error count
                         var $label = $toggle.children('label');
                         var span = document.createElement('span');
-                        span.appendChild(document.createTextNode($invalid.length));
+                        span.appendChild(document.createTextNode(invalid_inputs.length));
                         span.setAttribute('class', 'error-bubble');
                         $toggle.children('label').append(span);
                     }
