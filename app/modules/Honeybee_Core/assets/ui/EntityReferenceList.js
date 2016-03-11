@@ -191,6 +191,10 @@ define([
             onItemAdd: this.onItemAdded.bind(this),
             onItemRemove: this.onItemRemoved.bind(this)
         });
+
+        if (this.options.isReadonly === true) {
+            this.$select[0].selectize.disable();
+        }
     };
 
     ReferenceEntityList.prototype.handleAction = function(event, $target_item) {
