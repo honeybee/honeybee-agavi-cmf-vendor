@@ -67,7 +67,7 @@ define([
     };
 
     ReferenceEntityList.prototype.buildSuggestUrl = function(query, type_prefix) {
-        return this.getSuggestOptionsFor(type_prefix).suggest_url + encodeURIComponent(query);
+        return this.getSuggestOptionsFor(type_prefix).suggest_url.replace('%7BQUERY%7D', encodeURIComponent(query));
     };
 
     ReferenceEntityList.prototype.buildRenderUrl = function(type_prefix) {
