@@ -1,5 +1,5 @@
 <li class="{% if has_parent_attribute %}hb-embed-item{% endif %} {{ css }}" data-embed-type="{{ entity_type }}" data-input-group="{{ grouped_base_path }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
-    <input type="checkbox" id="{{ trigger_id }}" class="hb-embed-item__trigger" {% if expand_content_disabled %} disabled{% endif %} {% if expand_content_by_default %} checked{% endif %} />
+    <input type="checkbox" id="{{ trigger_id }}" class="hb-embed-item__trigger" {% if not collapsible %} disabled{% endif %} {% if expand_by_default %} checked{% endif %} />
     <div class="hb-embed-item__header">
         <label for="{{ trigger_id }}" class="hb-embed-item__toggle">
             <div class="hb-embed-item__glance">{{ rendered_glance_content|raw }}</div>

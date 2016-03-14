@@ -39,7 +39,7 @@ The glance supports configuration at different levels of the application:
                 <setting name="glance_config">
                     <setting name="enabled">true</setting>
                 </setting>
-                <setting name="expand_items_content_by_default">true</setting>
+                <setting name="css">custom_field_class</setting>
             </settings>
         </field>
         ...
@@ -147,6 +147,9 @@ To use a defined view-template just specify its name in the glance config.
 
 ### Glance renderer
 * **enabled** - Enable glance rendering.
+* **collapsible** - The entity content can be collapsed/expanded (true by default).
+* **expand_by_default** - Expand the entity content by default; useful when there is no rendered glance to click on for expanding/collapsing the content (true when glances are disabled)
+* **fixed_content** - Set a static content for the glance, without calling the rendering or specifying any custom template.
 * **image_url** - Static URL. [there is no auto-retriving when it is set]
 * **image_width**/**image_height** - Custom width/height for the image.
 * **image_value_path** - Attribute value path to an image-list existing attribute used for the glance image auto-retrieving. [requires *image_url* option to be empty]
@@ -164,7 +167,6 @@ Common options from the base-renderer and the entity-renderer (*e.g.* **template
 
 ### Entity renderer
 * **glance_config** - The glance configuration used for the glance rendering.
-The option **expand_content_by_default** is set to display/expand the entity details when there is no glance to click on.
 
 ### Embedded-Entity-List attribute renderer
 * **glance_config** - The *per-entity-list-attribute* glance configuration.
