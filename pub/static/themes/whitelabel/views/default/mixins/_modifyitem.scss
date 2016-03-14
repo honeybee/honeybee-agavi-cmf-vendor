@@ -1,3 +1,5 @@
+$item-margin: $panel-margin !default;
+
 @mixin modifyitem-view() {
     .hb-validation-messages {
         display: none;
@@ -189,17 +191,7 @@
         &:not(.hb-entity-list__inline-mode) {
             > .hb-field__value > .hb-entity-list {
                 > .hb-js-embed-item--is_focused {
-                    position: relative;
-                    @include zindex("base", 1);
-
-                    // pseudo-element prevents siblings from hiding outline on adjacent sides
-                    &:before {
-                        content: "";
-                        position: absolute;
-                        top: 0; right: 0; bottom: 0; left: 0;
-                        z-index: -1;
-                        box-shadow: 0 0 1px 3px color(outline);
-                    }
+                    @include focused-item;
                 }
             }
         }
@@ -253,6 +245,19 @@
         }
 
         &.hb-entity-list__inline-mode {
+
+            // the field looks like a list of hb-panel
+            //  (no hb-field surrounding shadow + keep hb-panel margin-bottom)
+            box-shadow: none;
+            > .hb-field__value {
+                > .hb-entity-list {
+                    > .hb-embed-item {
+                        // always show margin from "component/panel"
+                        margin: $item-margin;
+                    }
+                }
+            }
+
             .hb-field__content {
                 padding: 0;
             }
@@ -272,6 +277,27 @@
 
                 .hb-entity-header {
                     margin: 0;
+                }
+            }
+        }
+
+        // item highlighting with inline-mode
+        > .hb-field__value {
+            > .hb-entity-list {
+                > .hb-embed-item {
+                    // no direct descendant operator (>) because there is not yet a defined styling beyond the second nested level
+                    >.hb-entity-list__inline-mode {
+                        > .hb-field__value {
+                            > .hb-entity-list {
+                                > .hb-embed-item {
+                                    &.hb-embed-item--is_collapsible.hb-js-embed-item--is_focused {
+                                        // focus parent item (not the grandparent)
+                                        @include focused-item;
+                                    }
+                               }
+                           }
+                       }
+                    }
                 }
             }
         }
@@ -380,4 +406,18 @@
     }
 
     @content;
+}
+
+@mixin focused-item() {
+    position: relative;
+    @include zindex("base", 1);
+
+    // pseudo-element prevents siblings from hiding outline on adjacent sides
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0; right: 0; bottom: 0; left: 0;
+        z-index: -1;
+        box-shadow: 0 0 1px 3px color(outline);
+    }
 }

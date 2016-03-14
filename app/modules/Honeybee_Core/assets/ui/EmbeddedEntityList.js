@@ -52,9 +52,23 @@ define([
         }
         // manage highlighting of list items
         $(document).on('focus', ':input, label, a', function(ev){
-            $item = $(ev.target).parents('.hb-embed-item').first();
-            $('.hb-embed-item').not($item).removeClass('hb-js-embed-item--is_focused')
-            $item.addClass('hb-js-embed-item--is_focused');
+            $parent_items = $(ev.target).parents('.hb-embed-item');
+            $parent = $parent_items.eq(0);
+            $grandparent = $parent_items.eq(1);
+            $parent_entity_list = $parent.parents('.hb-js-embedded-entity-list').first();
+
+            $unfocus_items = $('.hb-embed-item');
+
+            // - focus parent item to identify collapsible area
+            // - focus grandparent item when the nested entity-list has inline-mode
+            //   and the item is not collapsible (panel-like styling)
+            if (!$parent_entity_list.hasClass('hb-entity-list__inline-mode') || $parent.hasClass('hb-embed-item--is_collapsible')) {
+                $unfocus_items.not($parent).removeClass('hb-js-embed-item--is_focused')
+                $parent.addClass('hb-js-embed-item--is_focused');
+            } else {
+                $unfocus_items.removeClass('hb-js-embed-item--is_focused')
+                $grandparent.addClass('hb-js-embed-item--is_focused');
+            }
         })
     }
 
@@ -168,7 +182,7 @@ define([
         });
 
         $item.find('.hb-embed-item__trigger').first().on('change', function(event) {
-            $item.toggleClass('hb-embed-item--expanded');
+            $item.toggleClass('hb-embed-item--is_expanded');
         });
 
         // unique id for the collapse/expand CSS behaviour for the current item and inner ones

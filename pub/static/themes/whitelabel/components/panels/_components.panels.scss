@@ -1,6 +1,9 @@
+$panel-margin: 0 0px $base-spacing 0px !default;
+
+%hb-panel,
 .hb-panel {
     @include frame;
-    margin: 0 0px $base-spacing 0px;
+    margin: $panel-margin;
 }
 
 %hb-panel__header,
