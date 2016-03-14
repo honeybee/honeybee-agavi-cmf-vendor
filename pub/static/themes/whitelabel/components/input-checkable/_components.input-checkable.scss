@@ -4,11 +4,7 @@
     $width: $font-size;
     $height: $font-size;
 
-    margin-top: $base-spacing;
-
-    &:first-child {
-        margin-top: 0;
-    }
+    margin-bottom: $base-spacing;
 
     input {
         @include visuallyhidden;

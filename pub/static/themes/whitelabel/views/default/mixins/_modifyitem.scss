@@ -46,11 +46,16 @@ $item-margin: $panel-margin !default;
     }
 
     .hb-field {
-        // reset padding, except when the panel is hidden to make a "component/field" look like a "object/sheet"
-        // not achievable with the more explicit selector (waiting for CSS4):
-        //      .hb-panel--hidden:not(.hb-field .hb-panel) > .hb-panel__content
+        // restore the removed padding, when the panel is either hidden and nested (.hb-field .hb-panel)
         .hb-panel--hidden > .hb-panel__content {
             padding: $base-spacing;
+        }
+
+        // restore the removed padding, when the list is nested (.hb-field .hb-entity-list__inline-mode)
+        .hb-entity-list__inline-mode.hb-entity-list__inline-mode {
+            > .hb-field__content {
+                @extend %hb-panel__header;
+            }
         }
     }
 
@@ -160,6 +165,7 @@ $item-margin: $panel-margin !default;
         .hb-embed-item__controls {
             // layout
             flex: 1 1 auto;
+            display: inline-flex;   // remove unwanted small spacing on Firefox
         }
 
         .hb-embed-item__toggle {
