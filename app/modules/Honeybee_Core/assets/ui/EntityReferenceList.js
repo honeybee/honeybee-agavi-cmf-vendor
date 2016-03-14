@@ -35,12 +35,17 @@ define([
         );
     };
 
-    ReferenceEntityList.prototype.onItemRemoved = function() {
+    ReferenceEntityList.prototype.onItemRemoved = function(ref_id) {
         if (this.options.inline_mode === true) {
             this.$entities_list.empty();
             this.cloneItem(this.templates[this.getActiveReferenceType()]);
             this.$entities_list.find('> .hb-embed-item > .hb-embed-item__content > .hb-embed-actions').remove();
             this.purgeSelectizeQueryCache();
+        } else {
+            var item_query = ".attribute_value_referenced_identifier input[value='{REF_ID}']".replace('{REF_ID}', ref_id);
+            this.$entities_list.find('> li').filter(function() {
+                return $(item_query, this).length > 0;
+            }).remove();
         }
     };
 
