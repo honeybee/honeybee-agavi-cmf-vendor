@@ -121,7 +121,16 @@ define([
             return "[" + self.cur_item_index + "]";
         });
 
-        this.$entities_list.append($clone);
+        var sfx = Math.random().toString(36).substring(5);
+        $clone.find('[id]').each(function(_, el) {
+            var $el = $(el);
+            var id = $el.attr('id');
+            var new_id = id + '_' + sfx;
+            $el.attr('id', new_id);
+            $clone.find('[for="'+id+'"]').each(function(_, label) {
+                $(label).attr('for', new_id);
+            });
+        });
 
         $clone.find('.attribute_value_identifier input').val('');
         $clone.removeAttr('data-hb-item-identifier');
@@ -135,6 +144,7 @@ define([
             }
         });
 
+        this.$entities_list.append($clone);
         this.registerItem($clone);
         this.updateUi();
 
