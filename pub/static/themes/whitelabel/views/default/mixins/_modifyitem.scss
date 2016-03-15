@@ -46,15 +46,15 @@ $item-margin: $panel-margin !default;
     }
 
     .hb-field {
-        // restore the removed padding, when the panel is either hidden and nested (.hb-field .hb-panel)
+        // restore removed padding, when the panel is either hidden and nested (.hb-field .hb-panel)
         .hb-panel--hidden > .hb-panel__content {
             padding: $base-spacing;
         }
 
-        // restore the removed padding, when the list is nested (.hb-field .hb-entity-list__inline-mode)
+        // restore removed padding, when the list is nested (.hb-field .hb-entity-list__inline-mode)
         .hb-entity-list__inline-mode.hb-entity-list__inline-mode {
             > .hb-field__content {
-                @extend %hb-panel__header;
+                display: none;
             }
         }
     }
