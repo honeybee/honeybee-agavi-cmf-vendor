@@ -43,9 +43,18 @@ $thumb-size-default: 150px;
     }
 }
 
+.hb-field-label__name {
+    @include media-query(lap-and-up) {
+        text-align: left;
+    }
+}
+
 .hb-imagelist__input-multiple-label {
-    text-align: right;
     color: color(blue); // as a link
+
+    @include media-query(lap-and-up) {
+        text-align: right;
+    }
 
     @include hb-icon-pseudo-el(
         (
@@ -233,8 +242,8 @@ $thumb-size-default: 150px;
 
         .imagelist__image {
             background: color(white);
-            margin: 2em 4em;
-            padding: 2em 2em;
+            margin: $base-spacing 4em;
+            padding: $base-spacing;
         }
 
         .imagelist__image-content {
@@ -267,6 +276,16 @@ $thumb-size-default: 150px;
     @extend %pack;
     @extend %pack--middle;
     border-spacing: $base-spacing;
+
+    @include media-query(palm) {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > div {
+            margin: auto;
+            margin-top: $small-spacing;
+        }
+    }
 
     .imagelist__item-controls-upload,
     .imagelist__item-controls-aoi,

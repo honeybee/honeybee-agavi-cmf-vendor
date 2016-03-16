@@ -4,35 +4,31 @@
         padding-top: 0;
         padding-bottom: 0;
         border-top: 1px solid color(lines);
-        &:first-child { border-top-width: 0; }
 
         &:focus { outline: 0; }
 
+        // Embed actions
         .hb-embed-actions {
             width: 100%;
-
             @extend %hb-embed-actions--large;
 
-            & .hb-embed-action__none {
-                display: none;
-            }
             @include media-query(lap-and-up) {
                 display: inline-flex;
                 flex-direction: row;
                 justify-content: flex-end;
             }
+
+            // override general declaration from 'entity-list'
+            .hb-embed-action__none.hb-embed-action__none { display: none; }
         }
 
         &:first-child {
-            .hb-embed-action__up {
-                display: none;
-            }
+            border-top-width: 0;
+            .hb-embed-action__up { display: none; }
         }
         &:last-child {
-            .hb-embed-action__down {
-                display: none;
-            }
             margin-bottom: 0;
+            .hb-embed-action__down { display: none; }
         }
     }
 
@@ -45,6 +41,7 @@
         // style
         background-color: color(white);
     }
+
     .hb-embed-item__toggle,
     .hb-embed-item__controls {
         // layout
@@ -86,7 +83,7 @@
     &:not(.hb-entity-list__inline-mode) {
         > .hb-field__value > .hb-entity-list {
             > .hb-js-embed-item--is_focused {
-                @include focused-item;
+                @include entity-list-item--focused;
             }
         }
     }
@@ -103,7 +100,7 @@
                 > .hb-embed-item {
                     &.hb-embed-item--is_collapsible.hb-js-embed-item--is_focused {
                         // focus parent item (not the grandparent)
-                        @include focused-item;
+                        @include entity-list-item--focused;
                     }
                }
             }
@@ -113,7 +110,7 @@
 
 
 
-@mixin focused-item() {
+@mixin entity-list-item--focused() {
     position: relative;
     @include zindex("base", 1);
 
