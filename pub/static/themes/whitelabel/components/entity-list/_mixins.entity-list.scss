@@ -1,0 +1,121 @@
+$item-margin: $panel-margin !default;
+
+@mixin entity-list() {
+
+    .hb-entity-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        &.hb-entity-templates {
+            display: none;
+        }
+    }
+
+    // Embed actions
+    .hb-embed-action__icon {
+        position: relative;
+
+        @include media-query(palm) {
+            width: 100%;
+        }
+    }
+
+    .hb-embed-item__controls > .hb-embed-actions {
+        .hb-embed-action__up .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: arrow-bold-up, size: 1.5 )); }
+        .hb-embed-action__down .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: arrow-bold-down, size: 1.5 )); }
+        .hb-embed-action__none .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: minus, size: 1.5 )); }
+        .hb-embed-action__delete .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: cross, size: 1.5 )); }
+        .hb-embed-action__duplicate .hb-embed-action__icon { @include hb-icon-pseudo-el(( icon-name: copy, size: 1.5 )); }
+    }
+
+    @include media-query(lap-and-up) {
+        .hb-embed-action__icon:after {
+            content: attr(data-action-caption);
+            // restore font-size set to 0 from icon mixin
+            font-size: 1rem !important;
+            // align vertically to icon
+            display: inline-table;
+        }
+    }
+
+    /*
+        No-JS styling
+        (JS behaviour not loaded, jsb_ class not removed)
+    */
+    &.jsb_ {
+        > .hb-field__content {
+            padding-top: 0;
+
+            .hb-embed-type-selector {
+                display: none;
+            }
+        }
+
+        // these should overwrite the following code
+        .hb-entity-templates {
+            display: block;
+
+            .hb-embed-item {
+                .hb-embed-actions {
+                    .hb-embed-action {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .hb-embed-item {
+            .hb-embed-actions {
+                .hb-embed-action {
+                    &.hb-embed-action__none {
+                        display: table-cell;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Inline mode */
+    &.hb-entity-list__inline-mode {
+
+        // the field looks like a list of hb-panel
+        //  (no hb-field surrounding shadow + keep hb-panel margin-bottom)
+        box-shadow: none;
+        > .hb-field__value {
+            > .hb-entity-list {
+                > .hb-embed-item {
+                    // always show margin from "component/panel"
+                    margin: $item-margin;
+                }
+            }
+        }
+
+        // @todo Move non-related stylings out
+        .hb-field__content {
+            padding: 0;
+        }
+
+        .hb-embed-type-selector {
+            display: none;
+        }
+
+        .hb-embed-item {
+            > .hb-embed-item__header {
+                > .hb-embed-item__controls {
+                    > .hb-embed-actions {
+                        display: none;
+                    }
+                }
+            }
+
+            .hb-entity-header {
+                margin: 0;
+            }
+        }
+    }
+
+    // @todo Change to BEM modifiers
+    .not-displayed { display: none; }
+    .highlight { background: white; }
+}

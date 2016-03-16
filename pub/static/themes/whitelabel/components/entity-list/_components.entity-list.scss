@@ -1,0 +1,31 @@
+@import "mixins";
+
+.hb-field__embedded-entity-list { @include embedded-entity-list; }
+.hb-field__entity-reference-list { @include entity-reference-list; }
+
+/* Modifiers */
+
+// embedded entity
+.hb-field__embedded-entity-list {
+
+    &.hb-field__label--hidden {
+        > .hb-field__content {
+            > .hb-field__label { display: none; }
+        }
+    }
+    &.hb-field__title--hidden {
+        > .hb-field__content {
+            .hb-field__title { display: none; }
+        }
+    }
+    &.hb-field__description--hidden {
+        > .hb-field__content {
+            .hb-field__description { display: none; }
+        }
+    }
+}
+
+// entity reference
+.hb-field__entity-reference-list {
+    .hb-panel--hidden { display: none; }
+}

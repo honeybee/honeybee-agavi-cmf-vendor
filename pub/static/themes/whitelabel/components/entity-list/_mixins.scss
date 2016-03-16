@@ -1,0 +1,87 @@
+/**
+    ## Entity-List component
+
+    Be specific with the child selectors to avoid recursion issues on nested lists.
+    Non-related selectors can be used for this purpose; keep them out of here otherwise.
+*/
+
+@import "mixins.entity-list";
+@import "mixins.entity-list-item";
+
+@mixin embedded-entity-list() {
+    // list style
+    @include entity-list;
+    // list-items style
+    @include entity-list-item;
+    @include entity-list-item--highlight;
+
+
+    margin-bottom: 0;
+    @include shadow-container;
+
+    .hb-embed-actions {
+        background-color: color(lightgrey1);
+    }
+
+    > .hb-field__content {
+        @extend %hb-panel__header;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        > .hb-embed-type-selector,
+        > .hb-field__label {
+            flex: 1 1 auto;
+            align-self: center; // vertically
+            width: 100%;
+        }
+
+        > .hb-field__label {
+            flex: 1 1 auto;
+            align-self: flex-start;
+
+            .hb-field__title { @extend %hb-panel__title; }
+            .hb-field__description { @extend %hb-panel__description; }
+        }
+
+        @include media-query(lap-and-up) {
+            flex-wrap: nowrap;
+            flex-direction: row;
+
+            > .hb-field__label { text-align: left; }
+            > .hb-embed-type-selector {
+                text-align: right;
+                width: auto;
+            }
+        }
+    }
+}
+
+@mixin entity-reference-list() {
+    // list style
+    @include entity-list;
+    // list-items style
+    @include entity-list-item;
+    @include entity-list-item--highlight;
+
+
+    > .hb-field__content {
+        > .hb-embed-type-selector {
+            text-align: right;
+        }
+        > .hb-autocomplete {
+            margin-bottom: 0.5*$base-spacing;
+        }
+    }
+    // list-items style
+    .hb-embed-item {
+        box-shadow: none; // remove focusing
+
+        > .hb-embed-item__header {
+            > .hb-embed-item__controls {
+                > .hb-embed-actions { display: none; }
+            }
+        }
+    }
+}
