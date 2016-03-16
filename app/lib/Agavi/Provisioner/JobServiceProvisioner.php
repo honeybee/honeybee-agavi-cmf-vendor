@@ -3,8 +3,11 @@
 namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
 use AgaviContext;
+use AgaviConfigCache;
+use AgaviConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
 use Honeybee\Infrastructure\Job\JobServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
@@ -13,8 +16,15 @@ use Psr\Log\LoggerInterface;
 
 class JobServiceProvisioner extends AbstractProvisioner
 {
+    const JOBS_CONFIG_FILE = 'jobs.xml';
+
     public function build(ServiceDefinitionInterface $service_definition, SettingsInterface $provisioner_settings)
     {
+        $jobs_config = include AgaviConfigCache::checkConfig(
+            AgaviConfig::get('core.config_dir') . DIRECTORY_SEPARATOR . self::JOBS_CONFIG_FILE,
+            AgaviContext::getInstance()->getName()
+        );
+
         $service = $service_definition->getClass();
 
         $factory_delegate = function (
@@ -23,13 +33,16 @@ class JobServiceProvisioner extends AbstractProvisioner
             LoggerInterface $logger
         ) use (
             $service_definition,
-            $provisioner_settings
+            $provisioner_settings,
+            $jobs_config
         ) {
             $connector = $connector_service->getConnector($provisioner_settings->get('connection'));
             $config = $service_definition->getConfig();
             $service_class = $service_definition->getClass();
+            $job_factory_class = $config->get('job_factory_class');
+            $job_factory = new $job_factory_class($service_locator, new ArrayConfig($jobs_config));
 
-            return new $service_class($connector, $service_locator, $config, $logger);
+            return new $service_class($connector, $service_locator, $job_factory, $config, $logger);
         };
 
         $this->di_container

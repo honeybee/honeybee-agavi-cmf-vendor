@@ -22,6 +22,7 @@ class ConfigurationScanner
         'events',
         'filesystems',
         'fixture',
+        'jobs',
         'local_configuration',
         'logging',
         'mail',

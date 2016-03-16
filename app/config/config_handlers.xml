@@ -53,6 +53,10 @@
                 <validation>%core.config_dir%/xsd/events.xsd</validation>
             </handler>
 
+            <handler pattern="%core.config_dir%/jobs.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\JobsConfigHandler">
+                <validation>%core.config_dir%/xsd/jobs.xsd</validation>
+            </handler>
+
             <handler pattern="%core.config_dir%/data_access.xml" class="Honeybee\FrameworkBinding\Agavi\ConfigHandler\DataAccessConfigHandler">
                 <validation>%core.config_dir%/xsd/data_access.xsd</validation>
             </handler>

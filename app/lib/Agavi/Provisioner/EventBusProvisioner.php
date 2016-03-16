@@ -102,6 +102,7 @@ class EventBusProvisioner extends AbstractProvisioner
                         $event_handlers_callback,
                         $event_filters_callback,
                         $event_transport_callback,
+                        new Settings($subscription_config['settings']),
                         $subscription_config['enabled']
                     )
                 );
@@ -118,11 +119,11 @@ class EventBusProvisioner extends AbstractProvisioner
         }
 
         $transport_config = $transport_configs[$transport_name];
-        $transport_state = [ ':name' => $transport_name, ':event_bus' => $event_bus ];
-
-        foreach ($transport_config['settings'] as $prop_name => $prop_value) {
-            $transport_state[':' . $prop_name] = $prop_value;
-        }
+        $transport_state = [
+            ':name' => $transport_name,
+            ':event_bus' => $event_bus,
+            ':settings' =>  new Settings($transport_config['settings'])
+        ];
 
         return $this->di_container->make($transport_config['implementor'], $transport_state);
     }

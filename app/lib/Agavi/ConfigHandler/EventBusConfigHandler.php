@@ -2,11 +2,9 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\ConfigHandler;
 
-use Trellis\Common\Error\RuntimeException;
 use Honeybee\Model\Event\Subscription\EventFilter;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
-use AgaviXmlConfigHandler;
 use Honeybee\Common\Error\ConfigError;
 use AgaviToolkit;
 
@@ -48,7 +46,7 @@ class EventBusConfigHandler extends BaseConfigHandler
             }
         }
 
-        $config_data = array('channels' => $channels, 'transports' => $transports);
+        $config_data = [ 'channels' => $channels, 'transports' => $transports ];
         $config_code = sprintf('return %s;', var_export($config_data, true));
 
         return $this->generate($config_code, $document->documentURI);
@@ -71,11 +69,12 @@ class EventBusConfigHandler extends BaseConfigHandler
             if (!class_exists($implementor)) {
                 throw new ConfigError('Unable to load transport implementor.');
             }
-            $transports[$name] = array(
+
+            $transports[$name] = [
                 'name' => $name,
                 'implementor' => $implementor,
                 'settings' => $settings
-            );
+            ];
         }
 
         return $transports;
@@ -117,20 +116,27 @@ class EventBusConfigHandler extends BaseConfigHandler
 
             $event_handlers = [];
             foreach ($subscription_element->get('handlers') as $handler_element) {
-                $event_handlers[] = array(
+                $event_handlers[] = [
                     'implementor' => $handler_element->getAttribute('implementor'),
                     'settings' => $this->parseSettings($handler_element)
-                );
+                ];
             }
 
-            $subscriptions[] = array(
+            $settings = [];
+            $settings_element = $subscription_element->getChild('settings');
+            if ($settings_element) {
+                $settings = $this->parseSettings($settings_element);
+            }
+
+            $subscriptions[] = [
                 'transport' => $transport,
                 'filters' => $filters,
                 'handlers' => $event_handlers,
+                'settings' => $settings,
                 'enabled' => AgaviToolkit::literalize(
                     $subscription_element->getAttribute('enabled', true)
                 )
-            );
+            ];
         }
 
         return $subscriptions;
@@ -147,10 +153,10 @@ class EventBusConfigHandler extends BaseConfigHandler
                 $settings_parent = $filter_element;
             }
 
-            $filters[] = array(
+            $filters[] = [
                 'implementor' => $filter_element->getAttribute('implementor', self::DEFAULT_FILTER),
                 'settings' => $this->parseSettings($filter_element)
-            );
+            ];
         }
 
         return $filters;

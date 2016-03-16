@@ -21,6 +21,7 @@ use Honeybee\FrameworkBinding\Agavi\Provisioner\ExpressionServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\FilesystemServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\FixtureServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ImportServiceProvisioner;
+use Honeybee\FrameworkBinding\Agavi\Provisioner\JobProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\JobServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\LoggerProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner;

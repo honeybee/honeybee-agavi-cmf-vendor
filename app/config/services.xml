@@ -44,7 +44,7 @@
                         </settings>
                     </provisioner>
                     <settings>
-                        <setting name="exchange">honeybee.domain</setting>
+                        <setting name="job_factory_class">Honeybee\Infrastructure\Job\JobFactory</setting>
                     </settings>
                 </service>
 
