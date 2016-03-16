@@ -74,18 +74,6 @@
                         </subscription>
                     </subscriptions>
                 </channel>
-
-                <channel name="honeybee.events.files">
-                    <subscriptions>
-                        <subscription enabled="true">
-                            <transport>sync</transport>
-                            <filter>
-                                <setting name="expression"><![CDATA[event.getType() matches "/.*(?<!\.noop)$/"]]></setting>
-                            </filter>
-                            <handler implementor="\Honeybee\Projection\EventHandler\ProjectionFileHandler" />
-                        </subscription>
-                    </subscriptions>
-                </channel>
             </channels>
         </event_bus>
     </ae:configuration>
