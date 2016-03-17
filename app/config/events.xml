@@ -16,6 +16,9 @@
             <transports>
                 <transport name="event_queue">
                     <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport</implementor>
+                    <settings>
+                        <setting name="exchange">honeybee.domain.events</setting>
+                    </settings>
                 </transport>
                 <transport name="event_pub">
                     <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport</implementor>

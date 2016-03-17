@@ -94,7 +94,11 @@ class ConsoleDialogValidator extends AgaviValidator
                 break; // yeah! valid value was given
             }
 
-            $this->askForValue();
+            $continue = $this->askForValue();
+            if (!$continue) {
+                $this->throwError('no_choice');
+                break; // hmm! no valid options..
+            }
         }
 
         $this->output->writeln('');
@@ -123,13 +127,18 @@ class ConsoleDialogValidator extends AgaviValidator
             $this->data = $this->dialog->askConfirmation($this->output, $this->question, $this->default);
         } elseif ($this->select) {
             // selection dialog to choose values from a list of choices
-            $this->choices = array_values(array_diff($this->choices, $this->ignore_choices));
+            $this->choices = array_unique(array_values(array_diff($this->choices, $this->ignore_choices)));
+            if (empty($this->choices)) {
+                return false;
+            }
             $selected = $this->dialog->select($this->output, $this->question, $this->choices, $this->default);
             $this->data = $this->choices[$selected];
         } else {
             // default behavior: ask for a valid value and allow autocompletion
             $this->data = $this->dialog->ask($this->output, $this->question, $this->default, $this->choices);
         }
+
+        return true;
     }
 
     /**

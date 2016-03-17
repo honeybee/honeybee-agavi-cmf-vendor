@@ -5,10 +5,9 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 use AgaviContext;
 use AgaviConfigCache;
 use AgaviConfig;
-use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
+use Honeybee\Infrastructure\Job\JobMap;
 use Honeybee\Infrastructure\Job\JobServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceLocatorInterface;
@@ -39,10 +38,8 @@ class JobServiceProvisioner extends AbstractProvisioner
             $connector = $connector_service->getConnector($provisioner_settings->get('connection'));
             $config = $service_definition->getConfig();
             $service_class = $service_definition->getClass();
-            $job_factory_class = $config->get('job_factory_class');
-            $job_factory = new $job_factory_class($service_locator, new ArrayConfig($jobs_config));
 
-            return new $service_class($connector, $service_locator, $job_factory, $config, $logger);
+            return new $service_class($connector, $service_locator, new JobMap($jobs_config), $config, $logger);
         };
 
         $this->di_container

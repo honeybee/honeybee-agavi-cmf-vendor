@@ -43,9 +43,6 @@
                             <setting name="connection">Default.MsgQueue</setting>
                         </settings>
                     </provisioner>
-                    <settings>
-                        <setting name="job_factory_class">Honeybee\Infrastructure\Job\JobFactory</setting>
-                    </settings>
                 </service>
 
                 <service name="honeybee.infrastructure.acl_service">
