@@ -10,6 +10,7 @@ $thumb-size-default: 150px;
     }
 
     .imagelist-tabs__toggle {
+        vertical-align: top; // keep aligned with siblings during upload
         margin: 0 $small-spacing $small-spacing 0;
 
         img {
