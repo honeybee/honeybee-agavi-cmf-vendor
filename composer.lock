@@ -607,12 +607,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "02f80a31d7fa2536246890f7d1634fd2fe3f9c24"
+                "reference": "74dbe8ca7256bfb8248956605d4990d2cdcd4ccb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/02f80a31d7fa2536246890f7d1634fd2fe3f9c24",
-                "reference": "02f80a31d7fa2536246890f7d1634fd2fe3f9c24",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/74dbe8ca7256bfb8248956605d4990d2cdcd4ccb",
+                "reference": "74dbe8ca7256bfb8248956605d4990d2cdcd4ccb",
                 "shasum": ""
             },
             "require": {
@@ -694,7 +694,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-03-17 17:18:29"
+            "time": "2016-03-18 10:27:10"
         },
         {
             "name": "honeybee/trellis",
@@ -2308,16 +2308,16 @@
     "packages-dev": [
         {
             "name": "blackfire/php-sdk",
-            "version": "v1.5.11",
+            "version": "v1.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blackfireio/php-sdk.git",
-                "reference": "559e1b507820b01df45988d6f4c2cbc82d0a0dc3"
+                "reference": "fee598740a7927db7781e645d279142a7a77bb4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blackfireio/php-sdk/zipball/559e1b507820b01df45988d6f4c2cbc82d0a0dc3",
-                "reference": "559e1b507820b01df45988d6f4c2cbc82d0a0dc3",
+                "url": "https://api.github.com/repos/blackfireio/php-sdk/zipball/fee598740a7927db7781e645d279142a7a77bb4b",
+                "reference": "fee598740a7927db7781e645d279142a7a77bb4b",
                 "shasum": ""
             },
             "require": {
@@ -2358,7 +2358,7 @@
                 "uprofiler",
                 "xhprof"
             ],
-            "time": "2016-03-01 11:48:09"
+            "time": "2016-03-17 15:37:22"
         },
         {
             "name": "doctrine/instantiator",
