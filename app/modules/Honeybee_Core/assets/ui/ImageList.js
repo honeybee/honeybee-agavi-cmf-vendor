@@ -574,8 +574,12 @@ define([
                 // create a new thumbnail
                 //var $thumbitem_tpl = self.$widget.find(".imagelist__thumb.newitem"); // LI
                 //var $newthumbitem = $thumbitem_tpl.clone();
+
+                // prevent flickering while loading after setting the new 'src'
+                $newthumbitem.load(function() {
+                    $newthumbitem.removeClass('hb-js-uploading');
+                });
                 $newthumbitem.find(".imagelist__thumb-img").attr('src', response_json.file.download_url||'');
-                $newthumbitem.removeClass('hb-js-uploading');
                 $newthumbitem.find('progress').remove();
                 //$newthumbitem.removeClass("newitem");
                 //$newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
