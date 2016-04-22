@@ -22,7 +22,6 @@ class NamespaceAutoloadGenerator implements ConfigGeneratorInterface
             $included_directories[] = $relative_package['directory'];
             $relative_package['namespace'] = var_export($relative_package['namespace'] . '\\', true);
             $relative_packages[] = $relative_package;
-
         }
 
         if (!empty($relative_packages)) {

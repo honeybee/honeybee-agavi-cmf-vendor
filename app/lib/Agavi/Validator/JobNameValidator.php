@@ -27,8 +27,8 @@ class JobNameValidator extends ConsoleDialogValidator
             ->getJobMap();
 
         $this->choices = [];
-        foreach($job_map->getSettings() as $name => $job) {
-           $this->choices[] = $name;
+        foreach ($job_map->getSettings() as $name => $job) {
+            $this->choices[] = $name;
         }
     }
 }

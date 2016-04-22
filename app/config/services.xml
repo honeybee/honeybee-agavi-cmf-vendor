@@ -16,6 +16,17 @@
                     <class>Honeybee\ServiceLocator</class>
                 </service>
 
+                <service name="honeybee.environment">
+                    <class>Honeybee\FrameworkBinding\Agavi\Environment</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\EnvironmentProvisioner</class>
+                        <settings>
+                            <setting name="share">true</setting>
+                            <setting name="alias">Honeybee\EnvironmentInterface</setting>
+                        </settings>
+                    </provisioner>
+                </service>
+
                 <!--
                     Infrastructure Services
                 -->

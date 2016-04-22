@@ -15,6 +15,7 @@ use Honeybee\FrameworkBinding\Agavi\Provisioner\CommandBusProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ConnectorServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\DataAccessServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\DefaultProvisioner;
+use Honeybee\FrameworkBinding\Agavi\Provisioner\EnvironmentProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\EventBusProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ExportServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ExpressionServiceProvisioner;
@@ -86,6 +87,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         'honeybee.ui.view_config_service' => ViewConfigServiceProvisioner::CLASS,
         'honeybee.ui.view_template_service' => ViewTemplateServiceProvisioner::CLASS,
         'honeybee.ui.workflow_activity_service' => WorkflowActivityServiceProvisioner::CLASS,
+        'honeybee.environment' => EnvironmentProvisioner::CLASS,
         'honeybee.service_locator' => ServiceLocatorProvisioner::CLASS,
     ];
 

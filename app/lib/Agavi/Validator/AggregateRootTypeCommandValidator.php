@@ -662,7 +662,6 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                     $valid_files[$key] = $file;
                 }
             }
-
         }
 
         // $this->logDebug('For path', $path, ' the valid files are:', $valid_files);
