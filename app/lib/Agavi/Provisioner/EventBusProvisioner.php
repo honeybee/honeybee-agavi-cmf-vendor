@@ -121,9 +121,11 @@ class EventBusProvisioner extends AbstractProvisioner
         $transport_config = $transport_configs[$transport_name];
         $transport_state = [
             ':name' => $transport_name,
-            ':event_bus' => $event_bus,
-            ':settings' =>  new Settings($transport_config['settings'])
+            ':event_bus' => $event_bus
         ];
+        foreach ($transport_config['settings'] as $key => $value) {
+            $transport_state[':' . $key] = $value;
+        }
 
         return $this->di_container->make($transport_config['implementor'], $transport_state);
     }
