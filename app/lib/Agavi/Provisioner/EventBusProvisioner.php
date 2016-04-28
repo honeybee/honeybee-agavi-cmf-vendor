@@ -40,6 +40,11 @@ class EventBusProvisioner extends AbstractProvisioner
             $channel_map->setItem($channel_name, new Channel($channel_name));
         }
 
+        $required_channels = array_diff($channel_map::getDefaultChannels(), $channel_map->getKeys());
+        foreach ($required_channels as $default_channel) {
+            $channel_map->setItem($default_channel, new Channel($default_channel));
+        }
+
         $that = $this;
         $callback = function (
             EventBusInterface $event_bus,

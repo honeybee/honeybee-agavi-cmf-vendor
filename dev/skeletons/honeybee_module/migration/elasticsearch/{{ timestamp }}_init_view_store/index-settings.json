@@ -149,6 +149,15 @@
                     }
                 },
                 {
+                    "entity_metadata": {
+                        "match": "metadata",
+                        "mapping": {
+                            "type": "object",
+                            "index": "not_analyzed"
+                        }
+                    }
+                },
+                {
                     "version_list": {
                         "path_match": "versions.*",
                         "mapping": {

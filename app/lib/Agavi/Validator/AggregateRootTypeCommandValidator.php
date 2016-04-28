@@ -16,6 +16,7 @@ use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Command\AggregateRootCommandInterface;
 use Honeybee\Model\Command\AggregateRootTypeCommandInterface;
+use Honeybee\Model\Command\EmbeddedEntityTypeCommandList;
 use Honeybee\Model\Event\AggregateRootEventInterface;
 use Honeybee\Model\Event\AggregateRootEventList;
 use Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\AddEmbeddedEntityCommand;
@@ -150,7 +151,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
         return [
             'values' => $changed_values,
-            'embedded_entity_commands' => $embedded_commands
+            'embedded_entity_commands' => new EmbeddedEntityTypeCommandList($embedded_commands)
         ];
     }
 

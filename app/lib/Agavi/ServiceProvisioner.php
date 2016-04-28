@@ -12,6 +12,7 @@ use Honeybee\FrameworkBinding\Agavi\Provisioner\AclServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ActivityServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\AuthenticationServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\CommandBusProvisioner;
+use Honeybee\FrameworkBinding\Agavi\Provisioner\CommandEnricherProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ConnectorServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\DataAccessServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\DefaultProvisioner;
@@ -66,6 +67,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         'honeybee.ui.url_generator' => UrlGeneratorProvisioner::CLASS,
         'honeybee.infrastructure.acl_service' => AclServiceProvisioner::CLASS,
         'honeybee.infrastructure.auth_service' => AuthenticationServiceProvisioner::CLASS,
+        'honeybee.infrastructure.command_enricher' => CommandEnricherProvisioner::CLASS,
         'honeybee.infrastructure.connector_service' => ConnectorServiceProvisioner::CLASS,
         'honeybee.infrastructure.data_access_service' => DataAccessServiceProvisioner::CLASS,
         'honeybee.infrastructure.expression_service' => ExpressionServiceProvisioner::CLASS,
