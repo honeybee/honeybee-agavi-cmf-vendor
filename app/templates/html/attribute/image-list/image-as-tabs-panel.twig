@@ -13,7 +13,7 @@
                     {% if isReadable %}
                     <div class="imagelist__item-controls" data-fpf-ignore>
                         <div class="imagelist__item-controls-upload">
-                            <input id="{{item_id}}_file" type="file" class="imagelist__image-input" name="{{grouped_base_path}}[file]" {{ disabled }} {{ required }} /><!--
+d }} /><!--
                             --><input id="{{item_id}}_location" type="hidden" class="imagelist__image-location"
                             name="{{grouped_base_path}}[location]" placeholder="location" value="{{ location }}" {{ disabled }} /><!--
                             --><label class="imagelist__upload-label" for="{{item_id}}_file" title="Change Image">Change Image</label>
@@ -42,19 +42,19 @@
                     <label class="imagelist__label-mimetype">Mimetype <input type="text" name="{{grouped_base_path}}[mimetype]" value="{{mimetype}}" readonly class="imagelist__image-mimetype" /></label>
                     <label class="imagelist__label-width">Width <input type="text" name="{{grouped_base_path}}[width]" value="{{width}}" readonly class="imagelist__image-width" /></label>
                     <label class="imagelist__label-height">Height <input type="text" name="{{grouped_base_path}}[height]" value="{{height}}" readonly class="imagelist__image-height" /></label>
-                    {% if meta_data %}
+                    {% if metadata %}
                         <label class="" for="{{item_id}}_meta-data-trigger">
                             <h3>Meta data</h3>
                         </label>
                         <input type="checkbox" id="{{item_id}}_meta-data-trigger"
                         class="imagelist__meta-data-trigger visuallyhidden" {{disabled}} />
                         <div class="imagelist__meta-data">
-                        {% for meta_name, meta_value in meta_data %}
+                        {% for meta_name, meta_value in metadata %}
                             <label class="imagelist__label-meta-data imagelist__label-meta-data-{{meta_name}}">
                                 {{meta_name}}
                                 <input
                                     type="text"
-                                    name="{{grouped_base_path}}[meta_data][{{meta_name}}]"
+                                    name="{{grouped_base_path}}[metadata][{{meta_name}}]"
                                     value="{{meta_value}}"
                                     readonly
                                     class="imagelist__image-meta-data-{{meta_name}}"
