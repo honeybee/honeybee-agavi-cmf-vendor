@@ -23,10 +23,6 @@ class AuditMetadataEnricher implements MetadataEnricherInterface
         $identifier = $user->getAttribute('identifier');
         $identifier = $identifier ?: $user->getAttribute('login');
 
-        if (!$identifier) {
-            throw new RuntimeError('Audit metadata identifier is not defined.');
-        }
-
         $metadata->setItem('user', $identifier);
         $metadata->setItem('role', $user->getRoleId());
 
