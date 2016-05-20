@@ -13,7 +13,7 @@
                     {% if isReadable %}
                     <div class="imagelist__item-controls" data-fpf-ignore>
                         <div class="imagelist__item-controls-upload">
-d }} /><!--
+                            <input id="{{item_id}}_file" type="file" class="imagelist__image-input" name="{{grouped_base_path}}[file]" {{ disabled }} {{ required }} /><!--
                             --><input id="{{item_id}}_location" type="hidden" class="imagelist__image-location"
                             name="{{grouped_base_path}}[location]" placeholder="location" value="{{ location }}" {{ disabled }} /><!--
                             --><label class="imagelist__upload-label" for="{{item_id}}_file" title="Change Image">Change Image</label>
