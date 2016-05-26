@@ -41,7 +41,7 @@
                 <service name="honeybee.infrastructure.event_bus">
                     <class>Honeybee\Infrastructure\Event\Bus\EventBus</class>
                 </service>
-                
+
                 <service name="honeybee.infrastructure.command_enricher">
                     <class>Honeybee\Infrastructure\Command\CommandEnricher</class>
                     <provisioner>
@@ -125,6 +125,8 @@
                     <settings>
                         <setting name="storage_reader">honeybee.core::process_state::process_store::reader</setting>
                         <setting name="storage_writer">honeybee.core::process_state::process_store::writer</setting>
+                        <setting name="cache_reader">honeybee.core::process_state::process_cache::reader</setting>
+                        <setting name="cache_writer">honeybee.core::process_state::process_cache::writer</setting>
                     </settings>
                 </service>
 

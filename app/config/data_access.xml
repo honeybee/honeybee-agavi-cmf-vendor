@@ -23,11 +23,17 @@
             <storage_writer name="honeybee.core::process_state::process_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter">
                 <connection>ProcessState.Store</connection>
             </storage_writer>
+            <storage_writer name="honeybee.core::process_state::process_cache::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateWriter">
+                <connection>ProcessState.Cache</connection>
+            </storage_writer>
         </storage_writers>
 
         <storage_readers>
             <storage_reader name="honeybee.core::process_state::process_store::reader" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader">
                 <connection>ProcessState.Store</connection>
+            </storage_reader>
+            <storage_reader name="honeybee.core::process_state::process_cache::reader" class="Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateReader">
+                <connection>ProcessState.Cache</connection>
             </storage_reader>
         </storage_readers>
 

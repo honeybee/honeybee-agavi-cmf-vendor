@@ -37,6 +37,8 @@
                 <setting name="directory">%core.app_dir%/../data/process_states</setting>
             </connection>
 
+            <connection name="ProcessState.Cache" class="Honeybee\Infrastructure\DataAccess\Connector\Memory\ArrayConnector" />
+
             <!--
             <connection name="Files.S3" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\AwsS3Connector">
                 <setting name="key">%aws-s3.key%</setting>
