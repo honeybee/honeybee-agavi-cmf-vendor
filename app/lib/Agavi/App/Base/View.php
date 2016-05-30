@@ -16,6 +16,7 @@ use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\Config\ArrayConfig;
+use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Projection\ProjectionInterface;
@@ -351,8 +352,14 @@ class View extends AgaviView
             }
         } elseif (is_array($renderer_config_or_name)) {
             $renderer_config = new ArrayConfig(array_merge($default_data, $renderer_config_or_name));
-        } elseif (is_object($renderer_config_or_name) && !($renderer_config_or_name instanceof ConfigInterface)) {
-            throw new RuntimeError('Renderer config must implement ConfigInterface.');
+        } elseif (is_object($renderer_config_or_name)) {
+            if(!$renderer_config_or_name instanceof ConfigInterface) {
+                throw new RuntimeError(sprintf(
+                    'Renderer config must implement %s; "%s" provided.',
+                    ConfigInterface::class,
+                    get_class($renderer_config_or_name))
+                );
+            }
         } else {
             throw new RuntimeError('Renderer config must implement ConfigInterface, be a name to lookup or an array');
         }
