@@ -12,7 +12,7 @@
     <ae:configuration>
         <event_bus>
             <channels>
-                <channel name="honeybee.events.domain">
+                <channel name="honeybee.events.infrastructure">
                     <subscriptions>
                         <subscription enabled="true">
                             <transport>sync</transport>
