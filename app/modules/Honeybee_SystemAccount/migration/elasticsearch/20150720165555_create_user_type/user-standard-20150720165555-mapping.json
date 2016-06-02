@@ -23,10 +23,6 @@
             "type": "string",
             "index": "not_analyzed"
         },
-        "url": {
-            "type": "string",
-            "index": "no"
-        },
         "role": {
             "type": "string",
             "index": "not_analyzed"
@@ -73,15 +69,6 @@
             "type": "string",
             "index": "not_analyzed"
         },
-        "birth_year": {
-            "type": "integer"
-        },
-        "hourly_rate": {
-            "type": "double"
-        },
-        "biography": {
-            "type": "string"
-        },
         "background_images": {
             "type": "object",
             "enabled": false
@@ -92,20 +79,6 @@
         },
         "token_expire_date": {
             "type": "date"
-        },
-        "tags": {
-            "type": "string",
-            "index": "not_analyzed"
-        },
-        "images": {
-            "type": "object",
-            "enabled": false
-        },
-        "comments": {
-            "type": "object"
-        },
-        "friends": {
-            "type": "object"
         }
     }
 }

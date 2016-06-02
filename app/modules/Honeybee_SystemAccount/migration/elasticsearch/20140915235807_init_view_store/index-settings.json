@@ -5,7 +5,7 @@
         "refresh_interval": "5s",
         "analysis": {
             "analyzer": {
-                "DefaultAnalyzer": {
+                "default": {
                     "type": "custom",
                     "tokenizer": "whitespace",
                     "filter": [
@@ -67,12 +67,10 @@
             "_source": {
               "enabled": true
             },
-            "index_analyzer": "DefaultAnalyzer",
-            "search_analyzer": "DefaultAnalyzer",
             "dynamic": true,
             "dynamic_templates": [
                 {
-                    "entity_id": {
+                    "std_identifier": {
                         "match": "identifier",
                         "match_mapping_type": "string",
                         "mapping": {
@@ -82,7 +80,7 @@
                     }
                 },
                 {
-                    "referenced_id": {
+                    "std_referenced_identifier": {
                         "match": "referenced_identifier",
                         "match_mapping_type": "string",
                         "mapping": {
@@ -92,7 +90,7 @@
                     }
                 },
                 {
-                    "entity_uuid": {
+                    "std_uuid": {
                         "match": "uuid",
                         "type": "string",
                         "mapping": {
@@ -102,7 +100,7 @@
                     }
                 },
                 {
-                    "entity_type": {
+                    "std_type": {
                         "match": "@type",
                         "type": "string",
                         "mapping": {
@@ -112,7 +110,7 @@
                     }
                 },
                 {
-                    "entity_language": {
+                    "std_language": {
                         "match": "language",
                         "type": "string",
                         "mapping": {
@@ -122,7 +120,7 @@
                     }
                 },
                 {
-                    "entity_version": {
+                    "std_version": {
                         "match": "version",
                         "match_mapping_type": "long",
                         "mapping": {
@@ -131,7 +129,7 @@
                     }
                 },
                 {
-                    "entity_revision": {
+                    "std_revision": {
                         "match": "revision",
                         "match_mapping_type": "long",
                         "mapping": {
@@ -140,7 +138,7 @@
                     }
                 },
                 {
-                    "entity_short_id": {
+                    "std_short_id": {
                         "match": "short_id",
                         "match_mapping_type": "long",
                         "mapping": {
@@ -149,7 +147,27 @@
                     }
                 },
                 {
-                    "entity_metadata": {
+                    "std_modified_at": {
+                        "match": "modified_at",
+                        "match_mapping_type": "date",
+                        "mapping": {
+                            "type": "date",
+                            "format": "strict_date_time"
+                        }
+                    }
+                },
+                {
+                    "std_created_at": {
+                        "match": "created_at",
+                        "match_mapping_type": "date",
+                        "mapping": {
+                            "type": "date",
+                            "format": "strict_date_time"
+                        }
+                    }
+                },
+                {
+                    "std_metadata": {
                         "match": "metadata",
                         "mapping": {
                             "type": "object",
@@ -158,7 +176,7 @@
                     }
                 },
                 {
-                    "version_list": {
+                    "std_version_list": {
                         "path_match": "versions.*",
                         "mapping": {
                             "type": "string",
@@ -167,7 +185,7 @@
                     }
                 },
                 {
-                    "hierarchy_id": {
+                    "std_parent_node_id": {
                         "match": "parent_node_id",
                         "match_mapping_type": "string",
                         "mapping": {
@@ -178,7 +196,7 @@
                     }
                 },
                 {
-                    "hierarchy_path": {
+                    "std_materialized_path": {
                         "match": "materialized_path",
                         "match_mapping_type": "string",
                         "mapping": {
@@ -189,7 +207,7 @@
                     }
                 },
                 {
-                    "workflow_state": {
+                    "std_workflow_state": {
                         "match": "workflow_state",
                         "mapping": {
                             "type": "string",
@@ -198,7 +216,7 @@
                     }
                 },
                 {
-                    "workflow_params": {
+                    "std_workflow_params": {
                         "match": "workflow_params",
                         "mapping": {
                             "type": "object",
@@ -207,7 +225,7 @@
                     }
                 },
                 {
-                    "std_text": {
+                    "default_text": {
                         "match": "*",
                         "match_mapping_type": "string",
                         "mapping": {

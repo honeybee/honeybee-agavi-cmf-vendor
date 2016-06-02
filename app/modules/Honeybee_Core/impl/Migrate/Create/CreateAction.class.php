@@ -35,7 +35,7 @@ class Honeybee_Core_Migrate_CreateAction extends Action
 
         if (!is_writable($migration_dir)) {
             throw new RuntimeError(
-                sprintf("Missing FS write permissions in order to create migration inside: %s", $migration_dir)
+                sprintf('Missing FS write permissions in order to create migration inside: %s', $migration_dir)
             );
         }
 
