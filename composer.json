@@ -60,7 +60,7 @@
         "michelf/php-markdown": "~1.5",
         "monolog/monolog": "~1.0",
         "mthaml/mthaml": "~1.7",
-        "swiftmailer/swiftmailer": "5.4.*",
+        "swiftmailer/swiftmailer": "~5.4",
         "symfony/finder": "~2.7",
         "symfony/process": "~2.7",
         "symfony/validator": "~2.7",
@@ -68,13 +68,13 @@
     },
 
     "require-dev": {
-        "phpunit/phpunit": "^4.5 || ^5.0.5",
+        "phpunit/phpunit": "^5.0.5",
         "phpmd/phpmd": "^2.3",
-        "sebastian/phpcpd": "~2.0.2",
-        "squizlabs/php_codesniffer": "^2.3.3",
+        "sebastian/phpcpd": "^2.0",
+        "squizlabs/php_codesniffer": "^2.3",
         "mockery/mockery": "master@dev",
         "satooshi/php-coveralls": "master@dev",
-        "sami/sami": "^3.0.8"
+        "sami/sami": "^3.2"
     },
 
     "scripts": {
