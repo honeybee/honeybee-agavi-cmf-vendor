@@ -5,7 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\FrameworkBinding\Agavi\Validator\DisplayModeValidator;
-use Honeybee\Projection\ProjectionCollection;
+use Honeybee\Projection\ProjectionList;
 
 class HierarchyAction extends Action
 {
@@ -14,7 +14,7 @@ class HierarchyAction extends Action
         $query_result = $this->query($this->getSearchSpec($request_data));
 
         $this->setAttribute('resource_type', $this->getProjectionType());
-        $this->setAttribute('resource_collection', new ProjectionCollection($query_result->getResults()));
+        $this->setAttribute('resource_collection', new ProjectionList($query_result->getResults()));
         $this->setAttribute('number_of_results', $query_result->getTotalCount());
         $this->setAttribute('activities', $this->getActivities());
         $this->setAttribute('view_scope', $this->getScopeKey());
