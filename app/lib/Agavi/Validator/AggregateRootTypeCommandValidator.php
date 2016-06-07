@@ -101,7 +101,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         $command = new $command_implementor(
             array_merge(
                 $command_payload,
-                [ 'aggregate_root_type' => get_class($this->getAggregateRootType()) ]
+                [ 'aggregate_root_type' => $this->getAggregateRootType()->getPrefix() ]
             )
         );
 
@@ -164,7 +164,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             ) {
                 continue;
             }
-            $entity_map = new Map();
+            $entity_map = new Map;
             foreach ($entity->getValue($attribute_name) as $embedded_entity) {
                 $entity_map->setItem($embedded_entity->getIdentifier(), $embedded_entity);
             }

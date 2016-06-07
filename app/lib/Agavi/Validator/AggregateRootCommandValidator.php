@@ -161,7 +161,7 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
             array_merge(
                 $command_payload,
                 [
-                    'aggregate_root_type' => get_class($this->aggregate_root_type),
+                    'aggregate_root_type' => $this->aggregate_root_type->getPrefix(),
                     'aggregate_root_identifier' => $aggregate_root->getIdentifier(),
                     'known_revision' => $aggregate_root->getRevision()
                 ]
