@@ -778,12 +778,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "e56a92307915de1180766b434cd7770baf1ce1e8"
+                "reference": "6e0fa1e812b8e24aab69a490ba50fc0713a3e014"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e56a92307915de1180766b434cd7770baf1ce1e8",
-                "reference": "e56a92307915de1180766b434cd7770baf1ce1e8",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/6e0fa1e812b8e24aab69a490ba50fc0713a3e014",
+                "reference": "6e0fa1e812b8e24aab69a490ba50fc0713a3e014",
                 "shasum": ""
             },
             "require": {
@@ -865,7 +865,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-06-07 11:38:46"
+            "time": "2016-06-08 10:24:03"
         },
         {
             "name": "honeybee/trellis",
@@ -873,12 +873,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "41d5d5b494c7851e446dce5d77504a7f490cdf62"
+                "reference": "33f4374a19ecfb1552360caa6f2642a9b26e2a01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/41d5d5b494c7851e446dce5d77504a7f490cdf62",
-                "reference": "41d5d5b494c7851e446dce5d77504a7f490cdf62",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/33f4374a19ecfb1552360caa6f2642a9b26e2a01",
+                "reference": "33f4374a19ecfb1552360caa6f2642a9b26e2a01",
                 "shasum": ""
             },
             "require": {
@@ -934,7 +934,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-06-07 11:27:06"
+            "time": "2016-06-08 09:59:41"
         },
         {
             "name": "league/flysystem",
