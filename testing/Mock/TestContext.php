@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests;
+namespace Honeybee\Tests\Mock;
 
 use Auryn\Injector as DiContainer;
 use Auryn\StandardReflector;

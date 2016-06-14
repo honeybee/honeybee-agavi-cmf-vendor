@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests;
+namespace Honeybee\Tests\Mock;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\ServiceLocator;

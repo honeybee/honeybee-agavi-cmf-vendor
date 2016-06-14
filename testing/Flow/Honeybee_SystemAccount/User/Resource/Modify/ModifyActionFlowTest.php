@@ -6,7 +6,7 @@ use AgaviWebResponse;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
-use Honeybee\Tests\HoneybeeAgaviFlowTestCase;
+use Honeybee\Tests\Mock\HoneybeeAgaviFlowTestCase;
 use Mockery;
 
 class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
@@ -48,6 +48,7 @@ class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
             ->andReturn(new FinderResult([ $mock_user_projection ], 1));
 
         $this->dispatch();
+
         $this->assertInstanceOf(AgaviWebResponse::CLASS, $this->getResponse());
         $this->assertEquals('200', $this->getResponse()->getHttpStatusCode());
     }
@@ -64,6 +65,7 @@ class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
             ->andReturn(new FinderResult([], 0));
 
         $this->dispatch();
+
         $this->assertInstanceOf(AgaviWebResponse::CLASS, $this->getResponse());
         $this->assertEquals('404', $this->getResponse()->getHttpStatusCode());
     }

@@ -258,13 +258,13 @@
         <service_map>
             <service_definitions>
                 <service name="honeybee.service_locator">
-                    <class>Honeybee\Tests\TestServiceLocator</class>
+                    <class>Honeybee\Tests\Mock\TestServiceLocator</class>
                 </service>
                 <service name="honeybee.ui.translator">
-                    <class>Honeybee\Tests\TestTranslator</class>
+                    <class>Honeybee\Tests\Mock\TestTranslator</class>
                 </service>
                 <service name="honeybee.ui.view_template_service">
-                    <class>Honeybee\Tests\TestViewTemplateService</class>
+                    <class>Honeybee\Tests\Mock\TestViewTemplateService</class>
                 </service>
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>

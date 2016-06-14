@@ -1,17 +1,49 @@
 <?php
 
-namespace Honeybee\Tests;
+namespace Honeybee\Tests\Mock;
 
 use AgaviFlowTestCase;
 use Mockery;
 use ReflectionObject;
+use Symfony\Component\DomCrawler\Crawler;
 use Text_Template;
 
 class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
 {
-    public function getResponse()
+    protected $crawler;
+
+    protected function getResponse()
     {
         return $this->response;
+    }
+
+    protected function getCrawler()
+    {
+        if (!$this->crawler) {
+            $this->crawler = new Crawler($this->getResponse()->getContent());
+        }
+
+        return $this->crawler;
+    }
+
+    protected function getElement($selector)
+    {
+        return $this->getCrawler()->filter($selector);
+    }
+
+    protected function assertTagExists($selector)
+    {
+        $this->assertNotEmpty($this->getElement($selector));
+    }
+
+    protected function assertTagContains($selector, $value)
+    {
+        $this->assertContains($value, $this->getElement($selector)->text());
+    }
+
+    protected function assertTagCount($selector, $size)
+    {
+        $this->assertEquals($size, $this->getElement($selector)->count());
     }
 
     protected function prepareTemplate(Text_Template $template)
@@ -52,5 +84,6 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
     public function tearDown()
     {
         Mockery::close();
+        $this->crawler = null;
     }
 }

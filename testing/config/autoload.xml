@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/autoload/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    xmlns:xi="http://www.w3.org/2001/XInclude"
+>
+    <ae:configuration environment="testing.*">
+        <autoloads>
+            <autoload class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator">%core.module_dir%/Honeybee_SystemAccount/lib/Agavi/Validator/CreateUserCommandValidator.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Projection\Standard\Base\User">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/Base/User.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Projection\Standard\Base\UserType">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/Base/UserType.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Projection\Standard\User">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/User.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Projection\Standard\UserType">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/UserType.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Aggregate\Base\User">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Aggregate/Base/User.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Aggregate\Base\UserType">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Aggregate/Base/UserType.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Aggregate\User">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Aggregate/User.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Aggregate\UserType">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Aggregate/UserType.php</autoload>
+        </autoloads>
+    </ae:configuration>
+
+</ae:configurations>

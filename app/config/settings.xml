@@ -170,7 +170,7 @@
     <ae:configuration environment="testing.*">
         <settings>
             <setting name="default_context">web</setting>
-            <setting name="context_implementation">Honeybee\Tests\TestContext</setting>
+            <setting name="context_implementation">Honeybee\Tests\Mock\TestContext</setting>
         </settings>
         <settings prefix="files.">
             <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
