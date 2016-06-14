@@ -4,27 +4,8 @@
     xmlns:env="http://berlinonline.de/schemas/honeybee/config/envelope/definition/1.0"
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     xmlns:xi="http://www.w3.org/2001/XInclude">
+    
     <ae:configuration>
-<!--
-        <roles>
-
-            <role name="test-role" parent="administrator">
-                <description>Role to test different permission scenarios.</description>
-                <acl>
-                    <permissions scope="honeybee.system_account.module.user.collection">
-                        <allow>activity::create_resource</allow>
-                        <allow>activity::filter_collection</allow>
-                    </permissions>
-                    <permissions scope="domain.module.user.workflow_step.*">
-                        <deny>plugin::delete if not is_even_hour()</deny>
-                    </permissions>
-                    <permissions scope="domain.module.user.workflow_step.published">
-                        <deny>field::*:write</deny>
-                        <deny>field::slug:read if resource.getSlug() match /secret/ and is_even_hour()</deny>
-                    </permissions>
-                </acl>
-            </role>
-        </roles>
--->
     </ae:configuration>
+    
 </ae:configurations>

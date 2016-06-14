@@ -166,6 +166,10 @@
     </ae:configuration>
 -->
 
+    <ae:configuration environment="testing.*">
+        <xi:include href="../modules/Honeybee_SystemAccount/config/User/translation.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration/*)"/>
+    </ae:configuration>
+
     <xi:include href="./includes/translation.xml"
         xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
         <xi:fallback />

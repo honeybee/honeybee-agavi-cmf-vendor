@@ -253,18 +253,31 @@
             </service_definitions>
         </service_map>
     </ae:configuration>
-<!--
-    <ae:configuration environment="development.*">
+
+    <ae:configuration environment="testing.*">
         <service_map>
             <service_definitions>
-                <service name="honeybee.ui.view_config_service">
-                    <class>Honeybee\Ui\ViewConfig\ViewConfigService</class>
-                    <settings>
-                        <setting name="create_missing">false</setting>
-                    </settings>
+                <service name="honeybee.service_locator">
+                    <class>Honeybee\Tests\TestServiceLocator</class>
+                </service>
+                <service name="honeybee.ui.translator">
+                    <class>Honeybee\Tests\TestTranslator</class>
+                </service>
+                <service name="honeybee.ui.view_template_service">
+                    <class>Honeybee\Tests\TestViewTemplateService</class>
+                </service>
+                <service name="honeybee.infrastructure.mail_service">
+                    <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
+                    <provisioner>
+                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
+                        <settings>
+                            <!-- @todo create a testing connection -->
+                            <setting name="connection">Default.Mailer.Null</setting>
+                        </settings>
+                    </provisioner>
                 </service>
             </service_definitions>
         </service_map>
     </ae:configuration>
--->
+    
 </ae:configurations>

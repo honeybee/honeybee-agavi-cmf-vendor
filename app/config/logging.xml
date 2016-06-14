@@ -4,7 +4,7 @@
     xmlns="http://agavi.org/agavi/config/parts/logging/1.0"
     xmlns:xi="http://www.w3.org/2001/XInclude"
 >
-    <ae:configuration>
+    <ae:configuration environment="[^(testing)].*">
 
         <loggers default="default">
 
@@ -57,7 +57,6 @@
                     <appender>browserconsole-message-only</appender>
                 </appenders>
             </logger>
-
         </loggers>
 
         <appenders>
@@ -154,6 +153,32 @@
             </layout>
         </layouts>
 
+    </ae:configuration>
+
+    <ae:configuration environment="testing.*">
+        <loggers default="default">
+            <logger name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+            <logger name="debug" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" level="\AgaviLogger::DEBUG" />
+            <logger name="error" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+            <logger name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+            <logger name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+            <logger name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+        </loggers>
+
+        <appenders>
+            <appender name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="message-only">
+                <ae:parameters>
+                    <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
+                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\TestSetup</ae:parameter>
+                </ae:parameters>
+            </appender>
+        </appenders>
+
+        <layouts>
+            <layout name="message-only" class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerLayout">
+                <ae:parameter name="message_format">%4$s</ae:parameter>
+            </layout>
+        </layouts>
     </ae:configuration>
 
     <xi:include href="./includes/logging.xml"

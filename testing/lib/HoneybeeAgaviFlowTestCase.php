@@ -1,0 +1,56 @@
+<?php
+
+namespace Honeybee\Tests;
+
+use AgaviFlowTestCase;
+use Mockery;
+use ReflectionObject;
+use Text_Template;
+
+class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
+{
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    protected function prepareTemplate(Text_Template $template)
+    {
+        parent::prepareTemplate($template);
+
+        // Assuming flow tests are always run with preserveGlobalState = true
+        $reflected = new ReflectionObject($template);
+        $property = $reflected->getProperty('values');
+        $property->setAccessible(true);
+        $oldVars = $property->getValue($template);
+
+        $server_globals = sprintf('
+	        $_SERVER["REQUEST_URI"] = %s;
+		    $_SERVER["SCRIPT_NAME"] = %s;
+			',
+            var_export($this->getDispatchScriptName() . $this->getRoutingInput(), true),
+            var_export($this->getDispatchScriptName(), true)
+        );
+
+        // add server to isolated bootstrap because routing is initialized before tests ):
+        $template->setVar([
+            'globals' => $oldVars['globals'] . PHP_EOL . $server_globals
+        ]);
+
+        // force swift mailer autoloader to run (if service is not delegated)? ):
+        if (isset($oldVars['constants'])) {
+            $constantsWithoutSwiftInit = array_filter(
+                explode(PHP_EOL, $oldVars['constants']),
+                function ($line) { return strpos($line, 'SWIFT_INIT_LOADED') === false; }
+            );
+            $template->setVar([
+                'constants' => implode(PHP_EOL, $constantsWithoutSwiftInit)
+            ]);
+        }
+    }
+
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+}

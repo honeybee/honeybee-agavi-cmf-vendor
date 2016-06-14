@@ -83,7 +83,7 @@ if ($cache_dir === false) {
     // where the environment on a server is switched and the cache isn't cleared
     AgaviConfig::set(
         'core.cache_dir',
-        AgaviConfig::get('core.app_dir') . '/cache/', // . AgaviConfig::get('core.environment'),
+        AgaviConfig::get('core.app_dir') . '/cache', // . AgaviConfig::get('core.environment'),
         true, // overwrite
         true // readonly
     );

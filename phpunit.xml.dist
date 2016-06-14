@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit backupGlobals="true"
+<phpunit backupGlobals="false"
          backupStaticAttributes="false"
          colors="true"
          convertErrorsToExceptions="true"
@@ -16,11 +16,6 @@
          strict="false"
          verbose="false"
          bootstrap="testing/bootstrap.php">
-    <testsuites>
-        <testsuite name="unit">
-            <directory>testing/unit</directory>
-        </testsuite>
-    </testsuites>
     <logging>
         <log type="coverage-html" target="etc/integration/build/coverage" title="Honeybee" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70"/>
         <log type="coverage-clover" target="etc/integration/build/logs/clover.xml"/>

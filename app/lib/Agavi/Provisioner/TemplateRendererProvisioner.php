@@ -60,7 +60,7 @@ class TemplateRendererProvisioner extends AbstractProvisioner
         }
 
         $settings['twig_options'] = [
-            'autoescape' => true,
+            'autoescape' => 'html',
             'strict_variables' => false,
             'debug' => AgaviConfig::get('core.debug', false),
             'cache' => $cache

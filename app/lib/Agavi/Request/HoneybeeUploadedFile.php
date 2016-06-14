@@ -40,7 +40,7 @@ class HoneybeeUploadedFile extends AgaviUploadedFile
         return $this[self::PROPERTY_LOCATION];
     }
 
-    public function getMimetype()
+    public function getMimetype($charset = false)
     {
         return $this[self::PROPERTY_MIMETYPE];
     }

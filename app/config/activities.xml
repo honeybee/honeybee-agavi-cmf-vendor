@@ -90,6 +90,19 @@
         </activity_containers>
     </ae:configuration>
 
+    <ae:configuration environment="testing.*">
+        <activity_containers>
+        <xi:include href="../modules/Honeybee_SystemAccount/config/User/activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Collection/Collection.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Create/Create.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Hierarchy/Hierarchy.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Resource/History/History.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Resource/Modify/Modify.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Resource/Resource.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        <xi:include href="../modules/Honeybee_SystemAccount/impl/User/Suggestions/Suggestions.activities.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(a=http://berlinonline.de/schemas/honeybee/config/activities/1.0) xpointer(//ae:configuration/a:activity_containers/*)"/>
+        </activity_containers>
+    </ae:configuration>
+
     <xi:include href="./includes/activities.xml"
         xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
         <xi:fallback />

@@ -99,11 +99,18 @@
         </routes>
     </ae:configuration>
 
+    <ae:configuration context="web" environment="testing.*">
+        <route name="honeybee.system_account.user" pattern="^/({module:honeybee-system_account-user})/" module="Honeybee_SystemAccount" action="User">
+            <routes>
+                <xi:include href="../modules/Honeybee_SystemAccount/config/User/routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='web']/*)"/>
+            </routes>
+        </route>
+    </ae:configuration>
+
     <!-- default Non-WEB routes of all modules (this includes CLI routes) -->
     <xi:include href="./includes/routing.xml"
         xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration[not(@context='web')])">
         <xi:fallback />
     </xi:include>
-
 
 </ae:configurations>
