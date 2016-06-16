@@ -6,12 +6,8 @@ use AgaviConfig;
 use AgaviConfigCache;
 use AgaviContext;
 use Auryn\Injector as DiContainer;
+use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Agavi\ServiceProvisioner;
-use Honeybee\Model\Aggregate\AggregateRootTypeMap;
-use Honeybee\Projection\ProjectionTypeMap;
-use Honeybee\SystemAccount\User\Model\Aggregate\UserType as UserAggregateType;
-use Honeybee\SystemAccount\User\Projection\Standard\UserType as UserProjectionType;
-use Workflux\Builder\XmlStateMachineBuilder;
 
 class TestServiceProvisioner extends ServiceProvisioner
 {
@@ -24,13 +20,8 @@ class TestServiceProvisioner extends ServiceProvisioner
             AgaviContext::getInstance()->getName()
         );
 
-        // @todo build art and pt map from file or fallback to config or static
-        $this->aggregate_root_type_map = new AggregateRootTypeMap;
-        $test_ar_user_type = new UserAggregateType($this->getDefaultStateMachine());
-        $this->aggregate_root_type_map->setItem('honeybee.system_account.user', $test_ar_user_type);
-        $this->projection_type_map = new ProjectionTypeMap;
-        $test_pr_user_type = new UserProjectionType($this->getDefaultStateMachine());
-        $this->projection_type_map->setItem('honeybee.system_account.user', $test_pr_user_type);
+        $this->aggregate_root_type_map = $this->loadTypeMap(self::AGGREGATE_ROOT_TYPE_MAP_CONFIG_NAME);
+        $this->projection_type_map = $this->loadTypeMap(self::PROJECTION_TYPE_MAP_CONFIG_NAME);
 
         $this->di_container->share($this->service_map);
         $this->di_container->share($this->aggregate_root_type_map);
@@ -39,11 +30,25 @@ class TestServiceProvisioner extends ServiceProvisioner
         $this->provisioned_services = [];
     }
 
-    protected function getDefaultStateMachine()
+    // @todo better fallback mechanism
+    protected function loadTypeMap($filename)
     {
-        return (new XmlStateMachineBuilder([
-            'name' => 'honeybee_system_account_user_workflow_default',
-            'state_machine_definition' => AgaviConfig::get('core.module_dir') . '/Honeybee_SystemAccount/config/User/workflows.xml'
-        ]))->build();
+        $ar_type_map_path = implode(
+            DIRECTORY_SEPARATOR,
+            [ AgaviConfig::get('core.testing_dir'), 'config', $filename ]
+        );
+        if (is_readable($ar_type_map_path)) {
+            return include $ar_type_map_path;
+        } else {
+            $ar_type_map_alt_path = implode(
+                DIRECTORY_SEPARATOR,
+                [ AgaviConfig::get('core.config_dir'), 'includes', $filename ]
+            );
+            if (is_readable($ar_type_map_alt_path)) {
+                return include $ar_type_map_alt_path;
+            } else {
+                throw new RuntimeError('Type map file could not be loaded: ' . $filename);
+            }
+        }
     }
 }

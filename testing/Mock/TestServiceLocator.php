@@ -2,11 +2,17 @@
 
 namespace Honeybee\Tests\Mock;
 
+use AgaviConfig;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\ServiceLocator;
 
 class TestServiceLocator extends ServiceLocator
 {
+    public function getInjector()
+    {
+        return $this->di_container;
+    }
+
     public function prepareService($service_key, array $state = [])
     {
         if (!$this->service_map->hasKey($service_key)) {

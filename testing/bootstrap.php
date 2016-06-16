@@ -12,7 +12,6 @@ putenv('APP_CONTEXT=web');
 
 require(__DIR__ . '/../app/config.php');
 
-AgaviConfig::set('core.app_dir', realpath(__DIR__ . '/../'));
 AgaviConfig::set('core.testing_dir', __DIR__);
 
 AgaviPhpUnitCli::dispatch($_SERVER['argv']);

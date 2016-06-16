@@ -254,30 +254,9 @@
         </service_map>
     </ae:configuration>
 
-    <ae:configuration environment="testing.*">
-        <service_map>
-            <service_definitions>
-                <service name="honeybee.service_locator">
-                    <class>Honeybee\Tests\Mock\TestServiceLocator</class>
-                </service>
-                <service name="honeybee.ui.translator">
-                    <class>Honeybee\Tests\Mock\TestTranslator</class>
-                </service>
-                <service name="honeybee.ui.view_template_service">
-                    <class>Honeybee\Tests\Mock\TestViewTemplateService</class>
-                </service>
-                <service name="honeybee.infrastructure.mail_service">
-                    <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
-                    <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
-                        <settings>
-                            <!-- @todo create a testing connection -->
-                            <setting name="connection">Default.Mailer.Null</setting>
-                        </settings>
-                    </provisioner>
-                </service>
-            </service_definitions>
-        </service_map>
-    </ae:configuration>
+    <xi:include href="../../testing/config/services.xml"
+        xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(/ae:configurations/*)">
+        <xi:fallback />
+    </xi:include>
     
 </ae:configurations>

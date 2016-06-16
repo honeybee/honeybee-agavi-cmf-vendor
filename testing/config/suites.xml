@@ -2,7 +2,7 @@
 <ae:configurations xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0" xmlns="http://agavi.org/agavi/config/parts/testing/suites/1.0">
     <ae:configuration>
         <suites>
-            <suite name="Unit">
+             <suite name="Unit">
                 <include>Unit/FrameworkBinding/Agavi/Validator/AggregateRootTypeCommandValidatorTest.php</include>
                 <include>Unit/FrameworkBinding/Agavi/Validator/TrellisTargetValidatorTest.php</include>
             </suite>

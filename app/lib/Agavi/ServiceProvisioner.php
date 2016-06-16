@@ -57,7 +57,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 
     const AGGREGATE_ROOT_TYPE_MAP_CONFIG_NAME = 'ar_type_map.php';
 
-    const RESOURCE_TYPE_MAP_CONFIG_NAME = 'projection_type_map.php';
+    const PROJECTION_TYPE_MAP_CONFIG_NAME = 'projection_type_map.php';
 
     protected static $default_provisioner_class = DefaultProvisioner::CLASS;
 
@@ -117,7 +117,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         );
         $this->projection_type_map = include implode(
             DIRECTORY_SEPARATOR,
-            [ AgaviConfig::get('core.config_dir'), 'includes', self::RESOURCE_TYPE_MAP_CONFIG_NAME ]
+            [ AgaviConfig::get('core.config_dir'), 'includes', self::PROJECTION_TYPE_MAP_CONFIG_NAME ]
         );
 
         $this->di_container->share($this->service_map);
@@ -143,8 +143,8 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         foreach ($this->aggregate_root_type_map as $aggregate_root_type) {
             $this->di_container->share($aggregate_root_type);
         }
-        foreach ($this->projection_type_map as $resource_type) {
-            $this->di_container->share($resource_type);
+        foreach ($this->projection_type_map as $projection_type) {
+            $this->di_container->share($projection_type);
         }
 
         $this->provisionServices();

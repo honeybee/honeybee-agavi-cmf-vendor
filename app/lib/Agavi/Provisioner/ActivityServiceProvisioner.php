@@ -5,15 +5,19 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Common\Error\ConfigError;
+use Honeybee\EnvironmentInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\Ui\Activity\Activity;
 use Honeybee\Ui\Activity\ActivityContainer;
 use Honeybee\Ui\Activity\ActivityContainerMap;
 use Honeybee\Ui\Activity\ActivityMap;
 use Honeybee\Ui\Activity\ActivityServiceInterface;
+use Honeybee\Ui\Activity\WorkflowActivityService;
 use Honeybee\Ui\Activity\Url;
+use Honeybee\Ui\UrlGeneratorInterface;
 use Trellis\Runtime\Validator\Rule\Type\UrlRule;
 
 class ActivityServiceProvisioner extends AbstractProvisioner
@@ -22,14 +26,28 @@ class ActivityServiceProvisioner extends AbstractProvisioner
 
     public function build(ServiceDefinitionInterface $service_definition, SettingsInterface $provisioner_settings)
     {
-        $activity_container_map = $this->buildActivityContainerMap();
+        $factory_delegate = function (
+                EnvironmentInterface $environment,
+                WorkflowActivityService $workflow_activity_service,
+                AggregateRootTypeMap $aggregate_root_type_map,
+                UrlGeneratorInterface $url_generator
+            ) use ($service_definition) {
+            $activity_container_map = $this->buildActivityContainerMap();
+            $service_class = $service_definition->getClass();
+
+            return new $service_class(
+                $environment,
+                $workflow_activity_service,
+                $activity_container_map,
+                $aggregate_root_type_map,
+                $url_generator
+            );
+        };
 
         $service = $service_definition->getClass();
 
-        $state = [ ':activity_container_map' => $activity_container_map ];
-
         $this->di_container
-            ->define($service, $state)
+            ->delegate($service, $factory_delegate)
             ->share($service)
             ->alias(ActivityServiceInterface::CLASS, $service);
     }

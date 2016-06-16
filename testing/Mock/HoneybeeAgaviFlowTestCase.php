@@ -12,9 +12,18 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
 {
     protected $crawler;
 
+    protected $dynamic_data = [];
+
+    const UUID_REGEX = '\w{8}\-\w{4}\-\w{4}\-\w{4}\-\w{12}';
+
     protected function getResponse()
     {
         return $this->response;
+    }
+
+    protected function getDynamicData()
+    {
+        return $this->dynamic_data;
     }
 
     protected function getCrawler()
@@ -44,6 +53,11 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
     protected function assertTagCount($selector, $size)
     {
         $this->assertEquals($size, $this->getElement($selector)->count());
+    }
+
+    protected function assertIsoDate($value)
+    {
+        $this->assertInstanceOf(\DateTime::CLASS, new \DateTime($value));
     }
 
     protected function prepareTemplate(Text_Template $template)
@@ -83,7 +97,8 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
 
     public function tearDown()
     {
-        Mockery::close();
+        $this->dynamic_data = [];
         $this->crawler = null;
+        Mockery::close();
     }
 }

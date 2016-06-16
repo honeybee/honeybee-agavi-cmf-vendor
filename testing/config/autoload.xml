@@ -7,6 +7,11 @@
     <ae:configuration environment="testing.*">
         <autoloads>
             <autoload class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator">%core.module_dir%/Honeybee_SystemAccount/lib/Agavi/Validator/CreateUserCommandValidator.php</autoload>
+            <autoload class="Honeybee\SystemAccount\MailService">%core.module_dir%/Honeybee_SystemAccount/lib/MailService.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommand">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Task/CreateUser/CreateUserCommand.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommandHandler">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Task/CreateUser/CreateUserCommandHandler.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Model\Task\CreateUser\UserCreatedEvent">%core.module_dir%/Honeybee_SystemAccount/lib/User/Model/Task/CreateUser/UserCreatedEvent.php</autoload>
+            <autoload class="Honeybee\SystemAccount\User\Projection\EventHandler\UserProjectionUpdater">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/EventHandler/UserProjectionUpdater.php</autoload>
             <autoload class="Honeybee\SystemAccount\User\Projection\Standard\Base\User">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/Base/User.php</autoload>
             <autoload class="Honeybee\SystemAccount\User\Projection\Standard\Base\UserType">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/Base/UserType.php</autoload>
             <autoload class="Honeybee\SystemAccount\User\Projection\Standard\User">%core.module_dir%/Honeybee_SystemAccount/lib/User/Projection/Standard/User.php</autoload>
