@@ -48,7 +48,7 @@ class ConfigurationScanner
         $configs_to_include = [
             'aggregate_root_type_map' => [],
             'autoload_namespaces' => [],
-            'resource_type_map' => [],
+            'projection_type_map' => [],
             'routing' => [ 'standard' => [], 'honeybee_modules' => [] ]
         ];
         foreach (self::$supported_module_specific_configs as $config_name) {
@@ -113,7 +113,7 @@ class ConfigurationScanner
                 $configs_to_include['aggregate_root_type_map'][] = $aggregate_root_schema_file->getRealPath();
                 $projections_directory = sprintf('%s/projection/', dirname($aggregate_root_schema_file->getRealPath()));
                 foreach ((new Finder())->files()->name('*.xml')->in($projections_directory) as $entity_schema_file) {
-                    $configs_to_include['resource_type_map'][] = $entity_schema_file->getRealPath();
+                    $configs_to_include['projection_type_map'][] = $entity_schema_file->getRealPath();
                 }
             }
 

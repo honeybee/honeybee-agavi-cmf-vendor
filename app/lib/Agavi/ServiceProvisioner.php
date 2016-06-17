@@ -55,7 +55,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
 {
     const SERVICES_CONFIG_NAME = 'services.xml';
 
-    const AGGREGATE_ROOT_TYPE_MAP_CONFIG_NAME = 'ar_type_map.php';
+    const AGGREGATE_ROOT_TYPE_MAP_CONFIG_NAME = 'aggregate_root_type_map.php';
 
     const PROJECTION_TYPE_MAP_CONFIG_NAME = 'projection_type_map.php';
 

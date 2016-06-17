@@ -3,17 +3,17 @@
 return [
     'index' => '%honeybee-system_account.index%',
     'type' => '%honeybee-system_account-user.standard.type%',
-    'id' => $dynamic_data['identifier'],
+    'id' => $fixture_data['identifier'],
     'body' => [
         '@type' => 'honeybee.system_account.user',
-        'identifier' => $dynamic_data['identifier'],
+        'identifier' => $fixture_data['identifier'],
         'revision' => 1,
-        'uuid' => $dynamic_data['uuid'],
+        'uuid' => $fixture_data['uuid'],
         'short_id' => 0,
         'language' => 'de_DE',
         'version' => 1,
-        'created_at' => $dynamic_data['event_iso_date'],
-        'modified_at' => $dynamic_data['event_iso_date'],
+        'created_at' => $fixture_data['event_iso_date'],
+        'modified_at' => $fixture_data['event_iso_date'],
         'workflow_state' => 'inactive',
         'workflow_parameters' => [],
         'metadata' => [
@@ -27,8 +27,8 @@ return [
         'lastname' => 'Lesnar',
         'password_hash' => '',
         'background_images' => [],
-        'auth_token' => $dynamic_data['auth_token'],
-        'token_expire_date' => $dynamic_data['token_expire_date']
+        'auth_token' => $fixture_data['auth_token'],
+        'token_expire_date' => $fixture_data['token_expire_date']
     ],
     'refresh' => true
 ];

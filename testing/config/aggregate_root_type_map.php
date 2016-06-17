@@ -3,8 +3,8 @@
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Workflux\Builder\XmlStateMachineBuilder;
 
-$ar_type_map = new AggregateRootTypeMap();
-$ar_type_map->setItem(
+$aggregate_root_type_map = new AggregateRootTypeMap;
+$aggregate_root_type_map->setItem(
     'honeybee.system_account.user',
     new Honeybee\SystemAccount\User\Model\Aggregate\UserType(
         (new XmlStateMachineBuilder([
@@ -14,4 +14,4 @@ $ar_type_map->setItem(
     )
 );
 
-return $ar_type_map;
+return $aggregate_root_type_map;

@@ -74,7 +74,7 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
         $es_client->shouldReceive('send')->once()->with(Mockery::on(
             function (RequestInterface $request) {
                 // set global dynamic data from request to inject into fixtures for assertions
-                $this->setDynamicData($request);
+                $this->setFixtureData($request);
                 $this->assertEventSourceSend($request, '01_es_send.php');
                 return true;
             }
@@ -98,20 +98,10 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
             }
         ));
 
-        // relation projection updater expectations
-        // @todo should the relation projection updater execute for creation events?
-        $vs_client->shouldReceive('search')->once()->with(Mockery::on(
-            function (array $query) {
-                $expected = $this->loadFixture('01_vs_search.php');
-                $this->assertEquals($expected, $query);
-                return true;
-            }
-        ))->andReturn([ 'hits' => [ 'hits' => [], 'total' => 0 ] ]);
-
         // connection expectations
         $this->mock_es_connector->shouldReceive('getConnection')->once()->andReturn($es_client);
         $this->mock_es_connector->shouldReceive('getConfig')->andReturn(new ArrayConfig([ 'database' => 'test-db' ]));
-        $this->mock_vs_connector->shouldReceive('getConnection')->times(3)->andReturn($vs_client);
+        $this->mock_vs_connector->shouldReceive('getConnection')->times(2)->andReturn($vs_client);
         $this->mock_vs_connector->shouldReceive('getConfig')->andReturn(
             new ArrayConfig([ 'index' => 'test-index', 'type' => 'test-type' ])
         );
@@ -151,15 +141,15 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
      * the event is the first access to dynamically created data so we setup anything for fixture
      * templates here to make assertions easier.
      */
-    protected function setDynamicData(RequestInterface $request)
+    protected function setFixtureData(RequestInterface $request)
     {
         $body = json_decode($request->getBody(), true);
-        $this->dynamic_data['event_uuid'] = $body['uuid'];
-        $this->dynamic_data['event_iso_date'] = $body['iso_date'];
-        $this->dynamic_data['identifier'] = $body['data']['identifier'];
-        $this->dynamic_data['uuid'] = $body['data']['uuid'];
-        $this->dynamic_data['auth_token'] = $body['data']['auth_token'];
-        $this->dynamic_data['token_expire_date'] = $body['data']['token_expire_date'];
+        $this->fixture_data['event_uuid'] = $body['uuid'];
+        $this->fixture_data['event_iso_date'] = $body['iso_date'];
+        $this->fixture_data['identifier'] = $body['data']['identifier'];
+        $this->fixture_data['uuid'] = $body['data']['uuid'];
+        $this->fixture_data['auth_token'] = $body['data']['auth_token'];
+        $this->fixture_data['token_expire_date'] = $body['data']['token_expire_date'];
     }
 
     protected function assertEventSourceSend(RequestInterface $request, $filename)
@@ -175,7 +165,7 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
     protected function loadFixture($filename)
     {
         // bring dynamic data in scope for fixtures
-        $dynamic_data = $this->getDynamicData();
+        $fixture_data = $this->getFixtureData();
         return require_once(__DIR__ . '/Fixture/' . $filename);
     }
 }

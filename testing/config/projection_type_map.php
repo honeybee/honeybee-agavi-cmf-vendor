@@ -3,7 +3,7 @@
 use Honeybee\Projection\ProjectionTypeMap;
 use Workflux\Builder\XmlStateMachineBuilder;
 
-$projection_type_map = new ProjectionTypeMap();
+$projection_type_map = new ProjectionTypeMap;
 $projection_type_map->setItem(
     'honeybee.system_account.user',
     new Honeybee\SystemAccount\User\Projection\Standard\UserType(

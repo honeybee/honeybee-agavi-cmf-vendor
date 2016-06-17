@@ -39,7 +39,7 @@ class Honeybee_Core_Util_BuildConfigAction extends Action
                     $generator = new AggregateRootTypeMapGenerator();
                     break;
 
-                case 'resource_type_map':
+                case 'projection_type_map':
                     $generator = new ProjectionTypeMapGenerator();
                     break;
 

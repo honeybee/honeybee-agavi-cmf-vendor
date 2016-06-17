@@ -4,9 +4,9 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
 
 class AggregateRootTypeMapGenerator extends EntityTypeMapGenerator
 {
-    const TEMPLATE = 'ar_type_map.php.twig';
+    const TEMPLATE = 'aggregate_root_type_map.php.twig';
 
-    const CONFIG_NAME = 'ar_type_map.php';
+    const CONFIG_NAME = 'aggregate_root_type_map.php';
 
     protected function getConfigFileName()
     {

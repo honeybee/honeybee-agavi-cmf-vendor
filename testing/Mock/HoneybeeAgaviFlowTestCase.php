@@ -12,7 +12,7 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
 {
     protected $crawler;
 
-    protected $dynamic_data = [];
+    protected $fixture_data = [];
 
     const UUID_REGEX = '\w{8}\-\w{4}\-\w{4}\-\w{4}\-\w{12}';
 
@@ -21,9 +21,9 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
         return $this->response;
     }
 
-    protected function getDynamicData()
+    protected function getFixtureData()
     {
-        return $this->dynamic_data;
+        return $this->fixture_data;
     }
 
     protected function getCrawler()

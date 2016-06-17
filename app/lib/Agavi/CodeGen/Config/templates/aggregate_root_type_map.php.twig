@@ -3,9 +3,9 @@
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Workflux\Builder\XmlStateMachineBuilder;
 
-$ar_type_map = new AggregateRootTypeMap();
+$aggregate_root_type_map = new AggregateRootTypeMap;
 {% for entity_key, meta_data in entity_type_map %}
-$ar_type_map->setItem(
+$aggregate_root_type_map->setItem(
     '{{ entity_key }}',
     new {{ meta_data.implementor }}(
         (new XmlStateMachineBuilder([
@@ -16,4 +16,4 @@ $ar_type_map->setItem(
 );
 {% endfor %}
 
-return $ar_type_map;
+return $aggregate_root_type_map;
