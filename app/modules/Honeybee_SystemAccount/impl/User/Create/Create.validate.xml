@@ -22,7 +22,6 @@
                 <error for="email.invalid_format">Email has an invalid format.</error>
                 <error for="username.min_length">Username is too short.</error>
                 <error for="username.max_length">Username is too long.</error>
-                <error for="comments.comment.title.min_length">Comment-Title is too short.</error>
             </validator>
 
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_user_write" depends="create_user[invalid_payload]">

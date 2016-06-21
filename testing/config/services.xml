@@ -17,6 +17,9 @@
                 <service name="honeybee.ui.view_template_service">
                     <class>Honeybee\Tests\Mock\TestViewTemplateService</class>
                 </service>
+                <service name="honeybee.infrastructure.filesystem_service">
+                    <class>Honeybee\Tests\Mock\TestFilesystemService</class>
+                </service>
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
                     <provisioner>

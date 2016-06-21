@@ -13,5 +13,41 @@ $projection_type_map->setItem(
         ]))->build()
     )
 );
+$projection_type_map->setItem(
+    'honeybee-cmf.projection_fixtures.author',
+    new Honeybee\Tests\Fixture\BookSchema\Projection\Author\AuthorType(
+        (new XmlStateMachineBuilder([
+            'name' => 'author_workflow_default',
+            'state_machine_definition' => AgaviConfig::get('core.testing_dir') . '/Fixture/BookSchema/Model/workflows.xml'
+        ]))->build()
+    )
+);
+$projection_type_map->setItem(
+    'honeybee-cmf.projection_fixtures.book',
+    new Honeybee\Tests\Fixture\BookSchema\Projection\Book\BookType(
+        (new XmlStateMachineBuilder([
+            'name' => 'author_workflow_default',
+            'state_machine_definition' => AgaviConfig::get('core.testing_dir') . '/Fixture/BookSchema/Model/workflows.xml'
+        ]))->build()
+    )
+);
+$projection_type_map->setItem(
+    'honeybee-cmf.projection_fixtures.publication',
+    new Honeybee\Tests\Fixture\BookSchema\Projection\Publication\PublicationType(
+        (new XmlStateMachineBuilder([
+            'name' => 'author_workflow_default',
+            'state_machine_definition' => AgaviConfig::get('core.testing_dir') . '/Fixture/BookSchema/Model/workflows.xml'
+        ]))->build()
+    )
+);
+$projection_type_map->setItem(
+    'honeybee-cmf.projection_fixtures.publisher',
+    new Honeybee\Tests\Fixture\BookSchema\Projection\Publisher\PublisherType(
+        (new XmlStateMachineBuilder([
+            'name' => 'author_workflow_default',
+            'state_machine_definition' => AgaviConfig::get('core.testing_dir') . '/Fixture/BookSchema/Model/workflows.xml'
+        ]))->build()
+    )
+);
 
 return $projection_type_map;

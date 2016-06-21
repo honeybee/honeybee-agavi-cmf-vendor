@@ -28,7 +28,8 @@
             <ae:parameter name="default_message_class">AgaviLoggerMessage</ae:parameter>
         </logger_manager>
 
-        <request class="Honeybee\FrameworkBinding\Agavi\Request\WebRequest">
+        <request class="AgaviWebRequest">
+            <ae:parameter name="uploaded_file_class">Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile</ae:parameter>
             <ae:parameter name="http_post_file_name">%core.http_post_file_name%</ae:parameter>
             <ae:parameter name="method_names">
                 <ae:parameter name="POST">write</ae:parameter>
@@ -107,7 +108,8 @@
     </ae:configuration>
 
     <ae:configuration context="console">
-        <request class="Honeybee\FrameworkBinding\Agavi\Request\ConsoleRequest">
+        <request class="AgaviConsoleRequest">
+            <ae:parameter name="uploaded_file_class">Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile</ae:parameter>
             <ae:parameter name="read_stdin">on</ae:parameter>
             <ae:parameter name="stdin_file_name">stdin_buffer_filepath</ae:parameter>
         </request>
@@ -140,11 +142,10 @@
                 <ae:parameter name="enable_caching">false</ae:parameter>
             </ae:parameters>
         </execution_filter>
-        <request class="Honeybee\FrameworkBinding\Agavi\Request\WebRequest">
+        <request class="AgaviWebRequest">
             <!-- static values for unit tests -->
             <ae:parameter name="sources">
                 <ae:parameter name="HTTPS" />
-                <ae:parameter name="REQUEST_METHOD">GET</ae:parameter>
                 <ae:parameter name="SERVER_NAME">testing.honeybee.com</ae:parameter>
                 <ae:parameter name="SERVER_PORT">80</ae:parameter>
                 <ae:parameter name="SERVER_PROTOCOL">HTTP/1.1</ae:parameter>

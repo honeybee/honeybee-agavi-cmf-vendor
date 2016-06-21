@@ -625,7 +625,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         //    'Validating files for path', $path, 'of', $attribute->getType()->getName(), '=>', $attribute->getName()
         //);
         $files_from_request =& $this->validationParameters->getAll('files');
-        if ($files_from_request === null) {
+        if (empty($files_from_request)) {
             //$this->logDebug('Nothing to validate for path', $path, 'as no files at all are in the request');
             return [];
         }
@@ -742,23 +742,29 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             );
         }
 
-        $uploaded_file->setLocation($file_identifier);
-        $uploaded_file->setFilename($uploaded_file->getName()); // beware! user provided original filename
-        $uploaded_file->setFilesize($fss->getSize($target_tempfile_uri));
-        $uploaded_file->setMimetype($fss->getMimetype($target_tempfile_uri));
-        $uploaded_file->setExtension($extension);
-
         // image attribute => determine image dimensions and add it to the uploaded file's properties
+        $image_width = $uploaded_file->getWidth();
+        $image_height = $uploaded_file->getHeight();
         if ($attribute instanceof HandlesFileInterface &&
             ($attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE)
         ) {
             // as this may silently fail now the resulting image value object will have zero width/height
             $info = @getimagesize($uploaded_file->getTmpName());
             if ($info !== false) {
-                $uploaded_file->setWidth($info[0]);
-                $uploaded_file->setHeight($info[1]);
+                $image_width = $info[0];
+                $image_height = $info[1];
             }
         }
+
+        $uploaded_file = $uploaded_file->createCopyWith([
+            HoneybeeUploadedFile::PROPERTY_LOCATION => $file_identifier,
+            HoneybeeUploadedFile::PROPERTY_FILENAME => $uploaded_file->getName(),
+            HoneybeeUploadedFile::PROPERTY_FILESIZE => $fss->getSize($target_tempfile_uri),
+            HoneybeeUploadedFile::PROPERTY_MIMETYPE => $fss->getMimetype($target_tempfile_uri),
+            HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
+            HoneybeeUploadedFile::PROPERTY_WIDTH => $image_width,
+            HoneybeeUploadedFile::PROPERTY_HEIGHT => $image_height
+        ]);
 
         //$this->logDebug('Uploaded temporary file for', $path, 'is:', $uploaded_file->getHoneybeeProperties());
 
@@ -863,6 +869,23 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         $mimetype = $fss->getMimetype($temp_uri);
         $extension = $fss->guessExtensionByMimeType($mimetype);
 
+        // convention here is, that the temp filesystem is always a local filesystem (flysystem LocalAdapter variant)
+        $local_fs = $fss->getFilesystem($fss->getTempScheme($this->getAggregateRootType()));
+        $local_file_path = $local_fs->applyPathPrefix($location);
+        // image attribute => determine image dimensions
+        $image_width = 0;
+        $image_height = 0;
+        if ($attribute instanceof HandlesFileInterface &&
+            ($attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE)
+        ) {
+            // as this may silently fail now the resulting image value object will have zero width/height
+            $info = @getimagesize($local_file_path);
+            if ($info !== false) {
+                $image_width = $info[0];
+                $image_height = $info[1];
+            }
+        }
+
         $uploaded_file = new HoneybeeUploadedFile(
             [
                 HoneybeeUploadedFile::PROPERTY_LOCATION => $location,
@@ -870,25 +893,13 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 HoneybeeUploadedFile::PROPERTY_MIMETYPE => $mimetype,
                 HoneybeeUploadedFile::PROPERTY_FILESIZE => $size,
                 HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
-                'moved' => true,
+                HoneybeeUploadedFile::PROPERTY_WIDTH => $image_width,
+                HoneybeeUploadedFile::PROPERTY_HEIGHT => $image_height,
+                'tmp_name' => $location, // added to work around AgaviUploadedFile exception
+                'is_moved' => true,
                 'is_uploaded_file' => false,
             ]
         );
-
-        // convention here is, that the temp filesystem is always a local filesystem (flysystem LocalAdapter variant)
-        $local_fs = $fss->getFilesystem($fss->getTempScheme($this->getAggregateRootType()));
-        $local_file_path = $local_fs->applyPathPrefix($location);
-        // image attribute => determine image dimensions and add it to the uploaded file's properties
-        if ($attribute instanceof HandlesFileInterface &&
-            ($attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE)
-        ) {
-            // as this may silently fail now the resulting image value object will have zero width/height
-            $info = @getimagesize($local_file_path);
-            if ($info !== false) {
-                $uploaded_file->setWidth($info[0]);
-                $uploaded_file->setHeight($info[1]);
-            }
-        }
 
         return $uploaded_file;
     }

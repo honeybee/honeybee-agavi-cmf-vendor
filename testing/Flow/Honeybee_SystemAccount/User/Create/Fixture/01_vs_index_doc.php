@@ -9,7 +9,6 @@ return [
         'identifier' => $fixture_data['identifier'],
         'revision' => 1,
         'uuid' => $fixture_data['uuid'],
-        'short_id' => 0,
         'language' => 'de_DE',
         'version' => 1,
         'created_at' => $fixture_data['event_iso_date'],

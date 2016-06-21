@@ -17,11 +17,20 @@ class HoneybeeUploadedFile extends AgaviUploadedFile
     const PROPERTY_WIDTH = 'honeybee_width';
     const PROPERTY_HEIGHT = 'honeybee_height';
 
-    public function __construct(
-        array $data = [],
-        $flags = ArrayObject::ARRAY_AS_PROPS,
-        $iterator_class = 'ArrayIterator'
-    ) {
+    protected static $indexMap = [
+        self::PROPERTY_LOCATION => 'location',
+        self::PROPERTY_FILENAME => 'filename',
+        self::PROPERTY_FILESIZE => 'filesize',
+        self::PROPERTY_MIMETYPE => 'mimeType',
+        self::PROPERTY_EXTENSION => 'extension',
+        self::PROPERTY_WIDTH => 'width',
+        self::PROPERTY_HEIGHT => 'height'
+    ];
+
+    public function __construct(array $data = [])
+    {
+        parent::__construct($data);
+
         $defaults = [
             self::PROPERTY_LOCATION => null,
             self::PROPERTY_FILENAME => null,
@@ -29,10 +38,28 @@ class HoneybeeUploadedFile extends AgaviUploadedFile
             self::PROPERTY_EXTENSION => null,
             self::PROPERTY_FILESIZE => 0,
             self::PROPERTY_WIDTH => 0,
-            self::PROPERTY_HEIGHT => 0,
+            self::PROPERTY_HEIGHT => 0
         ];
 
-        parent::__construct(array_merge($defaults, $data), $flags, $iterator_class);
+        $array = array_merge($defaults, $data);
+
+        // override parent resetting of 'is_moved'
+        if (isset($array['is_moved'])) {
+            $this->isMoved = $array['is_moved'];
+        }
+
+        foreach(self::$indexMap as $index => $property) {
+            if (isset($array[$index])) {
+                $this->$property = $array[$index];
+            }
+        }
+    }
+
+    // overriding because parent uses self instead of static map
+    public function offsetGet($key)
+    {
+        $property = self::$indexMap[$key];
+        return $this->$property;
     }
 
     public function getLocation()
@@ -70,39 +97,22 @@ class HoneybeeUploadedFile extends AgaviUploadedFile
         return $this[self::PROPERTY_HEIGHT];
     }
 
-    public function setLocation($location)
+    public function createCopyWith(array $data)
     {
-        $this[self::PROPERTY_LOCATION] = $location;
-    }
-
-    public function setMimetype($mimetype)
-    {
-        $this[self::PROPERTY_MIMETYPE] = $mimetype;
-    }
-
-    public function setExtension($ext)
-    {
-        $this[self::PROPERTY_EXTENSION] = $ext;
-    }
-
-    public function setFilesize($size)
-    {
-        $this[self::PROPERTY_FILESIZE] = $size;
-    }
-
-    public function setFilename($name)
-    {
-        $this[self::PROPERTY_FILENAME] = $name;
-    }
-
-    public function setWidth($width)
-    {
-        $this[self::PROPERTY_WIDTH] = $width;
-    }
-
-    public function setHeight($height)
-    {
-        $this[self::PROPERTY_HEIGHT] = $height;
+        return new static(array_merge(
+            [
+                'name' => $this->name,
+                'type' => $this->type,
+                'size' => $this->size,
+                'tmp_name' => $this->tmpName,
+                'error' => $this->error,
+                'is_uploaded_file' => $this->isUploadedFile,
+                'is_moved' => $this->isMoved,
+                'contents' => $this->contents,
+                'stream' => $this->stream,
+            ],
+            $data
+        ));
     }
 
     public function hasHoneybeeProperties()

@@ -27,6 +27,7 @@ use Trellis\Runtime\Entity\EntityInterface;
 use Trellis\Runtime\Entity\EntityList;
 use Trellis\Runtime\Validator\Result\IncidentInterface;
 use Trellis\Runtime\Validator\Rule\Type\SanitizedFilenameRule;
+use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
 
 class AggregateRootTypeFileUploadValidator extends AgaviValidator
 {
@@ -47,7 +48,7 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         }
 
         // get all files from request for the current argument base
-        $files = $this->getData($this->getArgument());
+        $files =& $this->getData($this->getArgument());
 
         // no files submitted
         if (empty($files) || !is_array($files)) {
@@ -139,11 +140,6 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
             throw new RuntimeError('Could not open read stream to uploaded file: ', $uploaded_file->getTmpName());
         }
 
-        // try to get a sanitized filename from the user provided original uploaded file's name
-        $uploaded_file->setFilename(
-            $this->getSanitizedFilename($uploaded_file->getName())
-        );
-
         /*
         $user_provided_original_filename = $uploaded_file->getName();
         // TODO this needs to be differen for HandlesFileInterface and HandlesFileListInterface
@@ -171,14 +167,16 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         */
 
         // image attribute => determine image dimensions and add it to the uploaded file's properties
+        $image_width = $uploaded_file->getWidth();
+        $image_height = $uploaded_file->getHeight();
         if ($attribute instanceof HandlesFileInterface &&
             $attribute->getFiletypeName() === HandlesFileInterface::FILETYPE_IMAGE
         ) {
             // as this may silently fail now the resulting image value object will have zero width/height
             $info = @getimagesize($uploaded_file->getTmpName());
             if ($info !== false) {
-                $uploaded_file->setWidth($info[0]);
-                $uploaded_file->setHeight($info[1]);
+                $image_width = $info[0];
+                $image_height = $info[1];
             }
         }
 
@@ -193,12 +191,21 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
             );
         }
 
-        $uploaded_file->setLocation($file_identifier);
-        $uploaded_file->setMimetype($fss->getMimetype($target_tempfile_uri));
-        $uploaded_file->setFilesize($fss->getSize($target_tempfile_uri));
-        $uploaded_file->setExtension($extension);
+        $uploaded_file = $uploaded_file->createCopyWith([
+            HoneybeeUploadedFile::PROPERTY_FILENAME => $this->getSanitizedFilename($uploaded_file->getName()),
+            HoneybeeUploadedFile::PROPERTY_LOCATION => $file_identifier,
+            HoneybeeUploadedFile::PROPERTY_MIMETYPE => $fss->getMimetype($target_tempfile_uri),
+            HoneybeeUploadedFile::PROPERTY_FILESIZE => $fss->getSize($target_tempfile_uri),
+            HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
+            HoneybeeUploadedFile::PROPERTY_WIDTH => $image_width,
+            HoneybeeUploadedFile::PROPERTY_HEIGHT => $image_height
+        ]);
 
-        $this->export($attribute, 'attribute', AgaviRequestDataHolder::SOURCE_PARAMETERS);
+        // Reset the uploaded file by reference
+        $files[$attribute_path] = $uploaded_file;
+
+        $this->setParameter('export_to_source', AgaviRequestDataHolder::SOURCE_PARAMETERS);
+        $this->export($attribute, 'attribute');
         // $this->export($uploaded_file, $this->getBase() . '[%1$s]');
 
         // $this->logDebug('VALIDATION OF FILES:', $success ? 'SUCCESSFUL! \o/' : 'FAILED m(');
