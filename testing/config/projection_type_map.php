@@ -14,7 +14,7 @@ $projection_type_map->setItem(
     )
 );
 $projection_type_map->setItem(
-    'honeybee-cmf.projection_fixtures.author',
+    'honeybee-cmf.test_fixtures.author',
     new Honeybee\Tests\Fixture\BookSchema\Projection\Author\AuthorType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',
@@ -23,7 +23,7 @@ $projection_type_map->setItem(
     )
 );
 $projection_type_map->setItem(
-    'honeybee-cmf.projection_fixtures.book',
+    'honeybee-cmf.test_fixtures.book',
     new Honeybee\Tests\Fixture\BookSchema\Projection\Book\BookType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',
@@ -32,7 +32,7 @@ $projection_type_map->setItem(
     )
 );
 $projection_type_map->setItem(
-    'honeybee-cmf.projection_fixtures.publication',
+    'honeybee-cmf.test_fixtures.publication',
     new Honeybee\Tests\Fixture\BookSchema\Projection\Publication\PublicationType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',
@@ -41,7 +41,7 @@ $projection_type_map->setItem(
     )
 );
 $projection_type_map->setItem(
-    'honeybee-cmf.projection_fixtures.publisher',
+    'honeybee-cmf.test_fixtures.publisher',
     new Honeybee\Tests\Fixture\BookSchema\Projection\Publisher\PublisherType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',

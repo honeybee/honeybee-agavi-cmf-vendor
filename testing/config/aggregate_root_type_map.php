@@ -14,7 +14,7 @@ $aggregate_root_type_map->setItem(
     )
 );
 $aggregate_root_type_map->setItem(
-    'honeybee-cmf.aggregate_fixtures.author',
+    'honeybee-cmf.test_fixtures.author',
     new Honeybee\Tests\Fixture\BookSchema\Model\Author\AuthorType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',
@@ -23,7 +23,7 @@ $aggregate_root_type_map->setItem(
     )
 );
 $aggregate_root_type_map->setItem(
-    'honeybee-cmf.aggregate_fixtures.book',
+    'honeybee-cmf.test_fixtures.book',
     new Honeybee\Tests\Fixture\BookSchema\Model\Book\BookType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',
@@ -32,7 +32,7 @@ $aggregate_root_type_map->setItem(
     )
 );
 $aggregate_root_type_map->setItem(
-    'honeybee-cmf.aggregate_fixtures.publication',
+    'honeybee-cmf.test_fixtures.publication',
     new Honeybee\Tests\Fixture\BookSchema\Model\Publication\PublicationType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',
@@ -41,7 +41,7 @@ $aggregate_root_type_map->setItem(
     )
 );
 $aggregate_root_type_map->setItem(
-    'honeybee-cmf.aggregate_fixtures.publisher',
+    'honeybee-cmf.test_fixtures.publisher',
     new Honeybee\Tests\Fixture\BookSchema\Model\Publisher\PublisherType(
         (new XmlStateMachineBuilder([
             'name' => 'author_workflow_default',

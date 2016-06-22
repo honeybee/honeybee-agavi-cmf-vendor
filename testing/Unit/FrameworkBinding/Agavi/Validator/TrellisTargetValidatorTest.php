@@ -3,10 +3,10 @@
 namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
 use AgaviContext;
-use AgaviUnitTestCase;
 use Honeybee\FrameworkBinding\Agavi\Validator\TrellisTargetValidator;
+use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
 
-class TrellisTargetValidatorTest extends AgaviUnitTestCase
+class TrellisTargetValidatorTest extends HoneybeeAgaviUnitTestCase
 {
 	public function testExecute()
 	{

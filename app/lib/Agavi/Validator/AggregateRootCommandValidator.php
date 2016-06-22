@@ -4,20 +4,19 @@ namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use AgaviValidationIncident;
 use AgaviValidator;
+use Honeybee\Common\Error\RuntimeError;
+use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeybee\Model\Aggregate\AggregateRootInterface;
+use Honeybee\Model\Command\AggregateRootCommandInterface;
+use Honeybee\Model\Event\AggregateRootEventInterface;
+use Honeybee\Model\Event\AggregateRootEventList;
+use Honeybee\Model\Task\TaskConflict;
 use Trellis\Common\Collection\Map;
 use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Entity\EntityInterface;
 use Trellis\Runtime\Entity\EntityList;
 use Trellis\Runtime\Validator\Result\IncidentInterface;
 use Trellis\Runtime\Validator\Rule\Type\IntegerRule;
-use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Model\Aggregate\AggregateRootInterface;
-use Honeybee\Model\Command\AggregateRootCommandInterface;
-use Honeybee\Model\Event\AggregateRootEventInterface;
-use Honeybee\Model\Event\AggregateRootEventList;
-use Honeybee\Model\Task\TaskConflict;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
-use Honeybee\Projection\ProjectionInterface;
 
 class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
 {
@@ -188,18 +187,24 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         array $conflicting_changes
     ) {
         $service_locator = $this->getServiceLocator();
-        $resource_type = $service_locator->getProjectionTypeByPrefix($this->getAggregateRootType()->getPrefix());
+        $projection_type = $service_locator->getProjectionTypeByPrefix($this->getAggregateRootType()->getPrefix());
 
-        $conflicted_resource = $resource_type->createEntity(
+        $conflicted_projection = $projection_type->createEntity(
             array_merge($aggregate_root->toNative(), $conflicting_changes)
         );
+
         $current_aggregate_root = $this->createAggregateRootFromHistory($aggregate_root_history);
-        $current_resource = $resource_type->createEntity($current_aggregate_root->toNative());
+        $timestamps['created_at'] = $aggregate_root_history->getFirst()->getIsoDate();
+        $timestamps['modified_at'] = $aggregate_root_history->getLast()->getIsoDate();
+        $current_projection = $projection_type->createEntity(array_merge(
+            $current_aggregate_root->toNative(),
+            $timestamps
+        ));
 
         $task_conflict = new TaskConflict(
             [
-                'current_resource' => $current_resource,
-                'conflicted_resource' => $conflicted_resource,
+                'current_resource' => $current_projection,
+                'conflicted_resource' => $conflicted_projection,
                 'conflicting_events' => $conflicting_events,
                 'conflicting_attribute_names' => array_keys($conflicting_changes)
             ]

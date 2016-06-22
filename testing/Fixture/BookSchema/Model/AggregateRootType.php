@@ -8,7 +8,7 @@ abstract class AggregateRootType extends BaseAggregateRootType
 {
     const VENDOR = 'Honeybee-CMF';
 
-    const PACKAGE = 'AggregateFixtures';
+    const PACKAGE = 'TestFixtures';
 
     protected $workflow_state_machine;
 

@@ -3,6 +3,7 @@
     <ae:configuration>
         <suites>
              <suite name="Unit">
+                <include>Unit/FrameworkBinding/Agavi/Validator/AggregateRootCommandValidatorTest.php</include>
                 <include>Unit/FrameworkBinding/Agavi/Validator/AggregateRootTypeCommandValidatorTest.php</include>
                 <include>Unit/FrameworkBinding/Agavi/Validator/TrellisTargetValidatorTest.php</include>
             </suite>

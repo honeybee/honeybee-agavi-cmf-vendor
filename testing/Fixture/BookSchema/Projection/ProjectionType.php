@@ -8,7 +8,7 @@ abstract class ProjectionType extends BaseProjectionType
 {
     const VENDOR = 'Honeybee-CMF';
 
-    const PACKAGE = 'ProjectionFixtures';
+    const PACKAGE = 'TestFixtures';
 
     protected $workflow_state_machine;
 
