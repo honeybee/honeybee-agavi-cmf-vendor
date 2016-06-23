@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da8b2525c3ed953be6dc5a0f4b2ee192",
+    "hash": "6b57a72a780186dc8ae7d571497b0ba3",
     "content-hash": "5a49a78485e717d219af2d4eadc6721e",
     "packages": [
         {
@@ -779,12 +779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "9b17705794ae38ffdf75bb2e996679b9775a370b"
+                "reference": "16fd5263a14083e4cce998686dec9ae1ebcc7026"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/9b17705794ae38ffdf75bb2e996679b9775a370b",
-                "reference": "9b17705794ae38ffdf75bb2e996679b9775a370b",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/16fd5263a14083e4cce998686dec9ae1ebcc7026",
+                "reference": "16fd5263a14083e4cce998686dec9ae1ebcc7026",
                 "shasum": ""
             },
             "require": {
@@ -866,7 +866,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-06-17 17:39:43"
+            "time": "2016-06-23 10:22:03"
         },
         {
             "name": "honeybee/trellis",
@@ -2524,16 +2524,16 @@
     "packages-dev": [
         {
             "name": "blackfire/php-sdk",
-            "version": "v1.5.16",
+            "version": "v1.5.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/blackfireio/php-sdk.git",
-                "reference": "824b822f26da4c4d7377f0aa13f2520a853b4253"
+                "reference": "8e75d2f6e1f1817d745c0068e8cf54c385e485ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blackfireio/php-sdk/zipball/824b822f26da4c4d7377f0aa13f2520a853b4253",
-                "reference": "824b822f26da4c4d7377f0aa13f2520a853b4253",
+                "url": "https://api.github.com/repos/blackfireio/php-sdk/zipball/8e75d2f6e1f1817d745c0068e8cf54c385e485ce",
+                "reference": "8e75d2f6e1f1817d745c0068e8cf54c385e485ce",
                 "shasum": ""
             },
             "require": {
@@ -2575,7 +2575,7 @@
                 "uprofiler",
                 "xhprof"
             ],
-            "time": "2016-06-20 11:41:11"
+            "time": "2016-06-22 11:53:07"
         },
         {
             "name": "composer/ca-bundle",
