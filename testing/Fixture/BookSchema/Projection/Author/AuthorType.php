@@ -25,12 +25,12 @@ class AuthorType extends ProjectionType
                 new EmailAttribute('email', $this, [ 'mandatory' => true ]),
                 new TextAttribute('blurb', $this, [ 'default_value' =>  'the grinch' ]),
                 new TokenAttribute('token', $this),
-                new ImageListAttribute('images', $this, [ 'max_count' => 1 ]),
+                new ImageListAttribute('images', $this),
                 new EmbeddedEntityListAttribute(
                     'products',
                     $this,
                     [
-                        'inline_mode' => true,
+                        'max_count' => 2,
                         'entity_types' => [
                             '\\Honeybee\\Tests\\Fixture\\BookSchema\\Projection\\Author\\Embed\\HighlightType',
                         ]

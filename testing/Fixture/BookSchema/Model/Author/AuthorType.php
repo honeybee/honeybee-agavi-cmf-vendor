@@ -26,11 +26,12 @@ class AuthorType extends AggregateRootType
                 new EmailAttribute('email', $this, [ 'mandatory' => true ]),
                 new TextAttribute('blurb', $this, [ 'default_value' =>  'the grinch' ]),
                 new TokenAttribute('token', $this),
-                new ImageListAttribute('images', $this, [ 'max_count' => 1 ]),
+                new ImageListAttribute('images', $this),
                 new EmbeddedEntityListAttribute(
                     'products',
                     $this,
                     [
+                        'max_count' => 2,
                         'entity_types' => [
                             '\\Honeybee\\Tests\\Fixture\\BookSchema\\Model\\Author\\Embed\\HighlightType',
                         ]
@@ -40,8 +41,9 @@ class AuthorType extends AggregateRootType
                     'books',
                     $this,
                     [
+                        'inline_mode' => true,
                         'entity_types' => [
-                            '\\Honeybee\\Tests\\Fixture\\BookSchema\\Model\\Author\\Reference\\BookType',
+                            '\\Honeybee\\Tests\\Fixture\\BookSchema\\Model\\Author\\Reference\\BookType'
                         ]
                     ]
                 )

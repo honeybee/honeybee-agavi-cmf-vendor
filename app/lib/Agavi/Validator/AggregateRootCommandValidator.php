@@ -50,6 +50,10 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         $aggregate_root = $this->createAggregateRootFromHistory($aggregate_root_history, $revision);
         $command_payload = $this->getValidatedAggregateRootCommandPayload($aggregate_root);
 
+        if (!is_array($command_payload)) {
+            return false;
+        }
+
         if (count($this->parentContainer->getValidatorIncidents($this->getParameter('name'))) > 0) {
             foreach ($this->parentContainer->getValidatorIncidents($this->getParameter('name')) as $incident) {
                 foreach ($incident->getErrors() as $error) {

@@ -28,4 +28,9 @@ class TestFilesystemService extends FilesystemService
     {
         return array_keys($this->test_resources);
     }
+
+    public function clear()
+    {
+        $this->test_resources = [];
+    }
 }

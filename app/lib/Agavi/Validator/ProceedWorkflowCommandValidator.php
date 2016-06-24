@@ -16,7 +16,7 @@ class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
 
         if (!in_array($event_name, $supported_events)) {
             $this->throwError('invalid_workflow_event');
-            return [ 'success' => false, 'payload' => [] ];
+            return false;
         }
 
         return [ 'current_state_name' => $current_state_name, 'event_name' => $event_name ];

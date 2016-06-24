@@ -7,17 +7,21 @@ use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
 use Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeCommandValidator;
-use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand;
 use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
+use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand;
 
 class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 {
     protected $vm;
 
+    protected $filesystem_service;
+
     public function setUp()
     {
         $this->vm = $this->getContext()->createInstanceFor('validation_manager');
         $this->vm->clear();
+        $this->filesystem_service = $this->getContext()->getServiceLocator()->getFilesystemService();
+        $this->filesystem_service->clear();
     }
 
     protected function createValidator($base = 'create_author')
@@ -31,6 +35,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'firstname.min_length' => 'Firstname is too short.',
                 'firstname.max_length' => 'Firstname is too long.',
                 'products.highlight.title.min_length' => 'Title is too short.',
+                'products.max_count' => 'Maximum number of products exceeded.',
                 'no_image' => 'Uploaded image not found.'
             ],
             [
@@ -94,8 +99,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'firstname' => 'a',
                     'email' => 'invalidemail.com',
                 ]
-            ],
-            AgaviWebRequestDataHolder::SOURCE_FILES => []
+            ]
         ]);
 
         $result = $validator->execute($rd);
@@ -167,8 +171,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         ]);
 
         $rd = new AgaviWebRequestDataHolder([
-            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [ '__command' => $source_command ],
-            AgaviWebRequestDataHolder::SOURCE_FILES => []
+            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [ '__command' => $source_command ]
         ]);
 
         $result = $validator->execute($rd);
@@ -195,7 +198,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         );
     }
 
-    public function testExecuteWithEmbeddedEntityCommands()
+    public function testExecuteWithEmbeddedEntities()
     {
         $validator = $this->createValidator();
 
@@ -218,8 +221,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ],
                 ]
-            ],
-            AgaviWebRequestDataHolder::SOURCE_FILES => []
+            ]
         ]);
 
         $result = $validator->execute($rd);
@@ -271,7 +273,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         );
     }
 
-    public function testExecuteWithInvalidEmbeddedEntityCommands()
+    public function testExecuteWithInvalidEmbeddedEntities()
     {
         $validator = $this->createValidator();
 
@@ -288,8 +290,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ]
                 ]
-            ],
-            AgaviWebRequestDataHolder::SOURCE_FILES => []
+            ]
         ]);
 
         $result = $validator->execute($rd);
@@ -311,7 +312,51 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         );
     }
 
-    public function testExecuteWithMissingEmbeddedEntityCommandValues()
+    public function testExecuteWithExcessEmbeddedEntities()
+    {
+        $validator = $this->createValidator();
+
+        $rd = new AgaviWebRequestDataHolder([
+            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
+                'create_author' => [
+                    'products' => [
+                        [
+                            '@type' => 'highlight',
+                            'title' => 'Awesome'
+                        ],
+                        [
+                            '@type' => 'highlight',
+                            'title' => 'Amazing'
+                        ],
+                        [
+                            '@type' => 'highlight',
+                            'title' => 'Wicked'
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        // @todo current command validator cannot easily validate embedded entity list attribute rules
+        // such as max_count but we can support in future using the command builder.
+        $this->markTestIncomplete();
+
+        $result = $validator->execute($rd);
+
+        $this->assertEquals(AggregateRootTypeCommandValidator::ERROR, $result);
+        $query = new AgaviValidationReportQuery($this->vm->getReport());
+        $this->assertEquals(2, $query->count());
+        $this->assertEquals(
+            [ 'Maximum number of products exceeded.' ],
+            $query->byArgument('create_author[products]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[__submit]')->getErrorMessages()
+        );
+    }
+
+    public function testExecuteWithMissingEmbeddedEntityValues()
     {
         $this->markTestIncomplete();
     }
@@ -344,8 +389,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ]
                 ]
-            ],
-            AgaviWebRequestDataHolder::SOURCE_FILES => []
+            ]
         ]);
 
         $result = $validator->execute($rd);
@@ -446,7 +490,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertEquals(AggregateRootTypeCommandValidator::SUCCESS, $result);
         $this->assertEquals([ 'create_author', '__command' ], $rd->getParameterNames());
         $this->assertCount(0, $this->vm->getReport()->getErrorMessages());
-        $uploaded_images = $this->getContext()->getServiceLocator()->getFilesystemService()->getTestResourceUris();
+        $uploaded_images = $this->filesystem_service->getTestResourceUris();
         $this->assertCount(1, $uploaded_images);
         $command = $rd->getParameter('__command');
         $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
@@ -543,7 +587,8 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $query = new AgaviValidationReportQuery($this->vm->getReport());
         $this->assertEquals(1, $query->count());
         $this->markTestIncomplete();
-        // @todo following assertion should yield a message
+        // @todo following assertion should yield a message. Currently we are using the
+        // AgaviImageFileValidator which is not aware of the argument payload path
         $this->assertEquals(
             [ 'Uploaded image not found.' ],
             $query->byArgument('create_author[images][0][file]')->getErrorMessages()
