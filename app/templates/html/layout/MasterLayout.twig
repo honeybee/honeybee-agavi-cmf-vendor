@@ -8,8 +8,9 @@
 {% set language = locale.getLocaleLanguage() %}
 {% set territory = locale.getLocaleTerritory() %}
 {% set theme_url = ro.getBaseHref() ~ 'static/themes/' ~ ac('themes.default', 'honeybee-minimal') ~ '/binaries/icons/' %}
+{% set config_js = ac('javascript.config')|json_encode|default('') %}
 <!DOCTYPE html>
-<html class="{{ _globalcss|default('') }}" lang="{{ language }}" data-territory="{{ territory }}" data-moment-locale-identifier="{{ language }}{% if territory %}{{ '-' ~ territory|lower }}{% endif %}" dir="{{ direction }}">
+<html class="{{ _globalcss|default('') }}" lang="{{ language }}" data-territory="{{ territory }}" data-moment-locale-identifier="{{ language }}{% if territory %}{{ '-' ~ territory|lower }}{% endif %}" dir="{{ direction }}" {% if config_js is not empty %} data-config-js="{{ config_js }}"{% endif %}>
 <head>
 {%- block htmlhead -%}
     <meta charset="utf-8">

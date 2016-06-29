@@ -96,6 +96,13 @@
             <exception_template context="console">%core.agavi_dir%/exception/templates/plaintext.php</exception_template>
         </exception_templates>
 
+        <settings prefix="javascript.">
+            <setting name="config">
+                <ae:parameter name="widgets.handle_loading">false</ae:parameter>
+                <ae:parameter name="widgets.loading_classname">hb-js-widget--busy</ae:parameter>
+            </setting>
+        </settings>
+
         <settings prefix="sass.">
             <!-- <setting name="cmd">/opt/ruby/bin/sass</setting> -->
             <setting name="style">compressed</setting> <!-- nested | expanded | compact | compressed -->

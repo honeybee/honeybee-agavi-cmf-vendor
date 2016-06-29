@@ -12,6 +12,11 @@ define([
         var fd = new FormData();
         fd.append(input_name, file);
 
+        jsb.fireEvent('WIDGET:BUSY_LOADING', {
+            'type': 'start',
+            'attribute_name': input_name
+        });
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', target_url, true);
         xhr.setRequestHeader('Accept', 'application/json');
@@ -35,6 +40,11 @@ define([
             } else {
                 end(new Error("Server error"), null);
             }
+
+            jsb.fireEvent('WIDGET:BUSY_LOADING', {
+                'type': 'stop',
+                'attribute_name': input_name
+            });
         };
 
         xhr.send(fd);

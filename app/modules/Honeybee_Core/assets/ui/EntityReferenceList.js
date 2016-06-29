@@ -51,6 +51,12 @@ define([
 
     ReferenceEntityList.prototype.appendEntityReference = function(reference_embed_data, type_prefix) {
         var self = this;
+        var attribute_name = self.$widget.find('.hb-field__value input[type=hidden]').prop('name');
+
+        jsb.fireEvent('WIDGET:BUSY_LOADING', {
+            'type': 'start',
+            'attribute_name': attribute_name
+        });
 
         $.ajax({
             url: this.buildRenderUrl(type_prefix),
@@ -67,6 +73,12 @@ define([
                     self.$entities_list.append(html_item);
                 }
                 self.registerItem(self.$entities_list.find('> li:last-child'));
+            },
+            complete: function() {
+                jsb.fireEvent('WIDGET:BUSY_LOADING', {
+                    'type': 'stop',
+                    'attribute_name': attribute_name
+                });
             }
         });
     };

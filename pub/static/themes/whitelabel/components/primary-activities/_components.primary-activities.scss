@@ -210,3 +210,14 @@ $hb-activity-group-splitbutton--styled-toggle: true !default;
         }
     }
 }
+
+// Modifiers
+.hb-js-widget--busy .primary-activities-list .activity.activity {
+    @include button-colors-emphasized-navigational-disabled;
+
+    // disable activity
+    cursor: default !important;
+    pointer-events: none;
+    user-input: disabled;
+    user-focus: ignore;
+}
