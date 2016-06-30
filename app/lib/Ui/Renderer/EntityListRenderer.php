@@ -3,15 +3,15 @@
 namespace Honeybee\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Projection\ProjectionList;
+use Trellis\Runtime\Entity\EntityList;
 
 abstract class EntityListRenderer extends Renderer
 {
     protected function validate()
     {
-        if (!$this->getPayload('subject') instanceof ProjectionList) {
+        if (!$this->getPayload('subject') instanceof EntityList) {
             throw new RuntimeError(
-                sprintf('Payload "subject" must implement "%s".', ProjectionList::CLASS)
+                sprintf('Payload "subject" must implement "%s".', EntityList::CLASS)
             );
         }
     }

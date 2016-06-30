@@ -1,12 +1,23 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Honeybee\Projection;
+namespace Honeybee\Ui\Renderer\Html\Honeybee\Ui;
 
 use Honeybee\Ui\Renderer\EntityListRenderer;
+use Honeybee\Ui\ResourceCollection;
+use Honeybee\Common\Error\RuntimeError;
 
-class HtmlProjectionListRenderer extends EntityListRenderer
+class HtmlResourceCollectionRenderer extends EntityListRenderer
 {
     const STATIC_TRANSLATION_PATH = 'collection';
+
+    protected function validate()
+    {
+        if (!$this->getPayload('subject') instanceof ResourceCollection) {
+            throw new RuntimeError(
+                sprintf('Payload "subject" must implement "%s".', ResourceCollection::CLASS)
+            );
+        }
+    }
 
     protected function getTemplateParameters()
     {
