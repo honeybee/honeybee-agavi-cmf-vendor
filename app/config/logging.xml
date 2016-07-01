@@ -4,7 +4,7 @@
     xmlns="http://agavi.org/agavi/config/parts/logging/1.0"
     xmlns:xi="http://www.w3.org/2001/XInclude"
 >
-    <ae:configuration environment="[^(testing)].*">
+    <ae:configuration environment="^(?!testing).*">
 
         <loggers default="default">
 
