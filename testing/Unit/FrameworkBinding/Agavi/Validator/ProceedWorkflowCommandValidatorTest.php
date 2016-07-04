@@ -2,7 +2,6 @@
 
 namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
-use AgaviContext;
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\Validator\ProceedWorkflowCommandValidator;
@@ -61,7 +60,8 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '' => 'Invalid command payload given.',
                 'conflict_detected' => 'Data has changed and conflicts with your attempt to modify it.',
-                'invalid_workflow_event' => 'Workflow event is invalid.'
+                'invalid_workflow_event' => 'Workflow event is invalid.',
+                'missing_workflow_event' => 'Workflow event is missing.'
             ],
             [
                 'name' => 'invalid_proceed_command',
@@ -73,7 +73,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         );
     }
 
-    public function xtestExecute()
+    public function testExecute()
     {
         $validator = $this->createValidator();
         $this->prepareHistory('aggregate_created');
@@ -151,7 +151,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $query = new AgaviValidationReportQuery($this->vm->getReport());
         $this->assertEquals(1, $query->count());
         $this->assertEquals(
-            [ 'Workflow event is invalid.' ],
+            [ 'Workflow event is missing.' ],
             $query->byArgument('event')->getErrorMessages()
         );
     }

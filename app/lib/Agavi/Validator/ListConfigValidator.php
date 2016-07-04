@@ -3,11 +3,9 @@
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use AgaviConfig;
-use AgaviInarrayValidator;
 use AgaviNumberValidator;
 use AgaviStringValidator;
 use AgaviValidator;
-use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Ui\ListConfigInterface;
 use Honeybee\FrameworkBinding\Agavi\Validator\SortSyntaxValidator;
 

@@ -18,7 +18,6 @@ use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 use Trellis\Runtime\Attribute\ListAttribute;
 use Trellis\Runtime\Entity\EntityInterface;
-use Trellis\Runtime\Validator\Result\IncidentInterface;
 use Trellis\Runtime\Validator\Rule\Type\NumberRule;
 
 class ResourceValidator extends AgaviValidator

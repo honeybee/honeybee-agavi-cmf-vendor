@@ -2,8 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
-use AgaviConfig;
-use AgaviConfigCache;
 use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Ui\ViewConfig\ViewConfigInterface;

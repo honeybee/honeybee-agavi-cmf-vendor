@@ -779,12 +779,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
+<<<<<<< HEAD
                 "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
                 "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
+=======
+                "reference": "39da90877453f984bc0810db4be39f619ea4447b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/39da90877453f984bc0810db4be39f619ea4447b",
+                "reference": "39da90877453f984bc0810db4be39f619ea4447b",
+>>>>>>> Refactor command validators
                 "shasum": ""
             },
             "require": {
@@ -866,7 +875,11 @@
                 "hexagonal",
                 "messaging"
             ],
+<<<<<<< HEAD
             "time": "2016-07-06 08:11:38"
+=======
+            "time": "2016-07-04 12:17:30"
+>>>>>>> Refactor command validators
         },
         {
             "name": "honeybee/trellis",

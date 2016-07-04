@@ -2,8 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
-use Honeybee\Model\Aggregate\AggregateRootType;
-
 /**
  * Validator for console usage that asks for a valid migration name.
  */

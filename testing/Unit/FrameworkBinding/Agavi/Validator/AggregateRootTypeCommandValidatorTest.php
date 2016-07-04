@@ -2,7 +2,6 @@
 
 namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
-use AgaviContext;
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
@@ -34,6 +33,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'email.invalid_format' => 'Email has an invalid format.',
                 'firstname.min_length' => 'Firstname is too short.',
                 'firstname.max_length' => 'Firstname is too long.',
+                'products.highlight.title.mandatory' => 'Title is required.',
                 'products.highlight.title.min_length' => 'Title is too short.',
                 'products.max_count' => 'Maximum number of products exceeded.',
                 'no_image' => 'Uploaded image not found.'
@@ -123,7 +123,28 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
     public function testExecuteWithMissingSource()
     {
-        $this->markTestIncomplete();
+        $validator = $this->createValidator();
+
+        $rd = new AgaviWebRequestDataHolder;
+
+        $result = $validator->execute($rd);
+
+        $this->assertEquals(AggregateRootTypeCommandValidator::SUCCESS, $result);
+        $this->assertEquals([ '__command' ], $rd->getParameterNames());
+        $this->assertCount(0, $this->vm->getReport()->getErrorMessages());
+        $command = $rd->getParameter('__command');
+        $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
+        $this->assertEquals(
+            [
+                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                'values' => [],
+                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'embedded_entity_commands' => [],
+                'uuid' => $command->getUuid(),
+                'metadata' => []
+            ],
+            $command->toArray()
+        );
     }
 
     public function testExecuteWithEmptySource()
@@ -162,7 +183,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $source_command = new CreateAuthorCommand([
             'values' => [
                 'firstname' => 'Brock',
-                'lastname' => 'Lesnar',
+                'lastname' => '',
                 'email' => 'honeybee.user@test.com'
             ],
             'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
@@ -186,7 +207,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
-                    'lastname' => 'Lesnar',
+                    'lastname' => '',
                     'email' => 'honeybee.user@test.com'
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
@@ -358,7 +379,33 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
     public function testExecuteWithMissingEmbeddedEntityValues()
     {
+        $validator = $this->createValidator();
+
+        $rd = new AgaviWebRequestDataHolder([
+            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
+                'create_author' => [
+                    'products' => [
+                        [
+                            '@type' => 'highlight'
+                            // missing mandatory title
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $result = $validator->execute($rd);
+
+        // @todo handle validation of missing mandatory embedded values
         $this->markTestIncomplete();
+
+        $this->assertEquals(AggregateRootTypeCommandValidator::ERROR, $result);
+        $query = new AgaviValidationReportQuery($this->vm->getReport());
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals(
+            [ 'Title is required.' ],
+            $query->byArgument('create_author[products][0][title]')->getErrorMessages()
+        );
     }
 
     public function testExecuteWithPreUploadedFile()
@@ -372,7 +419,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => 'Lesnar',
                     'email' => 'honeybee.user@test.com',
                     'images' => [
-                        [ /* empty file */ ],
+                        [ /* empty value */ ],
                         [
                             'location' => __DIR__ . '/Fixture/kitty.jpg',
                             'title' => 'Kitty',

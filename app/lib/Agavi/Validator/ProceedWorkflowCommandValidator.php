@@ -3,22 +3,41 @@
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use Honeybee\Model\Aggregate\AggregateRootInterface;
+use Honeybee\Model\Command\AggregateRootCommandBuilder;
 use Honeybee\Projection\WorkflowSubject;
 
 class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
 {
-    protected function getValidatedAggregateRootCommandPayload(AggregateRootInterface $aggregate_root)
+    protected function getCommandPayload(array $request_payload, AggregateRootInterface $aggregate_root)
     {
-        $state_machine = $this->aggregate_root_type->getWorkflowStateMachine();
+        // no need to filter payload as we are not building the command with values
+        return $request_payload;
+    }
+
+    protected function buildCommand(array $command_payload, AggregateRootInterface $aggregate_root)
+    {
+        $argument = $this->getArgument();
+        if (!isset($command_payload[$argument])) {
+            $this->throwError('missing_workflow_event');
+            return false;
+        }
+
+        $state_machine = $aggregate_root->getType()->getWorkflowStateMachine();
         $current_state_name = $aggregate_root->getWorkflowState();
         $supported_events = WorkflowSubject::getSupportedEventsFor($state_machine, $current_state_name);
-        $event_name = $this->getData($this->getArgument());
 
+        $event_name = $command_payload[$argument];
         if (!in_array($event_name, $supported_events)) {
             $this->throwError('invalid_workflow_event');
             return false;
         }
 
-        return [ 'current_state_name' => $current_state_name, 'event_name' => $event_name ];
+        $result = (new AggregateRootCommandBuilder($aggregate_root->getType(), $this->getCommandImplementor()))
+            ->fromEntity($aggregate_root)
+            ->withEventName($event_name)
+            ->withCurrentStateName($current_state_name)
+            ->build();
+
+        return $this->validateBuildResult($result);
     }
 }

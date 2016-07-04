@@ -2,7 +2,6 @@
 
 namespace Honeybee\Tests\Mock;
 
-use AgaviConfig;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\ServiceLocator;
 

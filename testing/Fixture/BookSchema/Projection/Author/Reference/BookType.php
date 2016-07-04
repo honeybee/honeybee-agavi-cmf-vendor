@@ -5,6 +5,7 @@ namespace Honeybee\Tests\Fixture\BookSchema\Projection\Author\Reference;
 use Honeybee\Projection\ReferencedEntityType;
 use Trellis\Common\Options;
 use Trellis\Runtime\Attribute\AttributeInterface;
+use Trellis\Runtime\Attribute\Text\TextAttribute;
 use Trellis\Runtime\EntityTypeInterface;
 
 class BookType extends ReferencedEntityType
@@ -13,7 +14,9 @@ class BookType extends ReferencedEntityType
     {
         parent::__construct(
             'Book',
-            [],
+            [
+                new TextAttribute('title', $this, [ 'mirrored' => true ], $parent_attribute)
+            ],
             new Options(
                 [
                     'referenced_type' => '\\Honeybee\\Tests\\Fixture\\BookSchema\\Projection\\Book\\BookType',

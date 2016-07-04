@@ -10,9 +10,9 @@ use Honeybee\Model\Aggregate\AggregateRootInterface;
 
 class SetUserAuthTokenCommandValidator extends AggregateRootCommandValidator
 {
-    protected function getValidatedAggregateRootCommandPayload(AggregateRootInterface $aggregate_root)
+    protected function getCommandPayload(array $request_payload, AggregateRootInterface $aggregate_root)
     {
-        $expire_date = new DateTime();
+        $expire_date = new DateTime;
         $expire_date->add(new DateInterval('PT20M')); // 20 minutes
 
         return [

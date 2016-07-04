@@ -2,29 +2,19 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
-use AgaviArrayPathDefinition;
 use AgaviConfig;
 use AgaviImageFileValidator;
 use AgaviRequestDataHolder;
 use AgaviUploadedFile;
-use AgaviValidationIncident;
 use AgaviValidator;
 use AgaviVirtualArrayPath;
 use Honeybee\Common\Error\Error;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
-use Honeybee\Model\Aggregate\AggregateRootInterface;
-use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Trellis\Runtime\Attribute\AttributeInterface;
-use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
-use Trellis\Runtime\Attribute\ImageList\ImageListAttribute;
 use Trellis\Runtime\Attribute\Image\Image;
-use Trellis\Runtime\Attribute\Image\ImageAttribute;
-use Trellis\Runtime\EntityTypeInterface;
-use Trellis\Runtime\Entity\EntityInterface;
-use Trellis\Runtime\Entity\EntityList;
 use Trellis\Runtime\Validator\Result\IncidentInterface;
 use Trellis\Runtime\Validator\Rule\Type\SanitizedFilenameRule;
 use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
@@ -337,9 +327,8 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
                 throw new RuntimeError('Missing required parameter "aggregate_root_type".');
             }
 
-            $this->aggregate_root_type = $this->getServiceLocator()
-                ->getAggregateRootTypeMap()
-                    ->getItem($this->getParameter('aggregate_root_type'));
+            $aggregate_root_type = $this->getParameter('aggregate_root_type');
+            $this->aggregate_root_type = $this->getServiceLocator()->getAggregateRootTypeMap()->getItem($aggregate_root_type);
         }
 
         return $this->aggregate_root_type;
