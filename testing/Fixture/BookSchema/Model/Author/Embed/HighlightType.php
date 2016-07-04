@@ -15,7 +15,7 @@ class HighlightType extends EmbeddedEntityType
         parent::__construct(
             'Highlight',
             [
-                new TextAttribute('title', $this, [ 'min_length' => 2 ], $parent_attribute),
+                new TextAttribute('title', $this, [ 'mandatory' => true, 'min_length' => 2 ], $parent_attribute),
                 new TextAttribute('description', $this, [], $parent_attribute),
             ],
             new Options([]),

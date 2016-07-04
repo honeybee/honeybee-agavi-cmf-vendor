@@ -21,7 +21,7 @@ class AuthorType extends ProjectionType
             'Author',
             [
                 new TextAttribute('firstname', $this, [ 'mandatory' => true, 'min_length' => 2 ]),
-                new TextAttribute('lastname', $this, [ 'mandatory' => true ]),
+                new TextAttribute('lastname', $this, [ 'min_length' => 2 ]),
                 new EmailAttribute('email', $this, [ 'mandatory' => true ]),
                 new TextAttribute('blurb', $this, [ 'default_value' =>  'the grinch' ]),
                 new TokenAttribute('token', $this),
