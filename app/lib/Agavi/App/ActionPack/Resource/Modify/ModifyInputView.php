@@ -16,7 +16,8 @@ class ModifyInputView extends View
         $view_scope = $this->getAttribute('view_scope', 'default.templates.modify');
 
         $default_ns = sprintf('modify_%s', $resource->getType()->getPrefix());
-        $renderer_settings = [ 'group_parts' => [ $request_data->getParameter('data_ns', $default_ns) ] ];
+        $default_settings = [ 'group_parts' => [ $request_data->getParameter('data_ns', $default_ns) ] ];
+        $renderer_settings = $this->getResourceRendererSettings($default_settings);
         $rendered_resource = $this->renderSubject($resource, $renderer_settings);
         $this->setAttribute('rendered_resource', $rendered_resource);
 
@@ -42,5 +43,10 @@ class ModifyInputView extends View
         return [
             $this->getServiceLocator()->getActivityService()->getActivity($resource_type->getPrefix(), 'collection')
         ];
+    }
+
+    protected function getResourceRendererSettings($default_settings = [])
+    {
+        return array_replace_recursive($default_settings, []);
     }
 }

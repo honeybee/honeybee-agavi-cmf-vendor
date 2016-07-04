@@ -6,6 +6,7 @@ use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\EntityInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
+use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Projection\ProjectionInterface;
 use Honeybee\Ui\Renderer\AttributeRenderer;
 
@@ -67,6 +68,7 @@ abstract class EntityRenderer extends Renderer
 
         $entity_type = $entity->getType();
 
+        $fields_options = $this->getOption('__fields_options', new Settings());
         $fields = $view_template->extractAllFields();
         foreach ($fields as $field_name => $field) {
             $attribute = null;
@@ -75,11 +77,14 @@ abstract class EntityRenderer extends Renderer
             if ($field_config->has('attribute_path')) {
                 $attribute = $entity_type->getAttribute($field_config->get('attribute_path'));
             }
+            $field_options = $fields_options->has($field_name)
+                ? $fields_options->get($field_name)
+                : new Settings();
 
             if ($attribute) {
                 // the attribute_path below ensures, that fields are provided with a cache-key, that is "unique enough"
                 $renderer_config = new ArrayConfig(
-                    array_merge($field->getConfig()->toArray(), [ 'attribute_path' => $attribute->getPath() ])
+                    array_merge($field_config->toArray(), [ 'attribute_path' => $attribute->getPath() ])
                 );
                 $renderer = $this->renderer_service->getRenderer($attribute, $this->output_format, $renderer_config);
 
@@ -104,7 +109,7 @@ abstract class EntityRenderer extends Renderer
                     $renderer_settings
                 );
             } else {
-                $renderer_config = new ArrayConfig($field->getConfig()->toArray());
+                $renderer_config = new ArrayConfig($field_config->toArray());
                 if (!$renderer_config->has('renderer')) {
                     throw new RuntimeError(
                         sprintf(
@@ -119,8 +124,10 @@ abstract class EntityRenderer extends Renderer
                 }
                 $renderer = $this->renderer_service->getRenderer(null, $this->output_format, $renderer_config);
 
-                $renderer_settings = [];
-                $renderer_settings = $renderer_config->getSettings()->toArray();
+                $renderer_settings = array_replace_recursive(
+                    $renderer_config->getSettings()->toArray(),
+                    $field_options->toArray()
+                );
                 $renderer_settings['group_parts'] = $this->getOption(
                     'group_parts',
                     $this->getOption('group_parts', [])

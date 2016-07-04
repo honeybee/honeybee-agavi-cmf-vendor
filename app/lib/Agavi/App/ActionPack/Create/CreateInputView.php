@@ -19,7 +19,8 @@ class CreateInputView extends View
         $view_config_scope = $this->getAttribute('view_scope');
         $entity_short_prefix = StringToolkit::asSnakeCase($resource->getType()->getName());
         $data_ns = sprintf('create_%s', $entity_short_prefix);
-        $renderer_settings = [ 'group_parts' => [ $data_ns ] ];
+        $default_settings = [ 'group_parts' => [ $data_ns ] ];
+        $renderer_settings = $this->getResourceRendererSettings($default_settings);
         $rendered_resource = $this->renderSubject($resource, $renderer_settings);
         $this->setAttribute('rendered_resource', $rendered_resource);
 
@@ -52,5 +53,10 @@ class CreateInputView extends View
         return [
             $this->getServiceLocator()->getActivityService()->getActivity($resource_type->getPrefix(), 'collection')
         ];
+    }
+
+    protected function getResourceRendererSettings($default_settings = [])
+    {
+        return array_replace_recursive($default_settings, []);
     }
 }

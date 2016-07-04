@@ -14,7 +14,8 @@ class ResourceSuccessView extends View
         $resource = $this->getAttribute('resource');
 
         $view_config_scope = $this->getAttribute('view_config_scope', 'default.templates.modify');
-        $rendered_resource = $this->renderSubject($resource, []);
+        $renderer_settings = $this->getResourceRendererSettings();
+        $rendered_resource = $this->renderSubject($resource, $renderer_settings);
 
         $routing = $this->getContext()->getRouting();
         $head_revision = $request_data->getParameter('head_revision');
@@ -44,5 +45,10 @@ class ResourceSuccessView extends View
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
         echo print_r($this->getAttribute('resource')->toArray(), true) . PHP_EOL;
+    }
+
+    protected function getResourceRendererSettings($default_settings = [])
+    {
+        return array_replace_recursive($default_settings, []);
     }
 }

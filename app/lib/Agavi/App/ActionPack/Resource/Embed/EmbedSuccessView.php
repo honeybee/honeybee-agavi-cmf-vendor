@@ -16,12 +16,18 @@ class EmbedSuccessView extends View
         /** @var Honeybee\Entity **/
         $embed = $this->getAttribute('embed');
 
-        $renderer_settings = [];
+        $default_settings = [];
         if ($request_data->hasParameter('input_group')) {
-            $renderer_settings['group_parts'] = $request_data->getParameter('input_group');
+            $default_settings['group_parts'] = $request_data->getParameter('input_group');
         }
+        $renderer_settings = $this->getResourceRendererSettings($default_settings);
 
         $rendered_embed = $this->renderSubject($embed, $renderer_settings);
         $this->setAttribute('rendered_embed', $rendered_embed);
+    }
+
+    protected function getResourceRendererSettings($default_settings = [])
+    {
+        return array_replace_recursive($default_settings, []);
     }
 }
