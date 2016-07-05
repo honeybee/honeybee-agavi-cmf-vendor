@@ -17,6 +17,7 @@ class HighlightType extends EmbeddedEntityType
             [
                 new TextAttribute('title', $this, [ 'mandatory' => true, 'min_length' => 2 ], $parent_attribute),
                 new TextAttribute('description', $this, [], $parent_attribute),
+                new TextAttribute('ignored', $this, [], $parent_attribute)
             ],
             new Options([]),
             $parent,

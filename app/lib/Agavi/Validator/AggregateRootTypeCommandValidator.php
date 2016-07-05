@@ -10,6 +10,7 @@ use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\EntityTypeInterface;
 use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
+use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Honeybee\Model\Command\AggregateRootCommand;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
 use Honeybee\Model\Command\AggregateRootTypeCommandInterface;
@@ -56,14 +57,12 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return false;
     }
 
+    /**
+     * @return array
+     */
     protected function getCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
-        return $this->processRequestPayload(
-            $request_payload,
-            $aggregate_root->getType(),
-            '',
-            $this->getAllowedAttributeNames()
-        );
+        return $this->processRequestPayload($request_payload, $aggregate_root->getType());
     }
 
     protected function buildCommand(array $command_values, AggregateRootInterface $aggregate_root)
@@ -97,19 +96,18 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return true; // always run this validator
     }
 
-    protected function processRequestPayload(
-        array $payload,
-        EntityTypeInterface $entity_type,
-        $path_prefix = '',
-        array $filter_names = []
-    ) {
+    protected function processRequestPayload(array $payload, EntityTypeInterface $entity_type, $path_prefix = '')
+    {
+        $allowed_attribute_names = $this->getAllowedAttributeNames($entity_type);
+
         $filtered = [];
-        if (empty($filter_names)) {
+        if (empty($allowed_attribute_names)) {
             $filtered = $payload;
         }
 
-        foreach ($filter_names as $attribute_name) {
-            if (!isset($payload[$attribute_name])) {
+        foreach ($allowed_attribute_names as $attribute_name) {
+            // attribute not in payload or bogus allowed attribute name
+            if (!isset($payload[$attribute_name]) || !$entity_type->hasAttribute($attribute_name)) {
                 continue;
             }
 
@@ -120,9 +118,10 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                     $embedded_type = $attribute->getEmbeddedEntityTypeMap()->getItem($entity_payload['@type']);
                     $filtered[$attribute_name][$position] = $this->processRequestPayload(
                         $entity_payload,
-                        $entity_type,
+                        $embedded_type,
                         $current_prefix . '.' . $position
                     );
+                    $filtered[$attribute_name][$position]['@type'] = $entity_payload['@type'];
                 }
             } elseif ($attribute instanceof HandlesFileListInterface) {
                 foreach ($payload[$attribute_name] as $position => $file_payload) {
@@ -366,16 +365,15 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return $implementor;
     }
 
-    protected function getAllowedAttributeNames()
+    protected function getAllowedAttributeNames(EntityTypeInterface $entity_type)
     {
         $allowed_attributes = [];
 
-        $whitelisted_attributes = $this->getWhitelistedAttributes();
-        $blacklisted_attributes = $this->getBlacklistedAttributes();
-
-        $attribute_names = $this->getAggregateRootType()->getAttributes()->getKeys();
+        $whitelisted_attributes = $this->getWhitelistedAttributes($entity_type);
+        $blacklisted_attributes = $this->getBlacklistedAttributes($entity_type);
         $allowed_attribute_names = array_diff($whitelisted_attributes, $blacklisted_attributes);
 
+        $attribute_names = $entity_type->getAttributes()->getKeys();
         foreach ($attribute_names as $attribute_name) {
             if (in_array($attribute_name, $blacklisted_attributes)) {
                 continue;
@@ -392,16 +390,41 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return array_unique($allowed_attributes);
     }
 
-    protected function getBlacklistedAttributes()
+    protected function getBlacklistedAttributes(EntityTypeInterface $entity_type)
     {
-        $default_blacklist = $this->getAggregateRootType()->getDefaultAttributeNames();
-        return array_merge($this->getParameter('attribute_blacklist', []), $default_blacklist);
+        $root_prefix = $entity_type->getRoot()->getPrefix();
+        $path_prefix = preg_quote(preg_replace("#^$root_prefix\.?#", '', $entity_type->getScopeKey()));
+
+        $attribute_blacklist = [];
+        foreach ($this->getParameter('attribute_blacklist', []) as $attribute_name) {
+            preg_match("#^$path_prefix\.?(?<name>[a-z_]+)$#", $attribute_name, $match);
+            if (isset($match['name'])) {
+                $attribute_blacklist[] = $match['name'];
+            }
+        }
+
+        if ($entity_type instanceof AggregateRootTypeInterface) {
+            $default_blacklist = $entity_type->getDefaultAttributeNames();
+            $attribute_blacklist = array_merge($attribute_blacklist, $default_blacklist);
+        }
+
+        return array_unique($attribute_blacklist);
     }
 
-    protected function getWhitelistedAttributes()
+    protected function getWhitelistedAttributes(EntityTypeInterface $entity_type)
     {
-        $default_whitelist = [];
-        return $this->getParameter('attribute_whitelist', $default_whitelist);
+        $root_prefix = $entity_type->getRoot()->getPrefix();
+        $path_prefix = preg_quote(preg_replace("#^$root_prefix\.?#", '', $entity_type->getScopeKey()));
+
+        $attribute_whitelist = [];
+        foreach ($this->getParameter('attribute_whitelist', []) as $attribute_name) {
+            preg_match("#^$path_prefix\.?(?<name>[a-z_]+)$#", $attribute_name, $match);
+            if (isset($match['name'])) {
+                $attribute_whitelist[] = $match['name'];
+            }
+        }
+
+        return array_unique($attribute_whitelist);
     }
 
     protected function throwErrorInParent($attribute_value_path, array $builder_incidents)
@@ -457,6 +480,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         if (!$command_implementor) {
             throw new RuntimeError('Missing required parameter "command_implementor".');
         }
+
         if (!class_exists($command_implementor)) {
             throw new RuntimeError(
                 sprintf('Unable to load configured command_implementor: "%s".', $command_implementor)

@@ -83,7 +83,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'identifier_arg' => 'identifier',
                 'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
-                'attribute_blacklist' => [ 'token' ]
+                'attribute_blacklist' => [ 'token', 'products.highlight.ignored' ]
             ]
         );
     }
@@ -416,6 +416,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'identifier' => 'e8d1f394-4148-49de-aa5f-3e922bde11ca',
                             'title' => 'Awesome',
                             'description' => '',
+                            'ignored' => ''
                         ]
                     ],
                     'books' => []
@@ -577,6 +578,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'identifier' => 'e8d1f394-4148-49de-aa5f-3e922bde11ca',
                             'title' => 'Awesome',
                             'description' => '',
+                            'ignored' => ''
                         ]
                     ],
                     'books' => []
@@ -621,6 +623,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'identifier' => 'e8d1f394-4148-49de-aa5f-3e922bde11ca',
                             'title' => 'Awesome',
                             'description' => '',
+                            'ignored' => ''
                         ]
                     ],
                     'books' => []

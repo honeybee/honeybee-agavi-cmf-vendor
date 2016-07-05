@@ -45,7 +45,12 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'base' => $base,
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
-                'attribute_blacklist' => [ 'token' ],
+                'attribute_whitelist' => [ 'products', 'nada', 'token' ],
+                'attribute_blacklist' => [
+                    'token',
+                    'products.highlight.ignored',
+                    'products.highlight.non.existent.attr'
+                ],
                 'export' => '__command'
             ]
         );
@@ -207,7 +212,8 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'products' => [
                         [
                             '@type' => 'highlight',
-                            'title' => 'Hall of Fame'
+                            'title' => 'Hall of Fame',
+                            'ignored' => 'ignore this'
                         ]
                     ],
                     'books' => [
