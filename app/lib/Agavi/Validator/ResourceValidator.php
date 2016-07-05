@@ -235,7 +235,7 @@ class ResourceValidator extends AgaviValidator
             throw new RuntimeError('Missing required "resource_type" parameter.');
         }
 
-        $this->resource_type = $this->getServiceLocator()->getProjectionTypeByPrefix(
+        $this->resource_type = $this->getServiceLocator()->getProjectionTypeMap()->getItem(
             $this->getParameter('resource_type')
         );
 
@@ -246,7 +246,7 @@ class ResourceValidator extends AgaviValidator
     {
         if (!$this->aggregate_root_type) {
             $resource_type = $this->getProjectionType();
-            $this->aggregate_root_type = $this->getServiceLocator()->getAggregateRootTypeByPrefix(
+            $this->aggregate_root_type = $this->getServiceLocator()->getAggregateRootTypeMap()->getItem(
                 $resource_type->getPrefix()
             );
         }

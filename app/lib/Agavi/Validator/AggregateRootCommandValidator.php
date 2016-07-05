@@ -191,7 +191,9 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         array $conflicting_changes
     ) {
         $service_locator = $this->getServiceLocator();
-        $projection_type = $service_locator->getProjectionTypeByPrefix($this->getAggregateRootType()->getPrefix());
+        $projection_type = $service_locator
+            ->getProjectionTypeMap()
+                ->getItem($this->getAggregateRootType()->getPrefix());
 
         $conflicted_projection = $projection_type->createEntity(
             array_merge($aggregate_root->toNative(), $conflicting_changes)

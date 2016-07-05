@@ -66,7 +66,7 @@ class EmbedPathValidator extends AgaviValidator
             throw new RuntimeError('Missing required "resource_type" parameter.');
         }
 
-        $this->resource_type = $this->getServiceLocator()->getProjectionTypeByPrefix(
+        $this->resource_type = $this->getServiceLocator()->getProjectionTypeMap()->getItem(
             $this->getParameter('resource_type')
         );
 

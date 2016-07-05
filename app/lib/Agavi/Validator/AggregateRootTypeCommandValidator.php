@@ -571,8 +571,9 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 throw new RuntimeError('Missing required paramter "aggregate_root_type".');
             }
 
-            $aggregate_root_type = $this->getParameter('aggregate_root_type');
-            $this->aggregate_root_type = $this->getServiceLocator()->getAggregateRootTypeByPrefix($aggregate_root_type);
+            $this->aggregate_root_type = $this->getServiceLocator()
+                ->getAggregateRootTypeMap()
+                    ->getItem($this->getParameter('aggregate_root_type'));
         }
 
         return $this->aggregate_root_type;

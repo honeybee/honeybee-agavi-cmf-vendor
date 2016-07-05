@@ -126,7 +126,7 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
             StringToolkit::asSnakeCase($entity_type)
         );
 
-        return $this->getServiceLocator()->getAggregateRootTypeByPrefix($prefix);
+        return $this->getServiceLocator()->getAggregateRootTypeMap()->getItem($prefix);
     }
 
     protected function getProjectionType()
@@ -142,7 +142,7 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
             StringToolkit::asSnakeCase($entity_type)
         );
 
-        return $this->getServiceLocator()->getProjectionTypeByPrefix($prefix);
+        return $this->getServiceLocator()->getProjectionTypeMap()->getItem($prefix);
     }
 
     protected function getServiceLocator()

@@ -55,7 +55,7 @@ class BulkAction extends Action
     {
         $locator = $this->getServiceLocator();
         $meta_data = $bulk_operation->getMetaData();
-        $ar_type = $locator->getAggregateRootTypeByPrefix($meta_data->getType());
+        $ar_type = $locator->getAggregateRootTypeMap()->getItem($meta_data->getType());
 
         $locator->getCommandBus()->post(
             $this->buildCommand($meta_data, $bulk_operation->getPayload())
