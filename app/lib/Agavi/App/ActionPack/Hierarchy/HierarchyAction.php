@@ -5,7 +5,9 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\FrameworkBinding\Agavi\Validator\DisplayModeValidator;
-use Honeybee\Projection\ProjectionList;
+use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
+use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
+use Honeybee\Ui\ResourceCollection;
 
 class HierarchyAction extends Action
 {
@@ -14,7 +16,7 @@ class HierarchyAction extends Action
         $query_result = $this->query($this->getSearchSpec($request_data));
 
         $this->setAttribute('resource_type', $this->getProjectionType());
-        $this->setAttribute('resource_collection', new ProjectionList($query_result->getResults()));
+        $this->setAttribute('resource_collection', new ResourceCollection($query_result->getResults()));
         $this->setAttribute('number_of_results', $query_result->getTotalCount());
         $this->setAttribute('activities', $this->getActivities());
         $this->setAttribute('view_scope', $this->getScopeKey());
@@ -36,19 +38,14 @@ class HierarchyAction extends Action
         $parent_node = $request_data->getParameter('parent_node', false);
         $query = $list_config->asQuery();
 
-         /**
-          * @todo merge hierarchy state into query
-          */
-        $search_spec = [];
         if ($parent_node) {
-            $parent_filter = [ 'parent_node_id' => $parent_node->getIdentifier() ];
+            $query->getFilterCriteriaList()->push(
+                new AttributeCriteria('parent_node_id', new Equals($parent_node->getIdentifier()))
+            );
         } else {
-            $parent_filter = [ 'parent_node_id' => '__empty' ];
-        }
-        if (array_key_exists('filter', $search_spec)) {
-            $search_spec['filter'] = array_merge($search_spec['filter'], $parent_filter);
-        } else {
-            $search_spec['filter'] = $parent_filter;
+            $query->getFilterCriteriaList()->push(
+                new AttributeCriteria('parent_node_id', new Equals('__empty'))
+            );
         }
 
         return $query;
