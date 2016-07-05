@@ -8,16 +8,16 @@ use Honeybee\Projection\WorkflowSubject;
 
 class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
 {
-    protected function getCommandPayload(array $request_payload, AggregateRootInterface $aggregate_root)
+    protected function getCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
         // no need to filter payload as we are not building the command with values
         return $request_payload;
     }
 
-    protected function buildCommand(array $command_payload, AggregateRootInterface $aggregate_root)
+    protected function buildCommand(array $command_values, AggregateRootInterface $aggregate_root)
     {
         $argument = $this->getArgument();
-        if (!isset($command_payload[$argument])) {
+        if (!isset($command_values[$argument])) {
             $this->throwError('missing_workflow_event');
             return false;
         }
@@ -26,7 +26,7 @@ class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
         $current_state_name = $aggregate_root->getWorkflowState();
         $supported_events = WorkflowSubject::getSupportedEventsFor($state_machine, $current_state_name);
 
-        $event_name = $command_payload[$argument];
+        $event_name = $command_values[$argument];
         if (!in_array($event_name, $supported_events)) {
             $this->throwError('invalid_workflow_event');
             return false;

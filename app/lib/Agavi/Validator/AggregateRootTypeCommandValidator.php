@@ -20,7 +20,6 @@ use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 use Trellis\Runtime\Attribute\Image\Image;
-use Trellis\Runtime\Attribute\ImageList\ImageListAttribute;
 use Trellis\Runtime\Attribute\ListAttribute;
 
 class AggregateRootTypeCommandValidator extends AgaviValidator
@@ -44,8 +43,8 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         if (!$command instanceof AggregateRootTypeCommandInterface) {
             $aggregate_root = $this->getAggregateRootType()->createEntity();
             $request_payload = (array)$this->getData(null);
-            $command_payload = $this->getCommandPayload($request_payload, $aggregate_root);
-            $command = $this->buildCommand($command_payload, $aggregate_root);
+            $command_values = $this->getCommandValues($request_payload, $aggregate_root);
+            $command = $this->buildCommand($command_values, $aggregate_root);
         }
 
         // export the commazzle
@@ -57,7 +56,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return false;
     }
 
-    protected function getCommandPayload(array $request_payload, AggregateRootInterface $aggregate_root)
+    protected function getCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
         return $this->processRequestPayload(
             $request_payload,
@@ -67,12 +66,12 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         );
     }
 
-    protected function buildCommand(array $command_payload, AggregateRootInterface $aggregate_root)
+    protected function buildCommand(array $command_values, AggregateRootInterface $aggregate_root)
     {
         // consider dropping empty command payloads here
         $result = (new AggregateRootCommandBuilder($aggregate_root->getType(), $this->getCommandImplementor()))
             ->fromEntity($aggregate_root)
-            ->withValues($command_payload)
+            ->withValues($command_values)
             ->build();
 
         return $this->validateBuildResult($result);
@@ -125,7 +124,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                         $current_prefix . '.' . $position
                     );
                 }
-            } elseif ($attribute instanceof ImageListAttribute) {
+            } elseif ($attribute instanceof HandlesFileListInterface) {
                 foreach ($payload[$attribute_name] as $position => $file_payload) {
                     $filtered[$attribute_name][$position] = $this->prepareUploadedFile(
                         $file_payload,
@@ -146,7 +145,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         return $filtered;
     }
 
-    protected function prepareUploadedFile(array $file_payload, ImageListAttribute $attribute, $payload_path)
+    protected function prepareUploadedFile(array $file_payload, HandlesFileListInterface $attribute, $payload_path)
     {
         // extract any uploaded file from the source files
         $uploaded_files = $this->validationParameters->getAll('files');

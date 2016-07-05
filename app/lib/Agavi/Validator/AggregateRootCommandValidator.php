@@ -32,6 +32,7 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
             }
         }
 
+        // don't accept future non-existent revisions
         if ($aggregate_root_history->getLast()->getSeqNumber() < $revision) {
             $this->throwError('invalid_revision');
             return false;
@@ -41,8 +42,8 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
 
         // build the command from the request and AR
         $request_payload = (array)$this->getData(null);
-        $command_payload = $this->getCommandPayload($request_payload, $aggregate_root);
-        $command = $this->buildCommand($command_payload, $aggregate_root);
+        $command_values = $this->getCommandValues($request_payload, $aggregate_root);
+        $command = $this->buildCommand($command_values, $aggregate_root);
         if (!$command instanceof AggregateRootCommandInterface) {
             return false;
         }
@@ -66,6 +67,7 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
             $this->throwError('conflict_detected');
             return false;
         }
+
         $this->export($command, $this->getParameter('export', 'command'));
 
         return true;
