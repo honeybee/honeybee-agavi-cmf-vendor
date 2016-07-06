@@ -779,30 +779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-<<<<<<< HEAD
-<<<<<<< HEAD
                 "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
                 "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
-=======
-                "reference": "39da90877453f984bc0810db4be39f619ea4447b"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/39da90877453f984bc0810db4be39f619ea4447b",
-                "reference": "39da90877453f984bc0810db4be39f619ea4447b",
->>>>>>> Refactor command validators
-=======
-                "reference": "4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095",
-                "reference": "4f9c71fc7bcb8e41bc62c6cf79e7daa199d61095",
->>>>>>> Mandatory attribute value checks
                 "shasum": ""
             },
             "require": {
@@ -884,15 +866,7 @@
                 "hexagonal",
                 "messaging"
             ],
-<<<<<<< HEAD
-<<<<<<< HEAD
             "time": "2016-07-06 08:11:38"
-=======
-            "time": "2016-07-04 12:17:30"
->>>>>>> Refactor command validators
-=======
-            "time": "2016-07-04 16:33:13"
->>>>>>> Mandatory attribute value checks
         },
         {
             "name": "honeybee/trellis",
