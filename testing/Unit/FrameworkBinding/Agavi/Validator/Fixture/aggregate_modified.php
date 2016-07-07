@@ -67,6 +67,19 @@ return [
                 'embedded_entity_type' => 'highlight',
                 'parent_attribute_name' => 'products',
                 'embedded_entity_events' => []
+            ],
+            [
+                '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\EmbeddedEntityAddedEvent',
+                'data' => [
+                    '@type' => 'highlight',
+                    'identifier' => '6d1460a7-c8ca-4fd9-89a2-3991a0766b14',
+                    'title' => 'Amaze'
+                ],
+                'position' => 0,
+                'embedded_entity_identifier' => '6d1460a7-c8ca-4fd9-89a2-3991a0766b14',
+                'embedded_entity_type' => 'highlight',
+                'parent_attribute_name' => 'products',
+                'embedded_entity_events' => []
             ]
         ],
         'seq_number' => 2,

@@ -779,12 +779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f"
+                "reference": "d3d26676f3b90c1bb5343908ed5363ec0a282fdd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
-                "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/d3d26676f3b90c1bb5343908ed5363ec0a282fdd",
+                "reference": "d3d26676f3b90c1bb5343908ed5363ec0a282fdd",
                 "shasum": ""
             },
             "require": {
@@ -866,7 +866,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-06 08:11:38"
+            "time": "2016-07-06 22:15:08"
         },
         {
             "name": "honeybee/trellis",
@@ -2740,12 +2740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "ec1ca8266d9f8220cb0f90bbb84735137d180c90"
+                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/ec1ca8266d9f8220cb0f90bbb84735137d180c90",
-                "reference": "ec1ca8266d9f8220cb0f90bbb84735137d180c90",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/ee06e7b564ea4dc9b90605d894c2626f87df334d",
+                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d",
                 "shasum": ""
             },
             "require": {
@@ -2797,7 +2797,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-06-02 10:51:58"
+            "time": "2016-07-06 09:05:19"
         },
         {
             "name": "myclabs/deep-copy",

@@ -98,50 +98,58 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
     protected function processRequestPayload(array $payload, EntityTypeInterface $entity_type, $path_prefix = '')
     {
+        $processed_payload = [];
         $allowed_attribute_names = $this->getAllowedAttributeNames($entity_type);
 
-        $filtered = [];
-        if (empty($allowed_attribute_names)) {
-            $filtered = $payload;
-        }
-
         foreach ($allowed_attribute_names as $attribute_name) {
-            // attribute not in payload or bogus allowed attribute name
+            // skip processing if attribute not in payload or not on entity type
             if (!isset($payload[$attribute_name]) || !$entity_type->hasAttribute($attribute_name)) {
                 continue;
             }
 
             $attribute = $entity_type->getAttribute($attribute_name);
             $current_prefix = $path_prefix ? $path_prefix . '.' . $attribute_name : $attribute_name;
-            if ($attribute instanceof EmbeddedEntityListAttribute) {
-                foreach ($payload[$attribute_name] as $position => $entity_payload) {
-                    $embedded_type = $attribute->getEmbeddedEntityTypeMap()->getItem($entity_payload['@type']);
-                    $filtered[$attribute_name][$position] = $this->processRequestPayload(
-                        $entity_payload,
-                        $embedded_type,
-                        $current_prefix . '.' . $position
-                    );
-                    $filtered[$attribute_name][$position]['@type'] = $entity_payload['@type'];
-                }
-            } elseif ($attribute instanceof HandlesFileListInterface) {
-                foreach ($payload[$attribute_name] as $position => $file_payload) {
-                    $filtered[$attribute_name][$position] = $this->prepareUploadedFile(
-                        $file_payload,
-                        $attribute,
-                        $current_prefix . '.' . $position
-                    );
+            if ($attribute instanceof ListAttribute) {
+                $processed_payload[$attribute_name] = [];
+                foreach ($payload[$attribute_name] as $position => $embedded_payload) {
+                    if ($attribute instanceof EmbeddedEntityListAttribute) {
+                        $processed_payload[$attribute_name][$position] = $this->processRequestPayload(
+                            $embedded_payload,
+                            $attribute->getEmbeddedEntityTypeMap()->getItem($embedded_payload['@type']),
+                            $current_prefix . '.' . $position
+                        );
+                        // reapply @type info to filtered payload
+                        $processed_payload[$attribute_name][$position]['@type'] = $embedded_payload['@type'];
+                    } elseif ($attribute instanceof HandlesFileListInterface) {
+                        $processed_payload[$attribute_name][$position] = $this->prepareUploadedFile(
+                            $embedded_payload,
+                            $attribute,
+                            $current_prefix . '.' . $position
+                        );
+                    }
+                    // reapply any action to filtered payload
+                    if (isset($embedded_payload['__action'])) {
+                        $processed_payload[$attribute_name][$position]['__action'] = $embedded_payload['__action'];
+                    }
                 }
             } else {
-                $filtered[$attribute_name] = $payload[$attribute_name];
+                $processed_payload[$attribute_name] = $payload[$attribute_name];
             }
 
             if ($attribute instanceof ListAttribute) {
-                $filtered[$attribute_name] = ArrayToolkit::filterEmptyValues($filtered[$attribute_name]);
-                $filtered[$attribute_name] = $this->applyListAttributeActions($attribute, $filtered[$attribute_name]);
+                $processed_payload[$attribute_name] = ArrayToolkit::filterEmptyValues(
+                    $processed_payload[$attribute_name],
+                    null,
+                    false
+                );
+                $processed_payload[$attribute_name] = $this->applyListAttributeActions(
+                    $attribute,
+                    $processed_payload[$attribute_name]
+                );
             }
         }
 
-        return $filtered;
+        return $processed_payload;
     }
 
     protected function prepareUploadedFile(array $file_payload, HandlesFileListInterface $attribute, $payload_path)
@@ -214,20 +222,24 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 case '__duplicate':
                     unset($embedded_payload['__action']);
                     $duped_data = $embedded_payload;
-                    if ($attribute instanceof EmbeddedEntityListAttribute && isset($duped_data['identifier'])) {
+                    if ($attribute instanceof EmbeddedEntityListAttribute
+                        && isset($duped_data['identifier'])
+                    ) {
                         unset($duped_data['identifier']);
                     }
                     $duplicated_payload[] = $duped_data;
                     break;
                 case '__delete':
-                    if (!$attribute instanceof EmbeddedEntityListAttribute) {
-                        // complex listattribute values
-                        unset($embedded_payload['__action']);
+                    unset($embedded_payload['__action']);
+                    // ignore if there is an uploaded file in the corresponding files position
+                    if (!$attribute instanceof HandlesFileListInterface
+                        && !isset($this->validationParameters->getAll('files')[$position])
+                    ) {
                         array_splice($ordered_payload, $position, 1);
                     }
                     break;
                 default:
-                    // nothing to do here ...
+                    // ignore unsupported embed action
             }
         }
 
@@ -281,6 +293,8 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 ' to temp storage ' . $target_tempfile_uri . ' failed.'
             );
         }
+
+        // @todo handling non-image files
 
         // image attribute => determine image dimensions and add it to the uploaded file's properties
         $image_width = $uploaded_file->getWidth();
