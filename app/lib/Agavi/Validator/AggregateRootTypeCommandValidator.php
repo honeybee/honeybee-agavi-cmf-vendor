@@ -44,7 +44,15 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         if (!$command instanceof AggregateRootTypeCommandInterface) {
             $aggregate_root = $this->getAggregateRootType()->createEntity();
             $request_payload = (array)$this->getData(null);
-            $command_values = $this->getCommandValues($request_payload, $aggregate_root);
+            $command_values = (array)$this->getCommandValues($request_payload, $aggregate_root);
+
+            // no need to build the command if there were incidents
+            if (count($this->parentContainer->getValidatorIncidents($this->getParameter('name'))) > 0
+                || isset($this->incident)
+            ) {
+                return false;
+            }
+
             $command = $this->buildCommand($command_values, $aggregate_root);
         }
 
@@ -111,36 +119,43 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             $current_prefix = $path_prefix ? $path_prefix . '.' . $attribute_name : $attribute_name;
             if ($attribute instanceof ListAttribute) {
                 $processed_payload[$attribute_name] = [];
-                foreach ($payload[$attribute_name] as $position => $embedded_payload) {
+                foreach ((array)$payload[$attribute_name] as $position => $embed_payload) {
+                    $value_path = $current_prefix . '.' . $position;
                     if ($attribute instanceof EmbeddedEntityListAttribute) {
-                        $processed_payload[$attribute_name][$position] = $this->processRequestPayload(
-                            $embedded_payload,
-                            $attribute->getEmbeddedEntityTypeMap()->getItem($embedded_payload['@type']),
-                            $current_prefix . '.' . $position
-                        );
-                        // reapply @type info to filtered payload
-                        $processed_payload[$attribute_name][$position]['@type'] = $embedded_payload['@type'];
+                        if (!isset($embed_payload['@type'])
+                            || !$embed_type = $attribute->getEmbeddedEntityTypeMap()->getItem($embed_payload['@type'])
+                        ) {
+                            // skip processing for invalid @type
+                            $processed_payload[$attribute_name][$position] = $embed_payload;
+                        } else {
+                            $processed_payload[$attribute_name][$position] = $this->processRequestPayload(
+                                $embed_payload,
+                                $embed_type,
+                                $value_path
+                            );
+                            // reapply @type into processed payload
+                            $processed_payload[$attribute_name][$position]['@type'] = $embed_payload['@type'];
+                        }
                     } elseif ($attribute instanceof HandlesFileListInterface) {
                         $processed_payload[$attribute_name][$position] = $this->prepareUploadedFile(
-                            $embedded_payload,
+                            $embed_payload,
                             $attribute,
-                            $current_prefix . '.' . $position
+                            $value_path
                         );
                     }
-                    // reapply any action to filtered payload
-                    if (isset($embedded_payload['__action'])) {
-                        $processed_payload[$attribute_name][$position]['__action'] = $embedded_payload['__action'];
+                    // reapply action into processed payload
+                    if (isset($embed_payload['__action'])) {
+                        $processed_payload[$attribute_name][$position]['__action'] = $embed_payload['__action'];
                     }
                 }
             } else {
                 $processed_payload[$attribute_name] = $payload[$attribute_name];
             }
 
+            // filter empty placeholders and apply list actions
             if ($attribute instanceof ListAttribute) {
                 $processed_payload[$attribute_name] = ArrayToolkit::filterEmptyValues(
-                    $processed_payload[$attribute_name],
-                    null,
-                    false
+                    $processed_payload[$attribute_name]
                 );
                 $processed_payload[$attribute_name] = $this->applyListAttributeActions(
                     $attribute,

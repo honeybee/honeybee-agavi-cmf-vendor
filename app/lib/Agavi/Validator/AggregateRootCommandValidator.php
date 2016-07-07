@@ -42,7 +42,15 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
 
         // build the command from the request and AR
         $request_payload = (array)$this->getData(null);
-        $command_values = $this->getCommandValues($request_payload, $aggregate_root);
+        $command_values = (array)$this->getCommandValues($request_payload, $aggregate_root);
+
+        // no need to build the command if there were incidents
+        if (count($this->parentContainer->getValidatorIncidents($this->getParameter('name'))) > 0
+            || isset($this->incident)
+        ) {
+            return false;
+        }
+
         $command = $this->buildCommand($command_values, $aggregate_root);
         if (!$command instanceof AggregateRootCommandInterface) {
             return false;
