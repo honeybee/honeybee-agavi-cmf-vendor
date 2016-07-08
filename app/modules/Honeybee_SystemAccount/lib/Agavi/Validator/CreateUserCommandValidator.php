@@ -10,9 +10,9 @@ use Honeybee\Model\Aggregate\AggregateRootInterface;
 
 class CreateUserCommandValidator extends AggregateRootTypeCommandValidator
 {
-    protected function getCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
+    protected function getValidatedCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
-        $command_values = parent::getCommandValues($request_payload, $aggregate_root);
+        $command_values = parent::getValidatedCommandValues($request_payload, $aggregate_root);
 
         $expire_date = new DateTime;
         $expire_date->add(new DateInterval('PT20M')); // 20 minutes

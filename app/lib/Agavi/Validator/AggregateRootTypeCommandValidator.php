@@ -44,7 +44,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         if (!$command instanceof AggregateRootTypeCommandInterface) {
             $aggregate_root = $this->getAggregateRootType()->createEntity();
             $request_payload = (array)$this->getData(null);
-            $command_values = (array)$this->getCommandValues($request_payload, $aggregate_root);
+            $command_values = (array)$this->getValidatedCommandValues($request_payload, $aggregate_root);
 
             // no need to build the command if there were incidents
             if (count($this->parentContainer->getValidatorIncidents($this->getParameter('name'))) > 0
@@ -68,7 +68,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
     /**
      * @return array
      */
-    protected function getCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
+    protected function getValidatedCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
         return $this->processRequestPayload($request_payload, $aggregate_root->getType());
     }
@@ -161,6 +161,13 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                     $attribute,
                     $processed_payload[$attribute_name]
                 );
+                // inline_mode means that we never want to produce 'remove' embedded entity commands
+                // so we just remove the key if the payload is empty after processing.
+                if ($attribute->getOption('inline_mode', false) === true
+                    && empty($processed_payload[$attribute_name])
+                ) {
+                    unset($processed_payload[$attribute_name]);
+                }
             }
         }
 

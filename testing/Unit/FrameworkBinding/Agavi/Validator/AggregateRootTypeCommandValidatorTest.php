@@ -222,7 +222,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
                             'title' => 'test book'
                         ]
-                    ],
+                    ]
                 ]
             ]
         ]);

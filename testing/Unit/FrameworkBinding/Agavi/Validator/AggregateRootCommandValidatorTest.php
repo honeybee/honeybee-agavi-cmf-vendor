@@ -405,7 +405,14 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'ignored' => ''
                         ]
                     ],
-                    'books' => []
+                    'books' => [
+                        [
+                            '@type' => 'book',
+                            'identifier' => 'a4be230b-fdd2-49f2-b943-f5b5b17a0d61',
+                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-e5e61e60-67de-405b-9e10-e8c2f9455f3f-de_DE-1',
+                            'title' => 'ZAMM'
+                        ]
+                    ]
                 ],
                 'conflicted_resource' => [
                     '@type' => 'honeybee-cmf.test_fixtures.author',
@@ -474,10 +481,24 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                                     'identifier' => '6d1460a7-c8ca-4fd9-89a2-3991a0766b14',
                                     'title' => 'Amaze'
                                 ],
-                                'position' => 0,
+                                'position' => 1,
                                 'embedded_entity_identifier' => '6d1460a7-c8ca-4fd9-89a2-3991a0766b14',
                                 'embedded_entity_type' => 'highlight',
                                 'parent_attribute_name' => 'products',
+                                'embedded_entity_events' => []
+                            ],
+                            [
+                                '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\EmbeddedEntityAddedEvent',
+                                'data' => [
+                                    '@type' => 'book',
+                                    'identifier' => 'a4be230b-fdd2-49f2-b943-f5b5b17a0d61',
+                                    'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-e5e61e60-67de-405b-9e10-e8c2f9455f3f-de_DE-1',
+                                    'title' => 'ZAMM'
+                                ],
+                                'position' => 0,
+                                'embedded_entity_identifier' => 'a4be230b-fdd2-49f2-b943-f5b5b17a0d61',
+                                'embedded_entity_type' => 'book',
+                                'parent_attribute_name' => 'books',
                                 'embedded_entity_events' => []
                             ]
                         ],
@@ -945,7 +966,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'identifier' => '6d1460a7-c8ca-4fd9-89a2-3991a0766b14',
                             'title' => 'Amaze'
                         ]
-                    ]
+                    ],
+                    'books' => [ [] ] // don't create a remove command for inline_mode list
                 ]
             ]
         ]);

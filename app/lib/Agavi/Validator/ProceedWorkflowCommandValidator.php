@@ -8,7 +8,7 @@ use Honeybee\Projection\WorkflowSubject;
 
 class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
 {
-    protected function getCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
+    protected function getValidatedCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
         $event_argument = $this->getArgument();
         if (!isset($request_payload[$event_argument])) {
