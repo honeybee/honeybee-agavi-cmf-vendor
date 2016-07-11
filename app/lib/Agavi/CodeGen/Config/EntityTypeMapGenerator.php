@@ -95,8 +95,7 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
                 StringToolkit::asSnakeCase($entity_type_definition->getName())
             ),
             'file' => sprintf(
-                '%s/%s_%s/config/%s/workflows.xml',
-                AgaviConfig::get('core.module_dir'),
+                '/%s_%s/config/%s/workflows.xml',
                 $vendor_opt->getValue(),
                 $package_opt->getValue(),
                 $entity_type_definition->getName()

@@ -3,17 +3,17 @@
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Workflux\Builder\XmlStateMachineBuilder;
 
-$aggregate_root_type_map = new AggregateRootTypeMap;
+$module_dir = AgaviConfig::get('core.module_dir');
+
+$aggregate_root_types = [];
+
 {% for entity_key, meta_data in entity_type_map %}
-$aggregate_root_type_map->setItem(
-    '{{ entity_key }}',
-    new {{ meta_data.implementor }}(
-        (new XmlStateMachineBuilder([
-            'name' => '{{ meta_data.workflow.name }}',
-            'state_machine_definition' => '{{ meta_data.workflow.file }}'
-        ]))->build()
-    )
+$aggregate_root_types['{{ entity_key }}'] = new {{ meta_data.implementor }}(
+    (new XmlStateMachineBuilder([
+        'name' => '{{ meta_data.workflow.name }}',
+        'state_machine_definition' => $module_dir . '{{ meta_data.workflow.file }}'
+    ]))->build()
 );
 {% endfor %}
 
-return $aggregate_root_type_map;
+return new AggregateRootTypeMap($aggregate_root_types);
