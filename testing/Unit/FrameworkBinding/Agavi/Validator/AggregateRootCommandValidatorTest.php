@@ -121,8 +121,6 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
                     'images' => [],
-                    // filter unmodified?
-                    'email' => 'honeybee.user@test.com'
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
@@ -777,10 +775,6 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'values' => [
-                    // filter unmodified?
-                    'firstname' => 'Brock',
-                    'lastname' => 'Lesnar',
-                    'email' => 'honeybee.user@test.com',
                     'images' => [
                         [
                             'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
@@ -908,10 +902,6 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'values' => [
-                    // filter unmodified?
-                    'firstname' => 'Brock',
-                    'lastname' => 'Lesnar',
-                    'email' => 'honeybee.user@test.com',
                     'images' => [
                         [
                             'location' => str_replace('honeybee-cmf.test_fixtures.author.tempfiles://', '', $uploaded_images[0]),
@@ -982,12 +972,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertEquals(
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
-                'values' => [
-                    // filter unmodified?
-                    'firstname' => 'Mark',
-                    'lastname' => 'Hunt',
-                    'email' => 'honeybee.user@test.com',
-                ],
+                'values' => [],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [
@@ -1062,12 +1047,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertEquals(
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
-                'values' => [
-                    // filter unmodified?
-                    'firstname' => 'Mark',
-                    'lastname' => 'Hunt',
-                    'email' => 'honeybee.user@test.com',
-                ],
+                'values' => [],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [
