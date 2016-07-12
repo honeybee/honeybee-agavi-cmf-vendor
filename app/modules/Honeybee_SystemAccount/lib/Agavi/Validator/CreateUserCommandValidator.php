@@ -3,7 +3,7 @@
 namespace Honeybee\SystemAccount\Agavi\Validator;
 
 use DateInterval;
-use DateTime;
+use DateTimeImmutable;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeCommandValidator;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
@@ -13,9 +13,11 @@ class CreateUserCommandValidator extends AggregateRootTypeCommandValidator
     protected function getValidatedCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
         $command_values = parent::getValidatedCommandValues($request_payload, $aggregate_root);
+        if (false === $command_values) {
+            return false;
+        }
 
-        $expire_date = new DateTime;
-        $expire_date->add(new DateInterval('PT20M')); // 20 minutes
+        $expire_date = (new DateTimeImmutable)->add(new DateInterval('PT20M'));
 
         $command_values['auth_token'] = StringToolkit::generateRandomToken();
         $command_values['token_expire_date'] = $expire_date;
