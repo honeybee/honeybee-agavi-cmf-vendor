@@ -12,10 +12,7 @@ class CreateUserCommandValidator extends AggregateRootTypeCommandValidator
 {
     protected function getValidatedCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
-        $command_values = parent::getValidatedCommandValues($request_payload, $aggregate_root);
-        if (false === $command_values) {
-            return false;
-        }
+        $command_values = (array)parent::getValidatedCommandValues($request_payload, $aggregate_root);
 
         $expire_date = (new DateTimeImmutable)->add(new DateInterval('PT20M'));
 
