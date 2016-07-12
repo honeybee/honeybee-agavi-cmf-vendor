@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use Workflux\Builder\XmlStateMachineBuilder;
 use Workflux\Parser\Xml\StateMachineDefinitionParser;
-use Workflux\Builder\StateMachineBuilder;
 
 /**
  * Validator for console usage that asks for a valid workflow subject.

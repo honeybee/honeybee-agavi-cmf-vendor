@@ -2,29 +2,27 @@
 
 namespace Honeybee\SystemAccount\Agavi\Validator;
 
-use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
 use DateInterval;
 use DateTime;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeCommandValidator;
+use Honeybee\Model\Aggregate\AggregateRootInterface;
 
 class CreateUserCommandValidator extends AggregateRootTypeCommandValidator
 {
-    protected function getValidatedAggregateRootCommandPayload(AggregateRootInterface $aggregate_root)
+    protected function getValidatedCommandValues(array $request_payload, AggregateRootInterface $aggregate_root)
     {
-        $expire_date = new DateTime();
+        $command_values = parent::getValidatedCommandValues($request_payload, $aggregate_root);
+
+        $expire_date = new DateTime;
         $expire_date->add(new DateInterval('PT20M')); // 20 minutes
 
-        $retval = parent::getValidatedAggregateRootCommandPayload($aggregate_root);
-
-        $command_payload =& $retval['values'];
-        $command_payload['auth_token'] = StringToolkit::generateRandomToken();
-        $command_payload['token_expire_date'] = $expire_date;
-        if (!isset($command_payload['role'])) {
-            $command_payload['role'] = $this->getParameter('default_role', 'administrator');
+        $command_values['auth_token'] = StringToolkit::generateRandomToken();
+        $command_values['token_expire_date'] = $expire_date;
+        if (!isset($command_values['role'])) {
+            $command_values['role'] = $this->getParameter('default_role', 'administrator');
         }
 
-        return $retval;
+        return $command_values;
     }
 }

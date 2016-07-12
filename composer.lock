@@ -779,12 +779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f"
+                "reference": "87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
-                "reference": "e1fab5f4cd15baee5eec98573ce53a3ff1dc928f",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14",
+                "reference": "87ffd29a71b5bc7127c4b81e9cdc13e62fc30c14",
                 "shasum": ""
             },
             "require": {
@@ -866,7 +866,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-06 08:11:38"
+            "time": "2016-07-08 10:12:36"
         },
         {
             "name": "honeybee/trellis",
@@ -1798,23 +1798,23 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.2",
+            "version": "v5.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8"
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/d8db871a54619458a805229a057ea2af33c753e8",
-                "reference": "d8db871a54619458a805229a057ea2af33c753e8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
+                "reference": "4cc92842069c2bbc1f28daaaf1d2576ec4dfe153",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "mockery/mockery": "~0.9.1,<0.9.4"
+                "mockery/mockery": "~0.9.1"
             },
             "type": "library",
             "extra": {
@@ -1847,7 +1847,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2016-05-01 08:45:47"
+            "time": "2016-07-08 11:51:25"
         },
         {
             "name": "symfony/console",
@@ -2740,12 +2740,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "ec1ca8266d9f8220cb0f90bbb84735137d180c90"
+                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/ec1ca8266d9f8220cb0f90bbb84735137d180c90",
-                "reference": "ec1ca8266d9f8220cb0f90bbb84735137d180c90",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/ee06e7b564ea4dc9b90605d894c2626f87df334d",
+                "reference": "ee06e7b564ea4dc9b90605d894c2626f87df334d",
                 "shasum": ""
             },
             "require": {
@@ -2797,7 +2797,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2016-06-02 10:51:58"
+            "time": "2016-07-06 09:05:19"
         },
         {
             "name": "myclabs/deep-copy",

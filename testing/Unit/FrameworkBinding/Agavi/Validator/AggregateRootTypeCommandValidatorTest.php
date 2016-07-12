@@ -2,7 +2,6 @@
 
 namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
-use AgaviContext;
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
@@ -31,19 +30,27 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [ '__submit' ],
             [
                 '' => 'Invalid command payload given.',
-                'email.invalid_format' => 'Email has an invalid format.',
+                'no_image' => 'Uploaded image not found.',
+                'firstname.mandatory' => 'Firstname is required.',
                 'firstname.min_length' => 'Firstname is too short.',
                 'firstname.max_length' => 'Firstname is too long.',
-                'products.highlight.title.min_length' => 'Title is too short.',
+                'email.mandatory' => 'Email is required.',
+                'email.invalid_format' => 'Email has an invalid format.',
                 'products.max_count' => 'Maximum number of products exceeded.',
-                'no_image' => 'Uploaded image not found.'
+                'products.highlight.title.mandatory' => 'Title is required.',
+                'products.highlight.title.min_length' => 'Title is too short.'
             ],
             [
                 'name' => 'invalid_task_data',
                 'base' => $base,
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
-                'attribute_blacklist' => [ 'token' ],
+                'attribute_whitelist' => [ 'products', 'nada', 'token' ],
+                'attribute_blacklist' => [
+                    'token',
+                    'products.highlight.ignored',
+                    'products.highlight.non.existent.attr'
+                ],
                 'export' => '__command'
             ]
         );
@@ -97,7 +104,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'create_author' => [
                     'firstname' => 'a',
-                    'email' => 'invalidemail.com',
+                    'email' => 'invalidemail.com'
                 ]
             ]
         ]);
@@ -108,22 +115,17 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $query = new AgaviValidationReportQuery($this->vm->getReport());
         $this->assertEquals(3, $query->count());
         $this->assertEquals(
-            [ 'Firstname is too short.' ],
-            $query->byArgument('create_author[firstname]')->getErrorMessages()
-        );
-        $this->assertEquals(
             [ 'Email has an invalid format.' ],
             $query->byArgument('create_author[email]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Firstname is too short.' ],
+            $query->byArgument('create_author[firstname]')->getErrorMessages()
         );
         $this->assertEquals(
             [ 'Invalid command payload given.' ],
             $query->byArgument('create_author[__submit]')->getErrorMessages()
         );
-    }
-
-    public function testExecuteWithMissingSource()
-    {
-        $this->markTestIncomplete();
     }
 
     public function testExecuteWithEmptySource()
@@ -137,21 +139,20 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
         $result = $validator->execute($rd);
 
-        $this->assertEquals(AggregateRootTypeCommandValidator::SUCCESS, $result);
-        $this->assertEquals([ '__command' ], $rd->getParameterNames());
-        $this->assertCount(0, $this->vm->getReport()->getErrorMessages());
-        $command = $rd->getParameter('__command');
-        $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
+        $this->assertEquals(AggregateRootTypeCommandValidator::ERROR, $result);
+        $query = new AgaviValidationReportQuery($this->vm->getReport());
+        $this->assertEquals(3, $query->count());
         $this->assertEquals(
-            [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
-                'values' => [],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
-                'embedded_entity_commands' => [],
-                'uuid' => $command->getUuid(),
-                'metadata' => []
-            ],
-            $command->toArray()
+            [ 'Firstname is required.' ],
+            $query->byArgument('create_author[firstname]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Email is required.' ],
+            $query->byArgument('create_author[email]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[__submit]')->getErrorMessages()
         );
     }
 
@@ -162,7 +163,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $source_command = new CreateAuthorCommand([
             'values' => [
                 'firstname' => 'Brock',
-                'lastname' => 'Lesnar',
+                'lastname' => '',
                 'email' => 'honeybee.user@test.com'
             ],
             'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
@@ -186,7 +187,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
-                    'lastname' => 'Lesnar',
+                    'lastname' => '',
                     'email' => 'honeybee.user@test.com'
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
@@ -211,15 +212,17 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'products' => [
                         [
                             '@type' => 'highlight',
-                            'title' => 'Hall of Fame'
+                            'title' => 'Hall of Fame',
+                            'ignored' => 'ignore this'
                         ]
                     ],
                     'books' => [
                         [
                             '@type' => 'book',
-                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1'
+                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
+                            'title' => 'test book'
                         ]
-                    ],
+                    ]
                 ]
             ]
         ]);
@@ -256,7 +259,8 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     [
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\AddEmbeddedEntityCommand',
                         'values' => [
-                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1'
+                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
+                            'title' => 'test book'
                         ],
                         'position' => 0,
                         'embedded_entity_type' => 'book',
@@ -312,6 +316,75 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         );
     }
 
+    public function testExecuteWithEmbeddedEntityMissingType()
+    {
+        $validator = $this->createValidator();
+
+        $rd = new AgaviWebRequestDataHolder([
+            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
+                'create_author' => [
+                    'firstname' => 'Brock',
+                    'lastname' => 'Lesnar',
+                    'email' => 'honeybee.user@test.com',
+                    'products' => [
+                        [
+                            'title' => 'Wait What'
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $result = $validator->execute($rd);
+
+        $this->assertEquals(AggregateRootTypeCommandValidator::ERROR, $result);
+        $query = new AgaviValidationReportQuery($this->vm->getReport());
+        $this->assertEquals(2, $query->count());
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[products][0][@type]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[__submit]')->getErrorMessages()
+        );
+    }
+
+    public function testExecuteWithInvalidEmbeddedEntityType()
+    {
+        $validator = $this->createValidator();
+
+        $rd = new AgaviWebRequestDataHolder([
+            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
+                'create_author' => [
+                    'firstname' => 'Brock',
+                    'lastname' => 'Lesnar',
+                    'email' => 'honeybee.user@test.com',
+                    'products' => [
+                        [
+                            '@type' => 'invalid',
+                            'title' => 'Who am I?'
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $result = $validator->execute($rd);
+
+        $this->assertEquals(AggregateRootTypeCommandValidator::ERROR, $result);
+        $query = new AgaviValidationReportQuery($this->vm->getReport());
+        $this->assertEquals(2, $query->count());
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[products][0][@type]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[__submit]')->getErrorMessages()
+        );
+    }
+
     public function testExecuteWithExcessEmbeddedEntities()
     {
         $validator = $this->createValidator();
@@ -358,7 +431,43 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
     public function testExecuteWithMissingEmbeddedEntityValues()
     {
-        $this->markTestIncomplete();
+        $validator = $this->createValidator();
+
+        $rd = new AgaviWebRequestDataHolder([
+            AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
+                'create_author' => [
+                    // missing mandatory values
+                    'products' => [
+                        [
+                            '@type' => 'highlight'
+                            // missing mandatory title
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+
+        $result = $validator->execute($rd);
+
+        $this->assertEquals(AggregateRootTypeCommandValidator::ERROR, $result);
+        $query = new AgaviValidationReportQuery($this->vm->getReport());
+        $this->assertEquals(4, $query->count());
+        $this->assertEquals(
+            [ 'Firstname is required.' ],
+            $query->byArgument('create_author[firstname]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Email is required.' ],
+            $query->byArgument('create_author[email]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Title is required.' ],
+            $query->byArgument('create_author[products][0][title]')->getErrorMessages()
+        );
+        $this->assertEquals(
+            [ 'Invalid command payload given.' ],
+            $query->byArgument('create_author[__submit]')->getErrorMessages()
+        );
     }
 
     public function testExecuteWithPreUploadedFile()
@@ -372,7 +481,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => 'Lesnar',
                     'email' => 'honeybee.user@test.com',
                     'images' => [
-                        [ /* empty file */ ],
+                        [ 'location' => '' ],
                         [
                             'location' => __DIR__ . '/Fixture/kitty.jpg',
                             'title' => 'Kitty',

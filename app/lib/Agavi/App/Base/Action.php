@@ -4,8 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\App\Base;
 
 use AgaviAction;
 use AgaviConfig;
-use AgaviConfigCache;
-use AgaviLogger;
 use AgaviRequestDataHolder;
 use AgaviToolkit;
 use AgaviValidationError;
@@ -16,10 +14,8 @@ use Honeybee\Common\ScopeKeyInterface;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\Logging\ILogger;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
-use Honeybee\FrameworkBinding\Agavi\Routing\ModuleRoutingCallback;
 use Honeybee\Infrastructure\Command\CommandInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
-use Honeybee\Model\Aggregate\AggregateRootType;
 use Honeybee\Ui\Activity\ActivityMap;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 

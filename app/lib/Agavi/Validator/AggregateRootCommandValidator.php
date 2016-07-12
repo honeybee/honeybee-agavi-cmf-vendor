@@ -2,31 +2,21 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
-use AgaviValidationIncident;
-use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Command\AggregateRootCommandInterface;
 use Honeybee\Model\Event\AggregateRootEventInterface;
 use Honeybee\Model\Event\AggregateRootEventList;
 use Honeybee\Model\Task\TaskConflict;
-use Trellis\Common\Collection\Map;
-use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Entity\EntityInterface;
-use Trellis\Runtime\Entity\EntityList;
-use Trellis\Runtime\Validator\Result\IncidentInterface;
 use Trellis\Runtime\Validator\Rule\Type\IntegerRule;
 
 class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
 {
-    use LogTrait;
-
     protected function validate()
     {
         $aggregate_root_history = $this->loadAggregateRootHistory();
         if ($aggregate_root_history->isEmpty()) {
-            $this->logError('No history found for identifier', $this->getIdentifier(), '– Possible duplicate id?');
             $this->throwError('history_is_empty');
             return false;
         }
@@ -42,31 +32,29 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
             }
         }
 
+        // don't accept future non-existent revisions
         if ($aggregate_root_history->getLast()->getSeqNumber() < $revision) {
             $this->throwError('invalid_revision');
             return false;
         }
 
         $aggregate_root = $this->createAggregateRootFromHistory($aggregate_root_history, $revision);
-        $command_payload = $this->getValidatedAggregateRootCommandPayload($aggregate_root);
 
-        if (!is_array($command_payload)) {
+        // build the command from the request and AR
+        $request_payload = (array)$this->getData(null);
+        $command_values = (array)$this->getValidatedCommandValues($request_payload, $aggregate_root);
+
+        // no need to build the command if there were incidents
+        if (count($this->parentContainer->getValidatorIncidents($this->getParameter('name'))) > 0
+            || isset($this->incident)
+        ) {
             return false;
         }
 
-        if (count($this->parentContainer->getValidatorIncidents($this->getParameter('name'))) > 0) {
-            foreach ($this->parentContainer->getValidatorIncidents($this->getParameter('name')) as $incident) {
-                foreach ($incident->getErrors() as $error) {
-                    $this->logDebug('Validator "' . $this->getParameter('name') . '" error: ' . $error->getMessage());
-                }
-            }
-            $this->logDebug('About to throw "invalid_payload" error in validator: ' . $this->getParameter('name'));
-            $this->throwError('invalid_payload');
-            $this->getDependencyManager()->addDependTokens([ 'invalid_payload' ], $this->getBase());
+        $command = $this->buildCommand($command_values, $aggregate_root);
+        if (!$command instanceof AggregateRootCommandInterface) {
             return false;
         }
-
-        $command = $this->createAggregateRootCommand($command_payload, $aggregate_root);
 
         $conflicting_changes = [];
         $conflicting_events = $aggregate_root_history->reverse()->filter(
@@ -157,43 +145,16 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         return $aggregate_root;
     }
 
-    protected function createAggregateRootCommand(array $command_payload, AggregateRootInterface $aggregate_root)
-    {
-        $command_implementor = $this->getCommandImplementor();
-        $command = new $command_implementor(
-            array_merge(
-                $command_payload,
-                [
-                    'aggregate_root_type' => $this->aggregate_root_type->getPrefix(),
-                    'aggregate_root_identifier' => $aggregate_root->getIdentifier(),
-                    'known_revision' => $aggregate_root->getRevision()
-                ]
-            )
-        );
-
-        if (!$command instanceof AggregateRootCommandInterface) {
-            throw new RuntimeError(
-                sprintf(
-                    'The configured command type must implement %s, but the given command "%s" does not do so.',
-                    AggregateRootCommandInterface::CLASS,
-                    get_class($command)
-                )
-            );
-        }
-
-        return $command;
-    }
-
     protected function populateAggregateRootTaskConflict(
         AggregateRootInterface $aggregate_root,
         AggregateRootEventList $aggregate_root_history,
         AggregateRootEventList $conflicting_events,
         array $conflicting_changes
     ) {
-        $service_locator = $this->getServiceLocator();
+        $service_locator = $this->getContext()->getServiceLocator();
         $projection_type = $service_locator
             ->getProjectionTypeMap()
-                ->getItem($this->getAggregateRootType()->getPrefix());
+            ->getItem($this->getAggregateRootType()->getPrefix());
 
         $conflicted_projection = $projection_type->createEntity(
             array_merge($aggregate_root->toNative(), $conflicting_changes)
@@ -221,8 +182,9 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
 
     protected function getQueryService()
     {
-        $projection_type_map = $this->getServiceLocator()->getProjectionTypeMap();
-        $data_access_service = $this->getServiceLocator()->getDataAccessService();
+        $service_locator = $this->getContext()->getServiceLocator();
+        $projection_type_map = $service_locator->getProjectionTypeMap();
+        $data_access_service = $service_locator->getDataAccessService();
         $query_service_map = $data_access_service->getQueryServiceMap();
 
         return $query_service_map->getByProjectionType(
