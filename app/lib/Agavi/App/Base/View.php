@@ -180,7 +180,9 @@ class View extends AgaviView
             $layout = $layout_parameters['layout_template'];
         }
 
-        $this->setAttribute(static::ATTRIBUTE_LAYOUT, $layout);
+        if(!$this->hasAttribute(static::ATTRIBUTE_LAYOUT)) {
+            $this->setAttribute(static::ATTRIBUTE_LAYOUT, $layout);
+        }
 
         $this->prepareViewConfigSlots();
     }

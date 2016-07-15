@@ -191,4 +191,15 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
 
         return $query_service_map->getByProjectionType($this->getProjectionType())->find($query);
     }
+
+    /**
+     *  Set the layout path to extend into the template, if successfully validated
+     **/
+    protected function setLayoutAttribute($request_data) {
+        if ($request_data->hasParameter('_layout')) {
+            $this->setAttribute('_layout', $request_data->getParameter('_layout'));
+            return true;
+        }
+        return false;
+    }
 }

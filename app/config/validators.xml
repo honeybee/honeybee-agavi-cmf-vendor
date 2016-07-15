@@ -51,6 +51,19 @@
                 </ae:parameters>
             </validator_definition>
 
+            <validator_definition name="switch_layout" class="Honeybee\FrameworkBinding\Agavi\Validator\LayoutNameValidator">
+                <errors>
+                    <error>Only specific names are allowed as layout value.</error>
+                    <error for="type">Only strings are allowed as layout names.</error>
+                    <error for="value_map">Only array of values is allowed for the value map</error>
+                </errors>
+                <ae:parameters>
+                    <ae:parameter name="value_map">
+                        <ae:parameter name="master">html/layout/MasterLayout.twig</ae:parameter>
+                        <ae:parameter name="slot">html/layout/SlotLayout.twig</ae:parameter>
+                    </ae:parameter>
+                </ae:parameters>
+            </validator_definition>
         </validator_definitions>
 
         <validators method="write">
@@ -67,5 +80,12 @@
             </validator>
         </validators>
 
+        <validators>
+            <validator class="switch_layout" required="false">
+                <arguments>
+                    <argument>_layout</argument>
+                </arguments>
+            </validator>
+        </validators>
     </ae:configuration>
 </ae:configurations>
