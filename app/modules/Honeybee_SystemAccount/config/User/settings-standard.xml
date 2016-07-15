@@ -3,8 +3,8 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     xmlns="http://agavi.org/agavi/config/parts/settings/1.0">
     <ae:configuration>
-        <settings prefix="honeybee-system_account-user.">
-            <setting name="type">honeybee-system_account-user</setting>
+        <settings prefix="honeybee-system_account-user.standard.">
+            <setting name="type">honeybee-system_account-user-standard</setting>
         </settings>
     </ae:configuration>
 </ae:configurations>

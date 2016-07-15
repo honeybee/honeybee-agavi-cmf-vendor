@@ -23,6 +23,7 @@ class HoneybeeModuleGenerator extends SkeletonGenerator
                 throw new RuntimeError(sprintf('A "%s" parameter must be provided', $required_data_key));
             }
         }
+
         $vendor = $data['vendor'];
         $package = $data['package'];
 

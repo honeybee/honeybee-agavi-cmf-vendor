@@ -6,12 +6,11 @@ use AgaviConfig;
 use DateTime;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Projection\ProjectionTypeInterface;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Trellis\CodeGen\Console\GenerateCodeCommand;
 
-class HoneybeeResourceGenerator extends SkeletonGenerator
+class HoneybeeProjectionGenerator extends SkeletonGenerator
 {
     /**
      * Creates a new generator instance.
@@ -22,8 +21,6 @@ class HoneybeeResourceGenerator extends SkeletonGenerator
      */
     public function __construct($skeleton_name, $target_path, array $data = [])
     {
-        $data['variant'] = ProjectionTypeInterface::DEFAULT_VARIANT;
-
         $required_data_keys = [ 'vendor', 'package', 'resource', 'variant' ];
         foreach ($required_data_keys as $required_data_key) {
             if (!array_key_exists($required_data_key, $data)) {
@@ -54,9 +51,7 @@ class HoneybeeResourceGenerator extends SkeletonGenerator
     {
         parent::generate();
 
-        // Now that a new resource skeleton has now been created, we will generate
-        // the aggregate root and standard projection files immediately.
-        $this->executeTrellis('aggregate_root');
+        // Build projection variant trellis files
         $this->executeTrellis($this->data['variant_prefix']);
 
         // Copy Trellis ES mapping file to correction location
@@ -74,11 +69,12 @@ class HoneybeeResourceGenerator extends SkeletonGenerator
         }
 
         $mapping_target_path = sprintf(
-            '%1$s%2$smigration%2$selasticsearch%2$s%3$s_create_%4$s%2$s%5$s',
+            '%1$s%2$smigration%2$selasticsearch%2$s%3$s_create_%4$s_%5$s%2$s%6$s',
             $this->data['target_path'],
             DIRECTORY_SEPARATOR,
             $this->data['timestamp'],
             $this->data['resource_prefix'],
+            $this->data['variant_prefix'],
             str_replace('{{ timestamp }}', $this->data['timestamp'], basename($trellis_config['deploy_path']))
         );
 

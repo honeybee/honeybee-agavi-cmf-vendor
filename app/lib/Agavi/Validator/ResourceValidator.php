@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\Validator;
 use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
@@ -13,6 +14,7 @@ use Honeybee\Infrastructure\DataAccess\Query\Query;
 use Honeybee\Model\Event\AggregateRootEventInterface;
 use Honeybee\Model\Event\AggregateRootEventList;
 use Honeybee\Projection\ProjectionInterface;
+use Honeybee\Projection\ProjectionTypeInterface;
 use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
@@ -36,9 +38,16 @@ class ResourceValidator extends AgaviValidator
             $this->export($resource, $this->getParameter('export', $argument));
             return true;
         }
+
+        $projection_type = $this->getProjectionType();
+        if (!$projection_type) {
+            $this->throwError('unknown_variant');
+            return false;
+        }
+
         $head_revision = 0;
         if (true === $this->getParameter('create_fresh_resource', false)) {
-            $resource = $this->getProjectionType()->createEntity();
+            $resource = $projection_type->createEntity();
         } else {
             $revision = $this->getPayloadRevision();
 
@@ -52,7 +61,7 @@ class ResourceValidator extends AgaviValidator
                         $argument,
                         'does not exist'
                     );
-                    $this->throwError('non_existant');
+                    $this->throwError('non_existent');
                     return false;
                 }
 
@@ -66,8 +75,7 @@ class ResourceValidator extends AgaviValidator
         }
 
         if (!$resource) {
-            $this->logError('Resource does not exist', $argument);
-            $this->throwError('non_existant');
+            $this->throwError('non_existent');
             return false;
         } elseif ($this->getParameter('allow_default_payload', false)) {
             $resource = $this->addPayloadToResource($resource);
@@ -154,8 +162,9 @@ class ResourceValidator extends AgaviValidator
     protected function loadCurrentResourceProjection()
     {
         $filter_attribute = $this->getParameter('filter_attribute', false);
+        $projection_query_service = $this->getProjectionQueryService();
         if ($filter_attribute && $filter_attribute !== 'identifier') {
-            $search_result = $this->getQueryService()->find(
+            $search_result = $projection_query_service->find(
                 new Query(
                     new CriteriaList,
                     new CriteriaList([
@@ -170,7 +179,7 @@ class ResourceValidator extends AgaviValidator
                 )
             );
         } else {
-            $search_result = $this->getQueryService()->findByIdentifier($this->getData($this->getArgument()));
+            $search_result = $projection_query_service->findByIdentifier($this->getData($this->getArgument()));
         }
 
         return $search_result->hasResults() ? $search_result->getFirstResult() : null;
@@ -214,7 +223,7 @@ class ResourceValidator extends AgaviValidator
         if ($identifier instanceof EntityInterface) {
             $identifier = $identifier->getIdentifier();
         }
-        $query_result = $this->getQueryService()->findEventsByIdentifier($identifier);
+        $query_result = $this->getDomainEventQueryService()->findEventsByIdentifier($identifier);
         $history = new AggregateRootEventList($query_result->getResults());
 
         if ($history->isEmpty()) {
@@ -234,9 +243,20 @@ class ResourceValidator extends AgaviValidator
             throw new RuntimeError('Missing required "resource_type" parameter.');
         }
 
-        $this->resource_type = $this->getServiceLocator()->getProjectionTypeMap()->getItem(
-            $this->getParameter('resource_type')
+        $variant = $this->getData('variant');
+        $variant = $variant ?: ProjectionTypeInterface::DEFAULT_VARIANT;
+        $projection_variant_prefix = sprintf(
+            '%s::projection.%s',
+            $this->getParameter('resource_type'),
+            StringToolkit::asSnakeCase($variant)
         );
+
+        $projection_type_map = $this->getServiceLocator()->getProjectionTypeMap();
+        if (!$projection_type_map->hasKey($projection_variant_prefix)) {
+            return false;
+        }
+
+        $this->resource_type = $projection_type_map->getItem($projection_variant_prefix);
 
         return $this->resource_type;
     }
@@ -266,7 +286,15 @@ class ResourceValidator extends AgaviValidator
         return parent::checkAllArgumentsSet($throw_error);
     }
 
-    protected function getQueryService()
+    protected function getDomainEventQueryService()
+    {
+        $data_access_service = $this->getServiceLocator()->getDataAccessService();
+        $query_service_map = $data_access_service->getQueryServiceMap();
+
+        return $query_service_map->getItem('honeybee::domain_event::query_service');
+    }
+
+    protected function getProjectionQueryService()
     {
         $data_access_service = $this->getServiceLocator()->getDataAccessService();
         $query_service_map = $data_access_service->getQueryServiceMap();

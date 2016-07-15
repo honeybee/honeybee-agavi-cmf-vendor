@@ -8,14 +8,12 @@
     <ae:configuration environment="testing.*">
         <xi:include href="../../app/modules/Honeybee_SystemAccount/config/events.xml"
             xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration/*)">
-            <xi:fallback />
         </xi:include>
     </ae:configuration>
 
     <ae:configuration environment="testing.*">
         <xi:include href="../../app/modules/Honeybee_SystemAccount/config/User/events.xml"
             xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration/*)">
-            <xi:fallback />
         </xi:include>
     </ae:configuration>
 </ae:configurations>

@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
 use AgaviConfig;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
+use Honeybee\Projection\ProjectionTypeInterface;
 use SplFileInfo;
 use Symfony\Component\Finder\Finder;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;
@@ -25,7 +26,7 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
 
         foreach ($schema_files as $schema_file) {
             $trellis_schema_file = new SplFileInfo($schema_file);
-            $trellis_config = (new ConfigIniParser())->parse(
+            $trellis_config = (new ConfigIniParser)->parse(
                 sprintf(
                     '%s/%s.ini',
                     $trellis_schema_file->getPath(),
@@ -33,7 +34,7 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
                 )
             );
 
-            $type_schema = (new EntityTypeSchemaXmlParser())->parse($trellis_schema_file->getRealPath());
+            $type_schema = (new EntityTypeSchemaXmlParser)->parse($trellis_schema_file->getRealPath());
 
             $entity_type_definition = $type_schema->getEntityTypeDefinition();
             $vendor_opt = $entity_type_definition->getOptions()->filterByName('vendor');
@@ -44,12 +45,25 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
                 );
             }
 
+            // resource prefix
             $entity_type_key = sprintf(
                 '%s.%s.%s',
                 strtolower($vendor_opt->getValue()),
                 StringToolkit::asSnakeCase($package_opt->getValue()),
                 StringToolkit::asSnakeCase($entity_type_definition->getName())
             );
+
+            // add projection suffix
+            $implementor = ltrim($entity_type_definition->getImplementor(), '\\');
+            if (is_subclass_of($implementor, ProjectionTypeInterface::CLASS)) {
+                $variant_opt = $entity_type_definition->getOptions()->filterByName('variant');
+                $variant = $variant_opt ? $variant_opt->getValue() : ProjectionTypeInterface::DEFAULT_VARIANT;
+                $entity_type_key = sprintf(
+                    '%s::projection.%s',
+                    $entity_type_key,
+                    StringToolkit::asSnakeCase($variant)
+                );
+            }
 
             $entity_type_map[$entity_type_key] = [
                 'implementor' => sprintf(

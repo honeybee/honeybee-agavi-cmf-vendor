@@ -20,21 +20,7 @@
                                 <setting name="expression">&honeybee_system_account_user_related_entity_events;</setting>
                             </filter>
                             <handler implementor="\Honeybee\Projection\EventHandler\RelationProjectionUpdater">
-                                <setting name="projection_type">honeybee.system_account.user</setting>
-                            </handler>
-                        </subscription>
-                    </subscriptions>
-                </channel>
-
-                <channel name="honeybee.events.replay">
-                    <subscriptions>
-                        <subscription enabled="true">
-                            <transport>sync</transport>
-                            <filter>
-                                <setting name="expression">&honeybee_system_account_user_related_entity_events;</setting>
-                            </filter>
-                            <handler implementor="\Honeybee\Projection\EventHandler\RelationProjectionUpdater">
-                                <setting name="projection_type">honeybee.system_account.user</setting>
+                                <setting name="projection_type">honeybee.system_account.user::projection.standard</setting>
                             </handler>
                         </subscription>
                     </subscriptions>

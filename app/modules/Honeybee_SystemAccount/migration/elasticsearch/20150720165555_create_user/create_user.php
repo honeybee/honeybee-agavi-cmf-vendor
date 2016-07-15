@@ -6,7 +6,7 @@ use Honeybee\Infrastructure\Migration\ElasticsearchMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 
-class Migration_20150720165555_CreateUserType extends ElasticsearchMigration
+class Migration_20150720165555_CreateUser extends ElasticsearchMigration
 {
     protected function up(MigrationTargetInterface $migration_target)
     {

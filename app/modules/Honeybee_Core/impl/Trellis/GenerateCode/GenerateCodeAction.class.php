@@ -6,11 +6,11 @@ use Honeybee\FrameworkBinding\Agavi\Util\HoneybeeAgaviToolkit;
 use Honeybee\FrameworkBinding\Agavi\Validator\TrellisTargetValidator;
 use Honeybee\FrameworkBinding\Agavi\Validator\MigrationNameValidator;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Common\Error\RuntimeError;
-use Trellis\CodeGen\Console\GenerateCodeCommand;
+use Honeybee\Common\Util\StringToolkit;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
+use Trellis\CodeGen\Console\GenerateCodeCommand;
 
 class Honeybee_Core_Trellis_GenerateCodeAction extends Action
 {
@@ -21,7 +21,7 @@ class Honeybee_Core_Trellis_GenerateCodeAction extends Action
         $migration_name = $request_data->getParameter('migration_name');
 
         // Should probably use a service for some of this
-        $finder = new TrellisTargetFinder();
+        $finder = new TrellisTargetFinder;
         $location = HoneybeeAgaviToolkit::getTypeSchemaPath($aggregate_root_type);
 
         if ($trellis_target == TrellisTargetValidator::ALL_TARGETS) {
@@ -39,7 +39,7 @@ class Honeybee_Core_Trellis_GenerateCodeAction extends Action
                 $current_target
             );
 
-            $command = new GenerateCodeCommand();
+            $command = new GenerateCodeCommand;
             $input = new ArrayInput(
                 [
                     'action' => 'gen+dep',
@@ -47,7 +47,7 @@ class Honeybee_Core_Trellis_GenerateCodeAction extends Action
                     '--config' => $trellis_config_path
                 ]
             );
-            $output = new BufferedOutput();
+            $output = new BufferedOutput;
 
             $report = array();
             $report[] = 'Generating trellis target "' . $current_target . '" for type "' . $aggregate_root_type->getName() . '".';

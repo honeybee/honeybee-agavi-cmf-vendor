@@ -45,6 +45,17 @@
                 </settings>
             </finder>
         </finders>
+
+        <query_services>
+            <query_service name="honeybee::domain_event::query_service" class="Honeybee\Infrastructure\DataAccess\Query\DomainEventQueryService">
+                <finder_mappings>
+                    <finder_mapping name="default">
+                        <finder>honeybee::domain_event::view_store::finder</finder>
+                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation" />
+                    </finder_mapping>
+                </finder_mappings>
+            </query_service>
+        </query_services>
     </ae:configuration>
 
     <xi:include href="../../testing/config/data_access.xml"

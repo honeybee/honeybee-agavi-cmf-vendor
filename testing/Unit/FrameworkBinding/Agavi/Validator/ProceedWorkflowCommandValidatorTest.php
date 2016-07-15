@@ -31,7 +31,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         // setup event history for test cases
         $this->mock_query_service = Mockery::mock(QueryServiceInterface::CLASS);
         $mock_query_service_map = new QueryServiceMap([
-            'honeybee-cmf.test_fixtures.author::query_service' => $this->mock_query_service
+            'honeybee::domain_event::query_service' => $this->mock_query_service
         ]);
 
         $service_locator->prepareService(

@@ -8,6 +8,8 @@
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}">
                 <argument>resource</argument>
                 <error>The given {{ resource_prefix }}(identifier) is invalid.</error>
+                <error for="non_existent">The requested resource does not exist.</error>
+                <error for="unknown_variant">The given variant is not known for this resource.</error>
                 <ae:parameter name="resource_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
                 <ae:parameter name="revision_arg">revision</ae:parameter>
             </validator>

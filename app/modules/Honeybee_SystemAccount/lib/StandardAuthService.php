@@ -11,7 +11,6 @@ use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Infrastructure\Security\Auth\AuthResponse;
 use Honeybee\Infrastructure\Security\Auth\AuthServiceInterface;
 use Honeybee\Infrastructure\Security\Auth\CryptedPasswordHandler;
-use Honeybee\SystemAccount\User\Projection\Standard\UserType;
 use Honeybee\SystemAccount\User\Projection\UserQueryService;
 
 class StandardAuthService implements AuthServiceInterface
@@ -22,11 +21,9 @@ class StandardAuthService implements AuthServiceInterface
 
     protected $config;
 
-    protected $password_handler;
-
-    protected $user_type;
-
     protected $query_service_map;
+
+    protected $password_handler;
 
     public function __construct(
         ConfigInterface $config,
@@ -34,8 +31,8 @@ class StandardAuthService implements AuthServiceInterface
         CryptedPasswordHandler $password_handler
     ) {
         $this->config = $config;
-        $this->password_handler = $password_handler;
         $this->query_service_map = $query_service_map;
+        $this->password_handler = $password_handler;
     }
 
     public function getTypeKey()
@@ -49,7 +46,7 @@ class StandardAuthService implements AuthServiceInterface
      */
     public function authenticate($username, $password, $options = array()) // @codingStandardsIgnoreEnd
     {
-        $query_result = $this->getQueryService()->find(
+        $query_result = $this->getProjectionQueryService()->find(
             new Query(
                 new CriteriaList,
                 new CriteriaList([ new AttributeCriteria('username', new Equals($username)) ]),
@@ -90,9 +87,13 @@ class StandardAuthService implements AuthServiceInterface
         return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, "authentication failed");
     }
 
-    protected function getQueryService()
+    protected function getProjectionQueryService()
     {
-        $query_service_key = $this->config->get('query_service', 'honeybee.system_account.user::query_service');
+        $query_service_key = $this->config->get(
+            'query_service',
+            'honeybee.system_account.user::projection.standard::query_service'
+        );
+
         if (!$this->query_service_map->hasKey($query_service_key)) {
             throw new RuntimeError('Unable to find QueryService for key: ' . $query_service_key);
         }

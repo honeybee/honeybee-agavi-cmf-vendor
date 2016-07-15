@@ -16,6 +16,7 @@ use Honeybee\FrameworkBinding\Agavi\Logging\ILogger;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\Command\CommandInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
+use Honeybee\Projection\ProjectionTypeInterface;
 use Honeybee\Ui\Activity\ActivityMap;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 
@@ -125,20 +126,21 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $this->getServiceLocator()->getAggregateRootTypeMap()->getItem($prefix);
     }
 
-    protected function getProjectionType()
+    protected function getProjectionType($variant = ProjectionTypeInterface::DEFAULT_VARIANT)
     {
         $class_name_parts = explode('_', static::CLASS);
         $vendor = array_shift($class_name_parts);
         $package = array_shift($class_name_parts);
         $entity_type = array_shift($class_name_parts);
-        $prefix = sprintf(
-            '%s.%s.%s',
+        $variant_prefix = sprintf(
+            '%s.%s.%s::projection.%s',
             strtolower($vendor),
             StringToolkit::asSnakeCase($package),
-            StringToolkit::asSnakeCase($entity_type)
+            StringToolkit::asSnakeCase($entity_type),
+            StringToolkit::asSnakeCase($variant)
         );
 
-        return $this->getServiceLocator()->getProjectionTypeMap()->getItem($prefix);
+        return $this->getServiceLocator()->getProjectionTypeMap()->getItem($variant_prefix);
     }
 
     protected function getServiceLocator()

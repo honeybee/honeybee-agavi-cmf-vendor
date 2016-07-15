@@ -37,6 +37,11 @@ class ConfigurationScanner
         'workflows'
     ];
 
+    protected static $supported_module_variant_configs = [
+        'data_access',
+        'settings'
+    ];
+
     protected static $supported_action_specific_configs = [
         'activities',
         'view_templates',
@@ -75,6 +80,13 @@ class ConfigurationScanner
                 $config_name = str_replace('.xml', '', basename($xml_config_file->getRelativePathname()));
                 if (in_array($config_name, self::$supported_module_specific_configs)) {
                     $configs_to_include[$config_name][] = $xml_config_file->getPathname();
+                } else {
+                    foreach (self::$supported_module_variant_configs as $variant_config) {
+                        if (strpos($config_name, $variant_config) === 0) {
+                            $configs_to_include[$variant_config][] = $xml_config_file->getPathname();
+                            break;
+                        }
+                    }
                 }
             }
 

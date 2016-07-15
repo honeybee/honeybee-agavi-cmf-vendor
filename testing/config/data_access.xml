@@ -9,14 +9,18 @@
     <ae:configuration environment="testing.*">
         <xi:include href="../../app/modules/Honeybee_SystemAccount/config/data_access.xml"
             xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration/*)">
-            <xi:fallback />
         </xi:include>
     </ae:configuration>
 
     <ae:configuration environment="testing.*">
         <xi:include href="../../app/modules/Honeybee_SystemAccount/config/User/data_access.xml"
             xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration/*)">
-            <xi:fallback />
+        </xi:include>
+    </ae:configuration>
+
+    <ae:configuration environment="testing.*">
+        <xi:include href="../../app/modules/Honeybee_SystemAccount/config/User/data_access-standard.xml"
+            xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xpointer(//ae:configuration/*)">
         </xi:include>
     </ae:configuration>
 

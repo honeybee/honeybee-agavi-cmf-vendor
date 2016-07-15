@@ -6,7 +6,7 @@ use Honeybee\Infrastructure\Migration\CouchDbMigration;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 
-class Migration_20150720165555_CreateUserType extends CouchDbMigration
+class Migration_20150720165555_CreateUser extends CouchDbMigration
 {
     protected function up(MigrationTargetInterface $migration_target)
     {

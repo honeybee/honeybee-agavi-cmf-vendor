@@ -2,12 +2,11 @@
 <ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
     <ae:configuration>
         <validators>
-
-            <validator class="and" depends="skeleton_name_honeybee_resource">
-                <ae:parameter name="description">Creates a Honeybee resource in the modules directory. By default it doesn't overwrite existing files.</ae:parameter>
+            <validator class="and" depends="skeleton_name_honeybee_projection">
+                <ae:parameter name="description">Creates a Honeybee projection in the modules directory. By default it doesn't overwrite existing files.</ae:parameter>
 
                 <validator class="skeleton_generator">
-                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeResourceGenerator</ae:parameter>
+                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeProjectionGenerator</ae:parameter>
                 </validator>
 
                 <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ModuleNameValidator">
@@ -28,6 +27,17 @@ Honeybee modules have a "module.ini" file.</info>]]></ae:parameter>
                 <validator class="dialog">
                     <argument>resource</argument>
                     <error>You must specify an resource name to generate.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                    </ae:parameter>
+                </validator>
+
+                <validator class="dialog">
+                    <argument>variant</argument>
+                    <error>You must specify an projection variant to generate.</error>
                     <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
                     <ae:parameter name="match">true</ae:parameter>
                     <ae:parameter name="dialog">

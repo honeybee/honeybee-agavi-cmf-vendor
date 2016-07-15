@@ -8,31 +8,31 @@ $testing_dir = AgaviConfig::get('core.testing_dir');
 
 $projection_types = [];
 
-$projection_types['honeybee.system_account.user'] = new Honeybee\SystemAccount\User\Projection\Standard\UserType(
+$projection_types['honeybee.system_account.user::projection.standard'] = new Honeybee\SystemAccount\User\Projection\Standard\UserType(
     (new XmlStateMachineBuilder([
         'name' => 'honeybee_system_account_user_workflow_default',
         'state_machine_definition' => $module_dir . '/Honeybee_SystemAccount/config/User/workflows.xml'
     ]))->build()
 );
-$projection_types['honeybee-cmf.test_fixtures.author'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Author\AuthorType(
+$projection_types['honeybee-cmf.test_fixtures.author::projection.standard'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Author\AuthorType(
     (new XmlStateMachineBuilder([
         'name' => 'author_workflow_default',
         'state_machine_definition' => $testing_dir . '/Fixture/BookSchema/Model/workflows.xml'
     ]))->build()
 );
-$projection_types['honeybee-cmf.test_fixtures.book'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Book\BookType(
+$projection_types['honeybee-cmf.test_fixtures.book::projection.standard'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Book\BookType(
     (new XmlStateMachineBuilder([
         'name' => 'author_workflow_default',
         'state_machine_definition' => $testing_dir . '/Fixture/BookSchema/Model/workflows.xml'
     ]))->build()
 );
-$projection_types['honeybee-cmf.test_fixtures.publication'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Publication\PublicationType(
+$projection_types['honeybee-cmf.test_fixtures.publication::projection.standard'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Publication\PublicationType(
     (new XmlStateMachineBuilder([
         'name' => 'author_workflow_default',
         'state_machine_definition' => $testing_dir . '/Fixture/BookSchema/Model/workflows.xml'
     ]))->build()
 );
-$projection_types['honeybee-cmf.test_fixtures.publisher'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Publisher\PublisherType(
+$projection_types['honeybee-cmf.test_fixtures.publisher::projection.standard'] = new Honeybee\Tests\Fixture\BookSchema\Projection\Publisher\PublisherType(
     (new XmlStateMachineBuilder([
         'name' => 'author_workflow_default',
         'state_machine_definition' => $testing_dir . '/Fixture/BookSchema/Model/workflows.xml'

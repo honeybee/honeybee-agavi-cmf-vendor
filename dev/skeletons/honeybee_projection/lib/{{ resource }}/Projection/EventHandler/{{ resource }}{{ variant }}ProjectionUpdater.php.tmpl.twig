@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ vendor }}\{{ package }}\{{ resource }}\Projection\EventHandler;
+
+use Honeybee\Model\Event\AggregateRootEventInterface;
+use Honeybee\Projection\EventHandler\ProjectionUpdater;
+
+class {{ resource }}{{ variant }}ProjectionUpdater extends ProjectionUpdater
+{
+    /**
+     * implement your variant projection handler here and register subscription
+     * to {{ resource }} domain events channel in your events.xml
+     */
+
+    protected function getProjectionType(AggregateRootEventInterface $event)
+    {
+        return $this->projection_type_map->getByAggregateRootType(
+            $this->aggregate_root_type_map->getItem($event->getAggregateRootType()),
+            '{{ variant }}'
+        );
+    }
+}

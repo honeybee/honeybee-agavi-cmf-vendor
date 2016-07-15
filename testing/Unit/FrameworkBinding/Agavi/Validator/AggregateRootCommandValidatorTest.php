@@ -37,7 +37,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         // setup event history for test cases
         $this->mock_query_service = Mockery::mock(QueryServiceInterface::CLASS);
         $mock_query_service_map = new QueryServiceMap([
-            'honeybee-cmf.test_fixtures.author::query_service' => $this->mock_query_service
+            'honeybee::domain_event::query_service' => $this->mock_query_service
         ]);
 
         $service_locator->prepareService(
@@ -354,7 +354,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Model\Task\TaskConflict',
                 'current_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author',
+                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
                     'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 2,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
@@ -413,7 +413,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     ]
                 ],
                 'conflicted_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author',
+                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
                     'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
@@ -557,7 +557,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Model\Task\TaskConflict',
                 'current_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author',
+                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
                     'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 3,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
@@ -602,7 +602,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'books' => []
                 ],
                 'conflicted_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author',
+                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
                     'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 2,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',

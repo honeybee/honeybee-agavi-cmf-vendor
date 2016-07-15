@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<type_schema namespace="{{ vendor }}\{{ package }}\{{ resource }}\Projection\Standard"
+<type_schema namespace="{{ vendor }}\{{ package }}\{{ resource }}\Projection\{{ variant }}"
     xmlns:xi="http://www.w3.org/2001/XInclude"
     xmlns="http://berlinonline.net/trellis/1.0/schema">
     <type_definition name="{{ resource }}">
         <implementor>\Honeybee\Projection\ProjectionType</implementor>
         <entity_implementor>\Honeybee\Projection\Projection</entity_implementor>
         <description>
-            Defines the (normalized) structure of the standard {{ resource_prefix }} projection.
+            Defines the (normalized) structure of the {{ variant_prefix }} {{ resource_prefix }} projection.
         </description>
         <options>
             <option name="vendor">{{ vendor }}</option>
             <option name="package">{{ package }}</option>
+            <option name="variant">{{ variant }}</option>
             <option name="is_hierarchical">false</option>
         </options>
         <!-- attribute definitions -->

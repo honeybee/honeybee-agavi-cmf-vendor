@@ -5,7 +5,7 @@ return [
     'type' => '%honeybee-system_account-user.standard.type%',
     'id' => $fixture_data['identifier'],
     'body' => [
-        '@type' => 'honeybee.system_account.user',
+        '@type' => 'honeybee.system_account.user::projection.standard',
         'identifier' => $fixture_data['identifier'],
         'revision' => 1,
         'uuid' => $fixture_data['uuid'],

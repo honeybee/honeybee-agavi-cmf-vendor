@@ -98,7 +98,7 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
 
     protected function loadAggregateRootHistory()
     {
-        $query_service = $this->getQueryService();
+        $query_service = $this->getDomainEventQueryService();
         $query_result = $query_service->findEventsByIdentifier($this->getIdentifier());
 
         return new AggregateRootEventList($query_result->getResults());
@@ -139,7 +139,7 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
             $known_history = $history;
         }
 
-        $aggregate_root = $this->aggregate_root_type->createEntity();
+        $aggregate_root = $this->getAggregateRootType()->createEntity();
         $aggregate_root->reconstituteFrom($known_history);
 
         return $aggregate_root;
@@ -154,7 +154,7 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         $service_locator = $this->getContext()->getServiceLocator();
         $projection_type = $service_locator
             ->getProjectionTypeMap()
-            ->getItem($this->getAggregateRootType()->getPrefix());
+            ->getByAggregateRootType($this->getAggregateRootType());
 
         $conflicted_projection = $projection_type->createEntity(
             array_merge($aggregate_root->toNative(), $conflicting_changes)
@@ -180,15 +180,11 @@ class AggregateRootCommandValidator extends AggregateRootTypeCommandValidator
         $service_locator->getTaskService()->addTaskConflict($task_conflict);
     }
 
-    protected function getQueryService()
+    protected function getDomainEventQueryService()
     {
-        $service_locator = $this->getContext()->getServiceLocator();
-        $projection_type_map = $service_locator->getProjectionTypeMap();
-        $data_access_service = $service_locator->getDataAccessService();
+        $data_access_service = $this->getContext()->getServiceLocator()->getDataAccessService();
         $query_service_map = $data_access_service->getQueryServiceMap();
 
-        return $query_service_map->getByProjectionType(
-            $projection_type_map->getItem($this->getAggregateRootType()->getPrefix())
-        );
+        return $query_service_map->getItem('honeybee::domain_event::query_service');
     }
 }
