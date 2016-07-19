@@ -6,9 +6,11 @@
         "ldsh": "Honeybee_Core/lib/lodash-template-loader",
         "magnific-popup": "Honeybee_Core/lib/magnific-popup",
         "selectize": "Honeybee_Core/lib/selectize",
-        "stickyfill": "Honeybee_Core/lib/stickyfill"
+        "stickyfill": "Honeybee_Core/lib/stickyfill",
 
         {#,"foo": "User/Example"#}
         {#"ckeditor-core": "Core/lib/ckeditor/ckeditor",
         "ckeditor": "Core/lib/ckeditor/adapters/jquery",#}
+
+        {% include "rjs/additional_paths.twig" ignore missing %}
     }
