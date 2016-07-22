@@ -370,6 +370,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'honeybee.user@test.com',
                     'blurb' => 'the grinch',
                     'token' => '7734ad2c6332fd0503afb3213c817391b93cb078',
+                    'tags' => [ 'text', 'list' ],
                     'images' => [
                         [
                             'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
@@ -429,6 +430,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'honeybee.user@test.com',
                     'blurb' => 'the grinch',
                     'token' => '7734ad2c6332fd0503afb3213c817391b93cb078',
+                    'tags' => [ 'text', 'list' ],
                     'images' => [
                         [
                             'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
@@ -573,6 +575,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'honeybee.user@test.com',
                     'blurb' => 'the grinch',
                     'token' => '7734ad2c6332fd0503afb3213c817391b93cb078',
+                    'tags' => [],
                     'images' => [
                         [
                             'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
@@ -618,6 +621,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'honeybee.user@test.com',
                     'blurb' => 'the grinch',
                     'token' => '7734ad2c6332fd0503afb3213c817391b93cb078',
+                    'tags' => [],
                     'images' => [
                         [
                             'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',

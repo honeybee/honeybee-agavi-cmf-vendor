@@ -142,6 +142,9 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                             $attribute,
                             $value_path
                         );
+                    } else {
+                        // generic list attribute handling
+                        $processed_payload[$attribute_name] = $payload[$attribute_name];
                     }
                     // reapply action into processed payload
                     if (isset($embed_payload['__action'])) {

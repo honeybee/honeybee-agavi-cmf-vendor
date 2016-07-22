@@ -209,6 +209,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
                     'email' => 'honeybee.user@test.com',
+                    'tags' => [ 'test', 'tags' ],
                     'products' => [
                         [
                             '@type' => 'highlight',
@@ -240,7 +241,8 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'values' => [
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
-                    'email' => 'honeybee.user@test.com'
+                    'email' => 'honeybee.user@test.com',
+                    'tags' => [ 'test', 'tags' ]
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'embedded_entity_commands' => [
