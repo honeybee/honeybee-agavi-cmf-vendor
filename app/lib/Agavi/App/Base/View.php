@@ -563,13 +563,21 @@ class View extends AgaviView
      *
      * @param string $error_message message to output
      * @param int $exit_code shell exit code to use; defaults to 1 for general errors
+     * @param bool $with_validation_errors whether to output the validation error messages as well
      *
      * @return void|string usually nothing, but error message in case of non-cli SAPI and undefined STDERR constant
      *
      * @throws \Exception when current response ist not an instance of AgaviConsoleResponse
      */
-    public function cliError($error_message, $exit_code = 1)
+    public function cliError($error_message, $exit_code = 1, $with_validation_errors = false)
     {
+        if ($with_validation_errors) {
+            $errors = $this->getErrorMessages();
+            if (count($errors) > 0) {
+                $error_message .= PHP_EOL . '- ' . implode($errors, PHP_EOL . '- ');
+            }
+        }
+
         if (!$this->getResponse() instanceof AgaviConsoleResponse) {
             throw new Exception(
                 "The current response must be an instance of \AgaviConsoleResponse." .

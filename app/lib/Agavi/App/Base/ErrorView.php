@@ -107,7 +107,10 @@ class ErrorView extends View
             $error_message .= $plain_text_message;
         }
 
-        $error_message .= 'Usage: bin/cli <routename> [parameters]' . PHP_EOL;
+        $usage_info = $this->getUsageInfo();
+        if (!empty($usage_info)) {
+            $error_message .= $usage_info;
+        }
 
         return $this->cliError($error_message);
     }
@@ -284,7 +287,7 @@ class ErrorView extends View
         }
     }
 
-    protected function getPlainTextErrorMessage()
+    protected function getPlainTextErrorMessage($with_validation_errors = true)
     {
         $error_message = '';
 
@@ -306,6 +309,13 @@ class ErrorView extends View
 
         if (!empty($message)) {
             $error_message .= '- Message: ' . $message . PHP_EOL;
+        }
+
+        if ($with_validation_errors) {
+            $errors = $this->getErrorMessages();
+            if (count($errors) > 0) {
+                $error_message .= '- Errors:' . PHP_EOL . '  - ' . implode($errors, PHP_EOL . '  - ') . PHP_EOL;
+            }
         }
 
         // @todo add links to error information and description?
@@ -377,5 +387,10 @@ class ErrorView extends View
     protected function getLogref()
     {
         return 'error';
+    }
+
+    protected function getUsageInfo()
+    {
+        return 'Usage: bin/cli <routename> [parameters]' . PHP_EOL;
     }
 }
