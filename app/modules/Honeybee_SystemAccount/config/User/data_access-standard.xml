@@ -56,7 +56,7 @@
                 <finder_mappings>
                     <finder_mapping name="default">
                         <finder>honeybee.system_account.user::projection.standard::view_store::finder</finder>
-                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation">
+                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation">
                             <setting name="multi_fields">
                                 <setting>username</setting>
                                 <setting>firstname</setting>

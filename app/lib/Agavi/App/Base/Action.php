@@ -184,12 +184,12 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $command;
     }
 
-    protected function query(QueryInterface $query)
+    protected function query(QueryInterface $query, $mapping_name = null)
     {
         $data_access_service = $this->getServiceLocator()->getDataAccessService();
         $query_service_map = $data_access_service->getQueryServiceMap();
 
-        return $query_service_map->getByProjectionType($this->getProjectionType())->find($query);
+        return $query_service_map->getByProjectionType($this->getProjectionType())->find($query, $mapping_name);
     }
 
     /**

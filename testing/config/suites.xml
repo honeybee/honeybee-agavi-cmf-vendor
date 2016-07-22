@@ -9,8 +9,8 @@
                 <include>Unit/FrameworkBinding/Agavi/Validator/TrellisTargetValidatorTest.php</include>
             </suite>
             <suite name="Honeybee_SystemAccount">
-                <include>Flow/Honeybee_SystemAccount/User/Create/CreateActionFlowTest.php</include>
                 <include>Flow/Honeybee_SystemAccount/User/Collection/CollectionActionFlowTest.php</include>
+                <include>Flow/Honeybee_SystemAccount/User/Create/CreateActionFlowTest.php</include>
                 <include>Flow/Honeybee_SystemAccount/User/Resource/Modify/ModifyActionFlowTest.php</include>
             </suite>
         </suites>

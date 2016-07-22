@@ -10,7 +10,7 @@ use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
-use Honeybee\Infrastructure\DataAccess\Query\Query;
+use Honeybee\Infrastructure\DataAccess\Query\CriteriaQuery;
 use Honeybee\Model\Event\AggregateRootEventInterface;
 use Honeybee\Model\Event\AggregateRootEventList;
 use Honeybee\Projection\ProjectionInterface;
@@ -165,7 +165,7 @@ class ResourceValidator extends AgaviValidator
         $projection_query_service = $this->getProjectionQueryService();
         if ($filter_attribute && $filter_attribute !== 'identifier') {
             $search_result = $projection_query_service->find(
-                new Query(
+                new CriteriaQuery(
                     new CriteriaList,
                     new CriteriaList([
                         new AttributeCriteria(

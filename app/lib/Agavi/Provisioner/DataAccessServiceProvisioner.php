@@ -6,6 +6,7 @@ use AgaviConfig;
 use AgaviConfigCache;
 use AgaviContext;
 use Auryn\Injector as DiContainer;
+use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;

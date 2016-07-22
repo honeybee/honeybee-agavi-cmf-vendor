@@ -8,7 +8,7 @@ use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorInterface;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
-use Honeybee\Infrastructure\DataAccess\Query\QueryServiceInterface;
+use Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorMap;
 use Honeybee\Tests\Mock\HoneybeeAgaviFlowTestCase;
 use Mockery;
@@ -26,7 +26,7 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
     {
         $service_locator = $this->getContext()->getServiceLocator();
 
-        $this->mock_query_service = Mockery::mock(QueryServiceInterface::CLASS);
+        $this->mock_query_service = Mockery::mock(ProjectionQueryServiceInterface::CLASS);
         $mock_query_service_map = new QueryServiceMap([
             'honeybee.system_account.user::projection.standard::query_service' => $this->mock_query_service
         ]);

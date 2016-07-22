@@ -51,7 +51,7 @@
                 <finder_mappings>
                     <finder_mapping name="default">
                         <finder>honeybee::domain_event::view_store::finder</finder>
-                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation" />
+                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation" />
                     </finder_mapping>
                 </finder_mappings>
             </query_service>

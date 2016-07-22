@@ -779,12 +779,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "b023f6bbf7fc3c11ff463d5cb8cc8934bc9c13d3"
+                "reference": "e82a610c99ff6483992c1441b5d7e2a2983ba45e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b023f6bbf7fc3c11ff463d5cb8cc8934bc9c13d3",
-                "reference": "b023f6bbf7fc3c11ff463d5cb8cc8934bc9c13d3",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/e82a610c99ff6483992c1441b5d7e2a2983ba45e",
+                "reference": "e82a610c99ff6483992c1441b5d7e2a2983ba45e",
                 "shasum": ""
             },
             "require": {
@@ -866,7 +866,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-07-15 11:09:38"
+            "time": "2016-07-22 12:52:23"
         },
         {
             "name": "honeybee/trellis",
@@ -3350,16 +3350,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.4.6",
+            "version": "5.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "2f1fc94b77ea6418bd6a06c64a1dac0645fbce59"
+                "reference": "6c8a756c17a1a92a066c99860eb57922e8b723da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/2f1fc94b77ea6418bd6a06c64a1dac0645fbce59",
-                "reference": "2f1fc94b77ea6418bd6a06c64a1dac0645fbce59",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6c8a756c17a1a92a066c99860eb57922e8b723da",
+                "reference": "6c8a756c17a1a92a066c99860eb57922e8b723da",
                 "shasum": ""
             },
             "require": {
@@ -3424,7 +3424,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-06-16 06:01:15"
+            "time": "2016-07-21 06:55:27"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

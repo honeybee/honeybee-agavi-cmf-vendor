@@ -4,10 +4,10 @@ namespace Honeybee\SystemAccount;
 
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
-use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
-use Honeybee\Infrastructure\DataAccess\Query\Query;
-use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
 use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
+use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
+use Honeybee\Infrastructure\DataAccess\Query\CriteriaQuery;
+use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
 use Honeybee\Infrastructure\Security\Auth\AuthResponse;
 use Honeybee\Infrastructure\Security\Auth\AuthServiceInterface;
 use Honeybee\Infrastructure\Security\Auth\CryptedPasswordHandler;
@@ -47,7 +47,7 @@ class StandardAuthService implements AuthServiceInterface
     public function authenticate($username, $password, $options = array()) // @codingStandardsIgnoreEnd
     {
         $query_result = $this->getProjectionQueryService()->find(
-            new Query(
+            new CriteriaQuery(
                 new CriteriaList,
                 new CriteriaList([ new AttributeCriteria('username', new Equals($username)) ]),
                 new CriteriaList,

@@ -5,7 +5,7 @@ namespace Honeybee\Tests\Flow\Honeybee\SystemAccount\User\Collection;
 use AgaviWebResponse;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
-use Honeybee\Infrastructure\DataAccess\Query\QueryServiceInterface;
+use Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
 use Honeybee\Tests\Mock\HoneybeeAgaviFlowTestCase;
 use Mockery;
@@ -18,7 +18,7 @@ class CollectionActionFlowTest extends HoneybeeAgaviFlowTestCase
     {
         $service_locator = $this->getContext()->getServiceLocator();
 
-        $this->mock_query_service = Mockery::mock(QueryServiceInterface::CLASS);
+        $this->mock_query_service = Mockery::mock(ProjectionQueryServiceInterface::CLASS);
         $mock_query_service_map = new QueryServiceMap([
             'honeybee.system_account.user::projection.standard::query_service' => $this->mock_query_service
         ]);
@@ -48,18 +48,18 @@ class CollectionActionFlowTest extends HoneybeeAgaviFlowTestCase
         ]);
 
         $expected_query = [
-            '@type' =>  'Honeybee\Infrastructure\DataAccess\Query\Query',
-            'search_criteria_list' =>  [],
-            'filter_criteria_list' =>  [],
-            'sort_criteria_list' =>  [
+            '@type' =>  'Honeybee\Infrastructure\DataAccess\Query\CriteriaQuery',
+            'search_criteria_list' => [],
+            'filter_criteria_list' => [],
+            'sort_criteria_list' => [
                 [
-                    '@type' =>  'Honeybee\Infrastructure\DataAccess\Query\SortCriteria',
-                    'attribute_path' =>  'modified_at',
-                    'direction' =>  'asc'
+                    '@type' => 'Honeybee\Infrastructure\DataAccess\Query\SortCriteria',
+                    'attribute_path' => 'modified_at',
+                    'direction' => 'asc'
                 ]
             ],
-            'offset' =>  0,
-            'limit' =>  50
+            'offset' => 0,
+            'limit' => 50
         ];
 
         $this->mock_query_service
@@ -67,7 +67,7 @@ class CollectionActionFlowTest extends HoneybeeAgaviFlowTestCase
             ->with(Mockery::on(function (QueryInterface $query) use ($expected_query) {
                 $this->assertEquals($expected_query, $query->toArray());
                 return true;
-            }))
+            }), null)
             ->andReturn(new FinderResult([ $mock_user_projection_1, $mock_user_projection_2 ], 2));
 
         $this->dispatch();
