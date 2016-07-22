@@ -56,7 +56,7 @@
                 <finder_mappings>
                     <finder_mapping name="default">
                         <finder>{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::projection.{{ variant_prefix }}::view_store::finder</finder>
-                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\ElasticsearchQueryTranslation">
+                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CriteriaQueryTranslation">
                             <setting name="multi_fields"></setting>
                             <setting name="query_filters">
                                 <setting name="workflow_state">!deleted</setting>
