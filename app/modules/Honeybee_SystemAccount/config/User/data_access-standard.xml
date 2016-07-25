@@ -67,6 +67,10 @@
                             </setting>
                         </query_translation>
                     </finder_mapping>
+                    <finder_mapping name="custom">
+                        <finder>honeybee.system_account.user::projection.standard::view_store::finder</finder>
+                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CustomQueryTranslation" />
+                    </finder_mapping>
                 </finder_mappings>
             </query_service>
         </query_services>

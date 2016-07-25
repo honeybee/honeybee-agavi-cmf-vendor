@@ -64,6 +64,10 @@
                             <setting name="dynamic_mappings"></setting>
                         </query_translation>
                     </finder_mapping>
+                    <finder_mapping name="custom">
+                        <finder>{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}::projection.{{ variant_prefix }}::view_store::finder</finder>
+                        <query_translation class="Honeybee\Infrastructure\DataAccess\Finder\Elasticsearch\CustomQueryTranslation" />
+                    </finder_mapping>
                 </finder_mappings>
             </query_service>
         </query_services>
