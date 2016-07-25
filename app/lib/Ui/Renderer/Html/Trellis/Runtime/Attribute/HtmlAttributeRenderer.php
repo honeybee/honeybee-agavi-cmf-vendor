@@ -12,8 +12,10 @@ class HtmlAttributeRenderer extends AttributeRenderer
         $params = parent::getTemplateParameters();
 
         $params['html_attributes'] = $this->getOption('html_attributes', []);
+
         // get common parameters for input HTML elements
         $params = array_replace_recursive($params, $this->getInputTemplateParameters());
+
         $params['pattern'] = array_key_exists('pattern', $params['translations'])
             ? sprintf('pattern="%s"', $params['translations']['pattern'])
             : '';
@@ -74,11 +76,6 @@ class HtmlAttributeRenderer extends AttributeRenderer
         ];
 
         return array_replace_recursive($widget_options, (array)$this->getOption('widget_options', []));
-    }
-
-    protected function getDefaultTranslationKeys()
-    {
-        return array_merge(parent::getDefaultTranslationKeys(), [ 'placeholder', 'pattern' ]);
     }
 
     protected function isDisabled()

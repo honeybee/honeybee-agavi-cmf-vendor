@@ -56,9 +56,10 @@ abstract class AttributeRenderer extends Renderer
 
         $attribute_name = $this->attribute->getName();
         $attribute_path = $this->attribute->getPath();
+        $field_name = $this->getOption('field_name', $attribute_name);
 
         $params['field_id'] = 'randomId-' . rand(); // @todo still random but nicer ids?
-        $params['field_name'] = $this->getOption('field_name', $attribute_name);
+        $params['field_name'] = $field_name;
         $params['grouped_field_name'] = $this->getGroupedInputFieldName();
         $params['grouped_base_path'] = $this->getGroupedInputFieldName();
         $params['attribute_name'] = $attribute_name;
@@ -184,21 +185,21 @@ abstract class AttributeRenderer extends Renderer
         return $this->expression_service->evaluate($expression, $expression_params);
     }
 
-     /**
-     * Attributes can have different translation-keys depending on the current state of the root
-     * resource.
-     * To provide translation just for one specific state define a translation key with the state
-     * appended after the translation key name:
+    /**
+     * Attributes can have different field specific translation keys. There can be translations depending
+     * on the current state of the root resource being rendered.
      *
-     *      e.g. translation key 'input_help' can have a specific translation when the resource is 'inactive',
-     *      and that can be defined with a translation key 'input_help.inactive' in the translations.xml
+     * Example: Field "foo" (of same name attribute "foo") will lead to translation attempts for the defined
+     * default translation keys. This means in translation you can have keys like "foo.input_help" and
+     * "foo.input_help.inactive" while the "translations" key in the template parameters contains on the
+     * "input_help" and "input_help.inactive" if those translation keys lead to actual translations (they exist).
      *
-     * Check the Workflow.xml of the interested Resource for a list of available states.
-     * If no 'per-state' translation is defined then the general translation key will be used as fallback:
+     * Check the Workflow.xml of the interested Resource for a list of available states. If no 'per-state' translation
+     * is defined then the general translation key will be used as fallback:
      *
      *      e.g. 'input_help' if 'input_help.inactive' has not been defined
      *
-     * If neither the fallback exists than the translation will not be included.
+     * If the fallback doesn't exist either, the translation will not be returned at all.
      *
      * @return array Translated strings to use in the template
      */
@@ -211,32 +212,41 @@ abstract class AttributeRenderer extends Renderer
             ? $this->getPayload('resource')->getWorkflowState()
             : $this->getPayload('resource')->getRoot()->getWorkflowState();
 
-        foreach ($translation_keys as $index => $key) {
-            $translation_key = sprintf('%s.%s', $key, $resource_current_state);
+        $field_name = $this->getOption('field_name', $this->attribute->getName());
+
+        foreach ($translation_keys as $key) {
+            $translation_key = sprintf('%s.%s.%s', $field_name, $key, $resource_current_state);
             $translation = $this->_($translation_key, $translation_domain, null, null, '');
 
             // if a translation doesn't exist for the current state fallback to the stateless translation
             if (empty($translation)) {
-                $translation_key = $key;
+                $translation_key = sprintf('%s.%s', $field_name, $key);
                 $translation = $this->_($translation_key, $translation_domain, null, null, '');
             }
-            // add just keys having a corresponding translations
+            // if there's a non-empty field specific translation now, remember it w/o field_name
             if (!empty($translation)) {
-                $translations[$index] = $translation;
+                $translations[$key] = $translation;
+                //$translations[$index] = $translation;
             }
         }
+
         return $translations;
     }
 
     protected function getDefaultTranslationKeys()
     {
         $default_translation_keys = parent::getDefaultTranslationKeys();
-        $attribute_translation_keys = [ 'input_help', 'input_hint', 'input_focus_hint' ];
 
-        return array_replace(
-            $default_translation_keys,
-            $attribute_translation_keys
-        );
+        // will be available as "translations.input_help" in the twig template while the actual
+        // translation key lookup will be for "field_name.input_help" in the "…fields" translation_domain
+        $field_translation_keys = [
+            'input_help',
+            'input_hint',
+            'input_focus_hint',
+            'placeholder',
+        ];
+
+        return array_replace($default_translation_keys, $field_translation_keys);
     }
 
     protected function isReadonly()

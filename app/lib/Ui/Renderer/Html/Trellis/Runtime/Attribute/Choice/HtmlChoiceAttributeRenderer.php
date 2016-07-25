@@ -2,13 +2,19 @@
 
 namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Choice;
 
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlChoiceAttributeRenderer extends HtmlAttributeRenderer
 {
     protected function getDefaultTemplateIdentifier()
     {
-        return $this->output_format->getName() . '/attribute/text-list/as_itemlist_item_cell.twig';
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'collection')) {
+            return $this->output_format->getName() . '/attribute/text-list/as_itemlist_item_cell.twig';
+        }
+
+        return $this->output_format->getName() . '/attribute/choice/as_input.twig';
     }
 
     protected function getTemplateParameters()

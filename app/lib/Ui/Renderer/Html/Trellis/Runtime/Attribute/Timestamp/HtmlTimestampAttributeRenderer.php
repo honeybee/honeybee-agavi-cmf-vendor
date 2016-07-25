@@ -2,13 +2,11 @@
 
 namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Timestamp;
 
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Honeybee\Common\Util\StringToolkit;
+use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlTimestampAttributeRenderer extends HtmlAttributeRenderer
 {
-    protected $removed_parameters = [ 'pattern' ];
-
     protected function getDefaultTemplateIdentifier()
     {
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');

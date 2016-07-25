@@ -2,13 +2,19 @@
 
 namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\ImageList;
 
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlImageListAttributeRenderer extends HtmlAttributeRenderer
 {
     protected function getDefaultTemplateIdentifier()
     {
-        return $this->output_format->getName() . '/attribute/image-list/as_itemlist_item_cell.twig';
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'collection')) {
+            return $this->output_format->getName() . '/attribute/image-list/as_itemlist_item_cell.twig';
+        }
+
+        return $this->output_format->getName() . '/attribute/image-list/as_tabs.twig';
     }
 
     protected function getTemplateParameters()

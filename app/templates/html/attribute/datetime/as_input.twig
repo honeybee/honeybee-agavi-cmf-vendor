@@ -1,13 +1,6 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
-{%- set input_help = translations.input_help | default('') -%}
-{%- set input_hint = translations.input_hint | default('') -%}
-{%- set input_focus_hint = translations.input_focus_hint | default('') -%}
-{%- set placeholder = translations.placeholder | default('') -%}
-<div
-    data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
-    class="hb-field {{ css|default('') }}"
-    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
+<div data-hb-field-name="{{ field_name }}" class="hb-field {{ css|default('') }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %} {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
     <div class="hb-field__content">
         <div class="hb-field__label">
             <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
@@ -15,7 +8,7 @@
         --><div class="hb-field__value">
         {% spaceless %}
             <div class="datepicker-controls-wrapper">
-                <input type="text" class="datepicker-input {% if readonly is not empty %}readonly{% endif %}" name="{{ grouped_field_name }}" value="{{ attribute_value }}" id="{{ field_id }}" placeholder="{{ placeholder }}" {{ readonly }} {{ disabled }} {{ required }} {{ pattern|raw }} />
+                <input type="text" class="datepicker-input {% if readonly is not empty %}readonly{% endif %}" name="{{ grouped_field_name }}" value="{{ attribute_value }}" id="{{ field_id }}" placeholder="{{ translations.placeholder|default('') }}" {{ readonly }} {{ disabled }} {{ required }} {{ pattern|raw }} />
                 {% if readonly is empty and disabled is empty and widget_enabled %}
                 <button type="button" class="datepicker-toggle" style="display: none;">
                     <span class="datepicker-toggle__icon"></span>
@@ -30,14 +23,14 @@
                     {%- endfor -%}
                 {%- endblock  -%}
             </ul>
-            {% if input_help %}
-                <div class="input_help">{{ input_help|raw }}</div>
+            {% if translations.input_help is defined %}
+                <div class="input_help">{{ translations.input_help|raw }}</div>
             {% endif %}
-            {% if input_hint %}
-                <div class="input_hint">{{ input_hint|raw }}</div>
+            {% if translations.input_hint is defined %}
+                <div class="input_hint">{{ translations.input_hint|raw }}</div>
             {% endif %}
-            {% if input_focus_hint %}
-                <div class="input_hint focus">{{ input_focus_hint|raw }}</div>
+            {% if translations.input_focus_hint is defined %}
+                <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
             {% endif %}
         {% endspaceless %}
         </div><!--

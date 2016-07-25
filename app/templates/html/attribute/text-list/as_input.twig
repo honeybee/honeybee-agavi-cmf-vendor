@@ -2,10 +2,6 @@
 {%- set errors = errors | default([]) -%}
 {%- set isReadable = (disabled is empty and readonly is empty) -%}
 {%- set min_count = widget_options.min_count | default(0) -%}
-{%- set input_help = translations.input_help | default('') -%}
-{%- set input_hint = translations.input_hint | default('') -%}
-{%- set input_focus_hint = translations.input_focus_hint | default('') -%}
-{%- set placeholder = translations.placeholder | default('') -%}
 {%- set unchecked_options = unchecked_options | default([]) -%}
 <div
     class="hb-field {{ css|default('') }}"
@@ -31,7 +27,7 @@
                 {% endfor %}
                 <div class="input-text-list__box">
                     <input type="text" name="{{ grouped_field_name }}" id="{{ field_id }}"
-                        {{ readonly }} {{ disabled }} {% if attribute_value|length < min_count %}{{ required }}{% endif %} {{ pattern|raw }} placeholder="{{ placeholder }}" />
+                        {{ readonly }} {{ disabled }} {% if attribute_value|length < min_count %}{{ required }}{% endif %} {{ pattern|raw }} placeholder="{{ translations.placeholder|default('') }}" />
                 </div>
                 <ul class="errors">
                     {%- block field_errors  -%}
@@ -40,14 +36,14 @@
                         {%- endfor -%}
                     {%- endblock  -%}
                 </ul>
-                {% if input_help %}
-                    <div class="input_help">{{ input_help|raw }}</div>
+                {% if translations.input_help is defined %}
+                    <div class="input_help">{{ translations.input_help|raw }}</div>
                 {% endif %}
-                {% if input_hint %}
-                    <div class="input_hint">{{ input_hint|raw }}</div>
+                {% if translations.input_hint is defined %}
+                    <div class="input_hint">{{ translations.input_hint|raw }}</div>
                 {% endif %}
-                {% if input_focus_hint %}
-                    <div class="input_hint focus">{{ input_focus_hint|raw }}</div>
+                {% if translations.input_focus_hint is defined %}
+                    <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
                 {% endif %}
             </div>
         </div><!--
