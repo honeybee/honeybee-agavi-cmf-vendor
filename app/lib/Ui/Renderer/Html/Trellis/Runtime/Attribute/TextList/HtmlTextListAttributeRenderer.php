@@ -115,6 +115,6 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getWidgetImplementor()
     {
-        return 'jsb_Honeybee_Core/ui/TextList';
+        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/TextList');
     }
 }

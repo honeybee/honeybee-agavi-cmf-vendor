@@ -287,6 +287,6 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getWidgetImplementor()
     {
-        return 'jsb_Honeybee_Core/ui/EmbeddedEntityList';
+        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/EmbeddedEntityList');
     }
 }

@@ -126,6 +126,6 @@ class HtmlImageListAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getWidgetImplementor()
     {
-        return 'jsb_Honeybee_Core/ui/ImageList';
+        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/ImageList');
     }
 }

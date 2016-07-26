@@ -39,6 +39,6 @@ class HtmlChoiceAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getWidgetImplementor()
     {
-        return 'jsb_Honeybee_Core/ui/SelectBox';
+        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/SelectBox');
     }
 }
