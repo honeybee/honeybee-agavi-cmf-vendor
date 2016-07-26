@@ -7,7 +7,7 @@ use Honeybee\Infrastructure\Fixture\FixtureTargetInterface;
 
 class Fixture_{{ timestamp }}_{{ name }} extends Fixture
 {
-    public function import(FixtureTargetInterface $fixture_target)
+    protected function import(FixtureTargetInterface $fixture_target)
     {
         $this->copyFilesToTempLocation(__DIR__ . DIRECTORY_SEPARATOR . 'files');
 
