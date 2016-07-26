@@ -2,13 +2,37 @@
 
 namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\TextList;
 
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
 {
     protected function getDefaultTemplateIdentifier()
     {
-        return $this->output_format->getName() . '/attribute/text-list/as_itemlist_item_cell.twig';
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'collection')) {
+            return $this->output_format->getName() . '/attribute/text-list/as_itemlist_item_cell.twig';
+        }
+
+        return $this->output_format->getName() . '/attribute/text-list/as_input.twig';
+    }
+
+    protected function getTemplateParameters()
+    {
+        $params = parent::getTemplateParameters();
+
+        $params['grouped_field_name'] = $params['grouped_field_name'] . '[]';
+        $value = $params['attribute_value'];
+
+        $missing_allowed_values = [];
+        foreach ($this->getAllowedValues() as $allowed_value) {
+            if (!in_array($allowed_value, $value)) {
+                $missing_allowed_values[] = $allowed_value;
+            }
+        }
+        $params['unchecked_options'] = $missing_allowed_values;
+
+        return $params;
     }
 
     protected function determineAttributeValue($attribute_name, $default_value = '')
@@ -31,24 +55,6 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         $value = is_array($value) ? $value : [ $value ];
 
         return $value;
-    }
-
-    protected function getTemplateParameters()
-    {
-        $params = parent::getTemplateParameters();
-
-        $params['grouped_field_name'] = $params['grouped_field_name'] . '[]';
-        $value = $params['attribute_value'];
-
-        $missing_allowed_values = [];
-        foreach ($this->getAllowedValues() as $allowed_value) {
-            if (!in_array($allowed_value, $value)) {
-                $missing_allowed_values[] = $allowed_value;
-            }
-        }
-        $params['unchecked_options'] = $missing_allowed_values;
-
-        return $params;
     }
 
     protected function getWidgetOptions()

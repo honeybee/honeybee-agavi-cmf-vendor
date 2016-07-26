@@ -1,21 +1,21 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Email;
+namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Text;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
-use Trellis\Runtime\Attribute\Email\EmailAttribute;
+use Trellis\Runtime\Attribute\Text\TextAttribute;
 
-class HtmlEmailAttributeRenderer extends HtmlAttributeRenderer
+class HtmlTextAttributeRenderer extends HtmlAttributeRenderer
 {
     protected function getDefaultTemplateIdentifier()
     {
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
         if (StringToolkit::endsWith($view_scope, 'collection')) {
-            return $this->output_format->getName() . '/attribute/email/as_itemlist_item_cell.twig';
+            return $this->output_format->getName() . '/attribute/text/as_itemlist_item_cell.twig';
         }
 
-        return $this->output_format->getName() . '/attribute/email/as_input.twig';
+        return $this->output_format->getName() . '/attribute/text/as_input.twig';
     }
 
     protected function getTemplateParameters()
@@ -24,7 +24,7 @@ class HtmlEmailAttributeRenderer extends HtmlAttributeRenderer
 
         $params['maxlength'] = $this->getOption(
             'maxlength',
-            $this->attribute->getOption(EmailAttribute::OPTION_MAX_LENGTH)
+            $this->attribute->getOption(TextAttribute::OPTION_MAX_LENGTH)
         );
 
         return $params;

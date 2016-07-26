@@ -1,8 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
-{%- set input_help = translations.input_help | default('') -%}
-{%- set input_hint = translations.input_hint | default('') -%}
-{%- set input_focus_hint = translations.input_focus_hint | default('') -%}
 
 {# Notifications about list constraints to respect #}
 {% set min_constraint = _('min', translation_domain) %}
@@ -12,9 +9,7 @@
     {% set field_constraints = '(%s: %s, %s: %s)'|format(min_constraint, widget_options.min_count|default('-'), max_constraint, widget_options.max_count|default('-')) %}
 {% endif %}
 
-<div
-    class="hb-field hb-field__embedded-entity-list {% if widget_enabled %} hb-js-embedded-entity-list{% endif %} {{ css|default('') }}"
-    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
+<div class="hb-field hb-field__embedded-entity-list {% if widget_enabled %} hb-js-embedded-entity-list{% endif %} {{ css|default('') }}" {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         {% if options.hide_attribute_label is not defined or not options.hide_attribute_label %}
@@ -45,6 +40,15 @@
                 {%- endfor -%}
             {%- endblock  -%}
         </ul>
+        {% if translations.input_help is defined %}
+            <div class="input_help">{{ translations.input_help|raw }}</div>
+        {% endif %}
+        {% if translations.input_hint is defined %}
+            <div class="input_hint">{{ translations.input_hint|raw }}</div>
+        {% endif %}
+        {% if translations.input_focus_hint is defined %}
+            <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
+        {% endif %}
         <input type="hidden" name="{{ grouped_field_name }}" value="" />
         <ul class="hb-entity-list">
         {%- for rendered_entity in rendered_entities -%}

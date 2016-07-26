@@ -2,6 +2,7 @@
 
 namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Float;
 
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\Float\FloatAttribute;
 
@@ -9,21 +10,19 @@ class HtmlFloatAttributeRenderer extends HtmlAttributeRenderer
 {
     const DEFAULT_VALUE_STEP = 0.001;
 
-    protected $removed_parameters = [ 'pattern' ];
-
     protected function getDefaultTemplateIdentifier()
     {
-        return $this->output_format->getName() . '/attribute/float/as_itemlist_item_cell.twig';
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'collection')) {
+            return $this->output_format->getName() . '/attribute/float/as_itemlist_item_cell.twig';
+        }
+
+        return $this->output_format->getName() . '/attribute/float/as_input.twig';
     }
 
     protected function getTemplateParameters()
     {
         $params = parent::getTemplateParameters();
-
-        // remove not supported options
-        foreach ($this->removed_parameters as $param_key) {
-            unset($params[$param_key]);
-        }
 
         // load settings or fallback to default attribute's options
         $params['min_value'] = $this->getOption(
@@ -48,6 +47,8 @@ class HtmlFloatAttributeRenderer extends HtmlAttributeRenderer
             }
         }
 
+        $params['maxlength'] = $this->getOption('maxlength', '');
+
         if (!$this->hasOption('placeholder')) {
             $params['placeholder'] = sprintf(
                 '%s…%s',
@@ -57,5 +58,10 @@ class HtmlFloatAttributeRenderer extends HtmlAttributeRenderer
         }
 
         return $params;
+    }
+
+    protected function getDefaultTranslationKeys()
+    {
+        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }

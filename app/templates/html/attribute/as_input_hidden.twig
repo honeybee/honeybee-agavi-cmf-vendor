@@ -7,7 +7,9 @@
                 value="{{ attribute_value }}"
                 id="{{ field_id }}"
                 name="{{ grouped_field_name }}"
-                {{ disabled }}
+                {{ disabled|default('') }}
+                {{ readonly|default('') }}
+                maxlength="{{ maxlength|default('') }}"
             />
         </div>
     </div>
