@@ -17,6 +17,24 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         return $this->output_format->getName() . '/attribute/text-list/as_input.twig';
     }
 
+    protected function getTemplateParameters()
+    {
+        $params = parent::getTemplateParameters();
+
+        $params['grouped_field_name'] = $params['grouped_field_name'] . '[]';
+        $value = $params['attribute_value'];
+
+        $missing_allowed_values = [];
+        foreach ($this->getAllowedValues() as $allowed_value) {
+            if (!in_array($allowed_value, $value)) {
+                $missing_allowed_values[] = $allowed_value;
+            }
+        }
+        $params['unchecked_options'] = $missing_allowed_values;
+
+        return $params;
+    }
+
     protected function determineAttributeValue($attribute_name, $default_value = '')
     {
         $value = [];
@@ -37,24 +55,6 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         $value = is_array($value) ? $value : [ $value ];
 
         return $value;
-    }
-
-    protected function getTemplateParameters()
-    {
-        $params = parent::getTemplateParameters();
-
-        $params['grouped_field_name'] = $params['grouped_field_name'] . '[]';
-        $value = $params['attribute_value'];
-
-        $missing_allowed_values = [];
-        foreach ($this->getAllowedValues() as $allowed_value) {
-            if (!in_array($allowed_value, $value)) {
-                $missing_allowed_values[] = $allowed_value;
-            }
-        }
-        $params['unchecked_options'] = $missing_allowed_values;
-
-        return $params;
     }
 
     protected function getWidgetOptions()

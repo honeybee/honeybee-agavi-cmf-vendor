@@ -10,7 +10,7 @@
         --><div class="hb-field__value">
             <textarea id="{{ field_id }}" name="{{ grouped_field_name }}" class="" placeholder="{{ translations.placeholder|default('') }}"
                 maxlength="{{ maxlength }}" wrap="{{ wrap }}" cols="{{ cols }}" rows="{{ rows }}"
-                {{ readonly }} {{ disabled }} {{ required }}>{#
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}">{#
                     #}{{ attribute_value }}{#
                 #}</textarea>
             <ul class="errors">

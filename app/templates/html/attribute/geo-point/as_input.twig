@@ -7,10 +7,12 @@
         </div><!--
         --><div class="hb-field__value">
             <input type="number" value="{{ attribute_value.lon|default('') }}" id="{{ field_id ~ 'lon' }}" name="{{ grouped_field_name }}[lon]" class=""
-                {{ readonly }} {{ disabled }} {{ required }}
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }}
+                {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder_lon|default('') }}" title="{{ translations.title_lon|default('') }}"
                 min="-180" max="180" step="{{ value_step }}" />
             <input type="number" value="{{ attribute_value.lat|default('') }}" id="{{ field_id ~ 'lat' }}" name="{{ grouped_field_name }}[lat]" class=""
-                {{ readonly }} {{ disabled }} {{ required }}
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }}
+                {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder_lat|default('') }}" title="{{ translations.title_lat|default('') }}"
                 min="-90" max="90" step="{{ value_step }}" />
             <ul class="errors">
                 {%- block field_errors  -%}

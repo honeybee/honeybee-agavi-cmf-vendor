@@ -1,6 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
-{%- set pattern = pattern | default('') -%}
 <div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         <div class="hb-field__label">
@@ -8,7 +7,8 @@
         </div><!--
         --><div class="hb-field__value">
             <input type="text" value="{{ attribute_value }}" id="{{ field_id }}" name="{{ grouped_field_name }}" class=""
-                {{ readonly }} {{ disabled }} {{ required }} {{ pattern|raw }} placeholder="{{ translations.placeholder|default('') }}" />
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }}  maxlength="{{ maxlength|default('') }}"
+                {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
             <ul class="errors">
                 {%- block field_errors  -%}
                     {%- for error in errors -%}

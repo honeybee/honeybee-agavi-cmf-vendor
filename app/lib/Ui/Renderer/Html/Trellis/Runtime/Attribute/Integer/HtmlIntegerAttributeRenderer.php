@@ -45,6 +45,8 @@ class HtmlIntegerAttributeRenderer extends HtmlAttributeRenderer
             }
         }
 
+        $params['maxlength'] = $this->getOption('maxlength', '');
+
         if (!$this->hasOption('placeholder')) {
             $params['placeholder'] = sprintf(
                 '%s…%s',
@@ -54,5 +56,10 @@ class HtmlIntegerAttributeRenderer extends HtmlAttributeRenderer
         }
 
         return $params;
+    }
+
+    protected function getDefaultTranslationKeys()
+    {
+        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }

@@ -7,8 +7,8 @@
         </div><!--
         --><div class="hb-field__value">
             <input type="number" value="{{ attribute_value }}" id="{{ field_id }}" name="{{ grouped_field_name }}" class=""
-                placeholder="{{ translations.placeholder|default('') }}"
-                {{ readonly }} {{ disabled }} {{ required }}
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
+                {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}"
                 min="{{ min_value }}" max="{{ max_value }}" step="{{ value_step }}" />
             <ul class="errors">
                 {%- block field_errors  -%}

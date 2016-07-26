@@ -4,6 +4,7 @@ namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Url;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Trellis\Runtime\Attribute\Url\UrlAttribute;
 
 class HtmlUrlAttributeRenderer extends HtmlAttributeRenderer
 {
@@ -24,6 +25,16 @@ class HtmlUrlAttributeRenderer extends HtmlAttributeRenderer
         $open_in_blank = $this->getOption('open_in_blank', true);
         $params['open_in_blank'] = $open_in_blank;
 
+        $params['maxlength'] = $this->getOption(
+            'maxlength',
+            $this->attribute->getOption(UrlAttribute::OPTION_MAX_LENGTH)
+        );
+
         return $params;
+    }
+
+    protected function getDefaultTranslationKeys()
+    {
+        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }

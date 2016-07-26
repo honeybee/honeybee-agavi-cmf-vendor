@@ -244,6 +244,7 @@ abstract class AttributeRenderer extends Renderer
             'input_hint',
             'input_focus_hint',
             'placeholder',
+            'title',
         ];
 
         return array_replace($default_translation_keys, $field_translation_keys);

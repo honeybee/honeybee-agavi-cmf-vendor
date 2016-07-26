@@ -27,7 +27,8 @@
                 {% endfor %}
                 <div class="input-text-list__box">
                     <input type="text" name="{{ grouped_field_name }}" id="{{ field_id }}"
-                        {{ readonly }} {{ disabled }} {% if attribute_value|length < min_count %}{{ required }}{% endif %} {{ pattern|raw }} placeholder="{{ translations.placeholder|default('') }}" />
+                        {{ readonly|default('') }} {{ disabled|default('') }} {% if attribute_value|length < min_count %} required {% endif %}
+                        {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
                 </div>
                 <ul class="errors">
                     {%- block field_errors  -%}

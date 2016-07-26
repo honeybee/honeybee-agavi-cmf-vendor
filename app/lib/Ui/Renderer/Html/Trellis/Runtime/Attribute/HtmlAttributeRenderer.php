@@ -16,9 +16,13 @@ class HtmlAttributeRenderer extends AttributeRenderer
         // get common parameters for input HTML elements
         $params = array_replace_recursive($params, $this->getInputTemplateParameters());
 
-        $params['pattern'] = array_key_exists('pattern', $params['translations'])
-            ? sprintf('pattern="%s"', $params['translations']['pattern'])
-            : '';
+        if ($this->hasOption('pattern')) {
+            $params['pattern'] = sprintf('pattern="%s"', $this->getOption('pattern', ''));
+        } else {
+            $params['pattern'] = array_key_exists('pattern', $params['translations'])
+                ? sprintf('pattern="%s"', $params['translations']['pattern'])
+                : '';
+        }
 
         $css = sprintf(
             'hb-attribute %s%s %s',

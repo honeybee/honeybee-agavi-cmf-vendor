@@ -21,6 +21,8 @@ class HtmlBooleanAttributeRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
+        $params['maxlength'] = $this->getOption('maxlength', '');
+
         return $params;
     }
 
@@ -33,5 +35,10 @@ class HtmlBooleanAttributeRenderer extends HtmlAttributeRenderer
         }
 
         return $global_input_parameters;
+    }
+
+    protected function getDefaultTranslationKeys()
+    {
+        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }
