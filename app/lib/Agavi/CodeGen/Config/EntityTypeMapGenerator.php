@@ -7,7 +7,6 @@ use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
 use Honeybee\Projection\ProjectionTypeInterface;
 use SplFileInfo;
-use Symfony\Component\Finder\Finder;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;
 use Trellis\CodeGen\Parser\Schema\EntityTypeSchemaXmlParser;
 use Trellis\CodeGen\Schema\EntityTypeDefinition;

@@ -122,7 +122,8 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
         $module_routing_file = $module_config_dir . 'routing.xml';
 
         $routing_finder = new Finder();
-        foreach ($routing_finder->files()->name('routing.xml')->in($module_config_dir) as $routing_file) {
+        $routing_finder->files()->name('routing.xml')->sortByName()->in($module_config_dir);
+        foreach ($routing_finder as $routing_file) {
             if ($routing_file->getPathname() === $module_routing_file) {
                 continue;
             }
@@ -186,7 +187,8 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
         $module_routing_file = $module_config_dir . 'routing.xml';
 
         $routing_finder = new Finder();
-        foreach ($routing_finder->files()->name('routing.xml')->in($module_config_dir) as $routing_file) {
+        $routing_finder->files()->name('routing.xml')->sortByName()->in($module_config_dir);
+        foreach ($routing_finder as $routing_file) {
             if ($routing_file->getPathname() === $module_routing_file) {
                 continue;
             }

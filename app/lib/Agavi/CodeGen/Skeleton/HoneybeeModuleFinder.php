@@ -40,7 +40,7 @@ class HoneybeeModuleFinder
         }
 
         $finder = new Finder();
-        $finder->directories()->depth(0)->name($name)->in($locations);
+        $finder->directories()->depth(0)->name($name)->sortByName()->in($locations);
 
         $results = iterator_to_array($finder, true);
 

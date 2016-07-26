@@ -42,7 +42,7 @@ class SkeletonFinder
         }
 
         $finder = new Finder();
-        $finder->directories()->depth(0)->name($skeleton_name)->in($locations);
+        $finder->directories()->depth(0)->name($skeleton_name)->sortByName()->in($locations);
 
         $skeletons = iterator_to_array($finder, true);
 

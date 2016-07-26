@@ -40,7 +40,7 @@ class NewSkeletonGenerator extends SkeletonGenerator
     protected function getFinderForFilesToCopy($source_path)
     {
         $finder = new Finder();
-        $finder->files()->in($source_path);
+        $finder->files()->sortByName()->in($source_path);
         return $finder;
     }
 }

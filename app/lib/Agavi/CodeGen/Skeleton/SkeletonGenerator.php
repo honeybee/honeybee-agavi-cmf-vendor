@@ -142,7 +142,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
     protected function getFinderForFilesToCopy($source_path)
     {
         $finder = new Finder();
-        $finder->files()->notName(SkeletonFinder::VALIDATION_FILE)->in($source_path);
+        $finder->files()->notName(SkeletonFinder::VALIDATION_FILE)->sortByName()->in($source_path);
         return $finder;
     }
 
@@ -156,7 +156,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
     {
         $finder = new Finder();
 
-        $finder->files()->name('*' . self::TEMPLATE_FILENAME_EXTENSION)->in($this->target_path);
+        $finder->files()->name('*' . self::TEMPLATE_FILENAME_EXTENSION)->sortByName()->in($this->target_path);
 
         $twig_renderer = TwigRenderer::create(
             [

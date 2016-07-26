@@ -76,7 +76,8 @@ class ConfigurationScanner
             $module_dir = $module_directory->getPathname();
             // scan for supported module specific config files in the "config" folder of the module
             $xml_config_finder = new Finder;
-            foreach ($xml_config_finder->files()->name('*.xml')->in($module_dir . '/config') as $xml_config_file) {
+            $xml_config_finder->files()->name('*.xml')->sortByName()->in($module_dir . '/config');
+            foreach ($xml_config_finder as $xml_config_file) {
                 $config_name = str_replace('.xml', '', basename($xml_config_file->getRelativePathname()));
                 if (in_array($config_name, self::$supported_module_specific_configs)) {
                     $configs_to_include[$config_name][] = $xml_config_file->getPathname();
@@ -96,6 +97,7 @@ class ConfigurationScanner
                 ->name('*.xml')
                 ->notName('#\.validate\.xml$#') // agavi validation configs
                 ->notName('#\.cache\.xml$#') // agavi caching configs
+                ->sortByName()
                 ->in($module_dir . '/impl');
 
             foreach ($action_config_finder as $file) {
@@ -112,7 +114,7 @@ class ConfigurationScanner
             // scan for aggregate-roots and their projections
             $entity_found = false;
             $schema_finder = new Finder;
-            $schema_finder->files()->name('aggregate_root.xml')->in($module_dir . '/config');
+            $schema_finder->files()->name('aggregate_root.xml')->sortByName()->in($module_dir . '/config');
             foreach ($schema_finder as $aggregate_root_schema_file) {
                 if (!$entity_found) {
                     $entity_found = true;
@@ -124,7 +126,8 @@ class ConfigurationScanner
                 }
                 $configs_to_include['aggregate_root_type_map'][] = $aggregate_root_schema_file->getRealPath();
                 $projections_directory = sprintf('%s/projection/', dirname($aggregate_root_schema_file->getRealPath()));
-                foreach ((new Finder())->files()->name('*.xml')->in($projections_directory) as $entity_schema_file) {
+                $projection_schemas = (new Finder())->files()->name('*.xml')->sortByName()->in($projections_directory);
+                foreach ($projection_schemas as $entity_schema_file) {
                     $configs_to_include['projection_type_map'][] = $entity_schema_file->getRealPath();
                 }
             }
