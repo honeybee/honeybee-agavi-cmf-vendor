@@ -19,11 +19,9 @@ class FixtureServiceProvisioner extends AbstractProvisioner
 
     public function build(ServiceDefinitionInterface $service_definition, SettingsInterface $provisioner_settings)
     {
-        $that = $this;
-
-        $factory_delegate = function (AggregateRootTypeMap $aggregate_root_type_map) use ($that, $service_definition) {
-            $fixture_config = $that->loadFixtureConfig();
-            $fixture_target_map = $that->buildFixtureTargetMap($fixture_config['targets']);
+        $factory_delegate = function (AggregateRootTypeMap $aggregate_root_type_map) use ($service_definition) {
+            $fixture_config = $this->loadFixtureConfig();
+            $fixture_target_map = $this->buildFixtureTargetMap($fixture_config['targets']);
 
             $service_config = $service_definition->getConfig();
             $service_class = $service_definition->getClass();

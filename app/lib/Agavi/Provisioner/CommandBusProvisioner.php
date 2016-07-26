@@ -24,16 +24,14 @@ class CommandBusProvisioner extends AbstractProvisioner
             AgaviContext::getInstance()->getName()
         );
 
-        $that = $this;
         $callback = function (
             CommandBusInterface $command_bus,
             DiContainer $di_container
         ) use (
-            $command_bus_config,
-            $that
-) {
-            if (!$that->prepare_executed) {
-                $that->prepareCommandBus($command_bus, $command_bus_config);
+            $command_bus_config
+        ) {
+            if (!$this->prepare_executed) {
+                $this->prepareCommandBus($command_bus, $command_bus_config);
                 $this->prepare_executed = true;
             }
         };

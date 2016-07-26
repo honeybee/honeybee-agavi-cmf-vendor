@@ -45,17 +45,15 @@ class EventBusProvisioner extends AbstractProvisioner
             $channel_map->setItem($default_channel, new Channel($default_channel));
         }
 
-        $that = $this;
         $callback = function (
             EventBusInterface $event_bus,
             DiContainer $di_container
         ) use (
-            $event_bus_config,
-            $that
+            $event_bus_config
         ) {
-            if (!$that->prepare_executed) {
-                $that->prepareEventBus($event_bus, $event_bus_config);
-                $that->prepare_executed = true;
+            if (!$this->prepare_executed) {
+                $this->prepareEventBus($event_bus, $event_bus_config);
+                $this->prepare_executed = true;
             }
         };
 

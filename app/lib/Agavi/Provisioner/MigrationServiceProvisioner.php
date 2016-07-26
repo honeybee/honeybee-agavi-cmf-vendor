@@ -2,15 +2,15 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
-use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\ServiceDefinitionInterface;
+use AgaviConfig;
+use AgaviConfigCache;
 use Honeybee\Common\Error\RuntimeError;
+use Honeybee\Infrastructure\Config\ArrayConfig;
+use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Migration\MigrationTargetMap;
 use Honeybee\Infrastructure\Migration\MigrationTarget;
 use Honeybee\Infrastructure\Migration\MigrationServiceInterface;
-use AgaviConfig;
-use AgaviConfigCache;
+use Honeybee\ServiceDefinitionInterface;
 
 class MigrationServiceProvisioner extends AbstractProvisioner
 {
@@ -18,11 +18,9 @@ class MigrationServiceProvisioner extends AbstractProvisioner
 
     public function build(ServiceDefinitionInterface $service_definition, SettingsInterface $provisioner_settings)
     {
-        $that = $this;
-
-        $factory_delegate = function () use ($that, $service_definition) {
-            $migration_config = $that->loadMigrationConfig();
-            $migration_target_map = $that->buildMigrationTargetMap($migration_config['targets']);
+        $factory_delegate = function () use ($service_definition) {
+            $migration_config = $this->loadMigrationConfig();
+            $migration_target_map = $this->buildMigrationTargetMap($migration_config['targets']);
 
             $service_config = $service_definition->getConfig();
             $service_class = $service_definition->getClass();

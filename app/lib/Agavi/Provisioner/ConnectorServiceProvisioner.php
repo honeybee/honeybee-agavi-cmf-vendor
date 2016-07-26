@@ -18,15 +18,13 @@ class ConnectorServiceProvisioner extends AbstractProvisioner
 
     public function build(ServiceDefinitionInterface $service_definition, SettingsInterface $provisioner_settings)
     {
-        $that = $this;
-
         $this->di_container
             ->share(ConnectorMap::CLASS)
             ->prepare(
                 ConnectorMap::CLASS,
-                function (ConnectorMap $connector_map, DiContainer $di_container) use ($that) {
-                    $connections_config = $that->loadConnectionsConfig();
-                    $that->registerConnectors($connector_map, $connections_config);
+                function (ConnectorMap $connector_map, DiContainer $di_container) {
+                    $connections_config = $this->loadConnectionsConfig();
+                    $this->registerConnectors($connector_map, $connections_config);
                 }
             );
 
