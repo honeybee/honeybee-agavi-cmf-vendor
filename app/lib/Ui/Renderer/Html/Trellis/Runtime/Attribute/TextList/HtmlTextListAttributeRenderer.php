@@ -4,6 +4,7 @@ namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\TextList;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Trellis\Runtime\Attribute\TextList\TextListAttribute;
 
 class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
 {
@@ -64,13 +65,17 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         $widget_options['min_count'] = $this->getMinCount($this->isRequired());
         $widget_options['max_count'] = $this->getMaxCount();
         $widget_options['allowed_values'] = $this->getAllowedValues();
+        $widget_options['remove_label'] = $this->getOption('remove_label', '-');
 
         return $widget_options;
     }
 
     protected function getMinCount($is_required = false)
     {
-        $min_count = $this->getOption('min_count');
+        $min_count = $this->getOption(
+            'min_count',
+            $this->attribute->getOption(TextListAttribute::OPTION_MIN_COUNT, 0)
+        );
 
         if (!is_numeric($min_count) && $is_required) {
             $min_count = 1;
@@ -80,12 +85,15 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getMaxCount()
     {
-        return $this->getOption('max_count');
+        return $this->getOption(
+            'max_count',
+            $this->attribute->getOption(TextListAttribute::OPTION_MAX_COUNT, 0)
+        );
     }
 
     protected function getAllowedValues()
     {
-        return $this->attribute->getOption('allowed_values', []);
+        return $this->attribute->getOption(TextListAttribute::OPTION_ALLOWED_VALUES, []);
     }
 
     protected function isRequired()

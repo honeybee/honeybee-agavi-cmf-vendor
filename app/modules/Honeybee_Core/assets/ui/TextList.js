@@ -57,14 +57,12 @@ define([
 
         this.$widget.find('.input-text-list__box').replaceWith($select);
 
-        $select.selectize({
+        var selectize_config = {
             maxItems: this.options.max_count,
             minItems: this.options.min_count,
             plugins: {
                 "remove_button": {
                     label: this.options.remove_label
-                },
-                "restore_on_backspace": {
                 }
             },
             create: this.isReadable && this.options.allowed_values && this.options.allowed_values.length === 0,
@@ -75,7 +73,14 @@ define([
             },
             onChange: this.updateItems,
             onInitialize: this.updateItems
-        });
+        };
+
+        // if there's a set of allowed tags they should be removed on backspace instead of characters being removed
+        if (this.options.allowed_values && this.options.allowed_values.length === 0) {
+            selectize_config['plugins']['restore_on_backspace'] = {};
+        }
+
+        $select.selectize(selectize_config);
     };
 
     TextList.prototype.updateItems = function() {
