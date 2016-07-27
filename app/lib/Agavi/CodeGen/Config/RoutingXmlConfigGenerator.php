@@ -118,14 +118,13 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
 
         $vendor_prefix = strtolower($meta_data['vendor']);
         $package_prefix = StringToolkit::asSnakeCase($meta_data['package']);
-        $module_config_dir = sprintf('%s/%s/config/', AgaviConfig::get('core.module_dir'), $honeybee_module);
-        $module_routing_file = $module_config_dir . 'routing.xml';
+        $module_config_dir = sprintf('%s/%s/config', AgaviConfig::get('core.module_dir'), $honeybee_module);
+        $module_routing_file = $module_config_dir . '/routing.xml';
 
-        $routing_finder = new Finder();
-        $routing_finder->files()->name('routing.xml')->sortByName()->in($module_config_dir);
+        $routing_finder = Finder::create()->files()->name('routing.xml')->sortByName()->in($module_config_dir);
         foreach ($routing_finder as $routing_file) {
             if ($routing_file->getPathname() === $module_routing_file) {
-                continue;
+                continue; // exclude app/modules/[module_name]/routing.xml
             }
             $resource_name = basename($routing_file->getPath());
             $resource_prefix = StringToolkit::asSnakeCase($resource_name);
@@ -183,14 +182,14 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
 
         $vendor_prefix = strtolower($meta_data['vendor']);
         $package_prefix = StringToolkit::asSnakeCase($meta_data['package']);
-        $module_config_dir = sprintf('%s/%s/config/', AgaviConfig::get('core.module_dir'), $honeybee_module);
-        $module_routing_file = $module_config_dir . 'routing.xml';
+        $module_config_dir = sprintf('%s/%s/config', AgaviConfig::get('core.module_dir'), $honeybee_module);
+        $module_routing_file = $module_config_dir . '/routing.xml';
 
         $routing_finder = new Finder();
         $routing_finder->files()->name('routing.xml')->sortByName()->in($module_config_dir);
         foreach ($routing_finder as $routing_file) {
             if ($routing_file->getPathname() === $module_routing_file) {
-                continue;
+                continue; // exclude app/modules/[module_name]/routing.xml
             }
             $resource_name = basename($routing_file->getPath());
             $resource_prefix = StringToolkit::asSnakeCase($resource_name);
