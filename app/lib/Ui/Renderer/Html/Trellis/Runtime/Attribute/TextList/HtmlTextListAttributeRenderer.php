@@ -74,7 +74,7 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
     {
         $min_count = $this->getOption(
             'min_count',
-            $this->attribute->getOption(TextListAttribute::OPTION_MIN_COUNT, 0)
+            $this->attribute->getOption(TextListAttribute::OPTION_MIN_COUNT)
         );
 
         if (!is_numeric($min_count) && $is_required) {
@@ -87,7 +87,7 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
     {
         return $this->getOption(
             'max_count',
-            $this->attribute->getOption(TextListAttribute::OPTION_MAX_COUNT, 0)
+            $this->attribute->getOption(TextListAttribute::OPTION_MAX_COUNT)
         );
     }
 
