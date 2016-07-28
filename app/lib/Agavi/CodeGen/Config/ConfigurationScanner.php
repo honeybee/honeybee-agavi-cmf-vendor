@@ -5,8 +5,6 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
 use AgaviConfig;
 use AgaviModuleFilesystemCheck;
 use AgaviToolkit;
-use DirectoryIterator;
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
 use Symfony\Component\Finder\Finder;
 
@@ -60,12 +58,8 @@ class ConfigurationScanner
             $configs_to_include[$config_name] = [];
         }
 
-        $directory_iterator = new DirectoryIterator(AgaviConfig::get('core.module_dir'));
-
-        foreach ($directory_iterator as $module_directory) {
-            if ($module_directory->isDot()) {
-                continue;
-            }
+        $module_directories = Finder::create()->directories()->sortByName()->in(AgaviConfig::get('core.module_dir'));
+        foreach ($module_directories as $module_directory) {
             $check = new AgaviModuleFilesystemCheck;
             $check->setConfigDirectory('config');
             $check->setPath($module_directory->getPathname());
@@ -75,9 +69,8 @@ class ConfigurationScanner
 
             $module_dir = $module_directory->getPathname();
             // scan for supported module specific config files in the "config" folder of the module
-            $xml_config_finder = new Finder;
-            $xml_config_finder->files()->name('*.xml')->sortByName()->in($module_dir . '/config');
-            foreach ($xml_config_finder as $xml_config_file) {
+            $xml_configs = Finder::create()->files()->name('*.xml')->sortByName()->in($module_dir . '/config');
+            foreach ($xml_configs as $xml_config_file) {
                 $config_name = str_replace('.xml', '', basename($xml_config_file->getRelativePathname()));
                 if (in_array($config_name, self::$supported_module_specific_configs)) {
                     $configs_to_include[$config_name][] = $xml_config_file->getPathname();
@@ -92,15 +85,15 @@ class ConfigurationScanner
             }
 
             // scan for supported action specific config files in the "impl" folder of the module
-            $action_config_finder = new Finder;
-            $action_config_finder->files()
+            $action_configs = Finder::create()
+                ->files()
                 ->name('*.xml')
                 ->notName('#\.validate\.xml$#') // agavi validation configs
                 ->notName('#\.cache\.xml$#') // agavi caching configs
                 ->sortByName()
                 ->in($module_dir . '/impl');
 
-            foreach ($action_config_finder as $file) {
+            foreach ($action_configs as $file) {
                 // the supported config name needs to be "view_configs", while the
                 // relativePathname is more like "ItemList/ItemList.view_configs.xml"
                 $config_name = str_replace('.xml', '', $file->getFilename()); // "ItemList.view_configs.xml"
@@ -113,9 +106,8 @@ class ConfigurationScanner
 
             // scan for aggregate-roots and their projections
             $entity_found = false;
-            $schema_finder = new Finder;
-            $schema_finder->files()->name('aggregate_root.xml')->sortByName()->in($module_dir . '/config');
-            foreach ($schema_finder as $aggregate_root_schema_file) {
+            $schemas = Finder::create()->files()->name('aggregate_root.xml')->sortByName()->in($module_dir . '/config');
+            foreach ($schemas as $aggregate_root_schema_file) {
                 if (!$entity_found) {
                     $entity_found = true;
                 }
@@ -125,8 +117,13 @@ class ConfigurationScanner
                     $configs_to_include['routing']['honeybee_modules'][] = $module_name;
                 }
                 $configs_to_include['aggregate_root_type_map'][] = $aggregate_root_schema_file->getRealPath();
+
                 $projections_directory = sprintf('%s/projection/', dirname($aggregate_root_schema_file->getRealPath()));
-                $projection_schemas = (new Finder())->files()->name('*.xml')->sortByName()->in($projections_directory);
+                $projection_schemas = Finder::create()
+                    ->files()
+                    ->name('*.xml')
+                    ->sortByName()
+                    ->in($projections_directory);
                 foreach ($projection_schemas as $entity_schema_file) {
                     $configs_to_include['projection_type_map'][] = $entity_schema_file->getRealPath();
                 }
