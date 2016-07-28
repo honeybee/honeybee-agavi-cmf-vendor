@@ -2,8 +2,10 @@
 
 namespace Honeybee\SystemAccount\User\Model\Task\SetUserAuthToken;
 
+use Assert\Assertion;
 use Honeybee\Model\Command\AggregateRootCommand;
 use Honeybee\Model\Event\AggregateRootEventInterface;
+use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
 
 class SetUserAuthTokenCommand extends AggregateRootCommand
 {
@@ -35,8 +37,8 @@ class SetUserAuthTokenCommand extends AggregateRootCommand
     {
         parent::guardRequiredState();
 
-        assert($this->auth_token !== null, '"auth_token" is set');
-        assert($this->token_expire_date !== null, '"token_expire_date" is set');
+        Assertion::notNull($this->auth_token);
+        Assertion::date($this->token_expire_date, DATE_ISO8601);
     }
 
     public function conflictsWith(AggregateRootEventInterface $event, array &$conflicting_changes = [])
