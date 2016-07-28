@@ -145,7 +145,7 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
             }
         } else {
             throw new RuntimeError(
-                'Missing the option named "suggest_attribute". ' .
+                'Missing the option named "suggest_attribute" on attribute "' . $this->attribute->getName() . '". ' .
                 'This option is required when rendering reference attributes.'
             );
         }
