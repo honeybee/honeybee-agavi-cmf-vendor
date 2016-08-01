@@ -1,7 +1,6 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Filter\ResourcePacker;
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 
 class Honeybee_Core_Util_ReplayEventsAction extends Action

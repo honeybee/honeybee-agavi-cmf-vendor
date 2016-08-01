@@ -16,15 +16,24 @@ class Honeybee_Core_Migrate_Create_CreateSuccessView extends View
         $migration_dir = $this->getAttribute('migration_dir');
 
         // Bit of a hack to build namespace
-        if (!preg_match('#.+/app/modules/(\w+_?)/.+#', $migration_dir, $matches)) {
+        if (!preg_match('#.+/app/(?:modules|migration)/(\w+_?)(?:$|/.+)#', $migration_dir, $matches)) {
             throw new RuntimeError(sprintf('Could not find namespace info in path %s', $migration_dir));
         }
+
         $namespace_parts = explode('_', $matches[1]);
+        if (count($namespace_parts) == 1) {
+            // @todo app migration - introduce a project root namespace setting
+            $namespace_parts = [ 'Your', 'Application' ];
+        }
+
         // And a hack to determine the technology namespace
-        if (strpos($request_data->getParameter('target'), 'event_source')) {
+        $target = $request_data->getParameter('target');
+        if (strpos($target, 'event_source')) {
             $technology = 'CouchDb';
-        } else {
+        } elseif (strpos($target, 'view_store')) {
             $technology = 'Elasticsearch';
+        } else {
+            $technology = 'RabbitMq';
         }
 
         $migration_filepath = sprintf(
@@ -35,11 +44,9 @@ class Honeybee_Core_Migrate_Create_CreateSuccessView extends View
             $migration_slug
         );
 
-        $twig_renderer = TwigRenderer::create(
-            [
-                'template_paths' => [ __DIR__ ]
-            ]
-        );
+        $twig_renderer = TwigRenderer::create([
+            'template_paths' => [ __DIR__ ]
+        ]);
 
         $twig_renderer->renderToFile(
             $technology . 'Migration.tpl.twig',
@@ -52,7 +59,8 @@ class Honeybee_Core_Migrate_Create_CreateSuccessView extends View
                 'filepath' => $migration_filepath,
                 'vendor_prefix' => $namespace_parts[0],
                 'package_prefix' => $namespace_parts[1],
-                'technology' => $technology
+                'technology' => $technology,
+                'project_prefix' => AgaviConfig::get('core.project_prefix')
             ]
         );
 

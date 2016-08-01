@@ -3,7 +3,6 @@
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Job\Worker\Worker;
-use Honeybee\Infrastructure\Event\Bus\Transport\JobQueueTransport;
 
 class Honeybee_Core_Worker_StartAction extends Action
 {

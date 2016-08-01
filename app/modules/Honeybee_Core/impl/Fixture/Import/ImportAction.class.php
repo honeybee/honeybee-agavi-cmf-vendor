@@ -1,8 +1,6 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Common\Util\JsonToolkit;
 
 class Honeybee_Core_Fixture_ImportAction extends Action
 {

@@ -4,7 +4,6 @@ use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\Ui\WebSocket\EventPusher;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
-use Ratchet\Wamp\WampServer;
 use Ratchet\WebSocket\WsServer;
 use React\EventLoop\Factory as EventLoopFactory;
 use React\Socket\Server;

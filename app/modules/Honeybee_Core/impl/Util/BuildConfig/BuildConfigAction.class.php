@@ -1,10 +1,8 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\AccessControlXmlConfigGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\AggregateRootTypeMapGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ConfigurationScanner;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\TrellisAutoloadGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\DefaultXmlConfigGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ProjectionTypeMapGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\NamespaceAutoloadGenerator;
