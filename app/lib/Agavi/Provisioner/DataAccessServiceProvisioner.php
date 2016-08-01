@@ -17,7 +17,6 @@ use Honeybee\Infrastructure\DataAccess\Query\QueryTranslationInterface;
 use Honeybee\Infrastructure\DataAccess\Storage\StorageReaderMap;
 use Honeybee\Infrastructure\DataAccess\Storage\StorageWriterMap;
 use Honeybee\Infrastructure\DataAccess\UnitOfWork\UnitOfWorkMap;
-use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\ServiceDefinitionInterface;
 
 class DataAccessServiceProvisioner extends AbstractProvisioner

@@ -20,9 +20,8 @@ class Honeybee_Core_Worker_StartAction extends Action
 
     protected function buildWorkerConfig(AgaviRequestDataHolder $request_data)
     {
-        $exchange = $request_data->getParameter('exchange', JobQueueTransport::DEFAULT_EVENT_EXCHANGE);
         $job = $request_data->getParameter('job');
 
-        return new ArrayConfig([ 'exchange' => $exchange, 'job' => $job ]);
+        return new ArrayConfig([ 'job' => $job ]);
     }
 }

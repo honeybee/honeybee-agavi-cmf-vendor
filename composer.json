@@ -65,7 +65,8 @@
         "symfony/finder": "~2.7",
         "symfony/process": "~2.7",
         "symfony/validator": "~2.7",
-        "willdurand/negotiation": "~1.4"
+        "willdurand/negotiation": "~1.4",
+        "roave/security-advisories": "master@dev"
     },
 
     "require-dev": {

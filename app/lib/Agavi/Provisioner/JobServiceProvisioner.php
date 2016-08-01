@@ -2,11 +2,12 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
-use AgaviContext;
-use AgaviConfigCache;
 use AgaviConfig;
+use AgaviConfigCache;
+use AgaviContext;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
+use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
 use Honeybee\Infrastructure\Job\JobMap;
 use Honeybee\Infrastructure\Job\JobServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
@@ -29,6 +30,7 @@ class JobServiceProvisioner extends AbstractProvisioner
         $factory_delegate = function (
             ConnectorServiceInterface $connector_service,
             ServiceLocatorInterface $service_locator,
+            EventBusInterface $event_bus,
             LoggerInterface $logger
         ) use (
             $service_definition,
@@ -39,7 +41,14 @@ class JobServiceProvisioner extends AbstractProvisioner
             $config = $service_definition->getConfig();
             $service_class = $service_definition->getClass();
 
-            return new $service_class($connector, $service_locator, new JobMap($jobs_config), $config, $logger);
+            return new $service_class(
+                $connector,
+                $service_locator,
+                $event_bus,
+                new JobMap($jobs_config),
+                $config,
+                $logger
+            );
         };
 
         $this->di_container

@@ -6,17 +6,6 @@
     <ae:configuration>
         <validators>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ExchangeNameValidator" name="invalid_exchange" translation_domain="honeybee.core.ui">
-                <argument>exchange</argument>
-                <error>You must specify a valid exchange name.</error>
-                <ae:parameter name="dialog">
-                    <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
-                    <ae:parameter name="select">true</ae:parameter>
-                    <ae:parameter name="question">Please pick an exchange</ae:parameter>
-                    <ae:parameter name="attempts">3</ae:parameter>
-                </ae:parameter>
-            </validator>
-
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\JobNameValidator" name="invalid_job" translation_domain="honeybee.core.ui">
                 <argument>job</argument>
                 <error>You must specify a valid job name.</error>

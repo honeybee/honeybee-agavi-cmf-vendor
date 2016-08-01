@@ -19,7 +19,6 @@
                     <setting name="type">domain_event</setting>
                 </settings>
             </storage_writer>
-
             <storage_writer name="honeybee.core::process_state::process_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter">
                 <connection>ProcessState.Store</connection>
             </storage_writer>

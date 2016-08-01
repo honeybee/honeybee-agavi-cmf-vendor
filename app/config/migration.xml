@@ -11,4 +11,7 @@
         <xi:fallback />
     </xi:include>
 
+    <ae:configuration>
+    </ae:configuration>
+
 </ae:configurations>

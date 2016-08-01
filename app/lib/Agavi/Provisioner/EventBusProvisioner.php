@@ -14,11 +14,9 @@ use Honeybee\Infrastructure\Event\Bus\Channel\ChannelMap;
 use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
 use Honeybee\Infrastructure\Event\Bus\Subscription\EventFilter;
 use Honeybee\Infrastructure\Event\Bus\Subscription\EventFilterList;
-use Honeybee\Infrastructure\Event\Bus\Subscription\EventSubscription;
 use Honeybee\Infrastructure\Event\Bus\Subscription\LazyEventSubscription;
 use Honeybee\Infrastructure\Event\EventHandlerList;
 use Honeybee\ServiceDefinitionInterface;
-use Psr\Log\LoggerInterface;
 
 class EventBusProvisioner extends AbstractProvisioner
 {
@@ -35,7 +33,7 @@ class EventBusProvisioner extends AbstractProvisioner
             AgaviContext::getInstance()->getName()
         );
 
-        $channel_map = new ChannelMap();
+        $channel_map = new ChannelMap;
         foreach ($event_bus_config['channels'] as $channel_name => $channel_config) {
             $channel_map->setItem($channel_name, new Channel($channel_name));
         }
@@ -135,7 +133,7 @@ class EventBusProvisioner extends AbstractProvisioner
 
     protected function buildEventHandlers(array $handler_configs)
     {
-        $event_handlers = new EventHandlerList();
+        $event_handlers = new EventHandlerList;
 
         foreach ($handler_configs as $handler_config) {
             $event_handlers->addItem(
@@ -153,7 +151,7 @@ class EventBusProvisioner extends AbstractProvisioner
     {
         // @todo make filter implementor configurable.
         $filter_implementor = EventFilter::class;
-        $event_filters = new EventFilterList();
+        $event_filters = new EventFilterList;
 
         foreach ($filter_configs as $filter_config) {
             $event_filters->addItem(

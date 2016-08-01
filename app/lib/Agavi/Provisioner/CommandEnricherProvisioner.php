@@ -5,7 +5,6 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 use Auryn\Injector as DiContainer;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Command\CommandEnricherInterface;
-use Honeybee\Infrastructure\Command\MetadataEnricherList;
 use Honeybee\ServiceDefinitionInterface;
 use Psr\Log\LoggerInterface;
 

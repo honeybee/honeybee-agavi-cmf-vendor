@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
-use Auryn\Injector as DiContainer;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
