@@ -38,7 +38,7 @@ class HtmlKeyValueListAttributeRenderer extends HtmlAttributeRenderer
             $params['allowed_values'] = array_values($params['allowed_pairs']);
         }
 
-
+        $params['disabled'] = $this->isReadonly() || $this->isDisabled() ? 'disabled' : '';
         $params['hide_pair_labels'] = $this->getOption('hide_pair_labels', false);
         $params['key_maxlength'] = $this->getOption('key_maxlength');
         $params['value_maxlength'] = $this->getOption(

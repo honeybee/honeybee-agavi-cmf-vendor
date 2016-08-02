@@ -22,7 +22,7 @@
                                 <input
                                     type="text"
                                     name="{{grouped_base_path}}[{{key}}]"
-                                    class="hb-key-value-item__key-{{key}}"
+                                    class="hb-key-value-item__key-{{key}} hb-key-value-item__input"
                                     {{ readonly|default('') }} {{ disabled|default('') }}
                                     {{ required|default('') }} maxlength="{{ key_maxlength|default('') }}"
                                     placeholder="{{ translations.placeholder|default('') }}"
@@ -30,7 +30,7 @@
                                     value="{{key}}"
                                 />
                             {% else %}
-                                <select class="hb-key-value-item__key-{{key}}">
+                                <select class="hb-key-value-item__key-{{key}} hb-key-value-item__select">
                                     {% for key in allowed_keys %}
                                     <option value="{{key}}">{{key}}</option>
                                     {% endfor %}
@@ -42,7 +42,7 @@
                                 <input
                                     type="{{ value_type }}"
                                     name="{{grouped_base_path}}[{{key}}]"
-                                    class="hb-key-value-item__value-{{key}}"
+                                    class="hb-key-value-item__value-{{key}} hb-key-value-item__input"
                                     {{ readonly|default('') }} {{ disabled|default('') }}
                                     {{ required|default('') }} maxlength="{{ value_maxlength|default('') }}"
                                     {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}"
@@ -52,7 +52,7 @@
                                     max="{{max|default('')}}"
                                 />
                             {% else %}
-                                <select class="hb-key-value-item__value-{{key}}">
+                                <select class="hb-key-value-item__value-{{key}} hb-key-value-item__select">
                                     {% for value in allowed_values %}
                                     <option value="{{value}}">{{value}}</option>
                                     {% endfor %}
@@ -69,8 +69,8 @@
                     {% if allowed_keys is empty %}
                         <input
                             type="text"
-                            name="{{grouped_base_path}}[new]"
-                            class="hb-key-value__key-new"
+                            name="{{grouped_base_path}}[@pair]"
+                            class="hb-key-value__key-newpair hb-key-value-item__input"
                             {{ readonly|default('') }} {{ disabled|default('') }}
                             {{ required|default('') }} maxlength="{{ key_maxlength|default('') }}"
                             placeholder="{{ translations.placeholder|default('') }}"
@@ -78,7 +78,7 @@
                             value=""
                         />
                     {% else %}
-                        <select class="hb-key-value__key-new">
+                        <select class="hb-key-value__key-newpair hb-key-value-item__select">
                             {% for allowed_key in allowed_keys %}
                             <option value="{{allowed_key}}">{{allowed_key}}</option>
                             {% endfor %}
@@ -89,8 +89,8 @@
                     {% if allowed_values is empty %}
                         <input
                             type="{{ value_type }}"
-                            name="{{grouped_base_path}}[new]"
-                            class="hb-key-value__value-new"
+                            name="{{grouped_base_path}}[@pair]"
+                            class="hb-key-value__value-newpair hb-key-value-item__input"
                             {{ readonly|default('') }} {{ disabled|default('') }}
                             {{ required|default('') }} maxlength="{{ value_maxlength|default('') }}"
                             {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}"
@@ -100,7 +100,7 @@
                             max="{{max|default('')}}"
                         />
                     {% else %}
-                        <select class="hb-key-value__value-new">
+                        <select class="hb-key-value__value-newpair hb-key-value-item__select">
                             {% for allowed_value in allowed_values %}
                             <option value="{{allowed_value}}">{{allowed_value}}</option>
                             {% endfor %}

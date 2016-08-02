@@ -26,6 +26,7 @@ use Trellis\Runtime\Attribute\ListAttribute;
 class AggregateRootTypeCommandValidator extends AgaviValidator
 {
     const DEFAULT_FILE_INPUT_FIELD_NAME = 'file';
+    const DEFAULT_KEYVALUE_INPUT_FIELD_NAME = '@pair';
 
     protected $aggregate_root_type;
 

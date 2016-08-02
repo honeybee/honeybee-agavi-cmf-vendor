@@ -29,6 +29,12 @@
         .hb-key-value-item__value {
             display: table-cell;
             width: 50%;
+            padding-bottom: $small-spacing/2;
+            padding-right: $small-spacing/2;
+        }
+
+        .hb-key-value-item__input,
+        .hb-key-value-item__select {
         }
 
         .hb-key-value-list__new-item {
