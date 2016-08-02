@@ -1,0 +1,132 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
+<div
+    class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+        </div>
+    </div><!--
+    --><div class="hb-field__value">
+        <div class="hb-key-value-list">
+            {% if attribute_value is iterable %}
+                <div class="hb-key-value-list__head {% if hide_pair_labels %} hb-key-value-list__head--hidden{% endif %}">
+                    <label class="hb-key-value-head__label">{{ _(field_name~'.key_label', translation_domain) }}</label>
+                    <label class="hb-key-value-head__label">{{ _(field_name~'.value_label', translation_domain) }}</label>
+                </div>
+                <div class="hb-key-value-list__items">
+                {% for key, value in attribute_value %}
+                    <div class="hb-key-value-list__item">
+                        <div class="hb-key-value-item__key">
+                            {% if allowed_keys is empty or readonly %}
+                                <input
+                                    type="text"
+                                    name="{{grouped_base_path}}[{{key}}]"
+                                    class="hb-key-value-item__key-{{key}}"
+                                    {{ readonly|default('') }} {{ disabled|default('') }}
+                                    {{ required|default('') }} maxlength="{{ key_maxlength|default('') }}"
+                                    placeholder="{{ translations.placeholder|default('') }}"
+                                    title="{{ translations.title|default('') }}"
+                                    value="{{key}}"
+                                />
+                            {% else %}
+                                <select class="hb-key-value-item__key-{{key}}">
+                                    {% for key in allowed_keys %}
+                                    <option value="{{key}}">{{key}}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
+                        </div>
+                        <div class="hb-key-value-item__value">
+                            {% if allowed_values is empty or readonly %}
+                                <input
+                                    type="{{ value_type }}"
+                                    name="{{grouped_base_path}}[{{key}}]"
+                                    class="hb-key-value-item__value-{{key}}"
+                                    {{ readonly|default('') }} {{ disabled|default('') }}
+                                    {{ required|default('') }} maxlength="{{ value_maxlength|default('') }}"
+                                    {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}"
+                                    title="{{ translations.title|default('') }}"
+                                    value="{{value}}"
+                                    min="{{min|default('')}}"
+                                    max="{{max|default('')}}"
+                                />
+                            {% else %}
+                                <select class="hb-key-value-item__value-{{key}}">
+                                    {% for value in allowed_values %}
+                                    <option value="{{value}}">{{value}}</option>
+                                    {% endfor %}
+                                </select>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% if not readonly and not disabled %}
+                <div class="hb-key-value-list__new-item">
+                    <div class="hb-key-value-item__key">
+                    {% if allowed_keys is empty %}
+                        <input
+                            type="text"
+                            name="{{grouped_base_path}}[new]"
+                            class="hb-key-value__key-new"
+                            {{ readonly|default('') }} {{ disabled|default('') }}
+                            {{ required|default('') }} maxlength="{{ key_maxlength|default('') }}"
+                            placeholder="{{ translations.placeholder|default('') }}"
+                            title="{{ translations.title|default('') }}"
+                            value=""
+                        />
+                    {% else %}
+                        <select class="hb-key-value__key-new">
+                            {% for allowed_key in allowed_keys %}
+                            <option value="{{allowed_key}}">{{allowed_key}}</option>
+                            {% endfor %}
+                        </select>
+                    {% endif %}
+                    </div>
+                    <div class="hb-key-value-item__value">
+                    {% if allowed_values is empty %}
+                        <input
+                            type="{{ value_type }}"
+                            name="{{grouped_base_path}}[new]"
+                            class="hb-key-value__value-new"
+                            {{ readonly|default('') }} {{ disabled|default('') }}
+                            {{ required|default('') }} maxlength="{{ value_maxlength|default('') }}"
+                            {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}"
+                            title="{{ translations.title|default('') }}"
+                            value=""
+                            min="{{min|default('')}}"
+                            max="{{max|default('')}}"
+                        />
+                    {% else %}
+                        <select class="hb-key-value__value-new">
+                            {% for allowed_value in allowed_values %}
+                            <option value="{{allowed_value}}">{{allowed_value}}</option>
+                            {% endfor %}
+                        </select>
+                    {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        <ul class="errors">
+            {%- block field_errors  -%}
+                {%- for error in errors -%}
+                    <li class="error">{{error}}</li>
+                {%- endfor -%}
+            {%- endblock  -%}
+        </ul>
+        {% if translations.input_help is defined %}
+            <div class="input_help">{{ translations.input_help|raw }}</div>
+        {% endif %}
+        {% if translations.input_hint is defined %}
+            <div class="input_hint">{{ translations.input_hint|raw }}</div>
+        {% endif %}
+        {% if translations.input_focus_hint is defined %}
+            <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
+        {% endif %}
+    </div><!--
+    --><div class="hb-field__extra"></div>
+</div>
+{%- endblock -%}

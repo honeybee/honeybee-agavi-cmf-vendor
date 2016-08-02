@@ -1,0 +1,17 @@
+{%- block field -%} {# this block exists for whitespace control #}
+<div class="hb-field hb-attribute {{ css|default('') }}" data-hb-field-name="{{ field_name }}"><!--
+    --><div class="hb-field__content"><!--
+        --><div class="hb-field__label">{{ _(field_name~'.field_name', translation_domain) }}</div><!--
+        --><div class="hb-field__value">
+            {% if attribute_value is iterable %}
+                {%- for key, value in attribute_value -%}
+                    <div class="hb-field__pair-key">{{key}}:</div>
+                    <div class="hb-field__pair-value">{{value}}</div>
+                {%- endfor -%}
+            {%- else -%}
+                {{ attribute_value }}
+            {%- endif -%}
+        </div><!--
+    --></div><!--
+--></div>
+{%- endblock field -%}

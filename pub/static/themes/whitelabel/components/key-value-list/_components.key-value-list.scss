@@ -1,0 +1,42 @@
+.hb-key-value-list {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+
+    margin-top: $small-spacing;
+    margin-bottom: $small-spacing;
+
+    @at-root {
+        .hb-key-value-list__head {
+            display: table-header-group;
+
+            &.hb-key-value-list__head--hidden {
+                display: none;
+            }
+        }
+        .hb-key-value-head__label {
+            display: table-cell;
+        }
+        .hb-key-value-list__items {
+            display: table-row-group;
+        }
+
+        .hb-key-value-list__item {
+            display: table-row;
+        }
+
+        .hb-key-value-item__key,
+        .hb-key-value-item__value {
+            display: table-cell;
+            width: 50%;
+        }
+
+        .hb-key-value-list__new-item {
+            display: table-footer-group;
+
+            .hb-key-value-item__key {
+                padding-top: $small-spacing;
+            }
+        }
+    }
+}

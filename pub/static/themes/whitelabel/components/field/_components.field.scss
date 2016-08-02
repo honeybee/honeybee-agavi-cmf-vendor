@@ -1,3 +1,23 @@
 .hb-field {
     margin-bottom: 1.43em; // 20/14
+
+    // KeyValueList attribute
+    .hb-field__pair-key,
+    .hb-field__pair-value {
+        display: inline-block;
+    }
+
+    .hb-field__pair-key {
+        font-style: italic;
+    }
+
+    .hb-field__pair-value {
+        &:after {
+            content: ',';
+            margin-right: 0.2em;
+        }
+        &:last-child {
+            &:after { content: ''; }
+        }
+    }
 }
