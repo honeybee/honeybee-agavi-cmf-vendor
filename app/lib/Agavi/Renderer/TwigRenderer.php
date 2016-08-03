@@ -9,7 +9,6 @@ use AgaviToolkit;
 use AgaviTwigRenderer;
 
 use Twig_Environment;
-use Twig_Loader_Filesystem;
 use Twig_Loader_String;
 use Twig_Template;
 

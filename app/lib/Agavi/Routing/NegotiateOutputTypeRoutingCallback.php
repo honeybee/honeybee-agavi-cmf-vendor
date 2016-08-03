@@ -2,11 +2,9 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Routing;
 
-use AgaviConfig;
 use AgaviContext;
 use AgaviExecutionContainer;
 use AgaviRoutingCallback;
-use InvalidArgumentException;
 use Negotiation\FormatNegotiator;
 
 /**

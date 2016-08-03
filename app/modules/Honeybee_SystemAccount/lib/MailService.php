@@ -7,7 +7,6 @@ use AgaviContext;
 use Exception;
 use Honeybee\SystemAccount\User\Projection\Standard\User;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\Environment;
 use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
 use Honeybee\FrameworkBinding\Agavi\Renderer\ModuleTemplateRenderer;
 use Honeybee\Infrastructure\Config\ConfigInterface;

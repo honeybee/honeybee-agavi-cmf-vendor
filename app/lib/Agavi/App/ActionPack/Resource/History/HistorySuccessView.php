@@ -3,9 +3,7 @@
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\History;
 
 use AgaviRequestDataHolder;
-use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use Honeybee\Infrastructure\Workflow\Plugin\InteractionResult;
 
 class HistorySuccessView extends View
 {

@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Filter;
 
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
 use AgaviContext;
 use AgaviFilterChain;
 use AgaviExecutionContainer;

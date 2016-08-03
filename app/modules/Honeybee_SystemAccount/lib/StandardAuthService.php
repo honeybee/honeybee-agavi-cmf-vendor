@@ -11,7 +11,6 @@ use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
 use Honeybee\Infrastructure\Security\Auth\AuthResponse;
 use Honeybee\Infrastructure\Security\Auth\AuthServiceInterface;
 use Honeybee\Infrastructure\Security\Auth\CryptedPasswordHandler;
-use Honeybee\SystemAccount\User\Projection\UserQueryService;
 
 class StandardAuthService implements AuthServiceInterface
 {

@@ -7,7 +7,6 @@ use AgaviExecutionContainer;
 use AgaviFilter;
 use AgaviFilterChain;
 use AgaviIGlobalFilter;
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
 use InvalidArgumentException;
 
 /**

@@ -1,7 +1,6 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use Honeybee\Infrastructure\Security\Auth\StandardAuthService;
 
 class Honeybee_SystemAccount_User_Login_LoginInputView extends View
 {

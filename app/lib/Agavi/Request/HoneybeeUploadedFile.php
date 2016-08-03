@@ -3,8 +3,6 @@
 namespace Honeybee\FrameworkBinding\Agavi\Request;
 
 use AgaviUploadedFile;
-use AgaviWebRequestDataHolder;
-use ArrayObject;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 
 class HoneybeeUploadedFile extends AgaviUploadedFile

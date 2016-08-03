@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Trellis;
 
 use AgaviConfig;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Model\Aggregate\AggregateRootType;
 use Symfony\Component\Finder\Finder;
 
 /**

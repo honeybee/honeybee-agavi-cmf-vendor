@@ -6,7 +6,6 @@ use AgaviRoutingCallback;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\EntityInterface;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
-use InvalidArgumentException;
 
 /**
  * This routing callback is used to generate a URL that contains

@@ -2,15 +2,14 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\User;
 
-use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Infrastructure\Security\Acl\AclService;
-use Zend\Permissions\Acl\Role\RoleInterface;
-use Zend\Permissions\Acl\Resource\ResourceInterface;
 use AgaviConfig;
 use AgaviContext;
 use AgaviConfigCache;
 use AgaviSecurityUser;
 use Exception;
+use Honeybee\Infrastructure\Security\Acl\AclService;
+use Zend\Permissions\Acl\Resource\ResourceInterface;
+use Zend\Permissions\Acl\Role\RoleInterface;
 
 /**
  * The AclSecurityUser is aware of the system's available activities and of the specific permissions,

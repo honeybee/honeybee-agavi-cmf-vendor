@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
 
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Validator\DisplayModeValidator;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Ui\ResourceCollection;

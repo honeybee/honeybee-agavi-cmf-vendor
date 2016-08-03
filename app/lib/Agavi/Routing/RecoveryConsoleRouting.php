@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Agavi\Routing;
 
 use AgaviConsoleRouting;
-use AgaviConfig;
 use AgaviConfigCache;
 use RuntimeException;
 

@@ -2,8 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create;
 
-use Honeybee\Ui\Renderer\Html\Attribute\ValueRenderer;
-use Honeybee\Ui\Renderer\RendererFactory;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 

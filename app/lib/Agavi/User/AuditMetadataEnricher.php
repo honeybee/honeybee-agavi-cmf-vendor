@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Agavi\User;
 
 use Honeybee\EnvironmentInterface;
-use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Command\Metadata;
 use Honeybee\Infrastructure\Command\MetadataEnricherInterface;
 

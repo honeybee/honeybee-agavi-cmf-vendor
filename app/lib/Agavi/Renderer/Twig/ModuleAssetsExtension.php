@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Renderer\Twig;
 
-use AgaviConfig;
 use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
 use Twig_Extension;
 use Twig_Function_Method;

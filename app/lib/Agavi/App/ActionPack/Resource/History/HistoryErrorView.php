@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\History;
 
-use Honeybee\Infrastructure\Workflow\Plugin\InteractionResult;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 

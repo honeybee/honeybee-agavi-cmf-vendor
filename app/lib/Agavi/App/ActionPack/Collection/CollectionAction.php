@@ -6,7 +6,6 @@ use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use Honeybee\FrameworkBinding\Agavi\Validator\DisplayModeValidator;
 use Honeybee\Ui\ResourceCollection;
-use Honeybee\Common\Util\StringToolkit;
 
 class CollectionAction extends Action
 {

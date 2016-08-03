@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\ConfigHandler;
 
-use AgaviConfig;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
 use Honeybee\Common\Error\ConfigError;

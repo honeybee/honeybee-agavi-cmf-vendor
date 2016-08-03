@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
-use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\Ui\OutputFormat\MediaTypeInfo;

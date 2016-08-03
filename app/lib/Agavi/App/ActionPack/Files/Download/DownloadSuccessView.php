@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Download;
 
-use Workflux\ExecutionContextInterface;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 use Honeybee\Common\Util\FileToolkit;

@@ -1,6 +1,5 @@
 <?php
 
-use Trellis\Common\Error\RuntimeException;
 use Honeybee\Infrastructure\Security\Auth\AuthResponse;
 use Honeybee\Infrastructure\Security\Acl\AclService;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;

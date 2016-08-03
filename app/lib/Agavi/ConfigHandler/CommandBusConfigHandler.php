@@ -2,10 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\ConfigHandler;
 
-use Trellis\Common\Error\RuntimeException;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
-use AgaviXmlConfigHandler;
 use Honeybee\Common\Error\ConfigError;
 
 class CommandBusConfigHandler extends BaseConfigHandler

@@ -7,7 +7,6 @@ use AgaviToolkit;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\Ui\Activity\ActivityInterface;
 use Honeybee\Ui\Activity\Url;
 
 class ActivitiesConfigHandler extends BaseConfigHandler
@@ -123,7 +122,7 @@ class ActivitiesConfigHandler extends BaseConfigHandler
         AgaviXmlConfigDomDocument $document,
         $scope
     ) {
-    
+
         $activities = [];
 
         foreach ($container_node->get('activity') as $activity_node) {

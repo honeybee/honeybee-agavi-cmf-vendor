@@ -5,8 +5,6 @@ namespace Honeybee\FrameworkBinding\Agavi;
 use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
 use Honeybee\FrameworkBinding\Agavi\ServiceProvisioner;
 use AgaviContext;
-use AgaviConfigCache;
-use AgaviConfig;
 use Auryn\Injector as DiContainer;
 use Auryn\StandardReflector;
 

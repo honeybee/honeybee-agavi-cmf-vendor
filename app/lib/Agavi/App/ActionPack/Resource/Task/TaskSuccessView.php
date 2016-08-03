@@ -2,7 +2,6 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Task;
 
-use Workflux\ExecutionContextInterface;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 

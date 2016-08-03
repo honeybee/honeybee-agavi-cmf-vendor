@@ -5,8 +5,6 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create;
 use AgaviRequestDataHolder;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use Honeybee\Ui\Renderer\Html\Attribute\ValueRenderer;
-use Honeybee\Ui\Renderer\RendererFactory;
 
 class CreateInputView extends View
 {

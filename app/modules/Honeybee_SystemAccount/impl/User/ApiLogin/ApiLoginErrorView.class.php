@@ -1,10 +1,8 @@
 <?php
 
-use \AgaviConsoleRequest;
 use \AgaviRequestDataHolder;
 use \AgaviWebResponse;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use \AgaviView;
 
 class Honeybee_SystemAccount_User_ApiLogin_ApiLoginErrorView extends View
 {
