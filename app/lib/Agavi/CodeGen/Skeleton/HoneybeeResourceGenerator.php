@@ -3,7 +3,6 @@
 namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton;
 
 use AgaviConfig;
-use DateTime;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Projection\ProjectionTypeInterface;
