@@ -48,7 +48,6 @@ AgaviConfig::set('core.module_dir', AgaviConfig::get('core.app_dir') . '/modules
 AgaviConfig::set('core.model_dir', AgaviConfig::get('core.app_dir') . '/model');
 AgaviConfig::set('core.lib_dir', AgaviConfig::get('core.app_dir') . '/lib');
 AgaviConfig::set('core.template_dir', AgaviConfig::get('core.app_dir') . '/templates');
-AgaviConfig::set('core.clean_environment', AgaviConfig::get('local.agavi_environment'));
 // e,g, necessary for RecoveryConsoleRouting (in factories.xml) to find correct app/config/recovery/routing.xml file
 if (__DIR__ === AgaviConfig::get('core.app_dir')) {
     AgaviConfig::set('core.honeybee_dir', $application_dir); //used in resourcepacker; has to be changed
