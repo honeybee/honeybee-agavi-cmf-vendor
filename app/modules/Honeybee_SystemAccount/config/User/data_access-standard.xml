@@ -45,9 +45,6 @@
                     <setting name="type">%honeybee-system_account-user.standard.type%</setting>
                     <setting name="log_search_query">false</setting>
                 </settings>
-                <dependencies>
-                    <dependency key="projection_type">Honeybee\SystemAccount\User\Projection\Standard\UserType</dependency>
-                </dependencies>
             </finder>
         </finders>
 

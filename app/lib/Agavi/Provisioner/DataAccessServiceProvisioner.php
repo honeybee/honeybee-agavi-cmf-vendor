@@ -42,7 +42,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
         $this->di_container->share(StorageWriterMap::CLASS)->delegate(
             StorageWriterMap::CLASS,
             function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($storage_writers) {
-                $map = new StorageWriterMap;
+                $map = [];
                 foreach ($storage_writers as $map_key => $config) {
                     $object_state = [
                         ':config' => new ArrayConfig($config['settings']),
@@ -51,10 +51,10 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                     foreach ($config['dependencies'] as $key => $dependency) {
                         $object_state[$key] = $dependency;
                     }
-                    $map->setItem($map_key, $di_container->make($config['class'], $object_state));
+                    $map[$map_key] = $di_container->make($config['class'], $object_state);
                 }
 
-                return $map;
+                return new StorageWriterMap($map);
             }
         );
     }
@@ -64,7 +64,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
         $this->di_container->share(StorageReaderMap::CLASS)->delegate(
             StorageReaderMap::CLASS,
             function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($storage_readers) {
-                $map = new StorageReaderMap;
+                $map = [];
                 foreach ($storage_readers as $map_key => $config) {
                     $object_state = [
                         ':config' => new ArrayConfig($config['settings']),
@@ -73,10 +73,10 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                     foreach ($config['dependencies'] as $key => $dependency) {
                         $object_state[$key] = $dependency;
                     }
-                    $map->setItem($map_key, $di_container->make($config['class'], $object_state));
+                   $map[$map_key] = $di_container->make($config['class'], $object_state);
                 }
 
-                return $map;
+                return new StorageReaderMap($map);
             }
         );
     }
@@ -86,7 +86,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
         $this->di_container->share(FinderMap::CLASS)->delegate(
             FinderMap::CLASS,
             function (DiContainer $di_container, ConnectorServiceInterface $connector_service) use ($finders) {
-                $map = new FinderMap;
+                $map = [];
                 foreach ($finders as $map_key => $config) {
                     $object_state = [
                         ':config' => new ArrayConfig($config['settings']),
@@ -95,10 +95,10 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                     foreach ($config['dependencies'] as $key => $dependency) {
                         $object_state[$key] = $dependency;
                     }
-                    $map->setItem($map_key, $di_container->make($config['class'], $object_state));
+                    $map[$map_key] = $di_container->make($config['class'], $object_state);
                 }
 
-                return $map;
+                return new FinderMap($map);
             }
         );
     }
@@ -112,7 +112,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                 StorageWriterMap $storage_writer_map,
                 StorageReaderMap $storage_reader_map
             ) use ($units_of_work) {
-                $map = new UnitOfWorkMap;
+                $map = [];
                 foreach ($units_of_work as $map_key => $config) {
                     $object_state = [
                         ':config' => new ArrayConfig($config['settings']),
@@ -122,10 +122,10 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                     foreach ($config['dependencies'] as $key => $dependency) {
                         $object_state[$key] = $dependency;
                     }
-                    $map->setItem($map_key, $di_container->make($config['class'], $object_state));
+                    $map[$map_key] = $di_container->make($config['class'], $object_state);
                 }
 
-                return $map;
+                return new UnitOfWorkMap($map);
             }
         );
     }
@@ -135,7 +135,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
         $this->di_container->share(QueryServiceMap::CLASS)->delegate(
             QueryServiceMap::CLASS,
             function (DiContainer $di_container, FinderMap $finder_map) use ($query_services) {
-                $query_service_map = new QueryServiceMap;
+                $map = [];
                 foreach ($query_services as $service_key => $service_config) {
                     $finder_mappings = [];
                     foreach ($service_config['finder_mappings'] as $finder_mapping_name => $finder_mapping) {
@@ -153,13 +153,10 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                         ]
                     );
 
-                    $query_service_map->setItem(
-                        $service_key,
-                        $di_container->make($service_config['class'], $object_state)
-                    );
+                    $map[$service_key] = $di_container->make($service_config['class'], $object_state);
                 }
 
-                return $query_service_map;
+                return new QueryServiceMap($map);
             }
         );
     }
