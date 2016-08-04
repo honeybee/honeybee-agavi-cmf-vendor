@@ -10,22 +10,5 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
 >
     <ae:configuration>
-        <event_bus>
-            <channels>
-                <channel name="honeybee.events.infrastructure">
-                    <subscriptions>
-                        <subscription enabled="true">
-                            <transport>sync</transport>
-                            <filter>
-                                <setting name="expression">&honeybee_system_account_user_related_entity_events;</setting>
-                            </filter>
-                            <handler implementor="\Honeybee\Projection\EventHandler\RelationProjectionUpdater">
-                                <setting name="projection_type">honeybee.system_account.user::projection.standard</setting>
-                            </handler>
-                        </subscription>
-                    </subscriptions>
-                </channel>
-            </channels>
-        </event_bus>
     </ae:configuration>
 </ae:configurations>
