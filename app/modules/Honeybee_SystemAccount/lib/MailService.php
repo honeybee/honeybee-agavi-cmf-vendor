@@ -67,19 +67,17 @@ class MailService
             ]
         );
 
-        $sender_email = $this->config->get('sender_email');
-        $sender_name = $this->config->get('sender_name');
+        $message->setFrom([ $this->config->get('from_email') => $this->config->get('from_name', '') ]);
+        $message->setTo([ $user->getEmail() => $user->getFirstname() . ' ' . $user->getLastname() ]);
 
-        $contact_email = $this->config->get('contact_email');
-        $contact_name = $this->config->get('contact_name');
-
-        if ($this->config->has('sender_email')) {
-            $message->setSender([ $sender_email => $sender_name ]);
+        if ($this->config->has('reply_email')) {
+            $message->setReplyTo([ $this->config->get('reply_email') => $this->config->get('reply_name', '') ]);
         }
 
-        $message->setFrom([ $contact_email => $contact_name ]);
-        $message->setTo([ $user->getEmail() => $user->getFirstname() . ' ' . $user->getLastname() ]);
-        $message->setReplyTo([ $contact_email => $contact_name ]);
+        // sender email can be used as theoretically multiple from addresses may be used for emails
+        if ($this->config->has('sender_email')) {
+            $message->setSender([ $this->config->get('sender_email') => $this->config->get('sender_name', '') ]);
+        }
 
         try {
             $info = $this->mail_service->send($message);

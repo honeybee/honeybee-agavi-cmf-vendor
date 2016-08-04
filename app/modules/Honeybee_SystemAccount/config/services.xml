@@ -11,10 +11,12 @@
                 <service name="honeybee.system_account.mail_service">
                     <class>Honeybee\SystemAccount\MailService</class>
                     <settings>
-                        <setting name="sender_email">no-reply@honeybee-cms.local</setting>
-                        <setting name="sender_name">%core.app_name%</setting>
-                        <setting name="contact_email">no-reply@honeybee-cms.local</setting>
-                        <setting name="contact_name">%core.app_name%</setting>
+                        <setting name="sender_email">%email.sender_email%</setting>
+                        <setting name="sender_name">%email.sender_name%</setting>
+                        <setting name="from_email">%email.from_email%</setting>
+                        <setting name="from_name">%email.from_name%</setting>
+                        <setting name="reply_email">%email.reply_email%</setting>
+                        <setting name="reply_name">%email.reply_email%</setting>
                     </settings>
                 </service>
 

@@ -60,6 +60,15 @@
             <setting name="exiftool_config">%core.config_dir%/exiftool.conf</setting>
         </settings>
 
+        <settings prefix="email.">
+            <setting name="sender_email">no-reply@honeybee.local</setting>
+            <setting name="sender_name">Honeybee CMF</setting>
+            <setting name="from_email">contact@honeybee.local</setting>
+            <setting name="from_name">Customer Care</setting>
+            <setting name="reply_email">helpdesk@honeybee.local</setting>
+            <setting name="reply_name">Helpdesk</setting>
+        </settings>
+
         <settings prefix="event_pub.">
             <setting name="default_channel">org.honeybee.events</setting>
             <setting name="pull_socket.host">127.0.0.1</setting>
@@ -77,18 +86,9 @@
             <setting name="min_uppercase_chars">0</setting>
             <setting name="min_lowercase_chars">1</setting>
             <setting name="min_string_length">10</setting>
-            <setting name="max_string_length">255</setting>
+            <setting name="max_string_length">72</setting>
             <setting name="similarity_percentage_threshold">70</setting>
             <setting name="minimum_levenshtein_distance">5</setting>
-        </settings>
-
-        <settings prefix="service.short_ids.">
-            <setting name="connection">Service.ShortIds</setting>
-        </settings>
-
-        <settings prefix="files.">
-            <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
-            <setting name="base_dir">%core.app_dir%/../data/files</setting>
         </settings>
 
         <exception_templates>
@@ -98,7 +98,7 @@
 
         <settings prefix="javascript.">
             <setting name="config">
-                <ae:parameter name="widgets.handle_loading">false</ae:parameter>
+                <ae:parameter name="widgets.handle_loading">true</ae:parameter>
                 <ae:parameter name="widgets.loading_classname">hb-js-widget--busy</ae:parameter>
             </setting>
         </settings>
@@ -110,7 +110,7 @@
 
         <settings prefix="autoprefixer.">
             <!-- <setting name="cmd">/some/path/to/node_modules/.bin/autoprefixer</setting> -->
-            <setting name="browsers"><![CDATA[ > 1%, last 3 versions, IE >= 9, Firefox ESR, Opera 12.1 ]]></setting>
+            <setting name="browsers"><![CDATA[ > 1%, last 3 versions, IE >= 9, Firefox ESR ]]></setting>
         </settings>
 
         <settings prefix="themes.">
@@ -178,10 +178,6 @@
         <settings>
             <setting name="default_context">web</setting>
             <setting name="context_implementation">Honeybee\Tests\Mock\TestContext</setting>
-        </settings>
-        <settings prefix="files.">
-            <setting name="mime_database">/usr/share/misc/magic.mgc</setting>
-            <setting name="base_dir">%core.app_dir%/../data/testing/files</setting>
         </settings>
     </ae:configuration>
 

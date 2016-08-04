@@ -193,6 +193,9 @@
                             <ae:parameter name="forgot_password">Kennwort zurücksetzen</ae:parameter>
                             <ae:parameter name="repeat_password">Kennwort wiederholen</ae:parameter>
                             <ae:parameter name="reset_password">Kennwort vergessen?</ae:parameter>
+                            <ae:parameter name="There were errors:">Leider traten folgende Fehler auf:</ae:parameter>
+                            <ae:parameter name="password_set">Neues Passwort erfolgreich übernommen.</ae:parameter>
+                            <ae:parameter name="An unexpected error occured while trying to logout.">Ein unerwarteter Fehler trat auf beim Ausloggen. Bitte schließen Sie Ihren Browser.</ae:parameter>
                             <ae:parameter name="Please sign in">Bitte Nutzernamen und Kennwort eingeben</ae:parameter>
                             <ae:parameter name="Please enter your email or username."><![CDATA[Bitte Nutzernamen <b>oder</b> Emailadresse eingeben.]]></ae:parameter>
                             <ae:parameter name="Min. %d characters long">Mind. %d Zeichen lang</ae:parameter>
@@ -206,6 +209,9 @@
                             <ae:parameter name="weak">schwach</ae:parameter>
                             <ae:parameter name="medium">mittel</ae:parameter>
                             <ae:parameter name="strong">stark</ae:parameter>
+                            <ae:parameter name="reset_success_title">Passwort zurücksetzen</ae:parameter>
+                            <ae:parameter name="reset_success_message">Eine Email mit Link zum Setzen eines neuen Passworts wurde versendet.</ae:parameter>
+                            <ae:parameter name="An unexpected error occured while trying to reset your password.">Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="signin">Sign in</ae:parameter>
@@ -223,6 +229,7 @@
                             <ae:parameter name="forgot_password">Forgot password?</ae:parameter>
                             <ae:parameter name="repeat_password">Repeat the password</ae:parameter>
                             <ae:parameter name="reset_password">Lost password?</ae:parameter>
+                            <ae:parameter name="password_set">New password has been set.</ae:parameter>
                             <ae:parameter name="Please sign in">Please sign in</ae:parameter>
                             <ae:parameter name="Please enter your email or username."><![CDATA[Please enter your email <b>oder</b> username.]]></ae:parameter>
                             <ae:parameter name="Min. %d characters long">Min. %d characters long</ae:parameter>
@@ -236,6 +243,8 @@
                             <ae:parameter name="weak">weak</ae:parameter>
                             <ae:parameter name="medium">medium</ae:parameter>
                             <ae:parameter name="strong">strong</ae:parameter>
+                            <ae:parameter name="reset_success_title">Password reset</ae:parameter>
+                            <ae:parameter name="reset_success_message">An email with a link to reset the password has been sent.</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
@@ -350,6 +359,35 @@
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sort by Username</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
+                    <ae:parameter name="errors">
+                        <ae:parameter name="de">
+                            <ae:parameter name="The given user(identifier) is invalid.">Die verwendete Nutzer-Id ist nicht korrekt.</ae:parameter>
+                            <ae:parameter name="Either username or email needs to be specified.">Nutzername oder Emailadresse wird benötigt.</ae:parameter>
+                            <ae:parameter name="Invalid command payload given.">Die Anfrage konnte leider nicht korrekt verarbeitet werden.</ae:parameter>
+                            <ae:parameter name="The given user token is invalid.">Ein gültiges Token wird benötigt.</ae:parameter>
+                            <ae:parameter name="password_too_short">Passwort ist zu kurz – mindestens %min_string_length% Zeichen werden benötigt.</ae:parameter>
+                            <ae:parameter name="password_too_long">Passwort ist zu lang – maximal %max_string_length% Zeichen sind zulässig.</ae:parameter>
+                            <ae:parameter name="repeated_password_mismatch">Die beiden angegebenen Passwörter stimmen nicht überein.</ae:parameter>
+                            <ae:parameter name="password_min_uppercase">Passwort sollte mindestens %min_uppercase_chars% Großbuchstaben enthalten.</ae:parameter>
+                            <ae:parameter name="password_min_lowercase">Passwort sollte mindestens %min_lowercase_chars% Kleinbuchstaben enthalten.</ae:parameter>
+                            <ae:parameter name="password_too_common">Passwort ist weit verbreitet und damit zu einfach zu erraten.</ae:parameter>
+                            <ae:parameter name="password_too_similar_to_user_attributes">Passwort ist zu ähnlich zu vorhandenen Daten (Nutzername, Email)</ae:parameter>
+                            <ae:parameter name="password_error">Leider müssen wir Sie bitten ein anderes Passwort zu wählen, da die Passwortrichtlinien dieses Systems dies erforderlich machen.</ae:parameter>
+                            <ae:parameter name="The password is either missing or invalid.">Geben Sie bitte Ihr Passwort ein.</ae:parameter>
+                            <ae:parameter name="The username is either missing or invalid.">Geben Sie bitte Ihren Nutzernamen ein.</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="password_too_short">Password is too short – it should contain at least %min_string_length% characters.</ae:parameter>
+                            <ae:parameter name="password_too_long">Passwort is too long – the maximum number of characters is %max_string_length%.</ae:parameter>
+                            <ae:parameter name="repeated_password_mismatch">The given passwords do not match.</ae:parameter>
+                            <ae:parameter name="password_min_uppercase">At least %min_uppercase_chars% uppercase characters are required.</ae:parameter>
+                            <ae:parameter name="password_min_lowercase">At least %min_lowercase_chars% lowercase characters are required.</ae:parameter>
+                            <ae:parameter name="password_too_common">Password is too common and thus too easy too guess.</ae:parameter>
+                            <ae:parameter name="password_too_similar_to_user_attributes">Password is similar to your account data (email, name).</ae:parameter>
+                            <ae:parameter name="password_error">Unfortunately we need to ask you to pick another password as it doesn't meet the complex requirements specified for this system.</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>
