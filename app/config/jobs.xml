@@ -12,10 +12,6 @@
     </xi:include>
 
     <ae:configuration>
-        <jobs>
-            <job name="honeybee.jobs.execute_handlers">
-                <class>Honeybee\Infrastructure\Job\Bundle\ExecuteEventHandlersJob</class>
-            </job>
-        </jobs>
     </ae:configuration>
+
 </ae:configurations>

@@ -3,9 +3,9 @@
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 /**
- * Validator for console usage that asks for a valid transport name.
+ * Validator for console usage that asks for a valid queue name.
  */
-class JobNameValidator extends ConsoleDialogValidator
+class JobQueueValidator extends ConsoleDialogValidator
 {
     protected function validate()
     {
@@ -15,7 +15,7 @@ class JobNameValidator extends ConsoleDialogValidator
     }
 
     /**
-     * Adds only valid transport names to the available choices.
+     * Adds only valid queue names to the available choices.
      */
     protected function setupProperties()
     {
@@ -26,9 +26,10 @@ class JobNameValidator extends ConsoleDialogValidator
             ->getJobService()
             ->getJobMap();
 
-        $this->choices = [];
+        $choices = [];
         foreach ($job_map->getSettings() as $name => $job) {
-            $this->choices[] = $name;
+            $choices[] = $job->get('settings')->get('queue');
         }
+        $this->choices = array_unique($choices);
     }
 }

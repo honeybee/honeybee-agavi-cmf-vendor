@@ -10,17 +10,12 @@ class Honeybee_Core_Worker_StartAction extends Action
     {
         $service_locator = $this->getServiceLocator();
 
-        $worker_state = [ ':config' => $this->buildWorkerConfig($request_data) ];
+        $queue = $request_data->getParameter('queue');
+
+        $worker_state = [ ':config' => new ArrayConfig([ 'queue' => $queue ]) ];
 
         $service_locator->createEntity(Worker::CLASS, $worker_state)->run();
 
         return AgaviView::NONE;
-    }
-
-    protected function buildWorkerConfig(AgaviRequestDataHolder $request_data)
-    {
-        $job = $request_data->getParameter('job');
-
-        return new ArrayConfig([ 'job' => $job ]);
     }
 }

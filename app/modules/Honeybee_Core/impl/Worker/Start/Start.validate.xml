@@ -6,21 +6,18 @@
     <ae:configuration>
         <validators>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\JobNameValidator" name="invalid_job" translation_domain="honeybee.core.ui">
-                <argument>job</argument>
-                <error>You must specify a valid job name.</error>
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\JobQueueValidator" name="invalid_queue" translation_domain="honeybee.core.ui">
+                <argument>queue</argument>
+                <error>You must specify a valid queue name.</error>
                 <error for="no_choice">No available choices.</error>
                 <ae:parameter name="dialog">
                     <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
                     <ae:parameter name="select">true</ae:parameter>
-                    <ae:parameter name="question">Please pick a job</ae:parameter>
+                    <ae:parameter name="question">Please pick a queue</ae:parameter>
                     <ae:parameter name="attempts">3</ae:parameter>
-                    <ae:parameter name="ignore_choices">
-                        <ae:parameter>honeybee.jobs.execute_handlers</ae:parameter>
-                    </ae:parameter>
                 </ae:parameter>
             </validator>
-            
+
         </validators>
     </ae:configuration>
 </ae:configurations>
