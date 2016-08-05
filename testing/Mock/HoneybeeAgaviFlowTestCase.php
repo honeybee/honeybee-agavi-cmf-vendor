@@ -70,7 +70,8 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
         $property->setAccessible(true);
         $oldVars = $property->getValue($template);
 
-        $server_globals = sprintf('
+        $server_globals = sprintf(
+            '
 	        $_SERVER["REQUEST_URI"] = %s;
 		    $_SERVER["SCRIPT_NAME"] = %s;
 			',
@@ -87,7 +88,9 @@ class HoneybeeAgaviFlowTestCase extends AgaviFlowTestCase
         if (isset($oldVars['constants'])) {
             $constantsWithoutSwiftInit = array_filter(
                 explode(PHP_EOL, $oldVars['constants']),
-                function ($line) { return strpos($line, 'SWIFT_INIT_LOADED') === false; }
+                function ($line) {
+                    return strpos($line, 'SWIFT_INIT_LOADED') === false;
+                }
             );
             $template->setVar([
                 'constants' => implode(PHP_EOL, $constantsWithoutSwiftInit)

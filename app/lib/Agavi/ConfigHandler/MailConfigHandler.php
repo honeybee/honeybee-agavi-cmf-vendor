@@ -210,6 +210,5 @@ class MailConfigHandler extends BaseConfigHandler
                 );
             }
         }
-
     }
 }

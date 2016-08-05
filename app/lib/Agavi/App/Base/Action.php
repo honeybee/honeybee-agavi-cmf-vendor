@@ -195,7 +195,8 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
     /**
      *  Set the layout path to extend into the template, if successfully validated
      **/
-    protected function setLayoutAttribute($request_data) {
+    protected function setLayoutAttribute($request_data)
+    {
         if ($request_data->hasParameter('_layout')) {
             $this->setAttribute('_layout', $request_data->getParameter('_layout'));
             return true;

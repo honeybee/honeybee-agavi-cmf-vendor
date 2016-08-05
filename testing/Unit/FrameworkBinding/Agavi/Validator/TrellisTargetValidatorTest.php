@@ -8,12 +8,12 @@ use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
 
 class TrellisTargetValidatorTest extends HoneybeeAgaviUnitTestCase
 {
-	public function testExecute()
-	{
-		$vm = $this->getContext()->createInstanceFor('validation_manager');
-		$vm->clear();
-		$validator = $vm->createValidator(TrellisTargetValidator::CLASS, []);
+    public function testExecute()
+    {
+        $vm = $this->getContext()->createInstanceFor('validation_manager');
+        $vm->clear();
+        $validator = $vm->createValidator(TrellisTargetValidator::CLASS, []);
 
-	    $this->assertInstanceOf(AgaviContext::CLASS, $validator->getContext());
+        $this->assertInstanceOf(AgaviContext::CLASS, $validator->getContext());
     }
 }

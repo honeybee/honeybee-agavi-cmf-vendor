@@ -27,11 +27,11 @@ class ActivityServiceProvisioner extends AbstractProvisioner
     public function build(ServiceDefinitionInterface $service_definition, SettingsInterface $provisioner_settings)
     {
         $factory_delegate = function (
-                EnvironmentInterface $environment,
-                WorkflowActivityService $workflow_activity_service,
-                AggregateRootTypeMap $aggregate_root_type_map,
-                UrlGeneratorInterface $url_generator
-            ) use ($service_definition) {
+            EnvironmentInterface $environment,
+            WorkflowActivityService $workflow_activity_service,
+            AggregateRootTypeMap $aggregate_root_type_map,
+            UrlGeneratorInterface $url_generator
+        ) use ($service_definition) {
             $activity_container_map = $this->buildActivityContainerMap();
             $service_class = $service_definition->getClass();
 

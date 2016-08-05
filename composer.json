@@ -88,8 +88,8 @@
             "@validate-json"
         ],
         "test": "phpunit",
-        "code-sniffer": "vendor/bin/phpcs --extensions=php --standard=psr2 app/lib testing/unit",
-        "code-sniffer-autofix": "vendor/bin/phpcbf --standard=psr2 -d tabWidth=4 app/lib",
+        "code-sniffer": "phpcs --extensions=php --standard=psr2 app/lib testing",
+        "code-sniffer-autofix": "phpcbf --standard=psr2 -d tabWidth=4 app/lib testing",
         "validate-json": "composer validate --no-check-all --no-check-lock",
         "validate-deps": "composer validate --with-dependencies --strict"
     }

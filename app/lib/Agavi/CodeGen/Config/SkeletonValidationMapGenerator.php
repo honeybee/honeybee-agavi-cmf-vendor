@@ -34,8 +34,8 @@ class SkeletonValidationMapGenerator implements ConfigGeneratorInterface
         $config_include_dir = AgaviConfig::get('core.config_dir') . DIRECTORY_SEPARATOR . 'includes';
         $relative_file_paths = [];
         foreach ($files_to_include as $file_to_include) {
-           $relative_path = $filesystem->makePathRelative(dirname($file_to_include), $config_include_dir);
-           $relative_file_paths[] = $relative_path . basename($file_to_include);
+            $relative_path = $filesystem->makePathRelative(dirname($file_to_include), $config_include_dir);
+            $relative_file_paths[] = $relative_path . basename($file_to_include);
         }
 
         $this->twig_renderer->renderToFile(

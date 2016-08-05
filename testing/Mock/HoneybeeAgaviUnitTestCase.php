@@ -23,7 +23,9 @@ class HoneybeeAgaviUnitTestCase extends AgaviUnitTestCase
         if (isset($oldVars['constants'])) {
             $constantsWithoutSwiftInit = array_filter(
                 explode(PHP_EOL, $oldVars['constants']),
-                function ($line) { return strpos($line, 'SWIFT_INIT_LOADED') === false; }
+                function ($line) {
+                    return strpos($line, 'SWIFT_INIT_LOADED') === false;
+                }
             );
             $template->setVar([
                 'constants' => implode(PHP_EOL, $constantsWithoutSwiftInit)

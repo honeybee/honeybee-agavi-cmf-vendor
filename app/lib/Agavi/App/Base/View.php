@@ -180,7 +180,7 @@ class View extends AgaviView
             $layout = $layout_parameters['layout_template'];
         }
 
-        if(!$this->hasAttribute(static::ATTRIBUTE_LAYOUT)) {
+        if (!$this->hasAttribute(static::ATTRIBUTE_LAYOUT)) {
             $this->setAttribute(static::ATTRIBUTE_LAYOUT, $layout);
         }
 
@@ -352,12 +352,12 @@ class View extends AgaviView
         } elseif (is_array($renderer_config_or_name)) {
             $renderer_config = new ArrayConfig(array_merge($default_data, $renderer_config_or_name));
         } elseif (is_object($renderer_config_or_name)) {
-            if(!$renderer_config_or_name instanceof ConfigInterface) {
+            if (!$renderer_config_or_name instanceof ConfigInterface) {
                 throw new RuntimeError(sprintf(
                     'Renderer config must implement %s; "%s" provided.',
                     ConfigInterface::class,
-                    get_class($renderer_config_or_name))
-                );
+                    get_class($renderer_config_or_name)
+                ));
             }
         } else {
             throw new RuntimeError('Renderer config must implement ConfigInterface, be a name to lookup or an array');

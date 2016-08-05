@@ -73,7 +73,7 @@ class DataAccessServiceProvisioner extends AbstractProvisioner
                     foreach ($config['dependencies'] as $key => $dependency) {
                         $object_state[$key] = $dependency;
                     }
-                   $map[$map_key] = $di_container->make($config['class'], $object_state);
+                    $map[$map_key] = $di_container->make($config['class'], $object_state);
                 }
 
                 return new StorageReaderMap($map);

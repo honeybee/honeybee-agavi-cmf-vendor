@@ -46,7 +46,7 @@ class HoneybeeUploadedFile extends AgaviUploadedFile
             $this->isMoved = $array['is_moved'];
         }
 
-        foreach(self::$indexMap as $index => $property) {
+        foreach (self::$indexMap as $index => $property) {
             if (isset($array[$index])) {
                 $this->$property = $array[$index];
             }
