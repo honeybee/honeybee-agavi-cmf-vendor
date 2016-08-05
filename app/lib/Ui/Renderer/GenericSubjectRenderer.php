@@ -5,20 +5,17 @@ namespace Honeybee\Ui\Renderer;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Ui\Activity\ActivityInterface;
 
+/**
+ * Whatever is given as payload to this renderer may be used via an expression to set the field_value for the template.
+ * When an "activity" is in the payload it will be rendered automatically and is then available as "rendered_activity".
+ */
 class GenericSubjectRenderer extends Renderer
 {
-    protected $activity_service;
-
     protected function validate()
     {
-        // TODO do we need to force a subject?
-
-
         $activity = $this->getPayload('activity');
         if ($activity && !$activity instanceof ActivityInterface) {
-            throw new RuntimeError(
-                sprintf('Payload "activity" must be given and implement "%s".', ActivityInterface::CLASS)
-            );
+            throw new RuntimeError('Optional payload "activity" must implement: ' . ActivityInterface::CLASS);
         }
     }
 
@@ -37,8 +34,19 @@ class GenericSubjectRenderer extends Renderer
         $params = parent::getTemplateParameters();
 
         $params['html_attributes'] = $this->getOption('html_attributes', []);
-        $params['field_name'] = $this->getOption('field_name', 'subject');
-        $params = array_merge($params, $this->getOptions());
+
+        $params['field_name'] = $this->getOption('field_name', 'Missing "field_name" setting.');
+
+        if ($this->hasOption('expression')) {
+            $payload = [];
+            foreach ($this->payload as $key => $val) {
+                $payload[$key] = $val;
+            }
+            $params['field_value'] = $this->expression_service->evaluate($this->getOption('expression'), $payload);
+        } else {
+            $params['field_value'] = $this->getOption('field_value', 'Missing "field_value" or "expression" setting.');
+        }
+
         if ($this->hasPayload('activity')) {
             $activity = $this->getPayload('activity')->toArray();
             $params['activity'] = $activity;
@@ -51,8 +59,7 @@ class GenericSubjectRenderer extends Renderer
             );
         }
 
-        $css = (string)$this->getOption('field_css', '');
-        $params['css'] = $css;
+        $params['css'] = (string)$this->getOption('css', '') . ' ' . (string)$this->getOption('field_css', '');
 
         return $params;
     }

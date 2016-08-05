@@ -122,6 +122,7 @@ abstract class EntityRenderer extends Renderer
                         )
                     );
                 }
+                // gets the renderer that has been specified in the config
                 $renderer = $this->renderer_service->getRenderer(null, $this->output_format, $renderer_config);
 
                 $renderer_settings = array_replace_recursive(
