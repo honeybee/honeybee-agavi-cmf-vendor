@@ -31,9 +31,6 @@
                     <setting name="index">%honeybee-system_account.index%</setting>
                     <setting name="type">%honeybee-system_account-user.standard.type%</setting>
                 </settings>
-                <dependencies>
-                    <dependency key="projection_type">Honeybee\SystemAccount\User\Projection\Standard\UserType</dependency>
-                </dependencies>
             </storage_reader>
         </storage_readers>
 
