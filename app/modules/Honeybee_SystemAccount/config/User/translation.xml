@@ -369,11 +369,11 @@
                             <ae:parameter name="Either username or email needs to be specified.">Nutzername oder Emailadresse wird benötigt.</ae:parameter>
                             <ae:parameter name="Invalid command payload given.">Die Anfrage konnte leider nicht korrekt verarbeitet werden.</ae:parameter>
                             <ae:parameter name="The given user token is invalid.">Ein gültiges Token wird benötigt.</ae:parameter>
-                            <ae:parameter name="password_too_short">Passwort ist zu kurz – mindestens %min_string_length% Zeichen werden benötigt.</ae:parameter>
-                            <ae:parameter name="password_too_long">Passwort ist zu lang – maximal %max_string_length% Zeichen sind zulässig.</ae:parameter>
+                            <ae:parameter name="password_too_short">Mindestens %password_constraints.min_string_length% Zeichen werden benötigt.</ae:parameter>
+                            <ae:parameter name="password_too_long">Maximal %password_constraints.max_string_length% Zeichen sind zulässig.</ae:parameter>
                             <ae:parameter name="repeated_password_mismatch">Die beiden angegebenen Passwörter stimmen nicht überein.</ae:parameter>
-                            <ae:parameter name="password_min_uppercase">Passwort sollte mindestens %min_uppercase_chars% Großbuchstaben enthalten.</ae:parameter>
-                            <ae:parameter name="password_min_lowercase">Passwort sollte mindestens %min_lowercase_chars% Kleinbuchstaben enthalten.</ae:parameter>
+                            <ae:parameter name="password_min_uppercase">Mindestens %password_constraints.min_uppercase_chars% Großbuchstaben enthalten.</ae:parameter>
+                            <ae:parameter name="password_min_lowercase">Mindestens %password_constraints.min_lowercase_chars% Kleinbuchstaben enthalten.</ae:parameter>
                             <ae:parameter name="password_too_common">Passwort ist weit verbreitet und damit zu einfach zu erraten.</ae:parameter>
                             <ae:parameter name="password_too_similar_to_user_attributes">Passwort ist zu ähnlich zu vorhandenen Daten (Nutzername, Email)</ae:parameter>
                             <ae:parameter name="password_error">Leider müssen wir Sie bitten ein anderes Passwort zu wählen, da die Passwortrichtlinien dieses Systems dies erforderlich machen.</ae:parameter>
@@ -382,11 +382,11 @@
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="invalid_login">Login failed. Please type username and password again and make sure you've been registered.</ae:parameter>
-                            <ae:parameter name="password_too_short">Password is too short – it should contain at least %min_string_length% characters.</ae:parameter>
-                            <ae:parameter name="password_too_long">Passwort is too long – the maximum number of characters is %max_string_length%.</ae:parameter>
+                            <ae:parameter name="password_too_short">At least %password_constraints.min_string_length% characters are required.</ae:parameter>
+                            <ae:parameter name="password_too_long">A maximum of %password_constraints.max_string_length% characters is allowed.</ae:parameter>
                             <ae:parameter name="repeated_password_mismatch">The given passwords do not match.</ae:parameter>
-                            <ae:parameter name="password_min_uppercase">At least %min_uppercase_chars% uppercase characters are required.</ae:parameter>
-                            <ae:parameter name="password_min_lowercase">At least %min_lowercase_chars% lowercase characters are required.</ae:parameter>
+                            <ae:parameter name="password_min_uppercase">At least %password_constraints.min_uppercase_chars% uppercase characters are required.</ae:parameter>
+                            <ae:parameter name="password_min_lowercase">At least %password_constraints.min_lowercase_chars% lowercase characters are required.</ae:parameter>
                             <ae:parameter name="password_too_common">Password is too common and thus too easy too guess.</ae:parameter>
                             <ae:parameter name="password_too_similar_to_user_attributes">Password is similar to your account data (email, name).</ae:parameter>
                             <ae:parameter name="password_error">Unfortunately we need to ask you to pick another password as it doesn't meet the complex requirements specified for this system.</ae:parameter>
