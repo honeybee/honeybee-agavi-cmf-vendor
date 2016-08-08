@@ -60,10 +60,12 @@ define([
 
         function setLoadingState() {
             $('body').addClass(loading_class);
+            $('iframe').contents().find('body').addClass(loading_class);
         }
 
         function releaseLoadingState() {
             $('body').removeClass(loading_class);
+            $('iframe').contents().find('body').removeClass(loading_class);
         }
 
         // release loading state after a period of time
