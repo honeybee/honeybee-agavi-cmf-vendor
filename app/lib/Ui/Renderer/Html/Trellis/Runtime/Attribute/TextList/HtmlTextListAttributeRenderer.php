@@ -65,7 +65,16 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         $widget_options['min_count'] = $this->getMinCount($this->isRequired());
         $widget_options['max_count'] = $this->getMaxCount();
         $widget_options['allowed_values'] = $this->getAllowedValues();
-        $widget_options['remove_label'] = $this->getOption('remove_label', '-');
+        if ($this->hasOption('remove_label')) {
+            $widget_options['remove_label'] = $this->_(
+                $this->getOption('remove_label'),
+                $this->getTranslationDomain()
+            );
+        }
+        $widget_options['remove_title'] = $this->_(
+            $this->getOption('remove_title', 'text_list_remove_title'),
+            $this->getTranslationDomain()
+        );
 
         return $widget_options;
     }

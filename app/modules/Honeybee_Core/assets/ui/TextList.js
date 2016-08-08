@@ -15,7 +15,9 @@ define([
 
         this.options.max_count = this.options.max_count;
         this.options.min_count = this.options.min_count || Number(this.isRequired());
-        this.options.remove_label = this.options.remove_label || "-";
+        this.options.remove_label = this.options.remove_label || "\u{00D7}";
+        this.options.remove_title = this.options.remove_title || "Remove";
+        this.options.remove_button_class = this.options.remove_button_class || "remove";
 
         this.isReadable = !(this.isReadonly() || this.isDisabled());
         this.$input_element = this.$widget.find(".input-text-list");
@@ -62,7 +64,9 @@ define([
             minItems: this.options.min_count,
             plugins: {
                 "remove_button": {
-                    label: this.options.remove_label
+                    label: this.options.remove_label,
+                    title: this.options.remove_title,
+                    className: this.options.remove_button_class
                 }
             },
             create: this.isReadable && this.options.allowed_values && this.options.allowed_values.length === 0,
