@@ -23,7 +23,7 @@
 {% set trigger_attr = (trigger_html_attributes | default({})) | cast_to_array %}
 
 <div
-    class="{{ dropdown_name }} {{ dropdown_css }} actvity-group"
+    class="{{ dropdown_name }} {{ dropdown_css }} activity-group"
     {% for attr, val in dropdown_attr %} {{ attr }}="{{ val }}" {% endfor %}
 >
     <input type="checkbox" id="{{ trigger_id }}" class="{{ dropdown_name ~ '__trigger' }} base-dropdown__trigger hb-js-flyout-trigger {{ trigger_css }}" {% for attr, val in trigger_attr %} {{ attr }}="{{ val }}" {% endfor %} {% if toggle_disabled %}disabled{% endif %} />

@@ -244,4 +244,18 @@ EOT;
 
         return $rendered_pagination;
     }
+
+    public function getBreadcrumbsActivities()
+    {
+        $breadcrumbs_root_activities = $this->getBreadcrumbsRootActivities();
+
+        return $breadcrumbs_root_activities;
+    }
+
+    public function getBreadcrumbsRootActivities()
+    {
+        return [
+            $this->getServiceLocator()->getActivityService()->getActivity($this->getAttribute('resource_type')->getPrefix(), 'collection')
+        ];
+    }
 }
