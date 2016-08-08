@@ -1,7 +1,7 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use Trellis\Common\Error\RuntimeException;
+use Honeybee\Common\Error\RuntimeError;
 
 class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
 {
@@ -62,7 +62,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
             $error_message = "[SESSIONID_REGENERATION_FAILED] SessionId could not be regenerated.";
             $this->logCritical($error_message);
 
-            throw new RuntimeException($error_message);
+            throw new RuntimeError($error_message);
         }
 
         $default_target_url = $this->routing->gen('index');  // dashboard a.k.a. homepage
@@ -118,7 +118,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
         $error_message = "[MISSING_FORWARD_TARGET] No internal forward container found.";
         $this->logError($error_message);
 
-        throw new RuntimeException($error_message);
+        throw new RuntimeError($error_message);
     }
 
     public function executeText(AgaviRequestDataHolder $request_data) // @codingStandardsIgnoreEnd
@@ -141,7 +141,7 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
         $error_message = "[MISSING_FORWARD_TARGET] No internal forward container found.";
         $this->logError($error_message);
 
-        throw new RuntimeException($error_message);
+        throw new RuntimeError($error_message);
     }
 
     protected function setRedirect($url)

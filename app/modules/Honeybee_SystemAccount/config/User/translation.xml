@@ -364,6 +364,7 @@
 
                     <ae:parameter name="errors">
                         <ae:parameter name="de">
+                            <ae:parameter name="invalid_login">Login fehlgeschlagen. Bitte prüfen Sie Ihre Eingaben.</ae:parameter>
                             <ae:parameter name="The given user(identifier) is invalid.">Die verwendete Nutzer-Id ist nicht korrekt.</ae:parameter>
                             <ae:parameter name="Either username or email needs to be specified.">Nutzername oder Emailadresse wird benötigt.</ae:parameter>
                             <ae:parameter name="Invalid command payload given.">Die Anfrage konnte leider nicht korrekt verarbeitet werden.</ae:parameter>
@@ -380,6 +381,7 @@
                             <ae:parameter name="The username is either missing or invalid.">Geben Sie bitte Ihren Nutzernamen ein.</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
+                            <ae:parameter name="invalid_login">Login failed. Please type username and password again and make sure you've been registered.</ae:parameter>
                             <ae:parameter name="password_too_short">Password is too short – it should contain at least %min_string_length% characters.</ae:parameter>
                             <ae:parameter name="password_too_long">Passwort is too long – the maximum number of characters is %max_string_length%.</ae:parameter>
                             <ae:parameter name="repeated_password_mismatch">The given passwords do not match.</ae:parameter>

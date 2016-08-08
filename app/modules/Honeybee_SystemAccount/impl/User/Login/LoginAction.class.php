@@ -80,7 +80,8 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
      */
     protected function authenticate(AgaviRequestDataHolder $request_data)
     {
-        $translation_manager = $this->getContext()->getTranslationManager();
+        $vm = $this->getContainer()->getValidationManager();
+        $tm = $this->getContext()->getTranslationManager();
         $user = $this->getContext()->getUser();
 
         $username = $request_data->getParameter('username');
@@ -91,7 +92,13 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
 
         $auth_response = $authentication_service->authenticate($username, $password);
 
-        $log_message_part = sprintf("for username '$username' via auth provider %s.", get_class($authentication_service));
+        $log_message = sprintf(
+            "username='%s' message='%s' auth_provider='%s' errors=''",
+            $username,
+            $auth_response->getMessage(),
+            get_class($authentication_service),
+            join(';', $auth_response->getErrors())
+        );
 
         if ($auth_response->getState() === AuthResponse::STATE_AUTHORIZED) {
             $view_name = 'Success';
@@ -104,34 +111,26 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
             );
             $user->setAuthenticated(true);
 
-            $this->logInfo("[AUTHORIZED] Successful authentication attempt " . $log_message_part);
+            $this->logInfo('[AUTHORIZED] ' . $log_message);
         } elseif ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {
             $view_name = 'Error';
 
             $user->setAuthenticated(false);
-            $this->setAttribute('errors', [ 'auth' => $translation_manager->_('invalid_login', 'user.messages') ]);
 
-            $this->logError(
-                sprintf(
-                    "[UNAUTHORIZED] Authentication attempt failed %s\nErrors are: %s",
-                    $log_message_part,
-                    join(PHP_EOL, $auth_response->getErrors())
-                )
-            );
+            $vm->addArgumentResult(new \AgaviValidationArgument('username'), AgaviValidator::ERROR);
+            $vm->addArgumentResult(new \AgaviValidationArgument('password'), AgaviValidator::ERROR);
+            $vm->setError('invalid_login', $tm->_('invalid_login', 'honeybee.system_account.user.errors'));
+
+            $this->logError('[UNAUTHORIZED] ' . $log_message);
         } else {
             $view_name = 'Error';
 
             $user->setAuthenticated(false);
-            $this->setAttribute('errors', [ 'auth' => $auth_response->getMessage() ]);
 
-            $this->logError(
-                sprintf(
-                    "[UNAUTHORIZED] Authentication attempt failed with auth response being '%s' %s\nErrors are: %s",
-                    $auth_response->getState(),
-                    $log_message_part,
-                    join(PHP_EOL, $auth_response->getErrors())
-                )
-            );
+            $this->setAttribute('errors', [ 'auth' => $auth_response->getMessage() ]);
+            $vm->setError('invalid_login', $tm->_('invalid_login', 'honeybee.system_account.user.errors'));
+
+            $this->logError("[ERROR] state='" . $auth_response->getState() . "' " . $log_message);
         }
 
         return $view_name;

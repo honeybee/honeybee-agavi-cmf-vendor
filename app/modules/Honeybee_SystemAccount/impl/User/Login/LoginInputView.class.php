@@ -50,7 +50,7 @@ class Honeybee_SystemAccount_User_Login_LoginInputView extends View
 
         return json_encode([
             'result' => 'failure',
-            'message' => $this->translation_manager->_('Authentication needed.')
+            'message' => $this->translation_manager->_('Authentication needed.', 'honeybee.system_account.user.errors')
         ]);
     }
 
@@ -59,10 +59,10 @@ class Honeybee_SystemAccount_User_Login_LoginInputView extends View
         $error_message = $this->translation_manager->_(
             'Please provide username and password as commandline arguments when calling secure actions. ' .
             'Use -username {user} -password {pass}.',
-            'user.messages'
+            'honeybee.system_account.user.errors'
         ) . PHP_EOL;
 
-        $this->cliError($error_message);
+        return $this->cliError($error_message);
     }
 
     public function executeBinary(AgaviRequestDataHolder $request_data)

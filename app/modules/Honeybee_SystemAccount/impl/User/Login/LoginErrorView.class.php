@@ -14,7 +14,6 @@ class Honeybee_SystemAccount_User_Login_LoginErrorView extends View
         $this->setAttribute(self::ATTRIBUTE_RENDERED_NAVIGATION, '');
         $this->setupHtml($request_data);
 
-        $this->setAttribute('error_messages', $this->getContainer()->getValidationManager()->getErrorMessages());
         $this->setAttribute('reset_password_enabled', AgaviConfig::get('core.reset_password_enabled', true));
 
         $this->getResponse()->setHttpStatusCode(401);
@@ -53,8 +52,8 @@ class Honeybee_SystemAccount_User_Login_LoginErrorView extends View
      */
     public function executeConsole(AgaviRequestDataHolder $request_data) // @codingStandardsIgnoreEnd
     {
-        $this->cliError(
-            $this->translation_manager->_('Wrong user name or password!', 'user') . PHP_EOL
+        return $this->cliError(
+            $this->translation_manager->_('Wrong username or password!', 'honeybee.system_account.user.errors')
         );
     }
 

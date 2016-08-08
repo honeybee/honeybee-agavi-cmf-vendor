@@ -59,14 +59,18 @@ class StandardAuthService implements AuthServiceInterface
         if (1 === $query_result->getTotalCount()) {
             $user = $query_result->getFirstResult();
         } else {
-            return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, "authentication failed");
+            return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, 'user not found');
         }
-        /*if ($user->getWorkflowState() !== $this->config->get('active_state', self::ACTIVE_STATE)) {
-            return new AuthResponse(
-                AuthResponse::STATE_UNAUTHORIZED,
-                "user inactive"
-            );
-        }*/
+
+        if ($user->getPasswordHash() === '') {
+            return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, 'user password not set');
+        }
+
+        /*
+        if ($user->getWorkflowState() !== $this->config->get('active_state', self::ACTIVE_STATE)) {
+            return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, 'user inactive');
+        }
+        */
 
         if ($this->password_handler->verify($password, $user->getPasswordHash())) {
             return new AuthResponse(
@@ -83,7 +87,7 @@ class StandardAuthService implements AuthServiceInterface
             );
         }
 
-        return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, "authentication failed");
+        return new AuthResponse(AuthResponse::STATE_UNAUTHORIZED, 'authentication failed');
     }
 
     protected function getProjectionQueryService()
