@@ -11,6 +11,36 @@ define([
         config.get('widgets.loading_classname', 'hb-js-widget--busy'),
         config.get('widgets.loading_release_time', 10000)
     );
+    handleClipboardCopyClicks();
+
+    // "data-clipboard-copy-value" text will be copied to clipboard from ".js-clipboard-copy" elements on click
+    function handleClipboardCopyClicks() {
+        $(document).on('click.clipboard-copy', function(ev) {
+            $elm = $(ev.target);
+            if (!$elm.hasClass('js-clipboard-copy')) {
+                return;
+            }
+            var tmpnode = document.createElement('pre');
+            tmpnode.style.width = '1px';
+            tmpnode.style.height = '1px';
+            tmpnode.style.position = 'fixed';
+            tmpnode.style.top = '5px';
+            tmpnode.textContent = ev.target.dataset.clipboardCopyValue; // data-clipboard-copy-value attribute
+            document.body.appendChild(tmpnode);
+
+            var selection = getSelection();
+            selection.removeAllRanges();
+            var range = document.createRange();
+            range.selectNodeContents(tmpnode);
+            selection.addRange(range);
+
+            document.execCommand('copy');
+
+            selection.removeAllRanges();
+
+            document.body.removeChild(tmpnode);
+        });
+    };
 
     function appendRequiredAttributeToAllDataRequiredFields() {
         $('[data-required]').each(function() {
