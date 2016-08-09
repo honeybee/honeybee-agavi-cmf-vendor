@@ -12,9 +12,9 @@ class HistoryAction extends Action
     {
         $data_access_service = $this->getServiceLocator()->getDataAccessService();
         $query_service_map = $data_access_service->getQueryServiceMap();
-        $query_service = $query_service_map->getByProjectionType($this->getProjectionType());
+        $domain_events_query_service = $query_service_map->getItem('honeybee::domain_event::query_service');
         $resource = $request_data->getParameter('resource');
-        $query_result = $query_service->findEventsByIdentifier($resource->getIdentifier());
+        $query_result = $domain_events_query_service->findEventsByIdentifier($resource->getIdentifier());
         $domain_events = new AggregateRootEventList($query_result->getResults());
 
         $this->setAttribute('resource', $resource);
