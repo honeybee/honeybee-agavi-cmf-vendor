@@ -18,10 +18,7 @@
                     </accepting>
                     <sending>
                         <type>text/html</type>
-                        <type>text/csv</type>
-                        <type>application/zip</type>
                         <type>application/json</type>
-                        <type>application/vnd.amundsen-uber+json</type>
                     </sending>
                 </activity>
 
@@ -35,6 +32,7 @@
             </activity_container>
 
             <activity_container scope="default_subheader_activities">
+                <!--
                 <activity name="create_resource">
                     <url type="route">module.create</url>
                     <rels>
@@ -46,13 +44,10 @@
                     </accepting>
                     <sending>
                         <type>text/html</type>
-                        <type>text/csv</type>
-                        <type>application/zip</type>
                         <type>application/json</type>
-                        <type>application/vnd.amundsen-uber+json</type>
                     </sending>
                 </activity>
-
+                -->
             </activity_container>
 
             <activity_container scope="converjon">

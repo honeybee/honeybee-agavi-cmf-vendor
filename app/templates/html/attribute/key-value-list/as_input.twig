@@ -9,7 +9,7 @@
     </div><!--
     --><div class="hb-field__value">
         <div class="hb-key-value-list">
-            {% if attribute_value is iterable %}
+            {% if attribute_value is iterable and attribute_value is not empty %}
                 <div class="hb-key-value-list__head {% if hide_pair_labels %} hb-key-value-list__head--hidden{% endif %}">
                     <label class="hb-key-value-head__label">{{ _(field_name~'.key_label', translation_domain) }}</label>
                     <label class="hb-key-value-head__label">{{ _(field_name~'.value_label', translation_domain) }}</label>
