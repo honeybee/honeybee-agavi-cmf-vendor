@@ -47,6 +47,10 @@ define([
             self.updateErrorBubbles();
         });
         self.updateErrorBubbles();
+
+        if (window.location.hash) {
+            self.openTab(window.location.hash.substr(1));
+        }
     }
 
     Tabs.prototype = new Widget();
@@ -57,6 +61,14 @@ define([
         var $panel = $panels.has(element);
         if ($panel.length > 0) {
             $panel.prev('.hb-tabs__trigger').prop("checked", true);
+            this.selectTab();
+        }
+    };
+
+    Tabs.prototype.openTab = function(tab_id) {
+        var trigger = document.getElementById(tab_id);
+        if (trigger) {
+            $(trigger).prop("checked", true);
             this.selectTab();
         }
     };
