@@ -34,8 +34,6 @@ define([
             }, 0);
         });
 
-        self.selectTab();
-
         jsb.whenFired('TABS:OPEN_TAB_THAT_CONTAINS', function(values, event_name) {
             if (values.element_id) {
                 // $(id) would need escaping for ids with dots…
@@ -50,7 +48,13 @@ define([
 
         if (window.location.hash) {
             self.openTab(window.location.hash.substr(1));
+        } else {
+            self.selectTab();
         }
+
+        $(window).on('hashchange', function(ev) {
+            self.openTab(window.location.hash.substr(1));
+        });
     }
 
     Tabs.prototype = new Widget();
