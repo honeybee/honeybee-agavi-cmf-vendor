@@ -67,7 +67,7 @@ define([
 
     Tabs.prototype.openTab = function(tab_id) {
         var trigger = document.getElementById(tab_id);
-        if (trigger) {
+        if (trigger && $(trigger).hasClass('hb-tabs__trigger')) {
             $(trigger).prop("checked", true);
             this.selectTab();
         }
@@ -79,6 +79,9 @@ define([
 
         this.$widget.find('> .hb-tabs__header label').removeClass('selected');
         $selected_label.addClass('selected');
+        if (active_id) {
+            window.location.hash = active_id;
+        }
     };
 
     Tabs.prototype.focusTab = function() {
