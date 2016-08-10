@@ -15,7 +15,7 @@ define([
 
         this.options.max_count = this.options.max_count;
         this.options.min_count = this.options.min_count || Number(this.isRequired());
-        this.options.remove_label = this.options.remove_label || "\u{00D7}";
+        this.options.remove_label = this.options.remove_label || "×";
         this.options.remove_title = this.options.remove_title || "Remove";
         this.options.remove_button_class = this.options.remove_button_class || "remove";
 
