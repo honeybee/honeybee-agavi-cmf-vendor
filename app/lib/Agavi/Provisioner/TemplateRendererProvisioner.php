@@ -15,6 +15,7 @@ use Honeybee\Infrastructure\Template\Twig\Extension\TranslatorExtension;
 use Honeybee\Infrastructure\Template\Twig\Loader\FilesystemLoader;
 use Honeybee\ServiceDefinitionInterface;
 use Twig_Environment;
+use Twig_Extension_Debug;
 
 class TemplateRendererProvisioner extends AbstractProvisioner
 {
@@ -72,6 +73,10 @@ class TemplateRendererProvisioner extends AbstractProvisioner
             TranslatorExtension::CLASS,
             MarkdownExtension::CLASS
         ];
+
+        if ($settings['twig_options']['debug'] === true) {
+            $settings['twig_extensions'][] = Twig_Extension_Debug::CLASS;
+        }
 
         $settings['template_paths'] = [
             AgaviConfig::get('core.template_dir'),

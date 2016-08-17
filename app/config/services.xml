@@ -245,6 +245,7 @@
                             <setting name="twig_options">
                                 <settings>
                                     <setting name="strict_variables">true</setting>
+                                    <setting name="debug">true</setting>
                                 </settings>
                             </setting>
                         </settings>
