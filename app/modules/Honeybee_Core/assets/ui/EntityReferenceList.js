@@ -11,6 +11,9 @@ define([
         if (dom_element) {
             EmbeddedEntityList.call(this, dom_element, _.merge({}, default_options, options));
         }
+        this.options.remove_label = this.options.remove_label || "×";
+        this.options.remove_title = this.options.remove_title || "Remove";
+        this.options.remove_button_class = this.options.remove_button_class || "remove";
     }
 
     ReferenceEntityList.prototype = new EmbeddedEntityList();
@@ -203,7 +206,13 @@ define([
             valueField: suggest_options.value_field,
             labelField: suggest_options.suggest_field,
             searchField: suggest_options.suggest_field,
-            plugins: { "remove_button": { label: "-" } },
+            plugins: {
+                "remove_button": {
+                    label: this.options.remove_label,
+                    title: this.options.remove_title,
+                    className: this.options.remove_button_class
+                }
+            },
             load: this.loadSuggestions.bind(this),
             onItemAdd: this.onItemAdded.bind(this),
             onItemRemove: this.onItemRemoved.bind(this)
