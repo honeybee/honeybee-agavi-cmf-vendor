@@ -1,0 +1,47 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
+{%- set min_count = widget_options.min_count | default(0) -%}
+<div
+    class="hb-field {{ css|default('') }}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
+    data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-field__value">
+            <div class="input-url-list">
+                {% for value in attribute_value %}
+                    <label class="url-list__item">
+                        <input type="url" value="{{ value }}" name="{{ grouped_field_name }}" class=""
+                            {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
+                            {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
+                    </label>
+                {% endfor %}
+                <div class="input-url-list__box">
+                    <input type="url" name="{{ grouped_field_name }}"
+                        {{ readonly|default('') }} {{ disabled|default('') }} {% if attribute_value|length < min_count %} required {% endif %} maxlength="{{ maxlength|default('') }}"
+                        {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
+                </div>
+                <ul class="errors">
+                    {%- block field_errors  -%}
+                        {%- for error in errors -%}
+                            <li class="error">{{error}}</li>
+                        {%- endfor -%}
+                    {%- endblock  -%}
+                </ul>
+                {% if translations.input_help is defined %}
+                    <div class="input_help">{{ translations.input_help|raw }}</div>
+                {% endif %}
+                {% if translations.input_hint is defined %}
+                    <div class="input_hint">{{ translations.input_hint|raw }}</div>
+                {% endif %}
+                {% if translations.input_focus_hint is defined %}
+                    <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
+                {% endif %}
+            </div>
+        </div><!--
+        --><div class="hb-field__extra"></div>
+    </div>
+</div>
+{%- endblock field -%}
