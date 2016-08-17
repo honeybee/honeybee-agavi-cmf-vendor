@@ -74,6 +74,9 @@ $pager-icon-size: 1.5 !default;
             // padding-top: auto;
             // padding-bottom: auto;
 
+        &.disabled {
+            color: color(lightgrey);
+        }
     }
 }
 .pager__first_page a {
