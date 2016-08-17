@@ -12,17 +12,22 @@
         --><div class="hb-field__value">
             <div class="input-url-list">
                 {% for value in attribute_value %}
-                    <label class="url-list__item">
-                        <input type="url" value="{{ value }}" name="{{ grouped_field_name }}" class=""
-                            {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
-                            {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
-                    </label>
-                {% endfor %}
-                <div class="input-url-list__box">
-                    <input type="url" name="{{ grouped_field_name }}"
-                        {{ readonly|default('') }} {{ disabled|default('') }} {% if attribute_value|length < min_count %} required {% endif %} maxlength="{{ maxlength|default('') }}"
+                    <input type="url" value="{{ value }}" name="{{ grouped_field_name }}" class="input-url-list__item" {% if loop.first %}id="{{field_id}}"{% endif %}
+                        {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
                         {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
-                </div>
+                {% endfor %}
+                {% if missing_inputs > 0 %}
+                    {% for i in 1..missing_inputs %}
+                    <input type="url" value="" name="{{ grouped_field_name }}" class="input-url-list__item"
+                        {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
+                        {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
+                    {% endfor %}
+                {% endif %}
+                {% if options.allow_more|default(true) %}
+                    <input type="url" value="" name="{{ grouped_field_name }}" class="input-url-list__item"
+                        {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
+                        {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
+                {% endif %}
                 <ul class="errors">
                     {%- block field_errors  -%}
                         {%- for error in errors -%}

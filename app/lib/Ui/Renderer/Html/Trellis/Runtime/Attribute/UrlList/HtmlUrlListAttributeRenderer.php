@@ -29,29 +29,36 @@ class HtmlUrlListAttributeRenderer extends HtmlAttributeRenderer
             $this->attribute->getOption(UrlListAttribute::OPTION_MAX_LENGTH)
         );
 
+        $display_inputs = (int)$this->getOption('display_inputs', -1);
+        $params['missing_inputs'] = 0;
+        if ($display_inputs > -1) {
+            $missing_inputs = $display_inputs - count($params['attribute_value']);
+            if ($missing_inputs > 0) {
+                $params['missing_inputs'] = $missing_inputs;
+            }
+        }
+
         return $params;
     }
 
     protected function determineAttributeValue($attribute_name, $default_value = '')
     {
-        $value = [];
+        $urls = [];
 
         if ($this->hasOption('value')) {
-            $value = $this->getOption('value', $default_value);
-            $value = is_array($value) ? $value : [ $value ];
-            return $value;
+            return (array)$this->getOption('value', $default_value);
         }
 
         $expression = $this->getOption('expression');
         if (!empty($expression)) {
-            $value = $this->evaluateExpression($expression);
+            $urls = $this->evaluateExpression($expression);
         } else {
-            $value = $this->getPayload('resource')->getValue($attribute_name);
+            $urls = $this->getPayload('resource')->getValue($attribute_name);
         }
 
-        $value = is_array($value) ? $value : [ $value ];
+        $urls = is_array($urls) ? $urls : [ $urls ];
 
-        return $value;
+        return $urls;
     }
 
     protected function getWidgetOptions()
