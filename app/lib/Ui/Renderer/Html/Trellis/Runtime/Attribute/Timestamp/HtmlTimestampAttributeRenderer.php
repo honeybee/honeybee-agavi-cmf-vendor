@@ -37,7 +37,13 @@ class HtmlTimestampAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getWidgetImplementor()
     {
-        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/DatePicker');
+        $default = '';
+
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
+            $default = 'jsb_Honeybee_Core/ui/DatePicker';
+        }
+        return $this->getOption('widget', $default);
     }
 
     protected function getDefaultTranslationKeys()
