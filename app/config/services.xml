@@ -214,8 +214,8 @@
                     <settings>
                         <setting name="role_map">
                             <settings>
-                                <setting name="vagrant">administrator</setting>
-                                <setting name="deploy">administrator</setting>
+                                <setting name="vagrant">full-privileged</setting>
+                                <setting name="deploy">full-privileged</setting>
                             </settings>
                         </setting>
                     </settings>

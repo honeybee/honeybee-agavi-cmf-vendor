@@ -27,7 +27,7 @@ class AclSecurityUser extends AgaviSecurityUser implements RoleInterface
 
     protected $raw_user_agent = '';
 
-    public function initialize(AgaviContext $context, array $parameters = array())
+    public function initialize(AgaviContext $context, array $parameters = [])
     {
         parent::initialize($context, $parameters);
 
@@ -50,7 +50,7 @@ class AclSecurityUser extends AgaviSecurityUser implements RoleInterface
 
     public function getAvailableRoles()
     {
-        $honeybee_standard_roles = [ AclService::ROLE_ADMIN, AclService::ROLE_NON_PRIV ];
+        $honeybee_standard_roles = [ AclService::ROLE_FULL_PRIV, AclService::ROLE_NON_PRIV ];
         $configured_roles = array_keys(($this->roles_configuration['roles']));
 
         return array_merge($honeybee_standard_roles, $configured_roles);
@@ -92,7 +92,7 @@ class AclSecurityUser extends AgaviSecurityUser implements RoleInterface
             }
             return $this->isAllowed(null, $credential);
         } catch (Exception $e) {
-            // @todo log error message
+            error_log(__METHOD__ . ' ' . $e->getTraceAsString());
             return false;
         }
     }

@@ -42,7 +42,7 @@ return [
         'iso_date' => '2016-06-21T08:39:39.837732+00:00',
         'metadata' => [
             'user' => 'honeybee.system_account.user-539fb03b-9bc3-47d9-886d-77f56d390d94-de_DE-1',
-            'role' => 'administrator'
+            'role' => 'full-privileged'
         ]
     ])
 ];

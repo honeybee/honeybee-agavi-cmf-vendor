@@ -19,7 +19,7 @@ class CreateUserCommandValidator extends AggregateRootTypeCommandValidator
         $command_values['auth_token'] = StringToolkit::generateRandomToken();
         $command_values['token_expire_date'] = $expire_date;
         if (!isset($command_values['role'])) {
-            $command_values['role'] = $this->getParameter('default_role', 'administrator');
+            $command_values['role'] = $this->getParameter('default_role', 'non-privileged');
         }
 
         return $command_values;

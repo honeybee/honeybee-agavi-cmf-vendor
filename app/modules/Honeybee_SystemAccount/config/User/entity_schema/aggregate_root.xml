@@ -27,11 +27,6 @@
                 <option name="mandatory">true</option>
                 <option name="min_length">1</option>
                 <option name="max_length">255</option>
-                <option name="allowed_values">
-                    <option name="administrator">administrator</option>
-                    <option name="test-role-additiv">test-role-additiv</option>
-                    <option name="test-two">test-two</option>
-                </option>
             </attribute>
             <attribute name="firstname" type="text">
                 <option name="max_length">100</option>

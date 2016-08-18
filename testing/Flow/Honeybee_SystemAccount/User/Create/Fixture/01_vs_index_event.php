@@ -14,7 +14,7 @@ return [
             'workflow_state' => 'inactive',
             'username' => 'test user',
             'email' => 'honeybee.user@test.com',
-            'role' => 'administrator',
+            'role' => 'full-privileged',
             'firstname' => 'Brock',
             'lastname' => 'Lesnar',
             'auth_token' => $fixture_data['auth_token'],
@@ -28,7 +28,7 @@ return [
         'iso_date' => $fixture_data['event_iso_date'],
         'metadata' => [
             'user' => 'honeybee.system_account.user-539fb03b-9bc3-47d9-886d-77f56d390d94-de_DE-1',
-            'role' => 'administrator'
+            'role' => 'full-privileged'
         ]
     ]
 ];

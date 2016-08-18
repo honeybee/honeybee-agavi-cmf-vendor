@@ -71,11 +71,6 @@ abstract class UserType extends ProjectionType
                         'mandatory' => true,
                         'min_length' => 1,
                         'max_length' => 255,
-                        'allowed_values' => array(
-                            'administrator' => 'administrator',
-                            'test-role-additiv' => 'test-role-additiv',
-                            'test-two' => 'test-two',
-                        ),
                     )
                 ),
                 new \Trellis\Runtime\Attribute\Text\TextAttribute(

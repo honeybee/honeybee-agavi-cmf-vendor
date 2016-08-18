@@ -135,7 +135,7 @@
                     <ae:parameter name="roles">
                         <ae:parameter name="de">
                             <ae:parameter name="non-privileged">Nutzer ohne Rechte</ae:parameter>
-                            <ae:parameter name="administrator">Nutzer mit allen Rechten (Administrator)</ae:parameter>
+                            <ae:parameter name="full-privileged">Nutzer mit allen Rechten</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>

@@ -1,0 +1,40 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
+<div class="hb-field input-choice {{ css|default('') }}" data-hb-field-name="{{ field_name }}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
+    {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label"><label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label></div><!--
+        --><div class="hb-field__value">
+            <select id="{{ field_id }}" name="{{ grouped_field_name }}" {{ disabled }} {{ required }}>
+                {% for role_id in allowed_roles %}
+                    <option value="{{ role_id }}"
+                        {% if role_id == attribute_value %}selected="selected"{% endif %}
+                    >{{ _(role_id, translation_domain) }}</option>
+                {% endfor %}
+            </select>
+            <ul class="errors">
+                {%- block field_errors  -%}
+                    {%- for error in errors -%}
+                        <li class="error">{{error}}</li>
+                    {%- endfor -%}
+                {%- endblock  -%}
+            </ul>
+            {% if translations.input_help is defined %}
+                <div class="input_help">{{ translations.input_help|raw }}</div>
+            {% endif %}
+            {% if translations.input_hint is defined %}
+                <div class="input_hint">{{ translations.input_hint|raw }}</div>
+            {% endif %}
+            {% if translations.input_focus_hint is defined %}
+                <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
+            {% endif %}
+        </div><!--
+        --><div class="hb-field__extra">
+            {% if readonly and disabled %}
+                <input type="hidden" name="{{ grouped_field_name }}" value="{{ attribute_value }}" />
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%- endblock field -%}

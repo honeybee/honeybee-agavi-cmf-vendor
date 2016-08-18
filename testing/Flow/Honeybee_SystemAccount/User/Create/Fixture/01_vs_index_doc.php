@@ -17,11 +17,11 @@ return [
         'workflow_parameters' => [],
         'metadata' => [
             'user' => 'honeybee.system_account.user-539fb03b-9bc3-47d9-886d-77f56d390d94-de_DE-1',
-            'role' => 'administrator'
+            'role' => 'full-privileged'
         ],
         'username' => 'test user',
         'email' => 'honeybee.user@test.com',
-        'role' => 'administrator',
+        'role' => 'full-privileged',
         'firstname' => 'Brock',
         'lastname' => 'Lesnar',
         'password_hash' => '',

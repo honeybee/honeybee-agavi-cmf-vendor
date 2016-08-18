@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "81fe51fe7afd834caa8298cf1ceb67bf",
+    "hash": "26717c75e9a7e4bf6b3c0efc69ba0dfe",
     "content-hash": "6ad9af4cd9f1d82a75cfbaa0638e82ac",
     "packages": [
         {
@@ -785,12 +785,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "88d72eda7d525c36a1eaecd06fc197ccd10613cb"
+                "reference": "3286336e224ff705a126f845d8e5342ae471b2c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/88d72eda7d525c36a1eaecd06fc197ccd10613cb",
-                "reference": "88d72eda7d525c36a1eaecd06fc197ccd10613cb",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/3286336e224ff705a126f845d8e5342ae471b2c9",
+                "reference": "3286336e224ff705a126f845d8e5342ae471b2c9",
                 "shasum": ""
             },
             "require": {
@@ -874,7 +874,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-08-05 11:14:18"
+            "time": "2016-08-18 11:27:16"
         },
         {
             "name": "honeybee/trellis",
@@ -882,12 +882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "9fbe21ada707a484091122fd67e2886cbd3b7265"
+                "reference": "654ef7bfe81895684b9388db296a90c43f9e5260"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/9fbe21ada707a484091122fd67e2886cbd3b7265",
-                "reference": "9fbe21ada707a484091122fd67e2886cbd3b7265",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/654ef7bfe81895684b9388db296a90c43f9e5260",
+                "reference": "654ef7bfe81895684b9388db296a90c43f9e5260",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +944,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-07-29 18:17:57"
+            "time": "2016-08-12 19:32:58"
         },
         {
             "name": "league/flysystem",

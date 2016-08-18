@@ -95,7 +95,7 @@
         </storage>
 
         <user class="Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser">
-            <ae:parameter name="default_acl_role">non-authenticated</ae:parameter>
+            <ae:parameter name="default_acl_role">non-privileged</ae:parameter>
         </user>
 
         <translation_manager class="AgaviTranslationManager" />

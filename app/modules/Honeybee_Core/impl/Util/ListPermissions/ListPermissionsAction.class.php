@@ -16,17 +16,17 @@ class Honeybee_Core_Util_ListPermissionsAction extends Action
             $role = $request_data->getParameter('role');
 
             $permissions = [];
-            if (empty($role) || $role === AclService::ROLE_ADMIN) {
+            if (empty($role) || $role === AclService::ROLE_FULL_PRIV) {
                 $permissions = $permission_service->getGlobalPermissions();
             } elseif (!empty($role) && $role !== AclService::ROLE_NON_PRIV) {
                 $permissions = $permission_service->getRolePermissions($role);
             }
 
             $parent_permissions = [];
-            $internal_roles = [ AclService::ROLE_ADMIN, AclService::ROLE_NON_PRIV ];
+            $internal_roles = [ AclService::ROLE_FULL_PRIV, AclService::ROLE_NON_PRIV ];
             foreach ($acl_service->getRoleParents($role) as $parent_role) {
                 if (in_array($parent_role, $internal_roles)) {
-                    if ($parent_role === AclService::ROLE_ADMIN) {
+                    if ($parent_role === AclService::ROLE_FULL_PRIV) {
                         $parent_permissions[$parent_role] = $permission_service->getGlobalPermissions();
                     } else {
                         $parent_permissions[$parent_role] = [];

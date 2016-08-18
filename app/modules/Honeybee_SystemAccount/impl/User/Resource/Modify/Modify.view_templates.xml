@@ -13,42 +13,23 @@
                         <row css="">
                             <cell css="portable-1/1 desk-wide-1/4">
                                 <group name="primary">
-                                    <field name="username" attribute_path="username" template="html/attribute/as_input_text.twig">
-                                        <!--
-                                            If not defined, a default translation domain in generated for fields:
-                                                <prefix>.fields.<path_to_attribute>
-                                        -->
-                                        <setting name="translation_domain">honeybee.system_account.user.fields</setting>
-                                        <!--
-                                            Will overwrite the eventual default 'mandatory' option of the attribute.
-                                            It will have effect just on the client-side validation
-                                        -->
+                                    <field name="username" attribute_path="username">
                                         <setting name="required">true</setting>
-                                        <!-- Set attribute as disabled or readonly -->
-                                        <setting name="disabled"></setting>
-                                        <setting name="readonly"></setting>
-                                        <!--
-                                            Will define custom translation keys to use into the view_template (is possible also to
-                                            override the default translation keys).
-                                            These keys will be automatically translated (if available in the translations.xml)
-                                            and made available in the 'translations' view_template parameter.
-
-                                                e.g.  use 'translations.placeholder' to retrieve the value in the view_template
-                                        -->
-                                        <setting name="translation_keys">
-                                            <setting name="placeholder">placeholder_value</setting>
-                                        </setting>
                                     </field>
-                                    <field name="email" attribute_path="email" template="html/attribute/email/as_input_email.twig" />
-                                    <field name="role" attribute_path="role" template="html/attribute/choice/as_input_select.twig" />
-                                    <field name="firstname" attribute_path="firstname" template="html/attribute/as_input_text.twig" />
-                                    <field name="lastname" attribute_path="lastname" template="html/attribute/as_input_text.twig" />
+                                    <field name="email" attribute_path="email">
+                                        <setting name="required">true</setting>
+                                    </field>
+                                    <field name="role" attribute_path="role" renderer="Honeybee\Ui\Renderer\Html\AclRolesRenderer">
+                                        <setting name="required">true</setting>
+                                    </field>
+                                    <field name="firstname" attribute_path="firstname" />
+                                    <field name="lastname" attribute_path="lastname" />
                                 </group>
                             </cell>
                             <cell css="desk-wide-3/4">
                                 <group name="userimages">
-                                    <field name="images" attribute_path="background_images" template="html/attribute/image-list/as_tabs.twig">
-                                        <setting name="use_converjon">true</setting>
+                                    <field name="images" attribute_path="background_images">
+                                        <setting name="use_converjon">%converjon.enabled%</setting>
                                         <setting name="thumbnail_activity_name">honeybee.system_account.user.thumbnail</setting>
                                         <setting name="thumbnail_activity_scope">converjon</setting>
                                         <setting name="preview_activity_name">honeybee.system_account.user.preview</setting>
@@ -64,13 +45,13 @@
                         <row>
                             <cell>
                                 <group name="meta_content">
-                                    <field name="uuid" attribute_path="uuid" template="html/attribute/as_input_text.twig">
+                                    <field name="uuid" attribute_path="uuid">
                                         <setting name="readonly">true</setting>
                                     </field>
-                                    <field name="workflow_state" attribute_path="workflow_state" template="html/attribute/as_input_text.twig">
+                                    <field name="workflow_state" attribute_path="workflow_state">
                                         <setting name="readonly">true</setting>
                                     </field>
-                                    <field name="language" attribute_path="language" template="html/attribute/as_input_text.twig">
+                                    <field name="language" attribute_path="language">
                                         <setting name="readonly">true</setting>
                                     </field>
                                     <field name="identifier" attribute_path="identifier" template="html/attribute/as_input_hidden.twig" />
