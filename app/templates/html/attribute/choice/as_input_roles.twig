@@ -10,7 +10,7 @@
                 {% for role_id in allowed_roles %}
                     <option value="{{ role_id }}"
                         {% if role_id == attribute_value %}selected="selected"{% endif %}
-                    >{{ _(role_id, translation_domain) }}</option>
+                    >{{ _(role_id, translation_domain_roles) }}</option>
                 {% endfor %}
             </select>
             <ul class="errors">

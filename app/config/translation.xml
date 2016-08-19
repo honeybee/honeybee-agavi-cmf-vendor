@@ -128,10 +128,6 @@
                             <ae:parameter name="none_action">Do nothing</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
-                </message_translator>
-            </translator>
-            <translator domain="user">
-                <message_translator class="AgaviSimpleTranslator">
                     <ae:parameter name="roles">
                         <ae:parameter name="de">
                             <ae:parameter name="non-privileged">Nutzer ohne Rechte</ae:parameter>
