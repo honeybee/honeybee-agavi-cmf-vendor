@@ -22,7 +22,7 @@ class AclRolesRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
-        $params['translation_domain_roles'] = $this->getOption('translation_domain_roles', 'roles');
+        $params['translation_domain_roles'] = $this->getOption('translation_domain_roles', 'application.roles');
 
         $wanted_roles = $this->getOption('allowed_values', $this->environment->getUser()->getAvailableRoles());
 /*
