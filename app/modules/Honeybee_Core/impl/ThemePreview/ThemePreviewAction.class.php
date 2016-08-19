@@ -15,16 +15,6 @@ class Honeybee_Core_ThemePreviewAction extends Action
     }
 
     /**
-     * Retrieve the credential required to access this action.
-     *
-     * @return mixed
-     */
-    public function getCredentials()
-    {
-        return 'action.honeybee_core.theme_preview';
-    }
-
-    /**
      * @return boolean
      */
     public function isSecure()
