@@ -19,6 +19,7 @@ class MappingGeneratorPlugin implements PluginInterface
 
     protected static $es_type_map = [
         'asset' => 'object',
+        'asset-list' => 'object',
         'boolean' => 'boolean',
         'boolean-list' => 'boolean',
         'choice' => 'string',
@@ -41,6 +42,7 @@ class MappingGeneratorPlugin implements PluginInterface
         'timestamp' => 'date',
         'token' => 'string',
         'url' => 'string',
+        'url-list' => 'string',
         'uuid' => 'string'
     ];
 
@@ -132,6 +134,11 @@ class MappingGeneratorPlugin implements PluginInterface
         return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'no' ];
     }
 
+    protected function mapUrlList($attribute_name, $attribute, $type_definition)
+    {
+        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'no' ];
+    }
+
     protected function mapTimestamp($attribute_name, $attribute, $type_definition)
     {
         return [ 'type' => self::$es_type_map[$attribute->getShortName()] ];
@@ -213,6 +220,11 @@ class MappingGeneratorPlugin implements PluginInterface
     }
 
     protected function mapAsset($attribute_name, $attribute, $type_definition)
+    {
+        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
+    }
+
+    protected function mapAssetList($attribute_name, $attribute, $type_definition)
     {
         return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
     }
