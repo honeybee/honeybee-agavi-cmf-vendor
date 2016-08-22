@@ -1,5 +1,5 @@
 <div class="{{ css }}" data-hb-item-identifier="{{ resource.identifier }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
-    <div class="hb-tabs hb-tabs--stack jsb_ jsb_Honeybee_Core/ui/Tabs">
+    <div class="{{ view_template.getCss()|default('hb-tabs hb-tabs--stack jsb_ jsb_Honeybee_Core/ui/Tabs') }}">
         {# {% set tabs_id = random() %} #}
         {# this name must be validated to repopulate the tab the user was on when submitting the form - see app/config/validators.xml #}
         {# {% set tabs_id = 'tabs_as_fields_with_viewtemplate' %} #}

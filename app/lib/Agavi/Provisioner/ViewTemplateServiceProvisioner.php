@@ -105,7 +105,7 @@ class ViewTemplateServiceProvisioner extends AbstractProvisioner
             $tab_list->addItem(new Tab($tab_name, $panel_list, $tab_css));
         }
 
-        return new ViewTemplate($template_config['name'], $tab_list);
+        return new ViewTemplate($template_config['name'], $tab_list, $template_config['css']);
     }
 
     protected function loadViewTemplatesConfig()

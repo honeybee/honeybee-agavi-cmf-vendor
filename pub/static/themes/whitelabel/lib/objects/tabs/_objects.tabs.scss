@@ -58,4 +58,15 @@
     &.#{$name}--rev {
         @extend %layout--rev;
     }
+
+    // hide tabs header
+    &.#{$name}--hidden {
+        .#{$name}__header {
+            display: none;
+        }
+
+        .#{$name}__content {
+            width: 100%;
+        }
+    }
 }

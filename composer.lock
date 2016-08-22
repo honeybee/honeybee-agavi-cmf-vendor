@@ -785,12 +785,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "3286336e224ff705a126f845d8e5342ae471b2c9"
+                "reference": "dd99b8c998b55e2c61c2335c46bb3445b513c91a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/3286336e224ff705a126f845d8e5342ae471b2c9",
-                "reference": "3286336e224ff705a126f845d8e5342ae471b2c9",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/dd99b8c998b55e2c61c2335c46bb3445b513c91a",
+                "reference": "dd99b8c998b55e2c61c2335c46bb3445b513c91a",
                 "shasum": ""
             },
             "require": {
@@ -874,7 +874,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-08-18 11:27:16"
+            "time": "2016-08-23 08:27:41"
         },
         {
             "name": "honeybee/trellis",
@@ -2591,7 +2591,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
