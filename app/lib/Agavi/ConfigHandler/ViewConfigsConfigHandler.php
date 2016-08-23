@@ -278,7 +278,9 @@ class ViewConfigsConfigHandler extends BaseConfigHandler
                 $implementor = trim($renderer_config->getAttribute('implementor'));
             }
             if (!empty($implementor)) {
-                $settings['implementor'] = $implementor;
+                // map attribute name to settings property as "renderer" is being used in
+                // RendererLocator and merged with the viewtemplate field settings "renderer"
+                $settings['renderer'] = $implementor;
             }
 
             $renderer_configs[$subject_name] = $settings;
