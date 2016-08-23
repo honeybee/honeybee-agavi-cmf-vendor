@@ -55,7 +55,16 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator" name="create_user_command" depends="valid_username valid_email">
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\RoleDialogValidator" name="role" provides="valid_role">
+                <argument>role</argument>
+                <error>Parameter "role" must be a valid role id.</error>
+                <ae:parameter name="dialog">
+                    <ae:parameter name="validator">Honeybee\FrameworkBinding\Agavi\Validator\RoleValidator</ae:parameter>
+                    <ae:parameter name="default">full-privileged</ae:parameter>
+                </ae:parameter>
+            </validator>
+
+            <validator class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator" name="create_user_command" depends="valid_username valid_emaili valid_role">
                 <error>Invalid command payload given.</error>
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="command_implementor">Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommand</ae:parameter>
