@@ -26,7 +26,7 @@ class DefaultProvisioner extends AbstractProvisioner
         $this->di_container->define($service, $state);
 
         // there will only be one instance of the service when the "share" setting is true
-        if ($provisioner_settings->get('share', false) === true) {
+        if ($provisioner_settings->get('share', true) === true) {
             $this->di_container->share($service);
         }
 
