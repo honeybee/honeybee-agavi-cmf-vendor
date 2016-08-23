@@ -16,7 +16,7 @@ class Honeybee_SystemAccount_User_Logout_LogoutErrorView extends View
             json_encode(
                 array(
                     'result'  => 'error',
-                    'message' => $this->translation_manager->_('An unexpected error occured during logout.', 'user.ui')
+                    'message' => $this->translation_manager->_('An unexpected error occured during logout.', 'honeybee.system_account.user.ui')
                 )
             )
         );
@@ -25,7 +25,7 @@ class Honeybee_SystemAccount_User_Logout_LogoutErrorView extends View
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
         $this->cliError(
-            $this->translation_manager->_("An unexpected error occured during logout.", 'user.ui')
+            $this->translation_manager->_("An unexpected error occured during logout.", 'honeybee.system_account.user.ui')
         );
     }
 }

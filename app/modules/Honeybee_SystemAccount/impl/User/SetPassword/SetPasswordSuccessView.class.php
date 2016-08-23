@@ -13,7 +13,7 @@ class Honeybee_SystemAccount_User_SetPassword_SetPasswordSuccessView extends Vie
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
         $this->cliMessage(
-            $this->translation_manager->_('Set Password - Success', 'user.ui')
+            $this->translation_manager->_('Set Password - Success', 'honeybee.system_account.user.ui')
         );
     }
 }
