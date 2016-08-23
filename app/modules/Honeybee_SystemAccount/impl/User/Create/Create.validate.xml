@@ -64,7 +64,7 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator" name="create_user_command" depends="valid_username valid_emaili valid_role">
+            <validator class="Honeybee\SystemAccount\Agavi\Validator\CreateUserCommandValidator" name="create_user_command" depends="valid_username valid_email valid_role">
                 <error>Invalid command payload given.</error>
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="command_implementor">Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommand</ae:parameter>
