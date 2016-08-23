@@ -96,7 +96,8 @@ define([
     };
 
     Tabs.prototype.updateErrorBubbles = function() {
-        var $toggles = this.$widget.find('> .hb-tabs__header > .hb-tabs__toggles > .hb-tabs__toggle');
+        var self = this;
+        var $toggles = self.$widget.find('> .hb-tabs__header > .hb-tabs__toggles > .hb-tabs__toggle');
         $toggles.each(function(idx, elem) {
             var $toggle = $(elem);
             var trigger_id = $toggle.find('label').attr('for');
@@ -122,6 +123,7 @@ define([
                         var span = document.createElement('span');
                         span.appendChild(document.createTextNode(invalid_inputs.length));
                         span.setAttribute('class', 'error-bubble');
+                        span.setAttribute('title', self.options.bubbleTitle || '# of errors');
                         $toggle.children('label').append(span);
                     }
                 } else {
