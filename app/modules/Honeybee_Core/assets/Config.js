@@ -35,7 +35,7 @@ define([], function() {
         var config_element = document.querySelector(config_selector);
 
         if (config_element && config_element.getAttribute('data-config-js')) {
-            var config = JSON.parse(config_element.dataset.configJs);
+            var config = JSON.parse(config_element.getAttribute('data-config-js'));
         }
 
         for (var setting in config) {
