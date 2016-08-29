@@ -338,7 +338,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
 
         $uploaded_file = $uploaded_file->createCopyWith([
             HoneybeeUploadedFile::PROPERTY_LOCATION => $file_identifier,
-            HoneybeeUploadedFile::PROPERTY_FILENAME => $uploaded_file->getName(),
+            HoneybeeUploadedFile::PROPERTY_FILENAME => $this->getSanitizedFilename($uploaded_file->getName()),
             HoneybeeUploadedFile::PROPERTY_FILESIZE => $fss->getSize($target_tempfile_uri),
             HoneybeeUploadedFile::PROPERTY_MIMETYPE => $fss->getMimetype($target_tempfile_uri),
             HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
@@ -395,7 +395,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                         $filetype,
                         $filetype_validator_parameter,
                         $attribute_path_validator_parameter,
-                        'validator_attribute_path'
+                        'validator_[attribute.path]'
                     )
                 );
             }
@@ -465,6 +465,17 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
         }
 
         return array_unique($attribute_whitelist);
+    }
+
+    protected function getSanitizedFilename($insecure_user_provided_filename)
+    {
+        $options = $this->getParameter('filename_sanitization_rule_options', []);
+        $rule = new SanitizedFilenameRule('filename', $options);
+        if ($rule->apply($insecure_user_provided_filename)) {
+            return $rule->getSanitizedValue();
+        }
+
+        return '';
     }
 
     protected function throwErrorInParent($attribute_value_path, array $builder_incidents)

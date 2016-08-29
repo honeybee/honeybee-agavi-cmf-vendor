@@ -1,11 +1,10 @@
 define([
     "Honeybee_Core/Widget",
-    "Honeybee_Core/lib/selectrect",
     "magnific-popup"
-], function(Widget, selectrect) {
+], function(Widget) {
 
     var default_options = {
-        prefix: "Honeybee_Core/ui/ImageList"
+        prefix: "Honeybee_Core/ui/AssetList"
     };
 
     function uploadFile(input_name, file, target_url, progress_cb, end_cb) {
@@ -24,7 +23,7 @@ define([
         xhr.upload.onprogress = function(e) {
             if (e.lengthComputable) {
                 var percentComplete = (e.loaded / e.total) * 100;
-                progress_cb(percentComplete);
+                progress(percentComplete);
             }
         };
 
@@ -55,7 +54,7 @@ define([
         xhr.send(fd);
     }
 
-    function ImageList(dom_element, options) {
+    function AssetList(dom_element, options) {
         var self = this;
 
         this.init(dom_element, default_options);
@@ -65,9 +64,8 @@ define([
 
         this.id = this.$widget.data('id');
         this.form_name = this.$widget.data('form-name');
-        this.aoi_selectrect = {};
-        this.dummy_items = [ '.newitem' ];
-        this.dropzone_selector = '.imagelist--dropzone';
+        this.dummy_items = ['.newitem'];
+        this.dropzone_selector = '.assetlist--dropzone';
 
         this.resource_type_name = this.$widget.data('resource-type-name');
         this.resource_type_prefix = this.$widget.data('resource-type-prefix');
@@ -83,14 +81,6 @@ define([
             return;
         }
 
-/*
-        this.initEvents();
-        this.initPopupSupport();
-        this.initDragAndDropSupport();
-*/
-
-        this.bindKeyEvents();
-
         this.current_index = -1;
 
         if (this.isReadable) {
@@ -98,7 +88,7 @@ define([
             this.bindClickEvents();
             this.bindMultipleInput();
 
-            this.$widget.find('.imagelist-tabs__content > .imagelist__item').each(function(i, item) {
+            this.$widget.find('.assetlist-tabs__content > .assetlist__item').each(function(i, item) {
                 var $item = $(item);
                 self.bindItemFileInput($item);
                 self.current_index++;
@@ -119,13 +109,6 @@ define([
             callbacks: {
                 open: function() {
                     // fires when this exact popup is opened, "this" refers to the magnific popup object
-                },
-                change: function() {
-                    self.cancelAoi();
-                    // fires when content changes, "this" refers to the magnific popup object
-                },
-                beforeClose: function() {
-                    self.cancelAoi();
                 }
             }
         }
@@ -135,59 +118,45 @@ define([
 
         this.$widget.addClass('widget-initialized');
 
-        this.$widget.on("click", ".imagelist__thumb", function(ev) {
+        this.$widget.on("click", ".assetlist__thumb", function(ev) {
             var $li = $(this);
             var item_index = $li.index();
 
             // console.log(self.id, item_index, self.popup_options, self.$popup_trigger);
                 self.$popup_trigger.magnificPopup('open'); // why does …('open', idx) not work?
                 self.$popup_trigger.magnificPopup('goTo', item_index-1);
-                /*
-            if (item_index > 0) {
-                // edit image details in popup
-                self.$popup_trigger.magnificPopup('open'); // why does …('open', idx) not work?
-                self.$popup_trigger.magnificPopup('goTo', item_index-1);
-            } else if (item_index === 0) {
-                // upload a new image
-                // TODO trigger the multiple file upload field?
-                var item_id = $li.data('item-id');
-                var $item = self.$widget.find('.imagelist__item[data-item-id='+item_id+'] .imagelist__image-input');
-                $item.trigger('click');
-            }*/
         });
 
-        this.$widget.on("click", ".imagelist__thumb-control.remove", function(ev) {
+        this.$widget.on("click", ".assetlist__thumb-control.remove", function(ev) {
             ev.preventDefault();
             ev.stopPropagation();
 
             var $target = $(ev.target);
-            var $thumb_item = $target.parents('.imagelist__thumb').first();
+            var $thumb_item = $target.parents('.assetlist__thumb').first();
             var index = $thumb_item.index();
             var $next = $thumb_item.next();
 
-            var items = self.$widget.find(".imagelist-tabs__content > .imagelist__item");
-            var thumbs = self.$widget.find(".imagelist-tabs__toggles > .imagelist__thumb");
+            var items = self.$widget.find(".assetlist-tabs__content > .assetlist__item");
+            var thumbs = self.$widget.find(".assetlist-tabs__toggles > .assetlist__thumb");
 
             items.eq(index).remove();
             thumbs.eq(index).remove();
 
             // TODO reindex the form fields to prevent gaps and update self.current_index
             // the FormPopulationFilter uses the index provided here to repopulate
-            // while the rendering of the images on serverside reindexes from 0-n without gaps
+            // while the rendering of the assets on serverside reindexes from 0-n without gaps
 
             self.updatePopupItems();
             self.updateItemsCount();
-
-            $next.find('.imagelist__thumb-control.move').first().focus();
         });
     }
 
-    ImageList.prototype = new Widget();
-    ImageList.prototype.constructor = ImageList;
+    AssetList.prototype = new Widget();
+    AssetList.prototype.constructor = AssetList;
 
-    ImageList.prototype.updateItemsCount = function() {
-        $items = this.$widget.find('.imagelist-tabs__toggle');
-        if (this.$widget.find('.imagelist-tabs__toggle').length - this.dummy_items.length) {
+    AssetList.prototype.updateItemsCount = function() {
+        $items = this.$widget.find('.assetlist-tabs__toggle');
+        if (this.$widget.find('.assetlist-tabs__toggle').length - this.dummy_items.length) {
             this.$widget.addClass('has-items');
             this.$widget.removeClass('is-empty');
         } else {
@@ -196,10 +165,10 @@ define([
         }
     }
 
-    ImageList.prototype.updatePopupItems = function() {
+    AssetList.prototype.updatePopupItems = function() {
         var items = [];
 
-        this.$widget.find('.imagelist__image').each(function(idx, item) {
+        this.$widget.find('.assetlist__asset').each(function(idx, item) {
             var $item = $(item);
             if (!$item.hasClass('newitem')) {
                 items.push({
@@ -215,103 +184,15 @@ define([
         this.$popup_trigger.magnificPopup(this.popup_options);
     };
 
-    ImageList.prototype.bindClickEvents = function() {
+    AssetList.prototype.bindClickEvents = function() {
         var self = this;
-
-        this.$widget.on("click", ".imagelist__thumb", function(ev) {
-            self.cancelAoi();
-        });
-
-        this.$widget.on("click", ".imagelist__thumb .move", function(ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-
-            var $target = $(ev.target);
-            var $thumb_item = $target.parents('.imagelist__thumb').first();
-            var index = $thumb_item.index();
-            var $next = $thumb_item.next();
-
-            if ($target.hasClass("right") && !$next.hasClass("newitem")) {
-                self.moveItem(index, index + 1);
-            } else if ($target.hasClass("left") && index > 0) {
-                self.moveItem(index, index - 1);
-            }
-
-            $target.focus();
-        });
-
-        this.$widget.on("click", ".imagelist__image-aoi-trigger", function(ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-            self.selectAoi($(ev.target));
-            $(this).addClass("hide").
-                siblings(".imagelist__image-aoi-accept").removeClass("hide").
-                siblings(".imagelist__image-aoi-cancel").removeClass("hide");
-        });
-
-        this.$widget.on("click", ".imagelist__image-aoi-accept", function(ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-            self.acceptAoi();
-            $(this).addClass("hide").
-                siblings(".imagelist__image-aoi-trigger").removeClass("hide").
-                siblings(".imagelist__image-aoi-cancel").addClass("hide");
-        });
-
-        this.$widget.on("click", ".imagelist__image-aoi-cancel", function(ev) {
-            ev.preventDefault();
-            ev.stopPropagation();
-            self.cancelAoi();
-            $(this).addClass("hide").
-                siblings(".imagelist__image-aoi-trigger").removeClass("hide").
-                siblings(".imagelist__image-aoi-accept").addClass("hide");
-        });
     };
 
-    ImageList.prototype.bindKeyEvents = function() {
-        var self = this;
-
-        this.$widget.on("keydown", ".move", function(ev) {
-            if (ev.shiftKey && ev.keyCode >= 37 && ev.keyCode <= 40) {
-                ev.preventDefault();
-                ev.stopPropagation();
-            }
-
-            var $target = $(ev.target);
-            var $item = $target.parents(".imagelist__thumb").first();
-            var index = $item.index();
-            var $next = $item.next();
-            var direction;
-
-            switch (ev.keyCode) {
-                case 39:
-                case 40:
-                    direction = 'forward';
-                    break;
-                case 37:
-                case 38:
-                    direction = 'backward';
-                    break;
-                default: return;
-            }
-
-            if (ev.shiftKey && self.isReadable) {
-                if (direction == "forward" && !$next.hasClass("newitem")) {// && $next.hasClass("item")) {
-                    self.moveItem(index, index + 1);
-                } else if (direction == "backward" && index > 0) {
-                    self.moveItem(index, index - 1);
-                }
-            }
-
-            $target.focus();
-        });
-    };
-
-    ImageList.prototype.bindItemFileInput = function($item) {
+    AssetList.prototype.bindItemFileInput = function($item) {
         var self = this;
         var item_id = $item.attr("data-item-id");
         // this.logDebug('bindItemFileInput', item_id, $item);
-        $input = $item.find(".imagelist__image-input");
+        $input = $item.find(".assetlist__asset-input");
         $input.addClass("visuallyhidden");
         $input.removeAttr('name');
         $input.on("change", function(ev) {
@@ -320,9 +201,9 @@ define([
             // self.logDebug('input onChange:', files, $input);
             if (files.length == 1) {
                 if ($item.hasClass("newitem")) {
-                    self.appendImageFile(files[0]);
+                    self.appendAssetFile(files[0]);
                 } else {
-                    self.replaceImageFile(item_id, files[0]);
+                    self.replaceAssetFile(item_id, files[0]);
                 }
             } else {
                 self.logDebug('Multiple files uploaded to input?', $input.id || '');
@@ -330,12 +211,12 @@ define([
         });
     };
 
-    ImageList.prototype.bindMultipleInput = function() {
+    AssetList.prototype.bindMultipleInput = function() {
         var self = this;
 
-        var $multi = this.$widget.find(".hb-imagelist__input-multiple");
-        var $multiinput = this.$widget.find(".hb-imagelist__input-multiple-trigger");
-        var $multilabel = this.$widget.find(".hb-imagelist__input-multiple-label");
+        var $multi = this.$widget.find(".hb-assetlist__input-multiple");
+        var $multiinput = this.$widget.find(".hb-assetlist__input-multiple-trigger");
+        var $multilabel = this.$widget.find(".hb-assetlist__input-multiple-label");
         var newid = this.getRandomString();
         $multiinput.attr('id', newid);
         $multilabel.attr('for', newid);
@@ -346,7 +227,7 @@ define([
         });
     };
 
-    ImageList.prototype.bindDropEvents = function() {
+    AssetList.prototype.bindDropEvents = function() {
         var self = this;
 
         /*
@@ -441,12 +322,12 @@ define([
 
             var files = ev.originalEvent.dataTransfer.files;
             if (files.length > 0) {
-                // console.log("dropped multiple files on the image list", files.length, ev);
+                // console.log("dropped multiple files on the asset list", files.length, ev);
                 self.appendMultipleFiles(files);
             }
         });
 
-        this.$widget.on("drop", ".imagelist__thumb-img", function(ev) {
+        this.$widget.on("drop", ".assetlist__thumb-img", function(ev) {
             // self.logDebug("replacement drop", ev.target);
             ev.stopPropagation();
             ev.preventDefault();
@@ -455,42 +336,42 @@ define([
             $body.removeClass('dragging');
             self.$widget.find('.dragover, .dragout').removeClass('dragover dragout');
 
-            var $item = $(this).parents(".imagelist__thumb").first();
+            var $item = $(this).parents(".assetlist__thumb").first();
             var item_id = $item.attr("data-item-id");
             // self.logDebug('dropOnThumb?', item_id, '$this=', $(this), 'item=', $item);
             var files = ev.originalEvent.dataTransfer.files;
             if (files.length == 1) {
-                console.log("dropped 1 file on an image item", item_id);
+                console.log("dropped 1 file on an asset item", item_id);
                 if ($item.hasClass("newitem")) {
-                    self.appendImageFile(files[0]);
+                    self.appendAssetFile(files[0]);
                 } else {
-                    self.replaceImageFile(item_id, files[0]);
+                    self.replaceAssetFile(item_id, files[0]);
                 }
             }
         });
     };
 
-    ImageList.prototype.appendMultipleFiles = function(files) {
+    AssetList.prototype.appendMultipleFiles = function(files) {
         files = Array.prototype.slice.call(files);
 
         _.forEach(files, function(f) {
-            this.appendImageFile(f);
+            this.appendAssetFile(f);
         }.bind(this));
     };
 
-    ImageList.prototype.uploadFile = function(file, progress_cb, end_cb) {
+    AssetList.prototype.uploadFile = function(file, progress_cb, end_cb) {
         var self = this;
         uploadFile(self.upload_input_name, file, self.upload_url, progress_cb.bind(self), end_cb.bind(self));
     };
 
-    ImageList.prototype.replaceImageFile = function(item_id, file) {
+    AssetList.prototype.replaceAssetFile = function(item_id, file) {
         var self = this;
         self.uploadFile(file, function(progress) {
-            self.logDebug("replaceImageFile progress", progress);
+            self.logDebug("replaceAssetFile progress", progress);
         }, function(err, response_json){
             if (err) {
                 self.updatePopupItems();
-                self.logDebug("replaceImageFile upload error", err, response_json);
+                self.logDebug("replaceAssetFile upload error", err, response_json);
                 if (response_json) {
                     var msg = self.options.upload_error_msg || 'File was not accepted by the server.';
                     msg += "\n\n";
@@ -502,58 +383,48 @@ define([
                 return;
             }
 
-            self.logDebug('upload complete for replaceImageFile', response_json, 'item_id=', item_id);
+            self.logDebug('upload complete for replaceAssetFile', response_json, 'item_id=', item_id);
 
-            var $thumb = self.$widget.find(".imagelist__thumb[data-item-id="+item_id+"] .imagelist__thumb-img");
+            var $thumb = self.$widget.find(".assetlist__thumb[data-item-id="+item_id+"] .assetlist__thumb-img");
             $thumb.attr("src", response_json.file.download_url||'');
 
-            var $item = self.$widget.find(".imagelist__image[data-item-id="+item_id+"]");
-            $item.find(".imagelist__image-img").attr("src", response_json.file.download_url||'')
-            $item.find(".imagelist__image-location").val(response_json.file.location||'');
-            $item.find(".imagelist__image-filename").val(response_json.file.filename);
-            $item.find(".imagelist__image-filesize").val(response_json.file.filesize);
-            $item.find(".imagelist__image-mimetype").val(response_json.file.mimetype);
-            $item.find(".imagelist__image-aoi").val('');
-            $item.find(".imagelist__image-width").val('0');
-            $item.find(".imagelist__image-height").val('0');
-            if (response_json.file.width) {
-                $item.find(".imagelist__image-width").val(response_json.file.width);
-            }
-            if (response_json.file.height) {
-                $item.find(".imagelist__image-height").val(response_json.file.height);
-            }
+            var $item = self.$widget.find(".assetlist__asset[data-item-id="+item_id+"]");
+            $item.find(".assetlist__asset-img").attr("src", response_json.file.download_url||'')
+            $item.find(".assetlist__asset-location").val(response_json.file.location||'');
+            $item.find(".assetlist__asset-filename").val(response_json.file.filename);
+            $item.find(".assetlist__asset-filesize").val(response_json.file.filesize);
+            $item.find(".assetlist__asset-mimetype").val(response_json.file.mimetype);
 
             self.updatePopupItems();
-            self.cancelAoi();
         });
     };
 
-    ImageList.prototype.appendImageFile = function(file) {
+    AssetList.prototype.appendAssetFile = function(file) {
         var self = this;
 
         // self.logDebug('Appending file', file);
 
         // create a new thumbnail
-        var $thumbitem_tpl = self.$widget.find(".imagelist__thumb.newitem"); // LI
+        var $thumbitem_tpl = self.$widget.find(".assetlist__thumb.newitem"); // LI
         var $newthumbitem = $thumbitem_tpl.clone();
-        //$newthumbitem.find(".imagelist__thumb-img").attr('src', response_json.file.download_url||'');
+        //$newthumbitem.find(".assetlist__thumb-img").attr('src', response_json.file.download_url||'');
         $newthumbitem.removeClass("newitem").addClass('hb-js-uploading');
 
         var $progress = $newthumbitem.find('progress').first()[0];
         $progress.value=0;
-        $newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
+        $newthumbitem.appendTo(self.$widget.find('.assetlist-tabs__toggles'));
         self.updateItemsCount();
 
         self.uploadFile(
             file,
             function(progress) {
-                self.logDebug("progress", progress);
+                console.log("progress", progress);
                 $progress.value=progress;
             }, function(err, response_json){
                 if (err) {
                     $newthumbitem.remove();
                     self.updateItemsCount();
-                    self.logDebug("appendImage upload error", err, response_json);
+                    self.logDebug("appendAssetFile upload error", err, response_json);
                     if (response_json) {
                         var msg = self.options.upload_error_msg || 'File was not accepted by the server.';
                         msg += "\n\n";
@@ -569,24 +440,17 @@ define([
 
                 self.logDebug('upload complete – new index='+self.current_index, response_json);
 
-                // create a new image inputs docfragment
+                // create a new asset inputs docfragment
                 // TODO create and move the radio input of the template item around as well
-                var $item_tpl = self.$widget.find(".imagelist__item.newitem").first();
+                var $item_tpl = self.$widget.find(".assetlist__item.newitem").first();
                 var input_name_prefix = $item_tpl.data('grouped-base-path');
                 var $newitem = $item_tpl.clone();
-                $newitem.find(".imagelist__image-location").val(response_json.file.location||'');
-                $newitem.find(".imagelist__image-img").attr('src', response_json.file.download_url||'');
+                $newitem.find(".assetlist__asset-location").val(response_json.file.location||'');
+                $newitem.find(".assetlist__asset-img").attr('src', response_json.file.download_url||'');
 
-                $newitem.find(".imagelist__image-filename").val(response_json.file.filename);
-                $newitem.find(".imagelist__image-filesize").val(response_json.file.filesize);
-                $newitem.find(".imagelist__image-mimetype").val(response_json.file.mimetype);
-
-                if (response_json.file.width) {
-                    $newitem.find(".imagelist__image-width").val(response_json.file.width);
-                }
-                if (response_json.file.height) {
-                    $newitem.find(".imagelist__image-height").val(response_json.file.height);
-                }
+                $newitem.find(".assetlist__asset-filename").val(response_json.file.filename);
+                $newitem.find(".assetlist__asset-filesize").val(response_json.file.filesize);
+                $newitem.find(".assetlist__asset-mimetype").val(response_json.file.mimetype);
 
                 $newitem.removeClass('newitem').find('.newitem').removeClass('newitem'); // the clone is not a template item
                 self.bindItemFileInput($newitem);
@@ -599,90 +463,26 @@ define([
                     });
                     $input.attr('name', $input.attr('name').replace(input_name_prefix, new_input_name_prefix));
                 });
-                $newitem.appendTo(self.$widget.find('.imagelist-tabs__content'));
+                $newitem.appendTo(self.$widget.find('.assetlist-tabs__content'));
 
                 // create a new thumbnail
-                //var $thumbitem_tpl = self.$widget.find(".imagelist__thumb.newitem"); // LI
+                //var $thumbitem_tpl = self.$widget.find(".assetlist__thumb.newitem"); // LI
                 //var $newthumbitem = $thumbitem_tpl.clone();
 
                 // prevent flickering while loading after setting the new 'src'
                 $newthumbitem.load(function() {
                     $newthumbitem.removeClass('hb-js-uploading');
                 });
-                $newthumbitem.find(".imagelist__thumb-img").attr('src', response_json.file.download_url||'');
+                $newthumbitem.find(".assetlist__thumb-img").attr('src', response_json.file.download_url||'');
                 $newthumbitem.find('progress').remove();
                 //$newthumbitem.removeClass("newitem");
-                //$newthumbitem.appendTo(self.$widget.find('.imagelist-tabs__toggles'));
+                //$newthumbitem.appendTo(self.$widget.find('.assetlist-tabs__toggles'));
 
-                // update popup items to contain the new image
+                // update popup items to contain the new asset
                 self.updatePopupItems();
-                self.cancelAoi();
             }
         );
     };
 
-    ImageList.prototype.moveItem = function(from, to) {
-        // TODO move the radio inputs of the items around as well
-        var items = this.$widget.find(".imagelist-tabs__content > .imagelist__item");
-        var thumbs = this.$widget.find(".imagelist-tabs__toggles > .imagelist__thumb");
-
-        if (to < from) {
-            items.eq(from).insertBefore(items.eq(to));
-            thumbs.eq(from).insertBefore(thumbs.eq(to));
-        } else if (from < to) {
-            items.eq(from).insertAfter(items.eq(to));
-            thumbs.eq(from).insertAfter(thumbs.eq(to));
-        }
-
-        this.updatePopupItems();
-    };
-
-    ImageList.prototype.acceptAoi = function() {
-        // this.logDebug(this.aoi_selectrect.selection);
-        this.aoi_selectrect.$input.val(this.aoi_selectrect.selection);
-        this.cancelAoi();
-    };
-
-    ImageList.prototype.cancelAoi = function() {
-        if (this.aoi_selectrect.rect) {
-            this.aoi_selectrect.rect.cancel();
-        }
-        this.aoi_selectrect = {};
-        this.$widget.find(".imagelist__image-aoi-trigger").removeClass("hide");
-    };
-
-    ImageList.prototype.selectAoi = function($btn) {
-        var self = this;
-        this.cancelAoi();
-        var $item = $btn.closest('.imagelist__image');
-        var $img =  $item.find(".imagelist__image-img");
-        var $aoi_input = $item.find(".imagelist__image-aoi");
-        var aoi = $aoi_input.val();
-        try {
-            aoi = JSON.parse(aoi);
-            aoi = {
-                x: aoi[0],
-                y: aoi[1],
-                w: aoi[2],
-                h: aoi[3]
-            };
-        } catch (e) {
-            aoi = undefined;
-        }
-        this.aoi_selectrect = {
-            rect: selectrect($img[0], aoi),
-            selection: {},
-            $input: $aoi_input
-        };
-        this.aoi_selectrect.rect.onUpdate(function(aoi) {
-            self.aoi_selectrect.selection = JSON.stringify([
-                aoi.x,
-                aoi.y,
-                aoi.w,
-                aoi.h
-            ]);
-        });
-    };
-
-    return ImageList;
+    return AssetList;
 });

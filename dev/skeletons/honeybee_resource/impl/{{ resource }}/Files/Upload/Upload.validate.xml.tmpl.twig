@@ -5,6 +5,7 @@
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
+
             <!--
             <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeAttributeValidator" name="invalid_attribute_path">
                 <arguments base="uploadform">
@@ -14,13 +15,36 @@
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
             </validator>
             -->
+
             <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeFileUploadValidator" name="invalid_uploaded_files" source="files">
                 <arguments base="uploadform"></arguments>
-                <error>File is not acceptable.</error>
-                <error for="no_image">File is not an image.</error>
+                <error>file_upload.generic_error</error>
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
-                <ae:parameter name="debug">true</ae:parameter>
+
+                <error for="upload_failed">file_upload.upload_failed</error>
+                <error for="max_size">file_upload.max_size</error>
+                <error for="min_size">file_upload.min_size</error>
+                <error for="extension">file_upload.extension</error>
+                <error for="mime_type">file_upload.mime_type</error>
+
+                <error for="no_image">file_upload.no_image</error>
+                <error for="max_width">file_upload.max_width</error>
+                <error for="min_width">file_upload.min_width</error>
+                <error for="max_height">file_upload.max_height</error>
+                <error for="min_height">file_upload.min_height</error>
+                <error for="format">file_upload.format</error>
+
+                <ae:parameter name="max_size">16777216</ae:parameter>
+                <ae:parameter name="max_width">10000</ae:parameter>
+                <ae:parameter name="max_height">10000</ae:parameter>
+                <ae:parameter name="min_width">1</ae:parameter>
+                <ae:parameter name="min_height">1</ae:parameter>
+                <!--
+                <ae:parameter name="extension">pdf docx xls xslx doc</ae:parameter>
+                <ae:parameter name="format">jpg png</ae:parameter>
+                -->
             </validator>
+
         </validators>
     </ae:configuration>
 </ae:configurations>

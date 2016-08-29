@@ -1,0 +1,62 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{%- if location is not defined %}{% set location = "" %}{% endif -%}
+{%- set alt = caption|default(title)|default('') -%}
+{%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
+<input type="radio" class="assetlist-tabs__trigger" name="{{tabs_id}}[]" id="{{tabs_id}}-{{asset_id}}" value="{{tabs_id}}-{{asset_id}}" />
+<div class="assetlist-tabs__panel assetlist__item {{newitem ? "newitem": "item"}}" data-item-id="{{item_id}}" data-grouped-base-path="{{grouped_base_path}}">
+    {% embed "html/embed-actions.twig" with { 'grouped_base_path': grouped_base_path, 'add_item_to_parent_list_allowed': false } only %}{% endembed %}
+    <div class="assetlist__item-content">
+        <div class="assetlist__asset {{newitem ? "newitem": "item"}}" data-item-id="{{item_id}}">
+            <div class="assetlist__asset-content">
+                <div class="assetlist__asset-img-wrapper">
+                    {% if isReadable %}
+                    <div class="assetlist__item-controls" data-fpf-ignore>
+                        <div class="assetlist__item-controls-upload">
+                            <input id="{{item_id}}_file" type="file" class="assetlist__asset-input" name="{{grouped_base_path}}[file]" {{ disabled }} {{ required }} /><!--
+                            --><input id="{{item_id}}_location" type="hidden" class="assetlist__asset-location"
+                            name="{{grouped_base_path}}[location]" placeholder="location" value="{{ location }}" {{ disabled }} /><!--
+                            --><label class="assetlist__upload-label" for="{{item_id}}_file" title="{{ _(field_name~'.change_asset_title', translation_domain) }}">{{ _(field_name~'.change_asset', translation_domain) }}</label>
+                        </div>
+                        <div class="assetlist__item-controls-download">
+                            <a href="{{download_url}}" target="_blank" class="btn assetlist__asset-download" download="download" title="{{ _(field_name~'.download_asset_title', translation_domain) }}">{{ _(field_name~'.download_asset', translation_domain) }}</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div><!-- assetlist__asset-img-wrapper
+                --><div class="assetlist__inputs-wrapper">
+                    <label class="assetlist__label-title">{{ _(field_name~'.title.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[title]" value="{{title}}" {{readonly}} {{disabled}} class="assetlist__asset-title" /><ul class="errors"></ul></label>
+                    <label class="assetlist__label-caption">{{ _(field_name~'.caption.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[caption]" value="{{caption}}" {{readonly}} {{disabled}} class="assetlist__asset-caption" /><ul class="errors"></ul></label>
+                    <label class="assetlist__label-copyright">{{ _(field_name~'.copyright.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[copyright]" value="{{copyright}}" {{readonly}} {{disabled}} class="assetlist__asset-copyright" /><ul class="errors"></ul></label>
+                    <label class="assetlist__label-copyright-url">{{ _(field_name~'.copyright_url.label', translation_domain) }}<input type="url" name="{{grouped_base_path}}[copyright_url]" value="{{copyright_url}}" {{readonly}} {{disabled}} class="assetlist__asset-copyright-url" /><ul class="errors"></ul></label>
+                    <label class="assetlist__label-source">{{ _(field_name~'.source.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[source]" value="{{source}}" {{readonly}} {{disabled}} class="assetlist__asset-source" /><ul class="errors"></ul></label>
+                    <label class="assetlist__label-filename">{{ _(field_name~'.filename.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[filename]" value="{{filename}}" readonly class="assetlist__asset-filename" /></label>
+                    <label class="assetlist__label-filesize">{{ _(field_name~'.filesize.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[filesize]" value="{{filesize}}" readonly class="assetlist__asset-filesize" /></label>
+                    <label class="assetlist__label-mimetype">{{ _(field_name~'.mimetype.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[mimetype]" value="{{mimetype}}" readonly class="assetlist__asset-mimetype" /></label>
+                    {% if metadata %}
+                        <label class="" for="{{item_id}}_meta-data-trigger">
+                            <h3>{{ _(field_name~'.metadata.label', translation_domain) }}</h3>
+                        </label>
+                        <input type="checkbox" id="{{item_id}}_meta-data-trigger"
+                        class="assetlist__meta-data-trigger visuallyhidden" {{disabled}} />
+                        <div class="assetlist__meta-data">
+                        {% for meta_name, meta_value in metadata %}
+                            <label class="assetlist__label-meta-data assetlist__label-meta-data-{{meta_name}}">
+                                {{meta_name}}
+                                <input
+                                    type="text"
+                                    name="{{grouped_base_path}}[metadata][{{meta_name}}]"
+                                    value="{{meta_value}}"
+                                    readonly
+                                    class="assetlist__asset-meta-data-{{meta_name}}"
+                                />
+                                <ul class="errors"></ul>
+                            </label>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                </div><!-- assetlist__inputs-wrapper -->
+            </div><!-- assetlist__asset-content -->
+        </div><!-- assetlist__asset -->
+    </div><!-- assetlist__item-content -->
+</div>{# hb-tabs__panel / assetlist__item PLUS: comment to fix Twig whitespace problem #}
+{%- endblock field -%}

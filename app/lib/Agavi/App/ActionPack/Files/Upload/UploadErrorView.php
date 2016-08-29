@@ -20,14 +20,18 @@ class UploadErrorView extends View
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
+        // when specific error messages are not translated they get the default error message
+        // and thus multiple validation incidents may lead to repeating "translations"
+        $unique_errors = array_reverse(array_keys(array_flip($this->getErrorMessages())));
+
         $payload = [
             'success' => false,
-            'messages' => $this->getAttribute('errors')
+            'messages' => $unique_errors
         ];
 
         $this->getResponse()->setHttpStatusCode(400);
 
-        return json_encode($payload, JSON_FORCE_OBJECT | JSON_PRETTY_PRINT);
+        return json_encode($payload);
     }
 
     public function executeConsole(AgaviRequestDataHolder $request_data)

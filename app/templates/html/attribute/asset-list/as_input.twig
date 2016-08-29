@@ -1,0 +1,130 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
+{%- set add_assets = translations.add_assets | default('add_assets') -%}
+{%- set dragndrop_description = translations.dragndrop_description | default('dragndrop_description') -%}
+<div class="hb-field hb-assetlist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/AssetList{% endif %}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
+    data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
+    data-attribute-path="{{ attribute_path }}" data-resource-type-prefix="{{ resource_type_prefix }}" data-resource-type-name="{{ resource_type_name }}"
+    data-resource-identifier="{{ resource_identifier }}" data-upload-url="{{ upload_url }}" data-grouped-field-name="{{ grouped_field_name }}" data-grouped-base-path="{{grouped_base_path}}">
+    <div class="popup-content-here"></div>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}" class="hb-field-label__name">{{ _(field_name~'.field_name', translation_domain) }}</label>
+            <div class="hb-assetlist__input-multiple">
+                <input id="{{field_id}}_multiple" type="file" multiple class="hb-assetlist__input-multiple-trigger" {{ disabled }} />
+                <label class="hb-assetlist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(add_assets, translation_domain) }}</label>
+            </div>
+        </div><!--
+        --><div class="hb-field__value">
+            <div class="assetlist assetlist--dropzone">
+                <div class="assetlist__dropzone-placeholder">
+                    <span class="assetlist__placeholder-title">{{ _(add_assets, translation_domain) }}</span>
+                    <span class="assetlist__placeholder-description">{{ _('dragndrop_description', translation_domain) }}</span>
+                </div>
+                <div class="assetlist-tabs">
+                    {% set tabs_id = 'hb-tabs-' ~ field_id %}
+                    <div class="assetlist-tabs__header">
+                        <ul class="assetlist-tabs__toggles">
+                            <li class="assetlist-tabs__toggle assetlist__thumb newitem" data-item-id="{{ 'add-asset-to-' ~ field_id }}">
+                                {% if isReadable %}
+                                <div class="assetlist__thumb-controls">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" class="remove assetlist__thumb-control">&#10060;</a></li>
+                                    </ul>
+                                </div>
+                                {% endif %}
+                                <label for="{{tabs_id}}-add-asset-to-{{ field_id }}">
+                                    <span class="assetlist__thumb-img assetlist--dropzone">{{ _('add_asset', translation_domain) }}</span>
+                                </label>
+                                <progress max="100" value="50"><div class="progress-bar"><span style="width: 50%;">{{ _('uploading…', translation_domain) }}</span></div></progress>
+                            </li>
+                            {%- for asset in assets -%}
+                            <li class="assetlist-tabs__toggle assetlist__thumb" data-item-id="{{asset.id}}">
+                                {%- if isReadable -%}
+                                <div class="assetlist__thumb-controls">
+                                    <ul>
+                                        <li><a href="javascript:void(0)" class="remove assetlist__thumb-control">&#10060;</a></li>
+                                    </ul>
+                                </div>
+                                {%- endif -%}
+                                <label for="{{tabs_id}}-{{asset.id}}">
+                                    <span title="{{asset.title|default('')}}" class="assetlist__thumb-img assetlist--dropzone">
+                                        {{- asset.title|default(asset.filename) -}}
+                                    </span>
+                                </label>
+                            </li>
+                            {%- endfor -%}
+                        </ul>
+                    </div><!--
+                    --><div class="assetlist-tabs__content">
+                        {%- if isReadable -%}
+                            {# add empty input elements to add a new asset when javascript is not available or did not load #}
+                            {%- include "html/attribute/asset-list/asset-as-input-panel.twig" with {
+                                field_name: field_name,
+                                field_id: field_id,
+                                item_id: 'add-asset-to-' ~ field_id,
+                                grouped_base_path: grouped_base_path ~"[0]",
+                                tabs_id: tabs_id,
+
+                                asset_id: 'add-asset-to-' ~ field_id,
+                                download_url: "static/themes/whitelabel/binaries/150x150.gif",
+                                location: "",
+                                filename: "",
+                                filesize: 0,
+                                mimetype: "",
+                                title: "",
+                                caption: "",
+                                copyright: "",
+                                copyright_url: "",
+                                source: "",
+                                metadata: {},
+
+                                newitem: true,
+
+                                readonly: readonly,
+                                disabled: disabled,
+
+                                translation_domain: translation_domain
+                            } -%}
+                        {% endif %}
+                        {%- for asset in assets -%}
+                            {%- include "html/attribute/asset-list/asset-as-input-panel.twig" with {
+
+                                field_name: field_name,
+                                field_id: field_id,
+
+                                item_id: asset.id,
+                                grouped_base_path: grouped_base_path ~"["~ loop.index ~"]",
+                                tabs_id: tabs_id,
+
+                                asset_id: asset.id,
+                                download_url: asset.download_url,
+                                location: asset.location,
+                                filename: asset.filename,
+                                filesize: asset.filesize,
+                                mimetype: asset.mimetype,
+                                title: asset.title,
+                                caption: asset.caption,
+                                copyright: asset.copyright,
+                                copyright_url: asset.copyright_url,
+                                source: asset.source,
+                                metadata: asset.metadata,
+
+                                newitem: false,
+
+                                readonly: readonly,
+                                disabled: disabled,
+
+                                translation_domain: translation_domain
+                            } -%}
+                        {%- endfor -%}
+                    </div>
+                </div>
+            </div>
+        </div><!--
+        --><div class="hb-field__extra">
+        </div>
+    </div>
+</div>
+{%- endblock field -%}

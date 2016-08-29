@@ -255,8 +255,32 @@
                     <ae:parameter name="errors">
                         <ae:parameter name="de">
                             <ae:parameter name="The given {{ resource_prefix }}(identifier) is invalid.">Der angegebene {{ resource_prefix }}-Identifier ist nicht bekannt.</ae:parameter>
+                            <ae:parameter name="file_upload.generic_error">Datei ist nicht akzeptabel.</ae:parameter>
+                            <ae:parameter name="file_upload.upload_failed">Hochladen der Datei ist fehlgeschlagen.</ae:parameter>
+                            <ae:parameter name="file_upload.min_size">Datei muss mindestens %min_size$s Bytes groß sein.</ae:parameter>
+                            <ae:parameter name="file_upload.max_size">Datei überschreitet maximale Größe von %max_size$s Byte.</ae:parameter>
+                            <ae:parameter name="file_upload.extension">Es werden nur Dateien mit folgenden Endungen akzeptiert: %extension$s.</ae:parameter>
+                            <ae:parameter name="file_upload.mime_type">Dateityp falsch erkannt oder ist nicht erlaubt.</ae:parameter>
+                            <ae:parameter name="file_upload.no_image">Hochgeladene Datei ist keine Bilddatei.</ae:parameter>
+                            <ae:parameter name="file_upload.min_width">Minimal erlaubte Breite von %min_width$spx unterschritten.</ae:parameter>
+                            <ae:parameter name="file_upload.max_width">Maximal erlaubte Breite von %max_width$spx überschritten.</ae:parameter>
+                            <ae:parameter name="file_upload.min_height">Minimal erlaubte Höhe von %min_height$spx unterschritten.</ae:parameter>
+                            <ae:parameter name="file_upload.max_height">Maximal erlaubte Höhe von %max_height$spx überschritten.</ae:parameter>
+                            <ae:parameter name="file_upload.format">Als Bilddatei sind nur folgende Format akzeptabel: %format$s.</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
+                            <ae:parameter name="file_upload.generic_error">File is not acceptable.</ae:parameter>
+                            <ae:parameter name="file_upload.upload_failed">Upload of file failed.</ae:parameter>
+                            <ae:parameter name="file_upload.min_size">File must be at least %min_size$s bytes.</ae:parameter>
+                            <ae:parameter name="file_upload.max_size">File is larger than %max_size$s bytey.</ae:parameter>
+                            <ae:parameter name="file_upload.extension">Only allowed file extensions are: %extension$s.</ae:parameter>
+                            <ae:parameter name="file_upload.mime_type">File type not recognized or not acceptable.</ae:parameter>
+                            <ae:parameter name="file_upload.no_image">Uploaded file is not an image.</ae:parameter>
+                            <ae:parameter name="file_upload.min_width">Minimum necessary width is %min_width$spx.</ae:parameter>
+                            <ae:parameter name="file_upload.max_width">Maximum width of %max_width$spx exceeded.</ae:parameter>
+                            <ae:parameter name="file_upload.min_height">Minimum height of %min_height$spx needed.</ae:parameter>
+                            <ae:parameter name="file_upload.max_height">Maximum height of %max_height$spx allowed.</ae:parameter>
+                            <ae:parameter name="file_upload.format">Given image file format not acceptable. Allowed: %format$s.</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>

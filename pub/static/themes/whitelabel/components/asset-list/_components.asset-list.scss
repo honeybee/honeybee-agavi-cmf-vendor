@@ -1,0 +1,385 @@
+$thumb-size-default: 150px;
+
+.assetlist-tabs {
+    @include hb-tabs("assetlist-tabs");
+
+    /* line-height: 0; */
+
+    .assetlist-tabs__toggles {
+        padding: $small-spacing $small-spacing 0 $small-spacing;
+    }
+
+    .assetlist-tabs__toggle {
+        vertical-align: top; // keep aligned with siblings during upload
+        min-width: $thumb-size-default;
+        min-height: $thumb-size-default/2;
+        margin: 0 $small-spacing $small-spacing 0;
+    }
+}
+/*
+.assetlist__inputs-wrapper {
+    .assetlist__thumb-controls,
+    label {
+        line-height: $base-spacing;
+    }
+}
+*/
+.hb-assetlist {
+    .hb-field__label {
+        display: flex;
+        flex-wrap: wrap;
+
+        .hb-field-label__name,
+        .hb-assetlist__input-multiple {
+            width: auto;
+            flex: 1 0 auto;
+            white-space: nowrap;
+            margin-bottom: $small-spacing;
+        }
+    }
+
+    .hb-field__value {
+        @include input-textual-shape-default;
+        @include input-textual-colors-default;
+    }
+}
+
+.hb-field-label__name {
+    @include media-query(lap-and-up) {
+        text-align: left;
+    }
+}
+
+.hb-assetlist__input-multiple-label {
+    color: color(blue); // as a link
+
+    @include media-query(lap-and-up) {
+        text-align: right;
+    }
+
+    @include hb-icon-pseudo-el(
+        (
+            icon-name: circle-with-plus,
+            hide-content: false,
+        )
+    ) {
+        font-size: 1.5rem;
+        margin-right: $small-spacing/2;
+    };
+}
+
+.assetlist__dropzone-placeholder {
+    // state
+    display: none;
+    .widget-initialized & { display: block; }
+
+    // style
+    border: 1px solid color(transparent);
+    padding: $small-spacing;
+    text-align: center;
+    color: color(grey1);
+
+    * { display: block; }
+
+    &:before {
+        display: block;
+        content: '\00a0';
+        background-asset: url('binaries/dropzone-placeholder.png');
+        background-repeat: no-repeat;
+        background-position: 50% 50%;
+        min-height: 50px;
+        width: 100%;
+    }
+}
+
+.assetlist__placeholder-title {
+    @include typography-headlines;
+    margin-bottom: $small-spacing/2;
+}
+
+// what to do when js-behaviour was applied?
+.hb-assetlist.widget-initialized {
+
+    .assetlist-tabs__panel {
+        display: none !important;
+    }
+
+    .assetlist__thumb.newitem {
+        display: none;
+    }
+
+    .assetlist-tabs__toggles {
+        border: 1px dashed color(action);
+    }
+}
+
+// what to do when js-behaviour did not load?
+.hb-assetlist.jsb_ {
+    .assetlist__asset-img-wrapper {
+        text-align: center;
+    }
+
+    .newitem .hb-embed-actions,
+    .assetlist__thumb-controls {
+        display: none;
+    }
+}
+
+.assetlist__asset-input,
+.hb-assetlist__input-multiple-trigger {
+    @include visuallyhidden;
+}
+
+// .hb-assetlist__input-multiple-label {
+//     @include button-emphasized-navigational;
+
+//     input:focus ~ & {
+//         @include button-emphasized-navigational-focus;
+//     }
+// }
+
+.assetlist__delete-input {
+    @include visuallyhidden;
+}
+
+.assetlist__item {
+    .hb-embed-actions {
+        @extend %hb-embed-actions--small;
+    }
+}
+
+.assetlist a:focus {
+    outline: 1px solid color(warning-secondary);
+}
+
+.assetlist__thumb {
+    position: relative;
+    min-width: $thumb-size-default;
+    min-height: $thumb-size-default;
+
+    .assetlist__thumb-controls {
+        ul {
+            @extend %list-bare;
+
+            li {
+                text-align: center;
+            }
+        }
+
+        .assetlist__thumb-control {
+            @include inuit-font-size(20px);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .remove {
+            background-color: color(background-default);
+            color: color(destructive);
+
+            &:hover {
+                background-color: color(background-highlight);
+                color: color(destructive-secondary);
+            }
+        }
+    }
+
+    &.newitem .assetlist__thumb-controls {
+        display: none;
+    }
+}
+
+
+.hb-assetlist {
+
+    // when displayed in popup
+    .mfp-container {
+
+        .mfp-close {
+            background: color(white);
+            color: color(action);
+        }
+
+        .mfp-arrow-left:before {
+            border-right-color: color(navigational-secondary);
+        }
+        .mfp-arrow-left:after {
+            border-right-color: color(navigational-primary);
+        }
+
+        .mfp-arrow-right:before {
+            border-right-color: color(navigational-secondary);
+        }
+        .mfp-arrow-right:after {
+            border-right-color: color(navigational-primary);
+        }
+
+        .assetlist__asset {
+            background: color(white);
+            margin: $base-spacing 4em;
+            padding: $base-spacing;
+        }
+
+        .assetlist__asset-content {
+            border-spacing: $base-spacing;
+        }
+
+        .assetlist__asset-img-wrapper {
+            vertical-align: top;
+            text-align: center;
+        }
+
+        .assetlist__inputs-wrapper {
+            vertical-align: top;
+        }
+    }
+}
+
+
+.assetlist__item-controls {
+    @extend %pack;
+    @extend %pack--middle;
+    border-spacing: $base-spacing;
+
+    @include media-query(palm) {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > div {
+            margin: auto;
+            margin-top: $small-spacing;
+        }
+    }
+
+    .assetlist__item-controls-upload,
+    .assetlist__item-controls-download {
+        @extend %pack__item;
+    }
+
+    .assetlist__item-controls-upload,
+    .assetlist__item-controls-download {
+        @extend %lap-and-up-1-of-5;
+    }
+
+    .assetlist__upload-label,
+    .assetlist__asset-download {
+        @include button-emphasized-navigational;
+    }
+
+    .assetlist__upload-label {
+        @include button-emphasized-mutating;
+        width: 100%;
+    }
+    .assetlist__asset-download {
+        @include button-emphasized-navigational;
+        width: 100%;
+    }
+}
+
+.assetlist__asset-input:focus ~ .assetlist__upload-label {
+    @include button-emphasized-mutating-focus;
+}
+
+// dragging dropzone
+.assetlist--dropzone {
+    position: relative;
+    border: 1px dotted color(lines);
+}
+
+// when drag-and-drop operation is ongoing
+.dragging {
+    .assetlist--dropzone {
+        border: 1px solid color(mutating-secondary);
+        overflow: hidden; // keep animations in dropzone boundaries
+    }
+
+    .assetlist__dropzone-placeholder {
+        animation-fill-mode: forwards;
+        background-color: color(background-highlight);
+    }
+
+    .assetlist__thumb-img {
+        border: 1px solid color(lines);
+
+        .dragover & {
+            border: 1px solid color(lines);
+            outline: 1px solid color(black);
+        }
+    }
+
+    .hb-assetlist.has-items {
+        .dragover .assetlist__dropzone-placeholder {
+            // animation IN
+            @extend %slideInDown;
+        }
+
+        .dragout .assetlist__dropzone-placeholder {
+            // animation OUT
+            @extend %slideOutUp;
+        }
+
+        .dragout .assetlist__dropzone-placeholder,
+        .dragover .assetlist__dropzone-placeholder {
+            // ready to be shown when dragging
+            display: flex;
+        }
+
+        .assetlist__dropzone-placeholder {
+            // vertically centered
+            flex-direction: column;
+            justify-content: center;
+        }
+    }
+
+    .hb-assetlist.is-empty .dragover,
+    .hb-assetlist.has-items {
+        .assetlist__dropzone-placeholder {
+            background-color: color(positive-primary);
+            border: 1px solid color(positive-secondary);
+            color: color(white);
+        }
+    }
+}
+
+// empty list
+.hb-assetlist.is-empty {
+    .assetlist-tabs { display: none; }
+}
+
+// list with items
+.hb-assetlist.has-items {
+    .assetlist__dropzone-placeholder {
+        display: none;  // when drag'n'drop is not active
+
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        @include zindex("base", 10);
+    }
+}
+
+
+.assetlist__thumb {
+
+    .progress-bar,
+    progress {
+        display: none;
+    }
+
+    &.hb-js-uploading {
+
+        .assetlist__thumb-img,
+        .progress-bar,
+        progress {
+            display: block;
+        }
+    }
+}
+
+.assetlist__thumb-img {
+    min-width: $thumb-size-default;
+    min-height: $thumb-size-default/2;
+    border: 1px solid color(transparent);
+}

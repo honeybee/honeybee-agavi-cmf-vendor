@@ -1,0 +1,12 @@
+{%- block field -%} {# this block exists for whitespace control #}
+<div class="hb-field hb-attribute {{ css|default('') }}" data-hb-field-name="{{ field_name }}"><!--
+    --><div class="hb-field__content"><!--
+        --><div class="hb-field__label">{{ _(field_name~'.field_name', translation_domain) }}</div><!--
+        --><div class="hb-field__value">
+            {%- for asset in assets -%}
+                <a src="{{asset.download_url}}" title="{{asset.title|default('')}}">{{asset.title|default(asset.location)}}</a>
+            {%- endfor -%}
+        </div><!--
+    --></div><!--
+--></div>
+{%- endblock field -%}

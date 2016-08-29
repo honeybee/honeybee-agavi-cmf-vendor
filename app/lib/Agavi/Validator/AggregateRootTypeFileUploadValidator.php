@@ -11,13 +11,13 @@ use AgaviVirtualArrayPath;
 use Honeybee\Common\Error\Error;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 use Trellis\Runtime\Attribute\Image\Image;
 use Trellis\Runtime\Validator\Result\IncidentInterface;
 use Trellis\Runtime\Validator\Rule\Type\SanitizedFilenameRule;
-use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
 
 class AggregateRootTypeFileUploadValidator extends AgaviValidator
 {
@@ -60,14 +60,6 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         }
 
         $art = $this->getAggregateRootType();
-/*
-        $allowed = array_keys($art->getFileHandlingAttributes());
-        if (!in_array($attribute_path, $allowed, true)) {
-            $this->logDebug('Attempted file upload for unknown attribute', $attribute_path, 'in allowed', $allowed);
-            $this->throwError('unknown_attribute');
-            return false;
-        }
-*/
         $attribute = null;
         try {
             $attribute = $art->getAttribute($attribute_path);
@@ -115,46 +107,11 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         // e.g. usertempfiles://user/image/random/uuid.jpg
         $target_tempfile_uri = $fss->createTempUri($file_identifier, $this->getAggregateRootType());
 
-        //$this->logDebug(
-        //    sprintf(
-        //        'Stream copying "%s" to %s specific temporary location: %s',
-        //        $uploaded_file->getTmpName(),
-        //        $this->getAggregateRootType()->getName(),
-        //        $target_tempfile_uri
-        //    )
-        //);
-
         // get a stream for the actually uploaded and validated file (probably from /tmp/)
         $uploaded_file_stream = $uploaded_file->getStream($this->getParameter('stream_read_mode', 'rb'));
         if (false === $uploaded_file_stream) {
             throw new RuntimeError('Could not open read stream to uploaded file: ', $uploaded_file->getTmpName());
         }
-
-        /*
-        $user_provided_original_filename = $uploaded_file->getName();
-        // TODO this needs to be differen for HandlesFileInterface and HandlesFileListInterface
-        $payload = [
-            [
-                $attribute->getFileLocationPropertyName() => $file_identifier,
-                $attribute->getFileNamePropertyName() => $user_provided_original_filename
-            ]
-        ];
-        $value_holder = $attribute->createValueHolder();
-        $result = $value_holder->setValue($payload);
-        if ($result->getSeverity() <= IncidentInterface::NOTICE) {
-            // validation succeeded => use sanitized user provided filename
-            // TODO assumption getFilename exists on valueobject => should perhaps be get(VO::PROPERTY_FILENAME)?
-            // TODO assumption that validation fails due to filename, while it could be another rule failing
-            // TODO using SanitizingFilenameRule directly may be used here, but could have different rules from
-            //      the attribute in question here and would then lead to failing store later on in web form
-            //      => can we get the defined filename rule and its options from the attribute?
-            //      another option would be to use e.g. DOMPurifier clientside to prevent attack surface in form
-            //      prior to submitting the uploaded file metadata as ajax is being used instead of twig escaping
-            $uploaded_file->setFilename($value_holder->getValue()[0]->getFilename());
-        } else {
-            $uploaded_file->setFilename('');
-        }
-        */
 
         // image attribute => determine image dimensions and add it to the uploaded file's properties
         $image_width = $uploaded_file->getWidth();
@@ -182,10 +139,10 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         }
 
         $uploaded_file = $uploaded_file->createCopyWith([
-            HoneybeeUploadedFile::PROPERTY_FILENAME => $this->getSanitizedFilename($uploaded_file->getName()),
             HoneybeeUploadedFile::PROPERTY_LOCATION => $file_identifier,
-            HoneybeeUploadedFile::PROPERTY_MIMETYPE => $fss->getMimetype($target_tempfile_uri),
+            HoneybeeUploadedFile::PROPERTY_FILENAME => $this->getSanitizedFilename($uploaded_file->getName()),
             HoneybeeUploadedFile::PROPERTY_FILESIZE => $fss->getSize($target_tempfile_uri),
+            HoneybeeUploadedFile::PROPERTY_MIMETYPE => $fss->getMimetype($target_tempfile_uri),
             HoneybeeUploadedFile::PROPERTY_EXTENSION => $extension,
             HoneybeeUploadedFile::PROPERTY_WIDTH => $image_width,
             HoneybeeUploadedFile::PROPERTY_HEIGHT => $image_height
@@ -197,8 +154,6 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
         $this->setParameter('export_to_source', AgaviRequestDataHolder::SOURCE_PARAMETERS);
         $this->export($attribute, 'attribute');
         // $this->export($uploaded_file, $this->getBase() . '[%1$s]');
-
-        // $this->logDebug('VALIDATION OF FILES:', $success ? 'SUCCESSFUL! \o/' : 'FAILED m(');
 
         return $success;
     }
@@ -230,46 +185,29 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
             return false;
         }
 
-        // $this->logDebug('YEH FOR FILE:', $file_validator->getArgument(), 'attribute-name='.$attribute->getName());
-
         return true;
     }
 
     protected function createFileValidatorForAttribute(AttributeInterface $attribute, AgaviVirtualArrayPath $path)
     {
+        if (!$attribute instanceof HandlesFileListInterface) {
+            throw new RuntimeError(
+                sprintf('Attribute at %s must implement %s.', $attribute->getPath(), HandlesFileListInterface::CLASS)
+            );
+        }
+
         $implementor = $this->getFileValidatorImplementor($attribute);
 
         $validator = new $implementor();
 
-        $parts = $path->getParts();
-
-        $new_path = clone $path;
-
-        $argument_path = clone $path;
-        $argument_name = $argument_path->pop();
-
-        // $this->logDebug($attribute->getType()->getName(), $attribute->getName(), $argument_name, $new_path);
-
-        $validator_definition = array_merge([], $attribute->getOptions());
-
-        // TODO get "mandatory" option from entity instead as only that know whether it's actually required?
-        if ($attribute->hasOption('mandatory')) {
-            $validator_definition['required'] = $attribute->getOption('mandatory');
-        } else {
-            $validator_definition['required'] = false;
-        }
-
-        $validator_definition['name'] = sprintf('_invalid_file_%s', $new_path->__toString());
-
-        // TODO should be taken from this validator and forwarded to the type specific validator
-        $errors = $this->errorMessages; //array('' => 'Given file is invalid.');
-
-        // TODO subset of params per validator/file type?
+        // fiddling
+        $validator_definition['name'] = sprintf('_invalid_file_%s', $path->__toString());
         $params = $this->getParameters();
         unset($params['class']);
         $params = array_merge($params, $validator_definition);
+        $params['source'] = 'files';
 
-        $validator->initialize($this->getContext(), $params, array($new_path->__toString()), $errors);
+        $validator->initialize($this->getContext(), $params, [ $path->__toString() ], $this->errorMessages);
 
         return $validator;
     }
@@ -277,7 +215,7 @@ class AggregateRootTypeFileUploadValidator extends AgaviValidator
     protected function getFileValidatorImplementor(AttributeInterface $attribute)
     {
         $attribute_path = $attribute->getPath();
-        $attribute_path_validator_parameter = 'validator_' . $attribute_path;
+        $attribute_path_validator_parameter = 'validator_' . str_replace('.', '_', $attribute_path);
 
         $filetype = $attribute->getFiletypeName();
         $filetype_validator_parameter = $filetype . '_validator';
