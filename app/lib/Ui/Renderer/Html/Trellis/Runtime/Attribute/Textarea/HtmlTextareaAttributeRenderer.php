@@ -26,6 +26,10 @@ class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
             'maxlength',
             $this->attribute->getOption(TextareaAttribute::OPTION_MAX_LENGTH)
         );
+
+        if (is_numeric($params['maxlength'])) {
+            $params['attribute_value'] = substr($params['attribute_value'], 0, $params['maxlength']);
+        }
         $params['wrap'] = $this->getOption('wrap', '');
         $params['cols'] = $this->getOption('cols', '');
         $params['rows'] = $this->getOption('rows', 12);
