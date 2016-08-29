@@ -11,7 +11,6 @@
             <items name="honeybee.system_account.user">
                 <activity scope="honeybee.system_account.user">create_resource</activity>
                 <activity scope="honeybee.system_account.user">collection</activity>
-                <activity scope="honeybee.system_account.user">hierarchy_root</activity>
             </items>
         </available_items>
 

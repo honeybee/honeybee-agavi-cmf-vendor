@@ -20,9 +20,6 @@
                 <option name="view_resource">
                     <option name="route">honeybee.system_account.user.resource</option>
                 </option>
-                <option name="resource_hierarchy">
-                    <option name="route">honeybee.system_account.user.hierarchy</option>
-                </option>
             </option>
         </initial>
 
@@ -42,9 +39,6 @@
                 </option>
                 <option name="view_resource">
                     <option name="route">honeybee.system_account.user.resource</option>
-                </option>
-                <option name="resource_hierarchy">
-                    <option name="route">honeybee.system_account.user.hierarchy</option>
                 </option>
             </option>
         </state>
