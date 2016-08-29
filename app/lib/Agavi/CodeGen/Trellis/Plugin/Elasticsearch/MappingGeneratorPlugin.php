@@ -15,7 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class MappingGeneratorPlugin implements PluginInterface
 {
-    const FILE_MODE = 0644;
+    const FILE_MODE = 0640;
 
     protected static $es_type_map = [
         'asset' => 'object',
@@ -63,16 +63,10 @@ class MappingGeneratorPlugin implements PluginInterface
         $index_name = $this->options->get('index_name');
         $type_name = $this->options->get('type_name');
 
-        $this->file_system->dumpFile(
-            $this->options['deploy_path'],
-            json_encode(
-                [
-                    'properties' => (object)$type_properties
-                ],
-                JSON_PRETTY_PRINT
-            ),
-            self::FILE_MODE
-        );
+        $json = json_encode([ 'properties' => (object)$type_properties ], JSON_PRETTY_PRINT);
+
+        $this->file_system->dumpFile($this->options['deploy_path'], $json);
+        $this->file_system->chmod($this->options['deploy_path'], self::FILE_MODE);
     }
 
     protected function buildTypePropertiesMapping(EntityTypeDefinition $type_definition)
