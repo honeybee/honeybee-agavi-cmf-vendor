@@ -23,7 +23,7 @@ define([
         xhr.upload.onprogress = function(e) {
             if (e.lengthComputable) {
                 var percentComplete = (e.loaded / e.total) * 100;
-                progress(percentComplete);
+                progress_cb(percentComplete);
             }
         };
 
