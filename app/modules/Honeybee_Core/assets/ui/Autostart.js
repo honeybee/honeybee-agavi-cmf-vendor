@@ -12,7 +12,6 @@ define([
         config.get('widgets.loading_release_time', 10000)
     );
     handleClipboardCopyClicks();
-    handleTextareaMaxlength();
 
     // "data-clipboard-copy-value" text will be copied to clipboard from ".js-clipboard-copy" elements on click
     function handleClipboardCopyClicks() {
@@ -146,18 +145,6 @@ define([
             } else {
                 releaseLoadingState(loading_class);
             }
-        });
-    }
-
-    function handleTextareaMaxlength() {
-        $('textarea[maxlength]').on('input propertychange', function(event) {
-            $textarea = $(this);
-            maxlength = $textarea.attr('maxlength');
-            if (isNaN(maxlength) || maxlength < 0) {
-                return;
-            }
-            limited_content = $textarea.val().substr(0, maxlength);
-            $textarea.val(limited_content);
         });
     }
 });
