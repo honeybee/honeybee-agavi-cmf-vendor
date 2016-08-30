@@ -13,11 +13,13 @@ class HtmlFloatAttributeRenderer extends HtmlAttributeRenderer
     protected function getDefaultTemplateIdentifier()
     {
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        if (StringToolkit::endsWith($view_scope, 'collection')) {
-            return $this->output_format->getName() . '/attribute/float/as_itemlist_item_cell.twig';
+        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
+
+        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
+            return $this->output_format->getName() . '/attribute/float/as_input.twig';
         }
 
-        return $this->output_format->getName() . '/attribute/float/as_input.twig';
+        return $this->output_format->getName() . '/attribute/float/as_itemlist_item_cell.twig';
     }
 
     protected function getTemplateParameters()

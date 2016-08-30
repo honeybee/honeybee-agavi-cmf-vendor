@@ -259,4 +259,21 @@ abstract class AttributeRenderer extends Renderer
     {
         return (bool)($this->getOption('required', $this->attribute->getOption('mandatory', false)));
     }
+
+    protected function getInputViewTemplateNameSuffixes($output_format_name = '')
+    {
+        $input_view_template_name_suffixes = $this->getOption(
+            'input_view_template_name_suffixes',
+            [ 'create', 'modify' ]
+        );
+
+        // by convention is possible to specify the output format name after the view name
+        if (!empty($output_format_name)) {
+            foreach ($input_view_template_name_suffixes as $input_suffix) {
+                $input_view_template_name_suffixes[] = sprintf('%s.%s', $input_suffix, $output_format_name);
+            }
+        }
+
+        return $input_view_template_name_suffixes;
+    }
 }

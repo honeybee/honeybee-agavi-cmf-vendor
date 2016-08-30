@@ -785,12 +785,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "dd99b8c998b55e2c61c2335c46bb3445b513c91a"
+                "reference": "b84b4258f8e983a1ac7d5cf743a5e9c5e626b714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/dd99b8c998b55e2c61c2335c46bb3445b513c91a",
-                "reference": "dd99b8c998b55e2c61c2335c46bb3445b513c91a",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b84b4258f8e983a1ac7d5cf743a5e9c5e626b714",
+                "reference": "b84b4258f8e983a1ac7d5cf743a5e9c5e626b714",
                 "shasum": ""
             },
             "require": {
@@ -874,7 +874,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2016-08-23 08:27:41"
+            "time": "2016-08-30 09:21:34"
         },
         {
             "name": "honeybee/trellis",
@@ -882,12 +882,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "654ef7bfe81895684b9388db296a90c43f9e5260"
+                "reference": "8bb45e4ba7289062826c34f9e443d3093b796cd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/654ef7bfe81895684b9388db296a90c43f9e5260",
-                "reference": "654ef7bfe81895684b9388db296a90c43f9e5260",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/8bb45e4ba7289062826c34f9e443d3093b796cd1",
+                "reference": "8bb45e4ba7289062826c34f9e443d3093b796cd1",
                 "shasum": ""
             },
             "require": {
@@ -944,7 +944,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2016-08-12 19:32:58"
+            "time": "2016-08-29 10:56:43"
         },
         {
             "name": "league/flysystem",
@@ -2591,7 +2591,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
