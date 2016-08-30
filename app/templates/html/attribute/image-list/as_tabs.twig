@@ -1,7 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
-{%- set add_images = translations.add_images | default('add_images') -%}
-{%- set dragndrop_description = translations.dragndrop_description | default('dragndrop_description') -%}
 <div class="hb-field hb-imagelist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/ImageList{% endif %}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
@@ -13,14 +11,14 @@
             <label for="{{ field_id }}" class="hb-field-label__name">{{ _(field_name~'.field_name', translation_domain) }}</label>
             <div class="hb-imagelist__input-multiple">
                 <input id="{{field_id}}_multiple" type="file" multiple class="hb-imagelist__input-multiple-trigger" {{ disabled }} />
-                <label class="hb-imagelist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(add_images, translation_domain) }}</label>
+                <label class="hb-imagelist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(field_name~'.add_images', translation_domain) }}</label>
             </div>
         </div><!--
         --><div class="hb-field__value">
             <div class="imagelist imagelist--dropzone">
                 <div class="imagelist__dropzone-placeholder">
-                    <span class="imagelist__placeholder-title">{{ _('add_images', translation_domain) }}</span>
-                    <span class="imagelist__placeholder-description">{{ _('dragndrop_description', translation_domain) }}</span>
+                    <span class="imagelist__placeholder-title">{{ _(field_name~'.add_images', translation_domain) }}</span>
+                    <span class="imagelist__placeholder-description">{{ _(field_name~'.dragndrop_description', translation_domain) }}</span>
                 </div>
                 <div class="imagelist-tabs">
                     {% set tabs_id = 'hb-tabs-' ~ field_id %}
@@ -30,11 +28,7 @@
                                 <label for="{{tabs_id}}-add-image-to-{{ field_id }}">
                                     <img src="static/themes/whitelabel/binaries/150x150.gif" alt="" class="imagelist__thumb-img imagelist--dropzone"/>
                                 </label>
-<progress max="100" value="50">
-    <div class="progress-bar">
-        <span style="width: 50%;">uploading…</span>
-    </div>
-</progress>
+                                <progress max="100" value="50"><div class="progress-bar"><span style="width: 50%;">Uploading…</span></div></progress>
                                 {% if isReadable %}
                                 <div class="imagelist__thumb-controls">
                                     <ul>
@@ -67,6 +61,9 @@
                         {%- if isReadable -%}
                             {# add empty input elements to add a new image when javascript is not available or did not load #}
                             {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
+
+                                field_name: field_name,
+                                field_id: field_id,
                                 item_id: 'add-image-to-' ~ field_id,
                                 grouped_base_path: grouped_base_path ~"[0]",
                                 tabs_id: tabs_id,
@@ -93,11 +90,15 @@
 
                                 readonly: readonly,
                                 disabled: disabled,
+
+                                translation_domain: translation_domain
                             } -%}
                         {% endif %}
                         {%- for image in images -%}
                             {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
 
+                                field_name: field_name,
+                                field_id: field_id,
                                 item_id: image.id,
                                 grouped_base_path: grouped_base_path ~"["~ loop.index ~"]",
                                 tabs_id: tabs_id,
@@ -124,6 +125,8 @@
 
                                 readonly: readonly,
                                 disabled: disabled,
+
+                                translation_domain: translation_domain
                             } -%}
                         {%- endfor -%}
                     </div>

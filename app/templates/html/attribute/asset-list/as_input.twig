@@ -1,7 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
-{%- set add_assets = translations.add_assets | default('add_assets') -%}
-{%- set dragndrop_description = translations.dragndrop_description | default('dragndrop_description') -%}
 <div class="hb-field hb-assetlist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/AssetList{% endif %}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
@@ -13,14 +11,14 @@
             <label for="{{ field_id }}" class="hb-field-label__name">{{ _(field_name~'.field_name', translation_domain) }}</label>
             <div class="hb-assetlist__input-multiple">
                 <input id="{{field_id}}_multiple" type="file" multiple class="hb-assetlist__input-multiple-trigger" {{ disabled }} />
-                <label class="hb-assetlist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(add_assets, translation_domain) }}</label>
+                <label class="hb-assetlist__input-multiple-label hide" for="{{field_id}}_multiple">{{ _(field_name~'.add_assets', translation_domain) }}</label>
             </div>
         </div><!--
         --><div class="hb-field__value">
             <div class="assetlist assetlist--dropzone">
                 <div class="assetlist__dropzone-placeholder">
-                    <span class="assetlist__placeholder-title">{{ _(add_assets, translation_domain) }}</span>
-                    <span class="assetlist__placeholder-description">{{ _('dragndrop_description', translation_domain) }}</span>
+                    <span class="assetlist__placeholder-title">{{ _(field_name~'.add_assets', translation_domain) }}</span>
+                    <span class="assetlist__placeholder-description">{{ _(field_name~'.dragndrop_description', translation_domain) }}</span>
                 </div>
                 <div class="assetlist-tabs">
                     {% set tabs_id = 'hb-tabs-' ~ field_id %}

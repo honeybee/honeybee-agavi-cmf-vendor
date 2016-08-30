@@ -86,17 +86,6 @@ class HtmlAssetListAttributeRenderer extends HtmlAttributeRenderer
         return $global_input_parameters;
     }
 
-    protected function getDefaultTranslationKeys()
-    {
-        $default_translation_keys = parent::getDefaultTranslationKeys();
-        $html_attribute_translation_keys = [ 'add_assets' ];
-
-        return array_merge(
-            $default_translation_keys,
-            $html_attribute_translation_keys
-        );
-    }
-
     protected function getWidgetImplementor()
     {
         return $this->getOption('widget', 'jsb_Honeybee_Core/ui/AssetList');

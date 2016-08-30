@@ -1,6 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- if location is not defined %}{% set location = "" %}{% endif -%}
-{%- set alt = caption|default(title)|default('') -%}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
 <input type="radio" class="assetlist-tabs__trigger" name="{{tabs_id}}[]" id="{{tabs_id}}-{{asset_id}}" value="{{tabs_id}}-{{asset_id}}" />
 <div class="assetlist-tabs__panel assetlist__item {{newitem ? "newitem": "item"}}" data-item-id="{{item_id}}" data-grouped-base-path="{{grouped_base_path}}">

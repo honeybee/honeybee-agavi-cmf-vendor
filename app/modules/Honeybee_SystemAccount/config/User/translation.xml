@@ -153,6 +153,31 @@
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
                             <ae:parameter name="language.field_name">Sprache</ae:parameter>
                             <ae:parameter name="token_expire_date.field_name">Tokenablaufdatum</ae:parameter>
+                            <ae:parameter name="background_images.field_name">Bilder</ae:parameter>
+                            <ae:parameter name="background_images.add_images">Bild(er) hinzufügen…</ae:parameter>
+                            <ae:parameter name="background_images.change_image">Bilddatei austauschen…</ae:parameter>
+                            <ae:parameter name="background_images.change_image_title">Neue Bilddatei hochladen und gegen die existierende austauschen…</ae:parameter>
+                            <ae:parameter name="background_images.download_image">Bilddatei herunterladen…</ae:parameter>
+                            <ae:parameter name="background_images.download_image_title">Existierendes Bild herunterladen…</ae:parameter>
+                            <ae:parameter name="background_images.title.label">Titel</ae:parameter>
+                            <ae:parameter name="background_images.caption.label">Beschriftung</ae:parameter>
+                            <ae:parameter name="background_images.copyright.label">Angaben zum Copyright</ae:parameter>
+                            <ae:parameter name="background_images.copyright_url.label">Link zu weiterführenden Copyright-Informationen</ae:parameter>
+                            <ae:parameter name="background_images.source.label">Informationen zur Quelle</ae:parameter>
+                            <ae:parameter name="background_images.filename.label">Dateiname (ursprünglich)</ae:parameter>
+                            <ae:parameter name="background_images.filesize.label">Dateigröße</ae:parameter>
+                            <ae:parameter name="background_images.mimetype.label">Dateityp</ae:parameter>
+                            <ae:parameter name="background_images.metadata.label">Weitere ergänzende Informationen (Metadaten)</ae:parameter>
+                            <ae:parameter name="background_images.width.label">Breite</ae:parameter>
+                            <ae:parameter name="background_images.height.label">Höhe</ae:parameter>
+                            <ae:parameter name="background_images.aoi.label">Area of Interest (AOI)</ae:parameter>
+                            <ae:parameter name="background_images.aoi.select">AOI auswählen</ae:parameter>
+                            <ae:parameter name="background_images.aoi.select_title">Wichtigen Bereich des Bilds festlegen</ae:parameter>
+                            <ae:parameter name="background_images.aoi.cancel">Abbrechen</ae:parameter>
+                            <ae:parameter name="background_images.aoi.cancel_title">AOI-Auswahl abbrechen und alten Wert behalten</ae:parameter>
+                            <ae:parameter name="background_images.aoi.accept">Festlegen</ae:parameter>
+                            <ae:parameter name="background_images.aoi.accept_title">Ausgewählten Bereich als neue AOI übernehmen</ae:parameter>
+                            <ae:parameter name="background_images.dragndrop_description">Einfach hier hereinziehen</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <ae:parameter name="username.field_name">Username</ae:parameter>
@@ -165,7 +190,6 @@
                             <ae:parameter name="email.placeholder">email@example.com</ae:parameter>
                             <ae:parameter name="email.input_focus_hint">Please, type a valid email address</ae:parameter>
                             <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
-                            <ae:parameter name="background_images.field_name">Background-image</ae:parameter>
                             <ae:parameter name="add_images">Add image</ae:parameter>
                             <ae:parameter name="text_list_remove_title">Remove</ae:parameter>
                             <ae:parameter name="dragndrop_description">Simply drag and drop here</ae:parameter>
@@ -175,6 +199,31 @@
                             <ae:parameter name="workflow_state.field_name">Status</ae:parameter>
                             <ae:parameter name="language.field_name">Language</ae:parameter>
                             <ae:parameter name="token_expire_date.field_name">Token expire-date</ae:parameter>
+                            <ae:parameter name="background_images.field_name">Background Images</ae:parameter>
+                            <ae:parameter name="background_images.add_images">Add image(s)…</ae:parameter>
+                            <ae:parameter name="background_images.change_image">Change image file…</ae:parameter>
+                            <ae:parameter name="background_images.change_image_title">Upload new image file and swap against the existing one…</ae:parameter>
+                            <ae:parameter name="background_images.download_image">Download image</ae:parameter>
+                            <ae:parameter name="background_images.download_image_title">Download existing image file…</ae:parameter>
+                            <ae:parameter name="background_images.title.label">Title</ae:parameter>
+                            <ae:parameter name="background_images.caption.label">Caption</ae:parameter>
+                            <ae:parameter name="background_images.copyright.label">Copyright</ae:parameter>
+                            <ae:parameter name="background_images.copyright_url.label">Link to additional copyright information</ae:parameter>
+                            <ae:parameter name="background_images.source.label">Source information</ae:parameter>
+                            <ae:parameter name="background_images.filename.label">Filename (original)</ae:parameter>
+                            <ae:parameter name="background_images.filesize.label">Filesize</ae:parameter>
+                            <ae:parameter name="background_images.mimetype.label">Filetype</ae:parameter>
+                            <ae:parameter name="background_images.metadata.label">Additional information (metadata)</ae:parameter>
+                            <ae:parameter name="background_images.width.label">Width</ae:parameter>
+                            <ae:parameter name="background_images.height.label">Height</ae:parameter>
+                            <ae:parameter name="background_images.aoi.label">Area of Interest (AOI)</ae:parameter>
+                            <ae:parameter name="background_images.aoi.select">Select AOI…</ae:parameter>
+                            <ae:parameter name="background_images.aoi.select_title">Select important part of the image</ae:parameter>
+                            <ae:parameter name="background_images.aoi.cancel">Cancel</ae:parameter>
+                            <ae:parameter name="background_images.aoi.cancel_title">Cancel AOI selection and keep old values</ae:parameter>
+                            <ae:parameter name="background_images.aoi.accept">Accept</ae:parameter>
+                            <ae:parameter name="background_images.aoi.accept_title">Accept chosen area as new Area of Interest</ae:parameter>
+                            <ae:parameter name="background_images.dragndrop_description">Drop image(s) here…</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 
