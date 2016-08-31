@@ -57,6 +57,14 @@
                     <appender>browserconsole-message-only</appender>
                 </appenders>
             </logger>
+
+            <!-- log all api access related messages -->
+            <logger name="api" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+                <appenders>
+                    <appender>api</appender>
+                </appenders>
+            </logger>
+
         </loggers>
 
         <appenders>
@@ -104,18 +112,17 @@
             <!-- log all messages to %core.app_dir%/log/default.log -->
             <appender name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
 
-            <!-- log all messages to %core.app_dir%/log/login.log -->
+            <!-- log all messages to %core.app_dir%/log/auth.log -->
             <appender name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\VerboseLoggerAppender" layout="default" />
 
-            <!-- log all messages to %core.app_dir%/log/trace.log -->
             <appender name="trace" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
 
-            <!-- log all messages to %core.app_dir%/log/mail.log -->
             <appender name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+
+            <appender name="api" class="Honeybee\FrameworkBinding\Agavi\Logging\ApiLoggerAppender" layout="default" />
 
             <appender name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="message-only" />
 
-            <!-- log all messages to %core.app_dir%/log/debug.log -->
             <appender name="debug-only" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default">
                 <ae:parameters>
                     <!-- logs to EMERGENCY, CRITICAL, ALERT, ERROR, WARNING, NOTICE, INFO and DEBUG, BUT as the
@@ -163,6 +170,7 @@
             <logger name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
             <logger name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
             <logger name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+            <logger name="api" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
         </loggers>
 
         <appenders>

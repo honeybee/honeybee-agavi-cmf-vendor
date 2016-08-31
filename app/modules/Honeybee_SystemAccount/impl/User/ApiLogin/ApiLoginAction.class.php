@@ -55,47 +55,45 @@ class Honeybee_SystemAccount_User_ApiLoginAction extends Action
 
         $auth_response = $authentication_service->authenticate($username, $password);
 
+        $log_message = sprintf(
+            "username='%s' message='%s' auth_provider='%s' errors=''",
+            $username,
+            $auth_response->getMessage(),
+            get_class($authentication_service),
+            join(';', $auth_response->getErrors())
+        );
+
         $log_message_part = sprintf("for username '$username' via auth provider %s.", get_class($authentication_service));
 
         if ($auth_response->getState() === AuthResponse::STATE_AUTHORIZED) {
             $view_name = 'Success';
 
-            $user->setAuthenticated(true);
             $user->setAttributes(
                 array_merge(
-                    array('acl_role' => AclService::ROLE_NON_PRIV),
+                    [ 'acl_role' => AclService::ROLE_NON_PRIV ],
                     $auth_response->getAttributes()
                 )
             );
+            $user->setAuthenticated(true);
 
-            $this->logInfo("[AUTHORIZED] Successful authentication attempt " . $log_message_part);
+            $this->logInfo('[AUTHORIZED] ' . $log_message);
         } elseif ($auth_response->getState() === AuthResponse::STATE_UNAUTHORIZED) {
             $view_name = 'Error';
 
             $user->setAuthenticated(false);
+
             $this->setAttribute('errors', array('auth' => $translation_manager->_('invalid_login', 'user.messages')));
 
-            $this->logError(
-                sprintf(
-                    "[UNAUTHORIZED] Authentication attempt failed %s\nErrors are: %s",
-                    $log_message_part,
-                    join(PHP_EOL, $auth_response->getErrors())
-                )
-            );
+            $this->logError('[UNAUTHORIZED] ' . $log_message);
         } else {
             $view_name = 'Error';
 
             $user->setAuthenticated(false);
-            $this->setAttribute('errors', array('auth' => $auth_response->getMessage()));
 
-            $this->logError(
-                sprintf(
-                    "[UNAUTHORIZED] Authentication attempt failed with auth response being '%s' %s\nErrors are: %s",
-                    $auth_response->getState(),
-                    $log_message_part,
-                    join(PHP_EOL, $auth_response->getErrors())
-                )
-            );
+            $this->setAttribute('errors', [ 'auth' => $auth_response->getMessage() ]);
+            $vm->setError('invalid_login', $tm->_('invalid_login', 'honeybee.system_account.user.errors'));
+
+            $this->logError("[ERROR] state='" . $auth_response->getState() . "' " . $log_message);
         }
 
         return $view_name;
