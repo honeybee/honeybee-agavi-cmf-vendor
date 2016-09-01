@@ -4,6 +4,7 @@ use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\AuthorCreatedEvent;
 use Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\AuthorModifiedEvent;
 use Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\AuthorWorkflowProceededEvent;
 
+// @codingStandardsIgnoreStart
 return [
     new AuthorCreatedEvent([
         'data' => [
@@ -96,3 +97,4 @@ return [
         ]
     ])
 ];
+// @codingStandardsIgnoreEnd

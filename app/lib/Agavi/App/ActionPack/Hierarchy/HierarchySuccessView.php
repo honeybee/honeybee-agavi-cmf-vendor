@@ -255,7 +255,10 @@ EOT;
     public function getBreadcrumbsRootActivities()
     {
         return [
-            $this->getServiceLocator()->getActivityService()->getActivity($this->getAttribute('resource_type')->getPrefix(), 'collection')
+            $this->getServiceLocator()->getActivityService()->getActivity(
+                $this->getAttribute('resource_type')->getPrefix(),
+                'collection'
+            )
         ];
     }
 }

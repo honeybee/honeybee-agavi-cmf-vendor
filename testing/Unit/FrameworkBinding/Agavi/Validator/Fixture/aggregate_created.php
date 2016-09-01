@@ -2,6 +2,7 @@
 
 use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\AuthorCreatedEvent;
 
+// @codingStandardsIgnoreStart
 return [
     new AuthorCreatedEvent([
         'data' => [
@@ -46,3 +47,4 @@ return [
         ]
     ])
 ];
+// @codingStandardsIgnoreEnd

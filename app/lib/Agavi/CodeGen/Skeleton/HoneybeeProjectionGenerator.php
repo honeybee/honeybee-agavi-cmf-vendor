@@ -54,7 +54,8 @@ class HoneybeeProjectionGenerator extends SkeletonGenerator
         $this->executeTrellis($this->data['variant_prefix']);
 
         // Copy Trellis ES mapping file to correction location
-        $trellis_config_path = $this->getTargetPath($this->data['variant_prefix']) . $this->data['variant_prefix'] . '.ini';
+        $trellis_config_path = $this->getTargetPath($this->data['variant_prefix']) .
+            $this->data['variant_prefix'] . '.ini';
         $trellis_config = parse_ini_file($trellis_config_path);
         $mapping_source_path = sprintf(
             '%s%s%s',

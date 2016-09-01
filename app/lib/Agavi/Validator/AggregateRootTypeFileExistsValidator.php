@@ -63,7 +63,9 @@ class AggregateRootTypeFileExistsValidator extends AgaviValidator
             }
 
             $aggregate_root_type = $this->getParameter('aggregate_root_type');
-            $this->aggregate_root_type = $this->getServiceLocator()->getAggregateRootTypeMap()->getItem($aggregate_root_type);
+            $this->aggregate_root_type = $this->getServiceLocator()
+                ->getAggregateRootTypeMap()
+                ->getItem($aggregate_root_type);
         }
 
         return $this->aggregate_root_type;

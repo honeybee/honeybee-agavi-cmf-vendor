@@ -68,7 +68,8 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'base' => $base,
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
                 'identifier_arg' => 'resource',
-                'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand'
+                'command_implementor' =>
+                    'Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand'
             ]
         );
     }
@@ -99,7 +100,8 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'current_state_name' => 'inactive',
                 'event_name' => 'promote',
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_identifier' =>
+                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],

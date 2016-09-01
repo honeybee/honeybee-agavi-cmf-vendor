@@ -53,7 +53,9 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
 
         $this->assertInstanceOf(AgaviWebResponse::CLASS, $this->getResponse());
         $this->assertEquals('200', $this->getResponse()->getHttpStatusCode());
-        $this->assertTagExists('form[action="http://testing.honeybee.com/index.php/en_US/honeybee-system_account-user/create"]');
+        $this->assertTagExists(
+            'form[action="http://testing.honeybee.com/index.php/en_US/honeybee-system_account-user/create"]'
+        );
         // @todo more tag assertions
     }
 
@@ -109,7 +111,8 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
         // action redirection expectations
         // @todo why reload then redirect?
         $service_locator = $this->getContext()->getServiceLocator();
-        $test_pr_user_type = $service_locator->getProjectionTypeMap()->getItem('honeybee.system_account.user::projection.standard');
+        $test_pr_user_type = $service_locator->getProjectionTypeMap()
+            ->getItem('honeybee.system_account.user::projection.standard');
         $mock_user_projection = $test_pr_user_type->createEntity([
             'identifier' => 'honeybee.system_account.user-8e56c666-00b4-4d72-9422-a55e2548e0e5-de_DE-1',
             'workflow_state' => 'inactive'
@@ -132,7 +135,9 @@ class CreateActionFlowTest extends HoneybeeAgaviFlowTestCase
         $this->assertInstanceOf(AgaviWebResponse::CLASS, $this->getResponse());
         $this->assertEquals('200', $this->getResponse()->getHttpStatusCode());
         // @todo response ending at redirect
-        // $this->assertTagExists('form[action="http://testing.honeybee.com/index.php/en_US/honeybee-system_account-user/create"]');
+        // $this->assertTagExists(
+        //     'form[action="http://testing.honeybee.com/index.php/en_US/honeybee-system_account-user/create"]'
+        // );
     }
 
     //-------------------------------helpers-----------------------------------

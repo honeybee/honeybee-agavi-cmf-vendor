@@ -220,7 +220,8 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'books' => [
                         [
                             '@type' => 'book',
-                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
+                            'referenced_identifier' =>
+                                'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
                             'title' => 'test book'
                         ]
                     ]
@@ -261,7 +262,8 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     [
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\AddEmbeddedEntityCommand',
                         'values' => [
-                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
+                            'referenced_identifier' =>
+                                'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
                             'title' => 'test book'
                         ],
                         'position' => 0,
@@ -614,7 +616,11 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'honeybee.user@test.com',
                     'images' => [
                         [
-                            'location' => str_replace('honeybee-cmf.test_fixtures.author.tempfiles://', '', $uploaded_images[0]),
+                            'location' => str_replace(
+                                'honeybee-cmf.test_fixtures.author.tempfiles://',
+                                '',
+                                $uploaded_images[0]
+                            ),
                             'title' => 'Kitty',
                             'caption' => 'Meow',
                             'copyright' => '',

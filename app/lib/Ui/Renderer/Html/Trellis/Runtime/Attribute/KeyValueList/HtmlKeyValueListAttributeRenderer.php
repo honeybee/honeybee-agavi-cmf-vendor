@@ -25,10 +25,18 @@ class HtmlKeyValueListAttributeRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
-        $params['allowed_keys'] = $this->attribute->getOption(KeyValueListAttribute::OPTION_ALLOWED_KEYS, $this->getOption('allowed_keys', []));
-        $params['allowed_values'] = $this->attribute->getOption(KeyValueListAttribute::OPTION_ALLOWED_VALUES, $this->getOption('allowed_values', []));
+        $params['allowed_keys'] = $this->attribute->getOption(
+            KeyValueListAttribute::OPTION_ALLOWED_KEYS,
+            $this->getOption('allowed_keys', [])
+        );
+        $params['allowed_values'] = $this->attribute->getOption(
+            KeyValueListAttribute::OPTION_ALLOWED_VALUES,
+            $this->getOption('allowed_values', [])
+        );
 
-        if ($this->attribute->hasOption(KeyValueListAttribute::OPTION_ALLOWED_PAIRS) || $this->hasOption('allowed_pairs')) {
+        if ($this->attribute->hasOption(KeyValueListAttribute::OPTION_ALLOWED_PAIRS) ||
+            $this->hasOption('allowed_pairs')
+        ) {
             $params['allowed_pairs'] = $this->getOption(
                 'allowed_pairs',
                 $this->attribute->getOption(KeyValueListAttribute::OPTION_ALLOWED_PAIRS, [])
@@ -55,8 +63,14 @@ class HtmlKeyValueListAttributeRenderer extends HtmlAttributeRenderer
             case 'integer':
             case 'float':
                 $params['value_type'] = 'number';
-                $params['min'] = $this->getOption('min', $this->attribute->getOption(KeyValueListAttribute::OPTION_MIN_VALUE));
-                $params['max'] = $this->getOption('max', $this->attribute->getOption(KeyValueListAttribute::OPTION_MAX_VALUE));
+                $params['min'] = $this->getOption(
+                    'min',
+                    $this->attribute->getOption(KeyValueListAttribute::OPTION_MIN_VALUE)
+                );
+                $params['max'] = $this->getOption(
+                    'max',
+                    $this->attribute->getOption(KeyValueListAttribute::OPTION_MAX_VALUE)
+                );
                 break;
             case 'boolean':
                 // @todo implement

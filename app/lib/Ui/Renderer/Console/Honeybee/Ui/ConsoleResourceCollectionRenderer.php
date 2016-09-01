@@ -16,5 +16,4 @@ class ConsoleResourceCollectionRenderer extends EntityListRenderer
             );
         }
     }
-
 }

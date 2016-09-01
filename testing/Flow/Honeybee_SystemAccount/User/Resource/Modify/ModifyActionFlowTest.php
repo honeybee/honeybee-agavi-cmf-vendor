@@ -29,14 +29,17 @@ class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
     }
 
     /**
+     * @codingStandardIgnoreStart
      * @agaviRequestMethod read
      * @agaviRoutingInput /en_US/honeybee-system_account-user/honeybee.system_account.user-8e56c666-00b4-4d72-9422-a55e2548e0e5-de_DE-1/tasks/edit
+     * @codingStandardIgnoreEnd
      */
     public function testExecuteRead()
     {
         $service_locator = $this->getContext()->getServiceLocator();
 
-        $test_pr_user_type = $service_locator->getProjectionTypeMap()->getItem('honeybee.system_account.user::projection.standard');
+        $test_pr_user_type = $service_locator->getProjectionTypeMap()
+            ->getItem('honeybee.system_account.user::projection.standard');
         $mock_user_projection = $test_pr_user_type->createEntity([
             'identifier' => 'honeybee.system_account.user-8e56c666-00b4-4d72-9422-a55e2548e0e5-de_DE-1',
             'workflow_state' => 'inactive'
@@ -54,8 +57,10 @@ class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
     }
 
     /**
+     * @codingStandardIgnoreStart
      * @agaviRequestMethod read
      * @agaviRoutingInput /en_US/honeybee-system_account-user/honeybee.system_account.user-12345678-1234-4d72-9422-a55e2548e0e5-de_DE-1/tasks/edit
+     * @codingStandardIgnoreEnd
      */
     public function testExecuteReadNotFound()
     {

@@ -123,7 +123,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'images' => [],
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_identifier' =>
+                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -307,7 +308,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'change.user@test.com'
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_identifier' =>
+                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -350,6 +352,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertCount(1, $task_conflicts);
         $task_conflict = $task_service->getLastTaskConflict();
         $this->assertInstanceOf(TaskConflict::CLASS, $task_conflict);
+        // @codingStandardsIgnoreStart
         $this->assertEquals(
             [
                 '@type' => 'Honeybee\Model\Task\TaskConflict',
@@ -515,6 +518,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             ],
             $task_conflict->toArray()
         );
+        // @codingStandardsIgnoreEnd
     }
 
     public function testExecuteWithWorkflowConflict()
@@ -555,6 +559,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertCount(1, $task_conflicts);
         $task_conflict = $task_service->getLastTaskConflict();
         $this->assertInstanceOf(TaskConflict::CLASS, $task_conflict);
+        // @codingStandardsIgnoreStart
         $this->assertEquals(
             [
                 '@type' => 'Honeybee\Model\Task\TaskConflict',
@@ -672,6 +677,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             ],
             $task_conflict->toArray()
         );
+        // @codingStandardsIgnoreEnd
     }
 
     public function testExecuteWithResolvableConflicts()
@@ -685,6 +691,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $validator = $this->createValidator();
         $this->prepareHistory('aggregate_created');
 
+        // @codingStandardsIgnoreStart
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
@@ -766,6 +773,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 ]
             ]
         ]);
+        // @codingStandardsIgnoreEnd
 
         $result = $validator->execute($rd);
 
@@ -775,6 +783,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $uploaded_images = $this->filesystem_service->getTestResourceUris();
         $command = $rd->getParameter('command');
         $this->assertInstanceOf(ModifyAuthorCommand::CLASS, $command);
+        // @codingStandardsIgnoreStart
         $this->assertEquals(
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
@@ -836,6 +845,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             ],
             $command->toArray()
         );
+        // @codingStandardsIgnoreEnd
     }
 
     public function testExecuteWithUploadedAndDeletedImages()
@@ -843,6 +853,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $validator = $this->createValidator();
         $this->prepareHistory('aggregate_created');
 
+        // @codingStandardsIgnoreStart
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
@@ -893,6 +904,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 ]
             ]
         ]);
+        // @codingStandardsIgnoreEnd
 
         $result = $validator->execute($rd);
 
@@ -908,7 +920,11 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'values' => [
                     'images' => [
                         [
-                            'location' => str_replace('honeybee-cmf.test_fixtures.author.tempfiles://', '', $uploaded_images[0]),
+                            'location' => str_replace(
+                                'honeybee-cmf.test_fixtures.author.tempfiles://',
+                                '',
+                                $uploaded_images[0]
+                            ),
                             'title' => 'Facepalm',
                             'caption' => 'Engage',
                             'copyright' => '',
@@ -925,7 +941,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     ]
                 ],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_identifier' =>
+                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -978,9 +995,11 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'values' => [],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                // @codingStandardsIgnoreLine
                 'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [
                     [
+                        // @codingStandardsIgnoreLine
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\ModifyEmbeddedEntity\ModifyEmbeddedEntityCommand',
                         'values' => [],
                         'position' => 0,
@@ -992,6 +1011,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         'metadata' => []
                     ],
                     [
+                        // @codingStandardsIgnoreLine
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\RemoveEmbeddedEntity\RemoveEmbeddedEntityCommand',
                         'embedded_entity_type' => 'highlight',
                         'parent_attribute_name' => 'products',
@@ -1053,9 +1073,11 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'values' => [],
                 'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                // @codingStandardsIgnoreLine
                 'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [
                     [
+                        // @codingStandardsIgnoreLine
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\ModifyEmbeddedEntity\ModifyEmbeddedEntityCommand',
                         'values' => [],
                         'position' => 0,
@@ -1067,6 +1089,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         'metadata' => []
                     ],
                     [
+                        // @codingStandardsIgnoreLine
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\ModifyEmbeddedEntity\ModifyEmbeddedEntityCommand',
                         'values' => [],
                         'position' => 1,
@@ -1078,6 +1101,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         'metadata' => []
                     ],
                     [
+                        // @codingStandardsIgnoreLine
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\AddEmbeddedEntityCommand',
                         'values' => [
                             'title' => 'Amaze'
