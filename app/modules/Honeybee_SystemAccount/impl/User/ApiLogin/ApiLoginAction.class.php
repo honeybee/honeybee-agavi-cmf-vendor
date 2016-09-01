@@ -82,7 +82,9 @@ class Honeybee_SystemAccount_User_ApiLoginAction extends Action
 
             $user->setAuthenticated(false);
 
-            $this->setAttribute('errors', array('auth' => $translation_manager->_('invalid_login', 'user.messages')));
+            $this->setAttribute('errors', [
+                'auth' => $translation_manager->_('invalid_login', 'honeybee.system_account.user.errors')
+            ]);
 
             $this->logError('[UNAUTHORIZED] ' . $log_message);
         } else {
