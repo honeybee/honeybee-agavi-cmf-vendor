@@ -22,6 +22,7 @@ use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 use Trellis\Runtime\Attribute\Image\Image;
 use Trellis\Runtime\Attribute\ListAttribute;
+use Trellis\Runtime\Validator\Rule\Type\SanitizedFilenameRule;
 
 class AggregateRootTypeCommandValidator extends AgaviValidator
 {
