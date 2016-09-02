@@ -6,7 +6,8 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
 >
     <ae:configuration>
-        <view_templates scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy">
+        <view_templates scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy" extends="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.collection">
+            <!--
             <view_template name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">
                 <tab name="{{ resource_prefix }}s">
                     <panel name="main">
@@ -23,8 +24,9 @@
                     </panel>
                 </tab>
             </view_template>
+            -->
 
-            <view_template name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.parent">
+            <view_template name="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy_parent">
                 <tab name="{{ resource_prefix }}s">
                     <panel name="main">
                         <row>

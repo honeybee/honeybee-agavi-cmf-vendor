@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use Honeybee\Infrastructure\Config\Settings;
+use Honeybee\Infrastructure\DataAccess\Query\QueryInterface\ProjectionQueryService;
 use Honeybee\Ui\Activity\Activity;
 use Honeybee\Ui\Activity\Url as ActivityUrl;
 use Honeybee\Ui\ValueObjects\Pagination;
@@ -29,23 +30,51 @@ class HierarchySuccessView extends View
 
         if ($request_data->hasParameter('parent_node')) {
             $parent_node = $request_data->getParameter('parent_node');
+            $parent_node_type = $parent_node->getType();
             $breadcrumbs = [
                 [
                     'text' => 'Top',
                     'link' => $this->routing->gen(
                         'module.hierarchy',
-                        array_merge($default_url_params, [ 'module' => $parent_node->getType() ])
+                        array_merge($default_url_params, [ 'module' => $parent_node_type ])
                     )
                 ]
             ];
-            foreach (array_filter(explode('/', $parent_node->getMaterializedPath())) as $ancestor_id) {
+
+            // get attribute name to use for labelling breadcrumbs
+            $service_locator = $this->getServiceLocator();
+            $view_config_service = $service_locator->getViewConfigService();
+            // @todo implement breadcrumbs renderer
+            $breadcrumbs_renderer_config = $view_config_service->getRendererConfig(
+                $this->getViewScope(),
+                $this->getOutputFormat(),
+                'hierarchy_breadcrumbs'
+            );
+            $breadcrumbs_label_attribute = (string)$breadcrumbs_renderer_config->get('breadcrumbs_label_attribute');
+
+            // get breadcrumbs nodes
+            $breadcrumbs_nodes = [];
+            $materialized_path_parts = array_filter(explode('/', $parent_node->getMaterializedPath()));
+            if (!empty($materialized_path_parts)) {
+                $data_access_service = $service_locator->getDataAccessService();
+                $query_service = $data_access_service->getProjectionQueryServiceByType($parent_node_type);
+                $breadcrumbs_nodes = $query_service->findByIdentifiers($materialized_path_parts)->getResults();
+            }
+
+            foreach ($breadcrumbs_nodes as $breadcrumb) {
+                $ancestor_id = $breadcrumb->getIdentifier();
+
+                $breadcrumb_label = $parent_node_type->hasAttribute($breadcrumbs_label_attribute)
+                    ? $breadcrumb->getValue($breadcrumbs_label_attribute)
+                    : $ancestor_id;
+
                 $breadcrumbs[] = [
-                    'text' => $ancestor_id,
+                    'text' => $breadcrumb_label,
                     'link' => $this->routing->gen(
                         'module.hierarchy',
                         array_merge(
                             $default_url_params,
-                            [ 'resource' => $ancestor_id, 'module' => $parent_node->getType() ]
+                            [ 'resource' => $ancestor_id, 'module' => $parent_node_type ]
                         )
                     )
                 ];
