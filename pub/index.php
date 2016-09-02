@@ -2,6 +2,8 @@
 
 $default_context = @$default_context ?: 'web';
 
+$environment_modifier='-stateless-api';
+
 // application dir is either set via (env) variable or will be ./../
 $application_dir = @$application_dir ?: getenv('APP_DIR');
 if (empty($application_dir) || realpath($application_dir) === false || !is_readable($application_dir)) {

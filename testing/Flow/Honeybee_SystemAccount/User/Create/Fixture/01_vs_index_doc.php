@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'index' => '%honeybee-system_account.index%',
-    'type' => '%honeybee-system_account-user.standard.type%',
+    'index' => 'honeybee.honeybee-system_account',
+    'type' => 'honeybee-system_account-user-standard',
     'id' => $fixture_data['identifier'],
     'body' => [
         '@type' => 'honeybee.system_account.user::projection.standard',

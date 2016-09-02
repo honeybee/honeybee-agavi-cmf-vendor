@@ -20,22 +20,14 @@ Setup local configuration files (adjust values accordingly):
 * create `/usr/local/honeybee-agavi-cmf-vendor/couchdb.json` with: ```{"couchdb":{"host":"localhost","port":5984,"user":"honeybee","password":"honeybee"}}```
 * create `/usr/local/honeybee-agavi-cmf-vendor/elasticsearch.json` with: ```{"elasticsearch":{"host":"localhost","port":9200}}```
 
-Create XInclude files to enable the modules:
+Create XInclude files to enable the modules, download and compile assets and run status test:
 
-* ```bin/cli honeybee.core.util.build_config --recovery```
-
-Download and compile assets and additional packages:
-
-* `npm install`
-* ```./node_modules/.bin/bower install```
-* ```bin/cli honeybee.core.util.compile_scss``` to create css files
-* ```bin/cli honeybee.core.util.compile_js``` to run `r.js` and create `pub/static/modules-built`
-* ```bin/wget_packages```
-
-Run status test:
-
-* ```bin/cli status``` should display `WORKING` now
+* ```composer init-standalone```
 
 From here on you may run migrations to setup the write- and readside databases/indices:
 
 * ```bin/cli honeybee.core.migrate.run```
+
+Create an administrative user:
+
+* ```bin/cli honeybee.system_account.user.create```

@@ -8,6 +8,7 @@ use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Ui\Activity\Activity;
 use Honeybee\Ui\Activity\Url as ActivityUrl;
 use Honeybee\Ui\ValueObjects\Pagination;
+use Honeybee\Common\Util\ArrayToolkit;
 
 class CollectionSuccessView extends View
 {
@@ -43,6 +44,92 @@ class CollectionSuccessView extends View
         $this->setSearchForm($request_data);
         $this->setSortActivities($request_data);
         $this->setPagination($request_data);
+    }
+
+    public function executeHaljson(AgaviRequestDataHolder $request_data)
+    {
+        $service_locator = $this->getContext()->getServiceLocator();
+
+        $resource_collection = $this->getAttribute('resource_collection');
+        $list_config = $request_data->getParameter('list_config');
+        $resource_type = $this->getAttribute('resource_type');
+        $number_of_results = $this->getAttribute('number_of_results', 0);
+
+        $pagination = Pagination::createByOffset(
+            $number_of_results,
+            $list_config->getLimit(),
+            $list_config->getOffset()
+        );
+
+        $rendered_resource_collection = $this->renderSubject($resource_collection);
+        error_log(var_export($rendered_resource_collection, true));
+
+        $json = [
+            'resource_type' => $resource_type->getPrefix(),
+            'resource_type_name' => $resource_type->getName(),
+            'results' => count($resource_collection),
+            'total_results' => $number_of_results,
+            'number_of_pages' => $pagination->getNumberOfPages(),
+            // 'pagination' => $pagination->toArray(),
+            '_embedded' => [
+                //$resource_type->getPrefix() => $resource_collection->toArray(),
+                $resource_type->getPrefix() => $rendered_resource_collection,
+            ],
+            '_links' => [
+            ],
+        ];
+
+        $url_generator = $service_locator->getUrlGenerator();
+
+        $current_page_url = $url_generator->generateUrl(null);
+        $url_parameters = ArrayToolkit::getUrlQueryInRequestFormat($current_page_url);
+        unset($url_parameters['offset']); // offset is not needed when page is used (see validator)
+
+        $current_page_url = $url_generator->generateUrl(null, $url_parameters);
+
+        $first_page_url = $url_generator->generateUrl(
+            null,
+            array_merge($url_parameters, [ 'offset' => 0 ])
+        );
+
+        $last_page_url = $url_generator->generateUrl(
+            null,
+            array_merge($url_parameters, [ 'offset' => $pagination->getLastPageOffset() ])
+        );
+
+        $next_page_url = $url_generator->generateUrl(
+            null,
+            array_merge($url_parameters, [ 'offset' => $pagination->getNextPageOffset() ])
+        );
+
+        $prev_page_url = $url_generator->generateUrl(
+            null,
+            array_merge($url_parameters, [ 'offset' => $pagination->getPrevPageOffset() ])
+        );
+
+        $json['_links'] = [
+            'self' => [
+                'href' => $current_page_url
+            ],
+            'first' => [
+                'href' => $first_page_url
+            ],
+            'previous' => [
+                'href' => $prev_page_url
+            ],
+            'next' => [
+                'href' => $next_page_url
+            ],
+            'last' => [
+                'href' => $last_page_url
+            ],
+            'jumpToPage' => [
+                'href' => $this->routing->gen(null),
+                'templated' => true
+            ],
+        ];
+
+        return json_encode($json);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)

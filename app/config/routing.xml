@@ -12,7 +12,7 @@
             <!-- try to set output type depeding on Accept header content negotiation and thus override uri extension-->
             <route name="negotiate_output_type" pattern="" source="_SERVER[HTTP_ACCEPT]" stop="false">
                 <callback class="Honeybee\FrameworkBinding\Agavi\Routing\NegotiateOutputTypeRoutingCallback">
-                    <ae:parameter name="default_output_type">html</ae:parameter>
+                    <!-- <ae:parameter name="default_output_type">html</ae:parameter> -->
                 </callback>
             </route>
             <!-- override output type depending on file extension of request uri -->
@@ -24,6 +24,7 @@
                             <ae:parameter>htm</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="xml">xml</ae:parameter>
+                        <ae:parameter name="haljson">haljson</ae:parameter>
                         <ae:parameter name="json">json</ae:parameter>
                         <ae:parameter name="text">txt</ae:parameter>
                         <ae:parameter name="csv">csv</ae:parameter>

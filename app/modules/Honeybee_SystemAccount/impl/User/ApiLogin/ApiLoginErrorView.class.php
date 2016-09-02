@@ -13,21 +13,38 @@ class Honeybee_SystemAccount_User_ApiLogin_ApiLoginErrorView extends View
         $this->setAttribute('_title', $this->translation_manager->_('Login Error', 'honeybee.system_account.user'));
         $this->setAttribute('error_messages', $this->getContainer()->getValidationManager()->getErrorMessages());
 
-        $this->getResponse()->setHttpStatusCode(401);
-        $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+        // OPTIONS requests are most likely PREFLIGHT requests from CORS supporting browsers and those
+        // browsers don't like getting 401 on OPTIONS requests with "Access-Control-Request-Headers:authorization"
+        if ($this->request->getMethod() !== 'options') {
+            $this->getResponse()->setHttpStatusCode(401);
+            $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+        }
+    }
+
+    public function executeHaljson(AgaviRequestDataHolder $request_data)
+    {
+        if ($this->request->getMethod() !== 'options') {
+            $this->getResponse()->setHttpStatusCode(401);
+            $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+        }
+
+        return json_encode([
+            'message' => $this->translation_manager->_('Authentication needed.', 'honeybee.system_account.user.errors'),
+            'errors' => $this->getContainer()->getValidationManager()->getErrorMessages()
+        ]);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
-        $this->getResponse()->setHttpStatusCode(401);
-        $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+        if ($this->request->getMethod() !== 'options') {
+            $this->getResponse()->setHttpStatusCode(401);
+            $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+        }
 
-        return json_encode(
-            array(
-                'result' => 'loginerror',
-                'errors' => $this->getContainer()->getValidationManager()->getErrorMessages()
-            )
-        );
+        return json_encode([
+            'message' => $this->translation_manager->_('Authentication needed.', 'honeybee.system_account.user.errors'),
+            'errors' => $this->getContainer()->getValidationManager()->getErrorMessages()
+        ]);
     }
 
     public function executeConsole(AgaviRequestDataHolder $request_data)
@@ -48,8 +65,10 @@ class Honeybee_SystemAccount_User_ApiLogin_ApiLoginErrorView extends View
     {
         if (preg_match('~^(execute)([A-Za-z_]+)$~', $method_name)) {
             if ($this->getResponse() instanceof AgaviWebResponse) {
-                $this->getResponse()->setHttpStatusCode(401);
-                $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+                if ($this->request->getMethod() !== 'options') {
+                    $this->getResponse()->setHttpStatusCode(401);
+                    $this->getResponse()->setHttpHeader('WWW-Authenticate', 'Basic realm="api"');
+                }
             } elseif ($this->getResponse() instanceof AgaviConsoleResponse) {
                 $this->getResponse()->setExitCode(70); // 70 ("internal software error") instead of 1 ("general error")
             }

@@ -5,7 +5,6 @@ namespace Honeybee\FrameworkBinding\Agavi\Routing;
 use AgaviContext;
 use AgaviExecutionContainer;
 use AgaviRoutingCallback;
-use Negotiation\FormatNegotiator;
 
 /**
  * Inspects the Accept HTTP header and sets the output_type according to
@@ -73,45 +72,41 @@ class NegotiateOutputTypeRoutingCallback extends AgaviRoutingCallback
             }
         }
 
-        $negotiator = new FormatNegotiator();
-
         // get a prioritized list of all media types (over all output types)
         $all_supported_media_types = array();
-        foreach ($supported_output_types as $output_type => $media_types) {
+        foreach ($supported_output_types as $output_type_name => $media_types) {
             foreach ($media_types as $media_type) {
-                $all_supported_media_types[] = $media_type;
+                $all_supported_media_types[$media_type] = $output_type_name;
             }
-            // register all known supported media types
-            $negotiator->registerFormat($output_type, $media_types, $override = true);
         }
 
-        $matching_output_type = $negotiator->getBestFormat($accept_header_value, $all_supported_media_types);
+        $acceptable_media_types_for_client = self::parseAcceptString($accept_header_value);
 
-        // TODO the negotiator v1 has predefined stuff we don't want; perhaps changing to v2 helps
-        if ($matching_output_type === 'txt') {
-            $matching_output_type = 'text';
+        $matching_output_type = null;
+        // get the first media type that is acceptable for the server as well in order of the client's prio
+        foreach ($acceptable_media_types_for_client as $acceptable_media_type) {
+            if (isset($all_supported_media_types[$acceptable_media_type])) {
+                $matching_output_type = $all_supported_media_types[$acceptable_media_type];
+                break;
+            }
         }
 
-        // set the current output type to the matching one
+        // set the current output type to the matching one and return early
         if ($matching_output_type !== null) {
             $new_output_type = $this->controller->getOutputType($matching_output_type);
             $container->setOutputType($new_output_type);
             return true;
         }
 
-        // media types did not match, but we want a default output type to be set
-        if ($matching_output_type === null && $this->hasParameter('default_output_type')) {
+        // media types did not match, but someone configured a default output type to be used
+        if ($matching_output_type === null && !empty($this->getParameter('default_output_type'))) {
             $default_output_type = $this->controller->getOutputType($this->getParameter('default_output_type'));
             $container->setOutputType($default_output_type);
             return true;
         }
 
-        /*
-         * no matching output type was found for the given Accept header
-         * and no default output type was defined => return a 406 http error
-         */
-
-        sort($all_supported_media_types); // sort alphabetically to ease reading
+         // no matching output type was found for the given Accept header
+         // and no default output type was defined => return a 406 http error
 
         $response_content = <<<EOC
 # 406 Not Acceptable
@@ -122,7 +117,7 @@ is currently acceptable. The following media types are supported instead:
 
 EOC;
 
-        foreach ($all_supported_media_types as $media_type) {
+        foreach ($all_supported_media_types as $media_type => $output_format) {
             $response_content .= '- ' . $media_type . PHP_EOL;
         }
 
@@ -164,29 +159,85 @@ EOC;
     }
 
     /**
-     * Parsing of accept header values.
+     * Parses the given accept header and returns a list of all media types sorted
+     * descending by their q value while the more specific types are preferred over
+     * types/subtypes with asterisks.
      *
-     * @return array media type strings
+     * @return array media type strings (sorted descending by their q value)
      */
     public static function parseAcceptString($accept_header_value)
     {
-        $types = array();
+        if (!is_string($accept_header_value)) {
+            return [];
+        }
 
-        $regex = '#(^|\s*,\s*)((\*/\*|[^/]+/\*|[^/]+/[^;,$]+)(\s*;\s*(?!q=)[^=]+=[^;,$]+)*)' .
-            '\s*(;\s*q\s*=\s*(1(\.0{0,3})?|0(\.[0-9]{0,3})))?#i';
+        $weighted_types = [];
 
-        if (preg_match_all('', $accept_header_value, $matches)) {
+        $regex = <<<EOR
+#
+(
+    ^|
+    \s*,\s*
+)
+(
+    (
+        \*/\*|
+        [^/]+/\*|
+        [^/]+/[^;,$]+
+    )
+    (
+        \s*;\s*
+        (?!\s*q\s*=)[^=]+=[^;,$]+
+    )*
+)
+\s*
+(
+    ;\s*q\s*=\s*(1(\.0{0,3})?|0(\.[0-9]{0,3}))
+)?
+#ix
+EOR;
+
+        // trim leading/trailing commas and whitespace
+        $accept_header_value = trim($accept_header_value, " \t\n\r\0\x0B,");
+
+        if (preg_match_all($regex, $accept_header_value, $matches)) {
             foreach ($matches[6] as &$quality) {
                 if ($quality === '') {
                     $quality = '1';
                 }
             }
 
+            $types = [];
             $types = array_combine($matches[2], $matches[6]);
 
-            arsort($types, SORT_NUMERIC);
+            // adjust scores of "type/*" or "*/*" media types as those should
+            // weigh less than the more specific types in our later matching
+            $adjusted = [];
+            foreach ($types as $type => $q) {
+                $cnt = substr_count($type, '*');
+                if ($cnt > 0) {
+                    $adjusted[$type] = ($q !== 1) ? (int)$q - $cnt : -$cnt;
+                } else {
+                    $adjusted[$type] = $q;
+                }
+            }
+
+            // sort without running into reordering issues that arsort() maybe has
+            $temp = [];
+            $i = 0;
+            foreach ($adjusted as $type => $q) {
+                $temp[] = [$i++, $type, $q];
+            }
+
+            uasort($temp, function($a, $b) {
+                return $a[2] == $b[2] ? ($a[0] > $b[0]) : ($a[2] < $b[2] ? 1 : -1);
+            });
+
+            foreach ($temp as $val) {
+                $weighted_types[$val[1]] = $val[2];
+            }
         }
 
-        return array_keys($types);
+        return array_keys($weighted_types);
     }
 }

@@ -10,6 +10,11 @@ class Honeybee_SystemAccount_User_ApiLogin_ApiLoginSuccessView extends View
         return $this->forwardToRequestedAction();
     }
 
+    public function executeHaljson(AgaviRequestDataHolder $request_data)
+    {
+        return $this->forwardToRequestedAction();
+    }
+
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
         return $this->forwardToRequestedAction();

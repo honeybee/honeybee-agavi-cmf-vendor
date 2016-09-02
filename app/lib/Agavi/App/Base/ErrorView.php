@@ -32,6 +32,30 @@ class ErrorView extends View
     }
 
     /**
+     * @param AgaviRequestDataHolder $request_data
+     *
+     * @return string json response with information message
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @codingStandardsIgnoreStart
+     */
+    public function executeHaljson(AgaviRequestDataHolder $request_data) // @codingStandardsIgnoreEnd
+    {
+        $this->logMatchedRoute();
+        $this->setDefaultAttributes();
+        $this->setHttpStatusCode();
+
+        return json_encode(
+            [
+                'logref' => $this->getAttribute('_logref'),
+                'title' => $this->getAttribute('_title'),
+                'message' => $this->getAttribute('_message')
+            ],
+            JSON_FORCE_OBJECT
+        );
+    }
+
+    /**
      * Handle errors for the json output type by returning a simple json
      * string with appropriate http status code.
      *

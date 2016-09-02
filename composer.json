@@ -57,28 +57,26 @@
         "honeybee/trellis": "master@dev",
         "shrink0r/workflux": "master@dev",
         "shrink0r/monatic": "master@dev",
-        "graste/environaut": "^0.5",
-        "michelf/php-markdown": "~1.5",
-        "monolog/monolog": "~1.0",
-        "mthaml/mthaml": "~1.7",
-        "swiftmailer/swiftmailer": "~5.4",
-        "symfony/finder": "~2.7",
-        "symfony/process": "~2.7",
-        "symfony/validator": "~2.7",
-        "willdurand/negotiation": "~1.4",
+        "michelf/php-markdown": "^1.5",
+        "monolog/monolog": "^1.0",
+        "mthaml/mthaml": "^1.7",
+        "swiftmailer/swiftmailer": "^5.4",
+        "symfony/finder": "^2.7",
+        "symfony/process": "^2.7",
+        "symfony/validator": "^2.7",
         "roave/security-advisories": "master@dev"
     },
 
     "require-dev": {
         "phpunit/phpunit": "^5.0.5",
         "phpmd/phpmd": "^2.3",
-        "sebastian/phpcpd": "^2.0",
-        "squizlabs/php_codesniffer": "^2.3",
-        "mockery/mockery": "master@dev",
+        "sebastian/phpcpd": "^2.0.4",
+        "squizlabs/php_codesniffer": "^2.6.2",
+        "mockery/mockery": "^0.9.5",
         "satooshi/php-coveralls": "master@dev",
         "sami/sami": "^3.2",
-        "symfony/css-selector": "~2.7",
-        "symfony/dom-crawler": "~2.7"
+        "symfony/css-selector": "^2.7",
+        "symfony/dom-crawler": "^2.7"
     },
 
     "scripts": {
@@ -91,6 +89,18 @@
         "code-sniffer": "phpcs --extensions=php --standard=psr2 app/lib testing",
         "code-sniffer-autofix": "phpcbf --standard=psr2 -d tabWidth=4 app/lib testing",
         "validate-json": "composer validate --no-check-all --no-check-lock",
-        "validate-deps": "composer validate --with-dependencies --strict"
+        "config-build": "bin/cli honeybee.core.util.build_config --recovery",
+        "validate-deps": "composer validate --with-dependencies --strict",
+        "css": "bin/cli honeybee.core.util.compile_scss",
+        "js": "bin/cli honeybee.core.util.compile_js",
+        "init-standalone": [
+            "@config-build",
+            "npm install",
+            "./node_modules/.bin/bower install",
+            "@css",
+            "@js",
+            "bin/wget_packages",
+            "bin/cli status"
+        ]
     }
 }

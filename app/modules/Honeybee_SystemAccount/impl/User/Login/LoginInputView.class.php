@@ -44,13 +44,23 @@ class Honeybee_SystemAccount_User_Login_LoginInputView extends View
         $this->setAttribute('reset_password_enabled', AgaviConfig::get('core.reset_password_enabled', true));
     }
 
+    public function executeHaljson(AgaviRequestDataHolder $request_data)
+    {
+        $this->getResponse()->setHttpStatusCode(401);
+
+        return json_encode([
+            'message' => $this->translation_manager->_('Authentication needed.', 'honeybee.system_account.user.errors'),
+            'errors' => $this->getContainer()->getValidationManager()->getErrorMessages()
+        ]);
+    }
+
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode(401);
 
         return json_encode([
-            'result' => 'failure',
-            'message' => $this->translation_manager->_('Authentication needed.', 'honeybee.system_account.user.errors')
+            'message' => $this->translation_manager->_('Authentication needed.', 'honeybee.system_account.user.errors'),
+            'errors' => $this->getContainer()->getValidationManager()->getErrorMessages()
         ]);
     }
 

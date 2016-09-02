@@ -21,15 +21,30 @@ class Honeybee_Core_Index_IndexSuccessView extends View
         $this->setAttribute('aggregate_root_types', $arts);
     }
 
+    public function executeHaljson(AgaviRequestDataHolder $request_data)
+    {
+        $service_locator = $this->getContext()->getServiceLocator();
+
+        $json = [
+            '_links' => [
+                'self' => [ 'href' => $this->routing->gen(null) ]
+            ],
+            'message' => $this->translation_manager->_('Welcome')
+        ];
+
+        foreach ($service_locator->getProjectionTypeMap() as $ptm) {
+            $json['_links'][$ptm->getPrefix()] = [
+                'href' => $this->routing->gen('module.collection', [ 'module' => $ptm ])
+            ];
+        }
+
+        $this->getContainer()->getResponse()->setContent(json_encode($json));
+    }
+
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
         $this->getContainer()->getResponse()->setContent(
-            json_encode(
-                array(
-                    'result' => 'error',
-                    'message' => 'Welcome to Honeybee.'
-                )
-            )
+            json_encode([ 'message' => $this->translation_manager->_('Welcome') ])
         );
     }
 
