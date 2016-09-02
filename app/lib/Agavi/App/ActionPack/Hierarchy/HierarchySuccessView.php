@@ -43,14 +43,9 @@ class HierarchySuccessView extends View
 
             // get attribute name to use for labelling breadcrumbs
             $service_locator = $this->getServiceLocator();
-            $view_config_service = $service_locator->getViewConfigService();
-            // @todo implement breadcrumbs renderer
-            $breadcrumbs_renderer_config = $view_config_service->getRendererConfig(
-                $this->getViewScope(),
-                $this->getOutputFormat(),
-                'hierarchy_breadcrumbs'
-            );
-            $breadcrumbs_label_attribute = (string)$breadcrumbs_renderer_config->get('breadcrumbs_label_attribute');
+            $view_config = $service_locator->getViewConfigService()->getViewConfig($this->getViewScope());
+            $view_config_settings = $view_config->getSettings();
+            $breadcrumbs_label_attribute = $view_config_settings->get('breadcrumbs_label_attribute', 'identifier');
 
             // get breadcrumbs nodes
             $breadcrumbs_nodes = [];
@@ -62,19 +57,13 @@ class HierarchySuccessView extends View
             }
 
             foreach ($breadcrumbs_nodes as $breadcrumb) {
-                $ancestor_id = $breadcrumb->getIdentifier();
-
-                $breadcrumb_label = $parent_node_type->hasAttribute($breadcrumbs_label_attribute)
-                    ? $breadcrumb->getValue($breadcrumbs_label_attribute)
-                    : $ancestor_id;
-
                 $breadcrumbs[] = [
-                    'text' => $breadcrumb_label,
+                    'text' => $breadcrumb->getValue($breadcrumbs_label_attribute),
                     'link' => $this->routing->gen(
                         'module.hierarchy',
                         array_merge(
                             $default_url_params,
-                            [ 'resource' => $ancestor_id, 'module' => $parent_node_type ]
+                            [ 'resource' => $breadcrumb->getIdentifier(), 'module' => $parent_node_type ]
                         )
                     )
                 ];

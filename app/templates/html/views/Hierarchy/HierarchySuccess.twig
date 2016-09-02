@@ -36,14 +36,14 @@
 
     <!--STARTE-->
     <div class="hb-parent-item">
-        <h4 class="hb-parent-item__header">{{ _('parent_resource') }}</h4>
+        <h4 class="hb-parent-item__header">{{ _('parent_resource', _view_settings.get('translation_domain')) }}</h4>
         {{ rendered_parent_node|raw }}
     </div>
     <!--ENDE-->
 
-    <h4 class="hb-child-items__header">{{ _('child_resources') }}</h4>
+    <h4 class="hb-child-items__header">{{ _('child_resources', _view_settings.get('translation_domain')) }}</h4>
 {% else %}
-    <h4 class="hb-child-items__header">{{ _('root_resources') }}</h4>
+    <h4 class="hb-child-items__header">{{ _('root_resources', _view_settings.get('translation_domain')) }}</h4>
 {% endif %}
 
 <div class="controls controls-top">

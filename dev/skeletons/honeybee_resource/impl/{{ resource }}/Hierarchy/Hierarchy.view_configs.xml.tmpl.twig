@@ -8,6 +8,12 @@
     <ae:configuration>
         <view_configs>
             <view_config scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy">
+                <settings>
+                    <!--
+                    <setting name="translation_domain">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy_view</setting>
+                    -->
+                    <setting name="breadcrumbs_label_attribute">identifier</setting>
+                </settings>
                 <output_formats>
                     <output_format name="html">
                         <renderer_configs>
