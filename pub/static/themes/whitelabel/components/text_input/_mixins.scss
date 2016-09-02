@@ -27,4 +27,8 @@
     @include input-textual();
     resize: vertical;
     transition: height 50ms linear; //makes the autogrow less flickery
+
+    &.readonly {
+        @include input-textual-disabled();
+    }
 }

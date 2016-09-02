@@ -89,6 +89,10 @@ textarea {
     @include textarea;
 }
 
+textarea[readonly] {
+    @include input-textual-disabled();
+}
+
 .input_help,
 .input_hint {
     color: color(text-secondary);
