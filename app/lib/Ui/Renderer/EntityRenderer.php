@@ -68,48 +68,56 @@ abstract class EntityRenderer extends Renderer
 
         $entity_type = $entity->getType();
 
-        $fields_options = $this->getOption('__fields_options', new Settings());
         $fields = $view_template->extractAllFields();
         foreach ($fields as $field_name => $field) {
+            $field_settings = $field->getConfig();
             $attribute = null;
-
-            $field_config = $field->getConfig();
-            if ($field_config->has('attribute_path')) {
-                $attribute = $entity_type->getAttribute($field_config->get('attribute_path'));
+            if ($field_settings->has('attribute_path')) {
+                $attribute = $entity_type->getAttribute($field_settings->get('attribute_path'));
             }
-            $field_options = $fields_options->has($field_name)
-                ? $fields_options->get($field_name)
-                : new Settings();
+
+            $default_render_settings = [
+                'group_parts' => $this->getOption('group_parts', [ $entity_type->getPrefix() ]),
+                'field_name' => $field->getName(),
+                'view_scope' => $this->getOption('view_scope'),
+                'is_within_embed_template' => $this->getOption('is_embed_template', false),
+                'readonly' => $this->getOption('readonly', false),
+            ];
+
+            $attribute_type_renderer_config = $this->view_config_service->getRendererConfig(
+                $this->getOption('view_scope', 'missing.view_scope'),
+                $this->output_format,
+                $attribute
+            )->toArray();
+            $field_renderer_config = $this->view_config_service->getRendererConfig(
+                $this->getOption('view_scope', 'missing.view_scope'),
+                $this->output_format,
+                'field_' . $field->getName()
+            )->toArray();
+
+            if ($field_settings->has('renderer')) {
+                $field_renderer_config['renderer'] = $field_settings->get('renderer');
+            }
+
+            $renderer_config = array_replace_recursive($attribute_type_renderer_config, $field_renderer_config);
+
+            $render_settings = array_replace_recursive(
+                $default_render_settings,
+                $renderer_config,
+                $field_settings->toArray(),
+                $this->getOption('__fields_options', new Settings())->get($field_name, new Settings())->toArray()
+            );
 
             if ($attribute) {
-                // the attribute_path below ensures, that fields are provided with a cache-key, that is "unique enough"
-                $renderer_config = new ArrayConfig(
-                    array_merge($field_config->toArray(), [ 'attribute_path' => $attribute->getPath() ])
-                );
-                $renderer = $this->renderer_service->getRenderer($attribute, $this->output_format, $renderer_config);
-
-                $renderer_settings = [];
-                $renderer_settings = $renderer_config->getSettings()->toArray();
-                $renderer_settings['group_parts'] = $this->getOption('group_parts', [ $entity_type->getPrefix() ]);
-                $renderer_settings['field_name'] = $field->getName();
-                $renderer_settings['field_css'] = $field->getCss();
-                $renderer_settings['view_scope'] = $this->getOption('view_scope');
-                $renderer_settings['is_within_embed_template'] = $this->getOption('is_embed_template', false);
-
-                // propagate eventual readonly state
-                if ($this->isReadonly()) {
-                    $renderer_settings['readonly'] = true;
-                }
-
+                $renderer = $this->renderer_service->getRenderer($attribute, $this->output_format, new ArrayConfig($renderer_config));
                 $rendered_field = $renderer->render(
                     [
                         'attribute' => $attribute,
                         'resource' => $entity
                     ],
-                    $renderer_settings
+                    $render_settings
                 );
             } else {
-                $renderer_config = new ArrayConfig($field_config->toArray());
                 if (!$renderer_config->has('renderer')) {
                     throw new RuntimeError(
                         sprintf(
@@ -122,26 +130,8 @@ abstract class EntityRenderer extends Renderer
                         )
                     );
                 }
-                // gets the renderer that has been specified in the config
                 $renderer = $this->renderer_service->getRenderer(null, $this->output_format, $renderer_config);
-
-                $renderer_settings = array_replace_recursive(
-                    $renderer_config->getSettings()->toArray(),
-                    $field_options->toArray()
-                );
-                $renderer_settings['group_parts'] = $this->getOption(
-                    'group_parts',
-                    $this->getOption('group_parts', [])
-                );
-                $renderer_settings['field_name'] = $field->getName();
-                $renderer_settings['field_css'] = $field->getCss();
-                $renderer_settings['view_scope'] = $this->getOption('view_scope');
-
-                // propagate eventual readonly state
-                if ($this->isReadonly()) {
-                    $renderer_settings['readonly'] = true;
-                }
-                $rendered_field = $renderer->render([ 'resource' => $entity ], $renderer_settings);
+                $rendered_field = $renderer->render([ 'resource' => $entity ], $render_settings);
             }
 
             // todo index should be tab->panel->row->item->group->field instead of field only
@@ -217,11 +207,6 @@ abstract class EntityRenderer extends Renderer
             'view_template' => $view_template,
             'view_template_name' => $view_template_name
         ];
-    }
-
-    protected function isReadonly()
-    {
-        return (bool)$this->getOption('readonly', false);
     }
 
     /**
