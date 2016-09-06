@@ -57,7 +57,7 @@ class ViewTemplatesConfigHandler extends BaseConfigHandler
                             )
                         );
                     }
-                    $view_templates = ArrayToolkit::mergeScalarSafe(
+                    $view_templates = array_replace_recursive(
                         $all_view_templates[$view_templates['extends']],
                         $view_templates
                     );
