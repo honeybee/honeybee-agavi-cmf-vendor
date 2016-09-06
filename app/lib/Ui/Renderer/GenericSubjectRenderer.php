@@ -59,7 +59,7 @@ class GenericSubjectRenderer extends Renderer
             );
         }
 
-        $params['css'] = (string)$this->getOption('css', '') . ' ' . (string)$this->getOption('field_css', '');
+        $params['css'] = (string)$this->getOption('css', '');
 
         return $params;
     }

@@ -28,7 +28,7 @@ class HtmlAttributeRenderer extends AttributeRenderer
             'hb-attribute %s%s %s',
             $this->getOption('css_prefix', 'attribute_value_'),
             $params['attribute_name'],
-            (string)$this->getOption('field_css', '')
+            (string)$this->getOption('css', '')
         );
         if ($this->isWidgetEnabled()) {
             $css .= sprintf(' %s %s', $params['is_embedded'] ? ' jsb__' : ' jsb_', $this->getWidgetImplementor());
