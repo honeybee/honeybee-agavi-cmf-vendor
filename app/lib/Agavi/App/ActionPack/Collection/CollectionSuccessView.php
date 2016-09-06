@@ -92,12 +92,6 @@ class CollectionSuccessView extends View
             // 'pagination' => $pagination->toArray(),
         ];
 
-        $current_page_url = $url_generator->generateUrl(null);
-        $url_parameters = ArrayToolkit::getUrlQueryInRequestFormat($current_page_url);
-        unset($url_parameters['offset']); // offset is not needed when page is used (see validator)
-
-        $current_page_url = $url_generator->generateUrl(null, $url_parameters);
-
         $curie = AgaviConfig::get('app_prefix', 'honeybee');
         $curie_tpl = AgaviConfig::get(
             'curie_url_tpl',
@@ -105,9 +99,6 @@ class CollectionSuccessView extends View
         );
 
         $links = [
-            'self' => [
-                'href' => $current_page_url
-            ],
             "curies" => [[
                 "name" => $curie,
                 "href" => $curie_tpl,
@@ -115,82 +106,69 @@ class CollectionSuccessView extends View
             ]],
         ];
 
-        if (!$pagination->isFirstPage()) {
-            $links['first'] = [
-                'href' => $url_generator->generateUrl(
-                    null,
-                    array_merge($url_parameters, [ 'offset' => 0 ])
+        // get pagination links
+        $page_links = $this->renderSubject(
+            $pagination,
+            [
+                'curie' => $curie,
+                'translation_domain' => $view_config->getSettings()->get(
+                    'pagination_translation_domain',
+                    'application.pagination'
                 ),
-                'title' => $tm->_(
-                    'pager.first_page.title',
-                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
-                ),
-            ];
-        }
+            ]
+        );
 
-        if ($pagination->hasPrevPage()) {
-            $links['prev'] = [
-                'href' => $url_generator->generateUrl(
-                    null,
-                    array_merge($url_parameters, [ 'offset' => $pagination->getPrevPageOffset() ])
-                ),
-                'title' => $tm->_(
-                    'pager.prev_page.title',
-                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
-                ),
-            ];
-        }
-
-        if ($pagination->hasNextPage()) {
-            $links['next'] = [
-                'href' => $url_generator->generateUrl(
-                    null,
-                    array_merge($url_parameters, [ 'offset' => $pagination->getNextPageOffset() ])
-                ),
-                'title' => $tm->_(
-                    'pager.next_page.title',
-                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
-                ),
-            ];
-        }
-
-        if (!$pagination->isLastPage()) {
-            $links['last'] = [
-                'href' => $url_generator->generateUrl(
-                    null,
-                    array_merge($url_parameters, [ 'offset' => $pagination->getLastPageOffset() ])
-                ),
-                'title' => $tm->_(
-                    'pager.last_page.title',
-                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
-                ),
-            ];
-        }
-
-        if ($pagination->getNumberOfPages() > 1) {
-            $links[$curie . ':jumpToPage'] = [
-                'href' => $this->routing->gen(null),
-                'templated' => true,
-                'title' => $tm->_(
-                    'pager.jump_to_page.title',
-                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
-                ),
-            ];
-        }
-
-        // get sort activities defined for current view config scope
-        $sort_activities_container = $activity_service->getContainer($view_scope . '.sort_activities');
-        $sort_activities_map = $sort_activities_container->getActivityMap();
-
+        // get links for sort activities
         $sort_links = $this->renderSubject(
-            $sort_activities_map,
+            $activity_service->getContainer($view_scope . '.sort_activities')->getActivityMap(),
             [
                 'curie' => $curie
             ],
             'sort_activities'
         );
 
-        $json['_links'] = array_merge($links, $sort_links);
+        // get links for primary activities
+        $primary_links = $this->renderSubject(
+            $activity_service->getContainer($view_scope . '.primary_activities')->getActivityMap(),
+            [
+                'curie' => $curie
+            ],
+            'primary_activities'
+        );
+
+        // get links for subheader activities
+        $subheader_links = $this->renderSubject(
+            $activity_service->getContainer($view_scope . '.subheader_activities')->getActivityMap(),
+            $sort_activities_map,
+            [
+                'curie' => $curie
+            ],
+            'subheader_activities'
+        );
+
+        $search_activity = $activity_service->getActivity($view_scope, 'search');
+        $search_link = $this->renderSubject(
+            $search_activity,
+            [
+                'curie' => $curie,
+                'search_value' => $request_data->getParameter('search'),
+                'form_parameters' => [
+                    'sort' => $request_data->getParameter('sort')
+                ]
+            ]
+        );
+        $search_link_name = sprintf('%s:%s~%s', $curie, $search_activity->getScope(), $search_activity->getName());
+        $search_links = [];
+        $search_links[$search_link_name] = $search_link;
+
+        $json['_links'] = array_merge(
+            $links,
+            $page_links,
+            $sort_links,
+            $primary_links,
+            $subheader_links,
+            $search_links
+        );
 
         return json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }

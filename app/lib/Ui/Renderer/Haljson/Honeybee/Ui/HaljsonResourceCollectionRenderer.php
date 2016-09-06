@@ -2,11 +2,11 @@
 
 namespace Honeybee\Ui\Renderer\Haljson\Honeybee\Ui;
 
-use Honeybee\Ui\Renderer\Haljson\HaljsonRenderer;
+use Honeybee\Ui\Renderer\Renderer;
 use Honeybee\Ui\ResourceCollection;
 use Honeybee\Common\Error\RuntimeError;
 
-class HaljsonResourceCollectionRenderer extends HaljsonRenderer
+class HaljsonResourceCollectionRenderer extends Renderer
 {
     protected function validate()
     {
@@ -20,11 +20,9 @@ class HaljsonResourceCollectionRenderer extends HaljsonRenderer
      */
     protected function doRender()
     {
-        $params = parent::getTemplateParameters();
-
         $resource_collection = $this->getPayload('subject');
 
-        $view_scope = $this->getOption('view_scope', 'missing.view_scope.collection');
+        $view_scope = $this->getOption('view_scope', 'missing.collection.view_scope');
 
         $default_data = [
             'view_scope' => $view_scope,

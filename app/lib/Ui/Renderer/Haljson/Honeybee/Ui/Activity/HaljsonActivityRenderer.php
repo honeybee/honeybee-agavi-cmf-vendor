@@ -13,11 +13,11 @@ class HaljsonActivityRenderer extends ActivityRenderer
     {
         $activity = $this->getPayload('subject');
 
+        // todo don't generate url for uri-template activity?
         $link = [
             'name' => $activity->getName(),
             'href' => $this->getLinkFor($activity),
-            // 'rel' => implode(' ', $activity->getRels()),
-            // 'rel' => 'http://docs.foo.de/rels?scope='.$activity->getScope().'&name='.$activity->getName(),
+            'rel' => implode(' ', $activity->getRels()),
             'title' => sprintf('%s.label', $activity->getName()),
         ];
 
