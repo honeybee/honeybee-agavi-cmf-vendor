@@ -26,6 +26,26 @@
 
 {% block primary %}
 
+{% if rendered_parent_node is not empty %}
+    <div class="hierarchy-breadcrumbs">
+    {% for breadcrumb in breadcrumbs %}
+        {% if not loop.first %} <span class="hierarchy-breadcrumbs__separator">&#62;</span> {% endif %}
+        <a class="hierarchy-breadcrumbs__item" href="{{ breadcrumb.link }}">{{ breadcrumb.text }}</a>
+    {% endfor %}
+    </div>
+
+    <!--STARTE-->
+    <div class="hb-parent-item">
+        <h4 class="hb-parent-item__header">{{ _('parent_resource', _view_settings.get('translation_domain')) }}</h4>
+        {{ rendered_parent_node|raw }}
+    </div>
+    <!--ENDE-->
+
+    <h4 class="hb-child-items__header">{{ _('child_resources', _view_settings.get('translation_domain')) }}</h4>
+{% else %}
+    <h4 class="hb-child-items__header">{{ _('root_resources', _view_settings.get('translation_domain')) }}</h4>
+{% endif %}
+
 <div class="controls controls-top">
     <div class="controls-layout">
         <div class="search-box">
@@ -47,19 +67,6 @@
         </div>
     </div>
 </div>
-
-{% if rendered_parent_node is not empty %}
-    {% for breadcrumb in breadcrumbs %}
-        {% if not loop.first %} <b>></b> {% endif %}
-        <a href="{{ breadcrumb.link }}">{{ breadcrumb.text }}</a>
-    {% endfor %}
-    <h4>{{ _('parent_resource') }}</h4>
-    {{ rendered_parent_node|raw }}
-
-    <h4>{{ _('child_resources') }}</h4>
-{% else %}
-    <h4>{{ _('root_resources') }}</h4>
-{% endif %}
 
 {{ rendered_resource_collection|raw }}
 

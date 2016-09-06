@@ -39,6 +39,7 @@ class View extends AgaviView
     const ATTRIBUTE_RENDERED_PRIMARY_ACTIVITIES = '_rendered_primary_activities';
     const ATTRIBUTE_IS_SLOT = '_is_slot';
     const ATTRIBUTE_LAYOUT = '_layout';
+    const ATTRIBUTE_VIEW_SETTINGS = '_view_settings';
 
     /**
      * Name of the default layout to use for slots.
@@ -218,6 +219,13 @@ class View extends AgaviView
 
         if (!$this->hasAttribute(static::ATTRIBUTE_BREADCRUMBS_TITLE)) {
             $this->setAttribute(static::ATTRIBUTE_BREADCRUMBS_TITLE, $this->getBreadcrumbsTitle());
+        }
+
+        $view_config_service = $this->getServiceLocator()->getViewConfigService();
+        $view_config = $view_config_service->getViewConfig($this->getViewScope());
+        $view_settings = $view_config->getSettings();
+        if (!$this->hasAttribute(static::ATTRIBUTE_VIEW_SETTINGS)) {
+            $this->setAttribute(static::ATTRIBUTE_VIEW_SETTINGS, $view_settings);
         }
     }
 

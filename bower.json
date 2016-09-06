@@ -13,7 +13,6 @@
         "moment": "~2.10.3",
         "datetime-local-picker": "^0.2.2",
         "magnific-popup": "~1",
-        "selectize": "~0.12.1",
         "selectrect": "~0.0.6",
 
         "Stickyfill": "~1.1.3",

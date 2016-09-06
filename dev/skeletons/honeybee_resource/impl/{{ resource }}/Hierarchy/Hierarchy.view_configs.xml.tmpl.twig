@@ -8,6 +8,12 @@
     <ae:configuration>
         <view_configs>
             <view_config scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy">
+                <settings>
+                    <!--
+                    <setting name="translation_domain">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.hierarchy_view</setting>
+                    -->
+                    <setting name="breadcrumbs_label_attribute">identifier</setting>
+                </settings>
                 <output_formats>
                     <output_format name="html">
                         <renderer_configs>
@@ -27,17 +33,17 @@
                                     <setting name="template">html/resource/as_nodelist_item.twig</setting>
                                 </settings>
                             </renderer_config>
-                            <renderer_config subject="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.inactive.activity_map">
+                            <renderer_config subject="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.published.activity_map">
                                <settings>
-                                    <setting name="default_activity_name">hierarchy</setting>
+                                    <setting name="default_activity_name">resource_hierarchy</setting>
                                     <setting name="hidden_activity_names">
                                         <setting>delete</setting>
                                     </setting>
                                 </settings>
                             </renderer_config>
-                            <renderer_config subject="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.active.activity_map">
+                            <renderer_config subject="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.edit.activity_map">
                                 <settings>
-                                    <setting name="default_activity_name">hierarchy</setting>
+                                    <setting name="default_activity_name">resource_hierarchy</setting>
                                     <setting name="hidden_activity_names">
                                         <setting>delete</setting>
                                     </setting>

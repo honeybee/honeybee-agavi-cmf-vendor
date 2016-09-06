@@ -1,5 +1,62 @@
 %view-hierarchy {
     @include listitems-view();
     @include listitems-controls;
-    @include listitems-sidebar;
+
+    .hb-parent-item {
+        margin-bottom: $base-spacing/2;
+
+        .hb-field {
+            margin: 0;
+        }
+
+        .hb-field__content {
+            @include frame(color(lightgrey2));
+        }
+
+        .hb-field__label, .hb-field__value {
+            padding: $base-spacing/2;
+        }
+
+        .hb-field__label {
+            font-size: 90%;
+            background-color: color(panel-header-background);
+            color: color(darkgrey1);
+            font-weight: 700;
+            border-bottom: 1px solid color(grey2);
+        }
+    }
+
+    .hb-child-items {
+    }
+
+    .hb-child-items__header {
+        margin-top: $base-spacing;
+    }
+
+    .hierarchy-breadcrumbs {
+        text-align: center;
+
+        @include media-query(lap-and-up) {
+            text-align: left;
+        }
+    }
+
+    .hierarchy-breadcrumbs__item {
+        &:first-child {
+            position: relative;
+            margin-left: $font-size*1.5;
+
+            @include hb-icon-pseudo-el(( icon-name: 'flow-cascade', hide-content: false )) {
+                position: absolute;
+                left: -$font-size*1.3;
+            };
+        }
+    }
+
+    .hierarchy-breadcrumbs__separator {
+        @include hb-icon-pseudo-el(( icon-name: 'chevron-right', hide-content: false )) {
+            font-size: 1rem;
+        };
+        font-size: 0;
+    }
 }
