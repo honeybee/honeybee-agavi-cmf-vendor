@@ -1,27 +1,15 @@
 {% extends _layout %}
 
 {% block primary %}
-<div class="container-fluid wrapper">
-    <div class="row-fluid">
-        <div class="span12">
-            <h1>404 Not Found</h1>
-            <hr />
-            <p>Unterhalb der Url {{ rq.url }} ist keine Resource verf&uuml;gbar.</p>
-            <hr />
-        </div>
-    </div>
-    <div class="info-box well">
-        <h4>Details:</h4>
-        <p>
-        {% if _module is not defined %}
-            Die Url hat keine der definierten Routen getroffen.
-        {% else %}
-            Die Url trifft zu, doch die resultierende "Module/Action" Kombination konnte nicht geladen werden.<br /><br />
-            {% if _module is defined %}Module: <strong>{{ _module }}</strong>{% endif %}<br />
-            {% if _action is defined %}Action: <strong>{{ _action }}</strong>{% endif %}
-        {% endif %}
-        </p>
-    </div>
-    <div class="push"></div>
-</div>
+    <h1>{{ _404_title|default('404 Not Found') }}</h1>
+    <p>{{ _404_message|default('Die Url hat keine der definierten Routen getroffen.') }}</p>
+    <p class="hide">
+    {% if _module is not defined %}
+        Die Url hat keine der definierten Routen getroffen.
+    {% else %}
+        Die Url trifft zu, doch die resultierende "Module/Action" Kombination konnte nicht geladen werden.<br /><br />
+        {% if _module is defined %}Module: <strong>{{ _module }}</strong>{% endif %}<br />
+        {% if _action is defined %}Action: <strong>{{ _action }}</strong>{% endif %}
+    {% endif %}
+    </p>
 {% endblock %}

@@ -9,6 +9,9 @@
         <view_configs>
 
             <view_config scope="honeybee.system_account.user.collection">
+                <settings>
+                    <!-- <setting name="pagination_translation_domain">application.ui</setting> -->
+                </settings>
                 <output_formats>
                     <output_format name="html">
                         <renderer_configs>

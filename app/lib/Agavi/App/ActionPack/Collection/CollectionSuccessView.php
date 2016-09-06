@@ -2,6 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Collection;
 
+use AgaviConfig;
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use Honeybee\Infrastructure\Config\Settings;
@@ -49,6 +50,11 @@ class CollectionSuccessView extends View
     public function executeHaljson(AgaviRequestDataHolder $request_data)
     {
         $service_locator = $this->getContext()->getServiceLocator();
+        $view_config_service = $service_locator->getViewConfigService();
+        $activity_service = $service_locator->getActivityService();
+        $url_generator = $service_locator->getUrlGenerator();
+        $tm = $this->translation_manager;
+        $view_scope = $this->getViewScope();
 
         $resource_collection = $this->getAttribute('resource_collection');
         $list_config = $request_data->getParameter('list_config');
@@ -61,25 +67,30 @@ class CollectionSuccessView extends View
             $list_config->getOffset()
         );
 
+        $view_config = $view_config_service->getViewConfig($view_scope);
+
         $rendered_resource_collection = $this->renderSubject($resource_collection);
-        error_log(var_export($rendered_resource_collection, true));
+
+        $td = $resource_type->getPrefix() . '.views';
 
         $json = [
+            'resource' => $tm->_('collection.page_title', $td),
             'resource_type' => $resource_type->getPrefix(),
-            'resource_type_name' => $resource_type->getName(),
-            'results' => count($resource_collection),
-            'total_results' => $number_of_results,
-            'number_of_pages' => $pagination->getNumberOfPages(),
-            // 'pagination' => $pagination->toArray(),
+            'resource_type_name' => $tm->_($resource_type->getName(), $td),
+            'current_number_of_results' => count($resource_collection),
+            'total_number_of_results' => $number_of_results,
             '_embedded' => [
-                //$resource_type->getPrefix() => $resource_collection->toArray(),
                 $resource_type->getPrefix() => $rendered_resource_collection,
             ],
             '_links' => [
             ],
+            'query' => [
+                'search' => $list_config->getSearch(),
+                'filter' => $list_config->getFilter(),
+                'sort' => $list_config->getSort(),
+            ],
+            // 'pagination' => $pagination->toArray(),
         ];
-
-        $url_generator = $service_locator->getUrlGenerator();
 
         $current_page_url = $url_generator->generateUrl(null);
         $url_parameters = ArrayToolkit::getUrlQueryInRequestFormat($current_page_url);
@@ -87,49 +98,101 @@ class CollectionSuccessView extends View
 
         $current_page_url = $url_generator->generateUrl(null, $url_parameters);
 
-        $first_page_url = $url_generator->generateUrl(
-            null,
-            array_merge($url_parameters, [ 'offset' => 0 ])
+        $curie = AgaviConfig::get('app_prefix', 'honeybee');
+        $curie_tpl = AgaviConfig::get(
+            'curie_url_tpl',
+            AgaviConfig::get('local.base_href') . 'honeybee-core/rels/{rel}'
         );
 
-        $last_page_url = $url_generator->generateUrl(
-            null,
-            array_merge($url_parameters, [ 'offset' => $pagination->getLastPageOffset() ])
-        );
-
-        $next_page_url = $url_generator->generateUrl(
-            null,
-            array_merge($url_parameters, [ 'offset' => $pagination->getNextPageOffset() ])
-        );
-
-        $prev_page_url = $url_generator->generateUrl(
-            null,
-            array_merge($url_parameters, [ 'offset' => $pagination->getPrevPageOffset() ])
-        );
-
-        $json['_links'] = [
+        $links = [
             'self' => [
                 'href' => $current_page_url
             ],
-            'first' => [
-                'href' => $first_page_url
-            ],
-            'previous' => [
-                'href' => $prev_page_url
-            ],
-            'next' => [
-                'href' => $next_page_url
-            ],
-            'last' => [
-                'href' => $last_page_url
-            ],
-            'jumpToPage' => [
-                'href' => $this->routing->gen(null),
-                'templated' => true
-            ],
+            "curies" => [[
+                "name" => $curie,
+                "href" => $curie_tpl,
+                "templated" => true,
+            ]],
         ];
 
-        return json_encode($json);
+        if (!$pagination->isFirstPage()) {
+            $links['first'] = [
+                'href' => $url_generator->generateUrl(
+                    null,
+                    array_merge($url_parameters, [ 'offset' => 0 ])
+                ),
+                'title' => $tm->_(
+                    'pager.first_page.title',
+                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
+                ),
+            ];
+        }
+
+        if ($pagination->hasPrevPage()) {
+            $links['prev'] = [
+                'href' => $url_generator->generateUrl(
+                    null,
+                    array_merge($url_parameters, [ 'offset' => $pagination->getPrevPageOffset() ])
+                ),
+                'title' => $tm->_(
+                    'pager.prev_page.title',
+                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
+                ),
+            ];
+        }
+
+        if ($pagination->hasNextPage()) {
+            $links['next'] = [
+                'href' => $url_generator->generateUrl(
+                    null,
+                    array_merge($url_parameters, [ 'offset' => $pagination->getNextPageOffset() ])
+                ),
+                'title' => $tm->_(
+                    'pager.next_page.title',
+                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
+                ),
+            ];
+        }
+
+        if (!$pagination->isLastPage()) {
+            $links['last'] = [
+                'href' => $url_generator->generateUrl(
+                    null,
+                    array_merge($url_parameters, [ 'offset' => $pagination->getLastPageOffset() ])
+                ),
+                'title' => $tm->_(
+                    'pager.last_page.title',
+                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
+                ),
+            ];
+        }
+
+        if ($pagination->getNumberOfPages() > 1) {
+            $links[$curie . ':jumpToPage'] = [
+                'href' => $this->routing->gen(null),
+                'templated' => true,
+                'title' => $tm->_(
+                    'pager.jump_to_page.title',
+                    $view_config->getSettings()->get('pagination_translation_domain', 'application.pagination')
+                ),
+            ];
+        }
+
+        // get sort activities defined for current view config scope
+        $sort_activities_container = $activity_service->getContainer($view_scope . '.sort_activities');
+        $sort_activities_map = $sort_activities_container->getActivityMap();
+
+        $sort_links = $this->renderSubject(
+            $sort_activities_map,
+            [
+                'curie' => $curie
+            ],
+            'sort_activities'
+        );
+
+        $json['_links'] = array_merge($links, $sort_links);
+
+        return json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)

@@ -29,7 +29,6 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
 
     public function executeOptions(AgaviRequestDataHolder $request_data)
     {
-        error_log('muahahaha');
         return 'Success';
     }
 
@@ -63,11 +62,11 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
     public function getNotFoundView($message = '', $title = '')
     {
         if (!empty($message)) {
-            $this->setAttribute('org.honeybee.error_404.message', $message);
+            $this->setAttribute('_404_message', $message);
         }
 
         if (!empty($title)) {
-            $this->setAttribute('org.honeybee.error_404.title', $title);
+            $this->setAttribute('_404_title', $title);
         }
 
         $module_name = AgaviConfig::get('actions.error_404_module');

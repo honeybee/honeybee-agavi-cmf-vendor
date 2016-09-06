@@ -12,12 +12,12 @@ class Honeybee_Core_System_Error404_Error404SuccessView extends ErrorView
 
     protected function getTitle()
     {
-        return '404 Not Found';
+        return $this->getAttribute('_404_title', null, '404 Not Found');
     }
 
     protected function getMessage()
     {
-        return 'The resource could not be found.';
+        return $this->getAttribute('_404_message', null, 'The resource could not be found.');
     }
 
     protected function getHttpStatusCode()

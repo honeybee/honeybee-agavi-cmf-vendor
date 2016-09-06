@@ -1,7 +1,7 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use Honeybee\Common\Error\RuntimeError;
+use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 
 class Honeybee_SystemAccount_User_ApiLogin_ApiLoginSuccessView extends View
 {
@@ -28,6 +28,32 @@ class Honeybee_SystemAccount_User_ApiLogin_ApiLoginSuccessView extends View
     public function executeBinary(AgaviRequestDataHolder $request_data)
     {
         return $this->forwardToRequestedAction();
+    }
+
+    /**
+     * Handles non-existing methods. This includes mainly the not implemented
+     * handling of certain output types.
+     *
+     * @param string $method_name
+     * @param array $arguments
+     *
+     * @throws AgaviViewException with different messages
+     */
+    public function __call($method_name, $arguments)
+    {
+        if (preg_match('~^(execute)([A-Za-z_]*)$~', $method_name, $matches)) {
+            return $this->forwardToRequestedAction();
+        }
+
+        throw new AgaviViewException(
+            sprintf(
+                'The view "%1$s" does not implement an "%2$s()" method. Please ' .
+                'implement "%1$s::%2$s()" or handle this situation in one of the base views (e.g. "%3$s").',
+                get_class($this),
+                $method_name,
+                get_class()
+            )
+        );
     }
 
     protected function forwardToRequestedAction()

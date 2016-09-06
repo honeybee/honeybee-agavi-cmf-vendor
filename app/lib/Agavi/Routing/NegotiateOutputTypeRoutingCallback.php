@@ -82,8 +82,8 @@ class NegotiateOutputTypeRoutingCallback extends AgaviRoutingCallback
 
         $acceptable_media_types_for_client = self::parseAcceptString($accept_header_value);
 
-        $matching_output_type = null;
         // get the first media type that is acceptable for the server as well in order of the client's prio
+        $matching_output_type = null;
         foreach ($acceptable_media_types_for_client as $acceptable_media_type) {
             if (isset($all_supported_media_types[$acceptable_media_type])) {
                 $matching_output_type = $all_supported_media_types[$acceptable_media_type];

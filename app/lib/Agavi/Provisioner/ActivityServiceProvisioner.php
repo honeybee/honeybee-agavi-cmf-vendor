@@ -83,9 +83,9 @@ class ActivityServiceProvisioner extends AbstractProvisioner
                     [ 'value' => $rule->getSanitizedValue() ]
                 );
             }
-        } else {
-            throw new ConfigError('Given URL must be convertible to an instance of: ' . Url::CLASS);
         }
+
+        throw new ConfigError('Given URL must be convertible to an instance of: ' . Url::CLASS);
     }
 
     protected function loadActivitiesConfig()

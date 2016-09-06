@@ -2,39 +2,38 @@
 
 namespace Honeybee\Ui\Renderer\Haljson\Honeybee\Ui;
 
-use Honeybee\Ui\Renderer\EntityListRenderer;
+use Honeybee\Ui\Renderer\Haljson\HaljsonRenderer;
 use Honeybee\Ui\ResourceCollection;
 use Honeybee\Common\Error\RuntimeError;
 
-class HaljsonResourceCollectionRenderer extends EntityListRenderer
+class HaljsonResourceCollectionRenderer extends HaljsonRenderer
 {
-    const STATIC_TRANSLATION_PATH = 'collection';
-
     protected function validate()
     {
         if (!$this->getPayload('subject') instanceof ResourceCollection) {
-            throw new RuntimeError(
-                sprintf('Payload "subject" must implement "%s".', ResourceCollection::CLASS)
-            );
+            throw new RuntimeError('Payload "subject" must implement: ' . ResourceCollection::CLASS);
         }
     }
 
+    /**
+     * @return array
+     */
     protected function doRender()
     {
         $params = parent::getTemplateParameters();
 
         $resource_collection = $this->getPayload('subject');
 
-        $scope = $this->getOption('view_scope', 'default.collection');
+        $view_scope = $this->getOption('view_scope', 'missing.view_scope.collection');
 
         $default_data = [
-            'view_scope' => $scope, // e.g. honeybee.system_account.user.collection
+            'view_scope' => $view_scope,
         ];
 
         $rendered_resources = [];
         foreach ($resource_collection as $resource) {
             $renderer_config = $this->view_config_service->getRendererConfig(
-                $scope,
+                $view_scope,
                 $this->output_format,
                 $resource,
                 $default_data
@@ -49,6 +48,6 @@ class HaljsonResourceCollectionRenderer extends EntityListRenderer
             );
         }
 
-        return json_encode($rendered_resources);
+        return $rendered_resources;
     }
 }

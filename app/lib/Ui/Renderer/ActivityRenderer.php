@@ -120,7 +120,7 @@ abstract class ActivityRenderer extends Renderer
     protected function getDefaultTranslationDomain()
     {
         $view_scope = $this->getViewScope();
-        $activity_scope = $this->getPayload('subject')->getScopeKey();
+        $activity_scope = $this->getPayload('subject')->getScope();
 
         if (empty($view_scope)) {
             if (empty($activity_scope)) {
