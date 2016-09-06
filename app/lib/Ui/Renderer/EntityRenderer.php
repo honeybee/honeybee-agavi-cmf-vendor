@@ -83,12 +83,6 @@ abstract class EntityRenderer extends Renderer
                 'is_within_embed_template' => $this->getOption('is_embed_template', false),
                 'readonly' => $this->getOption('readonly', false),
             ];
-
-            $attribute_type_renderer_config = $this->view_config_service->getRendererConfig(
-                $this->getOption('view_scope', 'missing.view_scope'),
-                $this->output_format,
-                $attribute
-            )->toArray();
             $field_renderer_config = $this->view_config_service->getRendererConfig(
                 $this->getOption('view_scope', 'missing.view_scope'),
                 $this->output_format,
@@ -99,6 +93,14 @@ abstract class EntityRenderer extends Renderer
                 $field_renderer_config['renderer'] = $field_settings->get('renderer');
             }
 
+            $attribute_type_renderer_config = [];
+            if ($attribute) {
+                $attribute_type_renderer_config = $this->view_config_service->getRendererConfig(
+                    $this->getOption('view_scope', 'missing.view_scope'),
+                    $this->output_format,
+                    $attribute
+                )->toArray();
+            }
             $renderer_config = array_replace_recursive($attribute_type_renderer_config, $field_renderer_config);
 
             $render_settings = array_replace_recursive(
@@ -108,8 +110,10 @@ abstract class EntityRenderer extends Renderer
                 $this->getOption('__fields_options', new Settings())->get($field_name, new Settings())->toArray()
             );
 
+            $renderer_config = new ArrayConfig($renderer_config);
+
             if ($attribute) {
-                $renderer = $this->renderer_service->getRenderer($attribute, $this->output_format, new ArrayConfig($renderer_config));
+                $renderer = $this->renderer_service->getRenderer($attribute, $this->output_format, $renderer_config);
                 $rendered_field = $renderer->render(
                     [
                         'attribute' => $attribute,
