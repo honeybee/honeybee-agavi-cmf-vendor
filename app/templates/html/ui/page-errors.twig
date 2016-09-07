@@ -1,19 +1,21 @@
 {%- block pageerrors -%}
-<div class="page-errors-layout">
-    <div class="box">
-        {%- spaceless -%}
-        <div class="hb-errors jsb_ jsb_Honeybee_Core/ui/GlobalErrors">
-            <ul class="hb-errors__global">{%- block pageerrors_global -%}{% endblock %}</ul>
-            <div class="hb-errors__specific">
-                <ul class="hb-errors__fields">{%- block pageerrors_specific -%}{% endblock %}</ul>
-                <div class="hb-errors__switch">
-                    <span class="hb-errors__switch-count"><span class="hb-errors__switch-count-current">1</span> / <span class="hb-errors__switch-count-total">10</span></span>
-                    <span class="hb-errors__switch-prev"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-prev" title="{{_('errors.prev_title')}}">&larr;</a></span>
-                    <span class="hb-errors__switch-next"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-next" title="{{_('errors.next_title')}}">&rarr;</a></span>
+<div class="page-errors">
+    <div class="page-errors-layout">
+        <div class="box">
+            {%- spaceless -%}
+            <div class="hb-errors jsb_ jsb_Honeybee_Core/ui/GlobalErrors">
+                <ul class="hb-errors__global">{%- block pageerrors_global -%}{% endblock %}</ul>
+                <div class="hb-errors__specific">
+                    <ul class="hb-errors__fields">{%- block pageerrors_specific -%}{% endblock %}</ul>
+                    <div class="hb-errors__switch">
+                        <span class="hb-errors__switch-count"><span class="hb-errors__switch-count-current">1</span> / <span class="hb-errors__switch-count-total">10</span></span>
+                        <span class="hb-errors__switch-prev"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-prev" title="{{_('errors.prev_title')}}">&larr;</a></span>
+                        <span class="hb-errors__switch-next"><a href="javascript:void(0);" class="hb-errors__switch-link hb-errors__switch-link-next" title="{{_('errors.next_title')}}">&rarr;</a></span>
+                    </div>
                 </div>
             </div>
+            {%- endspaceless -%}
         </div>
-        {%- endspaceless -%}
     </div>
 </div>
 {%- endblock pageerrors -%}
