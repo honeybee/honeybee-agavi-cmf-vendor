@@ -67,7 +67,7 @@ define([
         this.form_name = this.$widget.data('form-name');
         this.aoi_selectrect = {};
         this.dummy_items = [ '.newitem' ];
-        this.dropzone_selector = '.imagelist--dropzone';
+        this.dropzone_selector = '.imagelist__dropzone';
 
         this.resource_type_name = this.$widget.data('resource-type-name');
         this.resource_type_prefix = this.$widget.data('resource-type-prefix');
