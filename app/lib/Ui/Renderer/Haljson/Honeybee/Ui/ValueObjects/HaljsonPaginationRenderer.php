@@ -2,6 +2,7 @@
 
 namespace Honeybee\Ui\Renderer\Haljson\Honeybee\Ui\ValueObjects;
 
+use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\Ui\Renderer\PaginationRenderer;
 
 class HaljsonPaginationRenderer extends PaginationRenderer
