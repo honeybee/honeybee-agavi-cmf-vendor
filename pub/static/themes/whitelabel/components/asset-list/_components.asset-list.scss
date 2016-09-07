@@ -109,7 +109,7 @@ $thumb-size-default: 150px;
     }
 
     .assetlist-tabs__toggles {
-        border: 1px dashed color(action);
+        border: 1px dashed color(navigational-primary);
     }
 }
 
@@ -196,7 +196,7 @@ $thumb-size-default: 150px;
 
         .mfp-close {
             background: color(white);
-            color: color(action);
+            color: color(navigational-primary);
         }
 
         .mfp-arrow-left:before {

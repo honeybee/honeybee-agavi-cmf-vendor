@@ -38,9 +38,21 @@ $thumb-size-default: 150px;
         }
     }
 
-    .hb-field__value {
-        @include input-textual-shape-default;
+    .imagelist {
         @include input-textual-colors-default;
+
+        // rules in common with input-textual-shape
+        width: 100%;
+        border-radius: 3px;
+    }
+
+    &.hb-imagelist--readonly {
+        .imagelist {
+            @include input-textual-colors-disabled;
+        }
+
+        .newitem,
+        .hb-embed-actions { display: none; }
     }
 }
 
@@ -108,8 +120,12 @@ $thumb-size-default: 150px;
         display: none;
     }
 
-    .imagelist-tabs__toggles {
-        border: 1px dashed color(action);
+    .imagelist {
+        padding: $input-padding;
+    }
+
+    .imagelist__dropzone {
+        border: 1px dotted color(lines);
     }
 }
 
@@ -127,6 +143,15 @@ $thumb-size-default: 150px;
     .newitem .hb-embed-actions,
     .imagelist__thumb-controls {
         display: none;
+    }
+
+    .imagelist {
+        background-color: color(transparent);
+    }
+
+    .imagelist-tabs__toggles {
+        // from input-textual-colors-default
+        background-color: color(background-blank);
     }
 }
 
@@ -192,7 +217,7 @@ $thumb-size-default: 150px;
 
         .move {
             background-color: color(background-default);
-            color: color(action);
+            color: color(navigational-primary);
 
             &:hover {
             background-color: color(background-highlight);
@@ -224,7 +249,7 @@ $thumb-size-default: 150px;
 
         .mfp-close {
             background: color(white);
-            color: color(action);
+            color: color(navigational-primary);
         }
 
         .mfp-arrow-left:before {
@@ -319,7 +344,9 @@ $thumb-size-default: 150px;
     }
     .imagelist__image-aoi-accept {
         @include button-emphasized-positive;
-        margin-right: $base-spacing;
+        @include button-states {
+            margin-right: $base-spacing;
+        }
         width: 45%;
     }
     .imagelist__image-aoi-cancel {
@@ -372,14 +399,13 @@ $thumb-size-default: 150px;
 }
 
 // dragging dropzone
-.imagelist--dropzone {
+.imagelist__dropzone {
     position: relative;
-    border: 1px dotted color(lines);
 }
 
 // when drag-and-drop operation is ongoing
 .dragging {
-    .imagelist--dropzone {
+    .imagelist__dropzone {
         border: 1px solid color(mutating-secondary);
         overflow: hidden; // keep animations in dropzone boundaries
     }

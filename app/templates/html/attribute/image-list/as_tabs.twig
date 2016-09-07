@@ -1,6 +1,6 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
-<div class="hb-field hb-imagelist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/ImageList{% endif %}"
+<div class="hb-field hb-imagelist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/ImageList{% endif %} {% if not isReadable %}hb-imagelist--readonly{% endif %}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
     data-attribute-path="{{ attribute_path }}" data-resource-type-prefix="{{ resource_type_prefix }}" data-resource-type-name="{{ resource_type_name }}"
@@ -15,120 +15,122 @@
             </div>
         </div><!--
         --><div class="hb-field__value">
-            <div class="imagelist imagelist--dropzone">
-                <div class="imagelist__dropzone-placeholder">
-                    <span class="imagelist__placeholder-title">{{ _(field_name~'.add_images', translation_domain) }}</span>
-                    <span class="imagelist__placeholder-description">{{ _(field_name~'.dragndrop_description', translation_domain) }}</span>
-                </div>
-                <div class="imagelist-tabs">
-                    {% set tabs_id = 'hb-tabs-' ~ field_id %}
-                    <div class="imagelist-tabs__header">
-                        <ul class="imagelist-tabs__toggles">
-                            <li class="imagelist-tabs__toggle imagelist__thumb newitem" data-item-id="{{ 'add-image-to-' ~ field_id }}">
-                                <label for="{{tabs_id}}-add-image-to-{{ field_id }}">
-                                    <img src="static/themes/whitelabel/binaries/150x150.gif" alt="" class="imagelist__thumb-img imagelist--dropzone"/>
-                                </label>
-                                <progress max="100" value="50"><div class="progress-bar"><span style="width: 50%;">Uploading…</span></div></progress>
-                                {% if isReadable %}
-                                <div class="imagelist__thumb-controls">
-                                    <ul>
-                                        <li><a href="javascript:void(0)" class="move left imagelist__thumb-control">&#9664;</a></li>
-                                        <li><a href="javascript:void(0)" class="remove imagelist__thumb-control">&#10060;</a></li>
-                                        <li><a href="javascript:void(0)" class="move right imagelist__thumb-control">&#9654;</a></li>
-                                    </ul>
-                                </div>
-                                {% endif %}
-                            </li>
+            <div class="imagelist">
+                <div class="imagelist__dropzone imagelist__dropzone">
+                    <div class="imagelist__dropzone-placeholder">
+                        <span class="imagelist__placeholder-title">{{ _(field_name~'.add_images', translation_domain) }}</span>
+                        <span class="imagelist__placeholder-description">{{ _(field_name~'.dragndrop_description', translation_domain) }}</span>
+                    </div>
+                    <div class="imagelist-tabs">
+                        {% set tabs_id = 'hb-tabs-' ~ field_id %}
+                        <div class="imagelist-tabs__header">
+                            <ul class="imagelist-tabs__toggles">
+                                <li class="imagelist-tabs__toggle imagelist__thumb newitem" data-item-id="{{ 'add-image-to-' ~ field_id }}">
+                                    <label for="{{tabs_id}}-add-image-to-{{ field_id }}">
+                                        <img src="static/themes/whitelabel/binaries/150x150.gif" alt="" class="imagelist__thumb-img imagelist__dropzone"/>
+                                    </label>
+                                    <progress max="100" value="50"><div class="progress-bar"><span style="width: 50%;">Uploading…</span></div></progress>
+                                    {% if isReadable %}
+                                    <div class="imagelist__thumb-controls">
+                                        <ul>
+                                            <li><a href="javascript:void(0)" class="move left imagelist__thumb-control">&#9664;</a></li>
+                                            <li><a href="javascript:void(0)" class="remove imagelist__thumb-control">&#10060;</a></li>
+                                            <li><a href="javascript:void(0)" class="move right imagelist__thumb-control">&#9654;</a></li>
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                                </li>
+                                {%- for image in images -%}
+                                <li class="imagelist-tabs__toggle imagelist__thumb" data-item-id="{{image.id}}">
+                                    <label for="{{tabs_id}}-{{image.id}}">
+                                        <img src="{{image.thumb_url}}" title="{{image.title|default('')}}" alt="Thumbnail: {{image.caption|default(image.title)|default('')}}" class="imagelist__thumb-img imagelist__dropzone"/>
+                                    </label>
+                                    {% if isReadable %}
+                                    <div class="imagelist__thumb-controls">
+                                        <ul>
+                                            <li><a href="javascript:void(0)" class="move left imagelist__thumb-control">&#9664;</a></li>
+                                            <li><a href="javascript:void(0)" class="remove imagelist__thumb-control">&#10060;</a></li>
+                                            <li><a href="javascript:void(0)" class="move right imagelist__thumb-control">&#9654;</a></li>
+                                        </ul>
+                                    </div>
+                                    {% endif %}
+                                </li>
+                                {%- endfor -%}
+                            </ul>
+                        </div><!--
+                        --><div class="imagelist-tabs__content">
+                            {%- if isReadable -%}
+                                {# add empty input elements to add a new image when javascript is not available or did not load #}
+                                {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
+
+                                    field_name: field_name,
+                                    field_id: field_id,
+                                    item_id: 'add-image-to-' ~ field_id,
+                                    grouped_base_path: grouped_base_path ~"[0]",
+                                    tabs_id: tabs_id,
+
+                                    image_id: 'add-image-to-' ~ field_id,
+                                    thumb_url: "static/themes/whitelabel/binaries/150x150.gif",
+                                    preview_url: "static/themes/whitelabel/binaries/150x150.gif",
+                                    download_url: "static/themes/whitelabel/binaries/150x150.gif",
+                                    location: "",
+                                    filename: "",
+                                    filesize: 0,
+                                    mimetype: "",
+                                    title: "",
+                                    caption: "",
+                                    copyright: "",
+                                    copyright_url: "",
+                                    source: "",
+                                    aoi: "",
+                                    width: 0,
+                                    height: 0,
+                                    metadata: {},
+
+                                    newitem: true,
+
+                                    readonly: readonly,
+                                    disabled: disabled,
+
+                                    translation_domain: translation_domain
+                                } -%}
+                            {% endif %}
                             {%- for image in images -%}
-                            <li class="imagelist-tabs__toggle imagelist__thumb" data-item-id="{{image.id}}">
-                                <label for="{{tabs_id}}-{{image.id}}">
-                                    <img src="{{image.thumb_url}}" title="{{image.title|default('')}}" alt="Thumbnail: {{image.caption|default(image.title)|default('')}}" class="imagelist__thumb-img imagelist--dropzone"/>
-                                </label>
-                                {% if isReadable %}
-                                <div class="imagelist__thumb-controls">
-                                    <ul>
-                                        <li><a href="javascript:void(0)" class="move left imagelist__thumb-control">&#9664;</a></li>
-                                        <li><a href="javascript:void(0)" class="remove imagelist__thumb-control">&#10060;</a></li>
-                                        <li><a href="javascript:void(0)" class="move right imagelist__thumb-control">&#9654;</a></li>
-                                    </ul>
-                                </div>
-                                {% endif %}
-                            </li>
+                                {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
+
+                                    field_name: field_name,
+                                    field_id: field_id,
+                                    item_id: image.id,
+                                    grouped_base_path: grouped_base_path ~"["~ loop.index ~"]",
+                                    tabs_id: tabs_id,
+
+                                    image_id: image.id,
+                                    thumb_url: image.thumb_url,
+                                    preview_url: image.preview_url,
+                                    download_url: image.download_url,
+                                    location: image.location,
+                                    filename: image.filename,
+                                    filesize: image.filesize,
+                                    mimetype: image.mimetype,
+                                    title: image.title,
+                                    caption: image.caption,
+                                    copyright: image.copyright,
+                                    copyright_url: image.copyright_url,
+                                    source: image.source,
+                                    aoi: image.aoi,
+                                    width: image.width,
+                                    height: image.height,
+                                    metadata: image.metadata,
+
+                                    newitem: false,
+
+                                    readonly: readonly,
+                                    disabled: disabled,
+
+                                    translation_domain: translation_domain
+                                } -%}
                             {%- endfor -%}
-                        </ul>
-                    </div><!--
-                    --><div class="imagelist-tabs__content">
-                        {%- if isReadable -%}
-                            {# add empty input elements to add a new image when javascript is not available or did not load #}
-                            {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
-
-                                field_name: field_name,
-                                field_id: field_id,
-                                item_id: 'add-image-to-' ~ field_id,
-                                grouped_base_path: grouped_base_path ~"[0]",
-                                tabs_id: tabs_id,
-
-                                image_id: 'add-image-to-' ~ field_id,
-                                thumb_url: "static/themes/whitelabel/binaries/150x150.gif",
-                                preview_url: "static/themes/whitelabel/binaries/150x150.gif",
-                                download_url: "static/themes/whitelabel/binaries/150x150.gif",
-                                location: "",
-                                filename: "",
-                                filesize: 0,
-                                mimetype: "",
-                                title: "",
-                                caption: "",
-                                copyright: "",
-                                copyright_url: "",
-                                source: "",
-                                aoi: "",
-                                width: 0,
-                                height: 0,
-                                metadata: {},
-
-                                newitem: true,
-
-                                readonly: readonly,
-                                disabled: disabled,
-
-                                translation_domain: translation_domain
-                            } -%}
-                        {% endif %}
-                        {%- for image in images -%}
-                            {%- include "html/attribute/image-list/image-as-tabs-panel.twig" with {
-
-                                field_name: field_name,
-                                field_id: field_id,
-                                item_id: image.id,
-                                grouped_base_path: grouped_base_path ~"["~ loop.index ~"]",
-                                tabs_id: tabs_id,
-
-                                image_id: image.id,
-                                thumb_url: image.thumb_url,
-                                preview_url: image.preview_url,
-                                download_url: image.download_url,
-                                location: image.location,
-                                filename: image.filename,
-                                filesize: image.filesize,
-                                mimetype: image.mimetype,
-                                title: image.title,
-                                caption: image.caption,
-                                copyright: image.copyright,
-                                copyright_url: image.copyright_url,
-                                source: image.source,
-                                aoi: image.aoi,
-                                width: image.width,
-                                height: image.height,
-                                metadata: image.metadata,
-
-                                newitem: false,
-
-                                readonly: readonly,
-                                disabled: disabled,
-
-                                translation_domain: translation_domain
-                            } -%}
-                        {%- endfor -%}
+                        </div>
                     </div>
                 </div>
             </div>
