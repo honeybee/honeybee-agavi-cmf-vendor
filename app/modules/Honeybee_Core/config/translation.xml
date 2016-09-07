@@ -19,21 +19,6 @@
 
             <translator domain="honeybee.core">
                 <message_translator class="AgaviSimpleTranslator">
-                    <!-- user-interface related translation for the core module go here -->
-                    <ae:parameter name="views">
-                        <ae:parameter name="de">
-                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
-                            <ae:parameter name="theme_preview.page_title">Vorschau Theme</ae:parameter>
-                            <ae:parameter name="system.status.page_title">Applikationsstatus</ae:parameter>
-                            <ae:parameter name="system.error404.error404_success_view.page_title">404 Nicht gefunden</ae:parameter>
-                        </ae:parameter>
-                        <ae:parameter name="en">
-                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
-                            <ae:parameter name="theme_preview.page_title">Preview Theme</ae:parameter>
-                            <ae:parameter name="system.status.page_title">Application Status</ae:parameter>
-                            <ae:parameter name="system.error404.error404_success_view.page_title">404 Not Found</ae:parameter>
-                        </ae:parameter>
-                    </ae:parameter>
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
                             <ae:parameter name="theme_preview.label">Vorschau Theme</ae:parameter>
@@ -45,8 +30,46 @@
                 </message_translator>
             </translator>
 
+            <translator domain="honeybee.core.index">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="index.page_title">Honeybee</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
+            <translator domain="honeybee.core.system">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                            <ae:parameter name="status.page_title">Applikationsstatus</ae:parameter>
+                            <ae:parameter name="error404.error404_success_view.page_title">404 Nicht gefunden</ae:parameter>
+                            <ae:parameter name="rels.page_title">Activity</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="status.page_title">Application Status</ae:parameter>
+                            <ae:parameter name="error404.error404_success_view.page_title">404 Not Found</ae:parameter>
+                            <ae:parameter name="rels.page_title">Activity</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
             <translator domain="honeybee.core.theme_preview">
                 <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                            <ae:parameter name="theme_preview.page_title">Vorschau Theme</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="theme_preview.page_title">Preview Theme</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
                             <ae:parameter name="search.description">Search activity</ae:parameter>

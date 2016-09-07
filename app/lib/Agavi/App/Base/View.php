@@ -41,6 +41,8 @@ class View extends AgaviView
     const ATTRIBUTE_LAYOUT = '_layout';
     const ATTRIBUTE_VIEW_SETTINGS = '_view_settings';
 
+    const JSON_OPTIONS = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE;
+
     /**
      * Name of the default layout to use for slots.
      */

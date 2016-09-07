@@ -1,0 +1,33 @@
+{% extends _layout %}
+
+{% block primary %}
+<h2>{{ activity.label|default(activity.name) }}</h2>
+
+<p data-activity-description="{{ activity.description|default('') }}">{{ activity.description|default('–') }}</p>
+
+<dl>
+
+    <dt>Name:
+    <dd data-activity-name="{{ activity.name }}">{{ activity.name }}
+
+    <dt>Scope:
+    <dd data-activity-scope="{{ activity.scope }}">{{ activity.scope }}
+
+    <dt>Type:
+    <dd data-activity-type="{{ activity.type }}">{{ activity.type }}
+
+    <dt>Verb:
+    <dd data-activity-type="{{ activity.verb|default('') }}">{{ activity.verb|default('–') }}
+
+    <dt>Rels:
+    <dd data-activity-rels="{{ activity.rels|join(' ')|default('') }}">{{ activity.rels|join(' ')|default('–') }}
+
+    <dt>Accepting:
+    <dd data-activity-accepting="{{ activity.accepting|join(' ')|default('') }}">{{ activity.accepting|join(' ')|default('–') }}
+
+    <dt>Sending:
+    <dd data-activity-sending="{{ activity.sending|join(' ')|default('') }}">{{ activity.sending|join(' ')|default('–') }}
+
+</dl>
+
+{%- endblock -%}

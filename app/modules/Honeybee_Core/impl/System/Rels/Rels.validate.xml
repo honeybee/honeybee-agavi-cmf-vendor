@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ae:configurations
+    xmlns="http://agavi.org/agavi/config/parts/validators/1.0"
+    xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
+    parent="%core.config_dir%/validators.xml">
+    <ae:configuration>
+        <validators>
+
+            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\RelValidator" name="invalid_rel" required="false">
+                <argument>activity</argument>
+                <error>Expected format is "scope~name".</error>
+                <error for="missing">Given activity is either wrong or not configured.</error>
+            </validator>
+
+        </validators>
+    </ae:configuration>
+</ae:configurations>

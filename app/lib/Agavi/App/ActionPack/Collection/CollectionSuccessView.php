@@ -139,7 +139,6 @@ class CollectionSuccessView extends View
         // get links for subheader activities
         $subheader_links = $this->renderSubject(
             $activity_service->getContainer($view_scope . '.subheader_activities')->getActivityMap(),
-            $sort_activities_map,
             [
                 'curie' => $curie
             ],
@@ -170,7 +169,7 @@ class CollectionSuccessView extends View
             $search_links
         );
 
-        return json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return json_encode($json, self::JSON_OPTIONS);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)

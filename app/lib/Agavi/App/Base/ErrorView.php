@@ -238,26 +238,34 @@ class ErrorView extends View
                 $requested[] = $this->getAttribute($name);
             }
         }
-        $origin = empty($requested) ? '' : ' - Requested module/action: ' . join('/', $requested);
+        $origin = empty($requested) ? '' : ' requestedModuleAction="' . join('/', $requested) . '"';
 
         $output_type = $this->getResponse()->getOutputType()->getName();
         $request_method = $this->request->getMethod();
 
         $uri = '';
         if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
-            $uri = 'for request URI "' . $_SERVER['REQUEST_URI'] . '"';
+            $uri = $_SERVER['REQUEST_URI'];
         } else {
-            $uri = 'for input: ' . $this->routing->getInput();
+            $uri = $this->routing->getInput();
         }
 
         $log_message = '';
         $route_names_array = $this->request->getAttribute('matched_routes', 'org.agavi.routing');
         if (!empty($route_names_array)) {
-            $main_route = $this->routing->getRoute(reset($route_names_array));
-            $main_module = $main_route['opt']['module'];
-            $main_action = $main_route['opt']['action'];
+            $main_module = '';
+            $main_action = '';
+            foreach ($route_names_array as $route) {
+                $route_info = $this->routing->getRoute($route);
+                if ($route_info['opt']['module'] !== null) {
+                    $main_module = $route_info['opt']['module'];
+                }
+                if ($route_info['opt']['action'] !== null) {
+                    $main_action = $route_info['opt']['action'];
+                }
+            }
             $log_message = sprintf(
-                'module="%s" action="%s" outputType="%s" requestMethod="%s" matchedUri="%s" - matchedRoutes: "%s" %s',
+                'module="%s" action="%s" outputType="%s" requestMethod="%s" matchedUri="%s" matchedRoutes="%s" %s',
                 $main_module,
                 $main_action,
                 $output_type,
