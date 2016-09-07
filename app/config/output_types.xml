@@ -15,11 +15,11 @@
         <!-- default http headers that may be included in all output types -->
         <ae:parameter name="default_http_headers">
             <ae:parameter name="X-Content-Type-Options">nosniff</ae:parameter>
-            <!-- <ae:parameter name="X-Frame-Options">SAMEORIGIN</ae:parameter> -->
-            <ae:parameter name="Access-Control-Allow-Origin">*</ae:parameter>
-            <ae:parameter name="Access-Control-Allow-Credentials">true</ae:parameter>
-            <ae:parameter name="Access-Control-Allow-Methods">GET,POST,DELETE,PUT,OPTIONS</ae:parameter>
-            <ae:parameter name="Access-Control-Allow-Headers">Content-Type,Accept,Authorization</ae:parameter>
+            <ae:parameter name="X-Frame-Options">SAMEORIGIN</ae:parameter>
+            <!-- <ae:parameter name="Access-Control-Allow-Origin">*</ae:parameter> -->
+            <!-- <ae:parameter name="Access-Control-Allow-Credentials">true</ae:parameter> -->
+            <!-- <ae:parameter name="Access-Control-Allow-Methods">GET,POST,DELETE,PUT,OPTIONS</ae:parameter> -->
+            <!-- <ae:parameter name="Access-Control-Allow-Headers">Content-Type,Accept,Authorization</ae:parameter> -->
         </ae:parameter>
 
         <!-- default layers that may be of use in several layouts, the targets should always be paths to files (not directories!) -->
@@ -183,7 +183,7 @@
                 </ae:parameter>
             </output_type>
 
-            <output_type name="haljson" exception_template="%core.app_dir%/templates/haljson/exception.php">
+            <output_type name="haljson" exception_template="%core.honeybee_template_dir%/haljson/exception.php">
                 <ae:parameter name="http_headers">
                     <ae:parameter name="Content-Type">application/hal+json; charset=UTF-8</ae:parameter>
                     <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='default_http_headers']/*)" />

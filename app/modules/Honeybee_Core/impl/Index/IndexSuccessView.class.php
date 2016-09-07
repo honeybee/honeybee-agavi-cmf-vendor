@@ -38,7 +38,7 @@ class Honeybee_Core_Index_IndexSuccessView extends View
             ];
         }
 
-        $this->getContainer()->getResponse()->setContent(json_encode($json));
+        return json_encode($json, self::JSON_OPTIONS);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)
