@@ -63,14 +63,16 @@
                         <rel>view_resource</rel>
                         <rel>view_user</rel>
                     </rels>
+                    <description>See the specified resource in the latest revision.</description>
                 </activity>
 
-                <activity name="view_history" type="workflow">
+                <activity name="resource_history" type="workflow">
                     <url type="route">honeybee.system_account.user.history</url>
                     <rels>
                         <rel>activity</rel>
                         <rel>history</rel>
                     </rels>
+                    <description>See a list of historic events for the specified resource.</description>
                 </activity>
 
                 <activity name="create_resource">

@@ -21,6 +21,8 @@
                                     <field name="created_at" attribute_path="created_at" />
                                     <field name="modified_at" attribute_path="modified_at" />
                                     <field name="workflow_state" attribute_path="workflow_state" />
+                                    <field name="identifier" attribute_path="identifier" />
+                                    <field name="revision" attribute_path="revision" />
                                 </group>
                             </cell>
                         </row>

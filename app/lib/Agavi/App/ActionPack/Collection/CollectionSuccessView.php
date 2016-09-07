@@ -92,19 +92,10 @@ class CollectionSuccessView extends View
             // 'pagination' => $pagination->toArray(),
         ];
 
-        $curie = AgaviConfig::get('app_prefix', 'honeybee');
-        $curie_tpl = AgaviConfig::get(
-            'curie_url_tpl',
-            AgaviConfig::get('local.base_href') . 'honeybee-core/rels/{rel}'
-        );
+        $curie = $this->getCurieName();
+        $curies = $this->getCuries();
 
-        $links = [
-            "curies" => [[
-                "name" => $curie,
-                "href" => $curie_tpl,
-                "templated" => true,
-            ]],
-        ];
+        $links = array_merge([], $curies);
 
         // get pagination links
         $page_links = $this->renderSubject(

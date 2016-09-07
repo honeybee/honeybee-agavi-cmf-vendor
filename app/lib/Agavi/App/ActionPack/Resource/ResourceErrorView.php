@@ -5,13 +5,8 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource;
 use Honeybee\FrameworkBinding\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 
-class ResourceErrorView extends View
+class ResourceErrorView extends ErrorView
 {
-    public function executeHtml(AgaviRequestDataHolder $request_data)
-    {
-        $this->setupHtml($request_data);
-    }
-
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
         // @todo set other response code, than 200, because things went wrong

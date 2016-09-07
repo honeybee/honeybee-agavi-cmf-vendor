@@ -913,4 +913,24 @@ class View extends AgaviView
 
         return $rendered_primary_activities;
     }
+
+    protected function getCuries()
+    {
+        $curie_tpl = AgaviConfig::get('curie_url_tpl', AgaviConfig::get('local.base_href').'honeybee-core/rels/{rel}');
+
+        $links = [
+            "curies" => [[
+                "name" => $this->getCurieName(),
+                "href" => $curie_tpl,
+                "templated" => true,
+            ]],
+        ];
+
+        return $links;
+    }
+
+    protected function getCurieName()
+    {
+        return AgaviConfig::get('app_prefix', 'honeybee');
+    }
 }

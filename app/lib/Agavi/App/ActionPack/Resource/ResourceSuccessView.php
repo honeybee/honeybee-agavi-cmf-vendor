@@ -13,7 +13,6 @@ class ResourceSuccessView extends View
 
         $resource = $this->getAttribute('resource');
 
-        $view_config_scope = $this->getAttribute('view_config_scope', 'default.templates.modify');
         $renderer_settings = $this->getResourceRendererSettings();
         $rendered_resource = $this->renderSubject($resource, $renderer_settings);
 
@@ -33,6 +32,54 @@ class ResourceSuccessView extends View
         $this->setAttribute('rendered_resource', $rendered_resource);
         $this->setAttribute('prev_link', $prev_link);
         $this->setAttribute('next_link', $next_link);
+    }
+
+    public function executeHaljson(AgaviRequestDataHolder $request_data)
+    {
+        $activity_service = $this->getServiceLocator()->getActivityService();
+
+        $resource = $this->getAttribute('resource');
+
+        $head_revision = $request_data->getParameter('head_revision');
+
+        $curie = $this->getCurieName();
+        $curies = $this->getCuries();
+
+        $links = array_merge([], $curies);
+
+        if ($resource->getRevision() > 1) {
+            $activity = $activity_service->getActivity('default_resource_activities', 'prev_revision');
+            $links[$curie . ':default_resource_activities~prev_revision'] = $this->renderSubject(
+                $activity,
+                [
+                    'curie' => $curie,
+                    'additional_url_parameters' => [
+                        'resource' => $resource,
+                        'revision' => $resource->getRevision() - 1
+                    ]
+                ]
+            );
+        }
+
+        if ($resource->getRevision() < $head_revision) {
+            $activity = $activity_service->getActivity('default_resource_activities', 'next_revision');
+            $links[$curie . ':default_resource_activities~next_revision'] = $this->renderSubject(
+                $activity,
+                [
+                    'curie' => $curie,
+                    'additional_url_parameters' => [
+                        'resource' => $resource,
+                        'revision' => $resource->getRevision() + 1
+                    ]
+                ]
+            );
+        }
+
+        $rendered_resource = $this->renderSubject($resource, $this->getResourceRendererSettings());
+
+        $json = array_replace_recursive([], $rendered_resource, [ '_links' => $links ]);
+
+        return json_encode($json, self::JSON_OPTIONS);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)

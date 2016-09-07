@@ -10,7 +10,6 @@
                 <activity name="create_resource">
                     <url type="route">module.create</url>
                     <rels>
-                        <rel>activity</rel>
                         <rel>create_resource</rel>
                     </rels>
                     <accepting>
@@ -25,10 +24,56 @@
                 <activity name="collection">
                     <url type="route">module.collection</url>
                     <rels>
-                        <rel>activity</rel>
-                        <rel>collection</rel>
+                        <rel>view_resources</rel>
                     </rels>
                 </activity>
+
+                <activity name="view_resource" type="workflow">
+                    <url type="route">module.resource</url>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>view_resource</rel>
+                        <rel>view_user</rel>
+                    </rels>
+                    <description>See the specified resource in the latest revision.</description>
+                </activity>
+
+                <activity name="resource_history" type="workflow">
+                    <url type="route">module.resource.history</url>
+                    <rels>
+                        <rel>activity</rel>
+                        <rel>history</rel>
+                    </rels>
+                    <description>See a list of historic events for the specified resource.</description>
+                </activity>
+
+                <activity name="prev_revision">
+                    <url type="route">module.resource</url>
+                    <rels>
+                        <rel>view_resource_revision</rel>
+                        <rel>view_previous_resource_revision</rel>
+                    </rels>
+                    <description>See the specified resource in the previous (older) historic revision.</description>
+                </activity>
+
+                <activity name="next_revision">
+                    <url type="route">module.resource</url>
+                    <rels>
+                        <rel>view_resource_revision</rel>
+                        <rel>view_next_resource_revision</rel>
+                    </rels>
+                    <description>See the specified resource in the next (newer) historic revision.</description>
+                </activity>
+
+                <activity name="that_revision">
+                    <url type="route">module.resource</url>
+                    <rels>
+                        <rel>view_resource_revision</rel>
+                        <rel>view_that_resource_revision</rel>
+                    </rels>
+                    <description>See the specified resource in the specified historic revision.</description>
+                </activity>
+
             </activity_container>
 
             <activity_container scope="default_subheader_activities">

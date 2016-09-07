@@ -51,7 +51,7 @@ class ErrorView extends View
                 'title' => $this->getAttribute('_title'),
                 'message' => $this->getAttribute('_message')
             ],
-            JSON_FORCE_OBJECT
+            self::JSON_OPTIONS
         );
     }
 
