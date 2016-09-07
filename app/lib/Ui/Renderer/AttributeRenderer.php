@@ -262,7 +262,7 @@ abstract class AttributeRenderer extends Renderer
 
     protected function getInputViewTemplateNameSuffixes($output_format_name = '')
     {
-        $input_view_template_name_suffixes = $this->getOption(
+        $input_view_template_name_suffixes = (array)$this->getOption(
             'input_view_template_name_suffixes',
             [ 'create', 'modify' ]
         );

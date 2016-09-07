@@ -53,10 +53,29 @@ Of course the same setting can be passed directly in-code (e.g inside Views, whe
         ]
     ]
 
+The *__fields_options* setting relies on the key *__all_fields* to propagate settings to **all** the fields of the rendered entity.
+
+    <setting name="__fields_options">
+        <settings>
+            <!--
+                Render all the fields switching
+                to the template for input views.
+            -->
+            <setting name="__all_fields">
+                <setting name="input_view_template_name_suffixes">
+                    <settings>
+                        <setting>.resource</setting>
+                    </settings>
+                </setting>
+            </setting>
+        </settings>
+    </setting>
+
 The configuration mergin order is:
 * attribute-type config (view-config)
 * field-name config (view-config)
 * field settings (view-template)
+* all_fields settings propagated by the entity (view-config / in-code)
 * field settings propagated by the entity (view-config / in-code)
 
 ## TBD / Ideas / Misc

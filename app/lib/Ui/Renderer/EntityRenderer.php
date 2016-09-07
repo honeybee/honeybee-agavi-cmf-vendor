@@ -69,6 +69,9 @@ abstract class EntityRenderer extends Renderer
         $entity_type = $entity->getType();
 
         $fields = $view_template->extractAllFields();
+        $fields_options = $this->getOption('__fields_options', new Settings());
+        $all_fields_options = $fields_options->get('__all_fields', new Settings())->toArray();
+
         foreach ($fields as $field_name => $field) {
             $field_settings = $field->getConfig();
             $attribute = null;
@@ -107,7 +110,8 @@ abstract class EntityRenderer extends Renderer
                 $default_render_settings,
                 $renderer_config,
                 $field_settings->toArray(),
-                $this->getOption('__fields_options', new Settings())->get($field_name, new Settings())->toArray()
+                $all_fields_options,
+                $fields_options->get($field_name, new Settings())->toArray()
             );
 
             $renderer_config = new ArrayConfig($renderer_config);
