@@ -129,15 +129,14 @@ abstract class AttributeRenderer extends Renderer
         return ArrayToolkit::flattenToArrayPath($group_parts);
     }
 
-    protected function determineAttributeValue($attribute_name, $default_value = '')
+    protected function determineAttributeValue($attribute_name)
     {
         $value = '';
 
         if ($this->hasOption('value')) {
-            return $this->getOption('value', $default_value);
+            return $this->getOption('value');
         }
 
-        $expression = $this->getOption('expression');
         $value_path = $this->getOption('attribute_value_path');
         if (!empty($value_path)) {
             $value = AttributeValuePath::getAttributeValueByPath($this->getPayload('resource'), $value_path);
@@ -171,11 +170,7 @@ abstract class AttributeRenderer extends Renderer
             // $value = StringToolkit::getAsString($value);
         }
 
-        if ($value === $this->attribute->getNullValue()) {
-            return $default_value;
-        } else {
-            return $value;
-        }
+        return $value;
     }
 
     protected function evaluateExpression($expression)

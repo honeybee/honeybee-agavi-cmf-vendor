@@ -51,12 +51,12 @@ class HtmlAssetListAttributeRenderer extends HtmlAttributeRenderer
         return $params;
     }
 
-    protected function determineAttributeValue($attribute_name, $default_value = [])
+    protected function determineAttributeValue($attribute_name)
     {
         $value = [];
 
         if ($this->hasOption('value')) {
-            return (array)$this->getOption('value', $default_value);
+            return (array)$this->getOption('value');
         }
 
         $expression = $this->getOption('expression');
@@ -69,7 +69,7 @@ class HtmlAssetListAttributeRenderer extends HtmlAttributeRenderer
         $value = is_array($value) ? $value : [ $value ];
 
         if ($value === $this->attribute->getNullValue()) {
-            return $default_value;
+            return [];
         } else {
             return $value;
         }

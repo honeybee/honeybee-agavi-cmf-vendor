@@ -189,7 +189,7 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
         ));
     }
 
-    protected function determineAttributeValue($attribute_name, $default_value = '')
+    protected function determineAttributeValue($attribute_name)
     {
         $embedded_entity_list = clone $this->getPayload('resource')->getValue($attribute_name);
 

@@ -6,12 +6,12 @@ use Honeybee\Ui\Renderer\Text\Trellis\Runtime\Attribute\TextAttributeRenderer;
 
 class TextTextListAttributeRenderer extends TextAttributeRenderer
 {
-    protected function determineAttributeValue($attribute_name, $default_value = '')
+    protected function determineAttributeValue($attribute_name)
     {
         $value = [];
 
         if ($this->hasOption('value')) {
-            $value = $this->getOption('value', $default_value);
+            $value = $this->getOption('value');
             $value = is_array($value) ? $value : [ $value ];
         }
 

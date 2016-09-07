@@ -38,12 +38,12 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         return $params;
     }
 
-    protected function determineAttributeValue($attribute_name, $default_value = '')
+    protected function determineAttributeValue($attribute_name)
     {
         $value = [];
 
         if ($this->hasOption('value')) {
-            $value = $this->getOption('value', $default_value);
+            $value = $this->getOption('value');
             $value = is_array($value) ? $value : [ $value ];
             return $value;
         }

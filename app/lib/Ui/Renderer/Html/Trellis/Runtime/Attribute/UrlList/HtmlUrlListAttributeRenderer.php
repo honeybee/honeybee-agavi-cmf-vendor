@@ -43,12 +43,12 @@ class HtmlUrlListAttributeRenderer extends HtmlAttributeRenderer
         return $params;
     }
 
-    protected function determineAttributeValue($attribute_name, $default_value = '')
+    protected function determineAttributeValue($attribute_name)
     {
         $urls = [];
 
         if ($this->hasOption('value')) {
-            return (array)$this->getOption('value', $default_value);
+            return (array)$this->getOption('value');
         }
 
         $expression = $this->getOption('expression');
