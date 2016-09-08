@@ -2,13 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Summary;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use AgaviRequestDataHolder;
+use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
 
-class SummaryErrorView extends View
+class SummaryErrorView extends ErrorView
 {
-    public function executeHtml(AgaviRequestDataHolder $request_data)
-    {
-        $this->setupHtml($request_data);
-    }
 }

@@ -2,15 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Modify;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use AgaviRequestDataHolder;
+use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
 
-class ModifyErrorView extends View
+class ModifyErrorView extends ErrorView
 {
-    public function executeHtml(AgaviRequestDataHolder $request_data)
-    {
-        $this->setupHtml($request_data);
-
-        $this->setAttribute('errors', $this->getErrorMessages());
-    }
 }
