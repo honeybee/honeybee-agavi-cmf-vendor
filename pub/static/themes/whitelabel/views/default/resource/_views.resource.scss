@@ -8,7 +8,6 @@ $hover-color: mix(color(blue), color(lightgrey1), 10%);
 
     .hb-field__content {
         @include frame(color(lightgrey2));
-        // border-bottom: 2px solid color(grey2);
     }
 
     .hb-field__label {
@@ -22,7 +21,6 @@ $hover-color: mix(color(blue), color(lightgrey1), 10%);
 
     .hb-field__value {
         padding: $base-spacing;
-        // background-color: color(lightgrey2);
     }
 
     .hb-field {

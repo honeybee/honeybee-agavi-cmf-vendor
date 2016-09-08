@@ -65,7 +65,7 @@ define([
         this.id = this.$widget.data('id');
         this.form_name = this.$widget.data('form-name');
         this.dummy_items = ['.newitem'];
-        this.dropzone_selector = '.assetlist--dropzone';
+        this.dropzone_selector = '.assetlist__dropzone';
 
         this.resource_type_name = this.$widget.data('resource-type-name');
         this.resource_type_prefix = this.$widget.data('resource-type-prefix');

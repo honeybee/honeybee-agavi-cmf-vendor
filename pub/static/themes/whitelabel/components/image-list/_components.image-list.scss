@@ -122,10 +122,6 @@ $thumb-size-default: 150px;
 
     .imagelist {
         padding: $input-padding;
-
-        > .imagelist__dropzone {
-            border: 1px dotted color(lines);
-        }
     }
 }
 
@@ -185,6 +181,10 @@ $thumb-size-default: 150px;
 
 .imagelist a:focus {
     outline: 1px solid color(warning-secondary);
+}
+
+.imagelist > .imagelist__dropzone {
+    border: 1px dotted color(lines);
 }
 
 .imagelist__thumb {

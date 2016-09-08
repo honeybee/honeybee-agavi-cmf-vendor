@@ -110,7 +110,17 @@ $item-margin: $panel-margin !default;
         }
     }
 
+    /* Entity List modifiers */
+
     // @todo Change to BEM modifiers
     .not-displayed { display: none; }
     .highlight { background: white; }
+
+    &.hb-field__entity-reference-list--readonly {
+        .hb-entity-templates,
+        .hb-embed-type-selector,
+        .hb-embed-actions {
+            display: none;
+        }
+    }
 }
