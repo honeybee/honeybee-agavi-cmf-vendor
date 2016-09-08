@@ -55,6 +55,8 @@
             }
         }
     }
+    // .hb-field__entity-reference-list--empty {}
+    // .hb-field__entity-reference-list--readonly {}
 }
 
 @mixin entity-reference-list() {
@@ -83,4 +85,6 @@
             }
         }
     }
+    // .hb-field__entity-reference-list--empty {}
+    // .hb-field__entity-reference-list--readonly {}
 }

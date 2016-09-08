@@ -35,6 +35,8 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
             $rendered_entities[] = $this->renderEmbeddedEntity($embedded_entity, $pos);
         }
 
+        $params['is_empty'] = $embedded_entity_list->isEmpty();
+        $params['is_readonly'] = $this->isReadonly();
         $params['rendered_entities'] = $rendered_entities;
         $params['embedded_type_names'] = $this->attribute->getEmbeddedEntityTypeMap()->getKeys();
         $params['rendered_embed_selector'] = $this->renderEmbeddedEntityTypeSelectorMap();
@@ -44,6 +46,9 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
         if ($this->attribute->getOption('inline_mode', false)) {
             $params['css'] .= ' hb-entity-list__inline-mode';
         }
+
+        $params['css'] .= $embedded_entity_list->isEmpty() ? ' hb-field__entity-reference-list--empty' : '';
+        $params['css'] .= $this->isReadonly() ? ' hb-field__entity-reference-list--readonly' : '';
 
         return $params;
     }

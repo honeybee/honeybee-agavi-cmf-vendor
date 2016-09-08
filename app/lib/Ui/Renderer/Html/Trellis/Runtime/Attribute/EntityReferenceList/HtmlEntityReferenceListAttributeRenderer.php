@@ -17,6 +17,15 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
         return $this->output_format->getName() . '/attribute/entity-reference-list/as_input.twig';
     }
 
+    protected function getTemplateParameters()
+    {
+        $params = parent::getTemplateParameters();
+
+        $params['autocomplete_translation_key'] = $this->getOption('autocomplete_translation_key', 'autocomplete');
+
+        return $params;
+    }
+
     protected function getWidgetOptions()
     {
         $options = parent::getWidgetOptions();
