@@ -73,12 +73,12 @@ class ErrorView extends View
         $this->setHttpStatusCode();
 
         return json_encode(
-            array(
+            [
                 'logref' => $this->getAttribute('_logref'),
                 'title' => $this->getAttribute('_title'),
                 'message' => $this->getAttribute('_message')
-            ),
-            JSON_FORCE_OBJECT
+            ],
+            self::JSON_OPTIONS
         );
     }
 
@@ -100,12 +100,12 @@ class ErrorView extends View
         $this->setHttpStatusCode();
 
         return json_encode(
-            array(
+            [
                 'logref' => $this->getAttribute('_logref'),
                 'title' => $this->getAttribute('_title'),
                 'message' => $this->getAttribute('_message')
-            ),
-            JSON_FORCE_OBJECT
+            ],
+            self::JSON_OPTIONS
         );
     }
 
