@@ -8,7 +8,13 @@ use Trellis\Runtime\Attribute\AttributeValuePath;
 use Trellis\Runtime\Attribute\ListAttribute;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
 use Trellis\Runtime\ValueHolder\ComplexValueInterface;
+use Trellis\Runtime\Entity\EntityList;
+use Honeybee\Infrastructure\Config\ArrayConfig;
 
+/**
+ * Fallback haljson renderer for attributes that is usually
+ * used when there no attribute type specific renderers.
+ */
 class HaljsonAttributeRenderer extends AttributeRenderer
 {
     protected function doRender()
@@ -36,13 +42,27 @@ class HaljsonAttributeRenderer extends AttributeRenderer
             }
         }
 
-        if (is_array($value) && $this->attribute instanceof ListAttribute) {
-            return array_map(function($elm) {
-                if ($elm instanceof ComplexValueInterface) {
-                    return $elm->toArray();
+        if ($this->attribute instanceof ListAttribute) {
+            if (is_array($value)) {
+                return array_map(function($elm) {
+                    if ($elm instanceof ComplexValueInterface) {
+                        return $elm->toArray();
+                    }
+                    return $elm;
+                }, $value);
+            } elseif ($value instanceof EntityList) {
+                $rendered_entities = [];
+                foreach ($value as $entity) {
+                    $rendered_entities[] = $this->renderer_service->renderSubject(
+                        $entity,
+                        $this->output_format,
+                        new ArrayConfig($this->getOptions()) // todo don't pass everything on?
+                    );
                 }
-                return $elm;
-            }, $value);
+                return $rendered_entities;
+            } else {
+                return $value;
+            }
         }
 
         return $value;
