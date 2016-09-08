@@ -5,6 +5,7 @@ namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute;
 use DateTimeInterface;
 use Honeybee\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
+use Trellis\Runtime\Attribute\ListAttribute;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
 use Trellis\Runtime\ValueHolder\ComplexValueInterface;
 
@@ -29,10 +30,19 @@ class HaljsonAttributeRenderer extends AttributeRenderer
             if ($value instanceof DateTimeInterface) {
                 $value = $value->format(TimestampAttribute::FORMAT_ISO8601);
             } elseif ($value instanceof ComplexValueInterface) {
-                $value = $value->toNative();
+                $value = $value->toArray();
             } else {
                 // unknown object, hopefully json serializable
             }
+        }
+
+        if (is_array($value) && $this->attribute instanceof ListAttribute) {
+            return array_map(function($elm) {
+                if ($elm instanceof ComplexValueInterface) {
+                    return $elm->toArray();
+                }
+                return $elm;
+            }, $value);
         }
 
         return $value;
