@@ -35,7 +35,7 @@ class HaljsonPaginationRenderer extends PaginationRenderer
                     null,
                     array_merge($url_parameters, [ 'offset' => 0 ])
                 ),
-                'title' => $this->translator->_('pager.first_page.title', $translation_domain),
+                'title' => $this->translator->translate('pager.first_page.title', $translation_domain),
             ];
         }
 
@@ -45,7 +45,7 @@ class HaljsonPaginationRenderer extends PaginationRenderer
                     null,
                     array_merge($url_parameters, [ 'offset' => $pagination->getPrevPageOffset() ])
                 ),
-                'title' => $this->translator->_('pager.prev_page.title', $translation_domain),
+                'title' => $this->translator->translate('pager.prev_page.title', $translation_domain),
             ];
         }
 
@@ -55,7 +55,7 @@ class HaljsonPaginationRenderer extends PaginationRenderer
                     null,
                     array_merge($url_parameters, [ 'offset' => $pagination->getNextPageOffset() ])
                 ),
-                'title' => $this->translator->_('pager.next_page.title', $translation_domain),
+                'title' => $this->translator->translate('pager.next_page.title', $translation_domain),
             ];
         }
 
@@ -65,16 +65,16 @@ class HaljsonPaginationRenderer extends PaginationRenderer
                     null,
                     array_merge($url_parameters, [ 'offset' => $pagination->getLastPageOffset() ])
                 ),
-                'title' => $this->translator->_('pager.last_page.title', $translation_domain),
+                'title' => $this->translator->translate('pager.last_page.title', $translation_domain),
             ];
         }
 
         if ($pagination->getNumberOfPages() > 1) {
             $link_name = empty($curie) ? 'jumpToPage' : $curie . ':jumpToPage';
             $links[$link_name] = [
-                'href' => $this->routing->gen(null),
+                'href' => $this->url_generator->generateUrl(null),
                 'templated' => true,
-                'title' => $this->translator->_('pager.jump_to_page.title', $translation_domain),
+                'title' => $this->translator->translate('pager.jump_to_page.title', $translation_domain),
             ];
         }
 
