@@ -122,10 +122,10 @@ $thumb-size-default: 150px;
 
     .imagelist {
         padding: $input-padding;
-    }
 
-    .imagelist__dropzone {
-        border: 1px dotted color(lines);
+        > .imagelist__dropzone {
+            border: 1px dotted color(lines);
+        }
     }
 }
 
@@ -150,8 +150,13 @@ $thumb-size-default: 150px;
     }
 
     .imagelist-tabs__toggles {
-        // from input-textual-colors-default
-        background-color: color(background-blank);
+        @include input-textual-colors-default;
+    }
+
+    &.hb-imagelist--readonly {
+        .imagelist-tabs__toggles {
+            @include input-textual-colors-disabled;
+        }
     }
 }
 
