@@ -30,16 +30,24 @@ class HaljsonEntityRenderer extends EntityRenderer
             $view_template_name = $this->name_resolver->resolve($entity);
         }
 
-        $view_template = $this->view_template_service->getViewTemplate(
-            $view_scope,
-            $view_template_name,
-            $this->output_format
-        );
+        $view_template = null;
+        try {
+            $view_template = $this->view_template_service->getViewTemplate(
+                $view_scope,
+                $view_template_name,
+                $this->output_format
+            );
+        } catch (RuntimeError $e) {
+        }
+
 
         $json = [];
         // TODO introduce option?
-        //$json = $entity->toArray();
-        $json = $this->getRenderedFields($entity, $view_template);
+        if ($view_template !== null) {
+            $json = $this->getRenderedFields($entity, $view_template);
+        } else {
+            $json = $entity->toArray();
+        }
         // $json['title'] = $entity->getUsername();
 
         if ($entity instanceof ProjectionInterface && $entity->getWorkflowState()) {
