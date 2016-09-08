@@ -3,6 +3,7 @@
     xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0"
     xmlns="http://agavi.org/agavi/config/parts/routing/1.0">
     <ae:configuration context="web">
+        <route pattern="^$" name=".index" action="Index" />
         <route pattern="^theme_preview$" name=".theme_preview" action="ThemePreview" />
         <route pattern="^rels/({activity:.+})$" name=".rels" action="System.Rels" />
         <route pattern="" module="%actions.error_404_module%" action="%actions.error_404_action%" />
