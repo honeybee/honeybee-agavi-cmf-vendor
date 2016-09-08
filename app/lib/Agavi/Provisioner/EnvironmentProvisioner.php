@@ -2,9 +2,11 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 
+use AgaviConfig;
 use AgaviContext;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\ServiceDefinitionInterface;
 
 class EnvironmentProvisioner extends AbstractProvisioner
@@ -15,7 +17,8 @@ class EnvironmentProvisioner extends AbstractProvisioner
 
         $state = [
             ':config' => $service_definition->getConfig(),
-            ':user' => AgaviContext::getInstance()->getUser()
+            ':user' => AgaviContext::getInstance()->getUser(),
+            ':settings' => new Settings(AgaviConfig::toArray()),
         ];
 
         if ($provisioner_settings->has('logger')) {
