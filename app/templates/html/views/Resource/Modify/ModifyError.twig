@@ -1,5 +1,23 @@
 {% extends _layout %}
 
+{% block pageerrors %}
+<div class="page-errors invalid">
+    <div class="page-errors-layout">
+        <div class="box">
+            {%- spaceless -%}
+            <div class="hb-errors">
+                <ul class="hb-errors__global">
+                {% for error in errors %}
+                    <li class="error global"><span class="error__message">{{ error }}</span></li>
+                {% endfor %}
+                </ul>
+            </div>
+            {%- endspaceless -%}
+        </div>
+    </div>
+</div>
+{%- endblock pageerrors -%}
+{#
 {% block toc %}
     <h1>Resolve conflicts for <b>{{ resource.identifier }}</b></h1>
 {% endblock %}
@@ -28,3 +46,4 @@
     </ul>
 </div>
 {% endblock %}
+#}
