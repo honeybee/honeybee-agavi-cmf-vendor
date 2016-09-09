@@ -108,10 +108,15 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
         );
 
         $default_settings = [
+            'is_embed' => true,
             'view_scope' => $view_scope,
             'group_parts' => $group_parts,
             'is_embed_template' => $is_embed_template
         ];
+
+        if ($this->hasOption('entity_template')) {
+            $default_settings['template'] = $this->getOption('entity_template');
+        }
 
         $renderer_config = $this->view_config_service->getRendererConfig(
             $view_scope,
