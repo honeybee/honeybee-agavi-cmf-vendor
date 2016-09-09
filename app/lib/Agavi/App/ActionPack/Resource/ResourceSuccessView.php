@@ -98,4 +98,20 @@ class ResourceSuccessView extends View
     {
         return array_replace_recursive($default_settings, []);
     }
+
+    public function getBreadcrumbsActivities()
+    {
+        $breadcrumbs_root_activities = $this->getBreadcrumbsRootActivities();
+
+        return $breadcrumbs_root_activities;
+    }
+
+    public function getBreadcrumbsRootActivities()
+    {
+        $resource_type = $this->getAttribute('resource')->getType();
+
+        return [
+            $this->getServiceLocator()->getActivityService()->getActivity($resource_type->getPrefix(), 'collection')
+        ];
+    }
 }
