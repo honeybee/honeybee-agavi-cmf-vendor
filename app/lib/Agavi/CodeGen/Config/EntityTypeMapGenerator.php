@@ -78,7 +78,11 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
         $twig_renderer = TwigRenderer::create(
             [
                 'twig_options' => [ 'autoescape' => false ],
-                'template_paths' => [ __DIR__ . DIRECTORY_SEPARATOR . 'templates' ]
+                'template_paths' => [
+                    AgaviConfig::get('core.template_dir'),
+                    AgaviConfig::get('core.honeybee_template_dir'),
+                    __DIR__ . DIRECTORY_SEPARATOR . 'templates',
+                ]
             ]
         );
 
