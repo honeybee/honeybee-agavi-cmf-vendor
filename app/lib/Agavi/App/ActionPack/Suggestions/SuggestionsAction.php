@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Suggestions;
 use AgaviRequestDataHolder;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Trellis\Runtime\Attribute\AttributeValuePath;
 
 class SuggestionsAction extends Action
 {
@@ -35,7 +36,7 @@ class SuggestionsAction extends Action
         foreach ($query_result->getResults() as $resource) {
             $suggestion = [ 'identifier' => $resource->getIdentifier() ];
             foreach ($display_attribute_names as $display_attribute_name) {
-                $suggestion[$display_attribute_name] = $resource->getValue($display_attribute_name);
+                $suggestion[$display_attribute_name] = AttributeValuePath::getAttributeValueByPath($resource, $display_attribute_name);
             }
             $suggestions[] = $suggestion;
         }
