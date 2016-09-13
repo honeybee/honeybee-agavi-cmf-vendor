@@ -1,5 +1,11 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
+
+{# CSS modifiers (differ from entity-reference-list #}
+{%- set css = css ~ (is_readonly ? ' hb-field__entity-reference-list--readonly' : '') -%}
+{%- set css = css ~ (is_empty ? ' hb-field__entity-reference-list--empty' : '') -%}
+{%- set css = css ~ (as_panel ? ' hb-field__entity-reference-list--as_panel' : '') -%}
+
 <div class="hb-field hb-field__entity-reference-list {{ css }}" data-jsb="{{ widget_options|json_encode }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         {% if options.hide_attribute_label is not defined or not options.hide_attribute_label %}

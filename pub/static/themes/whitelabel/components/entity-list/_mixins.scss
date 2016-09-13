@@ -55,8 +55,6 @@
             }
         }
     }
-    // .hb-field__entity-reference-list--empty {}
-    // .hb-field__entity-reference-list--readonly {}
 }
 
 @mixin entity-reference-list() {
@@ -66,15 +64,6 @@
     @include entity-list-item;
     @include entity-list-item--highlight;
 
-
-    > .hb-field__content {
-        > .hb-embed-type-selector {
-            text-align: right;
-        }
-        > .hb-autocomplete {
-            margin-bottom: 0.5*$base-spacing;
-        }
-    }
     // list-items style
     .hb-embed-item {
         box-shadow: none; // remove focusing
@@ -85,6 +74,4 @@
             }
         }
     }
-    // .hb-field__entity-reference-list--empty {}
-    // .hb-field__entity-reference-list--readonly {}
 }

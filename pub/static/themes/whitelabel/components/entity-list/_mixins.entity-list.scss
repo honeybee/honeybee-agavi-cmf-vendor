@@ -124,3 +124,16 @@ $item-margin: $panel-margin !default;
         }
     }
 }
+
+@mixin entity-list--readonly() {
+    > .hb-field__content .hb-embed-type-selector {
+        display: none;
+    }
+
+    > .hb-field__value {
+        > .hb-entity-templates,
+        > .hb-entity-list > .hb-embed-item > .hb-embed-item__header > .hb-embed-actions {
+            display: none;
+        }
+    }
+}

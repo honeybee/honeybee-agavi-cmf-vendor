@@ -23,9 +23,21 @@
             .hb-field__description { display: none; }
         }
     }
+
+    // &.hb-field__embedded-entity-list--empty {}
+
+    &.hb-field__embedded-entity-list--readonly {
+        @include entity-list--readonly;
+    }
 }
 
 // entity reference
 .hb-field__entity-reference-list {
     .hb-panel--hidden { display: none; }
+
+    // &.hb-field__entity-reference-list--empty {}
+
+    &.hb-field__entity-reference-list--readonly {
+        @include entity-list--readonly;
+    }
 }

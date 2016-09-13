@@ -1,6 +1,11 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
 
+{# CSS modifiers (differ from entity-reference-list #}
+{%- set css = css ~ (is_readonly ? ' hb-field__embedded-entity-list--readonly' : '') -%}
+{%- set css = css ~ (is_empty ? ' hb-field__embedded-entity-list--empty' : '') -%}
+{%- set css = css ~ (as_panel ? ' hb-field__embedded-entity-list--as_panel' : '') -%}
+
 {# Notifications about list constraints to respect #}
 {% set min_constraint = _('min', translation_domain) %}
 {% set max_constraint = _('max', translation_domain) %}
