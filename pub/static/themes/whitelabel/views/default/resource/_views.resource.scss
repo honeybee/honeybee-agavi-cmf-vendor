@@ -24,8 +24,10 @@ $hover-color: mix(color(blue), color(lightgrey1), 10%);
     }
 
     .hb-field {
-
+        .input_hint { margin-top: $small-spacing; }
+        .errors:empty { margin: 0; }
     }
+
 
     .hb-itemlist__titles {
         background-color: color(panel-header-background);
@@ -60,10 +62,6 @@ $hover-color: mix(color(blue), color(lightgrey1), 10%);
     @include media-query(lap-and-up) {
         color: color(darkgrey2);
 
-        .hb-field[data-hb-field-name="#{$workflow_state_fieldname}"] {
-            width: percentage(3/12);
-        }
-
         .hb-actions {
             width: percentage(3/12);
             padding-right: $base-spacing;
@@ -79,8 +77,10 @@ $hover-color: mix(color(blue), color(lightgrey1), 10%);
         }
     }
 
-    .hb-field:hover,
-    .hb-actions:hover {
-        background-color: $hover-color;
+    // image/asset-list
+    .hb-field-label__name,
+    .hb-imagelist__input-multiple,
+    .hb-assetlist__input-multiple {
+        margin-bottom: 0;
     }
 }

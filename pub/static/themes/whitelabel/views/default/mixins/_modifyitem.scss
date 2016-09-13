@@ -84,5 +84,14 @@
         }
     }
 
+    .hb-imagelist,
+    .hb-assetlist {
+        .hb-field-label__name,
+        .hb-imagelist__input-multiple,
+        .hb-assetlist__input-multiple {
+            margin-bottom: $small-spacing;
+        }
+    }
+
     @content;
 }
