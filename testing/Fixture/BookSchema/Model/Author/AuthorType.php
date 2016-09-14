@@ -11,14 +11,11 @@ use Trellis\Runtime\Attribute\ImageList\ImageListAttribute;
 use Trellis\Runtime\Attribute\Text\TextAttribute;
 use Trellis\Runtime\Attribute\TextList\TextListAttribute;
 use Trellis\Runtime\Attribute\Token\TokenAttribute;
-use Workflux\StateMachine\StateMachineInterface;
 
 class AuthorType extends AggregateRootType
 {
-    public function __construct(StateMachineInterface $state_machine)
+    public function __construct()
     {
-        $this->workflow_state_machine = $state_machine;
-
         parent::__construct(
             'Author',
             [
