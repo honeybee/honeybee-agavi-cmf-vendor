@@ -28,6 +28,11 @@
                                     </setting>
                                 </settings>
                             </renderer_config>
+                            <renderer_config subject="embedded_entity_list_attribute">
+                                <settings>
+                                    <setting name="as_panel">false</setting>
+                                </settings>
+                            </renderer_config>
                         </renderer_configs>
                     </output_format>
                 </output_formats>
