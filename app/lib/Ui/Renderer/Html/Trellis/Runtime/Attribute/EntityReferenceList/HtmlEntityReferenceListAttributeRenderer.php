@@ -23,6 +23,7 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
         $params = parent::getTemplateParameters();
 
         $params['autocomplete_translation_key'] = $this->getOption('autocomplete_translation_key', 'autocomplete');
+        $params['hide_entity_list'] = $this->getOption('hide_entity_list', true);
 
         return $params;
     }

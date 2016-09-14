@@ -25,9 +25,9 @@
                 {%- set field_title = '%s %s'|format(field_title, field_constraints) -%}
             {%- endif -%}
             {%- set field_description = _(field_name~'.field_description', translation_domain, null, null, '') -%}
-            <h3 class="hb-field__title">
+            <label class="hb-field__title">
                 {{ field_title }}
-            </h3>
+            </label>
             <p class="hb-field__description">
                 {{ field_description }}
             </p>

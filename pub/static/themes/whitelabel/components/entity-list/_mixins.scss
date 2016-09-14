@@ -16,7 +16,7 @@
     @include entity-list-item--highlight;
 
 
-    margin-bottom: 0;
+    // margin-bottom: 0;    // commented: all the fields have a margin-bottom
     @include shadow-container;
 
     .hb-embed-actions {
@@ -24,12 +24,6 @@
     }
 
     > .hb-field__content {
-        @extend %hb-panel__header;
-
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-
         > .hb-embed-type-selector,
         > .hb-field__label {
             flex: 1 1 auto;
@@ -41,8 +35,7 @@
             flex: 1 1 auto;
             align-self: flex-start;
 
-            .hb-field__title { @extend %hb-panel__title; }
-            .hb-field__description { @extend %hb-panel__description; }
+            .hb-field__description { display: none; }
         }
 
         @include media-query(lap-and-up) {

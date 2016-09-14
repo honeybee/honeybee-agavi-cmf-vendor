@@ -24,6 +24,22 @@
         }
     }
 
+    &.hb-field__embedded-entity-list--as_panel {
+        > .hb-field__content {
+            @extend %hb-panel__header;
+            // label and selector aligned horizontally
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+            .hb-field__title { @extend %hb-panel__title; }
+            .hb-field__description {
+                display: block;
+                @extend %hb-panel__description;
+            }
+        }
+    }
+
     // &.hb-field__embedded-entity-list--empty {}
 
     &.hb-field__embedded-entity-list--readonly {

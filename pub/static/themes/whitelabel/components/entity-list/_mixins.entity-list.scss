@@ -46,8 +46,6 @@ $item-margin: $panel-margin !default;
     */
     &.jsb_ {
         > .hb-field__content {
-            padding-top: 0;
-
             .hb-embed-type-selector {
                 display: none;
             }
@@ -115,14 +113,6 @@ $item-margin: $panel-margin !default;
     // @todo Change to BEM modifiers
     .not-displayed { display: none; }
     .highlight { background: white; }
-
-    &.hb-field__entity-reference-list--readonly {
-        .hb-entity-templates,
-        .hb-embed-type-selector,
-        .hb-embed-actions {
-            display: none;
-        }
-    }
 }
 
 @mixin entity-list--readonly() {
