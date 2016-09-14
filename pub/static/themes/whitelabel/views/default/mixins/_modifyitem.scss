@@ -64,6 +64,18 @@
         }
     }
 
+    /*
+        Last field has nothing to distance from.
+        Note: cells are adjacent so the rule apply to all of them
+              (requires to NOT use cells as if they were rows: e.g. two 1/1-width cells)
+    */
+    @include media-query(lap-and-up) {
+        // @todo Should this work just when parent panel is NOT hidden?
+        .hb-row:last-child > .hb-cell > .hb-group:last-child > .hb-field:last-child {
+            margin-bottom: 0;
+        }
+    }
+
     @include media-query(palm) {
         .primary-activities .activities-list__more li {
             display: block;

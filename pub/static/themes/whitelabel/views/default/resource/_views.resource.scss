@@ -1,86 +1,149 @@
 $workflow_state_fieldname: "workflow_state" !default;
 $hover-color: mix(color(blue), color(lightgrey1), 10%);
+$field-bottom-spacing: 1.43em !default; // 20/14
 
-.view-resource {
-}
+%view-resource {
+    .hb-viewitem-wrapper {
 
-.view-resource .hb-viewitem-wrapper {
-
-    .hb-field__content {
-        @include frame(color(lightgrey2));
-    }
-
-    .hb-field__label {
-        font-size: 90%;
-        background-color: color(panel-header-background);
-        color: color(darkgrey1);
-        font-weight: 700;
-        padding: $base-spacing/2;
-        border-bottom: 1px solid color(grey2);
-    }
-
-    .hb-field__value {
-        padding: $base-spacing;
-    }
-
-    .hb-field {
-        .input_hint { margin-top: $small-spacing; }
-        .errors:empty { margin: 0; }
-    }
-
-
-    .hb-itemlist__titles {
-        background-color: color(panel-header-background);
-        color: color(darkgrey1);
-    }
-
-    .hb-itemlist__title {
-        font-weight: 700;
-        padding: $base-spacing;
-    }
-
-    @include media-query(palm) {
-        box-shadow: none;
-
-        .hb-item {
-            @include frame(color(transparent));
+        .hb-field {
+            @include frame(color(lightgrey2));
         }
 
         .hb-field__label {
-            text-align: center;
+            font-size: 90%;
+            color: color(darkgrey1);
+            font-weight: 700;
+            border-bottom: 1px solid color(grey2);
+            padding: $base-spacing/2;
+            background-color: color(panel-header-background);
+        }
+        .hb-field__embedded-entity-list--as_panel { // panel includes 'label' and 'type-selector'
+            > .hb-field__content {
+                background-color: color(panel-header-background);
+
+                .hb-field__label {
+                    border-width: 0;
+                    padding: 0;
+                }
+                .hb-embed-type-selector {
+                    padding: 0;
+                }
+            }
+        }
+        .hb-embed-type-selector {
+            padding: $base-spacing/2;
         }
 
         .hb-field__value {
-            padding: $base-spacing/2 $base-spacing;
+            padding: $base-spacing;
         }
 
         .hb-field {
-            margin: 0;
+            .input_hint { margin-top: $small-spacing; }
+            .errors:empty { display: none; }
+        }
+
+
+        .hb-itemlist__titles {
+            background-color: color(panel-header-background);
+            color: color(darkgrey1);
+        }
+
+        .hb-itemlist__title {
+            font-weight: 700;
+            padding: $base-spacing;
+        }
+
+        @include media-query(palm) {
+            box-shadow: none;
+
+            .hb-item {
+                @include frame(color(transparent));
+            }
+
+            .hb-field__label {
+                text-align: center;
+            }
+
+            .hb-field__value {
+                padding: $base-spacing/2 $base-spacing;
+            }
+
+            .hb-field {
+                margin: 0;
+            }
+        }
+
+        @include media-query(lap-and-up) {
+            color: color(darkgrey2);
+
+            .hb-actions {
+                width: percentage(3/12);
+                padding-right: $base-spacing;
+                text-align: right;
+            }
+
+            .hb-actions__content {
+                padding: 1px 10px 1px 1px;
+            }
+
+            .hb-itemlist__title-actions {
+                @include visuallyhidden;
+            }
+        }
+
+        // image/asset-list
+        .hb-field-label__name,
+        .hb-imagelist__input-multiple,
+        .hb-assetlist__input-multiple {
+            margin-bottom: 0;
+        }
+
+        // entity-list
+        .hb-entity-list {
+            li {
+                border: 1px solid color(lines);
+                margin-bottom: $field-bottom-spacing;
+
+                &:after {
+                    content: '';
+                    display: block;
+                    background-color: color(grey2);
+                    height: $base-spacing/2;
+                }
+            }
+            .hb-field { margin-bottom: 0; }
+            .hb-field__value { padding: $small-spacing; }
+        }
+
+        .hb-field__entity-reference-list,
+        .hb-field__embedded-entity-list {
+            > .hb-field__value {
+                > .hb-entity-list {
+                    overflow: auto;
+                }
+            }
+        }
+
+        .hb-field__entity-reference-list {
+            > .hb-field__content {
+                padding: 0;
+
+                > .hb-autocomplete,       // no JS
+                > .selectize-control {    // JS - Selectized
+                    padding: $base-spacing;
+                }
+            }
+            > .hb-field__value {
+                padding-top: 0;
+            }
+
+            &.hb-field__entity-reference-list--is_empty {
+                .hb-entity-list  { display: none; }
+            }
+
+            // &.hb-field__entity-reference-list--readonly {}
         }
     }
 
-    @include media-query(lap-and-up) {
-        color: color(darkgrey2);
-
-        .hb-actions {
-            width: percentage(3/12);
-            padding-right: $base-spacing;
-            text-align: right;
-        }
-
-        .hb-actions__content {
-            padding: 1px 10px 1px 1px;
-        }
-
-        .hb-itemlist__title-actions {
-            @include visuallyhidden;
-        }
-    }
-
-    // image/asset-list
-    .hb-field-label__name,
-    .hb-imagelist__input-multiple,
-    .hb-assetlist__input-multiple {
-        margin-bottom: 0;
-    }
 }
