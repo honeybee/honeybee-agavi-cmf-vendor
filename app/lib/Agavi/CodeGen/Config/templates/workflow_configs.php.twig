@@ -1,0 +1,11 @@
+<?php
+
+$module_dir = AgaviConfig::get('core.module_dir');
+
+$workflow_configs = [];
+
+{% for path in files %}
+$workflow_configs[] = $module_dir . '{{ path }}';
+{% endfor %}
+
+return $workflow_configs;

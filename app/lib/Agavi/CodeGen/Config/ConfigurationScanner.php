@@ -32,7 +32,7 @@ class ConfigurationScanner
         'translation',
         'view_configs',
         'view_templates',
-        'workflows'
+        'workflows',
     ];
 
     protected static $supported_module_variant_configs = [
