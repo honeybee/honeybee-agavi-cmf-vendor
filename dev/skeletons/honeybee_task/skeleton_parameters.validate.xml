@@ -80,6 +80,17 @@ Honeybee modules have a "module.ini" file.</info>]]></ae:parameter>
                     </ae:parameter>
                 </validator>
 
+                <validator class="dialog">
+                    <argument>resource</argument>
+                    <error>You must specify an resource name to generate.</error>
+                    <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
+                    <ae:parameter name="match">true</ae:parameter>
+                    <ae:parameter name="dialog">
+                        <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
+                        <ae:parameter name="attempts">3</ae:parameter>
+                    </ae:parameter>
+                </validator>
+
             </validator>
         </validators>
     </ae:configuration>

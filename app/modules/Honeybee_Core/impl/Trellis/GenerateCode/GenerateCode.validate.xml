@@ -8,11 +8,11 @@
     <ae:configuration>
 
         <validators translation_domain="honeybee.core.errors">
-            
+
             <validator class="boolean" required="false">
                 <argument>quiet</argument>
             </validator>
-            
+
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type within you project's domain.</error>
@@ -24,12 +24,12 @@
                     <ae:parameter name="attempts">3</ae:parameter>
                 </ae:parameter>
             </validator>
-            
+
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type name within you project's domain.</error>
             </validator>
-            
+
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\TrellisTargetValidator" name="trellis_target" depends="valid_type_name" provides="trellis_target">
                 <argument>target</argument>
                 <error>You must specify a valid Trellis target.</error>
@@ -41,13 +41,13 @@
                     <ae:parameter name="attempts">3</ae:parameter>
                 </ae:parameter>
             </validator>
-            
+
              <validator class="regex" depends="trellis_target" provides="is_projection" severity="info">
                  <argument>target</argument>
                  <ae:parameter name="pattern">/^aggregate_root$/</ae:parameter>
                  <ae:parameter name="match">false</ae:parameter>
              </validator>
-            
+
              <validator class="Honeybee\FrameworkBinding\Agavi\Validator\MigrationNameValidator" name="invalid_target" depends="is_projection">
                  <argument>migration_name</argument>
                  <error>You must specify a valid migration name.</error>

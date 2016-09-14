@@ -104,6 +104,14 @@
                     <class>Honeybee\Infrastructure\Template\Twig\TwigRenderer</class>
                 </service>
 
+                <service name="honeybee.infrastructure.state_machine_builder">
+                    <class>Honeybee\Infrastructure\Workflow\StateMachineBuilder</class>
+                </service>
+
+                <service name="honeybee.infrastructure.workflow_service">
+                    <class>Honeybee\Infrastructure\Workflow\WorkflowService</class>
+                </service>
+
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
                     <provisioner>

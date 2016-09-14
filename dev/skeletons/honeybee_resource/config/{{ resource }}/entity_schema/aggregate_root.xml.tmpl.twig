@@ -15,6 +15,87 @@
         </options>
         <!-- attribute definitions -->
         <attributes>
+            <!--
+            <attribute name="title" type="text" />
+            <attribute name="artists" type="text-list" />
+            <attribute name="start_date" type="timestamp" />
+            <attribute name="email" type="email" />
+            <attribute name="images" type="image-list" />
+            <attribute name="coords" type="geo-point">
+                <option name="null_island_as_null">false</option>
+                <option name="default_value">
+                    <option name="lon">0.0</option>
+                    <option name="lat">0.0</option>
+                </option>
+            </attribute>
+            <attribute name="tickets" type="embedded-entity-list">
+                <option name="entity_types">
+                    <option>Ticket</option>
+                </option>
+            </attribute>
+            <attribute name="tags" type="entity-reference-list">
+                <option name="entity_types">
+                    <option>Tag</option>
+                </option>
+            </attribute>
+            <attribute name="category" type="choice">
+                <option name="max_count">1</option>
+                <option name="allowed_values">
+                    <option>One</option>
+                    <option>Another One</option>
+                </option>
+            </attribute>
+            <attribute name="channels" type="text-list">
+                <option name="default_value">foo</option>
+                <option name="allowed_values">
+                    <option>foo</option>
+                    <option>bar</option>
+                    <option>another blah</option>
+                </option>
+            </attribute>
+            <attribute name="website_link" type="url">
+                <option name="default_scheme">http</option>
+                <option name="allowed_schemes">
+                    <option>http</option>
+                    <option>https</option>
+                </option>
+            </attribute>
+            <attribute name="ticketshop_links" type="url-list">
+                <option name="default_scheme">http</option>
+                <option name="allowed_schemes">
+                    <option>http</option>
+                    <option>https</option>
+                </option>
+            </attribute>
+            <attribute name="data_origin" type="key-value-list" />
+            -->
         </attributes>
     </type_definition>
+
+    <!--
+    <embed_definitions>
+        <embed_definition name="Ticket">
+            <implementor>\Honeybee\Model\Aggregate\EmbeddedEntityType</implementor>
+            <entity_implementor>\Honeybee\Model\Aggregate\EmbeddedEntity</entity_implementor>
+            <attributes>
+                <attribute name="name" type="text" />
+                <attribute name="price" type="text" />
+            </attributes>
+        </embed_definition>
+    </embed_definitions>
+    -->
+
+    <!--
+    <reference_definitions>
+
+        <reference_definition name="Tag">
+            <implementor>\Honeybee\Model\Aggregate\ReferencedEntityType</implementor>
+            <entity_implementor>\Honeybee\Model\Aggregate\ReferencedEntity</entity_implementor>
+            <option name="referenced_type">\{{ vendor }}\{{ package }}\Tag\Model\Aggregate\TagType</option>
+            <option name="identifying_attribute">identifier</option>
+        </reference_definition>
+
+    </reference_definitions>
+    -->
+
 </type_schema>

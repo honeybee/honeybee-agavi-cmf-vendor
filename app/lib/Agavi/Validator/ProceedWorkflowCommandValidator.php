@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
-use Honeybee\Projection\WorkflowSubject;
 
 class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
 {
@@ -16,9 +15,10 @@ class ProceedWorkflowCommandValidator extends AggregateRootCommandValidator
             return false;
         }
 
-        $state_machine = $aggregate_root->getType()->getWorkflowStateMachine();
+        $workflow_service = $this->getContext()->getServiceLocator()->getWorkflowService();
+        $state_machine = $workflow_service->getStateMachine($aggregate_root);
         $current_state_name = $aggregate_root->getWorkflowState();
-        $supported_events = WorkflowSubject::getSupportedEventsFor($state_machine, $current_state_name);
+        $supported_events = $workflow_service->getSupportedEventsFor($state_machine, $current_state_name);
 
         $event_name = $request_payload[$event_argument];
         if (!in_array($event_name, $supported_events)) {

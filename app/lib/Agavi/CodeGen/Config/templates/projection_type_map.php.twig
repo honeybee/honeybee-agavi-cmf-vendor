@@ -1,19 +1,13 @@
 <?php
 
 use Honeybee\Projection\ProjectionTypeMap;
-use Workflux\Builder\XmlStateMachineBuilder;
 
 $module_dir = AgaviConfig::get('core.module_dir');
 
 $projection_types = [];
 
 {% for entity_key, meta_data in entity_type_map %}
-$projection_types['{{ entity_key }}'] = new {{ meta_data.implementor }}(
-    (new XmlStateMachineBuilder([
-        'name' => '{{ meta_data.workflow.name }}',
-        'state_machine_definition' => $module_dir . '{{ meta_data.workflow.file }}'
-    ]))->build()
-);
+$projection_types['{{ entity_key }}'] = new {{ meta_data.implementor }}();
 {% endfor %}
 
 return new ProjectionTypeMap($projection_types);

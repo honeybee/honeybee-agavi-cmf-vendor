@@ -2,7 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Validator;
 
-use Workflux\Builder\XmlStateMachineBuilder;
+use Popula\TerminBuero\Workflow\XmlStateMachineBuilder;
 use Workflux\Parser\Xml\StateMachineDefinitionParser;
 
 /**
@@ -24,7 +24,8 @@ class WorkflowSubjectValidator extends ConsoleDialogValidator
                 [
                     'state_machine_definition' => $input,
                     'name' => $subject
-                ]
+                ],
+                $this->getContext()->getServiceLocator()->getDic()
             );
             $state_machine = $builder->build();
             $this->export($state_machine, $this->original_argument);

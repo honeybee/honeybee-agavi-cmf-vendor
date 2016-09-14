@@ -4,21 +4,21 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Task\Proceed;
 
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\Projection\WorkflowSubject;
 
 abstract class ProceedAction extends Action
 {
     public function executeRead(AgaviRequestDataHolder $request_data)
     {
         $resource = $request_data->getParameter('resource');
-        $state_machine = $resource->getType()->getWorkflowStateMachine();
+        $workflow_service = $this->getServiceLocator()->getWorkflowService();
+        $state_machine = $workflow_service->getStateMachine($resource);
         $this->setAttribute('resource', $resource);
         $this->setAttribute('resource_type', $resource->getType());
         $this->setAttribute('current_state', $resource->getWorkflowState());
         $this->setAttribute('view_scope', $this->getScopeKey());
         $this->setAttribute(
             'supported_events',
-            WorkflowSubject::getSupportedEventsFor($state_machine, $resource->getWorkflowState(), true)
+            $workflow_service->getSupportedEventsFor($state_machine, $resource->getWorkflowState(), true)
         );
 
         return 'Input';

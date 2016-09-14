@@ -13,7 +13,7 @@ use Trellis\CodeGen\Schema\EntityTypeDefinition;
 
 abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
 {
-    const WORKFLOW_NAME_PATTERN = '%s_%s_%s_workflow_default';
+    const WORKFLOW_NAME_PATTERN = '%s.%s.%s.default_workflow';
 
     abstract protected function getConfigFileName();
 

@@ -4,7 +4,6 @@ namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Task;
 
 use AgaviRequestDataHolder;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\Projection\WorkflowSubject;
 
 class TaskAction extends Action
 {
@@ -25,11 +24,12 @@ class TaskAction extends Action
     protected function setTaskInfo(AgaviRequestDataHolder $request_data)
     {
         $resource = $request_data->getParameter('resource');
-        $state_machine = $resource->getType()->getWorkflowStateMachine();
+        $workflow_service = $this->getServiceLocator()->getWorkflowService();
+        $state_machine = $workflow_service->getStateMachine($resource);
 
         $this->setAttribute(
             'task_info',
-            WorkflowSubject::getTaskByStateAndEvent($state_machine, $resource, $request_data->getParameter('event'))
+            $workflow_service->getTaskByStateAndEvent($state_machine, $resource, $request_data->getParameter('event'))
         );
     }
 }

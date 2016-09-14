@@ -19,4 +19,34 @@
             xpointer(/dt:type_schema/dt:type_definition/dt:attributes)">
         </xi:include>
     </type_definition>
+
+    <!--
+    <embed_definitions>
+        <embed_definition name="Ticket">
+            <implementor>\Honeybee\Projection\EmbeddedEntityType</implementor>
+            <entity_implementor>\Honeybee\Projection\EmbeddedEntity</entity_implementor>
+            <attributes>
+                <attribute name="name" type="text" />
+                <attribute name="price" type="text" />
+            </attributes>
+        </embed_definition>
+    </embed_definitions>
+    -->
+
+    <!--
+    <reference_definitions>
+        <reference_definition name="Tag">
+            <implementor>\Honeybee\Projection\ReferencedEntityType</implementor>
+            <entity_implementor>\Honeybee\Projection\ReferencedEntity</entity_implementor>
+            <option name="referenced_type">\{{ vendor }}\{{ package }}\Tag\Projection\Standard\TagType</option>
+            <option name="identifying_attribute">identifier</option>
+            <attributes>
+                <attribute name="name" type="text">
+                    <option name="mirrored">true</option>
+                </attribute>
+            </attributes>
+        </reference_definition>
+    </reference_definitions>
+    -->
+
 </type_schema>

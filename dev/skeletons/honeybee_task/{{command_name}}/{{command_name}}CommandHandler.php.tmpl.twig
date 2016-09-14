@@ -1,26 +1,30 @@
 <?php
 
-namespace {{module_namespace}}\Model\Task\{{command_name}};
+namespace {{ vendor }}\{{ package }}\{{ resource }}\Model\Task\{{ command_name }};
 
-use Honeybee\Model\Command\ModelCommandHandler;
-use Honeybee\Model\Command\ModelCommandInterface;
+use {{ vendor }}\{{ package }}\{{ resource }}\Model\Aggregate\{{ resource }}Type;
+use Honeybee\Infrastructure\Command\CommandInterface;
+use Honeybee\Infrastructure\DataAccess\DataAccessServiceInterface;
+use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
+use Honeybee\Infrastructure\Workflow\WorkflowServiceInterface;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
-use {{module_namespace}}\Model\Aggregate\{{module_name}}Type;
-use {{module_namespace}}\Model\{{module_name}}UnitOfWork;
+use Honeybee\Model\Task\ModifyAggregateRoot\ModifyAggregateRootCommandHandler;
 use Psr\Log\LoggerInterface;
 
-class {{command_name}}CommandHandler extends ModelCommandHandler
+class {{ command_name }}CommandHandler extends ModifyAggregateRootCommandHandler
 {
     public function __construct(
-        {{module_name}}Type ${{module_name|lower}}_type,
-        {{module_name}}UnitOfWork ${{module_name|lower}}_unit_of_work,
+        {{ resource }}Type ${{ resource_prefix }}_type,
+        DataAccessServiceInterface $data_access_service,
+        EventBusInterface $event_bus,
+        WorkflowServiceInterface $workflow_service,
         LoggerInterface $logger
     ) {
-        parent::__construct(${{module_name|lower}}_type, ${{module_name|lower}}_unit_of_work, $logger);
+        parent::__construct(${{ resource_prefix }}_type, $data_access_service, $event_bus, $workflow_service, $logger);
     }
 
-    protected function doExecute(ModelCommandInterface $command, AggregateRootInterface ${{module_name|lower}})
+    protected function doExecute(CommandInterface $command, AggregateRootInterface ${{ resource_prefix }})
     {
-        return $user->{{command_name|as_camel_case}}($command);
+        return ${{ resource_prefix }}->{{command_name|as_camel_case}}($command);
     }
 }

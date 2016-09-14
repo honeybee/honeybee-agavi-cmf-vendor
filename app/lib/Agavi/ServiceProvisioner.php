@@ -32,6 +32,7 @@ use Honeybee\FrameworkBinding\Agavi\Provisioner\ProcessMapProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ProvisionerInterface;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\RendererServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ServiceLocatorProvisioner;
+use Honeybee\FrameworkBinding\Agavi\Provisioner\StateMachineBuilderProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\TaskServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\TemplateRendererProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\TranslatorProvisioner;
@@ -39,6 +40,7 @@ use Honeybee\FrameworkBinding\Agavi\Provisioner\UrlGeneratorProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ViewConfigServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\ViewTemplateServiceProvisioner;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\WorkflowActivityServiceProvisioner;
+use Honeybee\FrameworkBinding\Agavi\Provisioner\WorkflowServiceProvisioner;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\ServiceDefinitionInterface;
 use Honeybee\ServiceLocatorInterface;
@@ -74,6 +76,8 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         'honeybee.infrastructure.command_bus' => CommandBusProvisioner::CLASS,
         'honeybee.infrastructure.event_bus' => EventBusProvisioner::CLASS,
         'honeybee.infrastructure.process_map' => ProcessMapProvisioner::CLASS,
+        'honeybee.infrastructure.state_machine_builder' => StateMachineBuilderProvisioner::CLASS,
+        'honeybee.infrastructure.workflow_service' => WorkflowServiceProvisioner::CLASS,
         'honeybee.model.task_service' => TaskServiceProvisioner::CLASS,
         'honeybee.ui.activity_service' => ActivityServiceProvisioner::CLASS,
         'honeybee.ui.navigation_service' => NavigationServiceProvisioner::CLASS,
