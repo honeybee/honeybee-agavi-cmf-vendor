@@ -46,15 +46,15 @@ define([
         });
         self.updateErrorBubbles();
 
-        if (window.location.hash) {
-            self.openTab(window.location.hash.substr(1));
-        } else {
+//        if (window.location.hash) {
+//            self.openTab(window.location.hash.substr(1));
+//        } else {
             self.selectTab();
-        }
-
-        $(window).on('hashchange', function(ev) {
-            self.openTab(window.location.hash.substr(1));
-        });
+//        }
+//
+//        $(window).on('hashchange', function(ev) {
+//            self.openTab(window.location.hash.substr(1));
+//        });
     }
 
     Tabs.prototype = new Widget();
@@ -83,9 +83,9 @@ define([
 
         this.$widget.find('> .hb-tabs__header label').removeClass('selected');
         $selected_label.addClass('selected');
-        if (active_id) {
-            window.location.hash = active_id;
-        }
+//        if (active_id) {
+//            window.location.hash = active_id;
+//        }
     };
 
     Tabs.prototype.focusTab = function() {
