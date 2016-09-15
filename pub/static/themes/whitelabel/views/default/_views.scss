@@ -27,3 +27,7 @@ $workflow_state_fieldname: "workflow_state";
 .view-hierarchy  {
     @extend %view-hierarchy;
 }
+
+.view-resource {
+    @extend %view-resource;
+}

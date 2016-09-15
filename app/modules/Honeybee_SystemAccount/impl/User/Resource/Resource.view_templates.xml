@@ -6,29 +6,7 @@
     xmlns:xi="http://www.w3.org/2001/XInclude"
 >
     <ae:configuration>
-        <view_templates scope="honeybee.system_account.user.resource">
-            <view_template name="honeybee.system_account.user">
-                <tab name="content">
-                    <panel name="main">
-                        <row css="">
-                            <cell css="">
-                                <group name="primary">
-                                    <field name="username" attribute_path="username" />
-                                    <field name="firstname" attribute_path="firstname" />
-                                    <field name="lastname" attribute_path="lastname" />
-                                    <field name="email" attribute_path="email" />
-                                    <field name="role" attribute_path="role" />
-                                    <field name="created_at" attribute_path="created_at" />
-                                    <field name="modified_at" attribute_path="modified_at" />
-                                    <field name="workflow_state" attribute_path="workflow_state" />
-                                    <field name="identifier" attribute_path="identifier" />
-                                    <field name="revision" attribute_path="revision" />
-                                </group>
-                            </cell>
-                        </row>
-                    </panel>
-                </tab>
-            </view_template>
+        <view_templates scope="honeybee.system_account.user.resource" extends="honeybee.system_account.user.resource.modify">
         </view_templates>
     </ae:configuration>
 </ae:configurations>

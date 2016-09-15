@@ -41,14 +41,12 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
         $params['embedded_type_names'] = $this->attribute->getEmbeddedEntityTypeMap()->getKeys();
         $params['rendered_embed_selector'] = $this->renderEmbeddedEntityTypeSelectorMap();
         $params['rendered_type_templates'] = $this->renderEmbeddedTypeTemplates($embedded_entity_list->getSize());
+        $params['as_panel'] = $this->getOption('as_panel', true);
         $params['inline_mode'] = $this->attribute->getOption('inline_mode', false);
 
         if ($this->attribute->getOption('inline_mode', false)) {
             $params['css'] .= ' hb-entity-list__inline-mode';
         }
-
-        $params['css'] .= $embedded_entity_list->isEmpty() ? ' hb-field__entity-reference-list--empty' : '';
-        $params['css'] .= $this->isReadonly() ? ' hb-field__entity-reference-list--readonly' : '';
 
         return $params;
     }

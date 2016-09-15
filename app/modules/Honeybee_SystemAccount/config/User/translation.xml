@@ -144,9 +144,10 @@
                             <ae:parameter name="email.input_focus_hint">Please, type a valid email address</ae:parameter>
                             <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
                             <ae:parameter name="background_images.field_name">Hintergrundbild</ae:parameter>
-                            <ae:parameter name="add_images">Bilder hinzufügen</ae:parameter>
                             <ae:parameter name="text_list_remove_title">Löschen</ae:parameter>
-                            <ae:parameter name="dragndrop_description">Einfach hier hereinziehen</ae:parameter>
+                            <ae:parameter name="images.field_name">Bild(er)</ae:parameter>
+                            <ae:parameter name="images.add_images">Bild(er) hinzufügen…</ae:parameter>
+                            <ae:parameter name="images.dragndrop_description">Einfach hier hereinziehen</ae:parameter>
                             <ae:parameter name="title.field_name">Titel</ae:parameter>
                             <ae:parameter name="text.field_name">Text</ae:parameter>
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>
@@ -190,9 +191,10 @@
                             <ae:parameter name="email.placeholder">email@example.com</ae:parameter>
                             <ae:parameter name="email.input_focus_hint">Please, type a valid email address</ae:parameter>
                             <ae:parameter name="email.input_hint.inactive"><![CDATA[The user is <em>inactive</em>; please, verify the email address before activating.]]></ae:parameter>
-                            <ae:parameter name="add_images">Add image</ae:parameter>
+                            <ae:parameter name="images.field_name">Images</ae:parameter>
+                            <ae:parameter name="images.add_images">Add image</ae:parameter>
+                            <ae:parameter name="images.dragndrop_description">Simply drag and drop here</ae:parameter>
                             <ae:parameter name="text_list_remove_title">Remove</ae:parameter>
-                            <ae:parameter name="dragndrop_description">Simply drag and drop here</ae:parameter>
                             <ae:parameter name="title.field_name">Title</ae:parameter>
                             <ae:parameter name="text.field_name">Text</ae:parameter>
                             <ae:parameter name="uuid.field_name">UUID</ae:parameter>

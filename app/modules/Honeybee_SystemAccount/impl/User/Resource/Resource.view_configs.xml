@@ -14,6 +14,23 @@
                             <renderer_config subject="honeybee.system_account.user">
                                 <settings>
                                     <setting name="template">html/resource/as_fields.twig</setting>
+                                    <setting name="readonly">true</setting>
+                                    <setting name="__fields_options">
+                                        <settings>
+                                            <setting name="__all_fields">
+                                                <setting name="input_view_template_name_suffixes">
+                                                    <settings>
+                                                        <setting>resource</setting>
+                                                    </settings>
+                                                </setting>
+                                            </setting>
+                                        </settings>
+                                    </setting>
+                                </settings>
+                            </renderer_config>
+                            <renderer_config subject="embedded_entity_list_attribute">
+                                <settings>
+                                    <setting name="as_panel">false</setting>
                                 </settings>
                             </renderer_config>
                         </renderer_configs>

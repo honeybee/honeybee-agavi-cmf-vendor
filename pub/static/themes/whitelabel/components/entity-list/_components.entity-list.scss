@@ -23,9 +23,37 @@
             .hb-field__description { display: none; }
         }
     }
+
+    &.hb-field__embedded-entity-list--as_panel {
+        > .hb-field__content {
+            @extend %hb-panel__header;
+            // label and selector aligned horizontally
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+
+            .hb-field__title { @extend %hb-panel__title; }
+            .hb-field__description {
+                display: block;
+                @extend %hb-panel__description;
+            }
+        }
+    }
+
+    // &.hb-field__embedded-entity-list--empty {}
+
+    &.hb-field__embedded-entity-list--readonly {
+        @include entity-list--readonly;
+    }
 }
 
 // entity reference
 .hb-field__entity-reference-list {
     .hb-panel--hidden { display: none; }
+
+    // &.hb-field__entity-reference-list--empty {}
+
+    &.hb-field__entity-reference-list--readonly {
+        @include entity-list--readonly;
+    }
 }

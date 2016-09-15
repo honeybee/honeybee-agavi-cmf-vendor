@@ -5,6 +5,7 @@ namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\EntityReferenceLis
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\EntityTypeInterface;
 use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\EmbeddedEntityList\HtmlEmbeddedEntityListAttributeRenderer;
+use Trellis\Runtime\Attribute\AttributeValuePath;
 
 class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAttributeRenderer
 {
@@ -22,6 +23,7 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
         $params = parent::getTemplateParameters();
 
         $params['autocomplete_translation_key'] = $this->getOption('autocomplete_translation_key', 'autocomplete');
+        $params['hide_entity_list'] = $this->getOption('hide_entity_list', true);
 
         return $params;
     }
@@ -46,9 +48,10 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
             }
             $embedded_type_opts = $suggest_options[$embedded_type];
             $suggest_field = $embedded_type_opts['suggest_field'];
+            $label_field = $embedded_type_opts['label_field'] ?: $suggest_field;
             $widget_value[] = [
                 'value' => $embedded_entity->getValue(self::SUGGEST_VALUE_ATTRIBUTE),
-                'label' => $embedded_entity->getValue($suggest_field)
+                'label' => AttributeValuePath::getAttributeValueByPath($embedded_entity, $label_field)
             ];
         }
 
@@ -86,6 +89,7 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
             $suggest_options[$embedded_type->getPrefix()] = [
                 'display_fields' => $display_fields,
                 'suggest_field' => $suggest_fieldname,
+                'label_field' => $this->getLabelFieldname($embedded_type) ?: $suggest_fieldname,
                 'value_field' => self::SUGGEST_VALUE_IDENTIFIER,
                 'placeholder' => $this->_(
                     sprintf('search for a %s by %s', $referenced_type->getName(), $suggest_fieldname)
@@ -160,6 +164,26 @@ class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAtt
         }
 
         return $suggest_fieldname;
+    }
+
+    protected function getLabelFieldname(EntityTypeInterface $embedded_type)
+    {
+        $type_prefix = $embedded_type->getPrefix();
+        $label_field_option = $type_prefix . '.label_attribute';
+        if ($this->hasOption($label_field_option)) {
+            $label_fieldname = $this->getOption($label_field_option);
+            if (!$embedded_type->hasAttribute($label_fieldname)) {
+                throw new RuntimeError(
+                    sprintf(
+                        'Non-existant label_attribute "%s" configured for embed-reference-type: %s',
+                        $label_fieldname,
+                        $embedded_type->getName()
+                    )
+                );
+            }
+            return $label_fieldname;
+        }
+        return null;
     }
 
     protected function getWidgetImplementor()

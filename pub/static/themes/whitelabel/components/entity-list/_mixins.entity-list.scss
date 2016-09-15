@@ -46,8 +46,6 @@ $item-margin: $panel-margin !default;
     */
     &.jsb_ {
         > .hb-field__content {
-            padding-top: 0;
-
             .hb-embed-type-selector {
                 display: none;
             }
@@ -115,11 +113,16 @@ $item-margin: $panel-margin !default;
     // @todo Change to BEM modifiers
     .not-displayed { display: none; }
     .highlight { background: white; }
+}
 
-    &.hb-field__entity-reference-list--readonly {
-        .hb-entity-templates,
-        .hb-embed-type-selector,
-        .hb-embed-actions {
+@mixin entity-list--readonly() {
+    > .hb-field__content .hb-embed-type-selector {
+        display: none;
+    }
+
+    > .hb-field__value {
+        > .hb-entity-templates,
+        > .hb-entity-list > .hb-embed-item > .hb-embed-item__header > .hb-embed-actions {
             display: none;
         }
     }
