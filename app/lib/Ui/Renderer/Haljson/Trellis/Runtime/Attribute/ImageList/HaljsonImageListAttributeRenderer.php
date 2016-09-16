@@ -2,14 +2,8 @@
 
 namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\ImageList;
 
-use DateTimeInterface;
 use Honeybee\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
-use Trellis\Runtime\Attribute\ListAttribute;
-use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
-use Trellis\Runtime\ValueHolder\ComplexValueInterface;
-use Trellis\Runtime\Entity\EntityList;
-use Honeybee\Infrastructure\Config\ArrayConfig;
 
 /**
  * ImageListAttribute renderer for haljson output format.

@@ -3,13 +3,13 @@
 namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute;
 
 use DateTimeInterface;
+use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 use Trellis\Runtime\Attribute\ListAttribute;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
-use Trellis\Runtime\ValueHolder\ComplexValueInterface;
 use Trellis\Runtime\Entity\EntityList;
-use Honeybee\Infrastructure\Config\ArrayConfig;
+use Trellis\Runtime\ValueHolder\ComplexValueInterface;
 
 /**
  * Fallback haljson renderer for attributes that is usually
