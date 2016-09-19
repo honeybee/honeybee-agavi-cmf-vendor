@@ -180,6 +180,10 @@ define([
 
             $next.find('.imagelist__thumb-control.move').first().focus();
         });
+
+        jsb.fireEvent('IMAGE_LIST:WIDGET_LOADED', {
+            'dom_element': this.$widget
+        });
     }
 
     ImageList.prototype = new Widget();
@@ -525,6 +529,10 @@ define([
 
             self.updatePopupItems();
             self.cancelAoi();
+
+            jsb.fireEvent('IMAGE_LIST:UPLOAD_FINISHED', {
+                'dom_element': self.$widget
+            });
         });
     };
 
@@ -617,6 +625,10 @@ define([
                 // update popup items to contain the new image
                 self.updatePopupItems();
                 self.cancelAoi();
+
+                jsb.fireEvent('IMAGE_LIST:UPLOAD_FINISHED', {
+                    'dom_element': self.$widget
+                });
             }
         );
     };
