@@ -5,6 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 use AgaviContext;
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
 
 class DefaultProvisioner extends AbstractProvisioner
@@ -23,6 +24,11 @@ class DefaultProvisioner extends AbstractProvisioner
             $state[':logger'] = $logger;
         }
 
+        if ($provisioner_settings->has('connector')) {
+            $connector_name = $provisioner_settings->get('connector', 'default');
+            $connector_service = $this->di_container->make(ConnectorServiceInterface::CLASS);
+            $state[':connector'] = $connector_service->getConnector($connector_name);
+        }
         $this->di_container->define($service, $state);
 
         // there will only be one instance of the service when the "share" setting is true
