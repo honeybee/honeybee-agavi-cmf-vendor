@@ -3,7 +3,7 @@
     <div class="hb-field__content">
         <div class="hb-field__label">{{ _(field_name~'.field_name', translation_domain) }}</div><!--
         --><div class="hb-field__value">
-            <a href="{{ attribute_value }}" {% if open_in_blank %}target="__blank" rel="noopener noreferrer"{% endif %}>{{ attribute_value }}</a>
+            <a href="{{ attribute_value }}" {% if open_in_blank %}target="__blank" rel="noopener noreferrer"{% endif %}>{{ attribute_value | truncate(options.truncate|default(30), false, "…") }}</a>
         </div>
     </div>
 </div>

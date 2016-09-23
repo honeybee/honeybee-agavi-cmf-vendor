@@ -16,6 +16,10 @@ use Honeybee\Infrastructure\Template\Twig\Loader\FilesystemLoader;
 use Honeybee\ServiceDefinitionInterface;
 use Twig_Environment;
 use Twig_Extension_Debug;
+use Twig_Extensions_Extension_Array;
+use Twig_Extensions_Extension_Date;
+use Twig_Extensions_Extension_Intl;
+use Twig_Extensions_Extension_Text;
 
 class TemplateRendererProvisioner extends AbstractProvisioner
 {
@@ -68,6 +72,10 @@ class TemplateRendererProvisioner extends AbstractProvisioner
         ];
 
         $settings['twig_extensions'] = [
+            Twig_Extensions_Extension_Text::CLASS,
+            Twig_Extensions_Extension_Intl::CLASS,
+            Twig_Extensions_Extension_Array::CLASS,
+            Twig_Extensions_Extension_Date::CLASS,
             ToolkitExtension::CLASS,
             HoneybeeToolkitExtension::CLASS,
             TranslatorExtension::CLASS,

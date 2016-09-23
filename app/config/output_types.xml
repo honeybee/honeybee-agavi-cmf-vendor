@@ -87,6 +87,10 @@
                 <ae:parameter>.html</ae:parameter>
             </ae:parameter>
             <ae:parameter name="extensions">
+                <ae:parameter>Twig_Extensions_Extension_Text</ae:parameter>
+                <ae:parameter>Twig_Extensions_Extension_Intl</ae:parameter>
+                <ae:parameter>Twig_Extensions_Extension_Array</ae:parameter>
+                <ae:parameter>Twig_Extensions_Extension_Date</ae:parameter>
                 <ae:parameter>Honeybee\Infrastructure\Template\Twig\Extension\ToolkitExtension</ae:parameter>
                 <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\TranslationManagerExtension</ae:parameter>
                 <ae:parameter>Honeybee\FrameworkBinding\Agavi\Renderer\Twig\HoneybeeToolkitExtension</ae:parameter>
