@@ -115,6 +115,11 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $activities;
     }
 
+    /**
+     * Returns the aggregate root type for the current action. This depends on the class name.
+     *
+     * @return AggregateRootTypeInterface
+     */
     protected function getAggregateRootType()
     {
         $class_name_parts = explode('_', static::CLASS);
@@ -131,6 +136,13 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $this->getServiceLocator()->getAggregateRootTypeMap()->getItem($prefix);
     }
 
+    /**
+     * Returns the (Standard) projection type for the current action. This depends on the class name.
+     *
+     * @param string $variant name of projection type variant (defaults to 'Standard')
+     *
+     * @return ProjectionTypeInterface
+     */
     protected function getProjectionType($variant = ProjectionTypeInterface::DEFAULT_VARIANT)
     {
         $class_name_parts = explode('_', static::CLASS);
@@ -153,6 +165,15 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $this->getContext()->getServiceLocator();
     }
 
+    /**
+     * Looks up service key in ServiceLocator and returns the found service.
+     *
+     * @param string $service_key
+     *
+     * @return object service
+     *
+     * @throws RuntimeError when service key yields no result
+     */
     protected function getService($service_key)
     {
         $service = $this->getServiceLocator()->getService($service_key);
@@ -182,6 +203,13 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $incident;
     }
 
+    /**
+     * Posts given command onto the command bus and returns the command.
+     *
+     * @param CommandInterface $command
+     *
+     * @return CommandInterface given command
+     */
     protected function dispatchCommand(CommandInterface $command)
     {
         $this->getServiceLocator()->getCommandBus()->post($command);
@@ -189,12 +217,24 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return $command;
     }
 
-    protected function query(QueryInterface $query, $mapping_name = null)
-    {
+    /**
+     * Queries the view store of projection type for (standard) variant.
+     *
+     * @param QueryInterface $query query to execute on projection type
+     * @param string $mapping_finder mapping to use in query service for projection type (uses 'default' when null)
+     * @param string $variant name of projection type variant (defaults to 'Standard')
+     *
+     * @return FinderResultInterface
+     */
+    protected function query(
+        QueryInterface $query,
+        $mapping_name = null,
+        $variant = ProjectionTypeInterface::DEFAULT_VARIANT
+    ) {
         $data_access_service = $this->getServiceLocator()->getDataAccessService();
         $query_service_map = $data_access_service->getQueryServiceMap();
 
-        return $query_service_map->getByProjectionType($this->getProjectionType())->find($query, $mapping_name);
+        return $query_service_map->getByProjectionType($this->getProjectionType($variant))->find($query, $mapping_name);
     }
 
     /**
