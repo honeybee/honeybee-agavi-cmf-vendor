@@ -94,7 +94,7 @@ define([
         var suggest_options = this.getSuggestOptionsFor(type_prefix);
         var parent_group_parts = this.getParentGroupParts(true);
         var input_group_parts = (parent_group_parts.length === 0)
-            ? this.options.input_group
+            ? _.clone(this.options.input_group)
             : _.clone(parent_group_parts);
         input_group_parts.push(this.options.fieldname, this.cur_item_index + 1);
 
