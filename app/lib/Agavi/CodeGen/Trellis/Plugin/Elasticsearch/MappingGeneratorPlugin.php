@@ -102,6 +102,7 @@ class MappingGeneratorPlugin implements PluginInterface
                 ],
                 'filter' => [
                     'type' => 'string',
+                    'null_value' => '',
                     'index' => 'not_analyzed'
                 ],
                 'suggest' => [
