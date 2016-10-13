@@ -34,6 +34,7 @@
             {% if readonly and disabled %}
                 <input type="hidden" name="{{ grouped_field_name }}" value="{{ attribute_value }}" />
             {% endif %}
+            {%- block choice_field_extra -%}{%- endblock -%}
         </div>
     </div>
 </div>

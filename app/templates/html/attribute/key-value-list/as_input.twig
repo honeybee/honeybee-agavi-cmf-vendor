@@ -125,6 +125,8 @@
             <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
         {% endif %}
     </div><!--
-    --><div class="hb-field__extra"></div>
+    --><div class="hb-field__extra">
+        {%- block keyvaluelist_field_extra -%}{%- endblock -%}
+    </div>
 </div>
 {%- endblock -%}

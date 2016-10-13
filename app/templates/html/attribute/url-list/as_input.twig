@@ -46,7 +46,9 @@
                 {% endif %}
             </div>
         </div><!--
-        --><div class="hb-field__extra"></div>
+        --><div class="hb-field__extra">
+            {%- block urllist_field_extra -%}{%- endblock -%}
+        </div>
     </div>
 </div>
 {%- endblock field -%}
