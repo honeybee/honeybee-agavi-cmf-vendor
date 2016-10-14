@@ -88,6 +88,8 @@ class CollectionSuccessView extends View
                 'search' => $list_config->getSearch(),
                 'filter' => $list_config->getFilter(),
                 'sort' => $list_config->getSort(),
+                'limit' => $list_config->getLimit(),
+                'offset' => $list_config->getOffset(),
             ],
             // 'pagination' => $pagination->toArray(),
         ];
