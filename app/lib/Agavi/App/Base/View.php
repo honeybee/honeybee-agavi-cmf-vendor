@@ -738,9 +738,7 @@ class View extends AgaviView
     {
         // view class name, e.g. "Honeybee_SystemAccount_User_ApiLogin_ApiLoginErrorView"
         $class_name_parts = explode('_', static::CLASS);
-        $first = array_shift($class_name_parts);
         $short_name = implode('.', array_map([StringToolkit::CLASS, 'asSnakeCase' ], $class_name_parts));
-        $short_name = strtolower($first) . '.' . $short_name;
 
         // e.g. honeybee.system_account.user.api_login
         return preg_replace('~\.[a-z\_]+view$~', '', $short_name);
@@ -752,7 +750,7 @@ class View extends AgaviView
         $class_name_parts = explode('_', static::CLASS);
 
         // honeybee
-        $vendor = strtolower(array_shift($class_name_parts));
+        $vendor = StringToolkit::asSnakeCase(array_shift($class_name_parts));
 
         $snake_parts = array_map([StringToolkit::CLASS, 'asSnakeCase' ], $class_name_parts);
 
@@ -852,7 +850,7 @@ class View extends AgaviView
     {
         $class_name_parts = explode('_', static::CLASS);
 
-        $vendor = strtolower(array_shift($class_name_parts));
+        $vendor = StringToolkit::asSnakeCase(array_shift($class_name_parts));
         $package = StringToolkit::asSnakeCase(array_shift($class_name_parts));
         $resource = StringToolkit::asSnakeCase(array_shift($class_name_parts));
 

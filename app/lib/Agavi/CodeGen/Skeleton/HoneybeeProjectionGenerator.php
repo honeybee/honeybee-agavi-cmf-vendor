@@ -34,7 +34,7 @@ class HoneybeeProjectionGenerator extends SkeletonGenerator
 
         $data['target_path'] = $target_path;
         $data['db_prefix'] = AgaviConfig::get('core.db_prefix');
-        $data['vendor_prefix'] = strtolower($vendor);
+        $data['vendor_prefix'] = StringToolkit::asSnakeCase($vendor);
         $data['package_prefix'] = StringToolkit::asSnakeCase($package);
         $data['resource_prefix'] = StringToolkit::asSnakeCase($resource);
         $data['variant_prefix'] = StringToolkit::asSnakeCase($variant);

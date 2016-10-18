@@ -50,7 +50,7 @@ class ResourceRoutingCallback extends AgaviRoutingCallback
             $user_parameters['module'] = $ro->createValue(
                 sprintf(
                     '%s-%s-%s',
-                    strtolower($root_entity->getType()->getVendor()),
+                    StringToolkit::asSnakeCase($root_entity->getType()->getVendor()),
                     StringToolkit::asSnakeCase($root_entity->getType()->getPackage()),
                     StringToolkit::asSnakeCase($root_entity->getType()->getName())
                 )

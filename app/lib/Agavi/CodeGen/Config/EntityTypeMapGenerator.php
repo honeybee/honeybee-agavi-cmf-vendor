@@ -47,7 +47,7 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
             // resource prefix
             $entity_type_key = sprintf(
                 '%s.%s.%s',
-                strtolower($vendor_opt->getValue()),
+                StringToolkit::asSnakeCase($vendor_opt->getValue()),
                 StringToolkit::asSnakeCase($package_opt->getValue()),
                 StringToolkit::asSnakeCase($entity_type_definition->getName())
             );
@@ -107,7 +107,7 @@ abstract class EntityTypeMapGenerator implements ConfigGeneratorInterface
         return [
             'name' => sprintf(
                 self::WORKFLOW_NAME_PATTERN,
-                strtolower($vendor_opt->getValue()),
+                StringToolkit::asSnakeCase($vendor_opt->getValue()),
                 StringToolkit::asSnakeCase($package_opt->getValue()),
                 StringToolkit::asSnakeCase($entity_type_definition->getName())
             ),

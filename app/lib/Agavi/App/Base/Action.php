@@ -96,7 +96,7 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
     public function getScopeKey()
     {
         $class_name_parts = explode('_', static::CLASS);
-        $vendor = strtolower(array_shift($class_name_parts));
+        $vendor = StringToolkit::asSnakeCase(array_shift($class_name_parts));
         $short_name = implode('.', array_map([StringToolkit::CLASS, 'asSnakeCase' ], $class_name_parts));
 
         return preg_replace('~_action$~', '', $vendor . '.' . $short_name);
@@ -128,7 +128,7 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         $entity_type = array_shift($class_name_parts);
         $prefix = sprintf(
             '%s.%s.%s',
-            strtolower($vendor),
+            StringToolkit::asSnakeCase($vendor),
             StringToolkit::asSnakeCase($package),
             StringToolkit::asSnakeCase($entity_type)
         );
@@ -151,7 +151,7 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         $entity_type = array_shift($class_name_parts);
         $variant_prefix = sprintf(
             '%s.%s.%s::projection.%s',
-            strtolower($vendor),
+            StringToolkit::asSnakeCase($vendor),
             StringToolkit::asSnakeCase($package),
             StringToolkit::asSnakeCase($entity_type),
             StringToolkit::asSnakeCase($variant)

@@ -40,7 +40,7 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
                 $user_parameters['module'] = $ro->createValue(
                     sprintf(
                         '%s-%s-%s',
-                        strtolower($attribute->getRootType()->getVendor()),
+                        StringToolkit::asSnakeCase($attribute->getRootType()->getVendor()),
                         StringToolkit::asSnakeCase($attribute->getRootType()->getPackage()),
                         StringToolkit::asSnakeCase($attribute->getRootType()->getName())
                     )
@@ -57,7 +57,7 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
                 $user_parameters['module'] = $ro->createValue(
                     sprintf(
                         '%s-%s-%s',
-                        strtolower($root_entity->getType()->getVendor()),
+                        StringToolkit::asSnakeCase($root_entity->getType()->getVendor()),
                         StringToolkit::asSnakeCase($root_entity->getType()->getPackage()),
                         StringToolkit::asSnakeCase($root_entity->getType()->getName())
                     )
@@ -73,7 +73,7 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
                 $user_parameters['module'] = $ro->createValue(
                     sprintf(
                         '%s-%s-%s',
-                        strtolower($root_type->getVendor()),
+                        StringToolkit::asSnakeCase($root_type->getVendor()),
                         StringToolkit::asSnakeCase($root_type->getPackage()),
                         StringToolkit::asSnakeCase($root_type->getName())
                     )

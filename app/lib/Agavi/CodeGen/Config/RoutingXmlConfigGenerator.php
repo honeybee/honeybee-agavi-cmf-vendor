@@ -55,8 +55,11 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
     protected function createStandardConsoleRouting(DOMDocument $document, $config_file)
     {
         $module_name = $this->extractModuleNameFromPath($config_file);
-        $route_pattern = sprintf('^%s.', str_replace('_', '.', strtolower($module_name)));
-        $route_name = strtolower(str_replace('_', '.', strtolower($module_name)));
+        $route_prefix = implode('.', array_map(function ($name_part) {
+            return StringToolkit::asSnakeCase($name_part);
+        }, explode('_', $module_name)));
+        $route_pattern = sprintf('^%s.', $route_prefix);
+        $route_name = $route_prefix;
 
         $module_route = $document->createElement('route');
         $module_route->setAttribute('name', $route_name);
@@ -83,8 +86,12 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
     protected function createStandardWebRouting(DOMDocument $document, $config_file)
     {
         $module_name = $this->extractModuleNameFromPath($config_file);
-        $route_pattern = '^/' . str_replace('_', '-', strtolower($module_name)) . '/';
-        $route_name = str_replace('_', '.', strtolower($module_name));
+        $route_pattern = sprintf('^/%s', implode('-', array_map(function ($name_part) {
+            return StringToolkit::asSnakeCase($name_part);
+        }, explode('_', $module_name))));
+        $route_name = implode('.', array_map(function ($name_part) {
+            return StringToolkit::asSnakeCase($name_part);
+        }, explode('_', $module_name)));
 
         $module_route = $document->createElement('route');
         $module_route->setAttribute('name', $route_name);
@@ -116,7 +123,7 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
             throw new RuntimeError('Missing meta-data file for suspected honeybee-module ' . $honeybee_module);
         }
 
-        $vendor_prefix = strtolower($meta_data['vendor']);
+        $vendor_prefix = StringToolkit::asSnakeCase($meta_data['vendor']);
         $package_prefix = StringToolkit::asSnakeCase($meta_data['package']);
         $module_config_dir = sprintf('%s/%s/config', AgaviConfig::get('core.module_dir'), $honeybee_module);
         $module_routing_file = $module_config_dir . '/routing.xml';
@@ -180,7 +187,7 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
             throw new RuntimeError('Missing meta-data file for suspected honeybee-module ' . $honeybee_module);
         }
 
-        $vendor_prefix = strtolower($meta_data['vendor']);
+        $vendor_prefix = StringToolkit::asSnakeCase($meta_data['vendor']);
         $package_prefix = StringToolkit::asSnakeCase($meta_data['package']);
         $module_config_dir = sprintf('%s/%s/config', AgaviConfig::get('core.module_dir'), $honeybee_module);
         $module_routing_file = $module_config_dir . '/routing.xml';
