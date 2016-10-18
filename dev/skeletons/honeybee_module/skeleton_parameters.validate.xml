@@ -16,7 +16,7 @@
                     <ae:parameter name="match">true</ae:parameter>
                     <ae:parameter name="dialog">
                         <ae:parameter name="validator">AgaviRegexValidator</ae:parameter>
-                        <ae:parameter name="attempts">3</ae:parameter>
+                        <ae:parameter name="attempts">1</ae:parameter>
                     </ae:parameter>
                 </validator>
 
