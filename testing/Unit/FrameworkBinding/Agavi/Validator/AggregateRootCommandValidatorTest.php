@@ -48,7 +48,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
     protected function prepareHistory(
         $fixture,
-        $identifier = 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1'
+        $identifier = 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1'
     ) {
         $events = require(__DIR__ . '/Fixture/' . $fixture . '.php');
         $this->mock_query_service
@@ -80,7 +80,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 'name' => 'invalid_task_data',
                 'base' => $base,
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'identifier_arg' => 'identifier',
                 'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'attribute_blacklist' => [ 'token', 'products.highlight.ignored' ]
@@ -96,7 +96,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
@@ -122,9 +122,9 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => 'Hunt',
                     'images' => [],
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'aggregate_root_identifier' =>
-                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -142,7 +142,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'x',
                     'lastname' => 'Hunt',
@@ -193,13 +193,13 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $validator = $this->createValidator();
         $this->prepareHistory(
             'aggregate_empty',
-            'honeybee-cmf.test_fixtures.author-12345678-251e-4a17-947a-dd3987e5a9df-de_DE-1'
+            'honeybee_cmf.test_fixtures.author-12345678-251e-4a17-947a-dd3987e5a9df-de_DE-1'
         );
 
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-12345678-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-12345678-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
@@ -228,7 +228,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
                     'email' => 'honeybee.user@test.com'
@@ -255,7 +255,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 5,
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
@@ -283,7 +283,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
@@ -307,9 +307,9 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => 'Hunt',
                     'email' => 'change.user@test.com'
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'aggregate_root_identifier' =>
-                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -327,7 +327,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'Conflict',
                     'lastname' => 'Hunt',
@@ -357,8 +357,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Model\Task\TaskConflict',
                 'current_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    '@type' => 'honeybee_cmf.test_fixtures.author::projection.standard',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 2,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
                     'language' => 'de_DE',
@@ -376,7 +376,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'tags' => [ 'text', 'list' ],
                     'images' => [
                         [
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'filesize' => 116752,
                             'filename' => 'kitty.jpg',
                             'mimetype' => 'image/jpeg',
@@ -411,14 +411,14 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         [
                             '@type' => 'book',
                             'identifier' => 'a4be230b-fdd2-49f2-b943-f5b5b17a0d61',
-                            'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-e5e61e60-67de-405b-9e10-e8c2f9455f3f-de_DE-1',
+                            'referenced_identifier' => 'honeybee_cmf.test_fixtures.book-e5e61e60-67de-405b-9e10-e8c2f9455f3f-de_DE-1',
                             'title' => 'ZAMM'
                         ]
                     ]
                 ],
                 'conflicted_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    '@type' => 'honeybee_cmf.test_fixtures.author::projection.standard',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
                     'language' => 'de_DE',
@@ -436,7 +436,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'tags' => [ 'text', 'list' ],
                     'images' => [
                         [
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'filesize' => 116752,
                             'filename' => 'kitty.jpg',
                             'mimetype' => 'image/jpeg',
@@ -461,8 +461,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'firstname' => 'Mark',
                             'lastname' => 'Hunt'
                         ],
-                        'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
-                        'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                        'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                        'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                         'embedded_entity_events' => [
                             [
                                 '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\EmbeddedEntityAddedEvent',
@@ -495,7 +495,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                                 'data' => [
                                     '@type' => 'book',
                                     'identifier' => 'a4be230b-fdd2-49f2-b943-f5b5b17a0d61',
-                                    'referenced_identifier' => 'honeybee-cmf.test_fixtures.book-e5e61e60-67de-405b-9e10-e8c2f9455f3f-de_DE-1',
+                                    'referenced_identifier' => 'honeybee_cmf.test_fixtures.book-e5e61e60-67de-405b-9e10-e8c2f9455f3f-de_DE-1',
                                     'title' => 'ZAMM'
                                 ],
                                 'position' => 0,
@@ -535,7 +535,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => 'Hunt',
                     'email' => 'honeybee.user@test.com',
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
-                    'custom_id' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'custom_id' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'custom_rev' => 2,
                     'workflow_state' => 'inactive',
                     'language' => 'de_DE'
@@ -564,8 +564,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Model\Task\TaskConflict',
                 'current_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    '@type' => 'honeybee_cmf.test_fixtures.author::projection.standard',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 3,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
                     'language' => 'de_DE',
@@ -583,7 +583,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'tags' => [],
                     'images' => [
                         [
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'filesize' => 116752,
                             'filename' => 'kitty.jpg',
                             'mimetype' => 'image/jpeg',
@@ -610,8 +610,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'books' => []
                 ],
                 'conflicted_resource' => [
-                    '@type' => 'honeybee-cmf.test_fixtures.author::projection.standard',
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    '@type' => 'honeybee_cmf.test_fixtures.author::projection.standard',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 2,
                     'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
                     'language' => 'de_DE',
@@ -629,7 +629,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'tags' => [],
                     'images' => [
                         [
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'filesize' => 116752,
                             'filename' => 'kitty.jpg',
                             'mimetype' => 'image/jpeg',
@@ -661,8 +661,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         'data' => [
                             'workflow_state' => 'active'
                         ],
-                        'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
-                        'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                        'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                        'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                         'embedded_entity_events' => [],
                         'seq_number' => 3,
                         'uuid' => '2523c4b4-d2aa-4458-bd34-11a71d3adaba',
@@ -695,7 +695,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
@@ -718,7 +718,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ],
                         [
                             '__action' => '__duplicate',
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'title' => 'Kitty',
                             'caption' => 'Meow',
                             'copyright' => '',
@@ -790,7 +790,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'values' => [
                     'images' => [
                         [
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'title' => 'Kitty',
                             'caption' => 'Meow',
                             'copyright' => '',
@@ -805,7 +805,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'metadata' => []
                         ],
                         [
-                            'location' => str_replace('honeybee-cmf.test_fixtures.author.tempfiles://', '', $uploaded_images[0]),
+                            'location' => str_replace('honeybee_cmf.test_fixtures.author.tempfiles://', '', $uploaded_images[0]),
                             'title' => 'Facepalm',
                             'caption' => 'Engage',
                             'copyright' => '',
@@ -820,7 +820,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                             'metadata' => []
                         ],
                         [
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'title' => 'Kitty',
                             'caption' => 'Meow',
                             'copyright' => '',
@@ -836,8 +836,8 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ]
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
+                'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -857,7 +857,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 1,
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
@@ -865,7 +865,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'images' => [
                         [
                             '__action' => '__delete',
-                            'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                            'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                             'title' => 'Facepalm',
                             'caption' => 'Engage',
                             'copyright' => '',
@@ -921,7 +921,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'images' => [
                         [
                             'location' => str_replace(
-                                'honeybee-cmf.test_fixtures.author.tempfiles://',
+                                'honeybee_cmf.test_fixtures.author.tempfiles://',
                                 '',
                                 $uploaded_images[0]
                             ),
@@ -940,9 +940,9 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ]
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'aggregate_root_identifier' =>
-                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -960,7 +960,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 2,
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
@@ -994,9 +994,9 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'values' => [],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 // @codingStandardsIgnoreLine
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [
                     [
                         // @codingStandardsIgnoreLine
@@ -1037,7 +1037,7 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
                 'edit' => [
-                    'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                     'revision' => 2,
                     'firstname' => 'Mark',
                     'lastname' => 'Hunt',
@@ -1072,9 +1072,9 @@ class AggregateRootCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ModifyAuthor\ModifyAuthorCommand',
                 'values' => [],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 // @codingStandardsIgnoreLine
-                'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [
                     [
                         // @codingStandardsIgnoreLine

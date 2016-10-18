@@ -9,7 +9,7 @@ return [
     new AuthorCreatedEvent([
         'data' => [
             '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\AuthorCreatedEvent',
-            'identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+            'identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
             'uuid' => '63d0d3f0-251e-4a17-947a-dd3987e5a9df',
             'language' => 'de_DE',
             'version' => 1,
@@ -22,7 +22,7 @@ return [
             'tags' => [],
             'images' => [
                 [
-                    'location' => 'honeybee/honeybee-cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
+                    'location' => 'honeybee/honeybee_cmf.test_fixtures.author/images/149/0322200b-8ea2-40ac-b395-8fcf1b9ec444.jpg',
                     'filesize' => 116752,
                     'filename' => 'kitty.jpg',
                     'mimetype' => 'image/jpeg',
@@ -38,8 +38,8 @@ return [
                 ]
             ]
         ],
-        'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
-        'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+        'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+        'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
         'embedded_entity_events' => [],
         'seq_number' => 1,
         'uuid' => '0a49d63f-664d-49c5-99da-c8b32df7cd01',
@@ -55,8 +55,8 @@ return [
             'firstname' => 'Mark',
             'lastname' => 'Hunt',
         ],
-        'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
-        'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+        'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+        'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
         'embedded_entity_events' => [
             [
                 '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\EmbeddedEntityAddedEvent',
@@ -85,8 +85,8 @@ return [
         'data' => [
             'workflow_state' => 'active'
         ],
-        'aggregate_root_identifier' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
-        'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+        'aggregate_root_identifier' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+        'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
         'embedded_entity_events' => [],
         'seq_number' => 3,
         'uuid' => '2523c4b4-d2aa-4458-bd34-11a71d3adaba',

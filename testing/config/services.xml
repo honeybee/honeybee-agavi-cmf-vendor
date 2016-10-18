@@ -20,6 +20,12 @@
                 <service name="honeybee.infrastructure.filesystem_service">
                     <class>Honeybee\Tests\Mock\TestFilesystemService</class>
                 </service>
+                <service name="honeybee.infrastructure.state_machine_builder">
+                    <class>Honeybee\Infrastructure\Workflow\StateMachineBuilder</class>
+                    <provisioner>
+                        <class>Honeybee\Tests\Mock\TestStateMachineBuilderProvisioner</class>
+                    </provisioner>
+                </service>
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
                     <provisioner>

@@ -43,7 +43,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 'name' => 'invalid_task_data',
                 'base' => $base,
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'attribute_whitelist' => [ 'products', 'nada', 'token' ],
                 'attribute_blacklist' => [
@@ -87,7 +87,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => 'Lesnar',
                     'email' => 'honeybee.user@test.com'
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => []
@@ -166,7 +166,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'lastname' => '',
                 'email' => 'honeybee.user@test.com'
             ],
-            'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+            'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
             'embedded_entity_commands' => [],
             'metadata' => []
         ]);
@@ -190,7 +190,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'lastname' => '',
                     'email' => 'honeybee.user@test.com'
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => []
@@ -221,7 +221,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         [
                             '@type' => 'book',
                             'referenced_identifier' =>
-                                'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
+                                'honeybee_cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
                             'title' => 'test book'
                         ]
                     ]
@@ -245,7 +245,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'email' => 'honeybee.user@test.com',
                     'tags' => [ 'test', 'tags' ]
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'embedded_entity_commands' => [
                     [
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\AddEmbeddedEntityCommand',
@@ -263,7 +263,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         '@type' => 'Honeybee\Model\Task\ModifyAggregateRoot\AddEmbeddedEntity\AddEmbeddedEntityCommand',
                         'values' => [
                             'referenced_identifier' =>
-                                'honeybee-cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
+                                'honeybee_cmf.test_fixtures.book-a7cec777-d932-4bbd-8156-261138d3fe39-de_DE-1',
                             'title' => 'test book'
                         ],
                         'position' => 0,
@@ -537,7 +537,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ]
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => []
@@ -617,7 +617,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                     'images' => [
                         [
                             'location' => str_replace(
-                                'honeybee-cmf.test_fixtures.author.tempfiles://',
+                                'honeybee_cmf.test_fixtures.author.tempfiles://',
                                 '',
                                 $uploaded_images[0]
                             ),
@@ -636,7 +636,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                         ]
                     ]
                 ],
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => []

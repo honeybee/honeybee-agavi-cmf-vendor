@@ -42,7 +42,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
     protected function prepareHistory(
         $fixture = 'aggregate_created',
-        $identifier = 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1'
+        $identifier = 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1'
     ) {
         $events = require(__DIR__ . '/Fixture/' . $fixture . '.php');
         $this->mock_query_service
@@ -66,7 +66,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
             [
                 'name' => 'invalid_proceed_command',
                 'base' => $base,
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'identifier_arg' => 'resource',
                 'command_implementor' =>
                     'Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand'
@@ -81,7 +81,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
-                'resource' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'resource' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'event' => 'promote',
                 'revision' => 1
             ]
@@ -99,9 +99,9 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand',
                 'current_state_name' => 'inactive',
                 'event_name' => 'promote',
-                'aggregate_root_type' => 'honeybee-cmf.test_fixtures.author',
+                'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'aggregate_root_identifier' =>
-                    'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                    'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'embedded_entity_commands' => [],
                 'uuid' => $command->getUuid(),
                 'metadata' => [],
@@ -118,7 +118,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
-                'resource' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'resource' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'event' => 'invalid',
                 'revision' => 1
             ]
@@ -142,7 +142,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 
         $rd = new AgaviWebRequestDataHolder([
             AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
-                'resource' => 'honeybee-cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
+                'resource' => 'honeybee_cmf.test_fixtures.author-63d0d3f0-251e-4a17-947a-dd3987e5a9df-de_DE-1',
                 'revision' => 1
             ]
         ]);
