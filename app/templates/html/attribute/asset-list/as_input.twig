@@ -34,7 +34,7 @@
                                     </div>
                                     {% endif %}
                                     <label for="{{tabs_id}}-add-asset-to-{{ field_id }}">
-                                        <span class="assetlist__thumb-img assetlist--dropzone">{{ _('add_asset', translation_domain) }}</span>
+                                        <span class="assetlist__thumb-img assetlist--dropzone">{{ _(field_name~'.add_asset', translation_domain, null, null, '') }}</span>
                                     </label>
                                     <progress max="100" value="50"><div class="progress-bar"><span style="width: 50%;">{{ _('uploading…', translation_domain) }}</span></div></progress>
                                 </li>
