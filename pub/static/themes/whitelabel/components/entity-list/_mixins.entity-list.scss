@@ -122,7 +122,7 @@ $item-margin: $panel-margin !default;
 
     > .hb-field__value {
         > .hb-entity-templates,
-        > .hb-entity-list > .hb-embed-item > .hb-embed-item__header > .hb-embed-actions {
+        > .hb-entity-list > .hb-embed-item > .hb-embed-item__header .hb-embed-item__controls {
             display: none;
         }
     }
