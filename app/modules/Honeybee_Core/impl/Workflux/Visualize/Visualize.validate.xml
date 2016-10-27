@@ -8,7 +8,7 @@
     <ae:configuration>
 
         <validators translation_domain="honeybee.core.errors">
-            
+
             <validator class="boolean" required="false">
                 <argument>quiet</argument>
             </validator>
@@ -17,7 +17,7 @@
                 <argument>input</argument>
                 <error>You must specify a valid Workflux definition.</error>
             </validator>
-           
+
             <validator class="Honeybee\FrameworkBinding\Agavi\Validator\WorkflowSubjectValidator" name="workflow_subject" depends="valid_input_file">
                <argument>subject</argument>
                <error>You must specify a valid Workflux subject.</error>
@@ -28,11 +28,11 @@
                     <ae:parameter name="attempts">3</ae:parameter>
                 </ae:parameter>
             </validator>
-            
+
             <validator class="string" required="false">
                 <argument>output</argument>
             </validator>
-            
+
         </validators>
 
     </ae:configuration>
