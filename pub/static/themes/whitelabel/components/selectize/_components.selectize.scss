@@ -157,4 +157,13 @@ $selectize-spacing: 3px;
             background-position: right 50%;
         }
     }
+
+    // allowEmptyOption enabled
+    [data-value=""] {
+        &:after {
+            content: '';
+            display: inline-block;
+            visibility: hidden;
+        }
+    }
 }

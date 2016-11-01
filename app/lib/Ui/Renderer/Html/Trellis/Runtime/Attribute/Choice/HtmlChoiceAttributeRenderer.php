@@ -23,7 +23,10 @@ class HtmlChoiceAttributeRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
-        $params['allowed_values'] = $this->attribute->getOption('allowed_values', []);
+        $params['allowed_values'] = (array)$this->attribute->getOption('allowed_values', []);
+        $params['add_empty_option'] = $this->getOption('add_empty_option', false);
+        $params['empty_option_name'] = $this->getOption('empty_option_name', '');
+        $params['empty_option_value'] = $this->getOption('empty_option_value', $this->attribute->getNullValue());
 
         return $params;
     }
@@ -42,5 +45,16 @@ class HtmlChoiceAttributeRenderer extends HtmlAttributeRenderer
     protected function getWidgetImplementor()
     {
         return $this->getOption('widget', 'jsb_Honeybee_Core/ui/SelectBox');
+    }
+
+    protected function getWidgetOptions()
+    {
+        $allow_empty_option = $this->getOption('allow_empty_option', false) || $this->getOption('add_empty_option', false);
+
+        $widget_options = [
+            'allow_empty_option' => $allow_empty_option
+        ];
+
+        return array_replace_recursive(parent::getWidgetOptions(), $widget_options);
     }
 }

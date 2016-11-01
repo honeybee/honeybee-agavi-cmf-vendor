@@ -12,13 +12,15 @@ define([
         this.addOptions(options);
 
         this.$select = this.$widget.find("select");
+        var settings = {};
 
         if (this.$select.length === 0) {
             this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
             return;
         }
+        settings['allowEmptyOption'] = this.options.allow_empty_option || false;
 
-        this.$select.selectize({});
+        this.$select.selectize(settings);
     }
 
     SelectBox.prototype = new Widget();
