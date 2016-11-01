@@ -81,6 +81,23 @@ abstract class ActivityRenderer extends Renderer
             $params['activity']['description'] = sprintf('%s.description', $activity_name);
         }
 
+        // translate label/description of workflow event transition per resource state
+        $params['activity_label'] = $this->_($params['activity']['label']);
+        $params['activity_description'] = $this->_($params['activity']['description']);
+        if ($this->hasPayload('resource')) {
+            $workflow_state = $this->getPayload('resource')->getWorkflowState();
+            $translation_key = $workflow_state.'.'.$params['activity']['label'];
+            $translation = $this->_($translation_key);
+            if ($translation !== $translation_key) {
+                $params['activity_label'] = $translation;
+            }
+            $translation_key = $workflow_state.'.'.$params['activity']['description'];
+            $translation = $this->_($translation_key);
+            if ($translation !== $translation_key) {
+                $params['activity_description'] = $translation;
+            }
+        }
+
         $params['link'] = $this->getLinkFor($activity);
 
         if ($activity->getVerb() === 'write' && $this->hasPayload('resource')) {
