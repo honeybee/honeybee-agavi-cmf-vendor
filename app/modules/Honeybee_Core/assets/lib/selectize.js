@@ -635,7 +635,7 @@
 }));
 
 /**
- * selectize.js (v0.12.3)
+ * selectize.js (v0.12.4)
  * Copyright (c) 2013–2015 Brian Reavis & contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -3735,7 +3735,9 @@
 							e.preventDefault();
 							if (self.isLocked) return;
 	
-							self.clear();
+							// use removeItem - clear() will not trigger the 'item_remove' event
+							var $item = $(e.currentTarget).parent();
+							self.removeItem($item);
 						});
 	
 					};
