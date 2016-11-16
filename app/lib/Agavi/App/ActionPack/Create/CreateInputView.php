@@ -55,6 +55,6 @@ class CreateInputView extends View
 
     protected function getResourceRendererSettings($default_settings = [])
     {
-        return array_replace_recursive($default_settings, []);
+        return array_replace_recursive([], $default_settings);
     }
 }
