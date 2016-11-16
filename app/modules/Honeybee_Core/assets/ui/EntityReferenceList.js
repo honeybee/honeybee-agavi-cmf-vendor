@@ -14,6 +14,7 @@ define([
         this.options.remove_label = this.options.remove_label || "×";
         this.options.remove_title = this.options.remove_title || "Remove";
         this.options.remove_button_class = this.options.remove_button_class || "remove";
+        this.pending_requestes = 0;
     }
 
     ReferenceEntityList.prototype = new EmbeddedEntityList();
@@ -61,6 +62,7 @@ define([
             'attribute_name': attribute_name
         });
 
+        this.pending_requestes++;
         $.ajax({
             url: this.buildRenderUrl(type_prefix),
             type: 'POST',
@@ -82,6 +84,7 @@ define([
                     'type': 'stop',
                     'attribute_name': attribute_name
                 });
+                this.pending_requestes--;
             }
         });
     };
@@ -96,7 +99,7 @@ define([
         var input_group_parts = (parent_group_parts.length === 0)
             ? _.clone(this.options.input_group)
             : _.clone(parent_group_parts);
-        input_group_parts.push(this.options.fieldname, this.cur_item_index + 1);
+        input_group_parts.push(this.options.fieldname, this.cur_item_index + this.pending_requestes + 1);
 
         var embed_path_parts = [ type_prefix + '[0]', this.options.fieldname ];
         var parent_items = this.$widget.parents('.hb-embed-item');
