@@ -15,6 +15,7 @@ define([
         this.options.remove_title = this.options.remove_title || "Remove";
         this.options.remove_button_class = this.options.remove_button_class || "remove";
         this.pending_requestes = 0;
+        this.locked_items = [];
     }
 
     ReferenceEntityList.prototype = new EmbeddedEntityList();
@@ -33,11 +34,33 @@ define([
     };
 
     ReferenceEntityList.prototype.onItemAdded = function(entity_identifer) {
+        // prevent deletion before complete loading of the entity-list-item
+        this.lockItem(entity_identifer);
         this.appendEntityReference(
             this.$select[0].selectize.options[entity_identifer],
             this.getActiveReferenceType()
         );
     };
+
+    ReferenceEntityList.prototype.lockItem = function(item_value) {
+        $remove_button = this.$select[0].selectize.$control.find('.item[data-value="'+ item_value +'"] .' + this.options.remove_button_class);
+        $remove_button.html('&#8987;');
+        this.locked_items.push(item_value);
+    }
+
+    ReferenceEntityList.prototype.unlockItem = function(item_value) {
+        $remove_button = this.$select[0].selectize.$control.find('.item[data-value="'+ item_value +'"] .' + this.options.remove_button_class);
+        $remove_button.html(this.options.remove_label);
+        this.locked_items.splice(this.locked_items.indexOf(item_value), 1);
+    }
+
+    ReferenceEntityList.prototype.onDelete = function(values) {
+        unlocked_values = _.difference(values, this.locked_items);
+        if (!_.isEqual(unlocked_values, values)) {
+            console.log("Cannot delete a locked item.");
+            return false;
+        }
+    }
 
     ReferenceEntityList.prototype.onItemRemoved = function(ref_id) {
         if (this.options.inline_mode === true) {
@@ -84,7 +107,8 @@ define([
                     'type': 'stop',
                     'attribute_name': attribute_name
                 });
-                this.pending_requestes--;
+                self.pending_requestes--;
+                self.unlockItem(reference_embed_data.identifier);
             }
         });
     };
@@ -218,7 +242,8 @@ define([
             },
             load: this.loadSuggestions.bind(this),
             onItemAdd: this.onItemAdded.bind(this),
-            onItemRemove: this.onItemRemoved.bind(this)
+            onItemRemove: this.onItemRemoved.bind(this),
+            onDelete: this.onDelete.bind(this)
         });
 
         if (this.options.isReadonly === true) {
