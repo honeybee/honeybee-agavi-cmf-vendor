@@ -123,7 +123,11 @@ define([
         return templates;
     };
 
-    EmbeddedEntityList.prototype.cloneItem = function($item) {
+    /**
+     * Clone an item into the entity list
+     */
+    EmbeddedEntityList.prototype.cloneItem = function($item, increment_cur_index) {
+        increment_cur_index = increment_cur_index !== false; // default: true
         if(!this.isClonable()) {
             this.logDebug('Cloning is not allowed. The limit of items could have been reached.');
             return false;
@@ -159,15 +163,24 @@ define([
         });
 
         this.$entities_list.append($clone);
-        this.registerItem($clone);
+        if (increment_cur_index) {
+            this.registerItem($clone, increment_cur_index);
+        }
         this.updateUi();
 
         return $clone;
     };
 
-    EmbeddedEntityList.prototype.registerItem = function($item) {
+    /**
+     * Increments index and registers behaviours and listeners inside the item
+     */
+    EmbeddedEntityList.prototype.registerItem = function($item, increment_cur_index) {
         var self = this;
-        this.cur_item_index++;
+        increment_cur_index = increment_cur_index !== false; // default: true
+
+        if (increment_cur_index) {
+            this.cur_item_index++;
+        }
 
         $item.find('.jsb__').each(function(idx, behavior_el) {
             if ($(behavior_el).parents('.hb-entity-templates').length === 0) {
@@ -180,7 +193,6 @@ define([
             // prevent double event triggering when using label+input inside hb-embed-action
             event.preventDefault();
         });
-
         $item.find('.hb-embed-item__trigger').first().on('change', function(event) {
             $item.toggleClass('hb-embed-item--is_expanded');
         });

@@ -14,8 +14,6 @@ define([
         this.options.remove_label = this.options.remove_label || "×";
         this.options.remove_title = this.options.remove_title || "Remove";
         this.options.remove_button_class = this.options.remove_button_class || "remove";
-        this.pending_requestes = 0;
-        this.locked_items = [];
     }
 
     ReferenceEntityList.prototype = new EmbeddedEntityList();
@@ -34,38 +32,16 @@ define([
     };
 
     ReferenceEntityList.prototype.onItemAdded = function(entity_identifer) {
-        // prevent deletion before complete loading of the entity-list-item
-        this.lockItem(entity_identifer);
         this.appendEntityReference(
             this.$select[0].selectize.options[entity_identifer],
             this.getActiveReferenceType()
         );
     };
 
-    ReferenceEntityList.prototype.lockItem = function(item_value) {
-        $remove_button = this.$select[0].selectize.$control.find('.item[data-value="'+ item_value +'"] .' + this.options.remove_button_class);
-        $remove_button.html('&#8987;');
-        this.locked_items.push(item_value);
-    }
-
-    ReferenceEntityList.prototype.unlockItem = function(item_value) {
-        $remove_button = this.$select[0].selectize.$control.find('.item[data-value="'+ item_value +'"] .' + this.options.remove_button_class);
-        $remove_button.html(this.options.remove_label);
-        this.locked_items.splice(this.locked_items.indexOf(item_value), 1);
-    }
-
-    ReferenceEntityList.prototype.onDelete = function(values) {
-        unlocked_values = _.difference(values, this.locked_items);
-        if (!_.isEqual(unlocked_values, values)) {
-            console.log("Cannot delete a locked item.");
-            return false;
-        }
-    }
-
     ReferenceEntityList.prototype.onItemRemoved = function(ref_id) {
         if (this.options.inline_mode === true) {
             this.$entities_list.empty();
-            this.cloneItem(this.templates[this.getActiveReferenceType()]);
+            this.cloneItem(this.templates[this.getActiveReferenceType()]); // inline-mode always has an item of each type
             this.$entities_list.find('> .hb-embed-item > .hb-embed-item__content > .hb-embed-actions').remove();
             this.purgeSelectizeQueryCache();
         } else {
@@ -73,6 +49,7 @@ define([
             this.$entities_list.find('> li').filter(function() {
                 return $(item_query, this).length > 0;
             }).remove();
+            this.removeEntityPlaceholder(ref_id);
         }
     };
 
@@ -85,32 +62,65 @@ define([
             'attribute_name': attribute_name
         });
 
-        this.pending_requestes++;
         $.ajax({
             url: this.buildRenderUrl(type_prefix),
             type: 'POST',
             dataType: 'html',
             data: this.buildRenderPostData(reference_embed_data, type_prefix),
+            beforeSend: function() {
+                // appendEntityPlaceholder will increment the cur_item_index
+                self.appendEntityPlaceholder(reference_embed_data.identifier);
+            },
             error: function() {
+                self.removeEntityPlaceholder(reference_embed_data.identifier);
                 self.logError("An unexpected error occured while rendering reference-embed serverside.", arguments);
             },
             success: function(html_item) {
                 if (self.options.inline_mode === true) {
                     self.$entities_list.html(html_item);
                 } else {
-                    self.$entities_list.append(html_item);
+                    self.replaceEntityPlaceholder(reference_embed_data.identifier, html_item);
                 }
-                self.registerItem(self.$entities_list.find('> li:last-child'));
+                // don't increment index (appendEntityPlaceholder already did it)
+                self.registerItem(self.$entities_list.find('> li:last-child'), false);
             },
             complete: function() {
                 jsb.fireEvent('WIDGET:BUSY_LOADING', {
                     'type': 'stop',
                     'attribute_name': attribute_name
                 });
-                self.pending_requestes--;
-                self.unlockItem(reference_embed_data.identifier);
             }
         });
+    };
+
+    ReferenceEntityList.prototype.appendEntityPlaceholder = function(entity_identifer) {
+        var $placeholder = this.cloneItem(this.templates[this.getActiveReferenceType()], true);
+        $placeholder.addClass('hb-embed-item-placeholder');
+        $placeholder.attr('data-placeholder-identifier', entity_identifer);
+        $placeholder.data('placeholder-identifier', entity_identifer);
+
+        return $placeholder;
+    };
+
+    ReferenceEntityList.prototype.replaceEntityPlaceholder = function(entity_identifer, html_item) {
+        var placeholder_query = '.hb-embed-item-placeholder[data-placeholder-identifier="{REF_ID}"]'.replace('{REF_ID}', entity_identifer);
+        var $placeholder = this.$entities_list.find('> li').filter(placeholder_query);
+        var $new_item = $(html_item).filter('.hb-embed-item');
+        var placeholder_input_group = $placeholder.attr('data-input-group');
+        var new_item_input_group = $new_item.attr('data-input-group');
+        // replace placeholder of the corresponding request
+        if (new_item_input_group === placeholder_input_group) {
+            return $placeholder.replaceWith($new_item);
+        }
+
+        return false;
+    };
+
+    ReferenceEntityList.prototype.removeEntityPlaceholder = function(entity_identifer) {
+        var placeholder_query = '.hb-embed-item-placeholder[data-placeholder-identifier="{REF_ID}"]'.replace('{REF_ID}', entity_identifer);
+        var $item = this.$entities_list.find('> li').filter(placeholder_query).remove();
+
+        return $item;
     };
 
     ReferenceEntityList.prototype.buildSuggestUrl = function(query, type_prefix) {
@@ -123,7 +133,7 @@ define([
         var input_group_parts = (parent_group_parts.length === 0)
             ? _.clone(this.options.input_group)
             : _.clone(parent_group_parts);
-        input_group_parts.push(this.options.fieldname, this.cur_item_index + this.pending_requestes + 1);
+        input_group_parts.push(this.options.fieldname, this.cur_item_index);
 
         var embed_path_parts = [ type_prefix + '[0]', this.options.fieldname ];
         var parent_items = this.$widget.parents('.hb-embed-item');
@@ -242,8 +252,7 @@ define([
             },
             load: this.loadSuggestions.bind(this),
             onItemAdd: this.onItemAdded.bind(this),
-            onItemRemove: this.onItemRemoved.bind(this),
-            onDelete: this.onDelete.bind(this)
+            onItemRemove: this.onItemRemoved.bind(this)
         });
 
         if (this.options.isReadonly === true) {
