@@ -60,6 +60,7 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         'honeybee.infrastructure.logger' => LoggerProvisioner::CLASS, // logger must be first
         'honeybee.ui.translator' => TranslatorProvisioner::CLASS,
         'honeybee.ui.url_generator' => UrlGeneratorProvisioner::CLASS,
+        'honeybee.environment' => EnvironmentProvisioner::CLASS,
         'honeybee.infrastructure.acl_service' => AclServiceProvisioner::CLASS,
         'honeybee.infrastructure.auth_service' => AuthenticationServiceProvisioner::CLASS,
         'honeybee.infrastructure.command_enricher' => CommandEnricherProvisioner::CLASS,
@@ -86,7 +87,6 @@ class ServiceProvisioner implements ServiceProvisionerInterface
         'honeybee.ui.view_config_service' => ViewConfigServiceProvisioner::CLASS,
         'honeybee.ui.view_template_service' => ViewTemplateServiceProvisioner::CLASS,
         'honeybee.ui.workflow_activity_service' => WorkflowActivityServiceProvisioner::CLASS,
-        'honeybee.environment' => EnvironmentProvisioner::CLASS,
         'honeybee.service_locator' => ServiceLocatorProvisioner::CLASS,
     ];
 

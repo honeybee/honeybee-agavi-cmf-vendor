@@ -12,6 +12,8 @@ use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Template\TemplateRendererInterface;
 use Honeybee\Infrastructure\Template\Twig\Extension\ToolkitExtension;
 use Honeybee\Infrastructure\Template\Twig\Extension\TranslatorExtension;
+use Honeybee\Infrastructure\Template\Twig\Extension\UrlGeneratorExtension;
+use Honeybee\Infrastructure\Template\Twig\Extension\EnvironmentExtension;
 use Honeybee\Infrastructure\Template\Twig\Loader\FilesystemLoader;
 use Honeybee\ServiceDefinitionInterface;
 use Twig_Environment;
@@ -79,6 +81,8 @@ class TemplateRendererProvisioner extends AbstractProvisioner
             ToolkitExtension::CLASS,
             HoneybeeToolkitExtension::CLASS,
             TranslatorExtension::CLASS,
+            UrlGeneratorExtension::CLASS,
+            EnvironmentExtension::CLASS,
             MarkdownExtension::CLASS
         ];
 
