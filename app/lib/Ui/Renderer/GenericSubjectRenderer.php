@@ -59,6 +59,10 @@ class GenericSubjectRenderer extends Renderer
             );
         }
 
+        if ($this->hasPayload('resource')) {
+            $params['resource'] = $this->getPayload('resource')->toArray();
+        }
+
         $params['css'] = (string)$this->getOption('css', '');
 
         return $params;

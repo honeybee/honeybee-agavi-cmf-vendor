@@ -235,6 +235,7 @@ EOT;
                 'search_value' => $request_data->getParameter('search'),
                 'form_parameters' => [
                     'sort' => $request_data->getParameter('sort')
+                    // ,'filter' => $request_data->getParameter('filter')
                 ]
             ]
         );
