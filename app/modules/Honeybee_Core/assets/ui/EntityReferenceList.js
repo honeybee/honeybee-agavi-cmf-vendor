@@ -68,7 +68,7 @@ define([
             dataType: 'html',
             data: this.buildRenderPostData(reference_embed_data, type_prefix),
             beforeSend: function() {
-                if (self.options.inline_mode === true) {
+                if (self.options.inline_mode === false) {
                     // appendEntityPlaceholder increments the cur_item_index
                     self.appendEntityPlaceholder(reference_embed_data.identifier);
                 }
