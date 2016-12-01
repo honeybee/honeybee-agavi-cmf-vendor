@@ -36,7 +36,7 @@ $selectize-spacing: 3px;
                 @include button-shape-emphasized-navigational-default;
                 @include button-colors-emphasized-navigational-default;
                 margin: $selectize-spacing $selectize-spacing $selectize-spacing 0;
-                line-height: 1em;
+                line-height: $line-height;
             }
 
             // some browsers need an explicit height
@@ -57,7 +57,7 @@ $selectize-spacing: 3px;
                 @include input-textual-shape-default;
                 // @todo input-textual-shape-default sets width:100%.
                 //       There should be space also for the caret, when typing is possible.
-                line-height: 1em;
+                line-height: $line-height;
                 text-align: left;
                 margin: 0;
 
@@ -90,6 +90,21 @@ $selectize-spacing: 3px;
             .item { color: inherit; }
         }
         &.focus { @include input-textual-colors-focus; }
+    }
+
+    &.plugin-remove_button {
+        .selectize-input.selectize-input {
+            &.has-items {
+                .item {
+                    position: relative;
+                    padding-right: $base-spacing * 1.5;
+                }
+
+                .remove {
+                    position: absolute;
+                }
+            }
+        }
     }
 
     .selectize-dropdown {
