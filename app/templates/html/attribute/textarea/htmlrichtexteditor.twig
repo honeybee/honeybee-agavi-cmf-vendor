@@ -13,7 +13,7 @@
         <li class="item"><button type="button" data-editor-action="redo" title="{{ _('redo.title', 'application.hrte') }}"><span>{{ _('redo', 'application.hrte') }}</span></button>
         <li class="item"><button type="button" data-editor-action="autogrow" title="{{ _('autogrow.title', 'application.hrte') }}"/>&#x21D5;</button>
     </ul>
-    <div class="editor-hrte"></div>
+    <div class="editor-hrte {{ editor.autogrow ? 'autogrow' : '' }}"></div>
     <div class="editor-popup editor-popup-link">
         <div>
             <h2>{{ _('popup-link.header', 'application.hrte') }}</h2>

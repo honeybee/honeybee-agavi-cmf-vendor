@@ -47,6 +47,7 @@ class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
         $editor = [];
 
         $editor['enabled'] = $this->getOption('editor_enabled', false);
+        $editor['autogrow'] = $this->getOption('editor_autogrow', false);
         $editor['twig'] = $this->getOption('editor_twig', 'html/attribute/textarea/htmlrichtexteditor.twig');
         $editor['options'] = json_encode(
             array_merge(
