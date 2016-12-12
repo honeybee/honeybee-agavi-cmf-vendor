@@ -144,7 +144,12 @@ define([
                 $btn: this.$widget.find('[data-editor-action="redo"]'),
                 highlight: function() { return false; },
                 enable: function() { return that.canRedo; }
-            }
+            },
+            autogrow: {
+                $btn: this.$widget.find('[data-editor-action="autogrow"]'),
+                highlight: function() { return that.$editor.hasClass('autogrow'); },
+                enable: function() { return true; }
+            },
         };
 
         // save editor instance
@@ -308,6 +313,12 @@ define([
             redo.$btn.prop('disabled', true);
         }
 
+        if (this.$editor.hasClass('autogrow')) {
+            this.buttons.autogrow.$btn.addClass('active');
+        } else {
+            this.buttons.autogrow.$btn.removeClass('active');
+        }
+
         // _.forOwn(this.buttons, function(btn, name) {
         //     if (btn.enable && btn.enable()) {
         //         btn.$btn.prop('disabled', false);
@@ -372,6 +383,13 @@ define([
             }
         } else if (action === 'link') {
             // do nothing as a dialog will be shown to the user to add/change the url etc.
+        } else if (action === 'autogrow') {
+            this.$editor.toggleClass('autogrow');
+            if (this.$editor.hasClass('autogrow')) {
+                this.buttons.autogrow.$btn.addClass('active');
+            } else {
+                this.buttons.autogrow.$btn.removeClass('active');
+            }
         } else {
             switch (action) {
                 case 'strike':

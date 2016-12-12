@@ -34,7 +34,7 @@ class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
         }
         $params['wrap'] = $this->getOption('wrap', '');
         $params['cols'] = $this->getOption('cols', '');
-        $params['rows'] = $this->getOption('rows', 12);
+        $params['rows'] = $this->getOption('rows', 9);
 
         // editor like the HtmlRichTextEditor
         $params['editor'] = $this->getEditorParameters($params);

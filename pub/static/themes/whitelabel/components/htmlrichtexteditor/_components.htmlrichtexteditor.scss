@@ -3,8 +3,22 @@
 }
 
 // htmlrichtexteditor should look like a normal textarea by default
+// and have a fixed height with a scrollbar – use ".autogrow" otherwise
 .editor-hrte {
     @include textarea;
+    min-width: 10em;
+    min-height: 2em;
+    height: 12.2em;
+    max-height: 30em;
+    overflow: auto;
+    resize: vertical;
+
+    &.autogrow {
+        max-height: none;
+        height: auto;
+        overflow: none;
+        resize: none;
+    }
 }
 
 .editor-menu {
@@ -14,6 +28,8 @@
 
     .item {
         @extend %pack__item;
+        text-align: center;
+        vertical-align: middle;
     }
 
     button {
@@ -73,6 +89,11 @@
 
     [data-editor-action="redo"] {
         background-image: url('binaries/icons/hrte/redo.svg');
+    }
+
+    [data-editor-action="autogrow"] {
+        background: none;
+        width: auto;
     }
 }
 
