@@ -146,18 +146,16 @@
                             <ae:parameter name="menu">Menü</ae:parameter>
                             <ae:parameter name="go_to_dashboard">Zur Einstiegsseite…</ae:parameter>
                             <ae:parameter name="welcome_header">Willkommen im Honeybee CMF</ae:parameter>
+                            <ae:parameter name="there_were_errors">There were errors</ae:parameter>
                             <!-- View: collection / hierarchy -->
                             <ae:parameter name="sort_by">Sortieren nach</ae:parameter>
                             <ae:parameter name="sidebar">Sidebar</ae:parameter>
                             <ae:parameter name="activities">Activities</ae:parameter>
-                            <ae:parameter name="cannot_display_collection">(DE) Can't display collection</ae:parameter>
-                            <ae:parameter name="there_were_errors">(DE) There were errors:</ae:parameter>
+                            <ae:parameter name="cannot_display_collection">Can't display collection</ae:parameter>
                             <!-- View: hierarchy -->
                             <ae:parameter name="parent_resource">Parent resource</ae:parameter>
                             <ae:parameter name="child_resources">Child resources</ae:parameter>
                             <ae:parameter name="root_resources">Root resources</ae:parameter>
-                            <!-- View: createinput -->
-                            <ae:parameter name="validation_unfortunately">Unfortunately…</ae:parameter>
                             <!-- View: sumary -->
                             <ae:parameter name="summary">Summary</ae:parameter>
                             <ae:parameter name="summary_error">Summary/SummaryError</ae:parameter>
@@ -174,18 +172,16 @@
                             <ae:parameter name="menu">Menu</ae:parameter>
                             <ae:parameter name="go_to_dashboard">Go to the dashboard…</ae:parameter>
                             <ae:parameter name="welcome_header">Welcome to the Honeybee CMF</ae:parameter>
+                            <ae:parameter name="there_were_errors">There were errors</ae:parameter>
                             <!-- View: collection / hierarchy -->
                             <ae:parameter name="sort_by">Sort by</ae:parameter>
                             <ae:parameter name="sidebar">Sidebar</ae:parameter>
                             <ae:parameter name="activities">Activities</ae:parameter>
                             <ae:parameter name="cannot_display_collection">Can't display collection</ae:parameter>
-                            <ae:parameter name="there_were_errors">There were errors:</ae:parameter>
                             <!-- View: hierarchy -->
                             <ae:parameter name="parent_resource">Parent resource</ae:parameter>
                             <ae:parameter name="child_resources">Child resources</ae:parameter>
                             <ae:parameter name="root_resources">Root resources</ae:parameter>
-                            <!-- View: createinput -->
-                            <ae:parameter name="validation_unfortunately">Unfortunately…</ae:parameter>
                             <!-- View: sumary -->
                             <ae:parameter name="summary">Summary</ae:parameter>
                             <ae:parameter name="summary_error">Summary/SummaryError</ae:parameter>
