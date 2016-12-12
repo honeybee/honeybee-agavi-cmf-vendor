@@ -1,0 +1,31 @@
+{%- block editor -%} {# this block exists for whitespace control #}
+<div class="editor jsb_ jsb_Honeybee_Core/ui/HtmlRichTextEditor" data-jsb="{{ editor.options|default('{}') }}">
+    <ul class="editor-menu" contenteditable="false">
+        <li class="item"><button type="button" data-editor-action="bold" title="{{ _('bold.title', 'application.hrte') }}"><span>{{ _('bold', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="italic" title="{{ _('italic.title', 'application.hrte') }}"><span>{{ _('italic', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="underline" title="{{ _('underline.title', 'application.hrte') }}"><span>{{ _('underline', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="strike" title="{{ _('strike.title', 'application.hrte') }}"><span>{{ _('strike', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="link" title="{{ _('link.title', 'application.hrte') }}"><span>{{ _('link', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="unlink" title="{{ _('unlink.title', 'application.hrte') }}"><span>{{ _('unlink', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="ol" title="{{ _('ol.title', 'application.hrte') }}"><span>{{ _('ol', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="ul" title="{{ _('ul.title', 'application.hrte') }}"><span>{{ _('ul', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="undo" title="{{ _('undo.title', 'application.hrte') }}"><span>{{ _('undo', 'application.hrte') }}</span></button>
+        <li class="item"><button type="button" data-editor-action="redo" title="{{ _('redo.title', 'application.hrte') }}"><span>{{ _('redo', 'application.hrte') }}</span></button>
+    </ul>
+    <div class="editor-hrte"></div>
+    <div class="editor-popup editor-popup-link">
+        <div>
+            <h2>{{ _('popup-link.header', 'application.hrte') }}</h2>
+            <ul class="editor-popup__inputs">
+                <li><label>{{ _('popup-link.href-input.label', 'application.hrte') }} <input type="url" placeholder="{{ _('popup-link.href-input.placeholder', 'application.hrte') }}" class="editor-popup-link__input-url" title="{{ _('popup-link.href-input.title', 'application.hrte') }}" /></label>
+                    <li><label>{{ _('popup-link.title-input.label', 'application.hrte') }} <input type="text" class="editor-popup-link__input-title" title="{{ _('popup-link.title-input.title', 'application.hrte') }}" /></label>
+                <li><label><input type="checkbox" class="editor-popup-link__input-target" /> {{ _('popup-link.target-input.label', 'application.hrte') }}</label>
+            </ul>
+            <ul class="editor-popup__buttons">
+                <li><button type="button" class="editor-popup__accept">{{ _('popup-link.accept', 'application.hrte') }}</button>
+                <li><button type="button" class="editor-popup__cancel">{{ _('popup-link.cancel', 'application.hrte') }}</button>
+            </ul>
+        </div>
+    </div>
+</div>
+{%- endblock editor -%}

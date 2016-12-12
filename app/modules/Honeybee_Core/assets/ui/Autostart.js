@@ -40,7 +40,7 @@ define([
 
             document.body.removeChild(tmpnode);
         });
-    };
+    }
 
     function appendRequiredAttributeToAllDataRequiredFields() {
         $('[data-required]').each(function() {
@@ -48,7 +48,7 @@ define([
             $(this).removeData('required');
             $(this).removeAttr('data-required');
         });
-    };
+    }
 
     function handleFlyoutSpecifics() {
         /**
@@ -80,11 +80,11 @@ define([
         $(document).on("mouseout", ".hb-js-flyout-toggle", function(ev) {
             $(this).siblings(".hb-js-flyout-toggle").removeClass("hover");
         });
-    };
+    }
 
     function handleLoadingState(enabled, loading_class, release_time) {
-        var loading_class = loading_class || 'hb-js-widget--busy';
-        var release_time = release_time || 5000;
+        loading_class = loading_class || 'hb-js-widget--busy';
+        release_time = release_time || 5000;
         var busy_state_timeout = null;
         var busy_state = {};
 

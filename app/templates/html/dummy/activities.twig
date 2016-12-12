@@ -1,60 +1,42 @@
 {% set activities = [
     {
-        activity: {
-            label: "Default",
-            description: "An activity without a specific type (should fallback to a default one).",
-            rels: []
-        },
+        activity_label: "Default",
+        activity_description: "An activity without a specific type (should fallback to a default one).",
         css: "activity navigational",
         link: "javascript:void(0);",
         disabled: false
     },
     {
-        activity: {
-            label: "Navigational",
-            description: "An activity that takes users somewhere.",
-            rels: []
-        },
+        activity_label: "Navigational",
+        activity_description: "An activity that takes users somewhere.",
         css: "activity navigational",
         link: "javascript:void(0);",
         disabled: false
     },
     {
-        activity: {
-            label: "Mutating",
-            description: "An activity that changes data, e.g. saving a document.",
-            rels: []
-        },
+        activity_label: "Mutating",
+        activity_description: "An activity that changes data, e.g. saving a document.",
         css: "activity mutating",
         link: "javascript:void(0);",
         disabled: false
     },
     {
-        activity: {
-            label: "Positive",
-            description: "An activity that confirms something.",
-            rels: []
-        },
+        activity_label: "Positive",
+        activity_description: "An activity that confirms something.",
         css: "activity positive",
         link: "javascript:void(0);",
         disabled: false
     },
     {
-        activity: {
-            label: "Warning",
-            description: "An activity that should be used with caution.",
-            rels: []
-        },
+        activity_label: "Warning",
+        activity_description: "An activity that should be used with caution.",
         css: "activity warning",
         link: "javascript:void(0);",
         disabled: false
     },
     {
-        activity: {
-            label: "Destructive",
-            description: "An activity that potentially destroys data irreversibly.",
-            rels: []
-        },
+        activity_label: "Destructive",
+        activity_description: "An activity that potentially destroys data irreversibly.",
         css: "activity destructive",
         link: "javascript:void(0);",
         disabled: false
@@ -62,11 +44,8 @@
 ] %}
 
 {% set search_activity = {
-    activity: {
-        label: "Search",
-        description: "An activity that takes users to a search result.",
-        rels: []
-    },
+    activity_label: "Search",
+    activity_description: "An activity that takes users to a search result.",
     css: "activity activity-search",
     link: "javascript:void(0);",
     disabled: false,
@@ -182,7 +161,7 @@
                 default_activity_rels: "",
             } %}
                 {% block default %}
-                    {{ activities[0].activity.label }}
+                    {{ activities[0].activity_label }}
                 {% endblock %}
                 {% block more %}
                     <ul>
@@ -199,7 +178,7 @@
                 default_activity_rels: "",
             } %}
                 {% block default %}
-                    {{ activities[0].activity.label }}
+                    {{ activities[0].activity_label }}
                 {% endblock %}
                 {% block more %}
                     <ul>
@@ -255,7 +234,7 @@
                 default_activity_rels: "",
             } %}
                 {% block default %}
-                    {{ activities[0].activity.label }}
+                    {{ activities[0].activity_label }}
                 {% endblock %}
                 {% block more %}
                     <ul>
@@ -273,7 +252,7 @@
                 default_activity_rels: "",
             } %}
                 {% block default %}
-                    {{ activities[0].activity.label }}
+                    {{ activities[0].activity_label }}
                 {% endblock %}
                 {% block more %}
                     <ul>
@@ -349,11 +328,8 @@
                 } %}
                     {% block default %}
                         {% include "html/activity/link.twig" with activities[0]|merge({
-                            activity: {
-                                label: "Positive",
-                                description: "An activity that confirms something.",
-                                rels: []
-                            },
+                            activity_label: "Positive",
+                            activity_description: "An activity that confirms something.",
                             css: "activity positive"
                         }) %}
                     {% endblock %}
@@ -376,11 +352,8 @@
                 } %}
                     {% block default %}
                         {% include "html/activity/link.twig" with activities[0]|merge({
-                            activity: {
-                                label: "Custom",
-                                description: "An custom activity.",
-                                rels: []
-                            }
+                            activity_label: "Custom",
+                            activity_description: "An custom activity.",
                         }) %}
                     {% endblock %}
                     {% block more %}

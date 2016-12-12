@@ -1,10 +1,10 @@
 <div class="search__content">
     <label for="{{ form_id }}search" class="search-description">{{ _('search.description', translation_domain) }}</label>
-    <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|join(' ') }}" id="{{ form_id }}" data-hb-translation-domain="{{ translation_domain }}">
-        {% for param_name, param_value in form_parameters %}
+    <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|default('')|join(' ') }}" id="{{ form_id }}" data-hb-translation-domain="{{ translation_domain }}">
+        {% for param_name, param_value in form_parameters|default([]) %}
         <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
         {% endfor %}
-        <input type="search" id="{{ form_id }}search" name="search" value="{{ options.search_value|default('') }}" placeholder="{{ _(activity.label, translation_domain) }}" maxlength="500" autocomplete spellcheck autosave/><!--
-        --><button type="submit" title="{{ activity_description }}" class="{{ css|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" rel="{{ activity.rels|join(' ') }}" data-form-id="{{ form_id }}" {% if disabled %}disabled="disabled"{% endif %}>{{ activity_label }}</button>
+        <input type="search" id="{{ form_id }}search" name="search" value="{{ options.search_value|default('') }}" placeholder="{{ _(activity_label, translation_domain) }}" maxlength="500" autocomplete spellcheck autosave/><!--
+        --><button type="submit" title="{{ activity_description }}" class="{{ css|default('')|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" rel="{{ activity.rels|default([])|join(' ') }}" data-form-id="{{ form_id }}" {% if disabled %}disabled="disabled"{% endif %}>{{ activity_label }}</button>
     </form>
 </div>

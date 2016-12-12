@@ -1,7 +1,7 @@
 <a
     href="{{ link }}"
-    rel="{{ activity.rels|join(' ') }}"
+    rel="{{ activity.rels|default([])|join(' ') }}"
     class="{{ css|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}"
-    title="{{ _(activity.description, translation_domain) }}"
+    title="{{ _(activity_description, translation_domain) }}"
     data-hb-translation-domain="{{ translation_domain }}"
-><img src="/static/themes/whitelabel/binaries/icons/favicon-16.png"> {{ _(activity.label, translation_domain) }}</a>
+><img src="/static/themes/whitelabel/binaries/icons/favicon-16.png"> {{ _(activity_label, translation_domain) }}</a>

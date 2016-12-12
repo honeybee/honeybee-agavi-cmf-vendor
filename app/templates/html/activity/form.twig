@@ -1,6 +1,6 @@
-<form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|join(' ') }}"  id="{{ form_id }}">
-    {% for param_name, param_value in form_parameters %}
+<form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|default('')|join(' ') }}"  id="{{ form_id }}">
+    {% for param_name, param_value in form_parameters|default([]) %}
     <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
     {% endfor %}
-    <button type="submit" name="submit-{{ form_id }}" title="{{ activity_description }}" class="{{ css|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" rel="{{ activity.rels|join(' ') }}" data-form-id="{{ form_id }}" {% if disabled %}disabled="disabled"{% endif %}>{{ activity_label }}</button>
+    <button type="submit" name="submit-{{ form_id }}" title="{{ activity_description }}" class="{{ css|default('')|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" rel="{{ activity.rels|default([])|join(' ') }}" data-form-id="{{ form_id }}" {% if disabled %}disabled="disabled"{% endif %}>{{ activity_label }}</button>
 </form>

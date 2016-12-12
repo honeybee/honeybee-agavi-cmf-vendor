@@ -1,8 +1,8 @@
 {% set activities = [
     {
+        activity_label: "Save",
+        activity_description: "An activity to save some data",
         activity: {
-            label: "Save",
-            description: "An activity to save some data",
             rels: [ 'save_resource' ]
         },
         css: "activity",
@@ -10,9 +10,9 @@
         disabled: false
     },
     {
+        activity_label: "Delete data",
+        activity_description: "An activity to delete data.",
         activity: {
-            label: "Delete data",
-            description: "An activity to delete data.",
             rels: [ "delete" ]
         },
         css: "activity destructive",
@@ -20,9 +20,9 @@
         disabled: false
     },
     {
+        activity_label: "Show details",
+        activity_description: "An activity to go somewhere",
         activity: {
-            label: "Show details",
-            description: "An activity to go somewhere",
             rels: []
         },
         css: "activity",
@@ -85,9 +85,9 @@
                 } %}
                     {% block default %}
                         {% include "html/activity/link.twig" with {
+                            activity_label: "Single activity",
+                            activity_description: "A unique primary activity available",
                             activity: {
-                                label: "Single activity",
-                                description: "A unique primary activity available",
                                 rels: []
                             },
                             css: "activity mutating",

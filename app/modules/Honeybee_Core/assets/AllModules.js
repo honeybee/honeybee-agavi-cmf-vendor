@@ -9,6 +9,8 @@ define([
     "magnific-popup",
     "selectize",
     "stickyfill",
+    "squire",
+    "dompurify",
     "moment",
     "ldsh!Honeybee_Core/lib/calendar.tmpl",
     "Honeybee_Core/lib/lodash",
@@ -23,6 +25,7 @@ define([
     "Honeybee_Core/ui/ActionGroup",
     "Honeybee_Core/ui/EmbeddedEntityList",
     "Honeybee_Core/ui/EntityReferenceList",
+    "Honeybee_Core/ui/HtmlRichTextEditor",
     "Honeybee_Core/ui/GlobalErrors"
 ], function($, jsb) {
 

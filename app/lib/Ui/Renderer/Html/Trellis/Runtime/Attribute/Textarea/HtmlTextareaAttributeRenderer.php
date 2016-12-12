@@ -35,20 +35,30 @@ class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
         $params['wrap'] = $this->getOption('wrap', '');
         $params['cols'] = $this->getOption('cols', '');
         $params['rows'] = $this->getOption('rows', 12);
-        $params['syntax'] = $this->getSyntaxParameters();
+
+        // editor like the HtmlRichTextEditor
+        $params['editor'] = $this->getEditorParameters($params);
 
         return $params;
     }
 
-    protected function getSyntaxParameters()
+    protected function getEditorParameters(array $current_params)
     {
-        $syntax_params = (array)$this->getOption('syntax', []);
+        $editor = [];
 
-        if (isset($syntax_params['enabled'])) {
-            $syntax_params['name'] = isset($syntax_params['name']) ? $syntax_params['name'] : '';
-            $syntax_params['preview'] = isset($syntax_params['preview']) ? $syntax_params['preview'] : '';
-        }
+        $editor['enabled'] = $this->getOption('editor_enabled', false);
+        $editor['twig'] = $this->getOption('editor_twig', 'html/attribute/textarea/htmlrichtexteditor.twig');
+        $editor['options'] = json_encode(
+            array_merge(
+                [
+                    'textarea_selector' => '#' . $current_params['field_id'],
+                    'editor_input_selector' => '.editor-hrte',
+                    'view_scope' => $this->getOption('view_scope', 'missing_view_scope.collection'),
+                ],
+                (array)$this->getOption('editor_options', [])
+            )
+        );
 
-        return $syntax_params;
+        return $editor;
     }
 }

@@ -1,7 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
-{%- set syntax_enabled = syntax.enabled | default(false) -%}
-{%- set syntax_preview = syntax.preview | default(false) -%}
 <div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         <div class="hb-field__label">
@@ -9,7 +7,7 @@
         </div><!--
         --><div class="hb-field__value">
             <textarea id="{{ field_id }}" name="{{ grouped_field_name }}" class="" placeholder="{{ translations.placeholder|default('') }}"
-                maxlength="{{ maxlength }}" wrap="{{ wrap }}" cols="{{ cols }}" rows="{{ rows }}"
+                maxlength="{{ maxlength|default('') }}" wrap="{{ wrap|default('') }}" cols="{{ cols|default('') }}" rows="{{ rows|default('') }}"
                 {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}">{#
                     #}{{ attribute_value }}{#
                 #}</textarea>
@@ -20,8 +18,8 @@
                     {%- endfor -%}
                 {%- endblock  -%}
             </ul>
-            {% if syntax_enabled and syntax_preview %}
-                <div class="input_preview" {{ field_id~'-preview' }}></div>
+            {% if editor is defined and editor.enabled == true %}
+                {% include editor.twig|default('html/attribute/textarea/htmlrichtexteditor.twig') %}
             {% endif %}
             {% if translations.input_help is defined %}
                 <div class="input_help">{{ translations.input_help|raw }}</div>

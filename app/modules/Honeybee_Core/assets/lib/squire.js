@@ -1,0 +1,1 @@
+../../../../../vendor/bower_components/squire-rte/build/squire-raw.js

@@ -1,0 +1,118 @@
+.editor.jsb_ {
+    display: none; // hide by default in case js doesn't load
+}
+
+// htmlrichtexteditor should look like a normal textarea by default
+.editor-hrte {
+    @include textarea;
+}
+
+.editor-menu {
+    @extend %list-bare;
+    @extend %pack;
+    margin-bottom: 0.2em;
+
+    .item {
+        @extend %pack__item;
+    }
+
+    button {
+        @include button-normal-mutating;
+    }
+
+    [data-editor-action] {
+        width: 1.2em;
+        height: 1.2em;
+        background: transparent no-repeat center;
+        background-size: contain;
+
+        &:disabled {
+            opacity: 0.3;
+        }
+
+        span {
+            @include visuallyhidden;
+        }
+    }
+
+    [data-editor-action="bold"] {
+        background-image: url('binaries/icons/hrte/bold.svg');
+    }
+
+    [data-editor-action="italic"] {
+        background-image: url('binaries/icons/hrte/italic.svg');
+    }
+
+    [data-editor-action="underline"] {
+        background-image: url('binaries/icons/hrte/underline.svg');
+    }
+
+    [data-editor-action="strike"] {
+        background-image: url('binaries/icons/hrte/strikethrough.svg');
+    }
+
+    [data-editor-action="link"] {
+        background-image: url('binaries/icons/hrte/addlink.svg');
+    }
+
+    [data-editor-action="unlink"] {
+        background-image: url('binaries/icons/hrte/unlink.svg');
+    }
+
+    [data-editor-action="ol"] {
+        background-image: url('binaries/icons/hrte/ordered-list.svg');
+    }
+
+    [data-editor-action="ul"] {
+        background-image: url('binaries/icons/hrte/unordered-list.svg');
+    }
+
+    [data-editor-action="undo"] {
+        background-image: url('binaries/icons/hrte/undo.svg');
+    }
+
+    [data-editor-action="redo"] {
+        background-image: url('binaries/icons/hrte/redo.svg');
+    }
+}
+
+.mfp-content .editor-popup {
+    display: block;
+}
+
+.editor-popup {
+    display: none;
+    background: #fff;
+    padding: 20px 30px;
+    text-align: left;
+    max-width: 650px;
+    margin: 20px auto;
+    position: relative;
+}
+
+.editor-popup__inputs {
+    @extend %list-bare;
+    margin-bottom: 1em;
+
+    li {
+        margin-bottom: 1em;
+    }
+}
+
+.editor-popup__buttons {
+    @extend %list-bare;
+    @extend %pack;
+
+    li {
+        @extend %pack__item;
+        text-align: center;
+    }
+}
+
+.editor-popup__accept {
+    @include button-emphasized-mutating;
+}
+
+.editor-popup__cancel {
+    @include button-emphasized-navigational;
+}

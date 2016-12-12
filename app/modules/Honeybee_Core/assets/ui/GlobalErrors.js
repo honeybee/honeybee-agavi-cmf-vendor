@@ -38,7 +38,7 @@ define([
         this.onScroll();
         this.attachEventHandlers();
         this.enableSpecificErrorSwitching();
-    };
+    }
 
     GlobalErrors.prototype = new Widget();
     GlobalErrors.prototype.constructor = GlobalErrors;

@@ -240,7 +240,6 @@
                 field_id: "textarea1",
                 html_attributes: {},
                 grouped_field_name: "textarea1",
-                syntax_enabled: false
             } %}
         </div><!--
         --><div class="layout__item u-1-of-2-lap-and-up">
@@ -257,8 +256,32 @@
                 field_id: "textarea2",
                 html_attributes: {},
                 grouped_field_name: "textarea2",
-                syntax_enabled: false
             } %}
+        </div>
+    </div>
+</div>
+<div class="sheet">
+    {# Textarea w/ HtmlRichTextEditor #}
+    <h1>Input: Textarea w/ HtmlRichTextEditor</h1>
+    <div class="layout layout--center">
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% set editor_options = {textarea_selector: '#htmltextarea1'} %}
+            {% include "html/attribute/textarea/as_input.twig" with {
+                disabled: "",
+                readonly: "",
+                required: "",
+                attribute_value: "Lorem ipsum dolor sit amet, nisl fusce dolor magna tellus. Est venenatis id. Interdum luctus aliquam ut quisque eu non, pellentesque ultricies neque. Dignissim bibendum rhoncus. Metus arcu a, lacinia accumsan dignissim posuere, sed convallis magna tincidunt nulla dui dui, cras a justo, felis hendrerit tristique nascetur. Euismod odio congue. Vestibulum turpis ante elit, nibh vitae eros, suspendisse tristique, eu laoreet consectetuer tempore. Mauris ullamcorper semper elit ullamcorper, feugiat metus augue a wisi.",
+                field_name: "html-textarea",
+                field_id: "htmltextarea1",
+                html_attributes: {},
+                grouped_field_name: "group",
+                editor: {
+                    enabled: true,
+                    options: editor_options|json_encode
+                }
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
         </div>
     </div>
 </div>

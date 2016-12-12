@@ -1,1 +1,1 @@
-<a href="{{ link }}" rel="{{ activity.rels|join(' ') }}" class="{{ css|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" title="{{ activity_description }}" {% if disabled %} tabindex="-1"{% endif %}>{{ activity_label }}</a>
+<a href="{{ link }}" rel="{{ activity.rels|default([])|join(' ') }}" class="{{ css|default('')|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" title="{{ activity_description|default('') }}" {% if disabled %} tabindex="-1"{% endif %}>{{ activity_label|default('missing activity_label') }}</a>

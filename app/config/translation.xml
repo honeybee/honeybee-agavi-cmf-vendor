@@ -59,6 +59,71 @@
                         </ae:parameter>
                     </ae:parameter>
 
+                    <ae:parameter name="hrte">
+                        <ae:parameter name="de">
+                            <ae:parameter name="bold">Fett</ae:parameter>
+                            <ae:parameter name="bold.title">Fettgedruckt (Strg+B)</ae:parameter>
+                            <ae:parameter name="italic">Kursiv</ae:parameter>
+                            <ae:parameter name="italic.title">Kursiv (Strg+I)</ae:parameter>
+                            <ae:parameter name="underline">Unterstrichen</ae:parameter>
+                            <ae:parameter name="underline.title">Unterstrichen (Strg+U)</ae:parameter>
+                            <ae:parameter name="strike">Durchgestrichen</ae:parameter>
+                            <ae:parameter name="strike.title">Durchgestrichen</ae:parameter>
+                            <ae:parameter name="link">Verlinkung</ae:parameter>
+                            <ae:parameter name="link.title">Link erstellen/ändern</ae:parameter>
+                            <ae:parameter name="unlink">Link entfernen</ae:parameter>
+                            <ae:parameter name="unlink.title">Bestehende Verlinkung aufheben</ae:parameter>
+                            <ae:parameter name="ol">OL</ae:parameter>
+                            <ae:parameter name="ol.title">Nummerierter Listenpunkt</ae:parameter>
+                            <ae:parameter name="ul">UL</ae:parameter>
+                            <ae:parameter name="ul.title">Unnummerierter Listenpunkt</ae:parameter>
+                            <ae:parameter name="undo">Undo</ae:parameter>
+                            <ae:parameter name="undo.title">Letzte Aktion rückgängig machen (Strg+Z)</ae:parameter>
+                            <ae:parameter name="redo">Redo</ae:parameter>
+                            <ae:parameter name="redo.title">Letzte Aktion wiederherstellen (Strg+Y)</ae:parameter>
+                            <ae:parameter name="popup-link.accept">Übernehmen</ae:parameter>
+                            <ae:parameter name="popup-link.cancel">Abbrechen</ae:parameter>
+                            <ae:parameter name="popup-link.header">Verlinkung setzen</ae:parameter>
+                            <ae:parameter name="popup-link.href-input.label">Adresse:</ae:parameter>
+                            <ae:parameter name="popup-link.href-input.title">Bitte komplette URL inklusive Protokoll eingeben (z.B. http://example.com)</ae:parameter>
+                            <ae:parameter name="popup-link.href-input.placeholder">Link URL (http://example.com)</ae:parameter>
+                            <ae:parameter name="popup-link.title-input.label">Titel:</ae:parameter>
+                            <ae:parameter name="popup-link.title-input.title">Bitte Titel für den Link angeben</ae:parameter>
+                            <ae:parameter name="popup-link.target-input.label">Link in neuem Fenster/Tab öffnen</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="bold">Bold</ae:parameter>
+                            <ae:parameter name="bold.title">Toggle bold (Ctrl+B)</ae:parameter>
+                            <ae:parameter name="italic">Italic</ae:parameter>
+                            <ae:parameter name="italic.title">Toggle italic (Ctrl+I)</ae:parameter>
+                            <ae:parameter name="underline">Underline</ae:parameter>
+                            <ae:parameter name="underline.title">Toggle underline (Ctrl+U)</ae:parameter>
+                            <ae:parameter name="strike">Strikethrough</ae:parameter>
+                            <ae:parameter name="strike.title">Toggle strikethrough</ae:parameter>
+                            <ae:parameter name="link">Link</ae:parameter>
+                            <ae:parameter name="link.title">Add or modify link</ae:parameter>
+                            <ae:parameter name="unlink">Remove Link</ae:parameter>
+                            <ae:parameter name="unlink.title">Remove existing link</ae:parameter>
+                            <ae:parameter name="ol">OL</ae:parameter>
+                            <ae:parameter name="ol.title">Ordered list</ae:parameter>
+                            <ae:parameter name="ul">UL</ae:parameter>
+                            <ae:parameter name="ul.title">Unordered list</ae:parameter>
+                            <ae:parameter name="undo">Undo</ae:parameter>
+                            <ae:parameter name="undo.title">Undo last operation (Ctrl+Z)</ae:parameter>
+                            <ae:parameter name="redo">Redo</ae:parameter>
+                            <ae:parameter name="redo.title">Redo last operation (Ctrl+Y)</ae:parameter>
+                            <ae:parameter name="popup-link.accept">Accept</ae:parameter>
+                            <ae:parameter name="popup-link.cancel">Cancel</ae:parameter>
+                            <ae:parameter name="popup-link.header">Modify Link</ae:parameter>
+                            <ae:parameter name="popup-link.href-input.label">URL:</ae:parameter>
+                            <ae:parameter name="popup-link.href-input.title">Please input a valid URL including the protocol (e.g. http://example.com)</ae:parameter>
+                            <ae:parameter name="popup-link.href-input.placeholder">Link URL (http://example.com)</ae:parameter>
+                            <ae:parameter name="popup-link.title-input.label">Title:</ae:parameter>
+                            <ae:parameter name="popup-link.title-input.title">Please input a title for the link</ae:parameter>
+                            <ae:parameter name="popup-link.target-input.label">Open link in new window</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+
                     <ae:parameter name="activities">
                         <ae:parameter name="de">
                             <ae:parameter name="search.description">Datensätze durchstöbern</ae:parameter>

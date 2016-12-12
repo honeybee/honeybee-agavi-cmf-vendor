@@ -44,7 +44,7 @@
     @include button-normal-navigational-default { @content };
     &:focus { @include button-normal-navigational-focus { @content }; }
     &:hover { @include button-normal-navigational-hover { @content }; }
-    &:active { @include button-normal-navigational-active { @content }; }
+    &:active, &.active { @include button-normal-navigational-active { @content }; }
     &:disabled, &.disabled { @include button-normal-navigational-disabled { @content }; }
 }
 
@@ -94,7 +94,7 @@
     @include button-normal-mutating-default { @content };
     &:focus { @include button-normal-mutating-focus { @content }; }
     &:hover { @include button-normal-mutating-hover { @content }; }
-    &:active { @include button-normal-mutating-active { @content }; }
+    &:active, &.active { @include button-normal-mutating-active { @content }; }
     &:disabled, &.disabled { @include button-normal-mutating-disabled { @content }; }
 }
 
@@ -144,7 +144,7 @@
     @include button-normal-positive-default { @content };
     &:focus { @include button-normal-positive-focus { @content }; }
     &:hover { @include button-normal-positive-hover { @content }; }
-    &:active { @include button-normal-positive-active { @content }; }
+    &:active, &.active { @include button-normal-positive-active { @content }; }
     &:disabled, &.disabled { @include button-normal-positive-disabled { @content }; }
 }
 
@@ -194,7 +194,7 @@
     @include button-normal-warning-default { @content };
     &:focus { @include button-normal-warning-focus { @content }; }
     &:hover { @include button-normal-warning-hover { @content }; }
-    &:active { @include button-normal-warning-active { @content }; }
+    &:active, &.active { @include button-normal-warning-active { @content }; }
     &:disabled, &.disabled { @include button-normal-warning-disabled { @content }; }
 }
 
@@ -244,7 +244,7 @@
     @include button-normal-destructive-default { @content };
     &:focus { @include button-normal-destructive-focus { @content }; }
     &:hover { @include button-normal-destructive-hover { @content }; }
-    &:active { @include button-normal-destructive-active { @content }; }
+    &:active, &.active { @include button-normal-destructive-active { @content }; }
     &:disabled, &.disabled { @include button-normal-destructive-disabled { @content }; }
 }
 
@@ -303,7 +303,7 @@
     @include button-emphasized-navigational-default { @content };
     &:focus { @include button-emphasized-navigational-focus { @content }; }
     &:hover { @include button-emphasized-navigational-hover { @content }; }
-    &:active { @include button-emphasized-navigational-active { @content }; }
+    &:active, &.active { @include button-emphasized-navigational-active { @content }; }
     &:disabled, &.disabled { @include button-emphasized-navigational-disabled { @content }; }
 }
 
@@ -353,7 +353,7 @@
     @include button-emphasized-mutating-default { @content };
     &:focus { @include button-emphasized-mutating-focus { @content }; }
     &:hover { @include button-emphasized-mutating-hover { @content }; }
-    &:active { @include button-emphasized-mutating-active { @content }; }
+    &:active, &.active { @include button-emphasized-mutating-active { @content }; }
     &:disabled, &.disabled { @include button-emphasized-mutating-disabled { @content }; }
 }
 
@@ -403,7 +403,7 @@
     @include button-emphasized-positive-default { @content };
     &:focus { @include button-emphasized-positive-focus { @content }; }
     &:hover { @include button-emphasized-positive-hover { @content }; }
-    &:active { @include button-emphasized-positive-active { @content }; }
+    &:active, &.active { @include button-emphasized-positive-active { @content }; }
     &:disabled, &.disabled { @include button-emphasized-positive-disabled { @content }; }
 }
 
@@ -453,7 +453,7 @@
     @include button-emphasized-warning-default { @content };
     &:focus { @include button-emphasized-warning-focus { @content }; }
     &:hover { @include button-emphasized-warning-hover { @content }; }
-    &:active { @include button-emphasized-warning-active { @content }; }
+    &:active, &.active { @include button-emphasized-warning-active { @content }; }
     &:disabled, &.disabled { @include button-emphasized-warning-disabled { @content }; }
 }
 
@@ -503,6 +503,6 @@
     @include button-emphasized-destructive-default { @content };
     &:focus { @include button-emphasized-destructive-focus { @content }; }
     &:hover { @include button-emphasized-destructive-hover { @content }; }
-    &:active { @include button-emphasized-destructive-active { @content }; }
+    &:active, &.active { @include button-emphasized-destructive-active { @content }; }
     &:disabled, &.disabled { @include button-emphasized-destructive-disabled { @content }; }
 }
