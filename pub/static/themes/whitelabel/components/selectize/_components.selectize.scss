@@ -18,6 +18,10 @@ $selectize-spacing: 3px;
             vertical-align: top;
         }
 
+        &.has-items:not(.focus), &.full {
+            input { @include visuallyhidden; }
+        }
+
         .remove {
             display: inline-block;
             width: $base-spacing;
@@ -57,7 +61,7 @@ $selectize-spacing: 3px;
                 @include input-textual-shape-default;
                 // @todo input-textual-shape-default sets width:100%.
                 //       There should be space also for the caret, when typing is possible.
-                line-height: $line-height;
+                line-height: 1;
                 text-align: left;
                 margin: 0;
 
