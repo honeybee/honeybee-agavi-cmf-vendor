@@ -1,6 +1,6 @@
 {
     "name": "honeybee",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "license": "MIT",
     "private": true,
     "main": "pub/static/require.js",
