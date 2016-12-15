@@ -98,9 +98,12 @@ define([
                     'type': 'stop',
                     'attribute_name': attribute_name
                 });
-                // eventually restore focus
+                // restore focus (without reopening the dropdown)
                 if (active_element == document.activeElement) {
-                    self.$select[0].selectize.focus();
+                    self.$select[0].selectize.ignoreFocus = true;
+                    self.$select[0].selectize.$control_input[0].focus();
+                    self.$select[0].selectize.$control.addClass('focus');
+                    self.$select[0].selectize.ignoreFocus = false;
                 }
             }
         });
