@@ -61,7 +61,6 @@ define([
     ReferenceEntityList.prototype.appendEntityReference = function(reference_embed_data, type_prefix) {
         var self = this;
         var attribute_name = self.$widget.find('.hb-field__value input[type=hidden]').prop('name');
-        var active_element;
 
         jsb.fireEvent('WIDGET:BUSY_LOADING', {
             'type': 'start',
@@ -78,7 +77,6 @@ define([
                     // appendEntityPlaceholder increments the cur_item_index
                     self.appendEntityPlaceholder(reference_embed_data.identifier);
                 }
-                active_element = document.activeElement;
             },
             error: function() {
                 self.removeEntityPlaceholder(reference_embed_data.identifier);
@@ -98,13 +96,6 @@ define([
                     'type': 'stop',
                     'attribute_name': attribute_name
                 });
-                // restore focus (without reopening the dropdown)
-                if (active_element == document.activeElement) {
-                    self.$select[0].selectize.ignoreFocus = true;
-                    self.$select[0].selectize.$control_input[0].focus();
-                    self.$select[0].selectize.$control.addClass('focus');
-                    self.$select[0].selectize.ignoreFocus = false;
-                }
             }
         });
     };
