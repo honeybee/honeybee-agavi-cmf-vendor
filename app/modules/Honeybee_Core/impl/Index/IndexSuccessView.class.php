@@ -32,11 +32,11 @@ class Honeybee_Core_Index_IndexSuccessView extends View
             'message' => $this->translation_manager->_('Welcome')
         ];
 
-        foreach ($service_locator->getProjectionTypeMap() as $ptm) {
-            $json['_links'][$ptm->getPrefix()] = [
-                'href' => $this->routing->gen('module.collection', [ 'module' => $ptm ])
-            ];
-        }
+        $navigation_service = $this->getServiceLocator()->getNavigationService();
+        $navigation = $navigation_service->getNavigation($this->getNavigationName());
+        $rendered_navigation = $this->renderSubject($navigation);
+
+        $json['_links'] = array_replace_recursive($json['_links'], $rendered_navigation);
 
         return json_encode($json, self::JSON_OPTIONS);
     }
