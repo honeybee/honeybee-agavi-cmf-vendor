@@ -47,32 +47,39 @@ class ResourceSuccessView extends View
 
         $links = array_merge([], $curies);
 
+        $activity_container = $activity_service->getContainer('default_resource_activities');
+        $activity_map = $activity_container->getActivityMap();
+
         if ($resource->getRevision() > 1) {
-            $activity = $activity_service->getActivity('default_resource_activities', 'prev_revision');
-            $links[$curie . ':default_resource_activities~prev_revision'] = $this->renderSubject(
-                $activity,
-                [
-                    'curie' => $curie,
-                    'additional_url_parameters' => [
-                        'resource' => $resource,
-                        'revision' => $resource->getRevision() - 1
+            if ($activity_map->hasKey('prev_revision')) {
+                $activity = $activity_service->getActivity('default_resource_activities', 'prev_revision');
+                $links[$curie . ':default_resource_activities~prev_revision'] = $this->renderSubject(
+                    $activity,
+                    [
+                        'curie' => $curie,
+                        'additional_url_parameters' => [
+                            'resource' => $resource,
+                            'revision' => $resource->getRevision() - 1
+                        ]
                     ]
-                ]
-            );
+                );
+            }
         }
 
         if ($resource->getRevision() < $head_revision) {
-            $activity = $activity_service->getActivity('default_resource_activities', 'next_revision');
-            $links[$curie . ':default_resource_activities~next_revision'] = $this->renderSubject(
-                $activity,
-                [
-                    'curie' => $curie,
-                    'additional_url_parameters' => [
-                        'resource' => $resource,
-                        'revision' => $resource->getRevision() + 1
+            if ($activity_map->hasKey('next_revision')) {
+                $activity = $activity_service->getActivity('default_resource_activities', 'next_revision');
+                $links[$curie . ':default_resource_activities~next_revision'] = $this->renderSubject(
+                    $activity,
+                    [
+                        'curie' => $curie,
+                        'additional_url_parameters' => [
+                            'resource' => $resource,
+                            'revision' => $resource->getRevision() + 1
+                        ]
                     ]
-                ]
-            );
+                );
+            }
         }
 
         $rendered_resource = $this->renderSubject($resource, $this->getResourceRendererSettings());
