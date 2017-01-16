@@ -4,7 +4,7 @@
         <div class="hb-field__value">
             <input
                 type="hidden"
-                value="{{ attribute_value }}"
+                value="{{ attribute_value|escape('html_attr') }}"
                 id="{{ field_id }}"
                 name="{{ grouped_field_name }}"
                 {{ disabled|default('') }}

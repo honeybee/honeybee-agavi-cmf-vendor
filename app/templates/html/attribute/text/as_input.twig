@@ -6,7 +6,7 @@
             <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
-            <input type="text" value="{{ attribute_value }}" id="{{ field_id }}" name="{{ grouped_field_name }}" class=""
+            <input type="text" value="{{ attribute_value|escape('html_attr') }}" id="{{ field_id }}" name="{{ grouped_field_name }}" class=""
                 {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }}  maxlength="{{ maxlength|default('') }}"
                 {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
             <ul class="errors">
