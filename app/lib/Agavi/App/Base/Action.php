@@ -14,6 +14,7 @@ use Honeybee\Common\ScopeKeyInterface;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\Logging\ILogger;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeybee\FrameworkBinding\Agavi\Util\HoneybeeAgaviToolkit;
 use Honeybee\Infrastructure\Command\CommandInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
@@ -83,6 +84,9 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return true;
     }
 
+    /**
+     * @return string vendor.package.type.some.action
+     */
     public function getResourceId()
     {
         return $this->getScopeKey();
@@ -93,13 +97,12 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
         return sprintf('%s::%s', $this->getScopeKey(), $this->getContainer()->getRequestMethod());
     }
 
+    /**
+     * @return string vendor.package.type.some.action
+     */
     public function getScopeKey()
     {
-        $class_name_parts = explode('_', static::CLASS);
-        $vendor = StringToolkit::asSnakeCase(array_shift($class_name_parts));
-        $short_name = implode('.', array_map([StringToolkit::CLASS, 'asSnakeCase' ], $class_name_parts));
-
-        return preg_replace('~_action$~', '', $vendor . '.' . $short_name);
+        return HoneybeeAgaviToolkit::getActionScopeKey(static::CLASS);
     }
 
     public function getActivities($resource = null)

@@ -5,7 +5,9 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
 use AgaviConfig;
 use AgaviModuleFilesystemCheck;
 use AgaviToolkit;
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
+use Honeybee\FrameworkBinding\Agavi\Util\HoneybeeAgaviToolkit;
 use Symfony\Component\Finder\Finder;
 
 class ConfigurationScanner
@@ -52,6 +54,7 @@ class ConfigurationScanner
             'aggregate_root_type_map' => [],
             'autoload_namespaces' => [],
             'projection_type_map' => [],
+            'action_scopes' => [],
             'routing' => [ 'standard' => [], 'honeybee_modules' => [] ]
         ];
         foreach (self::$supported_module_specific_configs as $config_name) {
@@ -102,6 +105,41 @@ class ConfigurationScanner
                 if (in_array($config_name, self::$supported_action_specific_configs)) {
                     $configs_to_include[$config_name][] = $file->getPathname();
                 }
+            }
+
+            // scan for available actions in the "impl" folder of the module and generate default permissions
+            // according to the scheme used by default in the base action's getCredentials method
+            $actions = Finder::create()
+                ->files()
+                ->name('*Action.class.php')
+                ->sortByName()
+                ->in($module_dir . '/impl');
+
+            foreach ($actions as $file) {
+                $class_name = $this->extractClassName($file->getPathname());
+                if (!$class_name) {
+                    continue;
+                }
+                if (!class_exists($class_name)) {
+                    require($file);
+                }
+                $class_methods = get_class_methods(new $class_name);
+                $operations = [];
+                foreach ($class_methods as $method_name) {
+                    if (StringToolkit::startsWith($method_name, 'execute')) {
+                        $name = strtolower(str_replace('execute', '', $method_name));
+                        if (!empty($name)) {
+                            $operations[] = $name;
+                        } else {
+                            // when name is empty the action only has a generic execute() method
+                            // for that we don't know which permission to generate; use sensible defaults
+                            $operations[] = 'read';
+                            $operations[] = 'write';
+                        }
+                    }
+                }
+                $scope = HoneybeeAgaviToolkit::getActionScopeKey($class_name);
+                $configs_to_include['action_scopes'][$scope] = array_unique($operations);
             }
 
             // scan for aggregate-roots and their projections
@@ -157,5 +195,23 @@ class ConfigurationScanner
         $finder = new SkeletonFinder;
 
         return $finder->findAllValidationFiles();
+    }
+
+    protected function extractClassName($filepath)
+    {
+        $class_token = false;
+        $php_file = file_get_contents($filepath);
+        $tokens = token_get_all($php_file);
+        foreach ($tokens as $token) {
+            if (is_array($token)) {
+                if ($token[0] == T_CLASS) {
+                    $class_token = true;
+                } elseif ($class_token && $token[0] == T_STRING) {
+                    return $token[1];
+                }
+            }
+        }
+
+        return false;
     }
 }

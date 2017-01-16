@@ -2,6 +2,7 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\Util;
 
+use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Model\Aggregate\AggregateRootType;
 use AgaviConfig;
 
@@ -44,5 +45,18 @@ class HoneybeeAgaviToolkit
             DIRECTORY_SEPARATOR,
             self::SCHEMA_PATH
         );
+    }
+
+    /**
+     * @param string $class_name class name of an Agavi action (static::CLASS), e.g. Foo_Bar_BazAction
+     *
+     * @return string foo.bar.baz
+     */
+    public static function getActionScopeKey($class_name)
+    {
+        $class_name_parts = explode('_', $class_name);
+        $vendor = StringToolkit::asSnakeCase(array_shift($class_name_parts));
+        $short_name = implode('.', array_map([StringToolkit::CLASS, 'asSnakeCase' ], $class_name_parts));
+        return preg_replace('~_action$~', '', $vendor . '.' . $short_name);
     }
 }

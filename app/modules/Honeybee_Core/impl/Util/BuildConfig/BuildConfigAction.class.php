@@ -1,6 +1,7 @@
 <?php
 
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ActionCredentialsConfigGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\AggregateRootTypeMapGenerator;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ConfigurationScanner;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\DefaultXmlConfigGenerator;
@@ -48,6 +49,10 @@ class Honeybee_Core_Util_BuildConfigAction extends Action
 
                 case 'workflows':
                     $generator = new WorkflowsXmlConfigGenerator();
+                    break;
+
+                case 'action_scopes':
+                    $generator = new ActionCredentialsConfigGenerator();
                     break;
 
                 default:

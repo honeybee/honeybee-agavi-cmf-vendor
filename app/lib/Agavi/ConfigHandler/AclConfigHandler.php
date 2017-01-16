@@ -52,6 +52,7 @@ class AclConfigHandler extends AgaviXmlConfigHandler
         $config_data = array('roles' => $domain_roles, 'external_roles' => $this->external_roles);
         $config_code = sprintf('return %s;', var_export($config_data, true));
 
+// error_log(var_export($config_data, true));
         return $this->generate($config_code, $document->documentURI);
     }
 
@@ -145,6 +146,9 @@ class AclConfigHandler extends AgaviXmlConfigHandler
             foreach ($permissions_node->getIterator() as $credential_node) {
                 $credential = $this->parseCredential($credential_node);
                 $credential['scope'] = $scope;
+                if ($scope === 'honeybee.system_account.user.create' || $scope === 'popula.ems.misc.dashboard') {
+                    error_log(__METHOD__ . ' - ' . var_export($credential, true));
+                }
                 $acl[$scope][] = $credential;
             }
         }
@@ -154,7 +158,7 @@ class AclConfigHandler extends AgaviXmlConfigHandler
 
     protected function parseCredential(AgaviXmlConfigDomElement $credential_node)
     {
-        static $supported_types = array('activity', 'field', 'plugin');
+        static $supported_types = array('activity', 'field', 'plugin', 'method');
 
         $credential_string = $credential_node->nodeValue;
         $type_parts = preg_split('/::/', $credential_string, 2);
