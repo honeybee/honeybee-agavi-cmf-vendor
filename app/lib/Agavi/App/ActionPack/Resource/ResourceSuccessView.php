@@ -19,12 +19,39 @@ class ResourceSuccessView extends View
         $routing = $this->getContext()->getRouting();
         $head_revision = $request_data->getParameter('head_revision');
         $prev_link = false;
+
+        $activity_service = $this->getServiceLocator()->getActivityService();
+        $activity_container = $activity_service->getContainer('default_resource_activities');
+        $activity_map = $activity_container->getActivityMap();
+
         if ($resource->getRevision() > 1) {
-            $prev_link = $routing->gen(null, [ 'revision' => $resource->getRevision() - 1 ]);
+            if ($activity_map->hasKey('prev_revision')) {
+                $activity = $activity_service->getActivity('default_resource_activities', 'prev_revision');
+                $prev_link = $this->renderSubject(
+                    $activity,
+                    [
+                        'additional_url_parameters' => [
+                            'resource' => $resource,
+                            'revision' => $resource->getRevision() - 1
+                        ]
+                    ]
+                );
+            }
         }
         $next_link = false;
         if ($resource->getRevision() < $head_revision) {
-            $next_link = $routing->gen(null, [ 'revision' => $resource->getRevision() + 1 ]);
+            if ($activity_map->hasKey('next_revision')) {
+                $activity = $activity_service->getActivity('default_resource_activities', 'next_revision');
+                $prev_link = $this->renderSubject(
+                    $activity,
+                    [
+                        'additional_url_parameters' => [
+                            'resource' => $resource,
+                            'revision' => $resource->getRevision() + 1
+                        ]
+                    ]
+                );
+            }
         }
 
         $this->setSubheaderActivities($request_data);

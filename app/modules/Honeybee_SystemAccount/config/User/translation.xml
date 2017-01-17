@@ -358,6 +358,8 @@
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Nutzername</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sortiert Nutzer aufsteigend nach Nutzername</ae:parameter>
+                            <ae:parameter name="prev_revision.label">Vorherige Version</ae:parameter>
+                            <ae:parameter name="next_revision.label">Nächste Version</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
                             <!--
@@ -412,6 +414,8 @@
                             <ae:parameter name="sort_by_workflow_state.label">Status</ae:parameter>
                             <ae:parameter name="sort_by_username.label">Username</ae:parameter>
                             <ae:parameter name="sort_by_username.description">Sort by Username</ae:parameter>
+                            <ae:parameter name="prev_revision.label">Previous version</ae:parameter>
+                            <ae:parameter name="next_revision.label">Next version</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
 

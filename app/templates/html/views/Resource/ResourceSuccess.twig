@@ -12,11 +12,11 @@
         {{ rendered_resource|raw }}
     </div>
     {% if prev_link %}
-        <a href="{{ prev_link }}">previous version</a>
+        {{ prev_link|raw }}
     {% endif %}
 
     {% if next_link %}
-        <a href="{{ next_link }}">next version</a>
+        {{ next_link|raw }}
     {% endif %}
 </div>
 {% endblock %}
