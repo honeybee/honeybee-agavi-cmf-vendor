@@ -2,8 +2,8 @@
 
 namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Embed;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 use AgaviRequestDataHolder;
+use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 
 class EmbedAction extends Action
 {
@@ -11,7 +11,7 @@ class EmbedAction extends Action
     {
         /** @var Honeybee\Projection\ProjectionInterface **/
         $resource = $request_data->getParameter('resource');
-        /** @var Trellis\Runtime\Embed\EmbedInterface **/
+        /** @var Trellis\Runtime\Entity\EntityReferenceInterface **/
         $embed = $request_data->getParameter('embed');
 
         $this->setAttribute('resource', $resource);

@@ -6,7 +6,7 @@
     <ae:configuration>
         <activity_containers>
 
-            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.resource">
+            <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.resource" extends="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}">
             </activity_container>
 
             <activity_container scope="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.resource.subheader_activities" extends="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.subheader_activities">

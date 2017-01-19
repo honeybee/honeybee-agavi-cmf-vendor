@@ -21,14 +21,13 @@ class ResourceSuccessView extends View
         $prev_link = false;
 
         $activity_service = $this->getServiceLocator()->getActivityService();
-        $activity_container = $activity_service->getContainer('default_resource_activities');
+        $activity_container = $activity_service->getContainer($this->getViewScope());
         $activity_map = $activity_container->getActivityMap();
 
         if ($resource->getRevision() > 1) {
             if ($activity_map->hasKey('prev_revision')) {
-                $activity = $activity_service->getActivity('default_resource_activities', 'prev_revision');
                 $prev_link = $this->renderSubject(
-                    $activity,
+                    $activity_map->getItem('prev_revision'),
                     [
                         'additional_url_parameters' => [
                             'resource' => $resource,
@@ -41,9 +40,8 @@ class ResourceSuccessView extends View
         $next_link = false;
         if ($resource->getRevision() < $head_revision) {
             if ($activity_map->hasKey('next_revision')) {
-                $activity = $activity_service->getActivity('default_resource_activities', 'next_revision');
                 $prev_link = $this->renderSubject(
-                    $activity,
+                    $activity_map->getItem('next_revision'),
                     [
                         'additional_url_parameters' => [
                             'resource' => $resource,
