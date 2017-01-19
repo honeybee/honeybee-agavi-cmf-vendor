@@ -41,11 +41,7 @@ class HaljsonEntityReferenceListAttributeRenderer extends AttributeRenderer
                 throw new RuntimeError('Rendered entity should be an array for haljson rendering.');
             }
 
-            if (isset($rendered_entity['@type'])) {
-                $rendered_entity['_links'] = $this->buildLinks($entity);
-            } else {
-                $this->logger->error('No @type in reference data: ' . var_export($rendered_entity, true));
-            }
+            $rendered_entity['_links'] = $this->buildLinks($entity);
 
             foreach ((array)$this->getOption('exclude_properties', []) as $property) {
                 unset($rendered_entity[$property]);
