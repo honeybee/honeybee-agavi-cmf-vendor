@@ -127,9 +127,9 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
 
     protected function getDefaultParameters(array $rendered_activities, ActivityInterface $default_activity)
     {
+        $default_rels = [];
         $default_name = $default_activity->getName();
         $default_label = $this->getOption('dropdown_label', $default_activity->getLabel() ?: "$default_name.label");
-        $default_rels = [];
         if (!$this->getOption('as_dropdown', false)) {
             $default_label = $rendered_activities[$default_name];
             // @todo Should default-activity rels be used just when a replacement default content/label is not provided?
