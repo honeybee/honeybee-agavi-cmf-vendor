@@ -4,15 +4,26 @@ namespace Honeybee\Ui\Renderer\Html\Honeybee\Ui\Activity;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
+use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
+use Honeybee\Ui\Activity\ActivityInterface;
+use Honeybee\Ui\Activity\ActivityMap;
 use Honeybee\Ui\Renderer\ActivityMapRenderer;
 
 class HtmlActivityMapRenderer extends ActivityMapRenderer
 {
+    protected static $propagated_options = [
+        'as_dropdown',
+        'as_list',
+        'default_activity_name',
+        'emphasized',
+        'toggle_disabled',
+        'view_scope'
+    ];
+
     protected function validate()
     {
         parent::validate();
-
         if ($this->hasOption('dropdown_label') && !$this->getOption('as_dropdown', false)) {
             throw new RuntimeError('Option "dropdown_label" is only valid when option "as_dropdown" is true.');
             $this->settings['as_dropdown'] = true;
@@ -26,154 +37,127 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
         } elseif ($this->getOption('as_list', false)) {
             return $this->output_format->getName() . '/activity_map/as_list.twig';
         }
-
         return $this->output_format->getName() . '/activity_map/as_splitbutton.twig';
     }
 
     protected function getTemplateParameters()
     {
-        $params = parent::getTemplateParameters();
-
-        $original_activity_map = $this->getPayload('subject');
-
-        if ($original_activity_map->isEmpty()) {
-            return $params;
-        }
-
-        $hidden_activity_names = (array)$this->getOption('hidden_activity_names', []);
-
-        // remove all activities that are excluded via config/settings
-        $activity_map = $original_activity_map->filter(
-            function ($activity) use ($hidden_activity_names) {
-                if (in_array($activity->getName(), $hidden_activity_names)) {
-                    return false;
-                }
-                return true;
-            }
-        );
-
+        $hidden_activities = (array)$this->getOption('hidden_activity_names', []);
+        $activity_map = $this->getPayload('subject')->filter(function ($activity) use ($hidden_activities) {
+            return !in_array($activity->getName(), $hidden_activities);
+        });
         if ($activity_map->isEmpty()) {
-            return $params;
+            return parent::getTemplateParameters();
         }
+        $default_activity = $this->pickDefaultActivity($activity_map);
+        $rendered_activities = $this->renderActivities($activity_map);
+        ArrayToolkit::moveToTop($rendered_activities, $default_activity->getName());
 
-        // determine which of the remaining activities should be the primary/current one
+        return array_merge(
+            parent::getTemplateParameters(),
+            $this->mapOptionsToParams(),
+            $this->getDefaultParameters($rendered_activities, $default_activity)
+        );
+    }
+
+    protected function pickDefaultActivity(ActivityMap $activity_map)
+    {
         $default_activity_name = $this->getOption('default_activity_name', '');
         if (!$activity_map->hasKey($default_activity_name)) {
             $default_activity_name = $activity_map->getKeys()[0];
         }
+        return $activity_map->getItem($default_activity_name);
+    }
 
-        $default_activity = $activity_map->getItem($default_activity_name);
-        $default_activity_label = $default_activity->getLabel();
-        if (empty($default_activity_label)) {
-            $default_activity_label = sprintf('%s.label', $default_activity->getName());
-        }
-
-        $dropdown_label = $this->_(
-            $this->getOption(
-                'dropdown_label',
-                $default_activity_label
-            )
-        );
-
+    protected function renderActivities(ActivityMap $activity_map)
+    {
         $rendered_activities = [];
         foreach ($activity_map as $activity) {
-            $name = $activity->getName();
-
-            if (in_array($name, $hidden_activity_names) && ($name !== $default_activity_name)) {
-                continue; // don't render activities that should not be displayed
-            }
-
-            $additional_payload = [
-                'subject' => $activity
-            ];
-
-            // workflow activities need an 'resource' or 'module' to generate the url correctly, leaky abstraction \o/
-            if ($this->hasPayload('resource')) {
-                $additional_payload['resource'] = $this->payload->get('resource');
-            } elseif ($this->hasPayload('module')) {
-                $additional_payload['module'] = $this->payload->get('module');
-            }
-
-            // retrieve config for specific activity
-            $specific_activity_options_key = 'activity.' . $activity->getName();
-            $default_config = $this->getOption($specific_activity_options_key, new Settings());
-
-            $activity_renderer_config = $this->view_config_service->getRendererConfig(
-                $this->getOption('view_scope'),
-                $this->output_format,
-                $specific_activity_options_key,
-                $default_config->toArray()
-            );
-
-            // propagate subset of activitymap options to activities
-            $activity_map_option_propagated_keys = array_flip([
-                'as_dropdown',
-                'as_list',
-                'default_activity_name',
-                'emphasized',
-                'toggle_disabled',
-                'view_scope'
-            ]);
-            $options = $this->getOptions();
-            $activity_map_propagated_options = array_intersect_key($options, $activity_map_option_propagated_keys);
-
-            $rendered_activities[$name] = $this->renderer_service->renderSubject(
+            $rendered_activities[$activity->getName()] = $this->renderActivity(
                 $activity,
-                $this->output_format,
-                $activity_renderer_config,
-                $additional_payload,
-                new Settings([ 'activity_map_options' => $activity_map_propagated_options ])
+                $this->getCommonActivityPayload($activity),
+                $this->getRendererConfigFor($activity)
             );
         }
+        return $rendered_activities;
+    }
 
-        // put default activity to top as that should be the primary activity
-        ArrayToolkit::moveToTop($rendered_activities, $default_activity_name);
+    protected function getRendererConfigFor(ActivityInterface $activity)
+    {
+        $specific_activity_options_key = 'activity.'.$activity->getName();
+        return $this->view_config_service->getRendererConfig(
+            $this->getOption('view_scope'),
+            $this->output_format,
+            $specific_activity_options_key,
+            $this->getOption($specific_activity_options_key, new Settings)->toArray()
+        );
+    }
 
-        $params['name'] = $this->getOption('name');
-        $params['tag'] = $this->getOption('tag');
-        $params['html_attributes'] = $this->getOption('html_attributes');
+    protected function renderActivity(ActivityInterface $activity, array $payload, ConfigInterface $renderer_config)
+    {
+        $propagated_options = array_intersect_key($this->getOptions(), array_flip(self::$propagated_options));
+        return $this->renderer_service->renderSubject(
+            $activity,
+            $this->output_format,
+            $renderer_config,
+            $payload,
+            new Settings([ 'activity_map_options' => $propagated_options ])
+        );
+    }
 
-        $default_css = 'activity-map';
-        $params['css'] = $this->getOption('css', $default_css);
-        $params['emphasized'] = $this->getOption('emphasized', false);
+    protected function mapOptionsToParams()
+    {
+        return [
+            'css' => $this->getOption('css', 'activity-map'),
+            'default_css' => $this->getOption('default_css'),
+            'default_html_attributes' => $this->getOption('default_html_attributes'),
+            'emphasized' => $this->getOption('emphasized', false),
+            'html_attributes' => $this->getOption('html_attributes'),
+            'more_css' => $this->getOption('more_css'),
+            'more_html_attributes' => $this->getOption('more_html_attributes'),
+            'name' => $this->getOption('name'),
+            'tag' => $this->getOption('tag'),
+            'toggle_content' => $this->getOption('toggle_content'),
+            'toggle_css' => $this->getOption('css'),
+            'toggle_html_attributes' => $this->getOption('toggle_html_attributes'),
+            'trigger_css' => $this->getOption('trigger_css'),
+            'trigger_html_attributes' => $this->getOption('trigger_html_attributes'),
+            'trigger_id' => $this->getOption('trigger_id')
+        ];
+    }
 
-        $params['trigger_id'] = $this->getOption('trigger_id');
-        $params['trigger_css'] = $this->getOption('trigger_css');
-        $params['trigger_html_attributes'] = $this->getOption('trigger_html_attributes');
-
-        $params['toggle_content'] = $this->getOption('toggle_content');
-        $params['toggle_css'] = $this->getOption('css');
-        $params['toggle_html_attributes'] = $this->getOption('toggle_html_attributes');
-
-        $params['default_activity_rels'] = [];
-        // when it's a list or splitbutton => rendered default activity is being used as "label"
-        $default_label = $dropdown_label;
-        if (!$this->getOption('as_dropdown', false)) {
-            $default_label = $rendered_activities[$default_activity_name];
-            // @todo Should default-activity rels be used just when a replacement default content/label is not provided?
-            $params['default_activity_rels'] = $this->getOption('default_activity_rels', $default_activity->getRels());
-        }
-        $params['default_content'] = $this->getOption('default_content', $default_label);
-        $params['default_css'] = $this->getOption('default_css');
-        $params['default_html_attributes'] = $this->getOption('default_html_attributes');
-
-        // don't render primary activity in (more) activities list when no dropdown label was given
+    protected function getDefaultParameters(array $rendered_activities, ActivityInterface $default_activity)
+    {
+        $default_name = $default_activity->getName();
+        // don't render primary activity in (more)activities list when no dropdown-label was given and "as_list" is true
         // thus, when a dropdown_label was specified the (more) activities are ALL activities
-        if (!$this->getOption('dropdown_label', false)) {
-            if (!$this->getOption('as_list')) { // when as_list is given, then don't remove, as ALL should be shown
-                unset($rendered_activities[$default_activity_name]);
-            }
+        if (!$this->getOption('dropdown_label', false) && !$this->getOption('as_list')) {
+            unset($rendered_activities[$default_name]);
         }
-
-        $params['more_css'] = $this->getOption('more_css');
-        $params['more_html_attributes'] = $this->getOption('more_html_attributes');
-        $params['more_activities'] = $this->getOption('more_activities', $rendered_activities);
-
-        $params['toggle_disabled'] = $this->getOption('toggle_disabled', false);
-        if (!count($params['more_activities'])) {
+        $default_label = $this->getOption('dropdown_label', $default_activity->getLabel() ?: "$default_name.label");
+        $params = [
+            'more_activities' => $this->getOption('more_activities', $rendered_activities),
+            'toggle_disabled' => $this->getOption('toggle_disabled', false),
+            'default_content' => $this->getOption('default_content', $this->_($default_label)),
+            'default_activity_rels' => !$this->getOption('as_dropdown', false)
+                ? $this->getOption('default_activity_rels', $default_activity->getRels())
+                : []
+        ];
+        if (empty($params['more_activities'])) {
             $params['toggle_disabled'] = true;
         }
-
         return $params;
+    }
+
+    protected function getCommonActivityPayload(ActivityInterface $activity)
+    {
+        // workflow activities need an 'resource' or 'module' to generate the url correctly, leaky abstraction \o/
+        $payload = [];
+        if ($this->hasPayload('resource')) {
+            $payload['resource'] = $this->payload->get('resource');
+        } elseif ($this->hasPayload('module')) {
+            $payload['module'] = $this->payload->get('module');
+        }
+        return $payload;
     }
 }
