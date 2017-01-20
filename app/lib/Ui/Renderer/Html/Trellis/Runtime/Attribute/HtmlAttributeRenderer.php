@@ -23,6 +23,9 @@ class HtmlAttributeRenderer extends AttributeRenderer
                 ? sprintf('pattern="%s"', $params['translations']['pattern'])
                 : '';
         }
+        if ($this->hasOption('tabindex')) {
+            $params['tabindex'] = $this->getOption('tabindex');
+        }
 
         $css = sprintf(
             'hb-attribute %s%s %s',
@@ -78,6 +81,9 @@ class HtmlAttributeRenderer extends AttributeRenderer
             'isDisabled' => $this->isDisabled(),
             'isRequired' => $this->isRequired()
         ];
+        if ($this->hasOption('tabindex')) {
+            $widget_options['tabindex'] = $this->getOption('tabindex');
+        }
 
         return array_replace_recursive($widget_options, (array)$this->getOption('widget_options', []));
     }

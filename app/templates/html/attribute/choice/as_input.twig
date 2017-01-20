@@ -6,7 +6,7 @@
     <div class="hb-field__content">
         <div class="hb-field__label"><label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label></div><!--
         --><div class="hb-field__value">
-            <select id="{{ field_id }}" name="{{ grouped_field_name }}" {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}">
+            <select id="{{ field_id }}" name="{{ grouped_field_name }}" {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}" {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
                 {% if add_empty_option -%}
                 <option value="{{ empty_option_value }}">{{ _(field_name~'.empty_option_name', translation_domain, null, null, '') }}</option>
                 {% endif %}
