@@ -26,7 +26,6 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
         parent::validate();
         if ($this->hasOption('dropdown_label') && !$this->getOption('as_dropdown', false)) {
             throw new RuntimeError('Option "dropdown_label" is only valid when option "as_dropdown" is true.');
-            $this->settings['as_dropdown'] = true;
         }
     }
 
@@ -129,21 +128,25 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
     protected function getDefaultParameters(array $rendered_activities, ActivityInterface $default_activity)
     {
         $default_name = $default_activity->getName();
+        $default_label = $this->getOption('dropdown_label', $default_activity->getLabel() ?: "$default_name.label");
+        $default_rels = [];
+        if (!$this->getOption('as_dropdown', false)) {
+            $default_label = $rendered_activities[$default_name];
+            // @todo Should default-activity rels be used just when a replacement default content/label is not provided?
+            $default_rels = $this->getOption('default_activity_rels', $default_activity->getRels());
+        }
         // don't render primary activity in (more)activities list when no dropdown-label was given and "as_list" is true
         // thus, when a dropdown_label was specified the (more) activities are ALL activities
         if (!$this->getOption('dropdown_label', false) && !$this->getOption('as_list')) {
             unset($rendered_activities[$default_name]);
         }
-        $default_label = $this->getOption('dropdown_label', $default_activity->getLabel() ?: "$default_name.label");
         $params = [
             'more_activities' => $this->getOption('more_activities', $rendered_activities),
             'toggle_disabled' => $this->getOption('toggle_disabled', false),
             'default_content' => $this->getOption('default_content', $this->_($default_label)),
-            'default_activity_rels' => !$this->getOption('as_dropdown', false)
-                ? $this->getOption('default_activity_rels', $default_activity->getRels())
-                : []
+            'default_activity_rels' => $default_rels
         ];
-        if (empty($params['more_activities'])) {
+        if (!count($params['more_activities'])) {
             $params['toggle_disabled'] = true;
         }
         return $params;
@@ -152,7 +155,7 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
     protected function getCommonActivityPayload(ActivityInterface $activity)
     {
         // workflow activities need an 'resource' or 'module' to generate the url correctly, leaky abstraction \o/
-        $payload = [];
+        $payload = [ 'subject' => $activity ];
         if ($this->hasPayload('resource')) {
             $payload['resource'] = $this->payload->get('resource');
         } elseif ($this->hasPayload('module')) {
