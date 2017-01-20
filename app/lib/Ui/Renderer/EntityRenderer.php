@@ -34,7 +34,6 @@ abstract class EntityRenderer extends Renderer
         $entity = $this->getPayload('subject');
         $group_parts = (array)$this->getOption('group_parts', []);
         $parent_attribute = $entity->getType()->getParentAttribute();
-
         $params = parent::getTemplateParameters();
 
         $params['has_parent_attribute'] = $parent_attribute !== null;
@@ -119,10 +118,7 @@ abstract class EntityRenderer extends Renderer
             if ($attribute) {
                 $renderer = $this->renderer_service->getRenderer($attribute, $this->output_format, $renderer_config);
                 $rendered_field = $renderer->render(
-                    [
-                        'attribute' => $attribute,
-                        'resource' => $entity
-                    ],
+                    $this->preparePayload([ 'attribute' => $attribute, 'resource' => $entity ]),
                     $render_settings
                 );
             } else {
@@ -139,7 +135,7 @@ abstract class EntityRenderer extends Renderer
                     );
                 }
                 $renderer = $this->renderer_service->getRenderer(null, $this->output_format, $renderer_config);
-                $rendered_field = $renderer->render([ 'resource' => $entity ], $render_settings);
+                $rendered_field = $renderer->render($this->preparePayload([ 'resource' => $entity ]), $render_settings);
             }
 
             // todo index should be tab->panel->row->item->group->field instead of field only
@@ -188,9 +184,8 @@ abstract class EntityRenderer extends Renderer
             $this->output_format,
             $renderer_config
         );
-
         $rendered_activity_map = $activity_map_renderer->render(
-            [ 'subject' => $activity_map, 'resource' => $resource ],
+            $this->preparePayload([ 'subject' => $activity_map, 'resource' => $resource ]),
             $this->settings
         );
 

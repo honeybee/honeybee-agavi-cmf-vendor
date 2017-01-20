@@ -34,12 +34,10 @@ class CollectionSuccessView extends View
 
         $this->setupHtml($request_data);
 
-        $resource_collection = $this->getAttribute('resource_collection');
         $resource_type = $this->getAttribute('resource_type');
-        $rendered_resource_collection = $this->renderSubject($resource_collection);
-        $this->setAttribute('rendered_resource_collection', $rendered_resource_collection);
         $this->setAttribute('resource_type_name', $resource_type->getName());
 
+        $this->setRenderedResourceCollection($request_data);
         $this->setSubheaderActivities($request_data);
         $this->setPrimaryActivities($request_data);
         $this->setSearchForm($request_data);
@@ -223,6 +221,12 @@ $rendered_resource_collection
 EOT;
 
         $this->cliMessage($text);
+    }
+
+    protected function setRenderedResourceCollection(AgaviRequestDataHolder $request_data)
+    {
+        $resource_collection = $this->getAttribute('resource_collection');
+        $this->setAttribute('rendered_resource_collection', $this->renderSubject($resource_collection));
     }
 
     protected function setSearchForm(AgaviRequestDataHolder $request_data)

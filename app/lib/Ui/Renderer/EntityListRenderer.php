@@ -37,7 +37,6 @@ abstract class EntityListRenderer extends Renderer
         $default_data = [
             'view_scope' => $scope, // e.g. honeybee.system_account.user.collection
         ];
-
         $rendered_resources = [];
         foreach ($resource_collection as $resource) {
             $renderer_config = $this->view_config_service->getRendererConfig(
@@ -46,12 +45,11 @@ abstract class EntityListRenderer extends Renderer
                 $resource,
                 $default_data
             );
-
             $rendered_resources[] = $this->renderer_service->renderSubject(
                 $resource,
                 $this->output_format,
                 $renderer_config,
-                [],
+                $this->preparePayload([]),
                 $this->settings
             );
         }
