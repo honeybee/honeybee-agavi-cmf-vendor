@@ -62,11 +62,6 @@
 
             // center vertically/horizontally
             @if $hide-content {
-                // keep in-flow
-                display: table-cell;
-                vertical-align: middle;
-                text-align: center;
-
                 @if $size != null {
                     font-size: #{$size}rem;
                 }
@@ -83,7 +78,10 @@
     & {
         @if $hide-content {
             box-sizing: content-box;    // width as the pseudo-element
-            display: table !important;  // allow easy alignment
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
             // hide content
             font-size: 0 !important;
