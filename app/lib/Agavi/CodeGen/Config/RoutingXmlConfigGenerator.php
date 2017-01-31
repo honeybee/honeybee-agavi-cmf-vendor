@@ -86,7 +86,7 @@ class RoutingXmlConfigGenerator extends DefaultXmlConfigGenerator
     protected function createStandardWebRouting(DOMDocument $document, $config_file)
     {
         $module_name = $this->extractModuleNameFromPath($config_file);
-        $route_pattern = sprintf('^/%s', implode('-', array_map(function ($name_part) {
+        $route_pattern = sprintf('^/%s/', implode('-', array_map(function ($name_part) {
             return StringToolkit::asSnakeCase($name_part);
         }, explode('_', $module_name))));
         $route_name = implode('.', array_map(function ($name_part) {
