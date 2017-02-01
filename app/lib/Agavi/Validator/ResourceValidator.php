@@ -114,7 +114,7 @@ class ResourceValidator extends AgaviValidator
             }
         }
 
-        return $resource->getType()->createEntity(array_merge($resource->toNative(), $resource_payload));
+        return $resource->getType()->createEntity(array_replace_recursive($resource->toNative(), $resource_payload));
     }
 
     public static function filterEmptyPayloadComingFromEmbedTemplates(ListAttribute $attribute, array $payload)
