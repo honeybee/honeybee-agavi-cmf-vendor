@@ -1,5 +1,6 @@
 <li class="nodelist-item {{ css }}"
     data-hb-item-identifier="{{ resource.identifier }}"
+    data-hb-item-type="{{ entity_type }}"
     {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
 >
     {%- for rendered_field in rendered_fields -%}
