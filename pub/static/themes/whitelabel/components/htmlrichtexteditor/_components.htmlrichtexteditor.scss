@@ -1,5 +1,17 @@
-.editor.jsb_ {
-    display: none; // hide by default in case js doesn't load
+.hb-field {
+    // in case js doesn't load
+    &.jsb_ {
+        > .hb-field__content > .hb-field__value {
+            > .editor { display: none; }
+        }
+    }
+
+    // js loaded
+    &:not(.jsb_) {
+        > .hb-field__content > .hb-field__value {
+            > textarea { display: none; }
+        }
+    }
 }
 
 // htmlrichtexteditor should look like a normal textarea by default
@@ -136,4 +148,28 @@
 
 .editor-popup__cancel {
     @include button-emphasized-navigational;
+}
+
+// modifiers
+
+textarea:read-only ~ .editor,
+.editor--readonly {
+    .editor-hrte {
+        @include input-textual-colors-disabled;
+    }
+}
+
+textarea.invalid ~ .editor,
+textarea:invalid ~ .editor,
+.editor--invalid {
+    .editor-hrte:not(:focus) {
+        // input-textual-colors-invalid
+        background-color: color(background-blank);
+        border-color: color(destructive-primary);
+    }
+
+    .editor-count {
+        // input-textual-colors-invalid
+        color: color(destructive-primary);
+    }
 }

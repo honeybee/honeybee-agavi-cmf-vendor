@@ -7,6 +7,7 @@ define([
 
     var default_options = {
         prefix: "Honeybee_Core/ui/HtmlRichTextEditor",
+        count_template: '{COUNT}',
         // the original textarea element that will be hidden
         textarea_selector: 'textarea',
         hide_textarea: true,
@@ -46,7 +47,7 @@ define([
             RETURN_DOM_FRAGMENT: false,
             FORBID_TAGS: ['BLOCK'],
             FORBID_ATTR: []
-        },
+        }
     };
 
     function HtmlRichTextEditor(dom_element, options) {
@@ -93,6 +94,9 @@ define([
         this.canUndo = false;
         this.canRedo = false;
         this.isFocussed = false;
+        this.maxlength = this.$textarea.prop('maxLength');
+        this.$editor_count = this.$widget.find('.editor-count');
+        this.readonly = this.options.isReadonly || this.options.isDisabled || this.$textarea.prop('readonly');
 
         this.buttons = {
             bold: {
@@ -156,11 +160,25 @@ define([
         this.editor = this.createSquireInstance();
 
         // set initial content of squire editor
+        this.validate(this.$textarea.val());
         this.editor.setHTML(this.$textarea.val());
 
         // hide textarea this widget syncs with
         if (this.options.hide_textarea === true) {
             this.$textarea.hide();
+        }
+
+        if (this.readonly) {
+            this.editor.getRoot().setAttribute('contenteditable', false);
+
+            for (var button_name in this.buttons) {
+                if (this.buttons.hasOwnProperty(button_name)) {
+                    this.buttons[button_name].$btn.prop('disabled', true);
+                    this.buttons[button_name].enable = function() { return false; };
+                }
+            }
+
+            return;
         }
 
         // this.$editor.on('click', function(ev) {
@@ -249,7 +267,7 @@ define([
         // initial ui update to have all buttons in their proper displayed state
         this.updateUI();
 
-        this.$widget.show();
+        this.$editor.show();
     }
 
     HtmlRichTextEditor.prototype = new Widget();
@@ -263,10 +281,10 @@ define([
 
         // sync content to textarea on input
         editor.addEventListener('input', function(ev) {
-            var sanitized_html = DOMPurify.sanitize(that.editor.getHTML(), that.options.dompurify_sync_config);
-            // remove trailing <br> element after DIV block removal
-            sanitized_html = sanitized_html.replace(/<br\>$/, '');
-            that.$textarea.val(sanitized_html);
+            var sanitized_html = that.sanitize(that.editor.getHTML());
+            if (that.validate(sanitized_html)) {
+                that.$textarea.val(sanitized_html);
+            }
         });
 
         editor.addEventListener('undoStateChange', function(ev) {
@@ -296,6 +314,30 @@ define([
         // });
 
         return editor;
+    };
+
+    HtmlRichTextEditor.prototype.sanitize = function(text) {
+        var sanitized_html = DOMPurify.sanitize(text, this.options.dompurify_sync_config);
+        // remove trailing <br> element after DIV block removal
+        return sanitized_html.replace(/<br\>$/, '');
+    }
+
+    HtmlRichTextEditor.prototype.validate = function(text)  {
+        var valid = true;
+        this.$editor_count.html(this.options.count_template.replace(/{COUNT}/, text.length));
+
+        if (this.maxlength !== -1 && text.length > this.maxlength) {
+            valid = false;
+        }
+
+        if (valid) {
+            this.$textarea.removeClass('invalid');
+        } else {
+            this.$textarea.addClass('invalid');
+        }
+        jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
+
+        return valid;
     };
 
     HtmlRichTextEditor.prototype.updateUI = function() {

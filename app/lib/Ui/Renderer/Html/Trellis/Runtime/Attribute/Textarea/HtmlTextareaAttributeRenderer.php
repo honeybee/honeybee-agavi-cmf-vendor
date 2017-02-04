@@ -37,29 +37,37 @@ class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
         $params['rows'] = $this->getOption('rows', 9);
 
         // editor like the HtmlRichTextEditor
-        $params['editor'] = $this->getEditorParameters($params);
+        $params['editor'] = $this->getEditorParameters();
+
+        $params['widget_options']['textarea_selector'] = '#' . $params['field_id'];
 
         return $params;
     }
 
-    protected function getEditorParameters(array $current_params)
+    protected function getEditorParameters()
     {
         $editor = [];
 
-        $editor['enabled'] = $this->getOption('editor_enabled', false);
+        $editor['enabled'] = $this->isWidgetEnabled() && $this->getOption('editor_enabled', false);
         $editor['autogrow'] = $this->getOption('editor_autogrow', false);
         $editor['twig'] = $this->getOption('editor_twig', 'html/attribute/textarea/htmlrichtexteditor.twig');
-        $editor['options'] = json_encode(
-            array_merge(
-                [
-                    'textarea_selector' => '#' . $current_params['field_id'],
-                    'editor_input_selector' => '.editor-hrte',
-                    'view_scope' => $this->getOption('view_scope', 'missing_view_scope.collection'),
-                ],
-                (array)$this->getOption('editor_options', [])
-            )
-        );
 
         return $editor;
+    }
+
+    protected function getWidgetOptions()
+    {
+        return array_replace_recursive(
+            [
+                'editor_input_selector' => '.editor-hrte',
+                'view_scope' => $this->getOption('view_scope', 'missing_view_scope.collection'),
+            ],
+            parent::getWidgetOptions()
+        );
+    }
+
+    protected function getWidgetImplementor()
+    {
+        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/HtmlRichTextEditor');
     }
 }

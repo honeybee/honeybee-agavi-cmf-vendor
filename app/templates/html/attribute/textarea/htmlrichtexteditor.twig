@@ -1,5 +1,5 @@
 {%- block editor -%} {# this block exists for whitespace control #}
-<div class="editor jsb_ jsb_Honeybee_Core/ui/HtmlRichTextEditor" data-jsb="{{ editor.options|default('{}') }}">
+<div class="editor">
     <ul class="editor-menu" contenteditable="false">
         <li class="item"><button type="button" data-editor-action="bold" title="{{ _('bold.title', 'application.hrte') }}"><span>{{ _('bold', 'application.hrte') }}</span></button>
         <li class="item"><button type="button" data-editor-action="italic" title="{{ _('italic.title', 'application.hrte') }}"><span>{{ _('italic', 'application.hrte') }}</span></button>
@@ -14,6 +14,7 @@
         <li class="item"><button type="button" data-editor-action="autogrow" title="{{ _('autogrow.title', 'application.hrte') }}"/>&#x21D5;</button>
     </ul>
     <div class="editor-hrte {{ editor.autogrow|default(false) ? 'autogrow' : '' }}"></div>
+    <div class="editor-count">{{ attribute_value|length }}</div>
     <div class="editor-popup editor-popup-link">
         <div>
             <h2>{{ _('popup-link.header', 'application.hrte') }}</h2>
