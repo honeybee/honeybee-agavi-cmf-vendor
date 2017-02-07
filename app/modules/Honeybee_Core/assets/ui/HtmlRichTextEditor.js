@@ -64,8 +64,8 @@ define([
 
         // a custom sanitization function may be specified for initial setHTML call and pasting content
         if (typeof this.options.sanitizeToDOMFragment !== 'function') {
-            this.options.squire_config.sanitizeToDOMFragment = function(html, is_paste) {
-                return that.sanitizeToDOMFragment(html, is_paste);
+            this.options.squire_config.sanitizeToDOMFragment = function(html, is_paste, squire_instance) {
+                return that.sanitizeToDOMFragment(html, is_paste, squire_instance);
             };
         }
 
@@ -375,9 +375,15 @@ define([
         // });
     };
 
-    HtmlRichTextEditor.prototype.sanitizeToDOMFragment = function(html, is_paste) {
+    HtmlRichTextEditor.prototype.sanitizeToDOMFragment = function(html, is_paste, squire_instance) {
         var dompurify_config = is_paste ? this.options.dompurify_paste_config : this.options.dompurify_config;
-        return DOMPurify.sanitize(html, dompurify_config);
+        var fragment = DOMPurify.sanitize(html, dompurify_config);
+
+        if (!fragment) {
+            fragment = squire_instance.getDocument().createDocumentFragment();
+        }
+
+        return fragment;
     };
 
     HtmlRichTextEditor.prototype.handleAction = function(action_element, ev) {
