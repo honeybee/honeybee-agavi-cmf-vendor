@@ -242,7 +242,7 @@ abstract class AttributeRenderer extends Renderer
             'title',
         ];
 
-        return array_replace($default_translation_keys, $field_translation_keys);
+        return array_unique(array_merge($default_translation_keys, $field_translation_keys));
     }
 
     protected function isReadonly()

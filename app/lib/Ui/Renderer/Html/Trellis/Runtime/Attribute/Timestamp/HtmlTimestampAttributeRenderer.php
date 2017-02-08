@@ -50,6 +50,6 @@ class HtmlTimestampAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getDefaultTranslationKeys()
     {
-        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
+        return array_merge(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }
