@@ -100,6 +100,14 @@
         background: none;
         width: auto;
     }
+
+    [data-editor-action="empty"] {
+        background-image: url('binaries/icons/hrte/trash.svg');
+    }
+}
+
+.editor-count {
+    padding: $small-spacing 0 0 $small-spacing;
 }
 
 .mfp-content .editor-popup {

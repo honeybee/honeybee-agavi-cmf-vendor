@@ -155,6 +155,11 @@ define([
                 highlight: function() { return that.$editor.hasClass('editor--autogrow'); },
                 enable: function() { return true; }
             },
+            empty: {
+                $btn: this.$widget.find('[data-editor-action="empty"]'),
+                highlight: function() { return false; },
+                enable: function() { console.log(that.editor.getHTML());return that.editor.getHTML() !== ''; }
+            }
         };
 
         this.$editor = this.$editor_input.closest('.editor');
@@ -174,12 +179,10 @@ define([
         if (this.readonly) {
             this.editor.getRoot().setAttribute('contenteditable', false);
 
-            for (var button_name in this.buttons) {
-                if (this.buttons.hasOwnProperty(button_name)) {
-                    this.buttons[button_name].$btn.prop('disabled', true);
-                    this.buttons[button_name].enable = function() { return false; };
-                }
-            }
+            _.forOwn(this.buttons, function(btn, name) {
+                btn.$btn.prop('disabled', true);
+                btn.enable = function() { return false; };
+            });
 
             this.$editor.addClass('editor--readonly');  // IE doesn't support :read-only selector
 
@@ -442,6 +445,10 @@ define([
                 this.buttons.autogrow.$btn.addClass('active');
             } else {
                 this.buttons.autogrow.$btn.removeClass('active');
+            }
+        } else if (action === 'empty') {
+            if (this.validate('')) {
+                editor._setHTML('');
             }
         } else {
             switch (action) {
