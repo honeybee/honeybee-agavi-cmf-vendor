@@ -166,9 +166,9 @@ define([
         this.validate(this.$textarea.val());
         this.editor.setHTML(this.$textarea.val());
 
-        // hide textarea this widget syncs with
-        if (this.options.hide_textarea === true) {
-            this.$textarea.hide();
+        // show textarea this widget syncs with
+        if (this.options.hide_textarea === false) {
+            this.$textarea.show();
         }
 
         if (this.readonly) {
