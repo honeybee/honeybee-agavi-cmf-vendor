@@ -151,12 +151,11 @@
 }
 
 // modifiers
-
-textarea:read-only ~ .editor,
-.editor--readonly {
-    .editor-hrte {
-        @include input-textual-colors-disabled;
-    }
+textarea:read-only ~ .editor .editor-hrte {
+    @include input-textual-colors-disabled;
+}
+.editor--readonly .editor-hrte {    // separate selector: pseudo-class breaks the rule on IE
+    @include input-textual-colors-disabled;
 }
 
 textarea.invalid ~ .editor,

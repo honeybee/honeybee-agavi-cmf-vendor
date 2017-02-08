@@ -74,22 +74,23 @@ define([
             this.$textarea = $(this.options.textarea_selector);
         }
 
-        this.$editor = this.$widget.find(this.options.editor_input_selector).first();
-        if (this.$editor.length === 0) {
+        this.$editor_input = this.$widget.find(this.options.editor_input_selector).first();
+        if (this.$editor_input.length === 0) {
             $(this.options.editor_input_selector);
         }
 
-        if (this.$textarea.length !== 1 || this.$editor.length !== 1) {
+        if (this.$textarea.length !== 1 || this.$editor_input.length !== 1) {
+            this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
             return;
         }
 
         // switch the label of the textarea to hide to the wysiwyg contenteditable element
         // hint: this doesn't work ATM as browsers and specs don't see contenteditable as controls
-        // if (!_.isString(this.$editor.id)) {
-        //     this.$editor.prop('id', 'hrte-' + this.getRandomString());
+        // if (!_.isString(this.$editor_input.id)) {
+        //     this.$editor_input.prop('id', 'hrte-' + this.getRandomString());
         // }
         // this.$textarea_label = $('label[for="'+this.$textarea.prop('id')+'"]');
-        // this.$textarea_label.prop('for', this.$editor.prop('id'));
+        // this.$textarea_label.prop('for', this.$editor_input.prop('id'));
 
         this.canUndo = false;
         this.canRedo = false;
@@ -151,10 +152,12 @@ define([
             },
             autogrow: {
                 $btn: this.$widget.find('[data-editor-action="autogrow"]'),
-                highlight: function() { return that.$editor.hasClass('autogrow'); },
+                highlight: function() { return that.$editor_input.hasClass('autogrow'); },
                 enable: function() { return true; }
             },
         };
+
+        this.$editor = this.$editor_input.closest('.editor');
 
         // save editor instance
         this.editor = this.createSquireInstance();
@@ -178,10 +181,12 @@ define([
                 }
             }
 
+            this.$editor.addClass('editor--readonly');  // IE doesn't support :read-only selector
+
             return;
         }
 
-        // this.$editor.on('click', function(ev) {
+        // this.$editor_input.on('click', function(ev) {
         //     that.updateUI();
         // });
 
@@ -277,7 +282,7 @@ define([
         var that = this;
 
         // init Squire instance
-        var editor = new Squire(this.$editor[0], this.options.squire_config);
+        var editor = new Squire(this.$editor_input[0], this.options.squire_config);
 
         // sync content to textarea on input
         editor.addEventListener('input', function(ev) {
@@ -355,7 +360,7 @@ define([
             redo.$btn.prop('disabled', true);
         }
 
-        if (this.$editor.hasClass('autogrow')) {
+        if (this.$editor_input.hasClass('autogrow')) {
             this.buttons.autogrow.$btn.addClass('active');
         } else {
             this.buttons.autogrow.$btn.removeClass('active');
@@ -432,8 +437,8 @@ define([
         } else if (action === 'link') {
             // do nothing as a dialog will be shown to the user to add/change the url etc.
         } else if (action === 'autogrow') {
-            this.$editor.toggleClass('autogrow');
-            if (this.$editor.hasClass('autogrow')) {
+            this.$editor_input.toggleClass('autogrow');
+            if (this.$editor_input.hasClass('autogrow')) {
                 this.buttons.autogrow.$btn.addClass('active');
             } else {
                 this.buttons.autogrow.$btn.removeClass('active');
