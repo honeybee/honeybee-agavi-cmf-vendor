@@ -152,7 +152,7 @@ define([
             },
             autogrow: {
                 $btn: this.$widget.find('[data-editor-action="autogrow"]'),
-                highlight: function() { return that.$editor_input.hasClass('autogrow'); },
+                highlight: function() { return that.$editor.hasClass('editor--autogrow'); },
                 enable: function() { return true; }
             },
         };
@@ -360,7 +360,7 @@ define([
             redo.$btn.prop('disabled', true);
         }
 
-        if (this.$editor_input.hasClass('autogrow')) {
+        if (this.$editor.hasClass('editor--autogrow')) {
             this.buttons.autogrow.$btn.addClass('active');
         } else {
             this.buttons.autogrow.$btn.removeClass('active');
@@ -437,8 +437,8 @@ define([
         } else if (action === 'link') {
             // do nothing as a dialog will be shown to the user to add/change the url etc.
         } else if (action === 'autogrow') {
-            this.$editor_input.toggleClass('autogrow');
-            if (this.$editor_input.hasClass('autogrow')) {
+            this.$editor.toggleClass('editor--autogrow');
+            if (this.$editor.hasClass('editor--autogrow')) {
                 this.buttons.autogrow.$btn.addClass('active');
             } else {
                 this.buttons.autogrow.$btn.removeClass('active');

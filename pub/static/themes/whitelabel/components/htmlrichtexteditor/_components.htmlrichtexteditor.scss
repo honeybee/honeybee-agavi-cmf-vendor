@@ -15,7 +15,7 @@
 }
 
 // htmlrichtexteditor should look like a normal textarea by default
-// and have a fixed height with a scrollbar – use ".autogrow" otherwise
+// and have a fixed height with a scrollbar – use ".editor--autogrow" otherwise
 .editor-hrte {
     @include textarea;
     min-width: 10em;
@@ -24,13 +24,6 @@
     max-height: 30em;
     overflow: auto;
     resize: vertical;
-
-    &.autogrow {
-        max-height: none;
-        height: auto;
-        overflow: none;
-        resize: none;
-    }
 }
 
 .editor-menu {
@@ -151,6 +144,14 @@
 }
 
 // modifiers
+
+.editor--autogrow .editor-hrte {
+    max-height: none;
+    height: auto;
+    overflow: none;
+    resize: none;
+}
+
 textarea:read-only ~ .editor .editor-hrte {
     @include input-textual-colors-disabled;
 }
