@@ -13,6 +13,8 @@ use AgaviWebResponse;
 use Exception;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
+use Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create\CreateInputView;
+use Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Modify\ModifyInputView;
 use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
@@ -767,7 +769,11 @@ class View extends AgaviView
 
         // view-api_login
         $view_action = 'view' . str_replace($prefix, '', $action);
-
+        if ($this instanceof CreateInputView) {
+            $view_action .= ' view-create';
+        } else  if ($this instanceof ModifyInputView) {
+            $view_action .= ' view-resource-modify';
+        }
         // api_login_error_view
         $specific_view = end($snake_parts);
 

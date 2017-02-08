@@ -259,9 +259,11 @@ abstract class AttributeRenderer extends Renderer
     {
         $input_view_template_name_suffixes = (array)$this->getOption(
             'input_view_template_name_suffixes',
-            [ 'create', 'modify' ]
+            (array)$this->environment->getSettings()->get(
+                'ui.input_view_template_name_suffixes',
+                [ 'create', 'modify' ]
+            )
         );
-
         // by convention is possible to specify the output format name after the view name
         if (!empty($output_format_name)) {
             foreach ($input_view_template_name_suffixes as $input_suffix) {
