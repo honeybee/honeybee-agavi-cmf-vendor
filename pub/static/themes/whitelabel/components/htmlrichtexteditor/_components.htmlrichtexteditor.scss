@@ -5,13 +5,6 @@
             > .editor { display: none; }
         }
     }
-
-    // js loaded
-    &:not(.jsb_) {
-        > .hb-field__content > .hb-field__value {
-            > textarea { display: none; }
-        }
-    }
 }
 
 // htmlrichtexteditor should look like a normal textarea by default
