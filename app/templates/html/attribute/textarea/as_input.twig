@@ -1,15 +1,18 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
-<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %} {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
+<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         <div class="hb-field__label">
             <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
             {#- textarea must precede editor markup -#}
-            <textarea id="{{ field_id }}" name="{{ grouped_field_name }}" class="" placeholder="{{ translations.placeholder|default('') }}"
+            <textarea id="{{ field_id }}" name="{{ grouped_field_name }}" placeholder="{{ translations.placeholder|default('') }}"
                 maxlength="{{ maxlength|default('') }}" wrap="{{ wrap|default('') }}" cols="{{ cols|default('') }}" rows="{{ rows|default('') }}"
-                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}">{#
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}"
+                class="{% if counter.enabled %} jsb_ jsb_Honeybee_Core/ui/CharCounter{% endif %}"
+                {% if counter.enabled %} data-jsb="{{ counter.options|json_encode }}"{% endif %}
+                >{#
                     #}{{ attribute_value }}{#
                 #}</textarea>
             <ul class="errors">

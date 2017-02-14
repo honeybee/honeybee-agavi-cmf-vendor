@@ -1,11 +1,5 @@
-.hb-field {
-    // in case js doesn't load
-    &.jsb_ {
-        > .hb-field__content > .hb-field__value {
-            > .editor { display: none; }
-        }
-    }
-}
+// in case js doesn't load
+.editor.jsb_ { display: none; }
 
 // htmlrichtexteditor should look like a normal textarea by default
 // and have a fixed height with a scrollbar – use ".editor--autogrow" otherwise
@@ -99,10 +93,6 @@
     }
 }
 
-.editor-count {
-    padding: $small-spacing 0 0 $small-spacing;
-}
-
 .mfp-content .editor-popup {
     display: block;
 }
@@ -162,15 +152,12 @@ textarea:read-only ~ .editor .editor-hrte {
 
 textarea.invalid ~ .editor,
 textarea:invalid ~ .editor,
-.editor--invalid {
+.editor--invalid,
+.editor--invalid-count {
     .editor-hrte:not(:focus) {
         // input-textual-colors-invalid
         background-color: color(background-blank);
         border-color: color(destructive-primary);
     }
-
-    .editor-count {
-        // input-textual-colors-invalid
-        color: color(destructive-primary);
-    }
 }
+
