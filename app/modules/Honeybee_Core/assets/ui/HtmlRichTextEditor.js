@@ -13,7 +13,7 @@ define([
         textarea_selector: 'textarea',
         hide_textarea: true,
         // element that will be used as editor for the textarea content
-        editor_input_selector: '.editor-hrte',
+        editor_selector: '.editor-hrte',
         // Squire options to use
         squire_config: {
             blockTag: 'BLOCK', // Squire default is 'DIV', 'BLOCK' is used as dompurify will remove that automatically
@@ -76,9 +76,9 @@ define([
             this.$textarea = $(this.options.textarea_selector);
         }
 
-        this.$editor = this.$widget.find(this.options.editor_input_selector).first();
+        this.$editor = this.$widget.find(this.options.editor_selector).first();
         if (this.$editor.length === 0) {
-            $(this.options.editor_input_selector);
+            $(this.options.editor_selector);
         }
 
         if (this.$textarea.length !== 1) {

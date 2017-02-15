@@ -81,6 +81,8 @@
                             <ae:parameter name="undo.title">Letzte Aktion rückgängig machen (Strg+Z)</ae:parameter>
                             <ae:parameter name="redo">Redo</ae:parameter>
                             <ae:parameter name="redo.title">Letzte Aktion wiederherstellen (Strg+Y)</ae:parameter>
+                            <ae:parameter name="empty">Leeren</ae:parameter>
+                            <ae:parameter name="empty.title">Inhalt löschen</ae:parameter>
                             <ae:parameter name="autogrow"><![CDATA[&#x21D5;]]></ae:parameter>
                             <ae:parameter name="autogrow.title">Automatisch die Größe des Textfelds anpassen?</ae:parameter>
                             <ae:parameter name="popup-link.accept">Übernehmen</ae:parameter>
@@ -114,6 +116,8 @@
                             <ae:parameter name="undo.title">Undo last operation (Ctrl+Z)</ae:parameter>
                             <ae:parameter name="redo">Redo</ae:parameter>
                             <ae:parameter name="redo.title">Redo last operation (Ctrl+Y)</ae:parameter>
+                            <ae:parameter name="empty">Clear</ae:parameter>
+                            <ae:parameter name="empty.title">Clear current content</ae:parameter>
                             <ae:parameter name="autogrow"><![CDATA[&#x21D5;]]></ae:parameter>
                             <ae:parameter name="autogrow.title">Automatically grow height of text input area?</ae:parameter>
                             <ae:parameter name="popup-link.accept">Accept</ae:parameter>

@@ -89,7 +89,10 @@
     }
 
     [data-editor-action="empty"] {
-        background-image: url('binaries/icons/hrte/trash.svg');
+        background-image: url('binaries/icons/hrte/block.svg');
+        @include button-states {
+            font-size: 0.8em;
+        }
     }
 }
 
