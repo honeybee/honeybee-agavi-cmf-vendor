@@ -42,4 +42,13 @@ class HtmlGeoPointAttributeRenderer extends HtmlAttributeRenderer
 
         return $params;
     }
+
+    protected function getWidgetOptions()
+    {
+        $widget_options = parent::getWidgetOptions();
+        if (isset($widget_options['geo_endpoint'])) {
+            $widget_options['geo_endpoint'] = $this->genUrl($widget_options['geo_endpoint']);
+        }
+        return $widget_options;
+    }
 }
