@@ -11,7 +11,7 @@
                 <tab name="content">
                     <panel name="main">
                         <row css="">
-                            <cell css="portable-1/1 desk-wide-1/4">
+                            <cell css="lap-1/2 desk-wide-1/4">
                                 <group name="primary">
                                     <field name="username" attribute_path="username">
                                         <setting name="required">true</setting>
@@ -26,7 +26,7 @@
                                     <field name="lastname" attribute_path="lastname" />
                                 </group>
                             </cell>
-                            <cell css="desk-wide-3/4">
+                            <cell css="lap-1/2 desk-wide-3/4">
                                 <group name="userimages">
                                     <field name="images" attribute_path="background_images">
                                         <setting name="use_converjon">%converjon.enabled%</setting>
