@@ -281,7 +281,7 @@ class AssetCompiler
          * '/some/input_file.scss' 'some_output_file.css'
          */
         $command = sprintf(
-            '%s %s --scss %s %s %s %s',
+            '%s %s --scss %s %s %s %s -E "UTF-8"',
             AgaviConfig::get('sass.env', 'RUBYOPT="" LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8"'),
             ProcessUtils::escapeArgument(AgaviConfig::get('sass.cmd', '/usr/local/bin/sass')),
             ProcessUtils::escapeArgument('--style=' . $style),
