@@ -23,9 +23,9 @@
                 <transport name="event_pub">
                     <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport</implementor>
                     <settings>
-                        <setting name="channel">%event_pub.default_channel%</setting>
-                        <setting name="host">%event_pub.pull_socket.host%</setting>
-                        <setting name="port">%event_pub.pull_socket.port%</setting>
+                        <setting name="channel">org.honeybee.events</setting>
+                        <setting name="host">%websocket.host%</setting>
+                        <setting name="port">%websocket.inbound_port%</setting>
                     </settings>
                 </transport>
                 <transport name="sync">
@@ -49,7 +49,7 @@
                         </subscription>
                     </subscriptions>
                 </channel>
-                
+
                 <channel name="honeybee.events.failed">
                     <subscriptions>
                         <subscription enabled="true">

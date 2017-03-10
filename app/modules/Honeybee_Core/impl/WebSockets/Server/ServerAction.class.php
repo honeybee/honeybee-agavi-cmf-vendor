@@ -22,8 +22,8 @@ class Honeybee_Core_WebSockets_ServerAction extends Action
         $pull_socket->bind(
             sprintf(
                 'tcp://%s:%s',
-                AgaviConfig::get('event_pub.pull_socket.host'),
-                AgaviConfig::get('event_pub.pull_socket.port')
+                "0.0.0.0",
+                AgaviConfig::get('websocket.inbound_port')
             )
         );
 
@@ -32,8 +32,8 @@ class Honeybee_Core_WebSockets_ServerAction extends Action
 
         $web_socket = new Server($event_loop);
         $web_socket->listen(
-            AgaviConfig::get('event_pub.web_socket.port'),
-            AgaviConfig::get('event_pub.web_socket.host')
+            AgaviConfig::get('websocket.outbound_port'),
+            "0.0.0.0"
         );
 
         $web_server = new IoServer(
