@@ -58,6 +58,7 @@
         "monolog/monolog": "^1.0",
         "mthaml/mthaml": "^1.7",
         "swiftmailer/swiftmailer": "^5.4",
+        "symfony/console": "^2.7",
         "symfony/finder": "^2.7",
         "symfony/process": "^2.7",
         "symfony/validator": "^2.7",

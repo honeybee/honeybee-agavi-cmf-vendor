@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c996b4541665d7b9e90ec16cc678bb8d",
+    "content-hash": "a810f7cf7fe359560a53008fc6a74af7",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -3942,7 +3942,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-02-25T12:14:18+00:00"
+            "time": "2017-02-25 12:14:18"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
