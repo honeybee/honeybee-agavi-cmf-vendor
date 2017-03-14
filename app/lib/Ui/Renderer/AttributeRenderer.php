@@ -58,6 +58,7 @@ abstract class AttributeRenderer extends Renderer
         $attribute_path = $this->attribute->getPath();
         $field_name = $this->getOption('field_name', $attribute_name);
 
+        $params['resource'] = $this->getPayload('resource');
         $params['field_id'] = 'randomId-' . rand(); // @todo still random but nicer ids?
         $params['field_name'] = $field_name;
         $params['grouped_field_name'] = $this->getGroupedInputFieldName();
