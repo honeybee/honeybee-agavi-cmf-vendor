@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a810f7cf7fe359560a53008fc6a74af7",
+    "content-hash": "ad0ce82d0f46711afc3b3160386ec146",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -724,12 +724,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "6463e901d4242665946030ab6b75db7bd6cfa311"
+                "reference": "d3e0047f48f12988386a42456d59511ddc78813f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/6463e901d4242665946030ab6b75db7bd6cfa311",
-                "reference": "6463e901d4242665946030ab6b75db7bd6cfa311",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/d3e0047f48f12988386a42456d59511ddc78813f",
+                "reference": "d3e0047f48f12988386a42456d59511ddc78813f",
                 "shasum": ""
             },
             "require": {
@@ -811,7 +811,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-14 15:42:59"
+            "time": "2017-03-14 16:57:27"
         },
         {
             "name": "honeybee/trellis",
