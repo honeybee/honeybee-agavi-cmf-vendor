@@ -861,7 +861,7 @@ class View extends AgaviView
         $resource = StringToolkit::asSnakeCase(array_shift($class_name_parts));
 
         $projection_type_map = $this->getServiceLocator()->getProjectionTypeMap();
-        if (!$projection_type_map->filterByPrefix($vendor . '.' . $package . '.' . $resource)) {
+        if ($projection_type_map->filterByPrefix($vendor . '.' . $package . '.' . $resource)->isEmpty()) {
             return $vendor . $join_char . $package;
         } else {
             return $vendor . $join_char . $package . $join_char . $resource;
