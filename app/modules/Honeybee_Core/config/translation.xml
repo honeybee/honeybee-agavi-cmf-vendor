@@ -19,12 +19,20 @@
 
             <translator domain="honeybee.core">
                 <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="views">
+                        <ae:parameter name="de">
+                            <ae:parameter name="theme_preview.page_title">Vorschau Theme</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="theme_preview.page_title">Theme Preview</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
                     <ae:parameter name="activity">
                         <ae:parameter name="de">
                             <ae:parameter name="theme_preview.label">Vorschau Theme</ae:parameter>
                         </ae:parameter>
                         <ae:parameter name="en">
-                            <ae:parameter name="theme_preview.label">Honeybee</ae:parameter>
+                            <ae:parameter name="theme_preview.label">Theme Preview</ae:parameter>
                         </ae:parameter>
                     </ae:parameter>
                 </message_translator>
