@@ -57,8 +57,8 @@ class HaljsonEntityReferenceListAttributeRenderer extends AttributeRenderer
     {
         $links = [];
         $resource_type_class = $this->attribute->getEmbeddedTypeByReferencedPrefix(
-                $resource->getType()->getPrefix()
-            )->getReferencedTypeClass();
+            $resource->getType()->getPrefix()
+        )->getReferencedTypeClass();
         $art = $this->resource_type_map->getByClassName($resource_type_class);
         $user = $this->environment->getUser();
 
@@ -68,7 +68,7 @@ class HaljsonEntityReferenceListAttributeRenderer extends AttributeRenderer
                 'module.resource',
                 [
                     'module' => $art,
-                    'resource' => $resource->getIdentifier()
+                    'resource' => $resource->getReferencedIdentifier()
                 ]
             );
             $link = [
