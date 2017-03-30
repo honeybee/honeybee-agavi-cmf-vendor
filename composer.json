@@ -53,7 +53,7 @@
         "php": ">=5.6.0",
         "lib-libxml": "*",
         "honeybee/agavi": "dev-honeybee-1.0",
-        "honeybee/honeybee": "master@dev",
+        "honeybee/honeybee": "dev-feature/ui_split",
         "michelf/php-markdown": "^1.5",
         "monolog/monolog": "^1.0",
         "mthaml/mthaml": "^1.7",
