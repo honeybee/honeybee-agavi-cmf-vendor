@@ -5,8 +5,8 @@ namespace Honeybee\FrameworkBinding\Agavi\ConfigHandler;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\Infrastructure\Mail\Message;
-use Honeybee\Infrastructure\Mail\MailServiceInterface;
+use Honeygavi\Mail\Message;
+use Honeygavi\Mail\MailServiceInterface;
 
 /**
  * Mail configuration files contain mailer elements that define settings

@@ -3,7 +3,7 @@
 namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton;
 
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
-use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
+use Honeygavi\Template\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 

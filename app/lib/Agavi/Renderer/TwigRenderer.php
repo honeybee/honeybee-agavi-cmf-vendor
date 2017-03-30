@@ -20,7 +20,7 @@ use MtHaml\Filter\Markdown\MichelfMarkdown as MtHamlMarkdownFilter;
 use Michelf\MarkdownExtra;
 
 use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
-use Honeybee\Infrastructure\Template\Twig\Loader\FilesystemLoader;
+use Honeygavi\Template\Twig\Loader\FilesystemLoader;
 
 //use Honeybee\FrameworkBinding\Agavi\Logging;
 

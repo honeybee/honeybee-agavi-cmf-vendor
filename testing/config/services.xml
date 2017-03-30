@@ -27,7 +27,7 @@
                     </provisioner>
                 </service>
                 <service name="honeybee.infrastructure.mail_service">
-                    <class>Honeybee\Infrastructure\Mail\LoggingSwiftMailer</class>
+                    <class>Honeygavi\Mail\LoggingSwiftMailer</class>
                     <provisioner>
                         <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
                         <settings>

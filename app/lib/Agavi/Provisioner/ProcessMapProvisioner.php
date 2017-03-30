@@ -9,7 +9,7 @@ use Auryn\Injector as DiContainer;
 use Honeybee\FrameworkBinding\Agavi\Provisioner\AbstractProvisioner;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Infrastructure\ProcessManager\Process;
+use Honeygavi\ProcessManager\Process;
 
 class ProcessMapProvisioner extends AbstractProvisioner
 {

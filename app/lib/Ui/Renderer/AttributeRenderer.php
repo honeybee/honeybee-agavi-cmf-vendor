@@ -10,7 +10,7 @@ use Honeybee\EntityInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
-use Honeybee\Infrastructure\Template\TemplateRendererInterface;
+use Honeygavi\Template\TemplateRendererInterface;
 use Honeybee\Projection\ProjectionInterface;
 use Honeybee\Ui\OutputFormat\OutputFormatInterface;
 use Honeybee\Ui\UrlGeneratorInterface;

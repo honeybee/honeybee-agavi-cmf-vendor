@@ -9,7 +9,7 @@ use Honeybee\Common\Error\ConfigError;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\ConnectorServiceInterface;
-use Honeybee\Infrastructure\Mail\MailServiceInterface;
+use Honeygavi\Mail\MailServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Psr\Log\LoggerInterface;
 use Swift_Mailer;

@@ -7,7 +7,7 @@ use AgaviConfigCache;
 use AgaviContext;
 use AgaviSecurityUser;
 use Exception;
-use Honeybee\Infrastructure\Security\Acl\AclService;
+use Honeygavi\Security\Acl\AclService;
 use Honeybee\UserInterface;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 use Zend\Permissions\Acl\Role\RoleInterface;

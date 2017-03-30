@@ -8,9 +8,9 @@ use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaQuery;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
-use Honeybee\Infrastructure\Security\Auth\AuthResponse;
-use Honeybee\Infrastructure\Security\Auth\AuthServiceInterface;
-use Honeybee\Infrastructure\Security\Auth\CryptedPasswordHandler;
+use Honeygavi\Security\Auth\AuthResponse;
+use Honeygavi\Security\Auth\AuthServiceInterface;
+use Honeygavi\Security\Auth\CryptedPasswordHandler;
 
 class StandardAuthService implements AuthServiceInterface
 {

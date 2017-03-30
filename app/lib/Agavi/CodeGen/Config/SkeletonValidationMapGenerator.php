@@ -4,7 +4,7 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
 
 use AgaviConfig;
 use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
-use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
+use Honeygavi\Template\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
 
 class SkeletonValidationMapGenerator implements ConfigGeneratorInterface

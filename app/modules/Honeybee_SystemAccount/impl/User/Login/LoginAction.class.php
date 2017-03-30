@@ -1,7 +1,7 @@
 <?php
 
-use Honeybee\Infrastructure\Security\Auth\AuthResponse;
-use Honeybee\Infrastructure\Security\Acl\AclService;
+use Honeygavi\Security\Auth\AuthResponse;
+use Honeygavi\Security\Acl\AclService;
 use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
 
 class Honeybee_SystemAccount_User_LoginAction extends Action

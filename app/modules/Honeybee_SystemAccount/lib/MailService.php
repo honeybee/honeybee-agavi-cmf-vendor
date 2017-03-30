@@ -10,7 +10,7 @@ use Honeybee\Common\Error\RuntimeError;
 use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
 use Honeybee\FrameworkBinding\Agavi\Renderer\ModuleTemplateRenderer;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Infrastructure\Mail\MailServiceInterface;
+use Honeygavi\Mail\MailServiceInterface;
 use Psr\Log\LoggerInterface;
 
 class MailService

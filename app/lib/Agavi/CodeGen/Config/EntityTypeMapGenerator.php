@@ -4,7 +4,7 @@ namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
 
 use AgaviConfig;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
+use Honeygavi\Template\Twig\TwigRenderer;
 use Honeybee\Projection\ProjectionTypeInterface;
 use SplFileInfo;
 use Trellis\CodeGen\Parser\Config\ConfigIniParser;

@@ -5,7 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Infrastructure\Security\Acl\AclServiceInterface;
+use Honeygavi\Security\Acl\AclServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
 
 class AclServiceProvisioner extends AbstractProvisioner

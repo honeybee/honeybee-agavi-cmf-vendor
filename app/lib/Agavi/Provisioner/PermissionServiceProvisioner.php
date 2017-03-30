@@ -5,7 +5,7 @@ namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Infrastructure\Security\Acl\Permission\PermissionServiceInterface;
+use Honeygavi\Security\Acl\Permission\PermissionServiceInterface;
 use Honeybee\ServiceDefinitionInterface;
 
 class PermissionServiceProvisioner extends AbstractProvisioner

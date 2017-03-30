@@ -9,7 +9,7 @@ use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\FrameworkBinding\Agavi\Renderer\TwigRenderer;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Infrastructure\Mail\Message;
+use Honeygavi\Mail\Message;
 
 /**
  * Renders templates with Twig (for modules).
