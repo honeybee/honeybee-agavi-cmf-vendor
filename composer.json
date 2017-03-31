@@ -52,7 +52,7 @@
         "php": ">=5.6.0",
         "lib-libxml": "*",
         "honeybee/agavi": "dev-honeybee-1.0",
-        "honeybee/honeybee": "^0.1",
+        "honeybee/honeybee": "dev-develop",
         "michelf/php-markdown": "^1.7",
         "monolog/monolog": "^1.22",
         "mthaml/mthaml": "^1.8",
@@ -72,7 +72,7 @@
         "phpmd/phpmd": "^2.6",
         "sebastian/phpcpd": "^3.0",
         "squizlabs/php_codesniffer": "^2.8",
-        "mockery/mockery": "^0.9",
+        "mockery/mockery": "master@dev",
         "satooshi/php-coveralls": "master@dev",
         "symfony/css-selector": "^3.2",
         "symfony/dom-crawler": "^3.2"
