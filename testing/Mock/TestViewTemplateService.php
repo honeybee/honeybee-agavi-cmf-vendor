@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
 use Honeybee\Projection\ProjectionTypeInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;

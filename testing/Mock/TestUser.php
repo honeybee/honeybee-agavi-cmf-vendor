@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
 use Honeygavi\User\AclSecurityUser;
 

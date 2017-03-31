@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Author\Reference;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Author\Reference;
 
 use Honeybee\Projection\ReferencedEntity;
 

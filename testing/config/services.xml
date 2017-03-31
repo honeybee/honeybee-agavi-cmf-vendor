@@ -9,21 +9,21 @@
         <service_map>
             <service_definitions>
                 <service name="honeybee.service_locator">
-                    <class>Honeybee\Tests\Mock\TestServiceLocator</class>
+                    <class>Honeygavi\Tests\Mock\TestServiceLocator</class>
                 </service>
                 <service name="honeybee.ui.translator">
-                    <class>Honeybee\Tests\Mock\TestTranslator</class>
+                    <class>Honeygavi\Tests\Mock\TestTranslator</class>
                 </service>
                 <service name="honeybee.ui.view_template_service">
-                    <class>Honeybee\Tests\Mock\TestViewTemplateService</class>
+                    <class>Honeygavi\Tests\Mock\TestViewTemplateService</class>
                 </service>
                 <service name="honeybee.infrastructure.filesystem_service">
-                    <class>Honeybee\Tests\Mock\TestFilesystemService</class>
+                    <class>Honeygavi\Tests\Mock\TestFilesystemService</class>
                 </service>
                 <service name="honeybee.infrastructure.state_machine_builder">
                     <class>Honeybee\Infrastructure\Workflow\StateMachineBuilder</class>
                     <provisioner>
-                        <class>Honeybee\Tests\Mock\TestStateMachineBuilderProvisioner</class>
+                        <class>Honeygavi\Tests\Mock\TestStateMachineBuilderProvisioner</class>
                     </provisioner>
                 </service>
                 <service name="honeybee.infrastructure.mail_service">

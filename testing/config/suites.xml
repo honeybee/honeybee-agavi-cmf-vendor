@@ -3,10 +3,14 @@
     <ae:configuration>
         <suites>
              <suite name="Unit">
-                <include>Unit/FrameworkBinding/Agavi/Validator/AggregateRootTypeCommandValidatorTest.php</include>
-                <include>Unit/FrameworkBinding/Agavi/Validator/AggregateRootCommandValidatorTest.php</include>
-                <include>Unit/FrameworkBinding/Agavi/Validator/ProceedWorkflowCommandValidatorTest.php</include>
-                <include>Unit/FrameworkBinding/Agavi/Validator/TrellisTargetValidatorTest.php</include>
+                <include>Unit/Validator/AggregateRootTypeCommandValidatorTest.php</include>
+                <include>Unit/Validator/AggregateRootCommandValidatorTest.php</include>
+                <include>Unit/Validator/ProceedWorkflowCommandValidatorTest.php</include>
+                <include>Unit/Validator/TrellisTargetValidatorTest.php</include>
+                <include>Unit/Routing/NegotiateOutputTypeRoutingCallbackTest.php</include>
+                <include>Unit/Mail/LoggingSwiftMailerTest.php</include>
+                <include>Unit/Ui/ListConfigTest.php</include>
+                <include>Unit/Ui/ValueObject/PaginationTest.php</include>
             </suite>
             <suite name="Honeybee_SystemAccount">
                 <include>Flow/Honeybee_SystemAccount/User/Collection/CollectionActionFlowTest.php</include>

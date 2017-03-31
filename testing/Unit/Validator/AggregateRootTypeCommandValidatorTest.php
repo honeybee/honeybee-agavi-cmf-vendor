@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Tests\Unit\Validator;
 
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
 use Honeygavi\Request\HoneybeeUploadedFile;
 use Honeygavi\Validator\AggregateRootTypeCommandValidator;
-use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
-use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand;
+use Honeygavi\Tests\Mock\HoneybeeAgaviUnitTestCase;
+use Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand;
 
 class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
 {
@@ -44,7 +44,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'name' => 'invalid_task_data',
                 'base' => $base,
                 'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
-                'command_implementor' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                'command_implementor' => 'Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'attribute_whitelist' => [ 'products', 'nada', 'token' ],
                 'attribute_blacklist' => [
                     'token',
@@ -81,7 +81,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
         $this->assertEquals(
             [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                '@type' => 'Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
@@ -184,7 +184,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
         $this->assertEquals(
             [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                '@type' => 'Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
                     'lastname' => '',
@@ -238,7 +238,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
         $this->assertEquals(
             [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                '@type' => 'Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
@@ -514,7 +514,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
         $this->assertEquals(
             [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                '@type' => 'Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',
@@ -609,7 +609,7 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertInstanceOf(CreateAuthorCommand::CLASS, $command);
         $this->assertEquals(
             [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
+                '@type' => 'Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand',
                 'values' => [
                     'firstname' => 'Brock',
                     'lastname' => 'Lesnar',

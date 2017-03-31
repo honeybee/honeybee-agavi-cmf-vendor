@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\AuthorCreatedEvent;
+use Honeygavi\Tests\Fixture\BookSchema\Task\CreateAuthor\AuthorCreatedEvent;
 
 // @codingStandardsIgnoreStart
 return [

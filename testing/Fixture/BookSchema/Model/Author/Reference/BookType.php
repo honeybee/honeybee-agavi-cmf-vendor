@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model\Author\Reference;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model\Author\Reference;
 
 use Honeybee\Model\Aggregate\ReferencedEntityType;
 use Trellis\Common\Options;
@@ -19,7 +19,7 @@ class BookType extends ReferencedEntityType
             ],
             new Options(
                 [
-                    'referenced_type' => '\\Honeybee\\Tests\\Model\\Aggregate\\Fixture\\Book\\BookType',
+                    'referenced_type' => '\\Honeygavi\\Tests\\Model\\Aggregate\\Fixture\\Book\\BookType',
                     'identifying_attribute' => 'identifier',
                 ]
             ),

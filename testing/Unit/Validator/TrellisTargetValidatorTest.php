@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Tests\Unit\Validator;
 
 use AgaviContext;
 use Honeygavi\Validator\TrellisTargetValidator;
-use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
+use Honeygavi\Tests\Mock\HoneybeeAgaviUnitTestCase;
 
 class TrellisTargetValidatorTest extends HoneybeeAgaviUnitTestCase
 {

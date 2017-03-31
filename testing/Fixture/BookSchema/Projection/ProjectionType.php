@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection;
 
 use Honeybee\Projection\ProjectionType as BaseProjectionType;
 

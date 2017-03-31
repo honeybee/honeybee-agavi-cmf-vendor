@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Routing;
+namespace Honeygavi\Tests\Unit\Routing;
 
 use AgaviContext;
 use AgaviWebResponse;
 use Honeygavi\Routing\NegotiateOutputTypeRoutingCallback;
-use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
+use Honeygavi\Tests\Mock\HoneybeeAgaviUnitTestCase;
 
 class NegotiateOutputTypeRoutingCallbackTest extends HoneybeeAgaviUnitTestCase
 {

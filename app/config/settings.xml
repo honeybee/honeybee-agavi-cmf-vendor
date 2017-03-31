@@ -165,7 +165,7 @@
     <ae:configuration environment="testing.*">
         <settings>
             <setting name="default_context">web</setting>
-            <setting name="context_implementation">Honeybee\Tests\Mock\TestContext</setting>
+            <setting name="context_implementation">Honeygavi\Tests\Mock\TestContext</setting>
         </settings>
     </ae:configuration>
 

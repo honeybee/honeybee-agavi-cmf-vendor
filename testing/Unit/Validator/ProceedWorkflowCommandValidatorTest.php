@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Tests\Unit\Validator;
 
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
@@ -9,7 +9,7 @@ use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
 use Honeybee\Model\Task\ProceedWorkflow\ProceedWorkflowCommand;
-use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
+use Honeygavi\Tests\Mock\HoneybeeAgaviUnitTestCase;
 use Mockery;
 
 class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
@@ -69,7 +69,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
                 'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',
                 'identifier_arg' => 'resource',
                 'command_implementor' =>
-                    'Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand'
+                    'Honeygavi\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand'
             ]
         );
     }
@@ -96,7 +96,7 @@ class ProceedWorkflowCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         $this->assertInstanceOf(ProceedWorkflowCommand::CLASS, $command);
         $this->assertEquals(
             [
-                '@type' => 'Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand',
+                '@type' => 'Honeygavi\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow\ProceedAuthorWorkflowCommand',
                 'current_state_name' => 'inactive',
                 'event_name' => 'promote',
                 'aggregate_root_type' => 'honeybee_cmf.test_fixtures.author',

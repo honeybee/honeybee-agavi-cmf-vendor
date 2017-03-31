@@ -136,7 +136,7 @@
 
     <ae:configuration context="web" environment="testing.*">
         <storage class="AgaviNullStorage" />
-        <user class="Honeybee\Tests\Mock\TestUser" />
+        <user class="Honeygavi\Tests\Mock\TestUser" />
         <execution_filter class="AgaviExecutionFilter">
             <ae:parameters>
                 <ae:parameter name="enable_caching">false</ae:parameter>

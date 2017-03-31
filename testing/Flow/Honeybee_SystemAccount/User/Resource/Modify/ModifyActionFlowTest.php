@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\Tests\Flow\Honeybee\SystemAccount\User\Resource\Modify;
+namespace Honeygavi\Tests\Flow\Honeybee\SystemAccount\User\Resource\Modify;
 
 use AgaviWebResponse;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
-use Honeybee\Tests\Mock\HoneybeeAgaviFlowTestCase;
+use Honeygavi\Tests\Mock\HoneybeeAgaviFlowTestCase;
 use Mockery;
 
 class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase

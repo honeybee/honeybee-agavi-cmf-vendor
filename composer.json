@@ -42,7 +42,7 @@
 
     "autoload-dev": {
         "psr-4": {
-            "Honeybee\\Tests\\" : "testing"
+            "Honeygavi\\Tests\\" : "testing"
         }
     },
 

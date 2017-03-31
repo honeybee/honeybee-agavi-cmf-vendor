@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Publication;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Publication;
 
-use Honeybee\Tests\Fixture\BookSchema\Projection\ProjectionType;
+use Honeygavi\Tests\Fixture\BookSchema\Projection\ProjectionType;
 use Trellis\Runtime\Attribute\Integer\IntegerAttribute;
 use Trellis\Runtime\Attribute\Text\TextAttribute;
 
