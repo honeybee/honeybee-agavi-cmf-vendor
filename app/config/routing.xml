@@ -11,13 +11,13 @@
 
             <!-- try to set output type depeding on Accept header content negotiation and thus override uri extension-->
             <route name="negotiate_output_type" pattern="" source="_SERVER[HTTP_ACCEPT]" stop="false">
-                <callback class="Honeygavi\Agavi\Routing\NegotiateOutputTypeRoutingCallback">
+                <callback class="Honeygavi\Routing\NegotiateOutputTypeRoutingCallback">
                     <!-- <ae:parameter name="default_output_type">html</ae:parameter> -->
                 </callback>
             </route>
             <!-- override output type depending on file extension of request uri -->
             <route name="override_output_type" pattern=".(ext:[a-z]+)$" stop="false" cut="true">
-                <callback class="Honeygavi\Agavi\Routing\SetOutputTypeRoutingCallback">
+                <callback class="Honeygavi\Routing\SetOutputTypeRoutingCallback">
                     <ae:parameter name="uri_extensions">
                         <ae:parameter name="html">
                             <ae:parameter>html</ae:parameter>
@@ -45,7 +45,7 @@
             -->
             <route name="locale" pattern="^/({locale:[a-z]{2}(_[A-Z]{2})?})" stop="false" imply="true" cut="true" locale="${locale}">
                 <callbacks>
-                    <callback class="Honeygavi\Agavi\Routing\LanguageRoutingCallback" />
+                    <callback class="Honeygavi\Routing\LanguageRoutingCallback" />
                 </callbacks>
                 <ignores>
                     <ignore>locale</ignore>
@@ -66,8 +66,8 @@
             <!-- global type-unspecific default gen-only routes for use in renderers etc. -->
             <route name="module" pattern="^/({module:[A-Za-z\-\/_]{3,128}})/">
                 <callbacks>
-                    <callback class="Honeygavi\Agavi\Routing\GenOnlyRoutingCallback" />
-                    <callback class="Honeygavi\Agavi\Routing\ModuleRoutingCallback" />
+                    <callback class="Honeygavi\Routing\GenOnlyRoutingCallback" />
+                    <callback class="Honeygavi\Routing\ModuleRoutingCallback" />
                 </callbacks>
                 <xi:include href="default_resource_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='web']/*)" />
             </route>
@@ -92,8 +92,8 @@
             <!-- global type-unspecific default gen-only routes for use in renderers etc. -->
             <route name="module" pattern="^({module:[A-Za-z\-\/_]{3,128}}).">
                 <callbacks>
-                    <callback class="Honeygavi\Agavi\Routing\GenOnlyRoutingCallback" />
-                    <callback class="Honeygavi\Agavi\Routing\ModuleRoutingCallback" />
+                    <callback class="Honeygavi\Routing\GenOnlyRoutingCallback" />
+                    <callback class="Honeygavi\Routing\ModuleRoutingCallback" />
                 </callbacks>
                 <xi:include href="default_resource_routing.xml" xpointer="xmlns(ae=http://agavi.org/agavi/config/global/envelope/1.0) xmlns(r=http://agavi.org/agavi/config/parts/routing/1.0) xpointer(//ae:configuration[@context='console']/*)" />
             </route>

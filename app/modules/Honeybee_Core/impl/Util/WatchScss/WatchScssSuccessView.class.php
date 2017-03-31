@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 //use Symfony\Component\Process\Process;
 

@@ -4,8 +4,8 @@ namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
-use Honeygavi\Agavi\Request\HoneybeeUploadedFile;
-use Honeygavi\Agavi\Validator\AggregateRootCommandValidator;
+use Honeygavi\Request\HoneybeeUploadedFile;
+use Honeygavi\Validator\AggregateRootCommandValidator;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;

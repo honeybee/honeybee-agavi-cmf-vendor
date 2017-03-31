@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\ActionPack\Files\FilesAction;
+use Honeygavi\App\ActionPack\Files\FilesAction;
 
 class Honeybee_SystemAccount_User_FilesAction extends FilesAction
 {

@@ -5,7 +5,7 @@
     <ae:configuration context="web">
         <filters>
 
-            <filter name="HttpStatus405Filter" class="Honeygavi\Agavi\Filter\HttpStatus405Filter">
+            <filter name="HttpStatus405Filter" class="Honeygavi\Filter\HttpStatus405Filter">
                 <ae:parameter name="module">Honeybee_Core</ae:parameter>
                 <ae:parameter name="action">System/Error405</ae:parameter>
                 <ae:parameter name="output_type">vnderrorjson</ae:parameter>
@@ -14,7 +14,7 @@
                 <ae:parameter name="debug">false</ae:parameter>
             </filter>
 
-            <filter name="ModuleAssetsResponseFilter" class="Honeygavi\Agavi\Filter\ModuleAssetsResponseFilter">
+            <filter name="ModuleAssetsResponseFilter" class="Honeygavi\Filter\ModuleAssetsResponseFilter">
                 <ae:parameter name="output_types">
                     <ae:parameter>html</ae:parameter>
                 </ae:parameter>
@@ -102,7 +102,7 @@
                         <ae:parameter name="location">child</ae:parameter>
                         <!-- <ae:parameter name="container"><![CDATA[<ul class="sheet hb-validation-messages invalid">${errorMessages}</ul>]]></ae:parameter> -->
                         <ae:parameter name="markup"><![CDATA[<li class="error global"><span class="error__message">${errorMessage}</span></li>]]></ae:parameter>
-                        <!-- <ae:parameter name="markup">Honeygavi\Agavi\FpfToolkit::getDynamicMarkup</ae:parameter> -->
+                        <!-- <ae:parameter name="markup">Honeygavi\FpfToolkit::getDynamicMarkup</ae:parameter> -->
                     </ae:parameter>
                 </ae:parameter>
             </filter>

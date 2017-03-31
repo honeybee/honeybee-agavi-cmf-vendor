@@ -29,7 +29,7 @@
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeygavi\Mail\LoggingSwiftMailer</class>
                     <provisioner>
-                        <class>Honeygavi\Agavi\Provisioner\MailServiceProvisioner</class>
+                        <class>Honeygavi\Provisioner\MailServiceProvisioner</class>
                         <settings>
                             <!-- @todo create a testing connection -->
                             <setting name="connection">Default.Mailer.Null</setting>

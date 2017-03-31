@@ -7,7 +7,7 @@
         <route name=".summary" pattern="^$" action=".Summary" />
         <route name=".collection" pattern="^collection$" action=".Collection">
             <callbacks>
-                <callback class="Honeygavi\Agavi\Routing\OnGenerateRoutingCallback">
+                <callback class="Honeygavi\Routing\OnGenerateRoutingCallback">
                     <ae:parameter name="remove">
                         <ae:parameter>jumpToPage</ae:parameter>
                         <ae:parameter>page</ae:parameter>
@@ -17,7 +17,7 @@
         </route>
         <route name=".resource" pattern="^({resource:[\w\.\-_]{1,128}\-\w{8}\-\w{4}\-\w{4}\-\w{4}\-\w{12}\-\w{2}_\w{2}\-\d+})" action=".Resource">
             <callbacks>
-                <callback class="Honeygavi\Agavi\Routing\ResourceRoutingCallback" />
+                <callback class="Honeygavi\Routing\ResourceRoutingCallback" />
             </callbacks>
             <route name=".task.proceed" pattern="^/tasks/({event:(promote|demote|delete)})" action=".Task.Proceed" />
             <route name=".task" pattern="^/tasks/({event:\w+})" action=".Task" />
@@ -26,7 +26,7 @@
             <route name=".embed"  pattern="^/_embeds/({embed_path:[A-Za-z0-9\-_\]\[\.\*]{1,1024}})" action=".Embed">
                 <!--
                 <callbacks>
-                    <callback class="Honeygavi\Agavi\Routing\AttributePathRoutingCallback" />
+                    <callback class="Honeygavi\Routing\AttributePathRoutingCallback" />
                 </callbacks>
                 -->
             </route>
@@ -35,7 +35,7 @@
         <route name=".embed"  pattern="^_embeds/({embed_path:[A-Za-z0-9\-_\]\[\.\*]{1,1024}})$" action=".Embed">
             <!--
             <callbacks>
-                <callback class="Honeygavi\Agavi\Routing\AttributePathRoutingCallback" />
+                <callback class="Honeygavi\Routing\AttributePathRoutingCallback" />
             </callbacks>
             -->
         </route>
@@ -43,7 +43,7 @@
             <route name=".upload" pattern="^/$" action=".Upload" />
             <route name=".download" pattern="^/({file:[A-Za-z0-9\/\-\_\.]{1,1024}})$" action=".Download" output_type="binary">
                 <callbacks>
-                    <callback class="Honeygavi\Agavi\Routing\AttributeRoutingCallback">
+                    <callback class="Honeygavi\Routing\AttributeRoutingCallback">
                         <ae:parameter name="mandatory">false</ae:parameter>
                     </callback>
                 </callbacks>
@@ -56,8 +56,8 @@
         <route name=".bulk" pattern="^bulk$" action=".Bulk" />
         <route name=".hierarchy" pattern="^hierarchy(/{resource:[\w\.\-_]{1,128}\-\w{8}\-\w{4}\-\w{4}\-\w{4}\-\w{12}\-\w{2}_\w{2}\-\d+})?" action=".Hierarchy">
             <callbacks>
-                <callback class="Honeygavi\Agavi\Routing\OptionalResourceRoutingCallback" />
-                <callback class="Honeygavi\Agavi\Routing\OnGenerateRoutingCallback">
+                <callback class="Honeygavi\Routing\OptionalResourceRoutingCallback" />
+                <callback class="Honeygavi\Routing\OnGenerateRoutingCallback">
                     <ae:parameter name="remove">
                         <ae:parameter>jumpToPage</ae:parameter>
                         <ae:parameter>page</ae:parameter>
@@ -79,7 +79,7 @@
         </route>
         <route name=".resource" pattern="^resource" action=".Resource">
             <callbacks>
-                <callback class="Honeygavi\Agavi\Routing\ResourceRoutingCallback" />
+                <callback class="Honeygavi\Routing\ResourceRoutingCallback" />
             </callbacks>
             <ae:parameter name="description">Retrieve resource information.</ae:parameter>
             <route name=".task" pattern="^.task" action=".Task">

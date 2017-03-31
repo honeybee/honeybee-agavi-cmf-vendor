@@ -2,7 +2,7 @@
 
 namespace Honeybee\Tests\Mock;
 
-use Honeygavi\Agavi\User\AclSecurityUser;
+use Honeygavi\User\AclSecurityUser;
 
 class TestUser extends AclSecurityUser
 {

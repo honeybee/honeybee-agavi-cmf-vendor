@@ -5,7 +5,7 @@ namespace Honeybee\SystemAccount\Agavi\Validator;
 use DateInterval;
 use DateTimeImmutable;
 use Honeybee\Common\Util\StringToolkit;
-use Honeygavi\Agavi\Validator\AggregateRootTypeCommandValidator;
+use Honeygavi\Validator\AggregateRootTypeCommandValidator;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 
 class CreateUserCommandValidator extends AggregateRootTypeCommandValidator

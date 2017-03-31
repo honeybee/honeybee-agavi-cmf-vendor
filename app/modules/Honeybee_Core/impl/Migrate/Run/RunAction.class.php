@@ -1,8 +1,8 @@
 <?php
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeygavi\Agavi\App\Base\Action;
-use Honeygavi\Agavi\Validator\MigrationTargetValidator;
+use Honeygavi\App\Base\Action;
+use Honeygavi\Validator\MigrationTargetValidator;
 
 class Honeybee_Core_Migrate_RunAction extends Action
 {

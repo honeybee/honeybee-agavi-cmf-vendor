@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 use \AgaviRequestDataHolder;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeygavi\Ui\Activity\Activity;

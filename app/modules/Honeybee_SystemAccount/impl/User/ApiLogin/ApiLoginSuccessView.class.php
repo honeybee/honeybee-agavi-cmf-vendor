@@ -1,7 +1,7 @@
 <?php
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_SystemAccount_User_ApiLogin_ApiLoginSuccessView extends View
 {

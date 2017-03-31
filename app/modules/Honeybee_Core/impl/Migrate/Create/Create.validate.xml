@@ -10,7 +10,7 @@
                 <argument>quiet</argument>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\MigrationTargetValidator" name="invalid_target" translation_domain="honeybee.core.ui">
+            <validator class="Honeygavi\Validator\MigrationTargetValidator" name="invalid_target" translation_domain="honeybee.core.ui">
                 <argument>target</argument>
                 <error>You must specify a valid migration target name.</error>
                 <ae:parameter name="dialog">

@@ -7,7 +7,7 @@ use AgaviConfigCache;
 use AgaviContext;
 use Auryn\Injector as DiContainer;
 use Honeybee\Common\Error\RuntimeError;
-use Honeygavi\Agavi\ServiceProvisioner;
+use Honeygavi\ServiceProvisioner;
 
 class TestServiceProvisioner extends ServiceProvisioner
 {

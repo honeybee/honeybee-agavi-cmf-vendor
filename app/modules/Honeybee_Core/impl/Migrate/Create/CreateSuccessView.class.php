@@ -1,7 +1,7 @@
 <?php
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 use Honeygavi\Template\Twig\TwigRenderer;
 use Honeybee\Common\Error\RuntimeError;
 

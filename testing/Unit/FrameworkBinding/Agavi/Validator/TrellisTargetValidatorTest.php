@@ -3,7 +3,7 @@
 namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
 use AgaviContext;
-use Honeygavi\Agavi\Validator\TrellisTargetValidator;
+use Honeygavi\Validator\TrellisTargetValidator;
 use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
 
 class TrellisTargetValidatorTest extends HoneybeeAgaviUnitTestCase

@@ -92,16 +92,16 @@
                 <ae:parameter>Twig_Extensions_Extension_Array</ae:parameter>
                 <ae:parameter>Twig_Extensions_Extension_Date</ae:parameter>
                 <ae:parameter>Honeygavi\Template\Twig\Extension\ToolkitExtension</ae:parameter>
-                <ae:parameter>Honeygavi\Agavi\Renderer\Twig\TranslationManagerExtension</ae:parameter>
-                <ae:parameter>Honeygavi\Agavi\Renderer\Twig\HoneybeeToolkitExtension</ae:parameter>
-                <ae:parameter>Honeygavi\Agavi\Renderer\Twig\ModuleAssetsExtension</ae:parameter>
-                <ae:parameter>Honeygavi\Agavi\Renderer\Twig\MarkdownExtension</ae:parameter>
+                <ae:parameter>Honeygavi\Renderer\Twig\TranslationManagerExtension</ae:parameter>
+                <ae:parameter>Honeygavi\Renderer\Twig\HoneybeeToolkitExtension</ae:parameter>
+                <ae:parameter>Honeygavi\Renderer\Twig\ModuleAssetsExtension</ae:parameter>
+                <ae:parameter>Honeygavi\Renderer\Twig\MarkdownExtension</ae:parameter>
             </ae:parameter>
         </ae:parameter>
 
         <!-- default proxy renderer configuration with twig and php as available template languages -->
         <renderers default="proxy">
-            <renderer name="proxy" class="Honeygavi\Agavi\Renderer\ProxyRenderer">
+            <renderer name="proxy" class="Honeygavi\Renderer\ProxyRenderer">
                 <ae:parameter name="renderers">
                     <ae:parameter>twig</ae:parameter>
                     <ae:parameter>hamltwig</ae:parameter>
@@ -109,16 +109,16 @@
                 </ae:parameter>
             </renderer>
 
-            <renderer name="twig" class="Honeygavi\Agavi\Renderer\TwigRenderer">
+            <renderer name="twig" class="Honeygavi\Renderer\TwigRenderer">
                 <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/*)" />
             </renderer>
 
-            <renderer name="hamltwig" class="Honeygavi\Agavi\Renderer\TwigRenderer">
+            <renderer name="hamltwig" class="Honeygavi\Renderer\TwigRenderer">
                 <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/*)" />
                 <ae:parameter name="default_extension">.haml</ae:parameter>
             </renderer>
 
-            <renderer name="php" class="Honeygavi\Agavi\Renderer\PhpRenderer">
+            <renderer name="php" class="Honeygavi\Renderer\PhpRenderer">
                 <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='assigns'])" />
                 <ae:parameter name="default_extension">.php</ae:parameter>
                 <ae:parameter name="var_name">t</ae:parameter> <!-- change the default template variables array name from $template to the more convenient $t -->
@@ -313,7 +313,7 @@
         <output_types default="html">
             <output_type name="html">
                 <renderers default="proxy">
-                    <renderer name="twig" class="Honeygavi\Agavi\Renderer\TwigRenderer">
+                    <renderer name="twig" class="Honeygavi\Renderer\TwigRenderer">
                         <ae:parameter name="options">
                             <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='options']/*)" />
                             <ae:parameter name="strict_variables">true</ae:parameter> <!-- throw exception instead of silently using null for invalid variables, attributes or methods -->
@@ -329,7 +329,7 @@
                         <ae:parameter name="extract_vars">true</ae:parameter>
                         <ae:parameter name="use_haml">true</ae:parameter>
                     </renderer>
-                    <renderer name="hamltwig" class="Honeygavi\Agavi\Renderer\TwigRenderer">
+                    <renderer name="hamltwig" class="Honeygavi\Renderer\TwigRenderer">
                         <ae:parameter name="options">
                             <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='options']/*)" />
                             <ae:parameter name="strict_variables">true</ae:parameter> <!-- throw exception instead of silently using null for invalid variables, attributes or methods -->

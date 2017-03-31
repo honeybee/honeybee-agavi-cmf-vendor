@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 
 class Honeybee_SystemAccount_User_LogoutAction extends Action
 {

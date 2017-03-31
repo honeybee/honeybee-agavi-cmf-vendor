@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 
 /**
  * Handles the HTTP status code 501 NOT IMPLEMENTED logic.

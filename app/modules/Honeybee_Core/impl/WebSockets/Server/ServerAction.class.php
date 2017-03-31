@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 use Honeygavi\Ui\WebSocket\EventPusher;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;

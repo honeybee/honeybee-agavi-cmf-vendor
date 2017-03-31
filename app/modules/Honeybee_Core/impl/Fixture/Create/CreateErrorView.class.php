@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_Core_Fixture_Create_CreateErrorView extends View
 {

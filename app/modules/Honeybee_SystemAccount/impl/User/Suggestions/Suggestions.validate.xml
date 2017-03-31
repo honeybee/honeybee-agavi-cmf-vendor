@@ -5,11 +5,11 @@
     parent="%core.module_dir%/Honeybee_SystemAccount/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="honeybee.system_account.user.errors">
-            <validator class="Honeygavi\Agavi\Validator\ListConfigValidator" name="invalid_suggest_config" required="true">
+            <validator class="Honeygavi\Validator\ListConfigValidator" name="invalid_suggest_config" required="true">
                 <ae:parameter name="default_limit">50</ae:parameter>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\ArrayValidator" name="invalid_display_fields" required="true">
+            <validator class="Honeygavi\Validator\ArrayValidator" name="invalid_display_fields" required="true">
                 <argument>display_fields</argument>
                 <ae:parameter name="explode_strings">true</ae:parameter>
                 <ae:parameter name="separator">,</ae:parameter>

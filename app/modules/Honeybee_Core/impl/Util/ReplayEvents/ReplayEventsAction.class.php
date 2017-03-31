@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 
 class Honeybee_Core_Util_ReplayEventsAction extends Action

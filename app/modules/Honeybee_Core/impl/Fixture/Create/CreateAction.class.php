@@ -1,8 +1,8 @@
 <?php
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeygavi\Agavi\App\Base\Action;
-use Honeygavi\Agavi\Provisioner\FixtureServiceProvisioner;
+use Honeygavi\App\Base\Action;
+use Honeygavi\Provisioner\FixtureServiceProvisioner;
 
 class Honeybee_Core_Fixture_CreateAction extends Action
 {

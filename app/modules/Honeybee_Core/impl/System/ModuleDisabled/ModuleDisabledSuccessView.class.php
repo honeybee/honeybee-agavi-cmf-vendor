@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 /**
  * Handles presentation logic required for the %system_actions.module_disabled%

@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Job\Worker\Worker;
 

@@ -4,7 +4,7 @@ namespace Honeybee\Tests\Mock;
 
 use Auryn\Injector as DiContainer;
 use Auryn\StandardReflector;
-use Honeygavi\Agavi\Context;
+use Honeygavi\Context;
 
 class TestContext extends Context
 {

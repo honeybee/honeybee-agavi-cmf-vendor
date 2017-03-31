@@ -4,8 +4,8 @@ namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
-use Honeygavi\Agavi\Request\HoneybeeUploadedFile;
-use Honeygavi\Agavi\Validator\AggregateRootTypeCommandValidator;
+use Honeygavi\Request\HoneybeeUploadedFile;
+use Honeygavi\Validator\AggregateRootTypeCommandValidator;
 use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
 use Honeybee\Tests\Fixture\BookSchema\Task\CreateAuthor\CreateAuthorCommand;
 

@@ -2,7 +2,7 @@
 
 use Honeygavi\Security\Auth\AuthResponse;
 use Honeygavi\Security\Acl\AclService;
-use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 
 class Honeybee_SystemAccount_User_LoginAction extends Action
 {

@@ -7,18 +7,18 @@
 >
     <ae:configuration context="web">
         <validators translation_domain="honeybee.system_account.user.errors">
-            <validator class="Honeygavi\Agavi\Validator\ListConfigValidator" name="invalid_list_config" required="true" method="read">
+            <validator class="Honeygavi\Validator\ListConfigValidator" name="invalid_list_config" required="true" method="read">
                 <ae:parameter name="default_limit">50</ae:parameter>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\ResourceValidator" name="invalid_node" required="false" method="read">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_node" required="false" method="read">
                 <argument>resource</argument>
                 <error>The given parent-node-id(user identifier) is invalid.</error>
                 <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="export">parent_node</ae:parameter>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\MoveAggregateRootNodeCommandValidator" name="invalid_task_data" method="write">
+            <validator class="Honeygavi\Validator\MoveAggregateRootNodeCommandValidator" name="invalid_task_data" method="write">
                 <argument>aggregate_root_identifier</argument>
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="identifier_arg">aggregate_root_identifier</ae:parameter>

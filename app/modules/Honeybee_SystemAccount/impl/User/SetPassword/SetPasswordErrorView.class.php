@@ -1,6 +1,6 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_SystemAccount_User_SetPassword_SetPasswordErrorView extends View
 {

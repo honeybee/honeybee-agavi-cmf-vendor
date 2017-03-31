@@ -7,7 +7,7 @@
 
         <validators translation_domain="honeybee.system_account.user.errors" method="read">
 
-            <validator class="Honeygavi\Agavi\Validator\ResourceValidator" name="invalid_user_read">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_user_read">
                 <argument>resource</argument>
                 <error>The given user(identifier) is invalid.</error>
                 <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>
@@ -22,7 +22,7 @@
 
         <validators translation_domain="honeybee.system_account.user.errors" method="write">
 
-            <validator class="Honeygavi\Agavi\Validator\AggregateRootCommandValidator" name="invalid_task_data">
+            <validator class="Honeygavi\Validator\AggregateRootCommandValidator" name="invalid_task_data">
                 <arguments base="edit" />
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="identifier_arg">identifier</ae:parameter>
@@ -40,7 +40,7 @@
                 <error for="images.copyright_url.host_missing">Missing host for copyright-url.</error>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\ResourceValidator" name="invalid_user_write" depends="edit[invalid_payload]">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_user_write" depends="edit[invalid_payload]">
                 <arguments base="edit">
                     <argument>identifier</argument>
                 </arguments>

@@ -18,7 +18,7 @@
                 <error>You must specify a valid Workflux definition.</error>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\WorkflowSubjectValidator" name="workflow_subject" depends="valid_input_file">
+            <validator class="Honeygavi\Validator\WorkflowSubjectValidator" name="workflow_subject" depends="valid_input_file">
                <argument>subject</argument>
                <error>You must specify a valid Workflux subject.</error>
                <ae:parameter name="dialog">

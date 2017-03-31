@@ -13,7 +13,7 @@
                 <argument>quiet</argument>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
+            <validator class="Honeygavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type within you project's domain.</error>
                 <ae:parameter name="description">Generate Trellis code for the aggregate root type.</ae:parameter>
@@ -25,12 +25,12 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
+            <validator class="Honeygavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type name within you project's domain.</error>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\TrellisTargetValidator" name="trellis_target" depends="valid_type_name" provides="trellis_target">
+            <validator class="Honeygavi\Validator\TrellisTargetValidator" name="trellis_target" depends="valid_type_name" provides="trellis_target">
                 <argument>target</argument>
                 <error>You must specify a valid Trellis target.</error>
                 <ae:parameter name="description">The name of the Trellis target to generate classes for.</ae:parameter>
@@ -48,7 +48,7 @@
                  <ae:parameter name="match">false</ae:parameter>
              </validator>
 
-             <validator class="Honeygavi\Agavi\Validator\MigrationNameValidator" name="invalid_target" depends="is_projection">
+             <validator class="Honeygavi\Validator\MigrationNameValidator" name="invalid_target" depends="is_projection">
                  <argument>migration_name</argument>
                  <error>You must specify a valid migration name.</error>
                  <ae:parameter name="dialog">

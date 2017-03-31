@@ -2,7 +2,7 @@
 
 namespace Honeybee\SystemAccount\Agavi\Validator;
 
-use Honeygavi\Agavi\Validator\AggregateRootCommandValidator;
+use Honeygavi\Validator\AggregateRootCommandValidator;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
 

@@ -10,7 +10,7 @@
                 <argument>quiet</argument>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
+            <validator class="Honeygavi\Validator\AggregateRootTypeNameValidator" name="type_name" provides="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type within you project's domain.</error>
                 <ae:parameter name="description">Generate fixture data for the aggregate root type.</ae:parameter>
@@ -22,7 +22,7 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeygavi\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
+            <validator class="Honeygavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type name within you project's domain.</error>
             </validator>

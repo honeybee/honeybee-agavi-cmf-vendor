@@ -1,8 +1,8 @@
 <?php
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeygavi\Agavi\App\Base\Action;
-use Honeygavi\Agavi\Provisioner\MigrationServiceProvisioner;
+use Honeygavi\App\Base\Action;
+use Honeygavi\Provisioner\MigrationServiceProvisioner;
 
 class Honeybee_Core_Migrate_CreateAction extends Action
 {

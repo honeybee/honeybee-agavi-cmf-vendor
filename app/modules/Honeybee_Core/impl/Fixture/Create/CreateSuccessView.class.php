@@ -2,7 +2,7 @@
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
-use Honeygavi\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 use Honeygavi\Template\Twig\TwigRenderer;
 
 class Honeybee_Core_Fixture_Create_CreateSuccessView extends View

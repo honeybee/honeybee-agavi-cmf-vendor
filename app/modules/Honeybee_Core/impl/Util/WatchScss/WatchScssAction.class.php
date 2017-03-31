@@ -1,7 +1,7 @@
 <?php
 
-use Honeygavi\Agavi\App\Base\Action;
-use Honeygavi\Agavi\Filter\AssetCompiler;
+use Honeygavi\App\Base\Action;
+use Honeygavi\Filter\AssetCompiler;
 
 class Honeybee_Core_Util_WatchScssAction extends Action
 {

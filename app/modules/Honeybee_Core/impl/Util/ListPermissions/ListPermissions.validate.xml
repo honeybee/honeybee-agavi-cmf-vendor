@@ -5,7 +5,7 @@
     parent="%core.module_dir%/Honeybee_Core/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="honeybee.core.errors">
-            <validator class="Honeygavi\Agavi\Validator\RoleValidator" name="role" required="false">
+            <validator class="Honeygavi\Validator\RoleValidator" name="role" required="false">
                 <argument>role</argument>
                 <error>Parameter %name$s must be a valid role name configured in access_control.xml.</error>
                 <ae:parameter name="description">Only list permissions specific for the given role.</ae:parameter>
