@@ -38,7 +38,7 @@ class TestServiceLocator implements ServiceLocatorInterface
         return $this->service_locator->$method();
     }
 
-    public function make(string $implementor, array $state = [])
+    public function make($implementor, array $state = [])
     {
         return $this->service_locator->make($implementor, $state);
     }

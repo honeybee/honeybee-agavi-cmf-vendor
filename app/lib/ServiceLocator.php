@@ -44,7 +44,7 @@ final class ServiceLocator implements ServiceLocatorInterface
         return $this->service_locator->has($service_key);
     }
 
-    public function make(string $implementor, array $state = [])
+    public function make($implementor, array $state = [])
     {
         return $this->service_locator->make($implementor, $state);
     }
