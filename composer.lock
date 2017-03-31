@@ -3995,7 +3995,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-02-25T12:14:18+00:00"
+            "time": "2017-02-25 12:14:18"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",

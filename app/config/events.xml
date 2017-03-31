@@ -39,7 +39,7 @@
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">event.getType() matches "/.*/"</setting>
+                                <setting name="expression">match_event(event, ".*")</setting>
                             </filter>
                             <handler implementor="\Honeybee\Projection\EventHandler\DomainEventProjector">
                                 <settings>
@@ -55,7 +55,7 @@
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">event.getType() matches "/.*\.failed$/"</setting>
+                                <setting name="expression">match_event(event, ".*\.failed$"</setting>
                             </filter>
                             <handler implementor="\Honeybee\Infrastructure\Event\FailedJobEventHandler" />
                         </subscription>
@@ -67,7 +67,7 @@
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">event.getType() matches "/.*/"</setting>
+                                <setting name="expression">match_event(event, ".*")</setting>
                             </filter>
                             <handler implementor="\Honeybee\Projection\EventHandler\DomainEventProjector">
                                 <settings>

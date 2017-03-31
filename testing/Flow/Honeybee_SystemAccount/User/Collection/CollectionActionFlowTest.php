@@ -52,13 +52,7 @@ class CollectionActionFlowTest extends HoneybeeAgaviFlowTestCase
             '@type' =>  'Honeybee\Infrastructure\DataAccess\Query\CriteriaQuery',
             'search_criteria_list' => [],
             'filter_criteria_list' => [],
-            'sort_criteria_list' => [
-                [
-                    '@type' => 'Honeybee\Infrastructure\DataAccess\Query\SortCriteria',
-                    'attribute_path' => 'modified_at',
-                    'direction' => 'asc'
-                ]
-            ],
+            'sort_criteria_list' => [],
             'offset' => 0,
             'limit' => 50
         ];
