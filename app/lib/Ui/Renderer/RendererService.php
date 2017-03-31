@@ -64,7 +64,7 @@ class RendererService implements RendererServiceInterface
             ':output_format' => $output_format
         ];
 
-        return $this->service_locator->createEntity($implementor, $state);
+        return $this->service_locator->make($implementor, $state);
     }
 
     public function determineImplementor(
@@ -94,7 +94,7 @@ class RendererService implements RendererServiceInterface
                 ':output_format' => $output_format
             ];
 
-            $this->loaded_locators[$name] = $this->service_locator->createEntity($implementor, $state);
+            $this->loaded_locators[$name] = $this->service_locator->make($implementor, $state);
         }
 
         return $this->loaded_locators[$name];

@@ -13,7 +13,7 @@
         <service_map>
             <service_definitions>
                 <service name="honeybee.service_locator">
-                    <class>Honeybee\ServiceLocator</class>
+                    <class>Honeygavi\ServiceLocator</class>
                 </service>
 
                 <service name="honeybee.environment">
