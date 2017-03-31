@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "de4aa9b31ded21c843fa9a35a6a8bc47",
+    "content-hash": "ff27ce51623b33d31fdd34f5bd773883",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -720,7 +720,7 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "dev-feature/ui_split",
+            "version": "dev-release/0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
