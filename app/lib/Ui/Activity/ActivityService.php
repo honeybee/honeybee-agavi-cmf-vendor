@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\Ui\Activity;
+namespace Honeygavi\Ui\Activity;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\GenericScopeKey;
 use Honeybee\Common\ScopeKeyInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\UrlGeneratorInterface;
 use QL\UriTemplate\UriTemplate;
 use Trellis\Common\Object;
 use Honeybee\EnvironmentInterface;

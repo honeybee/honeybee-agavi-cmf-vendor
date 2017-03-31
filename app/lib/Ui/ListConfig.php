@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui;
+namespace Honeygavi\Ui;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\Settings;

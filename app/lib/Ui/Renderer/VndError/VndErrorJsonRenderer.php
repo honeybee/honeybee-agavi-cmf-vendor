@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\VndError;
+namespace Honeygavi\Ui\Renderer\VndError;
 
-use Honeybee\Ui\Renderer\Renderer;
+use Honeygavi\Ui\Renderer\Renderer;
 use Trellis\Common\Error\RuntimeException;
 
 // @TODO this should probably reuse the HAL renderer, as the spec is compatible

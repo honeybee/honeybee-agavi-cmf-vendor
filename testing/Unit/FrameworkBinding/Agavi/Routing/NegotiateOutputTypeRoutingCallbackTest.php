@@ -4,7 +4,7 @@ namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Routing;
 
 use AgaviContext;
 use AgaviWebResponse;
-use Honeybee\FrameworkBinding\Agavi\Routing\NegotiateOutputTypeRoutingCallback;
+use Honeygavi\Agavi\Routing\NegotiateOutputTypeRoutingCallback;
 use Honeybee\Tests\Mock\HoneybeeAgaviUnitTestCase;
 
 class NegotiateOutputTypeRoutingCallbackTest extends HoneybeeAgaviUnitTestCase

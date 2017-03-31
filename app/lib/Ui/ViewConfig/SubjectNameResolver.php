@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\Ui\ViewConfig;
+namespace Honeygavi\Ui\ViewConfig;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Entity;
 use Honeybee\Projection\Projection;
 use Honeybee\Projection\ProjectionTypeInterface;
-use Honeybee\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\ActivityInterface;
 use ReflectionClass;
 
 class SubjectNameResolver implements NameResolverInterface
@@ -18,7 +18,7 @@ class SubjectNameResolver implements NameResolverInterface
      *
      * @example some Some\Foo\ProjectionList => 'resource_collection'
      * @example some specific Honeybee\Entity => 'vendor.module.type_prefix'
-     * @example some specific Honeybee\Ui\Activity\ActivityInterface => 'resource_collection_activity'
+     * @example some specific Honeygavi\Ui\Activity\ActivityInterface => 'resource_collection_activity'
      *
      * @param mixed $subject subject to resolve a name for
      *

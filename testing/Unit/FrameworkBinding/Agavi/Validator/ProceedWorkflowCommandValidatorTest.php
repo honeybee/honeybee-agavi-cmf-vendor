@@ -4,7 +4,7 @@ namespace Honeybee\Tests\Unit\FrameworkBinding\Agavi\Validator;
 
 use AgaviValidationReportQuery;
 use AgaviWebRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\Validator\ProceedWorkflowCommandValidator;
+use Honeygavi\Agavi\Validator\ProceedWorkflowCommandValidator;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;

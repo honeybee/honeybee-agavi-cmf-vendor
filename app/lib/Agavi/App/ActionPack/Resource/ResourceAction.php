@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource;
+namespace Honeygavi\Agavi\App\ActionPack\Resource;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 
 class ResourceAction extends Action
 {

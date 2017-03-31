@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Summary;
+namespace Honeygavi\Agavi\App\ActionPack\Summary;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\Agavi\App\Base\ErrorView;
 
 class SummaryErrorView extends ErrorView
 {

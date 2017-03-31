@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\ViewConfig;
+namespace Honeygavi\Ui\ViewConfig;
 
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 
 interface ViewConfigServiceInterface
 {

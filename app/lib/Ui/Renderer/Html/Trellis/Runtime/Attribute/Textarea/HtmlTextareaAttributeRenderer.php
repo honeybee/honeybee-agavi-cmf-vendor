@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Textarea;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Textarea;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\Textarea\TextareaAttribute;
 
 class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer

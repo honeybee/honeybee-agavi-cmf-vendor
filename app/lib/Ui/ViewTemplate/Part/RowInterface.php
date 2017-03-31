@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\ViewTemplate\Part;
+namespace Honeygavi\Ui\ViewTemplate\Part;
 
 interface RowInterface
 {

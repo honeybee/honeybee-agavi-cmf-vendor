@@ -5,12 +5,12 @@
     parent="%core.config_dir%/validators.xml">
     <ae:configuration>
         <validators>
-        
+
             <validator class="boolean" required="false">
                 <argument>quiet</argument>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\FixtureTargetValidator" name="invalid_target">
+            <validator class="Honeygavi\Agavi\Validator\FixtureTargetValidator" name="invalid_target">
                 <argument>target</argument>
                 <error>You must specify a valid fixture target name.</error>
                 <ae:parameter name="dialog">

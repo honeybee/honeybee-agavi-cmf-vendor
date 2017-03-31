@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 use AgaviLoggerLayout;
 use AgaviLoggerMessage;
 use DateTime;
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
-use Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager;
+use Honeygavi\Agavi\Logging\Logger;
+use Honeygavi\Agavi\Logging\LoggerManager;
 
 /**
  * Default layout used for log messages. By default an ISO-8601 compatible

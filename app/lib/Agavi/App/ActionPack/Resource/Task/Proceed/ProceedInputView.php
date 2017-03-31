@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Task\Proceed;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\Task\Proceed;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 
 class ProceedInputView extends View

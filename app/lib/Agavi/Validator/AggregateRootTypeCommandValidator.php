@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviConfig;
 use AgaviValidationIncident;
@@ -8,7 +8,7 @@ use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\EntityTypeInterface;
-use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
+use Honeygavi\Agavi\Request\HoneybeeUploadedFile;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Honeybee\Model\Command\AggregateRootCommand;

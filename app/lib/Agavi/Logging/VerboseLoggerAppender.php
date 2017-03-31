@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
-use Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender;
-use Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager;
+use Honeygavi\Agavi\Logging\FileLoggerAppender;
+use Honeygavi\Agavi\Logging\LoggerManager;
 use AgaviLoggerMessage;
 
 /**

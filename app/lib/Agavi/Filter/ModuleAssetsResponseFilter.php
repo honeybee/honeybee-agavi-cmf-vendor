@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Filter;
+namespace Honeygavi\Agavi\Filter;
 
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
+use Honeygavi\Agavi\Logging\Logger;
 use Honeybee\Common\Util\StringToolkit;
 use AgaviConfig;
 use AgaviContext;

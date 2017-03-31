@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Renderer;
+namespace Honeygavi\Agavi\Renderer;
 
 use AgaviException;
 use AgaviRenderer;

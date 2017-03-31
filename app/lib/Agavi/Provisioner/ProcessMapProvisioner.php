@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviContext;
 use AgaviConfig;
 use AgaviConfigCache;
 use Auryn\Injector as DiContainer;
-use Honeybee\FrameworkBinding\Agavi\Provisioner\AbstractProvisioner;
+use Honeygavi\Agavi\Provisioner\AbstractProvisioner;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Honeygavi\ProcessManager\Process;

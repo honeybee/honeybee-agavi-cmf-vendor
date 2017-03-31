@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 
 /**
  * Handles the %system_actions.secure% action logic which is executed by the

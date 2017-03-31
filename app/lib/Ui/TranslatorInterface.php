@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui;
+namespace Honeygavi\Ui;
 
 /**
  * Interface to support internationalisation by covering to following aspects:

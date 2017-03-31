@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 use Honeybee\Infrastructure\Migration\MigrationService;
 use Honeybee\Infrastructure\Migration\MigrationTargetInterface;

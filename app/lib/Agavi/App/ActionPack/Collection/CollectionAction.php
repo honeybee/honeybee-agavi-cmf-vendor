@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Collection;
+namespace Honeygavi\Agavi\App\ActionPack\Collection;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Validator\DisplayModeValidator;
-use Honeybee\Ui\ResourceCollection;
+use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\Agavi\Validator\DisplayModeValidator;
+use Honeygavi\Ui\ResourceCollection;
 
 class CollectionAction extends Action
 {

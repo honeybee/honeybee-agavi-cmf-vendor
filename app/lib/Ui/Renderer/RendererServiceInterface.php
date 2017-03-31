@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 
 interface RendererServiceInterface
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Ui\ViewConfig;
+namespace Honeygavi\Ui\ViewConfig;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use Trellis\Common\Object;
 
 class ViewConfigService extends Object implements ViewConfigServiceInterface

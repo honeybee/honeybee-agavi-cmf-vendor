@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\Base;
+namespace Honeygavi\Agavi\App\Base;
 
 use AgaviConfig;
 use AgaviConsoleResponse;
@@ -13,15 +13,15 @@ use AgaviWebResponse;
 use Exception;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create\CreateInputView;
-use Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Modify\ModifyInputView;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\App\ActionPack\Create\CreateInputView;
+use Honeygavi\Agavi\App\ActionPack\Resource\Modify\ModifyInputView;
+use Honeygavi\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\Activity\PrimaryActivityMap;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\Activity\PrimaryActivityMap;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use ReflectionClass;
 
 /**
@@ -108,7 +108,7 @@ class View extends AgaviView
 
     protected function getPreferences()
     {
-        // @todo Honeybee\FrameworkBinding\Agavi\View\PreferenceContainer
+        // @todo Honeygavi\Agavi\View\PreferenceContainer
         return $this->preference_manager->getPreferences($this->getPreferencesScope());
     }
 

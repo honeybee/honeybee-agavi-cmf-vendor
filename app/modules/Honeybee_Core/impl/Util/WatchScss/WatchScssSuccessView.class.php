@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 
 //use Symfony\Component\Process\Process;
 

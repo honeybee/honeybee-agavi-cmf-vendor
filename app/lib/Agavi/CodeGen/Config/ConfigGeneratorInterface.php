@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
+namespace Honeygavi\Agavi\CodeGen\Config;
 
 interface ConfigGeneratorInterface
 {

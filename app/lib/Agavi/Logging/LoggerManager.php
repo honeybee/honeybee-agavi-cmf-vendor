@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 use AgaviConfig;
 use AgaviConsoleRequest;
@@ -13,8 +13,8 @@ use DateTime;
 use Exception;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
-use Honeybee\FrameworkBinding\Agavi\Logging\Psr3Logger;
+use Honeygavi\Agavi\Logging\Logger;
+use Honeygavi\Agavi\Logging\Psr3Logger;
 use Honeybee\Model\Aggregate\AggregateRoot;
 use Honeybee\Model\Aggregate\AggregateRootType;
 use InvalidArgumentException;
@@ -138,7 +138,7 @@ class LoggerManager extends AgaviLoggerManager implements ILogger//, \Psr\Log\Lo
             return;
         }
 
-        /* @var $logger Honeybee\FrameworkBinding\Agavi\Logging\Logger */
+        /* @var $logger Honeygavi\Agavi\Logging\Logger */
         $logger = $this->getLogger($logger_name);
 
         if (!$logger) {
@@ -302,10 +302,10 @@ class LoggerManager extends AgaviLoggerManager implements ILogger//, \Psr\Log\Lo
         /* @var $agavi_context AgaviContext */
         $agavi_context = AgaviContext::getInstance();
 
-        /* @var $logger_manager Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager */
+        /* @var $logger_manager Honeygavi\Agavi\Logging\LoggerManager */
         $logger_manager = $agavi_context->getLoggerManager();
 
-        /* @var $logger Honeybee\FrameworkBinding\Agavi\Logging\Logger */
+        /* @var $logger Honeygavi\Agavi\Logging\Logger */
         $logger = $logger_manager->getLogger($logger_name);
 
         if (!$logger) {

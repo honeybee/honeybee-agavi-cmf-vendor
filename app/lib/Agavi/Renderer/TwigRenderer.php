@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Renderer;
+namespace Honeygavi\Agavi\Renderer;
 
 use AgaviConfig;
 use AgaviFileTemplateLayer;
@@ -19,10 +19,10 @@ use MtHaml\Filter\Markdown\MichelfMarkdown as MtHamlMarkdownFilter;
 
 use Michelf\MarkdownExtra;
 
-use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
+use Honeygavi\Agavi\Filter\AssetCompiler;
 use Honeygavi\Template\Twig\Loader\FilesystemLoader;
 
-//use Honeybee\FrameworkBinding\Agavi\Logging;
+//use Honeygavi\Agavi\Logging;
 
 /**
  * Extends the AgaviTwigRenderer to add twig extensions via parameters. If you

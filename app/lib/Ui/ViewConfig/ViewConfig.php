@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\Ui\ViewConfig;
+namespace Honeygavi\Ui\ViewConfig;
 
 use Trellis\Common\Object;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 
 class ViewConfig extends Object implements ViewConfigInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 /**
  * See RFC 5424 (Syslog) for log level severity names.

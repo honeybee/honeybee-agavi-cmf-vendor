@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Download;
+namespace Honeygavi\Agavi\App\ActionPack\Files\Download;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 use Honeybee\Common\Util\FileToolkit;
 

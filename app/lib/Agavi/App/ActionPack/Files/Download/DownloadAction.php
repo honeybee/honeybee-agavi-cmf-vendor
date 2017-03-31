@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Download;
+namespace Honeygavi\Agavi\App\ActionPack\Files\Download;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use AgaviRequestDataHolder;
 
 class DownloadAction extends Action

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use Auryn\Injector as DiContainer;
 use Psr\Log\LoggerInterface;

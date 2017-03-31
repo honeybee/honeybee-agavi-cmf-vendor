@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi;
+namespace Honeygavi\Agavi;
 
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
-use Honeybee\FrameworkBinding\Agavi\ServiceProvisioner;
+use Honeygavi\Agavi\Logging\Logger;
+use Honeygavi\Agavi\ServiceProvisioner;
 use AgaviContext;
 use Auryn\Injector as DiContainer;
 use Auryn\StandardReflector;

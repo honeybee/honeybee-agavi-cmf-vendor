@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Response;
+namespace Honeygavi\Agavi\Response;
 
 use AgaviWebResponse;
 use Closure;

@@ -19,7 +19,7 @@
                                     <field name="email" attribute_path="email">
                                         <setting name="required">true</setting>
                                     </field>
-                                    <field name="role" attribute_path="role" renderer="Honeybee\Ui\Renderer\Html\AclRolesRenderer">
+                                    <field name="role" attribute_path="role" renderer="Honeygavi\Ui\Renderer\Html\AclRolesRenderer">
                                         <setting name="required">true</setting>
                                     </field>
                                     <field name="firstname" attribute_path="firstname" />

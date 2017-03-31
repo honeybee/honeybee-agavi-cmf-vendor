@@ -2,7 +2,7 @@
 
 namespace Honeygavi\Template\Twig\Extension;
 
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\UrlGeneratorInterface;
 use Twig_Extension;
 use Twig_Function_Method;
 

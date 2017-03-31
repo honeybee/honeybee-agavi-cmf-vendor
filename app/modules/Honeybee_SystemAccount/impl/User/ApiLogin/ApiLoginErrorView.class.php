@@ -2,7 +2,7 @@
 
 use \AgaviRequestDataHolder;
 use \AgaviWebResponse;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 
 class Honeybee_SystemAccount_User_ApiLogin_ApiLoginErrorView extends View
 {

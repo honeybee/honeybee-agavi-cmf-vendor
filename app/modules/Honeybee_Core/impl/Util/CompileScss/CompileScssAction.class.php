@@ -1,7 +1,7 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
+use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\Agavi\Filter\AssetCompiler;
 
 class Honeybee_Core_Util_CompileScssAction extends Action
 {

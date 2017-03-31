@@ -1,15 +1,15 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\OutputFormat\MediaTypeInfo;
-use Honeybee\Ui\OutputFormat\OutputFormat;
-use Honeybee\Ui\OutputFormat\OutputFormatMap;
-use Honeybee\Ui\OutputFormat\OutputFormatServiceInterface;
+use Honeygavi\Ui\OutputFormat\MediaTypeInfo;
+use Honeygavi\Ui\OutputFormat\OutputFormat;
+use Honeygavi\Ui\OutputFormat\OutputFormatMap;
+use Honeygavi\Ui\OutputFormat\OutputFormatServiceInterface;
 
 class OutputFormatServiceProvisioner extends AbstractProvisioner
 {

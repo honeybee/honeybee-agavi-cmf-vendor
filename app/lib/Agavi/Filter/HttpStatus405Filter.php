@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Filter;
+namespace Honeygavi\Agavi\Filter;
 
 use AgaviContext;
 use AgaviExecutionContainer;

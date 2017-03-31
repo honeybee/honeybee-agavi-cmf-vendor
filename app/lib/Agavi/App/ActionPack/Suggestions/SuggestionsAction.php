@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Suggestions;
+namespace Honeygavi\Agavi\App\ActionPack\Suggestions;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 
 class SuggestionsAction extends Action
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Embed;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\Embed;
 
 use AgaviRequestDataHolder;
 use Honeybee\EntityInterface;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Trellis\Runtime\Attribute\ListAttribute;
 

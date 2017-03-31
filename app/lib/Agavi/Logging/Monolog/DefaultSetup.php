@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging\Monolog;
+namespace Honeygavi\Agavi\Logging\Monolog;
 
 use AgaviConfig;
 use AgaviLoggerAppender;

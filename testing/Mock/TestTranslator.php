@@ -2,7 +2,7 @@
 
 namespace Honeybee\Tests\Mock;
 
-use Honeybee\Ui\TranslatorInterface;
+use Honeygavi\Ui\TranslatorInterface;
 
 class TestTranslator implements TranslatorInterface
 {

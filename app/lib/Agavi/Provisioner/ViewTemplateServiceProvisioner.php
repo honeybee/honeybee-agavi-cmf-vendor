@@ -1,29 +1,29 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\ViewTemplate\Part\Cell;
-use Honeybee\Ui\ViewTemplate\Part\CellList;
-use Honeybee\Ui\ViewTemplate\Part\Field;
-use Honeybee\Ui\ViewTemplate\Part\FieldList;
-use Honeybee\Ui\ViewTemplate\Part\Group;
-use Honeybee\Ui\ViewTemplate\Part\GroupList;
-use Honeybee\Ui\ViewTemplate\Part\Panel;
-use Honeybee\Ui\ViewTemplate\Part\PanelList;
-use Honeybee\Ui\ViewTemplate\Part\Row;
-use Honeybee\Ui\ViewTemplate\Part\RowList;
-use Honeybee\Ui\ViewTemplate\Part\Tab;
-use Honeybee\Ui\ViewTemplate\Part\TabList;
-use Honeybee\Ui\ViewTemplate\ViewTemplate;
-use Honeybee\Ui\ViewTemplate\ViewTemplateMap;
-use Honeybee\Ui\ViewTemplate\ViewTemplateServiceInterface;
-use Honeybee\Ui\ViewTemplate\ViewTemplatesContainer;
-use Honeybee\Ui\ViewTemplate\ViewTemplatesContainerMap;
+use Honeygavi\Ui\ViewTemplate\Part\Cell;
+use Honeygavi\Ui\ViewTemplate\Part\CellList;
+use Honeygavi\Ui\ViewTemplate\Part\Field;
+use Honeygavi\Ui\ViewTemplate\Part\FieldList;
+use Honeygavi\Ui\ViewTemplate\Part\Group;
+use Honeygavi\Ui\ViewTemplate\Part\GroupList;
+use Honeygavi\Ui\ViewTemplate\Part\Panel;
+use Honeygavi\Ui\ViewTemplate\Part\PanelList;
+use Honeygavi\Ui\ViewTemplate\Part\Row;
+use Honeygavi\Ui\ViewTemplate\Part\RowList;
+use Honeygavi\Ui\ViewTemplate\Part\Tab;
+use Honeygavi\Ui\ViewTemplate\Part\TabList;
+use Honeygavi\Ui\ViewTemplate\ViewTemplate;
+use Honeygavi\Ui\ViewTemplate\ViewTemplateMap;
+use Honeygavi\Ui\ViewTemplate\ViewTemplateServiceInterface;
+use Honeygavi\Ui\ViewTemplate\ViewTemplatesContainer;
+use Honeygavi\Ui\ViewTemplate\ViewTemplatesContainerMap;
 
 class ViewTemplateServiceProvisioner extends AbstractProvisioner
 {

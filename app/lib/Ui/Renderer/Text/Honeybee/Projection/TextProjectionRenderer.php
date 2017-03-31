@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Text\Honeybee\Projection;
+namespace Honeygavi\Ui\Renderer\Text\Honeybee\Projection;
 
-use Honeybee\Ui\Renderer\EntityRenderer;
+use Honeygavi\Ui\Renderer\EntityRenderer;
 
 class TextProjectionRenderer extends EntityRenderer
 {

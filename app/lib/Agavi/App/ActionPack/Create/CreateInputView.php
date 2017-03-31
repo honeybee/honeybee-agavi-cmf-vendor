@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create;
+namespace Honeygavi\Agavi\App\ActionPack\Create;
 
 use AgaviRequestDataHolder;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 
 class CreateInputView extends View
 {

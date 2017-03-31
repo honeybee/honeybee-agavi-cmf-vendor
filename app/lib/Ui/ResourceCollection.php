@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui;
+namespace Honeygavi\Ui;
 
 use Trellis\Common\Collection\ArrayList;
 

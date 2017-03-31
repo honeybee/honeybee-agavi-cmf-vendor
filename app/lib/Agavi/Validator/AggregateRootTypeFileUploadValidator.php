@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviConfig;
 use AgaviImageFileValidator;
@@ -10,8 +10,8 @@ use AgaviValidator;
 use AgaviVirtualArrayPath;
 use Honeybee\Common\Error\Error;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
-use Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile;
+use Honeygavi\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\Request\HoneybeeUploadedFile;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;

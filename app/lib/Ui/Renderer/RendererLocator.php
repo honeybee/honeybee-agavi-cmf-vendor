@@ -1,17 +1,17 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use Psr\Log\LoggerInterface;
 
 class RendererLocator implements RendererLocatorInterface
 {
     const DEFAULT_LOOKUP_TEMPLATE = '{NAMESPACE}\\{OUTPUT_FORMAT_NAME}\\{SUBJECT}{MODIFIER}{SUFFIX}';
-    const DEFAULT_LOOKUP_NAMESPACE = 'Honeybee\\Ui\\Renderer';
+    const DEFAULT_LOOKUP_NAMESPACE = 'Honeygavi\\Ui\\Renderer';
     const DEFAULT_LOOKUP_MODIFIER = '';
     const DEFAULT_LOOKUP_SUFFIX = 'Renderer';
 

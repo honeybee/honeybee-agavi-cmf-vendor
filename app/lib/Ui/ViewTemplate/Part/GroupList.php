@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\ViewTemplate\Part;
+namespace Honeygavi\Ui\ViewTemplate\Part;
 
 class GroupList extends NamedItemList
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
+namespace Honeygavi\Agavi\CodeGen\Config;
 
 use AgaviConfig;
 use Honeybee\Common\Util\StringToolkit;

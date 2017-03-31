@@ -9,21 +9,21 @@
         <loggers default="default">
 
             <!-- log all messages, appenders decide if they actually want to log at all -->
-            <logger name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="default" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>default</appender>
                 </appenders>
             </logger>
 
             <!-- accept only DEBUG messages, appenders won't get other log level messages -->
-            <logger name="debug" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" level="\AgaviLogger::DEBUG">
+            <logger name="debug" class="Honeygavi\Agavi\Logging\Logger" level="\AgaviLogger::DEBUG">
                 <appenders>
                     <appender>debug-only</appender>
                 </appenders>
             </logger>
 
             <!-- accept all messages -->
-            <logger name="error" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="error" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>error</appender> <!-- log ERROR and below (see appender) -->
                     <appender>fingers_crossed</appender>
@@ -31,35 +31,35 @@
             </logger>
 
             <!-- accept all messages -->
-            <logger name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="mail" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>mail</appender>
                 </appenders>
             </logger>
 
             <!-- log all authentication related messages -->
-            <logger name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="auth" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>auth</appender>
                 </appenders>
             </logger>
 
             <!-- log all translation related messages -->
-            <logger name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="translation" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>translation</appender>
                 </appenders>
             </logger>
 
             <!-- log all translation related messages -->
-            <logger name="browserconsole" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="browserconsole" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>browserconsole-message-only</appender>
                 </appenders>
             </logger>
 
             <!-- log all api access related messages -->
-            <logger name="api" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger">
+            <logger name="api" class="Honeygavi\Agavi\Logging\Logger">
                 <appenders>
                     <appender>api</appender>
                 </appenders>
@@ -71,59 +71,59 @@
 
             <!-- DefaultSetup specifies a Monolog\Logger with FingersCrossedHandler that logs all messages above DEBUG
                  level to syslog and file when a CRITICAL log message appears. For parameters see the source. -->
-            <appender name="fingers_crossed" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+            <appender name="fingers_crossed" class="Honeygavi\Agavi\Logging\MonologLoggerAppender" layout="default">
                 <ae:parameters>
                     <ae:parameter name="channel">critical</ae:parameter>
-                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\DefaultSetup</ae:parameter>
+                    <ae:parameter name="setup">Honeygavi\Agavi\Logging\Monolog\DefaultSetup</ae:parameter>
                 </ae:parameters>
             </appender>
 
             <!-- FirePhpSetup specifies a Monolog\Logger with FirePHPHandler that logs all messages above DEBUG
                  level via FirePHP and thus you may see those messages in Firefox etc. For parameters see source. -->
-            <appender name="firephp" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+            <appender name="firephp" class="Honeygavi\Agavi\Logging\MonologLoggerAppender" layout="default">
                 <ae:parameters>
                     <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
-                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\FirePhpSetup</ae:parameter>
+                    <ae:parameter name="setup">Honeygavi\Agavi\Logging\Monolog\FirePhpSetup</ae:parameter>
                 </ae:parameters>
             </appender>
 
             <!-- ChromePhpSetup specifies a Monolog\Logger with ChromePHPHandler that logs all messages above DEBUG
                  level via ChromePHP and thus you may see those messages in Chrome etc. For parameters see source. -->
-            <appender name="chromephp" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+            <appender name="chromephp" class="Honeygavi\Agavi\Logging\MonologLoggerAppender" layout="default">
                 <ae:parameters>
                     <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
-                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\ChromePhpSetup</ae:parameter>
+                    <ae:parameter name="setup">Honeygavi\Agavi\Logging\Monolog\ChromePhpSetup</ae:parameter>
                 </ae:parameters>
             </appender>
 
-            <appender name="browserconsole" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="default">
+            <appender name="browserconsole" class="Honeygavi\Agavi\Logging\MonologLoggerAppender" layout="default">
                 <ae:parameters>
                     <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
-                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
+                    <ae:parameter name="setup">Honeygavi\Agavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
                 </ae:parameters>
             </appender>
 
-            <appender name="browserconsole-message-only" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="message-only">
+            <appender name="browserconsole-message-only" class="Honeygavi\Agavi\Logging\MonologLoggerAppender" layout="message-only">
                 <ae:parameters>
                     <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
-                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
+                    <ae:parameter name="setup">Honeygavi\Agavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
                 </ae:parameters>
             </appender>
             <!-- log all messages to %core.app_dir%/log/default.log -->
-            <appender name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+            <appender name="default" class="Honeygavi\Agavi\Logging\FileLoggerAppender" layout="default" />
 
             <!-- log all messages to %core.app_dir%/log/auth.log -->
-            <appender name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\VerboseLoggerAppender" layout="default" />
+            <appender name="auth" class="Honeygavi\Agavi\Logging\VerboseLoggerAppender" layout="default" />
 
-            <appender name="trace" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+            <appender name="trace" class="Honeygavi\Agavi\Logging\FileLoggerAppender" layout="default" />
 
-            <appender name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default" />
+            <appender name="mail" class="Honeygavi\Agavi\Logging\FileLoggerAppender" layout="default" />
 
-            <appender name="api" class="Honeybee\FrameworkBinding\Agavi\Logging\ApiLoggerAppender" layout="default" />
+            <appender name="api" class="Honeygavi\Agavi\Logging\ApiLoggerAppender" layout="default" />
 
-            <appender name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="message-only" />
+            <appender name="translation" class="Honeygavi\Agavi\Logging\FileLoggerAppender" layout="message-only" />
 
-            <appender name="debug-only" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default">
+            <appender name="debug-only" class="Honeygavi\Agavi\Logging\FileLoggerAppender" layout="default">
                 <ae:parameters>
                     <!-- logs to EMERGENCY, CRITICAL, ALERT, ERROR, WARNING, NOTICE, INFO and DEBUG, BUT as the
                          the "debug" logger only accepts DEBUG messages there will be only those messages in the log. -->
@@ -132,7 +132,7 @@
             </appender>
 
             <!-- log all messages to error.log -->
-            <appender name="error" class="Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender" layout="default">
+            <appender name="error" class="Honeygavi\Agavi\Logging\FileLoggerAppender" layout="default">
                 <ae:parameters>
                     <!-- logs to EMERGENCY, CRITICAL, ALERT and ERROR -->
                     <ae:parameter name="max_level">AgaviLogger::ERROR</ae:parameter>
@@ -153,9 +153,9 @@
         </appenders>
 
         <layouts>
-            <layout name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerLayout" />
+            <layout name="default" class="Honeygavi\Agavi\Logging\LoggerLayout" />
             <layout name="DateTimeLayout" class="AgaviTimestampLoggerLayout" />
-            <layout name="message-only" class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerLayout">
+            <layout name="message-only" class="Honeygavi\Agavi\Logging\LoggerLayout">
                 <ae:parameter name="message_format">%4$s</ae:parameter>
             </layout>
         </layouts>
@@ -164,26 +164,26 @@
 
     <ae:configuration environment="testing.*">
         <loggers default="default">
-            <logger name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
-            <logger name="debug" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" level="\AgaviLogger::DEBUG" />
-            <logger name="error" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
-            <logger name="mail" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
-            <logger name="auth" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
-            <logger name="translation" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
-            <logger name="api" class="Honeybee\FrameworkBinding\Agavi\Logging\Logger" />
+            <logger name="default" class="Honeygavi\Agavi\Logging\Logger" />
+            <logger name="debug" class="Honeygavi\Agavi\Logging\Logger" level="\AgaviLogger::DEBUG" />
+            <logger name="error" class="Honeygavi\Agavi\Logging\Logger" />
+            <logger name="mail" class="Honeygavi\Agavi\Logging\Logger" />
+            <logger name="auth" class="Honeygavi\Agavi\Logging\Logger" />
+            <logger name="translation" class="Honeygavi\Agavi\Logging\Logger" />
+            <logger name="api" class="Honeygavi\Agavi\Logging\Logger" />
         </loggers>
 
         <appenders>
-            <appender name="default" class="Honeybee\FrameworkBinding\Agavi\Logging\MonologLoggerAppender" layout="message-only">
+            <appender name="default" class="Honeygavi\Agavi\Logging\MonologLoggerAppender" layout="message-only">
                 <ae:parameters>
                     <ae:parameter name="channel">%core.clean_environment%</ae:parameter>
-                    <ae:parameter name="setup">Honeybee\FrameworkBinding\Agavi\Logging\Monolog\TestSetup</ae:parameter>
+                    <ae:parameter name="setup">Honeygavi\Agavi\Logging\Monolog\TestSetup</ae:parameter>
                 </ae:parameters>
             </appender>
         </appenders>
 
         <layouts>
-            <layout name="message-only" class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerLayout">
+            <layout name="message-only" class="Honeygavi\Agavi\Logging\LoggerLayout">
                 <ae:parameter name="message_format">%4$s</ae:parameter>
             </layout>
         </layouts>

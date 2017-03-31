@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 use AgaviLogger;
 use AgaviLoggerAppender;
 use AgaviLoggerMessage;
 use AgaviLoggingException;
-use Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager;
-use Honeybee\FrameworkBinding\Agavi\Logging\Monolog\DefaultSetup;
+use Honeygavi\Agavi\Logging\LoggerManager;
+use Honeygavi\Agavi\Logging\Monolog\DefaultSetup;
 use InvalidArgumentException;
 use Monolog\Logger as MonologLogger;
 
@@ -16,7 +16,7 @@ use Monolog\Logger as MonologLogger;
  *
  * The following parameters are supported:
  *
- * setup - Honeybee\FrameworkBinding\Agavi\Logging\Monolog\MonologSetupInterface implementing class name
+ * setup - Honeygavi\Agavi\Logging\Monolog\MonologSetupInterface implementing class name
  *         to instantiate to get a configured \Monolog\Logger with wanted
  *         channel name, handlers, processors and formatters.
  */

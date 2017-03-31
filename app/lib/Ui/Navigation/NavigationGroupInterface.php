@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Navigation;
+namespace Honeygavi\Ui\Navigation;
 
 interface NavigationGroupInterface
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Trellis\TrellisTargetFinder;
-use Honeybee\FrameworkBinding\Agavi\Util\HoneybeeAgaviToolkit;
+use Honeygavi\Agavi\CodeGen\Trellis\TrellisTargetFinder;
+use Honeygavi\Agavi\Util\HoneybeeAgaviToolkit;
 
 /**
  * Validator for console usage that asks for a valid module name.

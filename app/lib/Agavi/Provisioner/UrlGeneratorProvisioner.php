@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviContext;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\UrlGeneratorInterface;
 
 class UrlGeneratorProvisioner extends AbstractProvisioner
 {

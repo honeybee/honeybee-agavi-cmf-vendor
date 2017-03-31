@@ -1,15 +1,15 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\ViewConfig\NameResolverInterface;
-use Honeybee\Ui\ViewConfig\SubjectNameResolver;
-use Honeybee\Ui\ViewConfig\ViewConfigServiceInterface;
+use Honeygavi\Ui\ViewConfig\NameResolverInterface;
+use Honeygavi\Ui\ViewConfig\SubjectNameResolver;
+use Honeygavi\Ui\ViewConfig\ViewConfigServiceInterface;
 
 class ViewConfigServiceProvisioner extends AbstractProvisioner
 {

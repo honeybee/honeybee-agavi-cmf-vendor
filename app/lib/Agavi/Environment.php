@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi;
+namespace Honeygavi\Agavi;
 
 use Psr\Log\LoggerInterface;
 use Honeybee\EnvironmentInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser;
+use Honeygavi\Agavi\User\AclSecurityUser;
 
 class Environment implements EnvironmentInterface
 {

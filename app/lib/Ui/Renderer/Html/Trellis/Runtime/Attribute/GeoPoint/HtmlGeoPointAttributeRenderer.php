@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\GeoPoint;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\GeoPoint;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\GeoPoint\GeoPointAttribute;
 
 class HtmlGeoPointAttributeRenderer extends HtmlAttributeRenderer

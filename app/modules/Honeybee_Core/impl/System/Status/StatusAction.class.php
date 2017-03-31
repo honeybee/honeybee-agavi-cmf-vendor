@@ -1,7 +1,7 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\ShutdownListenerInterface;
+use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\Agavi\ShutdownListenerInterface;
 use Honeybee\Infrastructure\DataAccess\Connector\Status;
 
 /**
@@ -60,7 +60,7 @@ class Honeybee_Core_System_StatusAction extends Action implements ShutdownListen
      *
      * @see register_shutdown_function()
      * @see error_get_last()
-     * @see Honeybee\FrameworkBinding\Agavi\Context
+     * @see Honeygavi\Agavi\Context
      *
      * @param array $error associative array with keys "type", "message", "file" and "line"
      *

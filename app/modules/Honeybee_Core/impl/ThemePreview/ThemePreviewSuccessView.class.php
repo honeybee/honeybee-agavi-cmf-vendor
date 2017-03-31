@@ -1,11 +1,11 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use \AgaviRequestDataHolder;
 use Honeybee\Infrastructure\Config\Settings;
-use Honeybee\Ui\Activity\Activity;
-use Honeybee\Ui\Activity\ActivityMap;
-use Honeybee\Ui\Activity\Url;
+use Honeygavi\Ui\Activity\Activity;
+use Honeygavi\Ui\Activity\ActivityMap;
+use Honeygavi\Ui\Activity\Url;
 
 class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
 {

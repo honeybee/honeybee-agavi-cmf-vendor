@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Routing;
+namespace Honeygavi\Agavi\Routing;
 
 use AgaviRoutingCallback;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Trellis\Runtime\EntityTypeInterface;
 use Trellis\Runtime\Entity\EntityInterface;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\Logging\LogTrait;
 use InvalidArgumentException;
 
 /**

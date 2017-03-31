@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Ui\ViewConfig\ViewConfigInterface;
+use Honeygavi\Ui\ViewConfig\ViewConfigInterface;
 
 class RelValidator extends AgaviValidator
 {

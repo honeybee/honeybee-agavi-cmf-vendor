@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Trellis;
+namespace Honeygavi\Agavi\CodeGen\Trellis;
 
 use AgaviConfig;
 use Honeybee\Common\Error\RuntimeError;

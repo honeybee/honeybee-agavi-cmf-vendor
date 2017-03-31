@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
 use Honeybee\Infrastructure\DataAccess\Query\CriteriaList;

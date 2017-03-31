@@ -1,23 +1,23 @@
 <?php
 
-namespace Honeybee\Ui\ViewTemplate;
+namespace Honeygavi\Ui\ViewTemplate;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
-use Honeybee\Ui\ViewTemplate\Part\Cell;
-use Honeybee\Ui\ViewTemplate\Part\CellList;
-use Honeybee\Ui\ViewTemplate\Part\Field;
-use Honeybee\Ui\ViewTemplate\Part\FieldList;
-use Honeybee\Ui\ViewTemplate\Part\Group;
-use Honeybee\Ui\ViewTemplate\Part\GroupList;
-use Honeybee\Ui\ViewTemplate\Part\Panel;
-use Honeybee\Ui\ViewTemplate\Part\PanelList;
-use Honeybee\Ui\ViewTemplate\Part\Row;
-use Honeybee\Ui\ViewTemplate\Part\RowList;
-use Honeybee\Ui\ViewTemplate\Part\Tab;
-use Honeybee\Ui\ViewTemplate\Part\TabList;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\ViewTemplate\Part\Cell;
+use Honeygavi\Ui\ViewTemplate\Part\CellList;
+use Honeygavi\Ui\ViewTemplate\Part\Field;
+use Honeygavi\Ui\ViewTemplate\Part\FieldList;
+use Honeygavi\Ui\ViewTemplate\Part\Group;
+use Honeygavi\Ui\ViewTemplate\Part\GroupList;
+use Honeygavi\Ui\ViewTemplate\Part\Panel;
+use Honeygavi\Ui\ViewTemplate\Part\PanelList;
+use Honeygavi\Ui\ViewTemplate\Part\Row;
+use Honeygavi\Ui\ViewTemplate\Part\RowList;
+use Honeygavi\Ui\ViewTemplate\Part\Tab;
+use Honeygavi\Ui\ViewTemplate\Part\TabList;
 use Honeybee\EnvironmentInterface;
 use Trellis\Common\Object;
 

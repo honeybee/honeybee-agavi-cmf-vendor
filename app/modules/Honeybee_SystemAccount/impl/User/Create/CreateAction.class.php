@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create\CreateAction;
+use Honeygavi\Agavi\App\ActionPack\Create\CreateAction;
 
 class Honeybee_SystemAccount_User_CreateAction extends CreateAction
 {

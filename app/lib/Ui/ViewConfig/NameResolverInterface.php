@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\ViewConfig;
+namespace Honeygavi\Ui\ViewConfig;
 
 interface NameResolverInterface
 {

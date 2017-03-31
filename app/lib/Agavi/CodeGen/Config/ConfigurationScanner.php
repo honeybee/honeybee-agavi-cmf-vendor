@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Config;
+namespace Honeygavi\Agavi\CodeGen\Config;
 
 use AgaviConfig;
 use AgaviModuleFilesystemCheck;
 use AgaviToolkit;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
+use Honeygavi\Agavi\CodeGen\Skeleton\SkeletonFinder;
 use Symfony\Component\Finder\Finder;
 
 class ConfigurationScanner

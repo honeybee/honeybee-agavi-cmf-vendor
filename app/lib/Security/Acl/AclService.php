@@ -7,7 +7,7 @@ use Honeybee\Common\Error\RuntimeError;
 use Honeygavi\Security\Acl\Permission\Permission;
 use Honeygavi\Security\Acl\Permission\PermissionListMap;
 use Honeygavi\Security\Acl\Permission\PermissionServiceInterface;
-use Honeybee\Ui\Activity\ActivityServiceInterface;
+use Honeygavi\Ui\Activity\ActivityServiceInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
 use Zend\Permissions\Acl\Resource\GenericResource;
 use Zend\Permissions\Acl\Role\GenericRole;

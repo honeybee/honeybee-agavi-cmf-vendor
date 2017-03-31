@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use Honeybee\Infrastructure\Migration\MigrationService;
 
 class Honeybee_Core_Migrate_ListAction extends Action

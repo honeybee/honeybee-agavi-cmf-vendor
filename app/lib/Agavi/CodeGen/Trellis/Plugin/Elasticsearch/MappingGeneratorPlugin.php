@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Trellis\Plugin\Elasticsearch;
+namespace Honeygavi\Agavi\CodeGen\Trellis\Plugin\Elasticsearch;
 
 use Trellis\CodeGen\PluginInterface;
 use Trellis\CodeGen\Schema\EntityTypeDefinition;

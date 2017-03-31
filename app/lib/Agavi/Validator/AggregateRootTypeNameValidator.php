@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 class AggregateRootTypeNameValidator extends ConsoleDialogValidator
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use Honeybee\Infrastructure\Workflow\XmlStateMachineBuilder;
 use Workflux\Parser\Xml\StateMachineDefinitionParser;

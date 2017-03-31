@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use DateTimeInterface;
 use Honeybee\Common\Error\RuntimeError;
@@ -12,8 +12,8 @@ use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
 use Honeygavi\Template\TemplateRendererInterface;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\UrlGeneratorInterface;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;

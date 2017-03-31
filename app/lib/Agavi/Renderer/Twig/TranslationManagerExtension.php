@@ -1,5 +1,5 @@
 <?php
-namespace Honeybee\FrameworkBinding\Agavi\Renderer\Twig;
+namespace Honeygavi\Agavi\Renderer\Twig;
 
 use AgaviContext;
 use Twig_Extension;

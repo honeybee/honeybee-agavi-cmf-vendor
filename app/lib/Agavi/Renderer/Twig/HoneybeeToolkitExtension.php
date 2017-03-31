@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Renderer\Twig;
+namespace Honeygavi\Agavi\Renderer\Twig;
 
 use AgaviConfig;
 use Twig_Extension;

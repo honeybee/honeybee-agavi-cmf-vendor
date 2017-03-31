@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\ViewTemplate;
+namespace Honeygavi\Ui\ViewTemplate;
 
 use Trellis\Common\Object;
-use Honeybee\Ui\ViewTemplate\Part\TabList;
+use Honeygavi\Ui\ViewTemplate\Part\TabList;
 
 class ViewTemplate extends Object implements ViewTemplateInterface
 {

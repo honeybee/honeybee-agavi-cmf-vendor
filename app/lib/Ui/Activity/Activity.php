@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Activity;
+namespace Honeygavi\Ui\Activity;
 
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Trellis\Common\Configurable;

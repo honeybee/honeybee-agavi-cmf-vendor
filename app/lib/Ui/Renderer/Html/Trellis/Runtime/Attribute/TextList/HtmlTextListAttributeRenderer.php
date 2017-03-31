@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\TextList;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\TextList;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\TextList\TextListAttribute;
 
 class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer

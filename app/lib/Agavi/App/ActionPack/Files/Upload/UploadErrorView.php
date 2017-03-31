@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Upload;
+namespace Honeygavi\Agavi\App\ActionPack\Files\Upload;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use AgaviRequestDataHolder;
 use Trellis\Runtime\Attribute\HandlesFileListInterface;
 

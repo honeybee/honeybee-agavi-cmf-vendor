@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\ValueObjects;
+namespace Honeygavi\Ui\ValueObjects;
 
 interface PaginationInterface
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 class GenericLink
 {

@@ -10,7 +10,7 @@
                 <argument>quiet</argument>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\FixtureTargetValidator" name="invalid_target" translation_domain="honeybee.core.ui" provides="fixture_target">
+            <validator class="Honeygavi\Agavi\Validator\FixtureTargetValidator" name="invalid_target" translation_domain="honeybee.core.ui" provides="fixture_target">
                 <argument>target</argument>
                 <error>You must specify a valid fixture target name.</error>
                 <ae:parameter name="dialog">
@@ -26,7 +26,7 @@
                 <error>Invalid or missing 'version' parameter. Expecting one of the listed available versions.</error>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\FixtureNameValidator" name="invalid_fixture" depends="fixture_target">
+            <validator class="Honeygavi\Agavi\Validator\FixtureNameValidator" name="invalid_fixture" depends="fixture_target">
                 <argument>fixture</argument>
                 <error>You must specify a valid fixture name.</error>
                 <ae:parameter name="dialog">

@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviValidator;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Exception;
 use Honeybee\Common\Error\Error;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\Logging\LogTrait;
 
 /**
  * Validates and exports the attribute for the given attribute path

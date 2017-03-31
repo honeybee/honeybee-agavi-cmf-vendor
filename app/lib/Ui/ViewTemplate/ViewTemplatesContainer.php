@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\ViewTemplate;
+namespace Honeygavi\Ui\ViewTemplate;
 
 use Trellis\Common\Object;
 use Honeybee\Common\Error\RuntimeError;

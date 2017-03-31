@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviValidationArgument;
 use AgaviValidator;
@@ -29,7 +29,7 @@ use Symfony\Component\Console\Output\ConsoleOutput;
  * - dialog[confirm]: display question and ask for a boolean value via y/n.
  *
  * @example
- * <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ConsoleDialogValidator" name="skeleton" required="false">
+ * <validator class="Honeygavi\Agavi\Validator\ConsoleDialogValidator" name="skeleton" required="false">
         <argument>skeleton</argument>
         <error>You must specify a valid skeleton name (that is, a folder name from dev/templates/).</error>
         <ae:parameter name="pattern">/^[A-Za-z_]+$/</ae:parameter>

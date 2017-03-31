@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 use AgaviLogger;
 use AgaviLoggerAppender;
 use AgaviLoggerMessage;
 use AgaviLoggingException;
-use Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender;
+use Honeygavi\Agavi\Logging\FileLoggerAppender;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 
@@ -90,7 +90,7 @@ class Logger extends AgaviLogger
     }
 
     /**
-     * @return \Honeybee\FrameworkBinding\Agavi\Logging\Psr3Logger instance that is compatible to the PSR-3 standard
+     * @return \Honeygavi\Agavi\Logging\Psr3Logger instance that is compatible to the PSR-3 standard
      */
     public function getPsr3Logger()
     {

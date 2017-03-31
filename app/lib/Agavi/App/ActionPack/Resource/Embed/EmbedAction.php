@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Embed;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\Embed;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 
 class EmbedAction extends Action
 {

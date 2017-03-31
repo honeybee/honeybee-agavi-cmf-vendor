@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
@@ -12,17 +12,17 @@ use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
 use Honeygavi\Template\TemplateRendererInterface;
 use Honeybee\Projection\ProjectionTypeMap;
-use Honeybee\Ui\Activity\ActivityInterface;
-use Honeybee\Ui\Activity\ActivityServiceInterface;
-use Honeybee\Ui\Activity\Url;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatServiceInterface;
-use Honeybee\Ui\Renderer\RendererServiceInterface;
-use Honeybee\Ui\TranslatorInterface;
-use Honeybee\Ui\UrlGeneratorInterface;
-use Honeybee\Ui\ViewConfig\NameResolverInterface;
-use Honeybee\Ui\ViewConfig\ViewConfigServiceInterface;
-use Honeybee\Ui\ViewTemplate\ViewTemplateServiceInterface;
+use Honeygavi\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\ActivityServiceInterface;
+use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatServiceInterface;
+use Honeygavi\Ui\Renderer\RendererServiceInterface;
+use Honeygavi\Ui\TranslatorInterface;
+use Honeygavi\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\ViewConfig\NameResolverInterface;
+use Honeygavi\Ui\ViewConfig\ViewConfigServiceInterface;
+use Honeygavi\Ui\ViewTemplate\ViewTemplateServiceInterface;
 use Psr\Log\LoggerInterface;
 use QL\UriTemplate\UriTemplate;
 

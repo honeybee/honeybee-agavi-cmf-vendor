@@ -2,7 +2,7 @@
 
 namespace Honeygavi\Template\Twig\Extension;
 
-use Honeybee\Ui\TranslatorInterface;
+use Honeygavi\Ui\TranslatorInterface;
 use Twig_Extension;
 use Twig_Filter_Method;
 use Twig_Function_Method;

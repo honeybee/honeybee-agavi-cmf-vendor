@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Translation;
+namespace Honeygavi\Agavi\Translation;
 
 use AgaviTranslationManager;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Ui\TranslatorInterface;
+use Honeygavi\Ui\TranslatorInterface;
 use Psr\Log\LoggerInterface;
 
 class AgaviTranslator implements TranslatorInterface

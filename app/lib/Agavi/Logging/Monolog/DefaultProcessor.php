@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging\Monolog;
+namespace Honeygavi\Agavi\Logging\Monolog;
 
-use Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager;
+use Honeygavi\Agavi\Logging\LoggerManager;
 
 /**
  * Default processor for Monolog log messages that adds Agavi, system and

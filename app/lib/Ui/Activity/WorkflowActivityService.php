@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\Ui\Activity;
+namespace Honeygavi\Ui\Activity;
 
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Honeybee\ServiceLocatorInterface;
-use Honeybee\Ui\Activity\ActivityContainerMap;
+use Honeygavi\Ui\Activity\ActivityContainerMap;
 use Trellis\Common\Object;
 
 class WorkflowActivityService extends Object

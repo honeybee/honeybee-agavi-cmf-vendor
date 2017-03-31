@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Email;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Email;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\Email\EmailAttribute;
 
 class HtmlEmailAttributeRenderer extends HtmlAttributeRenderer

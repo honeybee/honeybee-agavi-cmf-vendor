@@ -4,7 +4,7 @@ namespace Honeybee\Tests\Mock;
 
 use AgaviConfig;
 use Workflux\Parser\Xml\StateMachineDefinitionParser;
-use Honeybee\FrameworkBinding\Agavi\Provisioner\StateMachineBuilderProvisioner;
+use Honeygavi\Agavi\Provisioner\StateMachineBuilderProvisioner;
 
 class TestStateMachineBuilderProvisioner extends StateMachineBuilderProvisioner
 {

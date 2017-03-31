@@ -6,7 +6,7 @@
     <ae:configuration>
 
         <validators translation_domain="honeybee.system_account.user.errors" method="read">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_user">
+            <validator class="Honeygavi\Agavi\Validator\ResourceValidator" name="invalid_user">
                 <argument>resource</argument>
                 <error>The given user(identifier) is invalid.</error>
                 <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>
@@ -14,7 +14,7 @@
         </validators>
 
         <validators translation_domain="honeybee.system_account.user.errors" method="write">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ProceedWorkflowCommandValidator" name="invalid_proceed_command">
+            <validator class="Honeygavi\Agavi\Validator\ProceedWorkflowCommandValidator" name="invalid_proceed_command">
                 <argument>event</argument>
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="identifier_arg">resource</ae:parameter>

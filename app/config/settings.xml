@@ -53,7 +53,7 @@
             <setting name="use_security">true</setting>
             <setting name="use_translation">true</setting>
             <setting name="http_post_file_name">post_payload</setting>
-            <setting name="context_implementation">Honeybee\FrameworkBinding\Agavi\Context</setting>
+            <setting name="context_implementation">Honeygavi\Agavi\Context</setting>
             <setting name="test_bootstrap_tpl">%core.app_dir%/../testing/TestCaseMethod.tpl</setting>
             <setting name="gravatar_url_tpl">//www.gravatar.com/avatar/{EMAIL_HASH}?s=31</setting>
             <setting name="apache_tika">%core.app_dir%/../vendor/tika.jar</setting>

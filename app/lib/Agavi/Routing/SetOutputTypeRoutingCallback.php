@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Routing;
+namespace Honeygavi\Agavi\Routing;
 
 use AgaviConfig;
 use AgaviContext;
@@ -14,7 +14,7 @@ use InvalidArgumentException;
 class SetOutputTypeRoutingCallback extends AgaviRoutingCallback
 {
     /**
-     * @var Honeybee\FrameworkBinding\Agavi\Controller\HoneybeeAgaviController
+     * @var Honeygavi\Agavi\Controller\HoneybeeAgaviController
      */
     protected $controller = null;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use Honeybee\Model\Command\Bulk\BulkStreamError;
 use Honeybee\Model\Command\Bulk\BulkStreamIterator;

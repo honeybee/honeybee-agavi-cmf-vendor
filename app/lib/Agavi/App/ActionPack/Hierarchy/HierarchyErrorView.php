@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
+namespace Honeygavi\Agavi\App\ActionPack\Hierarchy;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\Agavi\App\Base\ErrorView;
 
 class HierarchyErrorView extends ErrorView
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Task;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\Task;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 
 class TaskAction extends Action
 {

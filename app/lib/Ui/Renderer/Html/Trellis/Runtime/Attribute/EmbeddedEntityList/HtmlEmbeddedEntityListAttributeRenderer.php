@@ -1,16 +1,16 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\EmbeddedEntityList;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\EmbeddedEntityList;
 
 use Trellis\Runtime\Entity\EntityInterface;
 use Trellis\Runtime\Attribute\ListAttribute;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
-use Honeybee\Ui\Activity\Activity;
-use Honeybee\Ui\Activity\Url;
-use Honeybee\Ui\Activity\ActivityMap;
+use Honeygavi\Ui\Activity\Activity;
+use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\Activity\ActivityMap;
 
 class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
 {

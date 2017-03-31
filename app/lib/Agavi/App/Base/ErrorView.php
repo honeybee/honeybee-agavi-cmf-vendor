@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\Base;
+namespace Honeygavi\Agavi\App\Base;
 
 use AgaviRequestDataHolder;
 use AgaviWebResponse;

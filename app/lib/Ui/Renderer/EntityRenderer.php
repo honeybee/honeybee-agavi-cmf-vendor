@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
@@ -8,7 +8,7 @@ use Honeybee\EntityInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 
 abstract class EntityRenderer extends Renderer
 {

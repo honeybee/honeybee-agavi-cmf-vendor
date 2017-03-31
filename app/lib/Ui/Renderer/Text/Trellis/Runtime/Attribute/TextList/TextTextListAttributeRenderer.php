@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Text\Trellis\Runtime\Attribute\TextList;
+namespace Honeygavi\Ui\Renderer\Text\Trellis\Runtime\Attribute\TextList;
 
-use Honeybee\Ui\Renderer\Text\Trellis\Runtime\Attribute\TextAttributeRenderer;
+use Honeygavi\Ui\Renderer\Text\Trellis\Runtime\Attribute\TextAttributeRenderer;
 
 class TextTextListAttributeRenderer extends TextAttributeRenderer
 {

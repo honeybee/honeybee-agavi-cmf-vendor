@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Routing;
+namespace Honeygavi\Agavi\Routing;
 
 use AgaviConsoleRouting;
 use AgaviConfigCache;

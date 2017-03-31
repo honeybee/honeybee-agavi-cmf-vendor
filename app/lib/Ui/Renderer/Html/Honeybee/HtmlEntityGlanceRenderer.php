@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Honeybee;
+namespace Honeygavi\Ui\Renderer\Html\Honeybee;
 
-use Honeybee\Ui\Renderer\Renderer;
-use Honeybee\Ui\Renderer\EntityRenderer;
+use Honeygavi\Ui\Renderer\Renderer;
+use Honeygavi\Ui\Renderer\EntityRenderer;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\EntityInterface;
-use Honeybee\Ui\ViewTemplate\ViewTemplateInterface;
+use Honeygavi\Ui\ViewTemplate\ViewTemplateInterface;
 use Trellis\Runtime\Attribute\AttributePath;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 use Trellis\Runtime\Attribute\AttributePathInterface;

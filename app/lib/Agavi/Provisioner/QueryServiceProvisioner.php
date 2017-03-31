@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use Honeybee\Common\Error\ConfigError;
 use Honeybee\Common\Error\RuntimeError;

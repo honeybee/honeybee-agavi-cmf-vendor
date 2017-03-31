@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Routing;
+namespace Honeygavi\Agavi\Routing;
 
 use AgaviRoutingCallback;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\EntityInterface;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\Logging\LogTrait;
 
 /**
  * This routing callback is used to generate a URL that contains

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\ViewConfig;
+namespace Honeygavi\Ui\ViewConfig;
 
 use Trellis\Common\Collection\TypedMap;
 use Trellis\Common\Collection\UniqueValueInterface;

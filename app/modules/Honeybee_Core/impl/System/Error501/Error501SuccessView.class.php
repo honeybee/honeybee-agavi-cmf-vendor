@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\Agavi\App\Base\ErrorView;
 
 /**
  * Handles HTTP status 501 NOT IMPLEMENTED errors for all supported output

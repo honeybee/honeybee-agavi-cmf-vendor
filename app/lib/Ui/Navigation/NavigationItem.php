@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Navigation;
+namespace Honeygavi\Ui\Navigation;
 
 use Trellis\Common\Object;
-use Honeybee\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\ActivityInterface;
 
 class NavigationItem extends Object implements NavigationItemInterface
 {

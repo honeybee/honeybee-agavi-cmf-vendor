@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use Honeygavi\Security\Acl\AclService;
 
 class Honeybee_Core_Util_ListPermissionsAction extends Action

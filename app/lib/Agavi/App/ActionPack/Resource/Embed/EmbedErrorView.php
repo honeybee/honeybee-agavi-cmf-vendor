@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Embed;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\Embed;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\Agavi\App\Base\ErrorView;
 
 class EmbedErrorView extends ErrorView
 {

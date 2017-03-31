@@ -1,14 +1,14 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Collection;
+namespace Honeygavi\Agavi\App\ActionPack\Collection;
 
 use AgaviConfig;
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use Honeybee\Infrastructure\Config\Settings;
-use Honeybee\Ui\Activity\Activity;
-use Honeybee\Ui\Activity\Url as ActivityUrl;
-use Honeybee\Ui\ValueObjects\Pagination;
+use Honeygavi\Ui\Activity\Activity;
+use Honeygavi\Ui\Activity\Url as ActivityUrl;
+use Honeygavi\Ui\ValueObjects\Pagination;
 use Honeybee\Common\Util\ArrayToolkit;
 
 class CollectionSuccessView extends View

@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Bulk;
+namespace Honeygavi\Agavi\App\ActionPack\Bulk;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use Honeybee\Model\Command\Bulk\BulkOperation;
 use Honeybee\Model\Command\Bulk\BulkMetaData;
 use Honeybee\Common\Util\StringToolkit;

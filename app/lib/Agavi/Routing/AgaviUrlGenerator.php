@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Routing;
+namespace Honeygavi\Agavi\Routing;
 
 use AgaviRouting;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Ui\Activity\ActivityInterface;
-use Honeybee\Ui\Activity\Url;
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\UrlGeneratorInterface;
 use QL\UriTemplate\UriTemplate;
 
 class AgaviUrlGenerator implements UrlGeneratorInterface

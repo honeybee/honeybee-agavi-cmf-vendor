@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\WebSocket;
+namespace Honeygavi\Ui\WebSocket;
 
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;

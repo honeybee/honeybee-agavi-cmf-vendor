@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\User;
+namespace Honeygavi\Agavi\User;
 
 use AgaviConfig;
 use AgaviConfigCache;

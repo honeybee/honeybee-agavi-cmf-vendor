@@ -35,8 +35,6 @@
 
     "autoload": {
         "psr-4": {
-            "Honeybee\\FrameworkBinding\\Agavi\\": "app/lib/Agavi",
-            "Honeybee\\Ui\\": "app/lib/Ui",
             "Honeygavi\\": "app/lib",
             "HoneybeeExtensions\\Composer\\": "etc/composer/"
         }

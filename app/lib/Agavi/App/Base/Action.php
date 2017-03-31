@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\Base;
+namespace Honeygavi\Agavi\App\Base;
 
 use AgaviAction;
 use AgaviConfig;
@@ -12,12 +12,12 @@ use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\ScopeKeyInterface;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\Logging\ILogger;
-use Honeybee\FrameworkBinding\Agavi\Logging\LogTrait;
+use Honeygavi\Agavi\Logging\ILogger;
+use Honeygavi\Agavi\Logging\LogTrait;
 use Honeybee\Infrastructure\Command\CommandInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
-use Honeybee\Ui\Activity\ActivityMap;
+use Honeygavi\Ui\Activity\ActivityMap;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 
 /**

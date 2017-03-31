@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Request;
+namespace Honeygavi\Agavi\Request;
 
 use AgaviUploadedFile;
 use Trellis\Runtime\Attribute\HandlesFileInterface;

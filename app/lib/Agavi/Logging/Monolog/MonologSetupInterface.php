@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging\Monolog;
+namespace Honeygavi\Agavi\Logging\Monolog;
 
 use AgaviLoggerAppender;
 
 /**
  * Interface that classes should implement that want to return a configured
- * \Monolog\Logger instance for usage by the \Honeybee\FrameworkBinding\Agavi\Logging\Logger.
+ * \Monolog\Logger instance for usage by the \Honeygavi\Agavi\Logging\Logger.
  */
 interface MonologSetupInterface
 {

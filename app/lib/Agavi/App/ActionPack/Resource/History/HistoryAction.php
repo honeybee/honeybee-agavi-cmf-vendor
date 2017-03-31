@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\History;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\History;
 
 use AgaviRequestDataHolder;
 use Honeybee\Model\Event\AggregateRootEventList;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 
 class HistoryAction extends Action
 {

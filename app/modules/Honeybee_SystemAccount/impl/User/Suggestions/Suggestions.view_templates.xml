@@ -20,8 +20,8 @@
                                     <field name="firstname" />
                                     <field name="lastname" />
                                     -->
-                                    <field name="url" renderer="Honeybee\Ui\Renderer\Html\Dat0r\Runtime\Attribute\Url\HtmlUrlAttributeRenderer" />
-                                    <field name="email" renderer="Honeybee\Ui\Renderer\Html\Dat0r\Runtime\Attribute\Email\HtmlEmailAttributeRenderer" />
+                                    <field name="url" renderer="Honeygavi\Ui\Renderer\Html\Dat0r\Runtime\Attribute\Url\HtmlUrlAttributeRenderer" />
+                                    <field name="email" renderer="Honeygavi\Ui\Renderer\Html\Dat0r\Runtime\Attribute\Email\HtmlEmailAttributeRenderer" />
                                     <field name="birth_year" />
                                     <field name="tags" />
                                     <field name="role" />

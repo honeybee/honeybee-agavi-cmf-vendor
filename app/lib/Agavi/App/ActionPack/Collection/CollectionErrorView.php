@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Collection;
+namespace Honeygavi\Agavi\App\ActionPack\Collection;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\Agavi\App\Base\ErrorView;
 
 class CollectionErrorView extends ErrorView
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
+namespace Honeygavi\Agavi\App\ActionPack\Hierarchy;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use Honeybee\Infrastructure\DataAccess\Query\AttributeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\Comparison\Equals;
-use Honeybee\Ui\ResourceCollection;
+use Honeygavi\Ui\ResourceCollection;
 
 class HierarchyAction extends Action
 {

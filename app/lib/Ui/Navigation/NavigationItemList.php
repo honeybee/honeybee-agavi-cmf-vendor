@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Navigation;
+namespace Honeygavi\Ui\Navigation;
 
 use Trellis\Common\Collection\TypedList;
 use Trellis\Common\Collection\UniqueValueInterface;

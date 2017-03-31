@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Renderer;
+namespace Honeygavi\Agavi\Renderer;
 
 use AgaviConfig;
 use AgaviContext;
 use AgaviFileTemplateLayer; // do not remove!
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\Renderer\TwigRenderer;
+use Honeygavi\Agavi\Renderer\TwigRenderer;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeygavi\Mail\Message;
 

@@ -1,14 +1,14 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\AggregateRootTypeMapGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ConfigurationScanner;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\DefaultXmlConfigGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\NamespaceAutoloadGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ProjectionTypeMapGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\RoutingXmlConfigGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\SkeletonValidationMapGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\WorkflowsXmlConfigGenerator;
+use Honeygavi\Agavi\App\Base\Action;
+use Honeygavi\Agavi\CodeGen\Config\AggregateRootTypeMapGenerator;
+use Honeygavi\Agavi\CodeGen\Config\ConfigurationScanner;
+use Honeygavi\Agavi\CodeGen\Config\DefaultXmlConfigGenerator;
+use Honeygavi\Agavi\CodeGen\Config\NamespaceAutoloadGenerator;
+use Honeygavi\Agavi\CodeGen\Config\ProjectionTypeMapGenerator;
+use Honeygavi\Agavi\CodeGen\Config\RoutingXmlConfigGenerator;
+use Honeygavi\Agavi\CodeGen\Config\SkeletonValidationMapGenerator;
+use Honeygavi\Agavi\CodeGen\Config\WorkflowsXmlConfigGenerator;
 
 class Honeybee_Core_Util_BuildConfigAction extends Action
 {

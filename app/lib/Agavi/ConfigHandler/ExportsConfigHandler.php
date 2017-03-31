@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\ConfigHandler;
+namespace Honeygavi\Agavi\ConfigHandler;
 
 use AgaviXmlConfigDomDocument;
 

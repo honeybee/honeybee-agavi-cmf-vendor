@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
+use Honeygavi\Agavi\CodeGen\Skeleton\SkeletonFinder;
 
 /**
  * Validator for console usage that asks for a valid skeleton name. A skeleton

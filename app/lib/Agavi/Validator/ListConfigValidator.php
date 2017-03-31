@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
 use AgaviConfig;
 use AgaviNumberValidator;
 use AgaviStringValidator;
 use AgaviValidator;
-use Honeybee\Ui\ListConfigInterface;
-use Honeybee\FrameworkBinding\Agavi\Validator\SortSyntaxValidator;
+use Honeygavi\Ui\ListConfigInterface;
+use Honeygavi\Agavi\Validator\SortSyntaxValidator;
 
 // @todo implement ACL check for user for given "view_scope"? action could forward to NoPermission view...
 class ListConfigValidator extends AgaviValidator
@@ -89,7 +89,7 @@ class ListConfigValidator extends AgaviValidator
                     unset($validation_data['page']); // no longer needed as the offset is used internally
                 }
 
-                $list_config_implementor = $this->getParameter('list_config_implementor', 'Honeybee\\Ui\\ListConfig');
+                $list_config_implementor = $this->getParameter('list_config_implementor', 'Honeygavi\\Ui\\ListConfig');
                 $list_config = new $list_config_implementor($validation_data);
             }
         }

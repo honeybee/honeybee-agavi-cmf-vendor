@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Validator;
+namespace Honeygavi\Agavi\Validator;
 
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeModuleFinder;
+use Honeygavi\Agavi\CodeGen\Skeleton\HoneybeeModuleFinder;
 
 /**
  * Validator for console usage that asks for a valid module name.

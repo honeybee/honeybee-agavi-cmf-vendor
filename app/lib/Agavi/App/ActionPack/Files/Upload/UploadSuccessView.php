@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Upload;
+namespace Honeygavi\Agavi\App\ActionPack\Files\Upload;
 
 use AgaviRequestDataHolder;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use Trellis\Runtime\Attribute\HandlesFileInterface;
 
 class UploadSuccessView extends View

@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Renderer\Twig;
+namespace Honeygavi\Agavi\Renderer\Twig;
 
-use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
+use Honeygavi\Agavi\Filter\AssetCompiler;
 use Twig_Extension;
 use Twig_Function_Method;
 

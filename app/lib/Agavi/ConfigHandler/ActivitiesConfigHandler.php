@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\ConfigHandler;
+namespace Honeygavi\Agavi\ConfigHandler;
 
 use AgaviConfig;
 use AgaviToolkit;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
 use Honeybee\Common\Error\ConfigError;
-use Honeybee\Ui\Activity\Url;
+use Honeygavi\Ui\Activity\Url;
 
 class ActivitiesConfigHandler extends BaseConfigHandler
 {

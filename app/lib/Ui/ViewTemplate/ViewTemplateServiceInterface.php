@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\ViewTemplate;
+namespace Honeygavi\Ui\ViewTemplate;
 
 use Honeybee\Projection\ProjectionTypeInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 
 interface ViewTemplateServiceInterface
 {

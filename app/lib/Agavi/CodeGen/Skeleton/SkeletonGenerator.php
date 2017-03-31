@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton;
+namespace Honeygavi\Agavi\CodeGen\Skeleton;
 
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonFinder;
+use Honeygavi\Agavi\CodeGen\Skeleton\SkeletonFinder;
 use Honeygavi\Template\Twig\TwigRenderer;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;

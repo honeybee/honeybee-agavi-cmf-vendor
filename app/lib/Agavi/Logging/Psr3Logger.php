@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 use AgaviConfig;
 use AgaviContext;
 use AgaviILogger;
 use AgaviLogger;
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
-use Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager;
+use Honeygavi\Agavi\Logging\Logger;
+use Honeygavi\Agavi\Logging\LoggerManager;
 use Psr\Log\LogLevel;
 use Psr\Log\LoggerInterface;
 
@@ -198,7 +198,7 @@ class Psr3Logger implements LoggerInterface
         if (!$logger_message instanceof AgaviLoggerMessage) {
             $agavi_context = AgaviContext::getInstance();
 
-            /* @var $logger_manager Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager */
+            /* @var $logger_manager Honeygavi\Agavi\Logging\LoggerManager */
             $logger_manager = $agavi_context->getLoggerManager();
 
             $message = self::replacePlaceholders($message, $context);

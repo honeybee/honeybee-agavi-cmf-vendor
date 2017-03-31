@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton;
+namespace Honeygavi\Agavi\CodeGen\Skeleton;
 
 use AgaviConfig;
 use Honeybee\Common\Error\RuntimeError;

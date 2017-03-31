@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Logging;
+namespace Honeygavi\Agavi\Logging;
 
 use AgaviConfig;
 use AgaviContext;
 use AgaviLoggerMessage;
-use Honeybee\FrameworkBinding\Agavi\Logging\FileLoggerAppender;
+use Honeygavi\Agavi\Logging\FileLoggerAppender;
 
 /**
  * Extends the FileLoggerAppender message with various system, agavi and

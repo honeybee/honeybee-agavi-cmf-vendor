@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\Renderer\RendererServiceInterface;
+use Honeygavi\Ui\Renderer\RendererServiceInterface;
 
 class RendererServiceProvisioner extends AbstractProvisioner
 {

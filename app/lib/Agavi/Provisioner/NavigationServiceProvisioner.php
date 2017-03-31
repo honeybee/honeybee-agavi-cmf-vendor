@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\Navigation\NavigationServiceInterface;
+use Honeygavi\Ui\Navigation\NavigationServiceInterface;
 
 class NavigationServiceProvisioner extends AbstractProvisioner
 {

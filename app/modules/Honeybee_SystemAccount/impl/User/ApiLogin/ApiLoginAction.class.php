@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use Honeygavi\Security\Auth\AuthResponse;
 use Honeygavi\Security\Acl\AclService;
 

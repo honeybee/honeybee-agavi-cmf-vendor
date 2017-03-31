@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviConfig;
 use AgaviConfigCache;
@@ -10,14 +10,14 @@ use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\ServiceDefinitionInterface;
-use Honeybee\Ui\Activity\Activity;
-use Honeybee\Ui\Activity\ActivityContainer;
-use Honeybee\Ui\Activity\ActivityContainerMap;
-use Honeybee\Ui\Activity\ActivityMap;
-use Honeybee\Ui\Activity\ActivityServiceInterface;
-use Honeybee\Ui\Activity\WorkflowActivityService;
-use Honeybee\Ui\Activity\Url;
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\Activity\Activity;
+use Honeygavi\Ui\Activity\ActivityContainer;
+use Honeygavi\Ui\Activity\ActivityContainerMap;
+use Honeygavi\Ui\Activity\ActivityMap;
+use Honeygavi\Ui\Activity\ActivityServiceInterface;
+use Honeygavi\Ui\Activity\WorkflowActivityService;
+use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\UrlGeneratorInterface;
 use Trellis\Runtime\Validator\Rule\Type\UrlRule;
 
 class ActivityServiceProvisioner extends AbstractProvisioner

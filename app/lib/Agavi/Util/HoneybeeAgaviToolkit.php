@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Util;
+namespace Honeygavi\Agavi\Util;
 
 use Honeybee\Model\Aggregate\AggregateRootType;
 use AgaviConfig;

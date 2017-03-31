@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Navigation;
+namespace Honeygavi\Ui\Navigation;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Ui\Activity\ActivityServiceInterface;
+use Honeygavi\Ui\Activity\ActivityServiceInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Trellis\Common\Object;
 

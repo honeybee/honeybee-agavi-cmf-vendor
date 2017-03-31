@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create;
+namespace Honeygavi\Agavi\App\ActionPack\Create;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use AgaviRequestDataHolder;
 
 class CreateAction extends Action

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Activity;
+namespace Honeygavi\Ui\Activity;
 
 class PrimaryActivityMap extends ActivityMap
 {

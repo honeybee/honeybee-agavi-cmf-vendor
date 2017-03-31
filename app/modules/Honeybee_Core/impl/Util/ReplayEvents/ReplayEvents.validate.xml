@@ -10,7 +10,7 @@
                 <argument>quiet</argument>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" required="true" provides="valid_type_name">
+            <validator class="Honeygavi\Agavi\Validator\AggregateRootTypeNameValidator" name="type_name" required="true" provides="valid_type_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type name within your project's domain.</error>
                 <ae:parameter name="description">Replay all events for the given aggregate root type.</ae:parameter>
@@ -22,7 +22,7 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\EventChannelValidator" name="channel" required="true" provides="valid_channel_name">
+            <validator class="Honeygavi\Agavi\Validator\EventChannelValidator" name="channel" required="true" provides="valid_channel_name">
                 <argument>channel</argument>
                 <error>You must specify a valid channel name from the event_bus.xml.</error>
                 <ae:parameter name="description">Replay all events over the given channel only.</ae:parameter>
@@ -34,7 +34,7 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name valid_channel_name">
+            <validator class="Honeygavi\Agavi\Validator\AggregateRootTypeValidator" name="aggregate_root_type" depends="valid_type_name valid_channel_name">
                 <argument>type</argument>
                 <error>You must specify a valid aggregate root type name within you project's domain.</error>
             </validator>

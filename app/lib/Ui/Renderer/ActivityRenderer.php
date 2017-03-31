@@ -1,14 +1,14 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Projection\ProjectionInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
-use Honeybee\Ui\Activity\ActivityInterface;
-use Honeybee\Ui\Activity\Url;
+use Honeygavi\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\Url;
 use QL\UriTemplate\UriTemplate;
 
 abstract class ActivityRenderer extends Renderer

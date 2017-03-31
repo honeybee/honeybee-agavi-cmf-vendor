@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Provisioner;
+namespace Honeygavi\Agavi\Provisioner;
 
 use AgaviConfig;
 use DirectoryIterator;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\Renderer\Twig\HoneybeeToolkitExtension;
-use Honeybee\FrameworkBinding\Agavi\Renderer\Twig\MarkdownExtension;
+use Honeygavi\Agavi\Renderer\Twig\HoneybeeToolkitExtension;
+use Honeygavi\Agavi\Renderer\Twig\MarkdownExtension;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeygavi\Template\TemplateRendererInterface;

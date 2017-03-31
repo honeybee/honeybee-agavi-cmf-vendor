@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Files\Upload;
+namespace Honeygavi\Agavi\App\ActionPack\Files\Upload;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Agavi\App\Base\Action;
 use AgaviRequestDataHolder;
 
 class UploadAction extends Action

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\Controller;
+namespace Honeygavi\Agavi\Controller;
 
 use AgaviController;
 

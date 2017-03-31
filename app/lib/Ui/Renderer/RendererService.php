@@ -1,14 +1,14 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceLocatorInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
-use Honeybee\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\Activity\ActivityInterface;
 use Honeybee\Common\Util\StringToolkit;
 use ReflectionClass;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Resource\Modify;
+namespace Honeygavi\Agavi\App\ActionPack\Resource\Modify;
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\Agavi\App\Base\ErrorView;
 
 class ModifyErrorView extends ErrorView
 {

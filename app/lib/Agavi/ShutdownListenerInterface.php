@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi;
+namespace Honeygavi\Agavi;
 
 /**
- * Implement this interface and register yourself to the Honeybee\FrameworkBinding\Agavi\Context
+ * Implement this interface and register yourself to the Honeygavi\Agavi\Context
  * to be notified of shutdowns caused by e.g. Fatal Errors. You will be notified
  * of shutdowns and can free resources or do other graceful things.
  */
@@ -26,7 +26,7 @@ interface ShutdownListenerInterface
      *
      * @see register_shutdown_function()
      * @see error_get_last()
-     * @see Honeybee\FrameworkBinding\Agavi\Context
+     * @see Honeygavi\Agavi\Context
      *
      * @param array $error associative array with keys "type", "message", "file" and "line"
      *

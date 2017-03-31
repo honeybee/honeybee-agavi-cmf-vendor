@@ -1,14 +1,14 @@
 <?php
 
-namespace Honeybee\FrameworkBinding\Agavi\App\ActionPack\Hierarchy;
+namespace Honeygavi\Agavi\App\ActionPack\Hierarchy;
 
 use AgaviRequestDataHolder;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\Agavi\App\Base\View;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface\ProjectionQueryService;
-use Honeybee\Ui\Activity\Activity;
-use Honeybee\Ui\Activity\Url as ActivityUrl;
-use Honeybee\Ui\ValueObjects\Pagination;
+use Honeygavi\Ui\Activity\Activity;
+use Honeygavi\Ui\Activity\Url as ActivityUrl;
+use Honeygavi\Ui\ValueObjects\Pagination;
 
 class HierarchySuccessView extends View
 {

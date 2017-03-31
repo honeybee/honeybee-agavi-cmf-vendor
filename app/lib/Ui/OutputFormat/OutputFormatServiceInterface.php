@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\OutputFormat;
+namespace Honeygavi\Ui\OutputFormat;
 
 interface OutputFormatServiceInterface
 {

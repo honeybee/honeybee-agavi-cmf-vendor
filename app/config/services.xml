@@ -17,9 +17,9 @@
                 </service>
 
                 <service name="honeybee.environment">
-                    <class>Honeybee\FrameworkBinding\Agavi\Environment</class>
+                    <class>Honeygavi\Agavi\Environment</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\EnvironmentProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\EnvironmentProvisioner</class>
                         <settings>
                             <setting name="share">true</setting>
                             <setting name="alias">Honeybee\EnvironmentInterface</setting>
@@ -31,7 +31,7 @@
                     Infrastructure Services
                 -->
                 <service name="honeybee.infrastructure.logger">
-                    <class>Honeybee\FrameworkBinding\Agavi\Logging\Psr3Logger</class>
+                    <class>Honeygavi\Agavi\Logging\Psr3Logger</class>
                 </service>
 
                 <service name="honeybee.infrastructure.command_bus">
@@ -45,10 +45,10 @@
                 <service name="honeybee.infrastructure.command_enricher">
                     <class>Honeybee\Infrastructure\Command\CommandEnricher</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\CommandEnricherProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\CommandEnricherProvisioner</class>
 	                    <settings>
 	                        <setting name="enrichers">
-	                           <setting>Honeybee\FrameworkBinding\Agavi\User\AuditMetadataEnricher</setting>
+	                           <setting>Honeygavi\Agavi\User\AuditMetadataEnricher</setting>
                            </setting>
                         </settings>
                     </provisioner>
@@ -61,7 +61,7 @@
                 <service name="honeybee.infrastructure.job_service">
                     <class>Honeybee\Infrastructure\Job\JobService</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\JobServiceProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\JobServiceProvisioner</class>
                         <settings>
                             <setting name="connection">Default.MsgQueue</setting>
                         </settings>
@@ -115,7 +115,7 @@
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeygavi\Mail\LoggingSwiftMailer</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\MailServiceProvisioner</class>
                         <settings>
                             <setting name="connection">Default.Mailer</setting>
                         </settings>
@@ -125,7 +125,7 @@
                 <service name="honeybee.infrastructure.process_manager">
                     <class>Honeygavi\ProcessManager\ProcessManager</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\DefaultProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\DefaultProvisioner</class>
                         <settings>
                             <setting name="alias">Honeygavi\ProcessManager\ProcessManagerInterface</setting>
                         </settings>
@@ -141,7 +141,7 @@
                 <service name="honeybee.infrastructure.process_map">
                     <class>Honeygavi\ProcessManager\ProcessMap</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\ProcessMapProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\ProcessMapProvisioner</class>
                         <settings>
                             <!--
                             <setting name="processes">
@@ -169,42 +169,42 @@
                     UI Services
                 -->
                 <service name="honeybee.ui.navigation_service">
-                    <class>Honeybee\Ui\Navigation\NavigationService</class>
+                    <class>Honeygavi\Ui\Navigation\NavigationService</class>
                 </service>
 
                 <service name="honeybee.ui.renderer_service">
-                    <class>Honeybee\Ui\Renderer\RendererService</class>
+                    <class>Honeygavi\Ui\Renderer\RendererService</class>
                 </service>
 
                 <service name="honeybee.ui.activity_service">
-                    <class>Honeybee\Ui\Activity\ActivityService</class>
+                    <class>Honeygavi\Ui\Activity\ActivityService</class>
                 </service>
 
                 <service name="honeybee.ui.workflow_activity_service">
-                    <class>Honeybee\Ui\Activity\WorkflowActivityService</class>
+                    <class>Honeygavi\Ui\Activity\WorkflowActivityService</class>
                 </service>
 
                 <service name="honeybee.ui.view_config_service">
-                    <class>Honeybee\Ui\ViewConfig\ViewConfigService</class>
+                    <class>Honeygavi\Ui\ViewConfig\ViewConfigService</class>
                     <settings>
                         <setting name="create_missing">true</setting>
                     </settings>
                 </service>
 
                 <service name="honeybee.ui.view_template_service">
-                    <class>Honeybee\Ui\ViewTemplate\ViewTemplateService</class>
+                    <class>Honeygavi\Ui\ViewTemplate\ViewTemplateService</class>
                 </service>
 
                 <service name="honeybee.ui.output_format_service">
-                    <class>Honeybee\Ui\OutputFormat\OutputFormatService</class>
+                    <class>Honeygavi\Ui\OutputFormat\OutputFormatService</class>
                 </service>
 
                 <service name="honeybee.ui.url_generator">
-                    <class>Honeybee\FrameworkBinding\Agavi\Routing\AgaviUrlGenerator</class>
+                    <class>Honeygavi\Agavi\Routing\AgaviUrlGenerator</class>
                 </service>
 
                 <service name="honeybee.ui.translator">
-                    <class>Honeybee\FrameworkBinding\Agavi\Translation\AgaviTranslator</class>
+                    <class>Honeygavi\Agavi\Translation\AgaviTranslator</class>
                     <settings>
                         <setting name="log_missing_translations">false</setting>
                         <setting name="use_fallback">true</setting>
@@ -238,7 +238,7 @@
                 <service name="honeybee.infrastructure.mail_service">
                     <class>Honeygavi\Mail\LoggingSwiftMailer</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\MailServiceProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\MailServiceProvisioner</class>
                         <settings>
                             <setting name="connection">Default.Mailer.Null</setting>
                         </settings>
@@ -248,7 +248,7 @@
                 <service name="honeybee.infrastructure.template_renderer">
                     <class>Honeygavi\Template\Twig\TwigRenderer</class>
                     <provisioner>
-                        <class>Honeybee\FrameworkBinding\Agavi\Provisioner\TemplateRendererProvisioner</class>
+                        <class>Honeygavi\Agavi\Provisioner\TemplateRendererProvisioner</class>
                         <settings>
                             <setting name="twig_options">
                                 <settings>
