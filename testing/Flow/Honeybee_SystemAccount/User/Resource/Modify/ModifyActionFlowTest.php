@@ -19,7 +19,7 @@ class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
 
         $this->mock_query_service = Mockery::mock(ProjectionQueryServiceInterface::CLASS);
         $mock_query_service_map = new QueryServiceMap([
-            'honeybee.system_account.user::projection.standard::query_service' => $this->mock_query_service
+            'honeybee.system_account.user::projection.standard::view_store::query_service' => $this->mock_query_service
         ]);
 
         $service_locator->prepareService(
