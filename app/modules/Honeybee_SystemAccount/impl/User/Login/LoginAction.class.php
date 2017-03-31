@@ -91,7 +91,7 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
         $password = $request_data->getParameter('password');
 
         $service_locator = $this->getContext()->getServiceLocator();
-        $authentication_service = $service_locator->getService();
+        $authentication_service = $service_locator->getAuthService();
 
         $auth_response = $authentication_service->authenticate($username, $password);
 

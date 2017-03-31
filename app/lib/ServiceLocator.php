@@ -31,8 +31,6 @@ final class ServiceLocator implements ServiceLocatorInterface
 
     public function __construct(DiContainer $di_container, ServiceDefinitionMap $service_map)
     {
-        $this->di_container = $di_container;
-        $this->service_map = $service_map;
         $this->service_locator = new \Honeybee\ServiceLocator($di_container, $service_map);
     }
 
