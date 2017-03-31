@@ -94,7 +94,7 @@ class StandardAuthService implements AuthServiceInterface
     {
         $query_service_key = $this->config->get(
             'query_service',
-            'honeybee.system_account.user::projection.standard::query_service'
+            'honeybee.system_account.user::projection.standard::view_store::query_service'
         );
 
         if (!$this->query_service_map->hasKey($query_service_key)) {

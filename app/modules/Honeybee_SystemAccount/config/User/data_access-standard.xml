@@ -46,7 +46,7 @@
         </finders>
 
         <query_services>
-            <query_service name="honeybee.system_account.user::projection.standard::query_service" class="Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryService">
+            <query_service name="honeybee.system_account.user::projection.standard::view_store::query_service" class="Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryService">
                 <finder_mappings>
                     <finder_mapping name="default">
                         <finder>honeybee.system_account.user::projection.standard::view_store::finder</finder>
