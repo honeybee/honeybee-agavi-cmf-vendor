@@ -73,7 +73,7 @@ class RedirectValidator extends AgaviValidator
 
         $violations = new ConstraintViolationList();
         foreach ($constraints as $constraint) {
-            $violations->addAll($validator->validateValue($value, $constraint));
+            $violations->addAll($validator->validate($value, $constraint));
         }
 
         if ($violations->count() === 0) {
