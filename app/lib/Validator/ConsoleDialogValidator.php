@@ -7,7 +7,12 @@ use AgaviValidator;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Helper\HelperSet;
+use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * Validator for console usage that asks for a value when none was specified
@@ -124,18 +129,30 @@ class ConsoleDialogValidator extends AgaviValidator
 
         if ($this->confirm) {
             // a simple yes/no confirmation dialog
-            $this->data = $this->dialog->askConfirmation($this->output, $this->question, $this->default);
+            $this->data = $this->dialog->ask(
+                new ArgvInput,
+                $this->output,
+                new ConfirmationQuestion($this->question, $this->default)
+            );
         } elseif ($this->select) {
             // selection dialog to choose values from a list of choices
             $this->choices = array_unique(array_values(array_diff($this->choices, $this->ignore_choices)));
             if (empty($this->choices)) {
                 return false;
             }
-            $selected = $this->dialog->select($this->output, $this->question, $this->choices, $this->default);
+            $selected = $this->dialog->ask(
+                new ArgvInput,
+                $this->output,
+                new ChoiceQuestion($this->question, $this->choices, $this->default)
+            );
             $this->data = $this->choices[$selected];
         } else {
             // default behavior: ask for a valid value and allow autocompletion
-            $this->data = $this->dialog->ask($this->output, $this->question, $this->default, $this->choices);
+            $this->data = $this->dialog->ask(
+                new ArgvInput,
+                $this->output,
+                new Question($this->question, $this->default)
+            );
         }
 
         return true;
@@ -214,11 +231,9 @@ class ConsoleDialogValidator extends AgaviValidator
         // agavi input/output later on (as php doesn't like getting it twice?)
         $this->input = fopen('/dev/tty', 'r');
 
-        $this->output = new ConsoleOutput();
-
-        $helper_set = new HelperSet(array(new FormatterHelper()));
-        $this->dialog = new DialogHelper($this->output);
-        $this->dialog->setInputStream($this->input);
+        $this->output = new ConsoleOutput;
+        $helper_set = new HelperSet([ new FormatterHelper ]);
+        $this->dialog = new QuestionHelper($this->output);
         $this->dialog->setHelperSet($helper_set);
 
         $this->random_id = uniqid('proxy_', true);

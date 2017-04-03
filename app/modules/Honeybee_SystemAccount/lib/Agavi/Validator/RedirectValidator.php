@@ -3,9 +3,9 @@
 namespace Honeybee\SystemAccount\Agavi\Validator;
 
 use AgaviValidator;
-use Symfony\Component\Validator\ExecutionContextInterface;
-use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\ConstraintViolationList;
+use Symfony\Component\Validator\Constraints;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Validation;
 
 /**
@@ -43,32 +43,18 @@ class RedirectValidator extends AgaviValidator
         $validator = Validation::createValidator();
 
         $constraints = array(
-            new Constraints\Type(
-                array(
-                    'type' => 'string'
-                )
-            ),
-            new Constraints\Length(
-                array(
-                    'min' => $this->getParameter('min_length', 10),
-                    'max' => $this->getParameter('max_length', 1000)
-                )
-            ),
-            new Constraints\Url(
-                array(
-                    'protocols' => $this->getParameter('allowed_protocols', array('http', 'https'))
-                )
-            ),
+            new Constraints\Type([ 'type' => 'string' ]),
+            new Constraints\Length([
+                'min' => $this->getParameter('min_length', 10),
+                'max' => $this->getParameter('max_length', 1000)
+            ]),
+            new Constraints\Url([
+                'protocols' => $this->getParameter('allowed_protocols', [ 'http', 'https' ])
+            ]),
         );
 
         if ($this->getParameter('check_base_href', true)) {
-            $constraints[] = new Constraints\Callback(
-                array(
-                    'methods' => array(
-                        array($this, 'hasCorrectBaseHref')
-                    )
-                )
-            );
+            $constraints[] = new Constraints\Callback([ 'callback' => [ $this, 'hasCorrectBaseHref' ] ]);
         }
 
         $violations = new ConstraintViolationList();
@@ -92,7 +78,7 @@ class RedirectValidator extends AgaviValidator
 
     /**
      * @param string $url referrer url to check against base href of this application
-     * @param \Symfony\Component\Validator\ExecutionContextInterface $context
+     * @param \Symfony\Component\Validator\Context\ExecutionContextInterface $context
      */
     public function hasCorrectBaseHref($url, ExecutionContextInterface $context)
     {
