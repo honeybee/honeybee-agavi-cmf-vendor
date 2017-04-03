@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "94fc7c6d17f578f3be54286c561ac36e",
+    "content-hash": "fc2ba176aad340f0fa905a623ab48a90",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -725,16 +725,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "dev-develop",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "b56c82f8cfbfea49c9e6b337ae4e2e233bdd42bc"
+                "reference": "04b0cfa778c7a729a4aac326f3f6839b6fc94d5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b56c82f8cfbfea49c9e6b337ae4e2e233bdd42bc",
-                "reference": "b56c82f8cfbfea49c9e6b337ae4e2e233bdd42bc",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/04b0cfa778c7a729a4aac326f3f6839b6fc94d5f",
+                "reference": "04b0cfa778c7a729a4aac326f3f6839b6fc94d5f",
                 "shasum": ""
             },
             "require": {
@@ -815,40 +815,40 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-03-31 23:34:31"
+            "time": "2017-04-02T19:56:39+00:00"
         },
         {
             "name": "honeybee/trellis",
-            "version": "0.1.3",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "9df09739f30aea4182c762fa935408a3ed275eca"
+                "reference": "76759e805be70bcde814901030a4173061b5e5c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/9df09739f30aea4182c762fa935408a3ed275eca",
-                "reference": "9df09739f30aea4182c762fa935408a3ed275eca",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/76759e805be70bcde814901030a4173061b5e5c0",
+                "reference": "76759e805be70bcde814901030a4173061b5e5c0",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "^2.7",
                 "egulias/email-validator": "^2.1",
-                "fzaninotto/faker": "~1.6",
-                "mtdowling/jmespath.php": "~2.4",
+                "fzaninotto/faker": "^1.6",
+                "mtdowling/jmespath.php": "^2.4",
                 "php": ">=5.6.0",
                 "ramsey/uuid": "^3.6",
                 "roave/security-advisories": "master@dev",
-                "symfony/console": "~3.2",
-                "symfony/filesystem": "~3.2",
-                "twig/twig": "~1.3"
+                "symfony/console": "^3.2",
+                "symfony/filesystem": "^3.2",
+                "twig/twig": "^1.3"
             },
             "require-dev": {
                 "mockery/mockery": "^0.9",
                 "phpmd/phpmd": "^2.6",
                 "phpunit/phpunit": "^5.7",
                 "satooshi/php-coveralls": "master@dev",
-                "squizlabs/php_codesniffer": "~2.8"
+                "squizlabs/php_codesniffer": "^2.8"
             },
             "bin": [
                 "bin/trellis"
@@ -861,20 +861,35 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "MIT"
+                "MPL-2.0"
             ],
             "authors": [
                 {
-                    "name": "Thorsten Schmitt-Rink"
+                    "name": "Honeybee Contributors",
+                    "homepage": "https://github.com/honeybee/honeybee/graphs/contributors"
                 },
                 {
-                    "name": "Steffen Gransow"
+                    "name": "Thorsten Schmitt-Rink",
+                    "email": "schmittrink@gmail.com",
+                    "homepage": "https://github.com/shrink0r",
+                    "role": "Developer"
                 },
                 {
-                    "name": "Igor Pellegrini"
+                    "name": "Hasham Ahmad",
+                    "email": "mr.hash@gmail.com",
+                    "homepage": "https://github.com/MrHash",
+                    "role": "Developer"
                 },
                 {
-                    "name": "Hasham Ahmad"
+                    "name": "Steffen Gransow",
+                    "email": "honeybee@mivesto.de",
+                    "homepage": "https://github.com/graste",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Igor Pellegrini",
+                    "homepage": "https://github.com/Pictor13",
+                    "role": "Developer"
                 }
             ],
             "description": "Library for generating entities, that enforce data validity according to a specific schema.",
@@ -884,7 +899,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2017-03-31T23:23:48+00:00"
+            "time": "2017-04-02T17:50:50+00:00"
         },
         {
             "name": "league/flysystem",
@@ -3502,16 +3517,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "4.0.7",
+            "version": "4.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69"
+                "reference": "ef7b2f56815df854e66ceaee8ebe9393ae36a40d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/09e2277d14ea467e5a984010f501343ef29ffc69",
-                "reference": "09e2277d14ea467e5a984010f501343ef29ffc69",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/ef7b2f56815df854e66ceaee8ebe9393ae36a40d",
+                "reference": "ef7b2f56815df854e66ceaee8ebe9393ae36a40d",
                 "shasum": ""
             },
             "require": {
@@ -3561,7 +3576,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-01T09:12:17+00:00"
+            "time": "2017-04-02T07:44:40+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -3751,16 +3766,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "5.7.17",
+            "version": "5.7.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf"
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/68752b665d3875f9a38a357e3ecb35c79f8673bf",
-                "reference": "68752b665d3875f9a38a357e3ecb35c79f8673bf",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/69c4f49ff376af2692bad9cebd883d17ebaa98a1",
+                "reference": "69c4f49ff376af2692bad9cebd883d17ebaa98a1",
                 "shasum": ""
             },
             "require": {
@@ -3829,7 +3844,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-03-19T16:52:12+00:00"
+            "time": "2017-04-03T02:22:27+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3951,7 +3966,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-03-31 10:12:47"
+            "time": "2017-03-31T10:12:47+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -5060,7 +5075,6 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "honeybee/agavi": 20,
-        "honeybee/honeybee": 20,
         "roave/security-advisories": 20,
         "mockery/mockery": 20,
         "satooshi/php-coveralls": 20
