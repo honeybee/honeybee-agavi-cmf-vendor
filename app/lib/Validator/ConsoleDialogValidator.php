@@ -108,8 +108,6 @@ class ConsoleDialogValidator extends AgaviValidator
 
         $this->output->writeln('');
 
-        fclose($this->input);
-
         $success = $severity === AgaviValidator::SUCCESS;
 
         // only export (new) data under original argument name when validation succeeded
@@ -225,10 +223,6 @@ class ConsoleDialogValidator extends AgaviValidator
             $vm = $vm->getParentContainer();
         }
         $this->validation_manager = $vm;
-
-        // this is necessary as getting the default STDIN stream would break
-        // agavi input/output later on (as php doesn't like getting it twice?)
-        $this->input = fopen('/dev/tty', 'r');
 
         $this->output = new ConsoleOutput;
         $helper_set = new HelperSet([ new FormatterHelper ]);
