@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Ui\ValueObjects\PaginationInterface;
+use Honeygavi\Ui\ValueObjects\PaginationInterface;
 use Honeybee\Common\Util\ArrayToolkit;
 
 abstract class PaginationRenderer extends Renderer

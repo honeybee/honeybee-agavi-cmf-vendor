@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 use Honeybee\Infrastructure\DataAccess\Connector\Status;
 
 class Honeybee_Core_System_Health_HealthSuccessView extends View

@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Console\Trellis\Runtime\Attribute\TextList;
+namespace Honeygavi\Ui\Renderer\Console\Trellis\Runtime\Attribute\TextList;
 
-use Honeybee\Ui\Renderer\Console\Trellis\Runtime\Attribute\ConsoleAttributeRenderer;
+use Honeygavi\Ui\Renderer\Console\Trellis\Runtime\Attribute\ConsoleAttributeRenderer;
 
 class ConsoleTextListAttributeRenderer extends ConsoleAttributeRenderer
 {

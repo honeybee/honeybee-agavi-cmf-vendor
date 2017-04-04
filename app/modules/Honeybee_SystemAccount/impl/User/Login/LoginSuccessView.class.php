@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 use Honeybee\Common\Error\RuntimeError;
 
 class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View

@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_Core_Migrate_Create_CreateErrorView extends View
 {

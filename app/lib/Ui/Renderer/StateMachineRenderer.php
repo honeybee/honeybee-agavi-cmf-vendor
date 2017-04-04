@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Workflux\StateMachine\StateMachineInterface;
 use Honeybee\Common\Error\RuntimeError;

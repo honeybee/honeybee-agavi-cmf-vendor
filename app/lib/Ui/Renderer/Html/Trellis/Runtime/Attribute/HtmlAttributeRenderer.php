@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute;
 
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 use Honeybee\Projection\ProjectionInterface;
 
 class HtmlAttributeRenderer extends AttributeRenderer

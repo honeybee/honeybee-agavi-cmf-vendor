@@ -1,8 +1,8 @@
 <?php
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
-use Honeybee\Infrastructure\Template\Twig\TwigRenderer;
+use Honeygavi\App\Base\View;
+use Honeygavi\Template\Twig\TwigRenderer;
 use Honeybee\Common\Error\RuntimeError;
 
 class Honeybee_Core_Migrate_Create_CreateSuccessView extends View

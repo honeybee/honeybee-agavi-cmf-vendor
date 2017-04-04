@@ -1,7 +1,7 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\Ui\WebSocket\EventPusher;
+use Honeygavi\App\Base\Action;
+use Honeygavi\Ui\WebSocket\EventPusher;
 use Ratchet\Http\HttpServer;
 use Ratchet\Server\IoServer;
 use Ratchet\WebSocket\WsServer;

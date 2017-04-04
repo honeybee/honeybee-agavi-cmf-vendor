@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Float;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Float;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\Float\FloatAttribute;
 
 class HtmlFloatAttributeRenderer extends HtmlAttributeRenderer

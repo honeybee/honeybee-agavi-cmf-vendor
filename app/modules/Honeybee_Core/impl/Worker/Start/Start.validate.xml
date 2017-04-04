@@ -6,7 +6,7 @@
     <ae:configuration>
         <validators>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\JobQueueValidator" name="invalid_queue" translation_domain="honeybee.core.ui">
+            <validator class="Honeygavi\Validator\JobQueueValidator" name="invalid_queue" translation_domain="honeybee.core.ui">
                 <argument>queue</argument>
                 <error>You must specify a valid queue name.</error>
                 <error for="no_choice">No available choices.</error>

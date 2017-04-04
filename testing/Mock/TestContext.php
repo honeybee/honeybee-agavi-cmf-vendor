@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
 use Auryn\Injector as DiContainer;
 use Auryn\StandardReflector;
-use Honeybee\FrameworkBinding\Agavi\Context;
+use Honeygavi\Context;
 
 class TestContext extends Context
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\EntityReferenceList;
+namespace Honeygavi\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\EntityReferenceList;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Projection\ReferencedEntity;
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 
 /**

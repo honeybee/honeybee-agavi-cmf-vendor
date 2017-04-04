@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\VndError;
+namespace Honeygavi\Ui\Renderer\VndError;
 
-use Honeybee\Ui\Renderer\GenericLink;
+use Honeygavi\Ui\Renderer\GenericLink;
 use Trellis\Common\Object;
 
 class VndError extends Object

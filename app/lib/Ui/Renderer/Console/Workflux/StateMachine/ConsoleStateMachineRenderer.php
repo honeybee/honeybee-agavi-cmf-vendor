@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Console\Workflux\StateMachine;
+namespace Honeygavi\Ui\Renderer\Console\Workflux\StateMachine;
 
-use Honeybee\Ui\Renderer\StateMachineRenderer;
+use Honeygavi\Ui\Renderer\StateMachineRenderer;
 use Workflux\Renderer\DotGraphRenderer;
 use Symfony\Component\Process\Process;
 use Honeybee\Common\Error\RuntimeError;

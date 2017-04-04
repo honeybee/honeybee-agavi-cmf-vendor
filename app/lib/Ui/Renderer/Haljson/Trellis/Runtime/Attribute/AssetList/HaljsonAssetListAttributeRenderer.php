@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\AssetList;
+namespace Honeygavi\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\AssetList;
 
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 
 /**

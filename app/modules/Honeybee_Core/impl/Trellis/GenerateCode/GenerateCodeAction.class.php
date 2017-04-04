@@ -1,10 +1,10 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Trellis\TrellisTargetFinder;
-use Honeybee\FrameworkBinding\Agavi\Util\HoneybeeAgaviToolkit;
-use Honeybee\FrameworkBinding\Agavi\Validator\TrellisTargetValidator;
-use Honeybee\FrameworkBinding\Agavi\Validator\MigrationNameValidator;
+use Honeygavi\App\Base\Action;
+use Honeygavi\CodeGen\Trellis\TrellisTargetFinder;
+use Honeygavi\Util\HoneybeeAgaviToolkit;
+use Honeygavi\Validator\TrellisTargetValidator;
+use Honeygavi\Validator\MigrationNameValidator;
 use Honeybee\Infrastructure\Migration\MigrationInterface;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;

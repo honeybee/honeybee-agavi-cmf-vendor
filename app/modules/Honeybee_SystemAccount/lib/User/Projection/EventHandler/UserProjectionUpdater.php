@@ -4,7 +4,6 @@ namespace Honeybee\SystemAccount\User\Projection\EventHandler;
 
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\DataAccess\DataAccessServiceInterface;
-use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
 use Honeybee\Infrastructure\Event\Bus\EventBusInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeybee\Projection\EventHandler\ProjectionUpdater;
@@ -23,7 +22,6 @@ class UserProjectionUpdater extends ProjectionUpdater
         ConfigInterface $config,
         LoggerInterface $logger,
         DataAccessServiceInterface $data_access_service,
-        QueryServiceMap $query_service_map,
         ProjectionTypeMap $projection_type_map,
         AggregateRootTypeMap $aggregate_root_type_map,
         EventBusInterface $event_bus,
@@ -33,7 +31,6 @@ class UserProjectionUpdater extends ProjectionUpdater
             $config,
             $logger,
             $data_access_service,
-            $query_service_map,
             $projection_type_map,
             $aggregate_root_type_map,
             $event_bus

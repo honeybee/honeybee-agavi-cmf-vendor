@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
 use AgaviConfig;
 use Workflux\Parser\Xml\StateMachineDefinitionParser;
-use Honeybee\FrameworkBinding\Agavi\Provisioner\StateMachineBuilderProvisioner;
+use Honeygavi\Provisioner\StateMachineBuilderProvisioner;
 
 class TestStateMachineBuilderProvisioner extends StateMachineBuilderProvisioner
 {

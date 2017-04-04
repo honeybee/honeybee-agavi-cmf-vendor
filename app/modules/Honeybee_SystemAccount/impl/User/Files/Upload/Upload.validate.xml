@@ -6,7 +6,7 @@
     <ae:configuration>
         <validators translation_domain="honeybee.system_account.user.errors">
 
-            <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeFileUploadValidator" name="invalid_uploaded_files" source="files">
+            <validator method="write" class="Honeygavi\Validator\AggregateRootTypeFileUploadValidator" name="invalid_uploaded_files" source="files">
                 <arguments base="uploadform"></arguments>
                 <error>file_upload.generic_error</error>
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>

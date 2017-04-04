@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Author;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Author;
 
-use Honeybee\Tests\Fixture\BookSchema\Projection\ProjectionType;
+use Honeygavi\Tests\Fixture\BookSchema\Projection\ProjectionType;
 use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\EntityReferenceList\EntityReferenceListAttribute;
 use Trellis\Runtime\Attribute\Email\EmailAttribute;
@@ -31,7 +31,7 @@ class AuthorType extends ProjectionType
                     [
                         'max_count' => 2,
                         'entity_types' => [
-                            '\\Honeybee\\Tests\\Fixture\\BookSchema\\Projection\\Author\\Embed\\HighlightType',
+                            '\\Honeygavi\\Tests\\Fixture\\BookSchema\\Projection\\Author\\Embed\\HighlightType',
                         ]
                     ]
                 ),
@@ -41,7 +41,7 @@ class AuthorType extends ProjectionType
                     [
                         'inline_mode' => true,
                         'entity_types' => [
-                            '\\Honeybee\\Tests\\Fixture\\BookSchema\\Projection\\Author\\Reference\\BookType',
+                            '\\Honeygavi\\Tests\\Fixture\\BookSchema\\Projection\\Author\\Reference\\BookType',
                         ]
                     ]
                 )

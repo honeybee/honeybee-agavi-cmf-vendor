@@ -1,25 +1,25 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
 use Honeybee\Projection\ProjectionTypeInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
-use Honeybee\Ui\ViewTemplate\ViewTemplateServiceInterface;
-use Honeybee\Ui\ViewTemplate\ViewTemplate;
-use Honeybee\Ui\ViewTemplate\Part\TabList;
-use Honeybee\Ui\ViewTemplate\Part\Tab;
-use Honeybee\Ui\ViewTemplate\Part\PanelList;
-use Honeybee\Ui\ViewTemplate\Part\Panel;
-use Honeybee\Ui\ViewTemplate\Part\RowList;
-use Honeybee\Ui\ViewTemplate\Part\Row;
-use Honeybee\Ui\ViewTemplate\Part\CellList;
-use Honeybee\Ui\ViewTemplate\Part\Cell;
-use Honeybee\Ui\ViewTemplate\Part\GroupList;
-use Honeybee\Ui\ViewTemplate\Part\Group;
-use Honeybee\Ui\ViewTemplate\Part\FieldList;
-use Honeybee\Ui\ViewTemplate\Part\Field;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\ViewTemplate\ViewTemplateServiceInterface;
+use Honeygavi\Ui\ViewTemplate\ViewTemplate;
+use Honeygavi\Ui\ViewTemplate\Part\TabList;
+use Honeygavi\Ui\ViewTemplate\Part\Tab;
+use Honeygavi\Ui\ViewTemplate\Part\PanelList;
+use Honeygavi\Ui\ViewTemplate\Part\Panel;
+use Honeygavi\Ui\ViewTemplate\Part\RowList;
+use Honeygavi\Ui\ViewTemplate\Part\Row;
+use Honeygavi\Ui\ViewTemplate\Part\CellList;
+use Honeygavi\Ui\ViewTemplate\Part\Cell;
+use Honeygavi\Ui\ViewTemplate\Part\GroupList;
+use Honeygavi\Ui\ViewTemplate\Part\Group;
+use Honeygavi\Ui\ViewTemplate\Part\FieldList;
+use Honeygavi\Ui\ViewTemplate\Part\Field;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Ui\Renderer\GenericSubjectRenderer;
+use Honeygavi\Ui\Renderer\GenericSubjectRenderer;
 
 class TestViewTemplateService implements ViewTemplateServiceInterface
 {

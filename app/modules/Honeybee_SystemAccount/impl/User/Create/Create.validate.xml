@@ -8,7 +8,7 @@
 
         <validators translation_domain="honeybee.system_account.user.errors" method="write">
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeCommandValidator" name="invalid_task_data">
+            <validator class="Honeygavi\Validator\AggregateRootTypeCommandValidator" name="invalid_task_data">
                 <arguments base="create_user" />
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="command_implementor">Honeybee\SystemAccount\User\Model\Task\CreateUser\CreateUserCommand</ae:parameter>
@@ -24,7 +24,7 @@
                 <error for="username.max_length">Username is too long.</error>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_user_write" depends="create_user[invalid_payload]">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_user_write" depends="create_user[invalid_payload]">
                 <arguments base="create_user" />
                 <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>
                 <ae:parameter name="export">resource</ae:parameter>
@@ -55,11 +55,11 @@
                 </ae:parameter>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\RoleDialogValidator" name="role" provides="valid_role">
+            <validator class="Honeygavi\Validator\RoleDialogValidator" name="role" provides="valid_role">
                 <argument>role</argument>
                 <error>Parameter "role" must be a valid role id.</error>
                 <ae:parameter name="dialog">
-                    <ae:parameter name="validator">Honeybee\FrameworkBinding\Agavi\Validator\RoleValidator</ae:parameter>
+                    <ae:parameter name="validator">Honeygavi\Validator\RoleValidator</ae:parameter>
                     <ae:parameter name="default">full-privileged</ae:parameter>
                 </ae:parameter>
             </validator>

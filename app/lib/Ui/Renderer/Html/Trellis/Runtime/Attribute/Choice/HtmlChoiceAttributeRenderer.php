@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Choice;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Choice;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlChoiceAttributeRenderer extends HtmlAttributeRenderer
 {

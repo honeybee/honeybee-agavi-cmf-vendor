@@ -2,7 +2,7 @@
 
 namespace Honeybee\SystemAccount\Agavi\Validator;
 
-use Honeybee\Infrastructure\Security\Auth\CryptedPasswordHandler;
+use Honeygavi\Security\Auth\CryptedPasswordHandler;
 use AgaviValidator;
 use SplFileObject;
 

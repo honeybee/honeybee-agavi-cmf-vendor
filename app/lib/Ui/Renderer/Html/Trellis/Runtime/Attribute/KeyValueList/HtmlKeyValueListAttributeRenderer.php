@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\KeyValueList;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\KeyValueList;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Config\SettingsInterface;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\KeyValueList\KeyValueListAttribute;
 
 class HtmlKeyValueListAttributeRenderer extends HtmlAttributeRenderer

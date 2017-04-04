@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\Activity\ActivityInterface;
-use Honeybee\Ui\Activity\ActivityMap;
+use Honeygavi\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\ActivityMap;
 
 class ActivityMapRenderer extends Renderer
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Console\Trellis\Runtime\Attribute;
+namespace Honeygavi\Ui\Renderer\Console\Trellis\Runtime\Attribute;
 
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 
 class ConsoleAttributeRenderer extends AttributeRenderer
 {

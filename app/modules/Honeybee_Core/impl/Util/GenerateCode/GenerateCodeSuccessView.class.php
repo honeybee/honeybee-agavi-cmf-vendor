@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_Core_Util_GenerateCode_GenerateCodeSuccessView extends View
 {

@@ -5,7 +5,7 @@
     parent="%core.module_dir%/Honeybee_SystemAccount/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="honeybee.system_account.user.errors">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ListConfigValidator" name="invalid_list_config" required="true">
+            <validator class="Honeygavi\Validator\ListConfigValidator" name="invalid_list_config" required="true">
                 <ae:parameter name="default_limit">50</ae:parameter>
             </validator>
         </validators>

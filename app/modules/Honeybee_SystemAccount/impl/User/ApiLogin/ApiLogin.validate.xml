@@ -12,7 +12,7 @@
                 <ae:parameter name="max">200</ae:parameter>
                 <error>Authorization header value is not an acceptable string.</error>
             </validator>
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\HttpBasicAuthValidator" source="headers">
+            <validator class="Honeygavi\Validator\HttpBasicAuthValidator" source="headers">
                 <argument>AUTHORIZATION</argument>
                 <error>Invalid authorization header given.</error>
             </validator>

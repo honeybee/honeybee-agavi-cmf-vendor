@@ -6,7 +6,7 @@
     <ae:configuration>
         <validator_definitions>
 
-            <validator_definition name="dialog" class="Honeybee\FrameworkBinding\Agavi\Validator\ConsoleDialogValidator">
+            <validator_definition name="dialog" class="Honeygavi\Validator\ConsoleDialogValidator">
                 <ae:parameter name="required">true</ae:parameter>
                 <ae:parameter name="dialog">
                     <ae:parameter name="validator">AgaviStringValidator</ae:parameter>
@@ -51,7 +51,7 @@
                 </ae:parameters>
             </validator_definition>
 
-            <validator_definition name="switch_layout" class="Honeybee\FrameworkBinding\Agavi\Validator\LayoutNameValidator">
+            <validator_definition name="switch_layout" class="Honeygavi\Validator\LayoutNameValidator">
                 <errors>
                     <error>Only specific names are allowed as layout value.</error>
                     <error for="type">Only strings are allowed as layout names.</error>
