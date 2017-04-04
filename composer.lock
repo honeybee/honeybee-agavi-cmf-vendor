@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "623303a01e2a4c45ab6738345bf78089",
+    "content-hash": "4dd1b2ee3ff3c5da42b81ef972beb0c4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -661,7 +661,7 @@
         },
         {
             "name": "honeybee/agavi",
-            "version": "dev-honeybee-1.0",
+            "version": "1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/agavi.git",
@@ -721,20 +721,20 @@
                 "framework",
                 "mvc"
             ],
-            "time": "2017-03-23 14:29:37"
+            "time": "2017-03-23T14:29:37+00:00"
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.1.3",
+            "version": "0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "f05145b675bbf9cfdd8881675f3387f25fd025a9"
+                "reference": "cdedd4890ab88a976c2c381033980b04abfeb8d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/f05145b675bbf9cfdd8881675f3387f25fd025a9",
-                "reference": "f05145b675bbf9cfdd8881675f3387f25fd025a9",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/cdedd4890ab88a976c2c381033980b04abfeb8d9",
+                "reference": "cdedd4890ab88a976c2c381033980b04abfeb8d9",
                 "shasum": ""
             },
             "require": {
@@ -815,7 +815,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-04-03T14:29:45+00:00"
+            "time": "2017-04-04T10:08:39+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -5074,7 +5074,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "honeybee/agavi": 20,
         "roave/security-advisories": 20,
         "mockery/mockery": 20,
         "satooshi/php-coveralls": 20
