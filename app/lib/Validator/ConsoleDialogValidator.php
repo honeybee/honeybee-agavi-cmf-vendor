@@ -140,12 +140,11 @@ class ConsoleDialogValidator extends AgaviValidator
             if (empty($this->choices)) {
                 return false;
             }
-            $selected = $this->dialog->ask(
+            $this->data = $this->dialog->ask(
                 new ArgvInput,
                 $this->output,
                 new ChoiceQuestion($this->question, $this->choices, $this->default)
             );
-            $this->data = $this->choices[$selected];
         } else {
             // default behavior: ask for a valid value and allow autocompletion
             $this->data = $this->dialog->ask(
