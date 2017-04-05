@@ -6,7 +6,7 @@
                 <ae:parameter name="description">Creates a Honeybee module in the modules directory. By default it doesn't overwrite existing files.</ae:parameter>
 
                 <validator class="skeleton_generator">
-                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeModuleGenerator</ae:parameter>
+                    <ae:parameter name="value">Honeygavi\CodeGen\Skeleton\HoneybeeModuleGenerator</ae:parameter>
                 </validator>
 
                 <validator class="dialog">

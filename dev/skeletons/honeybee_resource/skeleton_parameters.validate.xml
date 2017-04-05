@@ -7,10 +7,10 @@
                 <ae:parameter name="description">Creates a Honeybee resource in the modules directory. By default it doesn't overwrite existing files.</ae:parameter>
 
                 <validator class="skeleton_generator">
-                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\HoneybeeResourceGenerator</ae:parameter>
+                    <ae:parameter name="value">Honeygavi\CodeGen\Skeleton\HoneybeeResourceGenerator</ae:parameter>
                 </validator>
 
-                <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ModuleNameValidator">
+                <validator class="Honeygavi\Validator\ModuleNameValidator">
                     <argument>module_name</argument>
                     <error>You must specify an existing module name.</error>
                     <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>

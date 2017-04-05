@@ -5,7 +5,7 @@
             <validator class="and" depends="skeleton_name_skeleton">
 
                 <validator class="skeleton_generator">
-                    <ae:parameter name="value">Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\NewSkeletonGenerator</ae:parameter>
+                    <ae:parameter name="value">Honeygavi\CodeGen\Skeleton\NewSkeletonGenerator</ae:parameter>
                 </validator>
 
                 <validator class="dialog">
@@ -16,7 +16,7 @@
                     <ae:parameter name="format">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>
                     <ae:parameter name="prefix">%core.skeleton_dir%</ae:parameter>
                     <ae:parameter name="dialog">
-                        <ae:parameter name="validator">Honeybee\FrameworkBinding\Agavi\Validator\FolderMissingValidator</ae:parameter>
+                        <ae:parameter name="validator">Honeygavi\Validator\FolderMissingValidator</ae:parameter>
                         <ae:parameter name="attempts">5</ae:parameter>
                         <ae:parameter name="introduction"><![CDATA[<info>The skeleton will be put into:</info> %core.skeleton_dir%]]></ae:parameter>
                     </ae:parameter>

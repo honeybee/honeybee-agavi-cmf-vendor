@@ -5,7 +5,7 @@
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors" method="read">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_read">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_read">
                 <argument>resource</argument>
                 <error>The given {{ resource_prefix }}(identifier) is invalid.</error>
                 <ae:parameter name="resource_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
@@ -18,7 +18,7 @@
         </validators>
 
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors" method="write">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootCommandValidator" name="invalid_task_data">
+            <validator class="Honeygavi\Validator\AggregateRootCommandValidator" name="invalid_task_data">
                 <arguments base="edit" />
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
                 <ae:parameter name="identifier_arg">identifier</ae:parameter>
@@ -41,7 +41,7 @@
                  -->
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_write" depends="edit[invalid_payload]">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_write" depends="edit[invalid_payload]">
                 <arguments base="edit">
                     <argument>identifier</argument>
                 </arguments>
