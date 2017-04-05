@@ -1,8 +1,8 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\Filter\AssetCompiler;
-use Honeybee\FrameworkBinding\Agavi\Renderer\ModuleTemplateRenderer;
+use Honeygavi\App\Base\Action;
+use Honeygavi\Filter\AssetCompiler;
+use Honeygavi\Renderer\ModuleTemplateRenderer;
 
 class Honeybee_Core_Util_CompileJsAction extends Action
 {

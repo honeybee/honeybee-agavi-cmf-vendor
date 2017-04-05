@@ -6,7 +6,7 @@
     <ae:configuration>
         <validators translation_domain="honeybee.system_account.user.errors">
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_user">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_user">
                 <argument>resource</argument>
                 <error>The given user(identifier) is invalid.</error>
                 <ae:parameter name="resource_type">honeybee.system_account.user</ae:parameter>

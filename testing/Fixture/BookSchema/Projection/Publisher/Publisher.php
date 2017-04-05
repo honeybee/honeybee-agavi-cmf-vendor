@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Publisher;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Publisher;
 
 use Honeybee\Projection\Resource\Resource;
 

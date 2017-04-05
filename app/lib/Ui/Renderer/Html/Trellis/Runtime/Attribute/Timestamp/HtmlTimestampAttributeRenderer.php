@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Timestamp;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Timestamp;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
 
 class HtmlTimestampAttributeRenderer extends HtmlAttributeRenderer
@@ -50,6 +50,6 @@ class HtmlTimestampAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getDefaultTranslationKeys()
     {
-        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
+        return array_merge(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }

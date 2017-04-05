@@ -6,7 +6,7 @@
     <div class="hb-field__content">
         <div class="hb-field__label"><label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label></div><!--
         --><div class="hb-field__value">
-            <select id="{{ field_id }}" name="{{ grouped_field_name }}" {{ disabled }} {{ required }}>
+            <select id="{{ field_id }}" name="{{ grouped_field_name }}" {{ disabled }} {{ required }} {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
                 {% for allowed_value in allowed_values %}
                     <option value="{{ allowed_value }}"
                         {% if allowed_value == attribute_value %}selected="selected"{% endif %}

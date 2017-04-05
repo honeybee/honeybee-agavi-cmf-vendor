@@ -1,5 +1,5 @@
 @import "lib/fonts/honeybee/honeybee";
-@import "lib/fonts/entypo/entypo";
+// @import "lib/fonts/entypo/entypo";
 
 @import "shadows";
 @import "typography";
@@ -54,6 +54,7 @@
 @import "components/glance/components.glance";
 @import "components/asset-list/components.asset-list";
 @import "components/htmlrichtexteditor/components.htmlrichtexteditor";
+@import "components/char-counter/components.char-counter";
 
 // tbd
 @import "components/toc/components.toc";

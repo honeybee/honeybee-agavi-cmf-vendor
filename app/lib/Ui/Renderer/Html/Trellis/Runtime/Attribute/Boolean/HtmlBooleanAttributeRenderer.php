@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Boolean;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Boolean;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlBooleanAttributeRenderer extends HtmlAttributeRenderer
 {
@@ -41,6 +41,6 @@ class HtmlBooleanAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getDefaultTranslationKeys()
     {
-        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
+        return array_merge(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }

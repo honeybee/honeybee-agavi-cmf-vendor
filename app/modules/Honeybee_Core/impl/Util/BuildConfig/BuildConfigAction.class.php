@@ -1,15 +1,15 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ActionCredentialsConfigGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\AggregateRootTypeMapGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ConfigurationScanner;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\DefaultXmlConfigGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\NamespaceAutoloadGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\ProjectionTypeMapGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\RoutingXmlConfigGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\SkeletonValidationMapGenerator;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Config\WorkflowsXmlConfigGenerator;
+use Honeygavi\App\Base\Action;
+use Honeygavi\CodeGen\Config\ActionCredentialsConfigGenerator;
+use Honeygavi\CodeGen\Config\AggregateRootTypeMapGenerator;
+use Honeygavi\CodeGen\Config\ConfigurationScanner;
+use Honeygavi\CodeGen\Config\DefaultXmlConfigGenerator;
+use Honeygavi\CodeGen\Config\NamespaceAutoloadGenerator;
+use Honeygavi\CodeGen\Config\ProjectionTypeMapGenerator;
+use Honeygavi\CodeGen\Config\RoutingXmlConfigGenerator;
+use Honeygavi\CodeGen\Config\SkeletonValidationMapGenerator;
+use Honeygavi\CodeGen\Config\WorkflowsXmlConfigGenerator;
 
 class Honeybee_Core_Util_BuildConfigAction extends Action
 {

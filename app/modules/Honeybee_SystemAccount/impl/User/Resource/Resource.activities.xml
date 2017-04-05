@@ -6,7 +6,7 @@
     <ae:configuration>
         <activity_containers>
 
-            <activity_container scope="honeybee.system_account.user.resource">
+            <activity_container scope="honeybee.system_account.user.resource" extends="honeybee.system_account.user">
             </activity_container>
 
             <activity_container scope="honeybee.system_account.user.resource.subheader_activities" extends="honeybee.system_account.user.subheader_activities">

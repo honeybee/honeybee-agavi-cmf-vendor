@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Author\Reference;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Author\Reference;
 
 use Honeybee\Projection\ReferencedEntityType;
 use Trellis\Common\Options;
@@ -19,7 +19,7 @@ class BookType extends ReferencedEntityType
             ],
             new Options(
                 [
-                    'referenced_type' => '\\Honeybee\\Tests\\Fixture\\BookSchema\\Projection\\Book\\BookType',
+                    'referenced_type' => '\\Honeygavi\\Tests\\Fixture\\BookSchema\\Projection\\Book\\BookType',
                     'identifying_attribute' => 'identifier',
                 ]
             ),

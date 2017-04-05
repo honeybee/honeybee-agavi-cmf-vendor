@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
-use Honeybee\Ui\TranslatorInterface;
+use Honeygavi\Ui\TranslatorInterface;
 
 class TestTranslator implements TranslatorInterface
 {

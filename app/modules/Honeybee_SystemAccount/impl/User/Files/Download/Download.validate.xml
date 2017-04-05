@@ -6,7 +6,7 @@
     <ae:configuration>
         <validators translation_domain="honeybee.system_account.user.errors">
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeFileExistsValidator" name="invalid_file_identifier">
+            <validator class="Honeygavi\Validator\AggregateRootTypeFileExistsValidator" name="invalid_file_identifier">
                 <argument>file</argument>
                 <error>File not found.</error>
                 <ae:parameter name="aggregate_root_type">honeybee.system_account.user</ae:parameter>

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Ui\Navigation\NavigationInterface;
+use Honeygavi\Ui\Navigation\NavigationInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Common\Util\StringToolkit;

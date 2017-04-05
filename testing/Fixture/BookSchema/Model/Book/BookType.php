@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model\Book;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model\Book;
 
-use Honeybee\Tests\Fixture\BookSchema\Model\AggregateRootType;
+use Honeygavi\Tests\Fixture\BookSchema\Model\AggregateRootType;
 use Trellis\Runtime\Attribute\Text\TextAttribute;
 
 class BookType extends AggregateRootType

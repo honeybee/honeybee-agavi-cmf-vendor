@@ -13,7 +13,7 @@
     <ae:configuration>
         <processes>
             <process name="my_process">
-                <builder class="Honeybee\Infrastructure\ProcessManager\StateMachine\StateMachineBuilder">
+                <builder class="Honeygavi\ProcessManager\StateMachine\StateMachineBuilder">
                     <setting name="state_machine_definition">%core.modules_dir%/MyModule/config/processes/my_process.xml</setting>
                 </builder>
             </process>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow;
+namespace Honeygavi\Tests\Fixture\BookSchema\Task\ProceedAuthorWorkflow;
 
 use Honeybee\Model\Task\ProceedWorkflow\ProceedWorkflowCommand;
 

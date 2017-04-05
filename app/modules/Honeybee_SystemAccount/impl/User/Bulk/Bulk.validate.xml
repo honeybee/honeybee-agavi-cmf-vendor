@@ -6,7 +6,7 @@
     <ae:configuration translation_domain="honeybee.system_account.user.errors">
 
         <validators method="write">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\BulkValidator" name="invalid_bulk_request">
+            <validator class="Honeygavi\Validator\BulkValidator" name="invalid_bulk_request">
                 <argument>%core.http_post_file_name%</argument>
                 <error for="invalid_format">Invalid bulk format. Expecting newline delimited command instruction tuples.</error>
                 <error for="invalid_meta_data">Invalid bulk-operation meta-data given.</error>

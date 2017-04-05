@@ -1,10 +1,11 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\EntityReferenceList;
+namespace Honeygavi\Ui\Renderer\Haljson\Trellis\Runtime\Attribute\EntityReferenceList;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeybee\Projection\ReferencedEntity;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 
 /**
@@ -40,30 +41,7 @@ class HaljsonEntityReferenceListAttributeRenderer extends AttributeRenderer
                 throw new RuntimeError('Rendered entity should be an array for haljson rendering.');
             }
 
-            if (isset($rendered_entity['@type'])) {
-                $referenced_type_class = $this->attribute->getEmbeddedTypeByReferencedPrefix(
-                    $rendered_entity['@type']
-                )->getReferencedTypeClass();
-
-                $art = $this->resource_type_map->getByClassName($referenced_type_class);
-
-                $view_resource_url = $this->url_generator->generateUrl(
-                    'module.resource',
-                    [
-                        'module' => $art,
-                        'resource' => $rendered_entity['referenced_identifier']
-                    ]
-                );
-
-                $rendered_entity['_links'] = [];
-                $link = [
-                    'href' => $view_resource_url,
-                    'name' => 'view_resource',
-                ];
-                $rendered_entity['_links']['honeybee:'.$art->getPrefix().'~view_resource'] = $link;
-            } else {
-                $this->logger->error('No @type in reference data: ' . var_export($rendered_entity, true));
-            }
+            $rendered_entity['_links'] = $this->buildLinks($entity);
 
             foreach ((array)$this->getOption('exclude_properties', []) as $property) {
                 unset($rendered_entity[$property]);
@@ -73,5 +51,33 @@ class HaljsonEntityReferenceListAttributeRenderer extends AttributeRenderer
         }
 
         return $rendered_entities;
+    }
+
+    protected function buildLinks(ReferencedEntity $resource)
+    {
+        $links = [];
+        $resource_type_class = $this->attribute->getEmbeddedTypeByReferencedPrefix(
+            $resource->getType()->getPrefix()
+        )->getReferencedTypeClass();
+        $art = $this->resource_type_map->getByClassName($resource_type_class);
+        $user = $this->environment->getUser();
+
+        // view_resource
+        if ($this->getOption('add_view_resource_link', true) && $user->isAllowed($art->getPrefix(), 'view_resource')) {
+            $view_resource_url = $this->url_generator->generateUrl(
+                'module.resource',
+                [
+                    'module' => $art,
+                    'resource' => $resource->getReferencedIdentifier()
+                ]
+            );
+            $link = [
+                'href' => $view_resource_url,
+                'name' => 'view_resource',
+            ];
+            $links['honeybee:' . $art->getPrefix() . '~view_resource'] = $link;
+        }
+
+        return $links;
     }
 }

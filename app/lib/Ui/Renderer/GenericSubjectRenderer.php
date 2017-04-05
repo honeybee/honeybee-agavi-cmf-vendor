@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Activity\ActivityInterface;
 
 /**
  * Whatever is given as payload to this renderer may be used via an expression to set the field_value for the template.

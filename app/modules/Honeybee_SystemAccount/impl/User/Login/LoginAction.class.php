@@ -1,8 +1,8 @@
 <?php
 
-use Honeybee\Infrastructure\Security\Auth\AuthResponse;
-use Honeybee\Infrastructure\Security\Acl\AclService;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\Security\Auth\AuthResponse;
+use Honeygavi\Security\Acl\AclService;
+use Honeygavi\App\Base\Action;
 
 class Honeybee_SystemAccount_User_LoginAction extends Action
 {
@@ -91,7 +91,7 @@ class Honeybee_SystemAccount_User_LoginAction extends Action
         $password = $request_data->getParameter('password');
 
         $service_locator = $this->getContext()->getServiceLocator();
-        $authentication_service = $service_locator->getAuthenticationService();
+        $authentication_service = $service_locator->getAuthService();
 
         $auth_response = $authentication_service->authenticate($username, $password);
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Haljson\Honeybee;
+namespace Honeygavi\Ui\Renderer\Haljson\Honeybee;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\EntityInterface;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\Renderer\EntityRenderer;
+use Honeygavi\Ui\Renderer\EntityRenderer;
 
 class HaljsonEntityRenderer extends EntityRenderer
 {

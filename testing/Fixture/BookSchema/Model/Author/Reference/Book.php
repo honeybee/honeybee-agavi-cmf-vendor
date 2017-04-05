@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model\Author\Reference;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model\Author\Reference;
 
 use Honeybee\Model\Aggregate\ReferencedEntity;
 

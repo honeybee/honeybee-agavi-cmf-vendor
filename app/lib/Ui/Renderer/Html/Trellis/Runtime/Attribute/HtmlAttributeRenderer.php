@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute;
 
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 use Honeybee\Projection\ProjectionInterface;
 
 class HtmlAttributeRenderer extends AttributeRenderer
@@ -22,6 +22,9 @@ class HtmlAttributeRenderer extends AttributeRenderer
             $params['pattern'] = array_key_exists('pattern', $params['translations'])
                 ? sprintf('pattern="%s"', $params['translations']['pattern'])
                 : '';
+        }
+        if ($this->hasOption('tabindex')) {
+            $params['tabindex'] = $this->getOption('tabindex');
         }
 
         $css = sprintf(
@@ -78,6 +81,9 @@ class HtmlAttributeRenderer extends AttributeRenderer
             'isDisabled' => $this->isDisabled(),
             'isRequired' => $this->isRequired()
         ];
+        if ($this->hasOption('tabindex')) {
+            $widget_options['tabindex'] = $this->getOption('tabindex');
+        }
 
         return array_replace_recursive($widget_options, (array)$this->getOption('widget_options', []));
     }

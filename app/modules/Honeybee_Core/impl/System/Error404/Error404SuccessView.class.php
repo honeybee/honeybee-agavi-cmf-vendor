@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\App\Base\ErrorView;
 
 /**
  * Handles 404 errors for all supported output types by usually logging the

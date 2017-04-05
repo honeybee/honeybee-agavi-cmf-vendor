@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\GeoPoint;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\GeoPoint;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\GeoPoint\GeoPointAttribute;
 
 class HtmlGeoPointAttributeRenderer extends HtmlAttributeRenderer
@@ -41,5 +41,14 @@ class HtmlGeoPointAttributeRenderer extends HtmlAttributeRenderer
         }
 
         return $params;
+    }
+
+    protected function getWidgetOptions()
+    {
+        $widget_options = parent::getWidgetOptions();
+        if (isset($widget_options['geo_endpoint'])) {
+            $widget_options['geo_endpoint'] = $this->genUrl($widget_options['geo_endpoint']);
+        }
+        return $widget_options;
     }
 }

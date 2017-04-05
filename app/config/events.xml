@@ -23,9 +23,9 @@
                 <transport name="event_pub">
                     <implementor>\Honeybee\Infrastructure\Event\Bus\Transport\ZmqTransport</implementor>
                     <settings>
-                        <setting name="channel">%event_pub.default_channel%</setting>
-                        <setting name="host">%event_pub.pull_socket.host%</setting>
-                        <setting name="port">%event_pub.pull_socket.port%</setting>
+                        <setting name="channel">org.honeybee.events</setting>
+                        <setting name="host">%websocket.host%</setting>
+                        <setting name="port">%websocket.inbound_port%</setting>
                     </settings>
                 </transport>
                 <transport name="sync">
@@ -39,7 +39,7 @@
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">event.getType() matches "/.*/"</setting>
+                                <setting name="expression">match_event(event, ".*")</setting>
                             </filter>
                             <handler implementor="\Honeybee\Projection\EventHandler\DomainEventProjector">
                                 <settings>
@@ -49,13 +49,13 @@
                         </subscription>
                     </subscriptions>
                 </channel>
-                
+
                 <channel name="honeybee.events.failed">
                     <subscriptions>
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">event.getType() matches "/.*\.failed$/"</setting>
+                                <setting name="expression">match_event(event, ".*\.failed$"</setting>
                             </filter>
                             <handler implementor="\Honeybee\Infrastructure\Event\FailedJobEventHandler" />
                         </subscription>
@@ -67,7 +67,7 @@
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">event.getType() matches "/.*/"</setting>
+                                <setting name="expression">match_event(event, ".*")</setting>
                             </filter>
                             <handler implementor="\Honeybee\Projection\EventHandler\DomainEventProjector">
                                 <settings>

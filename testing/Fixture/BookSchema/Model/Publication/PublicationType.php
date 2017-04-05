@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model\Publication;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model\Publication;
 
-use Honeybee\Tests\Fixture\BookSchema\Model\AggregateRootType;
+use Honeygavi\Tests\Fixture\BookSchema\Model\AggregateRootType;
 use Trellis\Runtime\Attribute\Integer\IntegerAttribute;
 use Trellis\Runtime\Attribute\Text\TextAttribute;
 

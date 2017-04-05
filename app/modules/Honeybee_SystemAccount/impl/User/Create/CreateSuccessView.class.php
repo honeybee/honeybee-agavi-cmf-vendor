@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\ActionPack\Create\CreateSuccessView;
+use Honeygavi\App\ActionPack\Create\CreateSuccessView;
 
 class Honeybee_SystemAccount_User_Create_CreateSuccessView extends CreateSuccessView
 {

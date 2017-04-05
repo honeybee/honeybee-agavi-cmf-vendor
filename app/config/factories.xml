@@ -4,7 +4,7 @@
         default environment settings for web and console
     -->
     <ae:configuration>
-        <controller class="Honeybee\FrameworkBinding\Agavi\Controller\HoneybeeAgaviController">
+        <controller class="Honeygavi\Controller\HoneybeeAgaviController">
             <ae:parameter name="max_executions">100</ae:parameter>
         </controller>
 
@@ -14,7 +14,7 @@
 
         <execution_container class="AgaviExecutionContainer" />
 
-        <execution_filter class="Honeybee\FrameworkBinding\Agavi\Filter\ExecutionFilter" />
+        <execution_filter class="Honeygavi\Filter\ExecutionFilter" />
 
         <action_execution_filter class="AgaviActionExecutionFilter" />
 
@@ -24,12 +24,12 @@
 
         <filter_chain class="AgaviFilterChain" />
 
-        <logger_manager class="Honeybee\FrameworkBinding\Agavi\Logging\LoggerManager">
+        <logger_manager class="Honeygavi\Logging\LoggerManager">
             <ae:parameter name="default_message_class">AgaviLoggerMessage</ae:parameter>
         </logger_manager>
 
         <request class="AgaviWebRequest">
-            <ae:parameter name="uploaded_file_class">Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile</ae:parameter>
+            <ae:parameter name="uploaded_file_class">Honeygavi\Request\HoneybeeUploadedFile</ae:parameter>
             <ae:parameter name="http_post_file_name">%core.http_post_file_name%</ae:parameter>
             <ae:parameter name="method_names">
                 <ae:parameter name="POST">write</ae:parameter>
@@ -49,7 +49,7 @@
             </ae:parameter>
         </request>
 
-        <response class="Honeybee\FrameworkBinding\Agavi\Response\WebResponse">
+        <response class="Honeygavi\Response\WebResponse">
             <ae:parameter name="send_content_length">false</ae:parameter> <!-- in HTTP 1.1 it's no longer necessary and in development var_dump() or similar could break correct content response length -->
             <ae:parameter name="expose_agavi">false</ae:parameter> <!-- disable X-Agavi header -->
             <ae:parameter name="use_sendfile_header">false</ae:parameter>
@@ -94,7 +94,7 @@
             <!-- <ae:parameter name="session_cookie_httponly">true</ae:parameter> --> <!-- set httponly flag (beware of XMLHttpRequest issues) -->
         </storage>
 
-        <user class="Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser">
+        <user class="Honeygavi\User\AclSecurityUser">
             <ae:parameter name="default_acl_role">non-privileged</ae:parameter>
         </user>
 
@@ -109,15 +109,15 @@
 
     <ae:configuration context="console">
         <request class="AgaviConsoleRequest">
-            <ae:parameter name="uploaded_file_class">Honeybee\FrameworkBinding\Agavi\Request\HoneybeeUploadedFile</ae:parameter>
+            <ae:parameter name="uploaded_file_class">Honeygavi\Request\HoneybeeUploadedFile</ae:parameter>
             <ae:parameter name="read_stdin">on</ae:parameter>
             <ae:parameter name="stdin_file_name">stdin_buffer_filepath</ae:parameter>
         </request>
         <response class="AgaviConsoleResponse">
             <ae:parameter name="append_eol">false</ae:parameter>
         </response>
-        <routing class="Honeybee\FrameworkBinding\Agavi\Routing\ConsoleRouting" />
-        <user class="Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser" />
+        <routing class="Honeygavi\Routing\ConsoleRouting" />
+        <user class="Honeygavi\User\AclSecurityUser" />
         <storage class="AgaviNullStorage" />
     </ae:configuration>
 
@@ -129,14 +129,14 @@
     </ae:configuration>
 
     <ae:configuration context="web" environment="development.*">
-        <response class="Honeybee\FrameworkBinding\Agavi\Response\WebResponse">
+        <response class="Honeygavi\Response\WebResponse">
             <ae:parameter name="expose_agavi">true</ae:parameter>
         </response>
     </ae:configuration>
 
     <ae:configuration context="web" environment="testing.*">
         <storage class="AgaviNullStorage" />
-        <user class="Honeybee\Tests\Mock\TestUser" />
+        <user class="Honeygavi\Tests\Mock\TestUser" />
         <execution_filter class="AgaviExecutionFilter">
             <ae:parameters>
                 <ae:parameter name="enable_caching">false</ae:parameter>
@@ -157,7 +157,7 @@
         special recovery environment, that is used to to setup and fix things
     -->
     <ae:configuration context="console" environment="recovery">
-        <routing class="Honeybee\FrameworkBinding\Agavi\Routing\RecoveryConsoleRouting">
+        <routing class="Honeygavi\Routing\RecoveryConsoleRouting">
             <ae:parameter name="routing_config">%core.honeybee_config_dir%/recovery/routing.xml</ae:parameter>
         </routing>
         <user class="AgaviSecurityUser" />

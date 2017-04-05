@@ -1,9 +1,8 @@
-.editor.jsb_ {
-    display: none; // hide by default in case js doesn't load
-}
+// in case js doesn't load
+.editor.jsb_ { display: none; }
 
 // htmlrichtexteditor should look like a normal textarea by default
-// and have a fixed height with a scrollbar – use ".autogrow" otherwise
+// and have a fixed height with a scrollbar – use ".editor--autogrow" otherwise
 .editor-hrte {
     @include textarea;
     min-width: 10em;
@@ -12,13 +11,6 @@
     max-height: 30em;
     overflow: auto;
     resize: vertical;
-
-    &.autogrow {
-        max-height: none;
-        height: auto;
-        overflow: none;
-        resize: none;
-    }
 }
 
 .editor-menu {
@@ -95,6 +87,13 @@
         background: none;
         width: auto;
     }
+
+    [data-editor-action="empty"] {
+        background-image: url('binaries/icons/hrte/block.svg');
+        @include button-states {
+            font-size: 0.8em;
+        }
+    }
 }
 
 .mfp-content .editor-popup {
@@ -137,3 +136,31 @@
 .editor-popup__cancel {
     @include button-emphasized-navigational;
 }
+
+// modifiers
+
+.editor--autogrow .editor-hrte {
+    max-height: none;
+    height: auto;
+    overflow: none;
+    resize: none;
+}
+
+textarea:read-only ~ .editor .editor-hrte {
+    @include input-textual-colors-disabled;
+}
+.editor--readonly .editor-hrte {    // separate selector: pseudo-class breaks the rule on IE
+    @include input-textual-colors-disabled;
+}
+
+textarea.invalid ~ .editor,
+textarea:invalid ~ .editor,
+.editor--invalid,
+.editor--invalid-count {
+    .editor-hrte:not(:focus) {
+        // input-textual-colors-invalid
+        background-color: color(background-blank);
+        border-color: color(destructive-primary);
+    }
+}
+

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Textarea;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Textarea;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\Textarea\TextareaAttribute;
 
 class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
@@ -37,29 +37,55 @@ class HtmlTextareaAttributeRenderer extends HtmlAttributeRenderer
         $params['rows'] = $this->getOption('rows', 9);
 
         // editor like the HtmlRichTextEditor
-        $params['editor'] = $this->getEditorParameters($params);
+        $params['editor'] = $this->getEditorParameters();
+        $params['editor']['options']['textarea_selector'] = '#' . $params['field_id'];
+
+        $params['counter'] = $this->getCounterParameters();
+
+        // counter just on the editor
+        if ($params['editor']['enabled'] && $params['counter']['enabled']) {
+            $params['editor']['options']['counter_enabled'] = true;
+            $params['editor']['options']['counter_config'] = $params['counter']['options'];
+            $params['counter']['enabled'] = false;
+        }
 
         return $params;
     }
 
-    protected function getEditorParameters(array $current_params)
+    protected function getEditorParameters()
     {
         $editor = [];
 
-        $editor['enabled'] = $this->getOption('editor_enabled', false);
+        $editor['enabled'] = $this->getOption('widget_enabled', true)
+            ? (bool)$this->getOption('editor_enabled', false)
+            : false;
         $editor['autogrow'] = $this->getOption('editor_autogrow', false);
         $editor['twig'] = $this->getOption('editor_twig', 'html/attribute/textarea/htmlrichtexteditor.twig');
-        $editor['options'] = json_encode(
-            array_merge(
-                [
-                    'textarea_selector' => '#' . $current_params['field_id'],
-                    'editor_input_selector' => '.editor-hrte',
-                    'view_scope' => $this->getOption('view_scope', 'missing_view_scope.collection'),
-                ],
-                (array)$this->getOption('editor_options', [])
-            )
+        $editor['options'] = array_replace_recursive(
+            [
+                'editor_input_selector' => '.editor-hrte',
+                'view_scope' => $this->getOption('view_scope', 'missing_view_scope.collection'),
+            ],
+            (array)$this->getOption('editor_options', [])
         );
 
         return $editor;
+    }
+
+    protected function getCounterParameters()
+    {
+        $counter = [];
+
+        $counter['enabled'] = $this->getOption('widget_enabled', true)
+            ? (bool)$this->getOption('counter_enabled', false)
+            : false;
+        $counter['options'] = array_replace_recursive(
+            [
+                'view_scope' => $this->getOption('view_scope', 'missing_view_scope.collection')
+            ],
+            (array)$this->getOption('counter_options', [])
+        );
+
+        return $counter;
     }
 }

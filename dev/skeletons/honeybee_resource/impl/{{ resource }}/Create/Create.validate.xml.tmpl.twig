@@ -5,7 +5,7 @@
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors" method="write">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeCommandValidator" name="invalid_task_data">
+            <validator class="Honeygavi\Validator\AggregateRootTypeCommandValidator" name="invalid_task_data">
                 <arguments base="create_{{ resource_prefix }}" />
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
                 <ae:parameter name="command_implementor">{{ vendor }}\{{ package }}\{{ resource }}\Model\Task\Create{{ resource }}\Create{{ resource }}Command</ae:parameter>
@@ -28,7 +28,7 @@
                  -->
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_write" depends="create_{{ resource_prefix }}[invalid_payload]">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_write" depends="create_{{ resource_prefix }}[invalid_payload]">
                 <arguments base="create_{{ resource_prefix }}" />
                 <ae:parameter name="resource_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
                 <ae:parameter name="export">resource</ae:parameter>

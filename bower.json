@@ -17,8 +17,8 @@
 
         "Stickyfill": "~1.1.3",
 
-        "squire-rte": "~1.8.2",
-        "dompurify": "~0.8.4",
+        "squire-rte": "~1.8.8",
+        "dompurify": "~0.8.5",
 
         "inuit-defaults": "latest",
         "inuit-responsive-settings": "latest",

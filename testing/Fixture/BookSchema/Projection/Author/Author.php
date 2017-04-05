@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Author;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Author;
 
 use Honeybee\Projection\Projection;
 

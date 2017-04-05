@@ -17,7 +17,7 @@
                 1. validate the given skeleton name and ask for it if none was given on CLI
                 2. provide a dependency token of format "skeleton_name_[SKELETON]" for skeleton specific validation
             -->
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\SkeletonNameValidator" name="skeleton" required="false" provides="skeleton_selected">
+            <validator class="Honeygavi\Validator\SkeletonNameValidator" name="skeleton" required="false" provides="skeleton_selected">
                 <argument>skeleton</argument>
                 <error>You must specify a valid skeleton name (that is, a folder name from dev/templates/).</error>
                 <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>

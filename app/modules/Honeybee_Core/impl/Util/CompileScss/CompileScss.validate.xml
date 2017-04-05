@@ -22,7 +22,7 @@
                 <ae:parameter name="values">nested|expanded|compact|compressed</ae:parameter>
                 <ae:parameter name="description">One of: nested|expanded|compact|compressed</ae:parameter>
             </validator>
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ArrayValidator" name="themes" required="false">
+            <validator class="Honeygavi\Validator\ArrayValidator" name="themes" required="false">
                 <argument>themes</argument>
                 <ae:parameter name="description">Comma-separated names of the themes to compile.</ae:parameter>
                 <error>Parameter %name$s must be a valid theme names list</error>

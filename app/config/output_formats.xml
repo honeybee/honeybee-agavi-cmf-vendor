@@ -10,7 +10,7 @@
 
         <output_formats>
 
-            <output_format name="html"><!-- renderer_locator="Honeybee\Ui\Renderer\RendererLocator" -->
+            <output_format name="html"><!-- renderer_locator="Honeygavi\Ui\Renderer\RendererLocator" -->
                 <acceptable_content_types>
                     <accept>text/html</accept>
                     <accept>application/xhtml+xml</accept>

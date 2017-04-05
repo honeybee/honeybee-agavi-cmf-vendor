@@ -27,7 +27,7 @@ handles necessary setup steps and declare that generator above with the
 
 -->
 
-                <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ModuleNameValidator">
+                <validator class="Honeygavi\Validator\ModuleNameValidator">
                     <argument>module_name</argument>
                     <error>You must specify a valid module name.</error>
                     <ae:parameter name="pattern">/^[A-Za-z0-9_-]{3,120}$/</ae:parameter>

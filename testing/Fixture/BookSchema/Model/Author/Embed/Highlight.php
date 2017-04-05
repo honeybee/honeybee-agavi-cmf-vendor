@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model\Author\Embed;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model\Author\Embed;
 
 use Honeybee\Model\Aggregate\EmbeddedEntity;
 

@@ -11,12 +11,12 @@ $projection_types = [];
 $projection_types['honeybee.system_account.user::projection.standard'] =
     new Honeybee\SystemAccount\User\Projection\Standard\UserType();
 $projection_types['honeybee_cmf.test_fixtures.author::projection.standard'] =
-    new Honeybee\Tests\Fixture\BookSchema\Projection\Author\AuthorType();
+    new Honeygavi\Tests\Fixture\BookSchema\Projection\Author\AuthorType();
 $projection_types['honeybee_cmf.test_fixtures.book::projection.standard'] =
-    new Honeybee\Tests\Fixture\BookSchema\Projection\Book\BookType();
+    new Honeygavi\Tests\Fixture\BookSchema\Projection\Book\BookType();
 $projection_types['honeybee_cmf.test_fixtures.publication::projection.standard'] =
-    new Honeybee\Tests\Fixture\BookSchema\Projection\Publication\PublicationType();
+    new Honeygavi\Tests\Fixture\BookSchema\Projection\Publication\PublicationType();
 $projection_types['honeybee_cmf.test_fixtures.publisher::projection.standard'] =
-    new Honeybee\Tests\Fixture\BookSchema\Projection\Publisher\PublisherType();
+    new Honeygavi\Tests\Fixture\BookSchema\Projection\Publisher\PublisherType();
 
 return new ProjectionTypeMap($projection_types);

@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model\Author;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model\Author;
 
-use Honeybee\Tests\Fixture\BookSchema\Model\AggregateRootType;
-use Honeybee\Tests\Fixture\BookSchema\Model\Author\Embed\HighlightType;
+use Honeygavi\Tests\Fixture\BookSchema\Model\AggregateRootType;
+use Honeygavi\Tests\Fixture\BookSchema\Model\Author\Embed\HighlightType;
 use Trellis\Runtime\Attribute\Email\EmailAttribute;
 use Trellis\Runtime\Attribute\EmbeddedEntityList\EmbeddedEntityListAttribute;
 use Trellis\Runtime\Attribute\EntityReferenceList\EntityReferenceListAttribute;
@@ -32,7 +32,7 @@ class AuthorType extends AggregateRootType
                     [
                         'max_count' => 2,
                         'entity_types' => [
-                            '\\Honeybee\\Tests\\Fixture\\BookSchema\\Model\\Author\\Embed\\HighlightType',
+                            '\\Honeygavi\\Tests\\Fixture\\BookSchema\\Model\\Author\\Embed\\HighlightType',
                         ]
                     ]
                 ),
@@ -42,7 +42,7 @@ class AuthorType extends AggregateRootType
                     [
                         'inline_mode' => true,
                         'entity_types' => [
-                            '\\Honeybee\\Tests\\Fixture\\BookSchema\\Model\\Author\\Reference\\BookType'
+                            '\\Honeygavi\\Tests\\Fixture\\BookSchema\\Model\\Author\\Reference\\BookType'
                         ]
                     ]
                 )

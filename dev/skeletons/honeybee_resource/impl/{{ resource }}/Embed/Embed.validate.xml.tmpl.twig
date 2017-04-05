@@ -5,7 +5,7 @@
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_resource" required="true" provides="valid_{{ resource_prefix }}_resource">
+            <validator class="Honeygavi\Validator\ResourceValidator" name="invalid_{{ resource_prefix }}_resource" required="true" provides="valid_{{ resource_prefix }}_resource">
                 <error>The given {{ resource_prefix }}resource (identifier) is invalid.</error>
                 <ae:parameter name="resource_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>
                 <ae:parameter name="allow_default_payload">true</ae:parameter>
@@ -13,7 +13,7 @@
                 <ae:parameter name="export">resource</ae:parameter>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\EmbedPathValidator" name="invalid_embed_path" depends="valid_{{ resource_prefix }}_resource">
+            <validator class="Honeygavi\Validator\EmbedPathValidator" name="invalid_embed_path" depends="valid_{{ resource_prefix }}_resource">
                 <argument>embed_path</argument>
                 <error>Missing required embed_path within request params.</error>
                 <error for="invalid_type">The given embed-path format/value-type is invalid.</error>
@@ -22,7 +22,7 @@
                 <ae:parameter name="export">embed</ae:parameter>
             </validator>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ArrayValidator" name="invalid_input_group" required="false">
+            <validator class="Honeygavi\Validator\ArrayValidator" name="invalid_input_group" required="false">
                 <argument>input_group</argument>
                 <ae:parameter name="explode_strings">true</ae:parameter>
                 <ae:parameter name="separator">,</ae:parameter>

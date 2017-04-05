@@ -240,6 +240,10 @@
                 field_id: "textarea1",
                 html_attributes: {},
                 grouped_field_name: "textarea1",
+                counter: {
+                    enabled: true,
+                    options: {}
+                }
             } %}
         </div><!--
         --><div class="layout__item u-1-of-2-lap-and-up">
@@ -256,6 +260,10 @@
                 field_id: "textarea2",
                 html_attributes: {},
                 grouped_field_name: "textarea2",
+                counter: {
+                    enabled: false,
+                    options: {}
+                }
             } %}
         </div>
     </div>
@@ -277,7 +285,10 @@
                 grouped_field_name: "group",
                 editor: {
                     enabled: true,
-                    options: editor_options|json_encode
+                    options: editor_options|json_encode,
+                },
+                counter: {
+                    enabled: false,
                 }
             } %}
         </div><!--

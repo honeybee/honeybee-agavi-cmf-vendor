@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Haljson\Trellis\Runtime\Attribute;
+namespace Honeygavi\Ui\Renderer\Haljson\Trellis\Runtime\Attribute;
 
 use DateTimeInterface;
 use Honeybee\Infrastructure\Config\ArrayConfig;
-use Honeybee\Ui\Renderer\AttributeRenderer;
+use Honeygavi\Ui\Renderer\AttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 use Trellis\Runtime\Attribute\ListAttribute;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;

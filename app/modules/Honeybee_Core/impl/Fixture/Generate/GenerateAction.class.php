@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 
 class Honeybee_Core_Fixture_GenerateAction extends Action
 {

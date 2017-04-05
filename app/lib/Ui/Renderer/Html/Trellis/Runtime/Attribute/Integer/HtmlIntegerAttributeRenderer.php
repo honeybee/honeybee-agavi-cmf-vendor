@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\Integer;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\Integer;
 
 use Honeybee\Common\Util\StringToolkit;
 use Trellis\Runtime\Attribute\Integer\IntegerAttribute;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 
 class HtmlIntegerAttributeRenderer extends HtmlAttributeRenderer
 {
@@ -62,6 +62,6 @@ class HtmlIntegerAttributeRenderer extends HtmlAttributeRenderer
 
     protected function getDefaultTranslationKeys()
     {
-        return array_replace(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
+        return array_merge(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 }

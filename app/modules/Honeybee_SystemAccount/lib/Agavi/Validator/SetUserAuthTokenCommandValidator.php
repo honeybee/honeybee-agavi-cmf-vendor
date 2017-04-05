@@ -5,7 +5,7 @@ namespace Honeybee\SystemAccount\Agavi\Validator;
 use DateInterval;
 use DateTimeImmutable;
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootCommandValidator;
+use Honeygavi\Validator\AggregateRootCommandValidator;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
 

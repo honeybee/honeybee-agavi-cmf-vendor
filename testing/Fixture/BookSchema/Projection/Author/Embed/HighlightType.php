@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Author\Embed;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Author\Embed;
 
 use Honeybee\Projection\EmbeddedEntityType;
 use Trellis\Common\Options;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Model;
+namespace Honeygavi\Tests\Fixture\BookSchema\Model;
 
 use Honeybee\Model\Aggregate\AggregateRootType as BaseAggregateRootType;
 

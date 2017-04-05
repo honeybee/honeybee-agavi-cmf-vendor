@@ -7,7 +7,7 @@
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
 
             <!--
-            <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeAttributeValidator" name="invalid_attribute_path">
+            <validator method="write" class="Honeygavi\Validator\AggregateRootTypeAttributeValidator" name="invalid_attribute_path">
                 <arguments base="uploadform">
                     <argument>attribute</argument>
                 </arguments>
@@ -16,7 +16,7 @@
             </validator>
             -->
 
-            <validator method="write" class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeFileUploadValidator" name="invalid_uploaded_files" source="files">
+            <validator method="write" class="Honeygavi\Validator\AggregateRootTypeFileUploadValidator" name="invalid_uploaded_files" source="files">
                 <arguments base="uploadform"></arguments>
                 <error>file_upload.generic_error</error>
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>

@@ -1,0 +1,8 @@
+.hb-counter {
+    display: none; // hidden by default
+}
+
+.hb-counter--invalid {
+    // input-textual-colors-invalid
+    color: color(destructive-primary);
+}

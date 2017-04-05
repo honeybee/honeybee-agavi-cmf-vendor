@@ -30,25 +30,27 @@
 
     // horizontal tabs by default
     &.#{$name}--inline {
-        .#{$name}__toggle {
-            display: inline-block;
+        > .#{$name}__header {
+            .#{$name}__toggle {
+                display: inline-block;
+            }
         }
     }
 
     // vertical tabs (that is, toggles are block instead of inline-block)
     &.#{$name}--stack {
-        .#{$name}__toggle {
-            display: block;
-        }
-
-        .#{$name}__header {
+        > .#{$name}__header {
             @extend %lap-and-up-1-of-4;
             @extend %desk-wide-1-of-5;
 
             border-bottom: 0; // revert default tabs bottom border
+
+            .#{$name}__toggle {
+                display: block;
+            }
         }
 
-        .#{$name}__content {
+        > .#{$name}__content {
             @extend %lap-and-up-3-of-4;
             @extend %desk-wide-4-of-5;
         }
@@ -61,11 +63,11 @@
 
     // hide tabs header
     &.#{$name}--hidden {
-        .#{$name}__header {
+        > .#{$name}__header {
             display: none;
         }
 
-        .#{$name}__content {
+        > .#{$name}__content {
             width: 100%;
         }
     }

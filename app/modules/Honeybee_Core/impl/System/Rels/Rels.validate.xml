@@ -6,7 +6,7 @@
     <ae:configuration>
         <validators>
 
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\RelValidator" name="invalid_rel" required="false">
+            <validator class="Honeygavi\Validator\RelValidator" name="invalid_rel" required="false">
                 <argument>activity</argument>
                 <error>Expected format is "scope~name".</error>
                 <error for="missing">Given activity is either wrong or not configured.</error>

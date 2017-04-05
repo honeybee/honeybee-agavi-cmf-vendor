@@ -1,3 +1,6 @@
+# From entypo.com
+Entypo+ doesn’t come as a font anymore but you can create your own using the SVG images. It’s really easy. Go to Fontello, Fontastic.me or the IcoMoon app to do so.
+
 # Prepare the _lib/_ folder with
 
 * _\_vars.scss_ containing a correspondence _Icon\_name -> Unicode\_char_ SCSS map

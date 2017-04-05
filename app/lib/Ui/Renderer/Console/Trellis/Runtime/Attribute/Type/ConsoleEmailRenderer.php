@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Console\Trellis\Runtime\Attribute\Type;
+namespace Honeygavi\Ui\Renderer\Console\Trellis\Runtime\Attribute\Type;
 
-use Honeybee\Ui\Renderer\Console\Trellis\Runtime\Attribute\ConsoleAttributeRenderer;
+use Honeygavi\Ui\Renderer\Console\Trellis\Runtime\Attribute\ConsoleAttributeRenderer;
 
 class ConsoleEmailRenderer extends ConsoleAttributeRenderer
 {

@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\ErrorView;
+use Honeygavi\App\Base\ErrorView;
 
 /**
  * Handles HTTP status 405 METHOD NOT ALLOWED errors for all supported output

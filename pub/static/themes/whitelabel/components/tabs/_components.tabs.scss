@@ -33,14 +33,16 @@
 }
 
 .hb-tabs--stack {
-    .hb-tabs__toggles {
-        display: block;
-    }
-    .hb-tabs__toggle {
-        label {
-            @include tabs-toggle-states {
-                padding-right: 7px;
-                padding-left:  20px;
+    > .hb-tabs__header {
+        .hb-tabs__toggles {
+            display: block;
+        }
+        .hb-tabs__toggle {
+            label {
+                @include tabs-toggle-states {
+                    padding-right: 7px;
+                    padding-left:  20px;
+                }
             }
         }
     }

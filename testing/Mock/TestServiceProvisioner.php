@@ -1,13 +1,13 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
 use AgaviConfig;
 use AgaviConfigCache;
 use AgaviContext;
 use Auryn\Injector as DiContainer;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\ServiceProvisioner;
+use Honeygavi\ServiceProvisioner;
 
 class TestServiceProvisioner extends ServiceProvisioner
 {

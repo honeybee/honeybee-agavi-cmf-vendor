@@ -1,17 +1,19 @@
 define([
     "Honeybee_Core/Widget",
+    "Honeybee_Core/ui/CharCounter",
     "squire",
     "dompurify",
-    "magnific-popup"
-], function(Widget, Squire, DOMPurify) {
+    "magnific-popup",
+], function(Widget, CharCounter, Squire, DOMPurify) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/HtmlRichTextEditor",
+        counter_enabled: false,
         // the original textarea element that will be hidden
         textarea_selector: 'textarea',
         hide_textarea: true,
         // element that will be used as editor for the textarea content
-        editor_input_selector: '.editor-hrte',
+        editor_selector: '.editor-hrte',
         // Squire options to use
         squire_config: {
             blockTag: 'BLOCK', // Squire default is 'DIV', 'BLOCK' is used as dompurify will remove that automatically
@@ -46,11 +48,12 @@ define([
             RETURN_DOM_FRAGMENT: false,
             FORBID_TAGS: ['BLOCK'],
             FORBID_ATTR: []
-        },
+        }
     };
 
     function HtmlRichTextEditor(dom_element, options) {
         var that = this;
+        var counter_config;
 
         if (!('contentEditable' in document.body) || !DOMPurify.isSupported) {
             return;
@@ -63,8 +66,8 @@ define([
 
         // a custom sanitization function may be specified for initial setHTML call and pasting content
         if (typeof this.options.sanitizeToDOMFragment !== 'function') {
-            this.options.squire_config.sanitizeToDOMFragment = function(html, is_paste) {
-                return that.sanitizeToDOMFragment(html, is_paste);
+            this.options.squire_config.sanitizeToDOMFragment = function(html, is_paste, squire_instance) {
+                return that.sanitizeToDOMFragment(html, is_paste, squire_instance);
             };
         }
 
@@ -73,12 +76,18 @@ define([
             this.$textarea = $(this.options.textarea_selector);
         }
 
-        this.$editor = this.$widget.find(this.options.editor_input_selector).first();
+        this.$editor = this.$widget.find(this.options.editor_selector).first();
         if (this.$editor.length === 0) {
-            $(this.options.editor_input_selector);
+            $(this.options.editor_selector);
         }
 
-        if (this.$textarea.length !== 1 || this.$editor.length !== 1) {
+        if (this.$textarea.length !== 1) {
+            this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
+            return;
+        }
+
+        if (this.$editor.length !== 1) {
+            this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
             return;
         }
 
@@ -93,6 +102,8 @@ define([
         this.canUndo = false;
         this.canRedo = false;
         this.isFocussed = false;
+        this.maxlength = this.$textarea.prop('maxLength');
+        this.readonly = this.options.isReadonly || this.options.isDisabled || this.$textarea.prop('readonly');
 
         this.buttons = {
             bold: {
@@ -147,20 +158,49 @@ define([
             },
             autogrow: {
                 $btn: this.$widget.find('[data-editor-action="autogrow"]'),
-                highlight: function() { return that.$editor.hasClass('autogrow'); },
+                highlight: function() { return that.$widget.hasClass('editor--autogrow'); },
                 enable: function() { return true; }
             },
+            empty: {
+                $btn: this.$widget.find('[data-editor-action="empty"]'),
+                highlight: function() { return false; },
+                enable: function() { console.log(that.editor.getHTML());return that.editor.getHTML() !== ''; }
+            }
         };
 
         // save editor instance
         this.editor = this.createSquireInstance();
 
-        // set initial content of squire editor
-        this.editor.setHTML(this.$textarea.val());
+        // add counter to editor
+        if (this.options.counter_enabled === true) {
+            // @todo Doesn't count correctly on the editor content yet
+            counter_config = this.options.counter_config || {};
+            counter_config.register_autoupdate =  false;
+            counter_config.getTargetVal = this.editor.getHTML.bind(this.editor);
+            this.char_counter = new CharCounter(this.$editor[0], counter_config);
+        }
 
-        // hide textarea this widget syncs with
+        // set initial content of squire editor
+        this.validate(this.$textarea.val());
+        this.editor.setHTML(this.$textarea.val());
+        this.editor.fireEvent('input');
+
+        // show textarea this widget syncs with
         if (this.options.hide_textarea === true) {
             this.$textarea.hide();
+        }
+
+        if (this.readonly) {
+            this.editor.getRoot().setAttribute('contenteditable', false);
+
+            _.forOwn(this.buttons, function(btn, name) {
+                btn.$btn.prop('disabled', true);
+                btn.enable = function() { return false; };
+            });
+
+            this.$widget.addClass('editor--readonly');  // IE doesn't support :read-only selector
+
+            return;
         }
 
         // this.$editor.on('click', function(ev) {
@@ -263,10 +303,15 @@ define([
 
         // sync content to textarea on input
         editor.addEventListener('input', function(ev) {
-            var sanitized_html = DOMPurify.sanitize(that.editor.getHTML(), that.options.dompurify_sync_config);
-            // remove trailing <br> element after DIV block removal
-            sanitized_html = sanitized_html.replace(/<br\>$/, '');
-            that.$textarea.val(sanitized_html);
+            var sanitized_html = that.sanitize(that.editor.getHTML());
+            // the editor won't prevent from typing, once reached the textarea maxlength
+            if (that.validate(sanitized_html)) {
+                that.$textarea.val(sanitized_html);
+            }
+            // counter register_autoupdate is false
+            if (that.char_counter) {
+                that.char_counter.updateCount();
+            }
         });
 
         editor.addEventListener('undoStateChange', function(ev) {
@@ -298,6 +343,33 @@ define([
         return editor;
     };
 
+    HtmlRichTextEditor.prototype.sanitize = function(text) {
+        var sanitized_html = DOMPurify.sanitize(text, this.options.dompurify_sync_config);
+        // remove trailing <br> element after DIV block removal
+        return sanitized_html.replace(/<br\>$/, '');
+    };
+
+    HtmlRichTextEditor.prototype.validate = function(text)  {
+        var valid = true;
+
+        if (this.maxlength !== -1 && text.length > this.maxlength) {
+            valid = false;
+        }
+
+        if (this.char_counter) {
+            this.char_counter.setValidity(valid);
+        }
+
+        if (valid) {
+            this.$textarea.removeClass('invalid');
+        } else {
+            this.$textarea.addClass('invalid');
+        }
+        jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
+
+        return valid;
+    };
+
     HtmlRichTextEditor.prototype.updateUI = function() {
         var undo = this.buttons.undo;
         if (undo.enable()) {
@@ -313,7 +385,7 @@ define([
             redo.$btn.prop('disabled', true);
         }
 
-        if (this.$editor.hasClass('autogrow')) {
+        if (this.$widget.hasClass('editor--autogrow')) {
             this.buttons.autogrow.$btn.addClass('active');
         } else {
             this.buttons.autogrow.$btn.removeClass('active');
@@ -333,9 +405,15 @@ define([
         // });
     };
 
-    HtmlRichTextEditor.prototype.sanitizeToDOMFragment = function(html, is_paste) {
+    HtmlRichTextEditor.prototype.sanitizeToDOMFragment = function(html, is_paste, squire_instance) {
         var dompurify_config = is_paste ? this.options.dompurify_paste_config : this.options.dompurify_config;
-        return DOMPurify.sanitize(html, dompurify_config);
+        var fragment = DOMPurify.sanitize(html, dompurify_config);
+
+        if (!fragment) {
+            fragment = squire_instance.getDocument().createDocumentFragment();
+        }
+
+        return fragment;
     };
 
     HtmlRichTextEditor.prototype.handleAction = function(action_element, ev) {
@@ -384,11 +462,16 @@ define([
         } else if (action === 'link') {
             // do nothing as a dialog will be shown to the user to add/change the url etc.
         } else if (action === 'autogrow') {
-            this.$editor.toggleClass('autogrow');
-            if (this.$editor.hasClass('autogrow')) {
+            this.$widget.toggleClass('editor--autogrow');
+            if (this.$widget.hasClass('editor--autogrow')) {
                 this.buttons.autogrow.$btn.addClass('active');
             } else {
                 this.buttons.autogrow.$btn.removeClass('active');
+            }
+        } else if (action === 'empty') {
+            if (this.validate('')) {
+                editor._setHTML('');
+                editor.fireEvent('input')
             }
         } else {
             switch (action) {

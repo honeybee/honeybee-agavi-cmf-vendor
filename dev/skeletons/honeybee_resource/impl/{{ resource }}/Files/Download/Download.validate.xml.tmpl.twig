@@ -5,7 +5,7 @@
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeFileExistsValidator" name="invalid_file_identifier">
+            <validator class="Honeygavi\Validator\AggregateRootTypeFileExistsValidator" name="invalid_file_identifier">
                 <argument>file</argument>
                 <error>File not found.</error>
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>

@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_Core_System_Status_StatusErrorView extends View
 {

@@ -7,10 +7,10 @@ use AgaviContext;
 use Exception;
 use Honeybee\SystemAccount\User\Projection\Standard\User;
 use Honeybee\Common\Error\RuntimeError;
-use Honeybee\FrameworkBinding\Agavi\Logging\Logger;
-use Honeybee\FrameworkBinding\Agavi\Renderer\ModuleTemplateRenderer;
+use Honeygavi\Logging\Logger;
+use Honeygavi\Renderer\ModuleTemplateRenderer;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Honeybee\Infrastructure\Mail\MailServiceInterface;
+use Honeygavi\Mail\MailServiceInterface;
 use Psr\Log\LoggerInterface;
 
 class MailService

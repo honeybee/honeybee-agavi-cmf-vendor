@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\View;
+use Honeygavi\App\Base\View;
 
 class Honeybee_SystemAccount_User_ResetPassword_ResetPasswordErrorView extends View
 {

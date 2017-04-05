@@ -5,13 +5,13 @@
     parent="%core.module_dir%/{{ vendor }}_{{ package }}/config/validators.xml">
     <ae:configuration>
         <validators translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\ListConfigValidator" name="invalid_list_config" required="true">
+            <validator class="Honeygavi\Validator\ListConfigValidator" name="invalid_list_config" required="true">
                 <ae:parameter name="default_limit">50</ae:parameter>
             </validator>
         </validators>
 
         <validators method="write" translation_domain="{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}.errors">
-            <validator class="Honeybee\FrameworkBinding\Agavi\Validator\AggregateRootTypeCommandValidator" name="invalid_{{ resource_prefix }}" required="true">
+            <validator class="Honeygavi\Validator\AggregateRootTypeCommandValidator" name="invalid_{{ resource_prefix }}" required="true">
                 <arguments base="create_{{ resource_prefix }}" />
                 <error>Invalid command payload given.</error>
                 <ae:parameter name="aggregate_root_type">{{ vendor_prefix }}.{{ package_prefix }}.{{ resource_prefix }}</ae:parameter>

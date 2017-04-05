@@ -1,9 +1,9 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\UrlList;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\UrlList;
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\UrlList\UrlListAttribute;
 
 class HtmlUrlListAttributeRenderer extends HtmlAttributeRenderer

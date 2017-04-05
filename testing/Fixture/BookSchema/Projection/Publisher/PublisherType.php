@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Fixture\BookSchema\Projection\Publisher;
+namespace Honeygavi\Tests\Fixture\BookSchema\Projection\Publisher;
 
-use Honeybee\Tests\Fixture\BookSchema\Projection\ProjectionType;
+use Honeygavi\Tests\Fixture\BookSchema\Projection\ProjectionType;
 use Trellis\Runtime\Attribute\Text\TextAttribute;
 
 class PublisherType extends ProjectionType

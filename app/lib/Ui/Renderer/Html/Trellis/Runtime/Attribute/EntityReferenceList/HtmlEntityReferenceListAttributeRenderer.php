@@ -1,10 +1,10 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\EntityReferenceList;
+namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\EntityReferenceList;
 
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\EntityTypeInterface;
-use Honeybee\Ui\Renderer\Html\Trellis\Runtime\Attribute\EmbeddedEntityList\HtmlEmbeddedEntityListAttributeRenderer;
+use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\EmbeddedEntityList\HtmlEmbeddedEntityListAttributeRenderer;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 
 class HtmlEntityReferenceListAttributeRenderer extends HtmlEmbeddedEntityListAttributeRenderer

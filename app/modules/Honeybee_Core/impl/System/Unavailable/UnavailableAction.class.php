@@ -1,6 +1,6 @@
 <?php
 
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
+use Honeygavi\App\Base\Action;
 
 /**
  * Handles the %system_actions.unavailable% logic (in case of maintenance).

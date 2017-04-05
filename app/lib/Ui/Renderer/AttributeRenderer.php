@@ -1,6 +1,6 @@
 <?php
 
-namespace Honeybee\Ui\Renderer;
+namespace Honeygavi\Ui\Renderer;
 
 use DateTimeInterface;
 use Honeybee\Common\Error\RuntimeError;
@@ -10,10 +10,10 @@ use Honeybee\EntityInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
-use Honeybee\Infrastructure\Template\TemplateRendererInterface;
+use Honeygavi\Template\TemplateRendererInterface;
 use Honeybee\Projection\ProjectionInterface;
-use Honeybee\Ui\OutputFormat\OutputFormatInterface;
-use Honeybee\Ui\UrlGeneratorInterface;
+use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\UrlGeneratorInterface;
 use Trellis\Runtime\Attribute\AttributeInterface;
 use Trellis\Runtime\Attribute\AttributeValuePath;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
@@ -58,6 +58,7 @@ abstract class AttributeRenderer extends Renderer
         $attribute_path = $this->attribute->getPath();
         $field_name = $this->getOption('field_name', $attribute_name);
 
+        $params['resource'] = $this->getPayload('resource');
         $params['field_id'] = 'randomId-' . rand(); // @todo still random but nicer ids?
         $params['field_name'] = $field_name;
         $params['grouped_field_name'] = $this->getGroupedInputFieldName();
@@ -242,7 +243,7 @@ abstract class AttributeRenderer extends Renderer
             'title',
         ];
 
-        return array_replace($default_translation_keys, $field_translation_keys);
+        return array_unique(array_merge($default_translation_keys, $field_translation_keys));
     }
 
     protected function isReadonly()
@@ -259,9 +260,11 @@ abstract class AttributeRenderer extends Renderer
     {
         $input_view_template_name_suffixes = (array)$this->getOption(
             'input_view_template_name_suffixes',
-            [ 'create', 'modify' ]
+            (array)$this->environment->getSettings()->get(
+                'ui.input_view_template_name_suffixes',
+                [ 'create', 'modify' ]
+            )
         );
-
         // by convention is possible to specify the output format name after the view name
         if (!empty($output_format_name)) {
             foreach ($input_view_template_name_suffixes as $input_suffix) {

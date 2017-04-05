@@ -1,8 +1,8 @@
 <?php
 
 use Honeybee\Common\Util\StringToolkit;
-use Honeybee\FrameworkBinding\Agavi\App\Base\Action;
-use Honeybee\FrameworkBinding\Agavi\CodeGen\Skeleton\SkeletonGenerator;
+use Honeygavi\App\Base\Action;
+use Honeygavi\CodeGen\Skeleton\SkeletonGenerator;
 
 class Honeybee_Core_Util_GenerateCodeAction extends Action
 {

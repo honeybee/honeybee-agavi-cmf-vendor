@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Tests\Mock;
+namespace Honeygavi\Tests\Mock;
 
-use Honeybee\FrameworkBinding\Agavi\User\AclSecurityUser;
+use Honeygavi\User\AclSecurityUser;
 
 class TestUser extends AclSecurityUser
 {

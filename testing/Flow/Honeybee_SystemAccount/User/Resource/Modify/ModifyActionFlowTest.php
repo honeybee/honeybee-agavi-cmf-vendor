@@ -1,12 +1,12 @@
 <?php
 
-namespace Honeybee\Tests\Flow\Honeybee\SystemAccount\User\Resource\Modify;
+namespace Honeygavi\Tests\Flow\Honeybee\SystemAccount\User\Resource\Modify;
 
 use AgaviWebResponse;
 use Honeybee\Infrastructure\DataAccess\Finder\FinderResult;
 use Honeybee\Infrastructure\DataAccess\Query\ProjectionQueryServiceInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryServiceMap;
-use Honeybee\Tests\Mock\HoneybeeAgaviFlowTestCase;
+use Honeygavi\Tests\Mock\HoneybeeAgaviFlowTestCase;
 use Mockery;
 
 class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
@@ -19,7 +19,7 @@ class ModifyActionFlowTest extends HoneybeeAgaviFlowTestCase
 
         $this->mock_query_service = Mockery::mock(ProjectionQueryServiceInterface::CLASS);
         $mock_query_service_map = new QueryServiceMap([
-            'honeybee.system_account.user::projection.standard::query_service' => $this->mock_query_service
+            'honeybee.system_account.user::projection.standard::view_store::query_service' => $this->mock_query_service
         ]);
 
         $service_locator->prepareService(

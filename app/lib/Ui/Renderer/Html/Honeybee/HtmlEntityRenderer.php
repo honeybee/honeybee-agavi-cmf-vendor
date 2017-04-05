@@ -1,8 +1,8 @@
 <?php
 
-namespace Honeybee\Ui\Renderer\Html\Honeybee;
+namespace Honeygavi\Ui\Renderer\Html\Honeybee;
 
-use Honeybee\Ui\Renderer\EntityRenderer;
+use Honeygavi\Ui\Renderer\EntityRenderer;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 
 class HtmlEntityRenderer extends EntityRenderer

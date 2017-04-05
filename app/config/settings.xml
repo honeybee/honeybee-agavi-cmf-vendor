@@ -53,7 +53,7 @@
             <setting name="use_security">true</setting>
             <setting name="use_translation">true</setting>
             <setting name="http_post_file_name">post_payload</setting>
-            <setting name="context_implementation">Honeybee\FrameworkBinding\Agavi\Context</setting>
+            <setting name="context_implementation">Honeygavi\Context</setting>
             <setting name="test_bootstrap_tpl">%core.app_dir%/../testing/TestCaseMethod.tpl</setting>
             <setting name="gravatar_url_tpl">//www.gravatar.com/avatar/{EMAIL_HASH}?s=31</setting>
             <setting name="apache_tika">%core.app_dir%/../vendor/tika.jar</setting>
@@ -67,18 +67,6 @@
             <setting name="from_name">Customer Care</setting>
             <setting name="reply_email">helpdesk@honeybee.local</setting>
             <setting name="reply_name">Helpdesk</setting>
-        </settings>
-
-        <settings prefix="event_pub.">
-            <setting name="default_channel">org.honeybee.events</setting>
-            <setting name="pull_socket.host">127.0.0.1</setting>
-            <setting name="pull_socket.port">5555</setting>
-            <setting name="web_socket.host">0.0.0.0</setting>
-            <setting name="web_socket.port">8081</setting>
-            <!-- @todo add support for pragmatic general multicast
-            <setting name="pgm.host">0.0.0.0</setting>
-            <setting name="pgm.port">5556</setting>
-            -->
         </settings>
 
         <settings prefix="password_constraints.">
@@ -177,7 +165,7 @@
     <ae:configuration environment="testing.*">
         <settings>
             <setting name="default_context">web</setting>
-            <setting name="context_implementation">Honeybee\Tests\Mock\TestContext</setting>
+            <setting name="context_implementation">Honeygavi\Tests\Mock\TestContext</setting>
         </settings>
     </ae:configuration>
 
