@@ -135,6 +135,7 @@ class ConfigurationScanner
                             // for that we don't know which permission to generate; use sensible defaults
                             $operations[] = 'read';
                             $operations[] = 'write';
+                            $operations[] = 'options';
                         }
                     }
                 }
@@ -199,16 +200,29 @@ class ConfigurationScanner
 
     protected function extractClassName($filepath)
     {
+        $namespace = [];
+        $namespace_tokens = false;
         $class_token = false;
         $php_file = file_get_contents($filepath);
         $tokens = token_get_all($php_file);
         foreach ($tokens as $token) {
             if (is_array($token)) {
+                if ($token[0] == T_NAMESPACE) {
+                    $namespace_tokens = true;
+                } elseif ($namespace_tokens && in_array($token[0], [ T_STRING, T_NS_SEPARATOR ])) {
+                    $namespace[] = $token[1];
+                }
                 if ($token[0] == T_CLASS) {
                     $class_token = true;
                 } elseif ($class_token && $token[0] == T_STRING) {
-                    return $token[1];
+                    $class_name = $token[1];
+                    if (!empty($namespace)) {
+                        $class_name = implode($namespace) . '\\' . $class_name;
+                    }
+                    return $class_name;
                 }
+            } elseif ($token == ';') {
+                $namespace_tokens = false;
             }
         }
 
