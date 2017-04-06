@@ -107,8 +107,9 @@ class ConsoleDialogValidator extends AgaviValidator
         }
 
         $this->output->writeln('');
-
-        fclose($this->input);
+        if ($this->input) {
+            fclose($this->input);
+        }
 
         $success = $severity === AgaviValidator::SUCCESS;
 
@@ -228,13 +229,15 @@ class ConsoleDialogValidator extends AgaviValidator
 
         // this is necessary as getting the default STDIN stream would break
         // agavi input/output later on (as php doesn't like getting it twice?)
-        $this->input = fopen('/dev/tty', 'r');
+        $this->input = @fopen('/dev/tty', 'r');
 
         $this->output = new ConsoleOutput;
         $helper_set = new HelperSet([ new FormatterHelper ]);
         $this->dialog = new QuestionHelper($this->output);
         $this->dialog->setHelperSet($helper_set);
-        $this->dialog->setInputStream($this->input);
+        if ($this->input) {
+            $this->dialog->setInputStream($this->input);
+        }
 
         $this->random_id = uniqid('proxy_', true);
         $this->attempt = 0;
