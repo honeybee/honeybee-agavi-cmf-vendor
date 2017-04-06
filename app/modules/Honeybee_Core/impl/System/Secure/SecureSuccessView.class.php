@@ -1,7 +1,6 @@
 <?php
 
 use Honeygavi\App\Base\View;
-use \AgaviRequestDataHolder;
 
 /**
  * Handles the presentation logic for the %system_actions.secure% action.
@@ -15,7 +14,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @param \AgaviRequestDataHolder $request_data
      */
-    public function executeHtml(AgaviRequestDataHolder $request_data)
+    public function executeHtml(\AgaviRequestDataHolder $request_data)
     {
         $message = $this->translation_manager->_(self::DEFAULT_MESSAGE);
         $this->setAttribute('_title', $message);
@@ -29,7 +28,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @param \AgaviRequestDataHolder $request_data
      */
-    public function executeJson(AgaviRequestDataHolder $request_data)
+    public function executeJson(\AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode('403');
         return json_encode(array('message' => $this->translation_manager->_(self::DEFAULT_MESSAGE)));
@@ -41,7 +40,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @return string XML content with 403 information
      */
-    public function executeXml(AgaviRequestDataHolder $request_data)
+    public function executeXml(\AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode('403');
         $message = $this->translation_manager->_(self::DEFAULT_MESSAGE);
@@ -55,7 +54,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @return string XML content with 403 information
      */
-    public function executeAtomxml(AgaviRequestDataHolder $request_data)
+    public function executeAtomxml(\AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode('403');
         $message = $this->translation_manager->_(self::DEFAULT_MESSAGE);
@@ -70,7 +69,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @return string response with information message
      */
-    public function executeBinary(AgaviRequestDataHolder $request_data)
+    public function executeBinary(\AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode('403');
         $this->getResponse()->setContentType('text/plain');
@@ -86,7 +85,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @return string response with information message
      */
-    public function executePdf(AgaviRequestDataHolder $request_data)
+    public function executePdf(\AgaviRequestDataHolder $request_data)
     {
         $this->getResponse()->setHttpStatusCode('403');
         $this->getResponse()->setContentType('text/plain');
@@ -102,7 +101,7 @@ class Honeybee_Core_System_Secure_SecureSuccessView extends View
      *
      * @return string response on STDERR with information message
      */
-    public function executeConsole(AgaviRequestDataHolder $request_data)
+    public function executeConsole(\AgaviRequestDataHolder $request_data)
     {
         return $this->cliError($this->translation_manager->_(self::DEFAULT_MESSAGE), 126);
     }

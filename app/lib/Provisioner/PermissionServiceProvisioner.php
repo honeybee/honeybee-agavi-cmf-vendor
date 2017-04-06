@@ -50,7 +50,7 @@ class PermissionServiceProvisioner extends AbstractProvisioner
                     'type' => 'method',
                     'name' => $op,
                     'access_scope' => $scope,
-                    'operation' => $op,
+                    'operation' => $op
                 ];
                 $permissions->addItem(new Permission($permission_data));
             }

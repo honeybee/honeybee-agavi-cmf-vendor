@@ -17,8 +17,7 @@ class AclServiceProvisioner extends AbstractProvisioner
         $service = $service_definition->getClass();
 
         $state = [
-            ':roles_configuration' => $this->loadAclConfig(),
-            ':additional_resources' => $this->loadAdditionalResources(),
+            ':roles_configuration' => $this->loadAclConfig()
         ];
 
         $this->di_container->define($service, $state)->share($service)->alias(AclServiceInterface::CLASS, $service);
@@ -29,11 +28,5 @@ class AclServiceProvisioner extends AbstractProvisioner
         return include AgaviConfigCache::checkConfig(
             AgaviConfig::get('core.config_dir') . DIRECTORY_SEPARATOR . self::ACL_CONFIG_NAME
         );
-    }
-
-    protected function loadAdditionalResources()
-    {
-        $creds = include AgaviConfig::get('core.config_dir') . '/includes/action_credentials.php';
-        return array_keys($creds);
     }
 }

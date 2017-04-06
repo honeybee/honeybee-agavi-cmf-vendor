@@ -26,11 +26,13 @@ class PermissionService extends Configurable implements PermissionServiceInterfa
     public function __construct(
         ActivityServiceInterface $activity_service,
         AggregateRootTypeMap $aggregate_root_type_map,
-        array $access_config
+        array $access_config,
+        PermissionListMap $additional_permissions
     ) {
         $this->access_config = $access_config;
         $this->activity_service = $activity_service;
         $this->aggregate_root_type_map = $aggregate_root_type_map;
+        $this->additional_permissions = $additional_permissions;
     }
 
     public function getRolePermissions($role_id)
@@ -78,6 +80,8 @@ class PermissionService extends Configurable implements PermissionServiceInterfa
         foreach ($this->activity_service->getContainers() as $scope => $container) {
             $permissions_map->setItem($scope, $this->buildDefaultPermissions($container));
         }
+
+        $permissions_map->append($this->additional_permissions);
 
         return $permissions_map;
     }
@@ -180,6 +184,10 @@ class PermissionService extends Configurable implements PermissionServiceInterfa
 
                 case 'attribute':
                     $affected_permissions->append($this->evaluateAttributeRule($acl_rule));
+                    break;
+
+                case 'method':
+                    $affected_permissions->append($this->evaluateMethodRule($acl_rule));
                     break;
 
                 default:
@@ -326,6 +334,28 @@ class PermissionService extends Configurable implements PermissionServiceInterfa
             if ($allow_all_operations_on_all_attributes
                 || $allow_specific_operation_on_all_attributes
                 || $allow_specific_operation_on_specific_attribute
+            ) {
+                $permission_data = $scope_permission->toArray();
+                $permission_data['access_type'] = $rule['access'];
+                $permission_data['expression'] = $rule['expression'];
+                $rule_permissions->addItem(new Permission($permission_data));
+            }
+        }
+
+        return $rule_permissions;
+    }
+
+    protected function evaluateMethodRule(array $rule)
+    {
+        $scope_permissions = $this->getGlobalPermissions()->getItem($rule['scope']);
+        if (!$scope_permissions) {
+            // @todo log/exception: configured permission scope does not exist.
+            return false;
+        }
+        $rule_permissions = new PermissionList();
+        foreach ($scope_permissions as $scope_permission) {
+            if ($scope_permission->getType() === 'method'
+                && ('*' === $rule['operation'] || $scope_permission->getName() === $rule['operation'])
             ) {
                 $permission_data = $scope_permission->toArray();
                 $permission_data['access_type'] = $rule['access'];

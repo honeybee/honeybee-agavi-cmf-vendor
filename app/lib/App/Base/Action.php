@@ -6,19 +6,21 @@ use AgaviAction;
 use AgaviConfig;
 use AgaviRequestDataHolder;
 use AgaviToolkit;
+use AgaviUser;
 use AgaviValidationError;
 use AgaviValidationIncident;
 use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\ScopeKeyInterface;
 use Honeybee\Common\Util\StringToolkit;
-use Honeygavi\Logging\ILogger;
-use Honeygavi\Logging\LogTrait;
-use Honeygavi\Util\HoneybeeAgaviToolkit;
 use Honeybee\Infrastructure\Command\CommandInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
+use Honeygavi\Logging\ILogger;
+use Honeygavi\Logging\LogTrait;
 use Honeygavi\Ui\Activity\ActivityMap;
+use Honeygavi\User\AclSecurityUser;
+use Honeygavi\Util\HoneybeeAgaviToolkit;
 use Zend\Permissions\Acl\Resource\ResourceInterface;
 
 /**
@@ -82,6 +84,33 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
     public function isSecure()
     {
         return true;
+    }
+
+    /**
+     * @param AclUser $user
+     * @param AgaviRequestDataHolder $rd
+     *
+     * @return bool
+     *
+     * @throws RuntimeError when user cannot be checked
+     */
+    public function checkPermissions(AgaviUser $user, AgaviRequestDataHolder $rd)
+    {
+        if (!$this->isSecure()) {
+            return true;
+        }
+
+        $request_method_allowed = false;
+        if (!$user instanceof AclSecurityUser) {
+            throw new RuntimeError('The provided user should be an instance of ' . AclSecurityUser::CLASS);
+        }
+        if ($user->hasCredential($this)) {
+            $request_method_allowed = true;
+        } else {
+            throw new RuntimeError('Access not allowed');
+        }
+
+        return $request_method_allowed;
     }
 
     /**
