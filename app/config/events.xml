@@ -55,7 +55,7 @@
                         <subscription enabled="true">
                             <transport>sync</transport>
                             <filter>
-                                <setting name="expression">match_event(event, ".*\.failed$"</setting>
+                                <setting name="expression">match_event(event, ".*\.failed$")</setting>
                             </filter>
                             <handler implementor="\Honeybee\Infrastructure\Event\FailedJobEventHandler" />
                         </subscription>
