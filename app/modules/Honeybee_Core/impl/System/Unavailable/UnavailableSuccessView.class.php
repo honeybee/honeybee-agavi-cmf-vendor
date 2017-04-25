@@ -1,7 +1,6 @@
 <?php
 
 use Honeygavi\App\Base\View;
-use \AgaviRequestDataHolder;
 
 /**
  * Handles the presentation logic for the %system_actions.unavailable% action.
