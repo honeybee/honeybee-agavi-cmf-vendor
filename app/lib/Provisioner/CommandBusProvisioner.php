@@ -8,6 +8,7 @@ use AgaviContext;
 use Auryn\Injector as DiContainer;
 use Honeybee\Infrastructure\Command\Bus\CommandBusInterface;
 use Honeybee\Infrastructure\Command\Bus\Subscription\LazyCommandSubscription;
+use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 
@@ -60,6 +61,7 @@ class CommandBusProvisioner extends AbstractProvisioner
         }
 
         foreach ($command_bus_config['subscriptions'] as $transport_name => $subscription_config) {
+            $subscription_settings = new Settings($subscription_config['settings']);
             foreach ($subscription_config['commands'] as $command_type => $command_config) {
                 $command_bus->subscribe(
                     $di_container->make(
@@ -67,6 +69,7 @@ class CommandBusProvisioner extends AbstractProvisioner
                         [
                             ':command_type' => $command_type,
                             ':command_transport' => $built_transports[$transport_name],
+                            ':settings' => $subscription_settings,
                             ':command_handler_callback' => function () use ($di_container, $command_config) {
                                 return $di_container->make($command_config['handler']);
                             }

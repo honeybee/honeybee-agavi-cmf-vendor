@@ -4,8 +4,12 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
     "hash": "79d5bd923c429b6c8ae1e38c8a536c12",
     "content-hash": "4dd1b2ee3ff3c5da42b81ef972beb0c4",
+=======
+    "content-hash": "0e0e369cb127aad6b02e58cd9687bd05",
+>>>>>>> bump honeybee composer deps
     "packages": [
         {
             "name": "beberlei/assert",
@@ -726,7 +730,11 @@
         },
         {
             "name": "honeybee/honeybee",
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "version": "0.1.6",
+=======
+            "version": "dev-master",
+>>>>>>> bump honeybee composer deps
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
@@ -904,16 +912,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.37",
+            "version": "1.0.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd"
+                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
-                "reference": "78b5cc4feb61a882302df4fbaf63b7662e5e4ccd",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2474325ee924134bb05848663b12531f6f2e9fbe",
+                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe",
                 "shasum": ""
             },
             "require": {
@@ -935,12 +943,12 @@
                 "league/flysystem-azure": "Allows you to use Windows Azure Blob storage",
                 "league/flysystem-cached-adapter": "Flysystem adapter decorator for metadata caching",
                 "league/flysystem-copy": "Allows you to use Copy.com storage",
-                "league/flysystem-dropbox": "Allows you to use Dropbox storage",
                 "league/flysystem-eventable-filesystem": "Allows you to use EventableFilesystem",
                 "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
                 "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
                 "league/flysystem-webdav": "Allows you to use WebDAV storage",
-                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
+                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter",
+                "spatie/flysystem-dropbox": "Allows you to use Dropbox storage"
             },
             "type": "library",
             "extra": {
@@ -983,7 +991,11 @@
                 "sftp",
                 "storage"
             ],
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "time": "2017-03-22 15:43:14"
+=======
+            "time": "2017-04-25T15:24:43+00:00"
+>>>>>>> bump honeybee composer deps
         },
         {
             "name": "michelf/php-markdown",
@@ -1668,16 +1680,16 @@
         },
         {
             "name": "rdlowrey/auryn",
-            "version": "v1.4.0",
+            "version": "v1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rdlowrey/auryn.git",
-                "reference": "2e4240791162dfe073d59654d8dc06df0eb0b73f"
+                "reference": "c6c92ec081c707f7e9e0a69185665147b30d66de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/2e4240791162dfe073d59654d8dc06df0eb0b73f",
-                "reference": "2e4240791162dfe073d59654d8dc06df0eb0b73f",
+                "url": "https://api.github.com/repos/rdlowrey/auryn/zipball/c6c92ec081c707f7e9e0a69185665147b30d66de",
+                "reference": "c6c92ec081c707f7e9e0a69185665147b30d66de",
                 "shasum": ""
             },
             "require": {
@@ -1725,7 +1737,11 @@
                 "dic",
                 "ioc"
             ],
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "time": "2016-03-14 20:10:19"
+=======
+            "time": "2017-04-07T16:12:28+00:00"
+>>>>>>> bump honeybee composer deps
         },
         {
             "name": "react/promise",
@@ -2007,16 +2023,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v5.4.6",
+            "version": "v5.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "81fdccfaf8bdc5d5d7a1ef6bb3a61bbb1a6c4a3e"
+                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/81fdccfaf8bdc5d5d7a1ef6bb3a61bbb1a6c4a3e",
-                "reference": "81fdccfaf8bdc5d5d7a1ef6bb3a61bbb1a6c4a3e",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
+                "reference": "56db4ed32a6d5c9824c3ecc1d2e538f663f47eb4",
                 "shasum": ""
             },
             "require": {
@@ -2057,7 +2073,11 @@
                 "mail",
                 "mailer"
             ],
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "time": "2017-02-13 07:52:53"
+=======
+            "time": "2017-04-20T17:32:18+00:00"
+>>>>>>> bump honeybee composer deps
         },
         {
             "name": "symfony/cache",
@@ -2881,16 +2901,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.33.0",
+            "version": "v1.33.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a"
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
-                "reference": "05cf49921b13f6f01d3cfdf9018cfa7a8086fd5a",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/dd6ca96227917e1e85b41c7c3cc6507b411e0927",
+                "reference": "dd6ca96227917e1e85b41c7c3cc6507b411e0927",
                 "shasum": ""
             },
             "require": {
@@ -2939,7 +2959,11 @@
             "keywords": [
                 "templating"
             ],
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "time": "2017-03-22 15:40:09"
+=======
+            "time": "2017-04-20T17:39:48+00:00"
+>>>>>>> bump honeybee composer deps
         },
         {
             "name": "zendframework/zend-permissions-acl",
@@ -3161,16 +3185,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "5a5a9fc8025a08d8919be87d6884d5a92520cefe"
+                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/5a5a9fc8025a08d8919be87d6884d5a92520cefe",
-                "reference": "5a5a9fc8025a08d8919be87d6884d5a92520cefe",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/8e6e04167378abf1ddb4d3522d8755c5fd90d102",
+                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
                 "shasum": ""
             },
             "require": {
@@ -3199,7 +3223,11 @@
                 "object",
                 "object graph"
             ],
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "time": "2017-01-26 22:05:40"
+=======
+            "time": "2017-04-12T18:52:22+00:00"
+>>>>>>> bump honeybee composer deps
         },
         {
             "name": "pdepend/pdepend",
@@ -4983,16 +5011,16 @@
         },
         {
             "name": "theseer/fdomdocument",
-            "version": "1.6.1",
+            "version": "1.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/theseer/fDOMDocument.git",
-                "reference": "d9ad139d6c2e8edf5e313ffbe37ff13344cf0684"
+                "reference": "8dcfd392135a5bd938c3c83ea71419501ad9855d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/theseer/fDOMDocument/zipball/d9ad139d6c2e8edf5e313ffbe37ff13344cf0684",
-                "reference": "d9ad139d6c2e8edf5e313ffbe37ff13344cf0684",
+                "url": "https://api.github.com/repos/theseer/fDOMDocument/zipball/8dcfd392135a5bd938c3c83ea71419501ad9855d",
+                "reference": "8dcfd392135a5bd938c3c83ea71419501ad9855d",
                 "shasum": ""
             },
             "require": {
@@ -5019,7 +5047,11 @@
             ],
             "description": "The classes contained within this repository extend the standard DOM to use exceptions at all occasions of errors instead of PHP warnings or notices. They also add various custom methods and shortcuts for convenience and to simplify the usage of DOM.",
             "homepage": "https://github.com/theseer/fDOMDocument",
+<<<<<<< 2dd4af39cc53c26a24199c220faaf6d431b56157
             "time": "2015-05-27 22:58:02"
+=======
+            "time": "2017-04-21T14:50:31+00:00"
+>>>>>>> bump honeybee composer deps
         },
         {
             "name": "webmozart/assert",
@@ -5075,6 +5107,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "honeybee/honeybee": 20,
         "roave/security-advisories": 20,
         "mockery/mockery": 20,
         "satooshi/php-coveralls": 20

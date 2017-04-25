@@ -98,7 +98,8 @@ class CommandBusConfigHandler extends BaseConfigHandler
 
             $subscriptions[$transport] = array(
                 'transport' => $transport,
-                'commands' => $commands
+                'commands' => $commands,
+                'settings' => $this->parseSettings($subscription_element)
             );
         }
 

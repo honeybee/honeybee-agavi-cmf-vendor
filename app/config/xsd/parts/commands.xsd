@@ -44,6 +44,7 @@
     <xs:complexType name="SubscriptionType">
         <xs:sequence>
             <xs:element name="commands" type="CommandCollectionType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="settings" type="SettingsListType" minOccurs="0" maxOccurs="1" />
         </xs:sequence>
         <xs:attribute name="transport" type="xs:string" use="required" />
     </xs:complexType>
