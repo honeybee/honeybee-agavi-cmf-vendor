@@ -1,6 +1,7 @@
 // mixins
 
 // aligns anything vertically by percentage value
+// note: 'transform' creates a new stacking context
 @mixin align-y($percentage: 50%) {
     position: relative;
     top: $percentage;

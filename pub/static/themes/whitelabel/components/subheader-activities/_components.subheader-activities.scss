@@ -10,10 +10,10 @@ $subheader-height: $base-spacing*2 !default;
         padding-bottom: $small-spacing;
     }
 
-    // center vertically
-    .activity-map {
-        @include media-query(lap-and-up) {
-            transform: translateY(50%);
-        }
+    // center vertically, align right
+    @include media-query(lap-and-up) {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
 }
