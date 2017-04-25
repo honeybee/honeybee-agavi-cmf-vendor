@@ -19,19 +19,19 @@
                     <setting name="type">domain_event</setting>
                 </settings>
             </storage_writer>
-            <storage_writer name="honeybee.core::process_state::process_store::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter">
+            <storage_writer name="honeybee.core::process_state::process_store::writer" class="Honeygavi\DataAccess\Storage\Filesystem\ProcessState\ProcessStateWriter">
                 <connection>ProcessState.Store</connection>
             </storage_writer>
-            <storage_writer name="honeybee.core::process_state::process_cache::writer" class="Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateWriter">
+            <storage_writer name="honeybee.core::process_state::process_cache::writer" class="Honeygavi\DataAccess\Storage\Memory\ProcessState\ProcessStateWriter">
                 <connection>ProcessState.Cache</connection>
             </storage_writer>
         </storage_writers>
 
         <storage_readers>
-            <storage_reader name="honeybee.core::process_state::process_store::reader" class="Honeybee\Infrastructure\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader">
+            <storage_reader name="honeybee.core::process_state::process_store::reader" class="Honeygavi\DataAccess\Storage\Filesystem\ProcessState\ProcessStateReader">
                 <connection>ProcessState.Store</connection>
             </storage_reader>
-            <storage_reader name="honeybee.core::process_state::process_cache::reader" class="Honeybee\Infrastructure\DataAccess\Storage\Memory\ProcessState\ProcessStateReader">
+            <storage_reader name="honeybee.core::process_state::process_cache::reader" class="Honeygavi\DataAccess\Storage\Memory\ProcessState\ProcessStateReader">
                 <connection>ProcessState.Cache</connection>
             </storage_reader>
         </storage_readers>
