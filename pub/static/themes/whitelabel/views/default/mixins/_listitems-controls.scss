@@ -29,13 +29,10 @@
             padding-left: 0.5em;
         }
 
-        .sort__control {
-            // vertical align
-            @include media-query(lap) {
-                position: relative;
-                top: 50%;
-                transform: translateY(-50%);
-            }
+        // vertical align .sort__control
+        .sort__content {
+            display: flex;
+            align-items: center;
         }
 
         .pager__description {
