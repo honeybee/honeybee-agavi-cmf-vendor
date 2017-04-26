@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "45c25afd640a554fc387dc7bad1f699e",
+    "content-hash": "8df732d371276f0a77d7ce834de115a7",
     "packages": [
         {
             "name": "beberlei/assert",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "3ee3bc468a3ce4bbfc3d74f53c6cdb5242d39d1a"
+                "reference": "2f688ee39ea9ce9e2c2164c9db62df3246b8fbff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/3ee3bc468a3ce4bbfc3d74f53c6cdb5242d39d1a",
-                "reference": "3ee3bc468a3ce4bbfc3d74f53c6cdb5242d39d1a",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/2f688ee39ea9ce9e2c2164c9db62df3246b8fbff",
+                "reference": "2f688ee39ea9ce9e2c2164c9db62df3246b8fbff",
                 "shasum": ""
             },
             "require": {
@@ -59,7 +59,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2017-03-14T18:06:52+00:00"
+            "time": "2017-04-26T09:32:13+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -725,16 +725,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "dev-develop",
+            "version": "0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "c2e76a0eeac40b9806533bcee78b83a32d07d039"
+                "reference": "82e4d7900e37453f2829b52a3467460eb2afb061"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/c2e76a0eeac40b9806533bcee78b83a32d07d039",
-                "reference": "c2e76a0eeac40b9806533bcee78b83a32d07d039",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/82e4d7900e37453f2829b52a3467460eb2afb061",
+                "reference": "82e4d7900e37453f2829b52a3467460eb2afb061",
                 "shasum": ""
             },
             "require": {
@@ -815,7 +815,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-04-25 15:52:34"
+            "time": "2017-04-26T12:45:54+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -5074,7 +5074,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "honeybee/honeybee": 20,
         "roave/security-advisories": 20,
         "mockery/mockery": 20,
         "satooshi/php-coveralls": 20
