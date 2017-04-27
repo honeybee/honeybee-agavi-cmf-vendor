@@ -725,16 +725,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.1.7",
+            "version": "0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "82e4d7900e37453f2829b52a3467460eb2afb061"
+                "reference": "b4abf2716994776b8fcca76b64fc269ba39adc84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/82e4d7900e37453f2829b52a3467460eb2afb061",
-                "reference": "82e4d7900e37453f2829b52a3467460eb2afb061",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b4abf2716994776b8fcca76b64fc269ba39adc84",
+                "reference": "b4abf2716994776b8fcca76b64fc269ba39adc84",
                 "shasum": ""
             },
             "require": {
@@ -815,7 +815,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-04-26T12:45:54+00:00"
+            "time": "2017-04-27T12:51:29+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -3099,12 +3099,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "e3a85ae983b481d9cc680ca8e1a03879772353f8"
+                "reference": "8e0ea898cf987e22ebfdbc7c13c18593b53c0334"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/e3a85ae983b481d9cc680ca8e1a03879772353f8",
-                "reference": "e3a85ae983b481d9cc680ca8e1a03879772353f8",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/8e0ea898cf987e22ebfdbc7c13c18593b53c0334",
+                "reference": "8e0ea898cf987e22ebfdbc7c13c18593b53c0334",
                 "shasum": ""
             },
             "require": {
@@ -3156,7 +3156,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2017-04-15 07:20:44"
+            "time": "2017-04-27 05:35:56"
         },
         {
             "name": "myclabs/deep-copy",
