@@ -729,12 +729,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "b4abf2716994776b8fcca76b64fc269ba39adc84"
+                "reference": "f8826184f19ada77218b881c8e39146374a73c90"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/b4abf2716994776b8fcca76b64fc269ba39adc84",
-                "reference": "b4abf2716994776b8fcca76b64fc269ba39adc84",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/f8826184f19ada77218b881c8e39146374a73c90",
+                "reference": "f8826184f19ada77218b881c8e39146374a73c90",
                 "shasum": ""
             },
             "require": {
