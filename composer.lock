@@ -725,16 +725,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.1.8",
+            "version": "0.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "f8826184f19ada77218b881c8e39146374a73c90"
+                "reference": "cddbdcfc36c310c6edde66e0fe553a83187a1fda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/f8826184f19ada77218b881c8e39146374a73c90",
-                "reference": "f8826184f19ada77218b881c8e39146374a73c90",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/cddbdcfc36c310c6edde66e0fe553a83187a1fda",
+                "reference": "cddbdcfc36c310c6edde66e0fe553a83187a1fda",
                 "shasum": ""
             },
             "require": {
@@ -815,7 +815,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-04-27T12:51:29+00:00"
+            "time": "2017-04-28T14:33:27+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -903,16 +903,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.39",
+            "version": "1.0.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe"
+                "reference": "3828f0b24e2c1918bb362d57a53205d6dc8fde61"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/2474325ee924134bb05848663b12531f6f2e9fbe",
-                "reference": "2474325ee924134bb05848663b12531f6f2e9fbe",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/3828f0b24e2c1918bb362d57a53205d6dc8fde61",
+                "reference": "3828f0b24e2c1918bb362d57a53205d6dc8fde61",
                 "shasum": ""
             },
             "require": {
@@ -982,7 +982,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-04-25T15:24:43+00:00"
+            "time": "2017-04-28T10:15:08+00:00"
         },
         {
             "name": "michelf/php-markdown",
