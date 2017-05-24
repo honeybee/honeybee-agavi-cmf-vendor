@@ -12,6 +12,7 @@ class CollectionAction extends Action
     public function executeRead(AgaviRequestDataHolder $request_data)
     {
         $display_mode = $this->getDisplayMode($request_data);
+
         $query_result = $this->query($request_data->getParameter('list_config')->asQuery());
 
         $this->setAttribute('resource_type', $this->getProjectionType());
@@ -26,10 +27,14 @@ class CollectionAction extends Action
 
     public function executeWrite(AgaviRequestDataHolder $request_data)
     {
+        $display_mode = $this->getDisplayMode($request_data);
+
         $this->setAttribute('command', $this->dispatchCommand($request_data->getParameter('command')));
         $this->setAttribute('resource_type', $this->getProjectionType());
+        $this->setAttribute('display_mode', $display_mode);
+        $this->setAttribute('view_scope', $this->getScopeKey());
 
-        return $this->executeRead($request_data);
+        return ucfirst($display_mode) . 'Success';
     }
 
     public function handleError(AgaviRequestDataHolder $request_data)
