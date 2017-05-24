@@ -24,7 +24,7 @@ class CollectionSuccessView extends View
                 $this->getResponse()->setRedirect(
                     $this->getContext()->getRouting()->gen(
                         'module.collection',
-                        [ 'module' => $this->getAttribute('resource_type') ],
+                        [ 'module' => $this->getAttribute('resource_type'), 'sort' => 'modified_at:desc' ],
                         [ 'relative' => false ]
                     )
                 );
