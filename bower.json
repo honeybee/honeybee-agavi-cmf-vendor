@@ -1,6 +1,6 @@
 {
     "name": "honeybee",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "license": "MIT",
     "private": true,
     "main": "pub/static/require.js",
@@ -10,15 +10,15 @@
         "lodash": "~3",
         "Sortable": "~1.2",
 
-        "moment": "~2.10.3",
+        "moment": "~2.10.6",
         "datetime-local-picker": "^0.4.0",
         "magnific-popup": "~1",
         "selectrect": "~0.0.6",
 
         "Stickyfill": "~1.1.3",
 
-        "squire-rte": "~1.8.8",
-        "dompurify": "~0.8.5",
+        "squire-rte": "~1.8.9",
+        "dompurify": "~0.8.9",
 
         "inuit-defaults": "latest",
         "inuit-responsive-settings": "latest",

@@ -2,7 +2,7 @@
     "name": "honeybee",
     "description": "Defines the node dependencies for honeybee.",
     "author": "Thorsten Schmitt-Rink <thorsten.schmitt-rink@berlinonline.de>",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "license": "MIT",
     "private": true,
     "dependencies": {
