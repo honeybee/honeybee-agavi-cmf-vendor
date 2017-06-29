@@ -7,8 +7,9 @@ class Honeybee_Core_Util_ReplayEvents_ReplayEventsSuccessView extends View
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
         $message = sprintf(
-            '-> successfully replayed events for aggregate root type "%s"' . PHP_EOL,
-            $request_data->getParameter('type')->getName()
+            '-> successfully replayed events for aggregate root type "%s"%s' . PHP_EOL,
+            $request_data->getParameter('type')->getName(),
+            $request_data->getParameter('identifier')?' for identifier: '.$request_data->getParameter('identifier'):''
         );
 
         $distributed_events = $this->getAttribute('distributed_events', []);

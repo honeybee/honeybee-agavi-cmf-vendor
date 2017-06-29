@@ -39,6 +39,12 @@
                 <error>You must specify a valid aggregate root type name within you project's domain.</error>
             </validator>
 
+            <validator class="string" name="aggregate_root_identifier" required="false" depends="valid_type_name valid_channel_name">
+                <argument>identifier</argument>
+                <error>You must specify a valid aggregate root identifier to replay events for.</error>
+                <ae:parameter name="min">1</ae:parameter>
+                <ae:parameter name="max">255</ae:parameter>
+            </validator>
         </validators>
     </ae:configuration>
 </ae:configurations>
