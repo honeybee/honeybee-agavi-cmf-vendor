@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b5a1c41f8d9c6f5f035c3797acb4e4d",
+    "content-hash": "77fe07d15a717604138e3664419c05bc",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -728,16 +728,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "4db6300cb7ae03d3c92e6a8141b9d702a33b5d39"
+                "reference": "3c6982e9f417ef0515dddaf1bc57459fa06c148a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/4db6300cb7ae03d3c92e6a8141b9d702a33b5d39",
-                "reference": "4db6300cb7ae03d3c92e6a8141b9d702a33b5d39",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/3c6982e9f417ef0515dddaf1bc57459fa06c148a",
+                "reference": "3c6982e9f417ef0515dddaf1bc57459fa06c148a",
                 "shasum": ""
             },
             "require": {
@@ -818,7 +818,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-06-23T12:02:24+00:00"
+            "time": "2017-06-29T12:27:18+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -3229,7 +3229,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2017-06-22T13:56:23+00:00"
+            "time": "2017-06-22 13:56:23"
         },
         {
             "name": "myclabs/deep-copy",
