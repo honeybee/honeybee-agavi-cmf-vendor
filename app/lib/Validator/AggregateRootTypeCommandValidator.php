@@ -444,6 +444,14 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
             }
         }
 
+        $current_role_id = $this->getContext()->getServiceLocator()->getEnvironment()->getUser()->getRoleId() ?? '';
+        foreach ($this->getParameter('attribute_blacklist_for_role-'.$current_role_id, []) as $attribute_name) {
+            preg_match("#^$path_prefix\.?(?<name>[a-z_]+)$#", $attribute_name, $match);
+            if (isset($match['name'])) {
+                $attribute_blacklist[] = $match['name'];
+            }
+        }
+
         if ($entity_type instanceof AggregateRootTypeInterface) {
             $default_blacklist = $entity_type->getDefaultAttributeNames();
             $attribute_blacklist = array_merge($attribute_blacklist, $default_blacklist);

@@ -24,7 +24,8 @@ final class ServiceLocator implements ServiceLocatorInterface
         'renderer_service' => 'honeybee.ui',
         'view_config_service' => 'honeybee.ui',
         'view_template_service' => 'honeybee.ui',
-        'task_service' => 'honeybee.model'
+        'task_service' => 'honeybee.model',
+        'environment' => 'honeybee',
     ];
 
     private $service_locator;
