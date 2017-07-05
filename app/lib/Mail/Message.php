@@ -8,30 +8,6 @@ namespace Honeygavi\Mail;
  */
 class Message implements MailInterface
 {
-    /**
-     * Set the 'type' key of attachments to specify that the content of the
-     * 'content' key is raw data.
-     */
-    const ATTACHMENT_TYPE_DATA = 'data';
-
-    /**
-     * Set the 'type' key of attachments to specify that the content of the
-     * 'content' key is a path to a file.
-     */
-    const ATTACHMENT_TYPE_PATH = 'path';
-
-    /**
-     * Set the 'type' key of attachments to specify that the content of the
-     * 'content' key is a path to a resource (e.g. file handle).
-     */
-    const ATTACHMENT_TYPE_RESOURCE = 'resource';
-
-    /**
-     * Default mime type that is used when no content type is specified for
-     * attachments.
-     */
-    const CONTENT_TYPE_DEFAULT = "application/octet-stream";
-
     protected $bcc;
     protected $body_html;
     protected $body_text;

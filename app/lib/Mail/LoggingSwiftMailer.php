@@ -309,10 +309,11 @@ class LoggingSwiftMailer implements MailServiceInterface
 
     /**
      * Attachment array keys:
-     * - 'path'
+     * - 'content'
      * - 'content_disposition'
      * - 'content_type'
      * - 'name'
+     * - 'type' (being 'path' or 'data' - specifies whether the 'content' is a file path or data to attach/embed)
      *
      * @param array $attachment information about the attachment to create
      *
@@ -322,8 +323,8 @@ class LoggingSwiftMailer implements MailServiceInterface
     {
         $file = '';
         if (MailInterface::CONTENT_DISPOSITION_INLINE === $attachment['content_disposition']) {
-            if (!empty($attachment['path'])) {
-                $file = Swift_EmbeddedFile::fromPath($attachment['path']);
+            if (!empty($attachment['type']) && $attachment['type'] === MailInterface::ATTACHMENT_TYPE_PATH) {
+                $file = Swift_EmbeddedFile::fromPath($attachment['content']);
                 $file->setFilename($attachment['name']);
                 $file->setContentType($attachment['content_type']);
             } else {
@@ -334,8 +335,8 @@ class LoggingSwiftMailer implements MailServiceInterface
                 );
             }
         } elseif (MailInterface::CONTENT_DISPOSITION_ATTACHMENT === $attachment['content_disposition']) {
-            if (!empty($attachment['path'])) {
-                $file = Swift_Attachment::fromPath($attachment['path']);
+            if (!empty($attachment['type']) && $attachment['type'] === MailInterface::ATTACHMENT_TYPE_PATH) {
+                $file = Swift_Attachment::fromPath($attachment['content']);
                 $file->setFilename($attachment['name']);
                 $file->setContentType($attachment['content_type']);
             } else {
