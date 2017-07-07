@@ -104,8 +104,8 @@ define([
             this.picker.unbind();
         }
 
-        window.pickers = window.pickers || [];
-        window.pickers.push(this.picker);
+        // window.pickers = window.pickers || [];
+        // window.pickers.push(this.picker);
     }
 
     DatePicker.prototype = new Widget();

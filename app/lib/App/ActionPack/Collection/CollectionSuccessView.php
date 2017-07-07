@@ -4,12 +4,16 @@ namespace Honeygavi\App\ActionPack\Collection;
 
 use AgaviConfig;
 use AgaviRequestDataHolder;
-use Honeygavi\App\Base\View;
-use Honeybee\Infrastructure\Config\Settings;
-use Honeygavi\Ui\Activity\Activity;
-use Honeygavi\Ui\Activity\Url as ActivityUrl;
-use Honeygavi\Ui\ValueObjects\Pagination;
 use Honeybee\Common\Util\ArrayToolkit;
+use Honeybee\Infrastructure\Config\Settings;
+use Honeygavi\App\Base\View;
+use Honeygavi\Ui\Activity\Activity;
+use Honeygavi\Ui\Activity\ActivityMap;
+use Honeygavi\Ui\Activity\Url as ActivityUrl;
+use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\Filter\ListFilter;
+use Honeygavi\Ui\Filter\ListFilterMap;
+use Honeygavi\Ui\ValueObjects\Pagination;
 
 class CollectionSuccessView extends View
 {
@@ -231,8 +235,28 @@ EOT;
 
     protected function setSearchForm(AgaviRequestDataHolder $request_data)
     {
-        $activity_service = $this->getServiceLocator()->getActivityService();
+        $service_locator = $this->getServiceLocator();
+        $activity_service = $service_locator->getActivityService();
+        $list_filter_map = $this->getListFilterMap($request_data);
+        $list_filters_activity_map = $this->buildListFiltersActivityMap($list_filter_map);
         $search_activity = $activity_service->getActivity($this->getViewScope(), 'search');
+
+        $rendered_list_filters = $this->getRenderedListFilters($request_data);
+        $rendered_list_filters_control = $this->renderSubject(
+            $this->buildListFiltersActivityMap($list_filter_map),
+            [
+                'as_dropdown' => true,
+                'emphasized' => true,
+                // 'name' => 'list-filters-control',
+                'default_content' => 'Foo',
+                'default_activity_name' => 'mutating',
+                'default_activity_rels' => 'promote',
+                'activity.mutating' => [
+                    'template' => 'html/dummy/activity_custom_template.twig'
+                ],
+            ]
+        );
+
         $rendered_search_form = $this->renderSubject(
             $search_activity,
             [
@@ -240,11 +264,39 @@ EOT;
                 'form_parameters' => [
                     'sort' => $request_data->getParameter('sort')
                     // ,'filter' => $request_data->getParameter('filter')
+                ],
+                // 'rendered_list_filters_control' => $rendered_list_filters_control,
+                'rendered_additional_markup' => [
+                    'list_filters_control' => $rendered_list_filters_control,
+                    'list_filters' => $rendered_list_filters
                 ]
             ]
         );
         $this->setAttribute('rendered_search_form', $rendered_search_form);
         $this->setAttribute('search_value', $request_data->getParameter('search'));
+    }
+
+    protected function buildListFiltersActivityMap(ListFilterMap $list_filter_map)
+    {
+        $list_filters_activity_map = new ActivityMap();
+        foreach ($list_filter_map as $list_filter) {
+            $activity_name = $list_filter->getName();
+            $list_filters_activity_map->setItem(
+                $activity_name,
+                new Activity([
+                    'name' => $activity_name,
+                    'scope' => 'list_filters',
+                    'url' => Url::createUri('javascript:void(0);'),   // @todo what url, when no-js?
+                    'label' => sprintf('%s.label', $activity_name),
+                    'description' => sprintf('%s.description', $activity_name),
+                    'verb' => 'read',
+                    'settings' => new Settings
+                    // 'url' => Url::createRoute($action_options['route'], $route_params)
+                ])
+            );
+        }
+
+        return $list_filters_activity_map;
     }
 
     protected function setSortActivities(AgaviRequestDataHolder $request_data)
@@ -381,5 +433,76 @@ EOT;
         $this->setAttribute('rendered_pagination', $rendered_pagination);
 
         return $rendered_pagination;
+    }
+
+    protected function getRenderedListFilters(AgaviRequestDataHolder $request_data)
+    {
+        $view_config_service = $this->getServiceLocator()->getViewConfigService();
+        $output_format = $this->getOutputFormat();
+        $view_scope = $this->getViewScope();
+        $rendered_list_filters = '';
+
+        $list_filter_map = $this->getListFilterMap($request_data);
+        if (!$list_filter_map->isEmpty()) {
+            $list_filter_names = $list_filter_map->getKeys();
+            $undefined_filters = array_filter(
+                $request_data->getFlatParameterNames(),
+                function ($parameter_name) use ($list_filter_names) {
+                    if (preg_match("~^filter\[(\w+)\]$~", $parameter_name, $matches)) {
+                        return !in_array($matches[1], $list_filter_names);
+                        // @todo Also provide the list-filter value
+                    }
+                }
+            );
+
+            $renderer_config = $view_config_service->getRendererConfig(
+                $view_scope,
+                $output_format,
+                'list_filters'
+            );
+
+            $rendered_list_filters = $this->renderSubject(
+                $list_filter_map,
+                [
+                    'view_scope' => $view_scope,
+                    'undefined_filters' => $undefined_filters
+                ],
+                $renderer_config,
+                [ 'resource' => $this->getAttribute('resource_type')->createEntity() ]
+            );
+        }
+
+        return $rendered_list_filters;
+    }
+
+    protected function getListFilterMap(AgaviRequestDataHolder $request_data)
+    {
+        $view_config_service = $this->getServiceLocator()->getViewConfigService();
+        $view_config = $view_config_service->getViewConfig($this->getViewScope());
+        $view_settings = $view_config->getSettings();
+
+        $type = $this->getAttribute('resource_type');
+
+        $list_config_filters = $request_data->getParameter('list_config')->getFilter();
+        $list_filters = (array)$view_settings->get('list_filters', []);
+
+        $list_filter_map = new ListFilterMap();
+        foreach ($list_filters as $filter_name => $value) {
+            $list_filter_map->setItem(
+                $filter_name,
+                new ListFilter(
+                    $filter_name,
+                    $list_config_filters[$filter_name] ?? null,
+                    $type->hasAttribute($filter_name) ? $type->getAttribute($filter_name) : null
+                )
+            );
+        }
+
+        $this->setAttribute(
+            'list_filters_enabled',
+            $view_settings->get('list_filters_enabled', !$list_filter_map->isEmpty())
+        );
+
+        return $list_filter_map;
     }
 }

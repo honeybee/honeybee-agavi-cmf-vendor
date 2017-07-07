@@ -105,6 +105,8 @@ abstract class ActivityRenderer extends Renderer
             $params['form_parameters'] = [ 'revision' => $revision ];
         }
 
+        $params['rendered_additional_markup'] = (array)$this->getOption('rendered_additional_markup', []);
+
         return $params;
     }
 

@@ -1,4 +1,29 @@
 .controls {
     // @extend %sheet;
-}
 
+    .search__content .search--with-additional-markup {
+        display: flex;
+        flex-wrap: wrap;
+
+        // remove automatic *-box settings and use flex
+        .search__input-box,
+        .search__submit-box,
+        .search__list-filters-box,
+        .search__list-filters-control-box { padding-left: 0; }
+
+        // top line
+        .search__list-filters-control-box { flex: 1 0 5%; }
+        .search__input-box { flex: 1 1 80% }
+        .search__submit-box { flex: 0 0 5% }
+        // bottom line
+        .search__list-filters-box { flex: 0 1 100%; }
+    }
+
+    &.controls--list_filters_enabled {
+        .search-box,
+        .sort-box,
+        .pager-box {
+            vertical-align: top;
+        }
+    }
+}

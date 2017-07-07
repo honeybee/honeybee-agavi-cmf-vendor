@@ -39,6 +39,7 @@
     .activity-search {
         @include button-emphasized-navigational {
             overflow: visible;
+            white-space: nowrap;
         };
         // avoid text wrapping
         @include flex-shrink(0);

@@ -1,0 +1,28 @@
+{%- block list_filters -%}
+<div class="hb-list-filters jsb_ jsb_Honeybee_Core/ui/ListFilters">
+    {% if rendered_list_filters is not empty %}
+        <input type="checkbox" name="hb-list-filters__trigger" id="hb-list-filters__trigger" value="hb-list-filters__trigger" class="hb-list-filters__trigger">
+        <div class="hb-list-filters__header">
+            <!-- <label for="hb-list-filters__trigger" class="hb-list-filters__toggle">List Filters</label> -->
+            <div class="hb-list-filters__quick-controls">
+                {%- for filter_name, rendered_filter in rendered_list_filters -%}
+                    <div class="hb-list-filters__quick">
+                        <label class="hb-list-filters__quick-label hb-list-filter__toggle hb-list-filter-{{filter_name}}__toggle" for="hb-list-filter-{{filter_name}}__trigger"tabindex="0">{{ _(filter_name~'.quick_label', translation_domain) }}</label>
+                        <span class="hb-list-filters__clear" tabindex="0">x</span>
+                    </div>
+                {%- endfor -%}
+            </div>
+        </div>
+        <div class="hb-list-filters__content">
+            {%- for filter_name, rendered_filter in rendered_list_filters -%}
+                <input type="checkbox" id="hb-list-filter-{{filter_name}}__trigger" class="hb-list-filter__trigger" checked>
+                <div class="hb-list-filters__filter hb-list-filters__filter_{{filter_name}}">
+                    {{ rendered_filter|raw }}
+                </div>
+            {%- else -%}
+                No Filters
+            {%- endfor -%}
+        </div>
+    {% endif %}
+</div>
+{%- endblock -%}

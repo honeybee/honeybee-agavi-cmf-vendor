@@ -1,0 +1,29 @@
+{%- block timestamp_attribute_filter -%}
+{# @todo Write a separated template for the markup of the interval-picker? Separated from the filter markup? #}
+<div class="hb-list-filter {{css}}" data-jsb="{{ widget_options|json_encode }}" data-js-attribute-name="{{ attribute_name }}" data-js-from="{{ from_value }}" data-js-to="{{ to_value }}">
+    <div class="hb-list-filter__content">
+        <div class="hb-list-filter__label">
+            <label for="{{ filter_name }}">{{ _(filter_name~'.label', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-list-filter__value hb-list-filter-{{filter_name}}__value">
+            <div class="{{css_prefix}}-interval-picker__input input-choice">
+                <select name="{{ input_name }}" data-js-value="{{ filter_value }}" id="{{ filter_name }}">
+                    <option value="">{{ _(attribute_name ~ '_picker_none', translation_domain) }}</option>
+                    {% for value, label in choice_options %}
+                        <option value="{{ value }}" {% if value == filter_value %}selected{% endif %}>{{ _(attribute_name ~ '_picker_' ~ label, translation_domain) }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="{{css_prefix}}-interval-picker__custom {{css_prefix}}-interval-picker__custom--hidden">
+                <div class="datepicker-controls-wrapper datepicker-controls-wrapper-template">
+                    <input type="text" class="datepicker-input" placeholder="{{ _(attribute_name ~ '_picker_placeholder') }}" />
+                    <button type="button" class="datepicker-toggle activity" style="display: none;">
+                        <span class="datepicker-toggle__icon"></span>
+                        <span class="datepicker-toggle__label">{{ _(attribute_name ~ '_picker_toggle', translation_domain) }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%- endblock -%}

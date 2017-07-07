@@ -25,7 +25,7 @@
 
 {% block primary %}
 
-<div class="controls controls-top">
+<div class="controls controls-top {% if list_filters_enabled %}controls--list_filters_enabled{% endif %}">
     <div class="controls-layout">
         <div class="search-box">
             {{ rendered_search_form|raw }}

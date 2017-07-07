@@ -119,8 +119,8 @@
     }
 
     .search__content {
-        input[type=search] {
-            @include media-query(lap-and-up) { margin-right: $base-spacing; }
+        .activity-search {
+            @include media-query(lap-and-up) { margin-left: $base-spacing; }
         }
 
         .search-description { display: none; }
