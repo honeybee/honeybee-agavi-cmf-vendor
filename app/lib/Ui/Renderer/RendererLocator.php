@@ -5,6 +5,7 @@ namespace Honeygavi\Ui\Renderer;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Config\ConfigInterface;
+use Honeygavi\Ui\Filter\ListFilterInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use Psr\Log\LoggerInterface;
 
@@ -96,27 +97,37 @@ class RendererLocator implements RendererLocatorInterface
                 $types[] = $type;
             }
 
+            $type_modifier = $this->getTypeModifier($subject);
+
             $impls_tried = [];
             // try to get the most specific renderer for the subject's class
             foreach ($types as $type) {
+                if (!empty($type_modifier)) {
+                    $impl = str_replace('{SUBJECT}', $this->buildTypeString($type, $type_modifier), $format_implementor);
+                    if (class_exists($impl)) {
+                        $implementor = $impl;
+                        break;
+                    }
+                    $impls_tried[] = $impl;
+                }
                 $impl = str_replace('{SUBJECT}', $this->buildTypeString($type), $format_implementor);
                 if (class_exists($impl)) {
                     $implementor = $impl;
                     break;
-                } else {
-                    if ($logging_enabled) {
-                        $this->logger->debug(
-                            sprintf(
-                                '[%s] [OutputFormat=%s] [Subject=%s] Renderer does not exist: %s',
-                                __METHOD__,
-                                $this->output_format_name,
-                                is_object($subject) ? get_class($subject) : gettype($subject),
-                                $impl
-                            )
-                        );
-                    }
                 }
                 $impls_tried[] = $impl;
+            }
+
+            if ($logging_enabled && !empty($impls_tried)) {
+                $this->logger->debug(
+                    sprintf(
+                        '[%s] [OutputFormat=%s] [Subject=%s] Renderers tried but not found:' . PHP_EOL . '%s',
+                        __METHOD__,
+                        $this->output_format_name,
+                        is_object($subject) ? get_class($subject) : gettype($subject),
+                        implode(PHP_EOL, $impls_tried)
+                    )
+                );
             }
 
             if (empty($implementor)) {
@@ -189,11 +200,25 @@ class RendererLocator implements RendererLocatorInterface
         return $implementor_template;
     }
 
-    protected function buildTypeString($namespaced_type)
+    protected function getTypeModifier($subject)
+    {
+        $modifier = '';
+        if ($subject instanceof ListFilterInterface) {
+            $attr = $subject->getAttribute();
+            if ($attr) {
+                $attr_class = new \ReflectionClass($attr);
+                $modifier = $attr_class->getShortName();
+            }
+        }
+
+        return $modifier;
+    }
+
+    protected function buildTypeString($namespaced_type, $type_modifier = '')
     {
         $type_parts = explode('\\', $namespaced_type);
         $type_name = array_pop($type_parts);
-        $type_parts[] = StringToolkit::asStudlyCaps($this->output_format_name) . $type_name;
+        $type_parts[] = StringToolkit::asStudlyCaps($this->output_format_name) . $type_modifier . $type_name;
 
         return implode('\\', $type_parts);
     }
