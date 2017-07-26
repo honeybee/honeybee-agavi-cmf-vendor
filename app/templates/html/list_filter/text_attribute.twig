@@ -1,0 +1,19 @@
+{#
+    JS requirements:
+    - Label must provide the classname of the block containing the filter controls (data-js-expand-target)
+    - Label is used as summary, when the filter is not shown
+#}
+{%- block list_filter -%} {# this block exists for whitespace control #}
+<div class="hb-list-filter">
+    <div class="hb-list-filter__content">
+        <div class="hb-list-filter__label">
+            <label for="{{ filter_name }}">{{ _(filter_name~'.label', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-list-filter__value">
+            <input data-bound-filter-id="{{ filter_name }}" type="text" value="{{ filter_value|escape('html_attr') }}" id="{{ filter_name }}" name="filter[{{ filter_name }}]"
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
+                {{ pattern|default('')|raw }} placeholder="{{ _(filter_name~'.placeholder'|default(''), translation_domain) }}" title="{{ _(filter_name~'.title'|default(''), translation_domain) }}" />
+        </div>
+    </div>
+</div>
+{%- endblock -%}
