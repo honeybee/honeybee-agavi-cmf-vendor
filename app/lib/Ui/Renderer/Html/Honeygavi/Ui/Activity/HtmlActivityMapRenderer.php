@@ -144,6 +144,7 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
             'more_activities' => $this->getOption('more_activities', $rendered_activities),
             'toggle_disabled' => $this->getOption('toggle_disabled', false),
             'default_content' => $this->getOption('default_content', $this->_($default_label)),
+            'default_description'   => $this->_($this->getOption('default_description', $this->getOption('name', 'activity_map') . '.description')),
             'default_activity_rels' => $default_rels
         ];
         if (!count($params['more_activities'])) {
