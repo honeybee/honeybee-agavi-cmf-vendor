@@ -1,0 +1,73 @@
+{%- block list_filters -%}
+<div class="hb-list-filters {{ css }}" {% if widget_enabled %}data-jsb="{{ widget_options|json_encode }}"{% endif %}>
+    {%- block list_filters_header -%}
+    <div class="hb-list-filters__header">
+        <ul class="hb-list-filters__quick-controls">
+            {% for filter_id, rendered_filter in rendered_list_filters -%}
+                {% set value = list_filters[filter_id].current_value %}
+                {% set content = block('control_default_content') %}
+                {{ block('quick_control') }}
+            {%- endfor -%}
+        </ul>
+    </div>
+    <div class="hb-list-filters__content">
+        <ul class="hb-list-filters__list">
+            {%- for filter_id, rendered_filter in rendered_list_filters -%}
+                {% set content = rendered_filter %}
+                {{ block('list_filter_item') }}
+            {%- endfor -%}
+        </ul>
+    </div>
+    {%- endblock -%}
+
+    {# @todo Import list filters templates from separate twig #}
+    {%- block list_filters_templates -%}
+    <div class="hb-list-filters__templates visuallyhidden">
+        <!-- available vars: FILTER_ID, CONTENT}, VALUE -->
+        {%- set filter_id = '{FILTER_ID}' -%}
+        {%- set content = '{CONTENT}' -%}
+        {%- set value = '{VALUE}' -%}
+
+        {# default list filters templates #}
+        <script type="text/template" data-template-name="quick-control">
+            {%- block quick_control -%}
+                <li class="hb-list-filters__quick" data-filter-id="{{ filter_id }}">{{ content|raw }}</li>
+            {%- endblock -%}
+        </script>
+
+        <script type="text/template" data-template-name="quick-control_default_content">
+            {% block control_default_content %}
+                <label class="hb-list-filters__quick-label hb-list-filter__toggle hb-list-filter-{{ filter_id }}__toggle" for="hb-list-filter-{{ filter_id }}__trigger"tabindex="0">
+                        {{ _('quick_label', null, null, null, '{FILTER_ID}: {VALUE}')|replace({ '{VALUE}': value, '{FILTER_ID}': filter_id }) }}
+                </label>
+                <span class="hb-list-filters__clear" title="{{ _('quick_clear.description', translation_domain) }}" tabindex="0">
+                    {{ _('quick_clear', translation_domain, null, null, 'x') }}
+                </span>
+            {% endblock %}
+        </script>
+
+        <script type="text/template" data-template-name="filter-list-item">
+            {%- block list_filter_item -%}
+                <li class="hb-list-filters__list-item" data-filter-id="{{ filter_id }}">
+                    <input type="checkbox" id="hb-list-filter-{{ filter_id }}__trigger" class="hb-list-filters__trigger">
+                    <div class="hb-list-filters__filter hb-list-filters__filter_{{ filter_id }}" data-filter-id="{{ filter_id }}">
+                        {{ content|raw }}
+                    </div>
+                </li>
+            {%- endblock -%}
+        </script>
+
+        {# custom list filters templates #}
+        {% for filter_id, rendered_filter_template in rendered_list_filters_templates -%}
+            {# @todo avoid to render filters that use default template? #}
+            {# @todo support array in rendered_filter_template, when we need more than one template? or custom code in custom js? #}
+            {% if rendered_filter_template is not empty %}
+            <script type="text/template" data-template-name="{{ filter_id }}_filter" data-js-filter-id="{{ filter_id }}">
+                {{ rendered_filter_template|raw }}
+            </script>
+            {%- endif -%}
+        {%- endfor -%}
+    </div>
+    {%- endblock -%}
+</div>
+{%- endblock -%}

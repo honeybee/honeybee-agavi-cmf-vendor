@@ -1,0 +1,26 @@
+<div class="search__content {% if rendered_additional_markup is not empty %}search--with-additional-markup{% endif %}">
+    <label for="{{ form_id }}search" class="search-description">{{ _('search.description', translation_domain) }}</label>
+    <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|default('')|join(' ') }}" id="{{ form_id }}" data-hb-translation-domain="{{ translation_domain }}">
+        {% if rendered_additional_markup.list_filters_control is not empty %}
+        <div class="search__list-filters-control jsb_ jsb_Honeybee_Core/ui/ListFiltersControl">
+            {{ rendered_additional_markup.list_filters_control|raw }}
+        </div>
+        {% endif %}
+        <div class="search__activity-layout layout--flush layout--middle">
+            <div class="search__input-box">
+                <input type="search" id="{{ form_id }}search" name="search" value="{{ options.search_value|default('') }}" placeholder="{{ _(activity_label, translation_domain) }}" maxlength="500" autocomplete spellcheck autosave />
+            </div><!--
+            --><div class="search__submit-box">
+                <button type="submit" title="{{ activity_description }}" class="{{ css|default('')|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" rel="{{ activity.rels|default([])|join(' ') }}" data-form-id="{{ form_id }}" {% if disabled %}disabled="disabled"{% endif %}>{{ activity_label }}</button>
+            </div>
+        </div>
+        <div class="search__additional-inputs">
+        {% for param_name, param_value in form_parameters|default([]) %}
+            <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
+        {% endfor %}
+        </div>
+    </form>
+    <div class="search__list-filters-layout">
+        <div class="search__list-filters-box">{{ rendered_additional_markup.list_filters|default('')|raw }}</div>
+    </div>
+</div>
