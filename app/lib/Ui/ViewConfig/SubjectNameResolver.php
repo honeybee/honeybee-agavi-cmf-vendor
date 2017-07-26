@@ -8,6 +8,7 @@ use Honeybee\Entity;
 use Honeybee\Projection\Projection;
 use Honeybee\Projection\ProjectionTypeInterface;
 use Honeygavi\Ui\Activity\ActivityInterface;
+use Honeygavi\Ui\Filter\ListFilterInterface;
 use ReflectionClass;
 
 class SubjectNameResolver implements NameResolverInterface
@@ -51,6 +52,8 @@ class SubjectNameResolver implements NameResolverInterface
                 $subject_class = new ReflectionClass($subject);
                 $subject_name = $subject_class->getShortName();
                 if ($subject instanceof ActivityInterface) {
+                    $subject_name = $subject->getName() . $subject_name;
+                } elseif ($subject instanceof ListFilterInterface) {
                     $subject_name = $subject->getName() . $subject_name;
                 }
             }
