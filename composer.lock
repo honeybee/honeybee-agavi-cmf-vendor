@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2edf5b4c47cc570b90dbfb19cfb52a0a",
+    "content-hash": "93a1f4536740bb8cc9e7047b7ca6f6f4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -730,23 +730,23 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.2.2",
+            "version": "0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "90c653a9d18f95ec044c4b2aedd6677154a9a521"
+                "reference": "49cb9b1e82d061d9d3b1b0737457b6606af79770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/90c653a9d18f95ec044c4b2aedd6677154a9a521",
-                "reference": "90c653a9d18f95ec044c4b2aedd6677154a9a521",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/49cb9b1e82d061d9d3b1b0737457b6606af79770",
+                "reference": "49cb9b1e82d061d9d3b1b0737457b6606af79770",
                 "shasum": ""
             },
             "require": {
                 "beberlei/assert": "^2.7",
                 "elasticsearch/elasticsearch": "^2.0",
                 "guzzlehttp/guzzle": "^6.2",
-                "honeybee/trellis": "^0.1.5",
+                "honeybee/trellis": "^0.1.6",
                 "league/flysystem": "^1.0",
                 "mtdowling/jmespath.php": "^2.4",
                 "php": ">=5.6.0",
@@ -820,20 +820,20 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-07-27T09:27:03+00:00"
+            "time": "2017-07-27T12:22:19+00:00"
         },
         {
             "name": "honeybee/trellis",
-            "version": "0.1.5",
+            "version": "0.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "151b666805f7d5c1bed6d3bfe841a320d3f38f72"
+                "reference": "f4e898c521b0b1a71c612f7d7f81721a9509c88d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/151b666805f7d5c1bed6d3bfe841a320d3f38f72",
-                "reference": "151b666805f7d5c1bed6d3bfe841a320d3f38f72",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/f4e898c521b0b1a71c612f7d7f81721a9509c88d",
+                "reference": "f4e898c521b0b1a71c612f7d7f81721a9509c88d",
                 "shasum": ""
             },
             "require": {
@@ -904,7 +904,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2017-07-27T08:25:45+00:00"
+            "time": "2017-07-27T12:17:35+00:00"
         },
         {
             "name": "league/flysystem",
