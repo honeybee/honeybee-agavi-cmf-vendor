@@ -43,6 +43,8 @@ class MappingGeneratorPlugin implements PluginInterface
         'token' => 'string',
         'url' => 'string',
         'url-list' => 'string',
+        'html-link' => 'object',
+        'html-link-list' => 'object',
         'uuid' => 'string'
     ];
 
@@ -232,5 +234,15 @@ class MappingGeneratorPlugin implements PluginInterface
     protected function mapToken($attribute_name, $attribute, $type_definition)
     {
         return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'index' => 'not_analyzed' ];
+    }
+
+    protected function mapHtmlLink($attribute_name, $attribute, $type_definition)
+    {
+        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
+    }
+
+    protected function mapHtmlLinkList($attribute_name, $attribute, $type_definition)
+    {
+        return [ 'type' => self::$es_type_map[$attribute->getShortName()], 'enabled' => false ];
     }
 }
