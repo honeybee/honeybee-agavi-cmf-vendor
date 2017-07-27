@@ -37,7 +37,7 @@ class HtmlListFilterMapRenderer extends Renderer
         $custom_list_filters = $this->getOption('custom_list_filters');
 
         $params['rendered_list_filters'] = $this->renderListFilters($list_filter_map);
-        $params['rendered_list_filters_templates'] = $custom_list_filters
+        $params['rendered_list_filters_templates'] = $custom_list_filters instanceof ListFilterMap
             ? $this->renderListFilters($custom_list_filters)
             : [];
         $params['list_filters'] = array_map(
