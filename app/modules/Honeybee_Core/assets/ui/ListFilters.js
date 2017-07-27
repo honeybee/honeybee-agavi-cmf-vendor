@@ -22,12 +22,14 @@ define([
         input_with_id: 'input[name="filter[{FILTER_ID}]"]',
         filter_list: '.hb-list-filters__list',
         filter_with_id: '[data-filter-id="{FILTER_ID}"]',
+// filter_bound_input: '[data-bound-filter-id]', // '.hb-list-filter__default-input',
         quick_control: '.hb-list-filters__quick',
         quick_control_list: '.hb-list-filters__quick-controls',
         quick_control_label: '.hb-list-filters__quick-label',
         quick_control_with_id: '[data-filter-id="{FILTER_ID}"]',
         template: 'script[type="text/template"]',
         trigger: '.hb-list-filters__trigger',
+        bubble: '.hb-list-filter__value',
         filter_toggle_class: 'hb-list-filter__toggle',
         quick_clear_class: 'hb-list-filters__clear'
     };
@@ -145,6 +147,16 @@ define([
                     input_value: $target.val()
                 }
             );
+        });
+
+        // close bubbles
+        $(document).on("click", function(e) {
+            var $target = $(e.target);
+            var $open_filters = self.$widget.find(selectors.trigger).filter(':checked');
+            var target_selector = selectors.bubble + ', .' + selectors.filter_toggle_class + ', .hb-list-filters-control .activity';
+            if ($open_filters.length && !$target.is(target_selector) && !$target.closest(target_selector).length) {
+                $open_filters.prop('checked', false);
+            }
         });
 
         return this;
@@ -304,7 +316,7 @@ define([
 
     ListFilters.prototype.positionBubble = function(id) {
         var $quick_control = this.getQuickControl(id);
-        var $bubble = this.$widget.find('.hb-list-filter__value');
+        var $bubble = this.$widget.find(selectors.bubble);
         var left_pos = +$quick_control.position().left + +$quick_control.width() / 2;
 
         $bubble.css('left', left_pos + 'px');

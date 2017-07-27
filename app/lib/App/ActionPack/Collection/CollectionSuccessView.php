@@ -249,6 +249,7 @@ EOT;
                 [
                     'as_dropdown' => true,
                     'emphasized' => true,
+                    'css' => 'hb-list-filters-control activity-map',
                     // 'name' => 'list-filters-control',    // @todo fix css support for name
                     'default_description' => $this->translation_manager->_('collection.list_filters.description', $td),
                     'dropdown_label' => $this->translation_manager->_('collection.add_list_filter', $td)
