@@ -121,8 +121,8 @@
             @extend .u-4-of-12-desk;
         }
 
-        .search__input-box { @extend %lap-and-up-9-of-10; @extend %portable-9-of-10; }
-        .search__submit-box { @extend %lap-and-up-1-of-10;  @extend %portable-1-of-10; }
+        .search__input-box { @extend %lap-and-up-9-of-10; }
+        .search__submit-box { @extend %lap-and-up-1-of-10; }
     }
 
     .search__content {
