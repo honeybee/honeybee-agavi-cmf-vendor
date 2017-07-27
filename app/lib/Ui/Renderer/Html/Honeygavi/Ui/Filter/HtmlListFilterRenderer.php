@@ -74,7 +74,7 @@ class HtmlListFilterRenderer extends Renderer
     protected function getTranslatedFilterValue()
     {
         $filter_value = $this->list_filter->getCurrentValue();
-        $filter_value_key = sprintf('%s.value_%s', $this->list_filter->getName(), $filter_value);
+        $filter_value_key = sprintf('filter_%s.value_%s', $this->list_filter->getName(), $filter_value);
 
         return $this->_($filter_value_key, null, null, null, '') ? $filter_value_key : $filter_value;
     }
