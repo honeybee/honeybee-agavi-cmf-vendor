@@ -25,23 +25,10 @@
 
 /* search activity */
 .search__content {
-    form {
-        @include flexbox;
-        @include flex-flow(row);
-        @include align-items(center);
-    }
-
-    input[type=search] {
-        @include flex-grow(1);
-        margin-right: $small-spacing;
-    }
-
     .activity-search {
         @include button-emphasized-navigational {
-            overflow: visible;
+            white-space: nowrap;
         };
-        // avoid text wrapping
-        @include flex-shrink(0);
     }
 }
 
