@@ -17,6 +17,8 @@ define([
     "Honeybee_Core/lib/selectrect",
 
     "Honeybee_Core/ui/Autostart",
+    "Honeybee_Core/ui/ListFilters",
+    "Honeybee_Core/ui/ListFiltersControl",
     "Honeybee_Core/ui/DatePicker",
     "Honeybee_Core/ui/SelectBox",
     "Honeybee_Core/ui/TextList",
