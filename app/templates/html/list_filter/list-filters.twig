@@ -1,5 +1,5 @@
 {%- block list_filters -%}
-<div class="hb-list-filters {{ css }}" {% if widget_enabled %}data-jsb="{{ widget_options|json_encode }}"{% endif %}>
+<div class="hb-list-filters {{ css }}" {% if widget_enabled %}data-jsb="{{ widget_options|json_encode }}"{% endif %} data-hb-translation-domain="{{ translation_domain }}">
     {%- block list_filters_header -%}
     <div class="hb-list-filters__header">
         <ul class="hb-list-filters__quick-controls">
