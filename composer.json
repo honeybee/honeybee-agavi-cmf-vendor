@@ -52,7 +52,7 @@
         "php": ">=5.6.0",
         "lib-libxml": "*",
         "honeybee/agavi": "1.0.9",
-        "honeybee/honeybee": "^0.2.1",
+        "honeybee/honeybee": "^0.2.2",
         "michelf/php-markdown": "^1.7",
         "monolog/monolog": "^1.22",
         "mthaml/mthaml": "^1.8",
@@ -85,6 +85,7 @@
             "@validate-json"
         ],
         "test": "phpunit",
+        "tests": "phpunit --no-coverage",
         "code-sniffer": "phpcs --extensions=php --standard=psr2 app/lib testing",
         "code-sniffer-autofix": "phpcbf --standard=psr2 -d tabWidth=4 app/lib testing",
         "validate-json": "composer validate --no-check-all --no-check-lock",
