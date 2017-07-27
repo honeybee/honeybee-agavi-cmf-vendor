@@ -295,8 +295,21 @@ define([
             .filter(function() { return $(this).is($trigger) === false; })
             .prop('checked', false);
 
+        $filter.find('[data-bound-filter-id]').focus();
+
+        this.positionBubble(id);
+
         return this;
     };
+
+    ListFilters.prototype.positionBubble = function(id) {
+        var $quick_control = this.getQuickControl(id);
+        var $bubble = this.$widget.find('.hb-list-filter__value');
+        var left_pos = +$quick_control.position().left + +$quick_control.width() / 2;
+
+        $bubble.css('left', left_pos + 'px');
+        // @todo Solve flowing over the window
+    }
 
     ListFilters.prototype.isFilterLoaded = function(id) {
         return this.$form_controls.find(selectors.input_with_id.replace('{FILTER_ID}', id)).length !== 0;
