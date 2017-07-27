@@ -103,26 +103,29 @@
         @extend .layout--middle;
 
         .search-box {
+            vertical-align: top;
             @extend .u-1-of-1-portable;
             @extend .u-6-of-12-desk;
         }
+
         .sort-box {
+            vertical-align: top;
             @extend .u-1-of-1-palm;
             @extend .u-3-of-8-lap-and-up;
             @extend .u-2-of-12-desk;
         }
         .pager-box {
+            vertical-align: top;
             @extend .u-1-of-1-palm;
             @extend .u-5-of-8-lap-and-up;
             @extend .u-4-of-12-desk;
         }
+
+        .search__input-box { @extend %lap-and-up-9-of-10; @extend %portable-9-of-10; }
+        .search__submit-box { @extend %lap-and-up-1-of-10;  @extend %portable-1-of-10; }
     }
 
     .search__content {
-        input[type=search] {
-            @include media-query(lap-and-up) { margin-right: $base-spacing; }
-        }
-
         .search-description { display: none; }
     }
 

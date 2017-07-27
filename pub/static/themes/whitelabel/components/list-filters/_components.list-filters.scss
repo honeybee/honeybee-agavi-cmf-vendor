@@ -1,0 +1,185 @@
+$enable-bubbles: true !default;
+$filter_value_background: if($enable-bubbles, color(lightgrey1), color(lightgrey2));
+$quick_controls_height: 2 * $base-spacing;
+
+// show/hide triggers
+
+// .hb-list-filters__content,
+// .hb-list-filters__trigger { display: none; }
+// .hb-list-filters__trigger:checked ~ .hb-list-filters__content { display: flex; }
+
+.hb-list-filter,
+.hb-list-filters__filter,
+.hb-list-filters__trigger { display: none; }
+.hb-list-filters__trigger:checked + .hb-list-filters__filter { display: inline-flex; }
+
+// list-filters
+.hb-list-filters {
+    // javascript not loaded
+    &.jsb_ {
+        .hb-list-filters__clear { display: none; }
+
+        .hb-list-filters__filter {
+            input, textarea, select {
+                @include input-textual-disabled();
+            }
+        }
+    }
+
+    // javascript loaded
+    &:not(jsb_) {
+    }
+}
+
+.hb-list-filters {
+    width: 100%;
+    // background-color: color(lightgrey3);
+    // margin-top: $small-spacing;
+}
+
+.hb-list-filters__header {
+    display: inline-flex;
+}
+
+.hb-list-filters__toggle {
+    flex-grow: 0;
+    flex-shrink: 2;
+    flex-basis: 2 * $base-spacing;
+
+    // @include button-colors-emphasized-navigational;
+    // @include button-shadow-emphasized-navigational;
+
+    padding: $small-spacing;
+    box-sizing: border-box !important; // override icon-mixin   @todo remove !important
+}
+
+// quick controls
+
+.hb-list-filters__quick-controls {
+    position: relative;
+    display: inline-flex;
+    flex-wrap: wrap;
+
+    margin: 0;
+    // padding: $small-spacing;
+
+    height: auto;
+    overflow: auto;
+}
+.hb-list-filters__quick {
+    display: inline-flex;
+    margin: 2px;
+    margin-right: $small-spacing;
+    margin-top: $small-spacing;
+    height: 1.5em;
+}
+
+.hb-list-filters__clear,
+.hb-list-filters__quick-label {
+    @include button-colors-emphasized-navigational;
+    @include button-shape;
+    @include typography-default;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.hb-list-filters__quick-label {
+    white-space: nowrap;
+    width: auto;
+    @include button-states {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+.hb-list-filters__clear {
+    @include button-states {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    };
+}
+
+
+.hb-list-filters__content {
+    position: absolute;
+    @include zindex('popover');
+    @include shadow-overlay;
+    // padding: $base-spacing;
+
+
+    // @include outline;
+    border-radius: $buttons-border-radius;
+    background-color: color(lightgrey1);
+}
+
+.hb-list-filters__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// list-filter
+
+.hb-list-filter {
+    position: relative;
+    display: inline-flex;
+    // padding-right: $base-spacing;
+}
+
+.hb-list-filter__toggle:focus,
+.hb-list-filters__clear:focus {
+    @include outline;
+}
+
+.hb-list-filter__label { display: none; }
+
+.hb-list-filter__value {
+    @include sheet($filter_value_background);
+    border-radius: $buttons-border-radius;
+    min-width: 250px;
+    padding: $small-spacing;
+
+    @if $enable-bubbles {
+        position: absolute;
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 10px;
+            border-width: 0 7px 10px;
+            border-style: solid;
+            border-color: $filter_value_background transparent;
+            display: block;
+            width: 0;
+        }
+    }
+}
+
+.hb-list-filter--hidden {
+
+}
+
+
+// list-filters related (@todo move in a better place)
+
+.search__list-filters-control {
+    // javascript not loaded
+    &.jsb_ { display: none; }
+
+    .base-dropdown__more {
+        // @include flyout--popover('list-filters-control');
+        left: 0;
+        right: initial;
+    }
+    .base-dropdown__toggle-icon { display: none; }
+    .activity-map {
+        .base-dropdown__toggle {
+            @include hb-icon-pseudo-el(funnel);
+            @include button-states {
+                padding: $small-spacing;
+            }
+        }
+        &.destructive .base-dropdown__toggle:before {
+            content: map-get($hb-icon, 'cross') !important;
+        }
+    }
+}

@@ -1,4 +1,17 @@
 .controls {
     // @extend %sheet;
-}
 
+    .search--with-additional-markup {
+        form {
+            @include media-query(lap-and-up) {
+                display: flex;
+                flex-wrap: nowrap;
+
+                // top line
+                .search__list-filters-control { flex: 0 0 10%; }
+                .search__activity-layout { flex: 1 1 90%; }
+            }
+        }
+        .search__list-filters-layout { height: 0; display: inline; }
+    }
+}

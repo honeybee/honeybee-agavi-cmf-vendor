@@ -24,6 +24,7 @@ $inuit-base-spacing-unit: $base-spacing !default;
 $inuit-base-line-height: 1.6*$base-spacing !default;
 $inuit-base-text-color: map-get($colors, grey-shadow) !default;
 $inuit-base-background-color: map-get($colors, white) !default;
+$inuit-enable-layout--flush: true;
 
 // our breakpoint definitions for use with @media-query
 $breakpoints: (
