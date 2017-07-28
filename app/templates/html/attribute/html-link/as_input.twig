@@ -1,0 +1,65 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
+<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    <div class="hb-field__content">
+        <div class="hb-field__label">
+            <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
+        </div><!--
+        --><div class="hb-field__value">
+            <div class="htmllink-controls">
+                <div class="htmllink-popup-preview">{{ _(field_name~'.preview_link', translation_domain, null, null, '') }}<a href="{{ attribute_value.href|default('') }}" rel="noreferrer noopener" target="_blank">{{ attribute_value.text|default('') }}</a><span style="visibility:hidden">M</span></div>
+                <button data-mfp-src="#{{ field_id }}-popup" class="htmllink-popup-trigger">
+                    <span>{{ _(field_name~'.add_link', translation_domain, null, null, '') }}</span>
+                    <span class="icon"></span>
+                </button>
+                {# <button href="#{{ field_id }}-popup-empty" class="activity emphasized warning">X</button> #}
+            </div>
+            <div class="htmllink-popup" id="{{ field_id }}-popup">
+                <div>
+                    <h2>{{ _(field_name~'.field_name', translation_domain) }}</h2>
+                    <ul class="htmllink-popup__inputs">
+                        <li>
+                            <label class="htmllink__label-href">{{ _(field_name~'.href.label', translation_domain) }}<input type="url" name="{{grouped_base_path}}[href]" value="{{ attribute_value.href|default('') }}" {{required}} {{readonly}} {{disabled}} id="{{field_id}}" class="htmllink__href" title="{{ translations.title|default('') }}" placeholder="{{ translations.placeholder|default('') }}" />
+                            <ul class="errors">{%- block field_errors  -%}{%- for error in errors -%}<li class="error">{{error}}</li>{%- endfor -%}{%- endblock  -%}</ul></label>
+                            {% if translations.input_help is defined %}
+                                <div class="input_help">{{ translations.input_help|raw }}</div>
+                            {% endif %}
+                            {% if translations.input_hint is defined %}
+                                <div class="input_hint">{{ translations.input_hint|raw }}</div>
+                            {% endif %}
+                            {% if translations.input_focus_hint is defined %}
+                                <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
+                            {% endif %}
+                        <li>
+                            <label class="htmllink__label-text">{{ _(field_name~'.text.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[text]" value="{{ attribute_value.text|default('') }}" {{readonly}} {{disabled}} class="htmllink__text" /><ul class="errors"></ul></label>
+                        <li>
+                            <label class="htmllink__label-title">{{ _(field_name~'.title.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[title]" value="{{ attribute_value.title|default('') }}" {{readonly}} {{disabled}} class="htmllink__title" /><ul class="errors"></ul></label>
+                        <li>
+                            <label class="htmllink__label-target">{{ _(field_name~'.target.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[target]" value="{{ attribute_value.target|default('') }}" {{readonly}} {{disabled}} class="htmllink__target" /><ul class="errors"></ul></label>
+                        <li>
+                            <label class="htmllink__label-rel">{{ _(field_name~'.rel.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[rel]" value="{{ attribute_value.rel|default('') }}" {{readonly}} {{disabled}} class="htmllink__rel" /><ul class="errors"></ul></label>
+                        <li>
+                            <input type="hidden" value="0" id="{{ field_id }}_download_hidden" name="{{grouped_base_path}}[download]" class="" {{ readonly }} {{ disabled }}>
+                            <div class="input-checkbox">
+                                <input type="checkbox" value="1" id="{{ field_id }}_download" name="{{grouped_base_path}}[download]" class="htmllink__download"
+                                    {{ readonly }} {{ disabled }} title="{{ translations.title|default('') }}"
+                                    {% if attribute_value.download|default(false) == true %} checked="checked" {% endif %} />
+                                <label for="{{ field_id }}_download" class="input-proxy"></label>
+                                <label for="{{ field_id }}_download">{{ _(field_name~'.download.label', translation_domain) }}</label>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="htmllink-popup__buttons">
+                        <li><button type="button" class="htmllink-popup__accept">{{ _('popup-link.accept', 'application.hrte') }}</button>
+                        <li><button type="button" class="htmllink-popup__reset">{{ _('popup-link.reset', 'application.hrte') }}</button>
+                    </ul>
+                </div>
+            </div>
+
+        </div><!--
+        --><div class="hb-field__extra">
+            {%- block htmllink_field_extra -%}{%- endblock -%}
+        </div>
+    </div>
+</div>
+{%- endblock field -%}

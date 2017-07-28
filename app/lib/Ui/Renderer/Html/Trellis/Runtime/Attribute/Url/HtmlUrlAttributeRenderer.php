@@ -24,6 +24,8 @@ class HtmlUrlAttributeRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
+        $params['grouped_field_name'] = $params['grouped_field_name'] . '[]';
+
         $open_in_blank = $this->getOption('open_in_blank', true);
         $params['open_in_blank'] = $open_in_blank;
 

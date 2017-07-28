@@ -1,0 +1,5 @@
+{%- block field -%} {# this block exists for whitespace control #}
+{% if attribute_value.href is defined %}
+<a href="{{ attribute_value.href|default('') }}" class="{{ css|default('') }}" target="{{ attribute_value.target|default('_blank') }}" rel="{{ attribute_value.rel|default('noopener noreferrer') }}" {% if attribute_value.download %}download{% endif %} hreflang="{{ attribute_value.hreflang|default('')}}" title="{{ attribute_value.title|default('') }}">{{ attribute_value.text|default('') }}</a>
+{% endif %}
+{%- endblock field -%}

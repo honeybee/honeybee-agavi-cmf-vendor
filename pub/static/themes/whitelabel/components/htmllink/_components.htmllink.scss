@@ -1,0 +1,101 @@
+.htmllink-controls {
+    position: relative;
+}
+
+.htmllink-popup-trigger {
+    @include button-emphasized-navigational;
+    // override button stylings
+    &,
+    &:focus,
+    &:hover,
+    &:active,
+    &:disabled,
+    &.disabled {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border: 0;
+        margin: 1px;
+    }
+
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    min-width: 67.5px;
+    min-height: 41px;
+
+    span {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    .icon {
+        width: 24px;
+        height: 24px;
+        background: transparent no-repeat center;
+        background-size: contain;
+        background-image: url('binaries/icons/hrte/addlink.svg');
+    }
+
+    &:disabled {
+        opacity: 0.3;
+    }
+}
+
+.htmllink-popup-preview {
+    @include input-textual-shape-default;
+    @include input-textual-colors-default;
+    width: 100%;
+    text-align: left;
+}
+
+.mfp-content .htmllink-popup {
+    display: block;
+}
+
+.htmllink-popup {
+    display: none;
+    background: #fff;
+    padding: 20px 30px;
+    text-align: left;
+    max-width: 650px;
+    margin: 20px auto;
+    position: relative;
+}
+.jsb_ .htmllink-popup {
+    display: block;
+}
+
+.htmllink-popup__inputs {
+    @extend %list-bare;
+    margin-bottom: 1em;
+
+    li {
+        margin-bottom: 1em;
+    }
+}
+
+.htmllink-popup__buttons {
+    @extend %list-bare;
+    @extend %pack;
+
+    li {
+        @extend %pack__item;
+        text-align: center;
+    }
+}
+
+.htmllink-popup__accept {
+    @include button-emphasized-mutating;
+}
+
+.htmllink-popup__reset {
+    @include button-normal-warning;
+}
+
+.htmllink-popup__cancel {
+    @include button-emphasized-navigational;
+}
+

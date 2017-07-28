@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "93a1f4536740bb8cc9e7047b7ca6f6f4",
+    "content-hash": "2b4eee216b3c614f92ba7aa0d4cd3ca7",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -730,16 +730,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.2.3",
+            "version": "0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "49cb9b1e82d061d9d3b1b0737457b6606af79770"
+                "reference": "6858878de0c36060cfd579ca858610a3b1283be1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/49cb9b1e82d061d9d3b1b0737457b6606af79770",
-                "reference": "49cb9b1e82d061d9d3b1b0737457b6606af79770",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/6858878de0c36060cfd579ca858610a3b1283be1",
+                "reference": "6858878de0c36060cfd579ca858610a3b1283be1",
                 "shasum": ""
             },
             "require": {
@@ -820,20 +820,20 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-07-27T12:22:19+00:00"
+            "time": "2017-07-28T14:26:15+00:00"
         },
         {
             "name": "honeybee/trellis",
-            "version": "0.1.6",
+            "version": "0.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/trellis.git",
-                "reference": "f4e898c521b0b1a71c612f7d7f81721a9509c88d"
+                "reference": "b8a92ea61af8e9d4582d47e6cd50cb0b9f4c2a23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/trellis/zipball/f4e898c521b0b1a71c612f7d7f81721a9509c88d",
-                "reference": "f4e898c521b0b1a71c612f7d7f81721a9509c88d",
+                "url": "https://api.github.com/repos/honeybee/trellis/zipball/b8a92ea61af8e9d4582d47e6cd50cb0b9f4c2a23",
+                "reference": "b8a92ea61af8e9d4582d47e6cd50cb0b9f4c2a23",
                 "shasum": ""
             },
             "require": {
@@ -904,7 +904,7 @@
                 "entity",
                 "validation"
             ],
-            "time": "2017-07-27T12:17:35+00:00"
+            "time": "2017-07-28T07:55:54+00:00"
         },
         {
             "name": "league/flysystem",
@@ -1831,12 +1831,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "fa53c38b02d1ec883f4ea2b2c05492da0c7611cf"
+                "reference": "626c97bd5b45a08db902a0fb0b13f58f3785b439"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/fa53c38b02d1ec883f4ea2b2c05492da0c7611cf",
-                "reference": "fa53c38b02d1ec883f4ea2b2c05492da0c7611cf",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/626c97bd5b45a08db902a0fb0b13f58f3785b439",
+                "reference": "626c97bd5b45a08db902a0fb0b13f58f3785b439",
                 "shasum": ""
             },
             "conflict": {
@@ -1882,7 +1882,7 @@
                 "onelogin/php-saml": "<2.10.4",
                 "oro/crm": ">=1.7,<1.7.4",
                 "oro/platform": ">=1.7,<1.7.4",
-                "phpmailer/phpmailer": ">=5,<5.2.22",
+                "phpmailer/phpmailer": ">=5,<5.2.24",
                 "pusher/pusher-php-server": "<2.2.1",
                 "sabre/dav": ">=1.6,<1.6.99|>=1.7,<1.7.11|>=1.8,<1.8.9",
                 "shopware/shopware": "<4.4|>=5,<5.2.16",
@@ -1960,7 +1960,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2017-07-18T08:09:10+00:00"
+            "time": "2017-07-28T07:54:11+00:00"
         },
         {
             "name": "shrink0r/monatic",
