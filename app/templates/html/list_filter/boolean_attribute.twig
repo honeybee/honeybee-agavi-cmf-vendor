@@ -1,19 +1,13 @@
-{%- block list_filter -%} {# this block exists for whitespace control #}
-<div class="hb-list-filter hb-list-filter__choice">
-    <div class="hb-list-filter__content">
-        <div class="hb-list-filter__label">
-            <label for="{{ filter_name }}">{{ _(filter_name~'.label', translation_domain) }}</label>
-        </div><!--
-        --><div class="hb-list-filter__value hb-list-filter__choice-layout layout--flush layout--middle">
-            <div class="1/2 hb-list-filter__choice-box">
-                <input type="radio" data-bound-filter-id="{{ filter_name }}" name="filter[{{ filter_id }}]" value="0" {% if filter_value == '0' %}checked{% endif %} />
-                <span>{{ _('filter_' ~ filter_id ~ '.quick_label.value_0', translation_domain, null, null, '0') }}</span>
-            </div><!--
-            --><div class="1/2 hb-list-filter__choice-box">
-                <input type="radio" data-bound-filter-id="{{ filter_name }}" name="filter[{{ filter_id }}]" value="1" {% if filter_value == '1' %}checked{% endif %} />
-                <span>{{ _('filter_' ~ filter_id ~ '.quick_label.value_1', translation_domain, null, null, '1') }}</span></div>
-            </div>
-        </div>
+{%- extends 'html/list_filter/default_list_filter.twig' -%}
+{%- block filter_input %}
+<div class="hb-list-filter__choice-layout layout--flush layout--middle">
+    <div class="1/2 hb-list-filter__choice-box">
+        <input type="radio" name="filter[{{ filter_id }}]" value="0" {% if filter_value == '0' %}checked{% endif %} />
+        <span>{{ _('filter_' ~ filter_id ~ '.quick_label.value_0', translation_domain, null, null, '0') }}</span>
+    </div><!--
+    --><div class="1/2 hb-list-filter__choice-box">
+        <input type="radio" name="filter[{{ filter_id }}]" value="1" {% if filter_value == '1' %}checked{% endif %} />
+        <span>{{ _('filter_' ~ filter_id ~ '.quick_label.value_1', translation_domain, null, null, '1') }}</span>
     </div>
 </div>
 {%- endblock -%}

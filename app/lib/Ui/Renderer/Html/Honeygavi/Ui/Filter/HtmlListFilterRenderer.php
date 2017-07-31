@@ -46,14 +46,20 @@ class HtmlListFilterRenderer extends Renderer
             $params['attribute_type_name'] = $this->name_resolver->resolve($this->attribute);
         }
 
-        $params['filter_value_translation'] = $this->getTranslatedFilterValue($this->list_filter);
+        // $params['filter_value_translation'] = $this->getTranslatedFilterValue($this->list_filter);
         $params['filter_value'] = $this->list_filter->getCurrentValue();
         $params['filter_name'] = $this->list_filter->getName();
         $params['filter_id'] = $this->list_filter->getId();   // we don't want dots
         $params['html_attributes'] = $this->getOption('html_attributes', []);
 
+        // render inner form, when form-parameters are passed (e.g to support no-js submit of filter)
+        $params['form_parameters'] = $this->getOption('form_parameters', []);
+        $params['form_url'] = $this->url_generator->generateUrl(null);
+
         $params['widget_enabled'] = $this->isWidgetEnabled();
         $params['widget_options'] = $this->getWidgetOptions();
+        $params['widget_options']['translations'] = $params['translations'];
+
         if ($this->hasOption('tabindex')) {
             $params['tabindex'] = $this->getOption('tabindex');
         }
@@ -69,6 +75,53 @@ class HtmlListFilterRenderer extends Renderer
         $params['css'] = $css;
 
         return $params;
+    }
+
+    public function getTranslations($domain = null)
+    {
+        $translations = [];
+        $filter_id = $this->list_filter->getId();
+        $filter_name = $this->list_filter->getName();
+        $filter_value = $this->list_filter->getCurrentValue();
+        $params = [
+            'id' => $filter_id,
+            'name' => $filter_name,
+            'value' => $filter_value
+        ];
+
+        $translations['quick_label'] = $this->lookupTranslation('quick_label', [ 'value' => '{VALUE}' ] + $params, "$filter_name: {VALUE}");
+        $translations['quick_label_title'] = $this->lookupTranslation('quick_label.title', $params);
+        $translations['quick_clear'] = $this->lookupTranslation('quick_clear', $params, 'x');
+        $translations['quick_clear_title'] = $this->lookupTranslation('quick_clear.title', $params);
+        $translations['filter_label'] = $this->lookupTranslation(
+            'filter_label',
+            [ 'value' => '{VALUE}' ] + $params,  // lookup without value
+            $translations['quick_label']
+        );
+        $translations['filter_placeholder'] = $this->lookupTranslation('filter_placeholder', $params, '');
+
+        // value tranlsations
+        // @todo Support translation of values
+
+        return $translations;
+    }
+
+    public function lookupTranslation($text, $params = [], $fallback = null, $domain = null, $locale = null)
+    {
+        $filter_name = $this->list_filter->getName();
+        return $this->_(
+            $filter_name . ".$text.value_" . $params['value'],
+            $domain,
+            $locale,
+            $params,
+            $this->_(
+                $filter_name . ".$text",
+                $domain,
+                $locale,
+                $params,
+                $this->_($text, $domain, $locale, $params, $fallback)
+            )
+        );
     }
 
     protected function getTranslatedFilterValue()
@@ -96,7 +149,7 @@ class HtmlListFilterRenderer extends Renderer
 
     protected function getWidgetImplementor()
     {
-        return $this->getOption('widget', null);
+        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/ListFilter');
     }
 
     /**

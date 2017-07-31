@@ -238,14 +238,25 @@ EOT;
         $search_activity = $activity_service->getActivity($this->getViewScope(), 'search');
         $td = $this->getTranslationDomainPrefix() . '.activity';
 
-        $list_filter_map = $this->getListFilterMap($request_data);
-        $custom_list_filter_map = $this->getCustomListFilterMap();
+        $list_filter_map = $this->getListFilterMap();
+        $active_list_filter_map = $this->getActiveListFilterMap($request_data);
 
-        $rendered_list_filters = $this->getRenderedListFilters($list_filter_map, $custom_list_filter_map);
+        $form_parameters = [ 'sort' => $request_data->getParameter('sort') ];
+        // add initialized filters to search form
+        foreach ($active_list_filter_map as $filter) {
+            $form_parameters[sprintf('filter[%s]', $filter->getName())] = $filter->getCurrentValue();
+        }
+
+        $list_filter_map->append($active_list_filter_map);
+        $list_filters_render_settings = [
+            // 'configured_list_filters' => $list_filter_map,
+            'form_parameters' => $form_parameters
+        ];
+        $rendered_list_filters = $this->getRenderedListFilters($list_filter_map, $list_filters_render_settings);
         $rendered_list_filters_control = '';
-        if (!$custom_list_filter_map->isEmpty()) {
+        if (!$list_filter_map->isEmpty()) {
             $rendered_list_filters_control = $this->renderSubject(
-                $this->buildListFiltersActivityMap($custom_list_filter_map),
+                $this->buildListFiltersActivityMap($list_filter_map),
                 [
                     'as_dropdown' => true,
                     'emphasized' => true,
@@ -255,12 +266,6 @@ EOT;
                     'dropdown_label' => $this->translation_manager->_('collection.add_list_filter', $td)
                 ]
             );
-        }
-
-        $form_parameters = [ 'sort' => $request_data->getParameter('sort') ];
-        // add initialized filters to search form
-        foreach ($list_filter_map as $filter) {
-            $form_parameters[sprintf('filter[%s]', $filter->getName())] = $filter->getCurrentValue();
         }
 
         $rendered_search_form = $this->renderSubject(
@@ -436,7 +441,7 @@ EOT;
         return $rendered_pagination;
     }
 
-    protected function getRenderedListFilters(ListFilterMap $list_filter_map, ListFilterMap $custom_list_filter_map = null)
+    protected function getRenderedListFilters(ListFilterMap $list_filter_map, $render_settings = [])
     {
         $view_config_service = $this->getServiceLocator()->getViewConfigService();
         $output_format = $this->getOutputFormat();
@@ -452,10 +457,10 @@ EOT;
 
             $rendered_list_filters = $this->renderSubject(
                 $list_filter_map,
-                [
-                    'view_scope' => $view_scope,
-                    'custom_list_filters' => $custom_list_filter_map
-                ],
+                array_replace_recursive(
+                    [ 'view_scope' => $view_scope ],
+                    $render_settings
+                ),
                 $renderer_config,
                 [ 'resource' => $this->getAttribute('resource_type')->createEntity() ]
             );
@@ -464,7 +469,7 @@ EOT;
         return $rendered_list_filters;
     }
 
-    protected function getListFilterMap(AgaviRequestDataHolder $request_data)
+    protected function getActiveListFilterMap(AgaviRequestDataHolder $request_data)
     {
         $type = $this->getAttribute('resource_type');
         $list_config_filters = $request_data->getParameter('list_config')->getFilter();
@@ -484,20 +489,20 @@ EOT;
         return $list_filter_map;
     }
 
-    protected function getCustomListFilterMap(ListFilterMap $list_filter_values_map = null)
+    protected function getListFilterMap(ListFilterMap $list_filter_values_map = null)
     {
         $view_config = $this->getServiceLocator()->getViewConfigService()->getViewConfig($this->getViewScope());
         $view_settings = $view_config->getSettings();
-        $custom_list_filters = $view_settings->get('list_filters', []);
+        $configured_list_filters = $view_settings->get('list_filters', []);
         $type = $this->getAttribute('resource_type');
 
-        $custom_list_filter_map = new ListFilterMap();
-        foreach ($custom_list_filters as $filter_name => $value) {
+        $list_filter_map = new ListFilterMap();
+        foreach ($configured_list_filters as $filter_name => $value) {
             $filter_value = null;
             if ($list_filter_values_map && $list_filter_values_map->hasKey($filter_name)) {
                 $filter_value = $list_filter_values_map->getItem($filter_name)->getCurrentValue();
             }
-            $custom_list_filter_map->setItem(
+            $list_filter_map->setItem(
                 $filter_name,
                 new ListFilter(
                     $filter_name,
@@ -506,6 +511,6 @@ EOT;
                 )
             );
         }
-        return $custom_list_filter_map;
+        return $list_filter_map;
     }
 }
