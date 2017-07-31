@@ -126,6 +126,7 @@
     }
 
     .search__content {
+        form { width: 100%; display: inline-flex; }
         .search-description { display: none; }
     }
 
