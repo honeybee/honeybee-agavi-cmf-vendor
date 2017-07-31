@@ -27,8 +27,11 @@ class HtmlTextListAttributeRenderer extends HtmlAttributeRenderer
         $params['grouped_field_name'] = $params['grouped_field_name'] . '[]';
         $value = $params['attribute_value'];
 
+        $allowed_values = $this->getAllowedValues();
+        $params['allowed_values'] = $allowed_values;
+
         $missing_allowed_values = [];
-        foreach ($this->getAllowedValues() as $allowed_value) {
+        foreach ($allowed_values as $allowed_value) {
             if (!in_array($allowed_value, $value)) {
                 $missing_allowed_values[] = $allowed_value;
             }
