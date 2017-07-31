@@ -26,6 +26,7 @@ define([
     "Honeybee_Core/ui/EmbeddedEntityList",
     "Honeybee_Core/ui/EntityReferenceList",
     "Honeybee_Core/ui/HtmlRichTextEditor",
+    "Honeybee_Core/ui/HtmlLinkPopup",
     "Honeybee_Core/ui/GlobalErrors"
 ], function($, jsb) {
 

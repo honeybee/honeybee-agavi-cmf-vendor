@@ -88,6 +88,7 @@
                             <ae:parameter name="popup-link.accept">Übernehmen</ae:parameter>
                             <ae:parameter name="popup-link.cancel">Abbrechen</ae:parameter>
                             <ae:parameter name="popup-link.reset">Zurücksetzen</ae:parameter>
+                            <ae:parameter name="popup-link.clear">Löschen</ae:parameter>
                             <ae:parameter name="popup-link.header">Verlinkung setzen</ae:parameter>
                             <ae:parameter name="popup-link.href-input.label">Adresse:</ae:parameter>
                             <ae:parameter name="popup-link.href-input.title">Bitte komplette URL inklusive Protokoll eingeben (z.B. http://example.com)</ae:parameter>

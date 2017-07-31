@@ -6,7 +6,9 @@
             <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
-{% include 'html/attribute/html-link/popup_with_preview.twig' %}
+        {% for htmllink in attribute_value %}
+            {% include 'html/attribute/html-link/popup_with_preview.twig' %}
+        {% endfor %}
         </div><!--
         --><div class="hb-field__extra">
             {%- block htmllink_field_extra -%}{%- endblock -%}
