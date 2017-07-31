@@ -1,0 +1,63 @@
+{#
+    TWIG requirement:
+    - filter is active when its value is not empty (.hb-list-filter--active selector to show/hide it)
+    - template CAN have its own local form and filter-control for setting filter with no-JS
+
+    - block for quick-control and for advanced-control must be defined with '.hb-list-filter__quick-control' and '.hb-list-filter__filter'
+      (suggested to extend the base template and override just the necessary blocks)
+    - translations keys should rely on 'filter_name' ('filter_id' snakeCases the name)
+
+    JS requirements:
+    - filter is identified by "id=list_filter_<filterId>"
+    - changes to input, select, textarea with attribute name 'filter[FILTER_NAME]' will trigger the change in the destination filter form
+
+    CSS requirements:
+    - 'hb-list-filter' class on wrapper
+    - 'hb-list-filter__trigger' + 'hb-list-filter__content' to show/hide content
+#}
+{%- block list_filter -%} {# this block exists for whitespace control #}
+<li class="hb-list-filter hb-list-filter-{{ filter_id }} hb-list-filters__list-item {{ css|default('') }} {% if filter_value is not null %}hb-list-filter--active{% endif %}"
+    id="list_filter_{{ filter_id }}" data-hb-filter-id="{{ filter_id }}" data-hb-filter-name="{{ filter_name }}"
+    {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
+
+    {%- block quick_control %}
+    <div class="hb-list-filter__quick-control">
+        <label class="hb-list-filter__quick-label hb-list-filter__toggle" for="hb-list-filter-{{ filter_id }}__trigger" title="{{ translations.quick_label_title }}" tabindex="0">
+            {{ translations.quick_label_with_value|default(translations.quick_label|replace({'{VALUE}': filter_value})) }}
+        </label>
+        <span class="hb-list-filter__clear" title="{{ translations.quick_clear_title }}" tabindex="0">{{ translations.quick_clear }}</span>
+    </div>
+    {% endblock -%}
+
+    {%- block filter_control %}
+    <input type="checkbox" id="hb-list-filter-{{ filter_id }}__trigger" class="hb-list-filter__trigger">
+    <div class="hb-list-filter__content">
+        <div class="hb-list-filter__filter-control">
+            <div class="hb-list-filter__label">
+                <label for="list_filter_{{ filter_id }}_control">{{ translations.filter_label_with_value|default(translations.filter_label|replace({'{VALUE}': filter_value})) }}</label>
+            </div><!--
+            --><div class="hb-list-filter__value">
+
+                {%- block filter_input %}
+                    {% if form_parameters is not empty -%}
+                        <form action="{{ form_url }}" method="GET" class="hb-list-filter__form" id="filter_{{ filter_id }}_form">
+                            {% for param_name, param_value in form_parameters if param_name != 'filter[' ~filter_name~ ']' -%}
+                                <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
+                            {%- endfor -%}
+                    {% endif -%}
+
+                    <input id="list_filter_{{ filter_id }}_control" type="text" value="{{ filter_value|escape('html_attr') }}" name="filter[{{ filter_name }}]"
+                        {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}" {{ pattern|default('')|raw }}
+                        placeholder="{{ translations.filter_placeholder }}" title="{{ translations.filter_label }}" />
+
+                    {% if form_parameters is not empty %}
+                        </form>
+                    {% endif %}
+                {% endblock -%}
+
+            </div>
+        </div>
+    </div>
+    {% endblock -%}
+</li>
+{%- endblock -%}

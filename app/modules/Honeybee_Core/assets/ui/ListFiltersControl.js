@@ -50,16 +50,11 @@ define([
     };
 
     ListFiltersControl.prototype.addFilter = function(filter_id) {
-        jsb.fireEvent('LIST_FILTERS:ACTION',
-            {
-                action: 'ADD_LIST_FILTER_WITH_ID',
-                filter_id: filter_id,
-            }
-        );
+        jsb.fireEvent('LIST_FILTER_' + filter_id.toUpperCase() + ':ACTION', { action: 'ADD_LIST_FILTER' } );
     };
 
     ListFiltersControl.prototype.clearAllFilters = function() {
-        jsb.fireEvent('LIST_FILTERS:ACTION', { action: 'CLEAR_ALL_FILTERS' });
+        jsb.fireEvent('LIST_FILTER:ACTION', { action: 'CLEAR' });
     };
 
     return ListFiltersControl;

@@ -1,0 +1,31 @@
+{%- set css = css ~ ' input-choice' -%}
+{%- extends 'html/list_filter/default_list_filter.twig' -%}
+{%- block filter_input %}
+    {% if form_parameters is not empty -%}
+        <form action="{{ form_url }}" method="GET" class="hb-list-filter__form" id="filter_{{ filter_id }}_form">
+            {% for param_name, param_value in form_parameters if param_name != 'filter[' ~filter_name~ ']' -%}
+                <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
+            {%- endfor -%}
+    {% endif -%}
+
+    {% if allowed_values is defined and not empty %}
+        <select id="{{ filter_id }}" name="filter[{{ filter_name }}]" {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}" {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
+            {% if add_empty_option|default(false) -%}
+            <option value="{{ empty_option_value|default('') }}">{{ _(filter_name~'.empty_option_name', translation_domain, null, null, '') }}</option>
+            {% endif %}
+            {% for allowed_value in allowed_values %}
+                <option value="{{ allowed_value }}"
+                    {% if allowed_value == filter_value %}selected="selected"{% endif %}
+                >{{ _(allowed_value, translation_domain) }}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <input id="list_filter_{{ filter_id }}_control" type="text" value="{{ filter_value|escape('html_attr') }}" name="filter[{{ filter_name }}]"
+            {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}" {{ pattern|default('')|raw }}
+            placeholder="{{ translations.filter_placeholder }}" title="{{ translations.filter_label }}" />
+    {% endif %}
+
+    {% if form_parameters is not empty %}
+        </form>
+    {% endif %}
+{% endblock -%}
