@@ -1,0 +1,60 @@
+{%- block popupwithpreview -%} {# this block exists for whitespace control #}
+{%- set errors = errors | default([]) -%}
+<div class="htmllink-controls">
+    <div class="htmllink-popup-preview">{{ _(field_name~'.preview_link', translation_domain, null, null, '') }}<a href="{{ attribute_value.href|default('') }}" rel="noreferrer noopener" target="_blank">{{ attribute_value.text|default('') }}</a><span style="visibility:hidden">M</span></div>
+    <button data-mfp-src="#{{ field_id }}-popup" class="htmllink-popup-trigger">
+        <span>{{ _(field_name~'.add_link', translation_domain, null, null, '') }}</span>
+        <span class="icon"></span>
+    </button>
+</div>
+<div class="htmllink-popup" id="{{ field_id }}-popup">
+    <div>
+        <h2>{{ _(field_name~'.field_name', translation_domain) }}</h2>
+        <ul class="htmllink-popup__inputs">
+            <li>
+                <label class="htmllink__label-href">{{ _(field_name~'.href.label', translation_domain, null, null, 'Adresse:') }}<input type="url" name="{{grouped_base_path}}[href]" value="{{ attribute_value.href|default('') }}" {{required}} {{readonly}} {{disabled}} id="{{field_id}}" class="htmllink__href" title="{{ translations.title|default('') }}" placeholder="{{ translations.placeholder|default('URL, z.B. https://www.example.com') }}" />
+                <ul class="errors">{%- block field_errors  -%}{%- for error in errors -%}<li class="error">{{error}}</li>{%- endfor -%}{%- endblock  -%}</ul></label>
+                {% if translations.input_help is defined %}
+                    <div class="input_help">{{ translations.input_help|raw }}</div>
+                {% endif %}
+                {% if translations.input_hint is defined %}
+                    <div class="input_hint">{{ translations.input_hint|raw }}</div>
+                {% endif %}
+                {% if translations.input_focus_hint is defined %}
+                    <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
+                {% endif %}
+            <li>
+                <label class="htmllink__label-text">{{ _(field_name~'.text.label', translation_domain, null, null, 'Beschreibung (als Linktext):') }}<input type="text" name="{{grouped_base_path}}[text]" value="{{ attribute_value.text|default('') }}" {{readonly}} {{disabled}} class="htmllink__text" /><ul class="errors"></ul></label>
+            <li>
+                <label class="htmllink__label-title">{{ _(field_name~'.title.label', translation_domain, null, null, 'Titel (nur sichtbar beim Hovern):') }}<input type="text" name="{{grouped_base_path}}[title]" value="{{ attribute_value.title|default('') }}" {{readonly}} {{disabled}} class="htmllink__title" /><ul class="errors"></ul></label>{#
+            <li>
+                <label class="htmllink__label-rel">{{ _(field_name~'.rel.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[rel]" value="{{ attribute_value.rel|default('') }}" {{readonly}} {{disabled}} class="htmllink__rel" /><ul class="errors"></ul></label>
+            <li>
+            <label class="htmllink__label-hreflang">{{ _(field_name~'.hreflang.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[hreflang]" value="{{ attribute_value.hreflang|default('') }}" {{readonly}} {{disabled}} class="htmllink__hreflang" list="{{ field_id }}-hreflang-datalist" /><datalist id="{{ field_id }}-hreflang-datalist"><option value="de">Deutsch</option><option value="en">Englisch</option></datalist><ul class="errors"></ul></label>
+#}
+            <li>
+                {# <label class="htmllink__label-target">{{ _(field_name~'.target.label', translation_domain) }}<input type="text" name="{{grouped_base_path}}[target]" value="{{ attribute_value.target|default('') }}" {{readonly}} {{disabled}} class="htmllink__target" list="{{ field_id }}-target-datalist" /><datalist id="{{ field_id }}-target-datalist"><option value="_blank">In neuem Tab/Fenster öffnen</option></datalist> #}
+                <input type="hidden" value="" id="{{ field_id }}_target_hidden" name="{{grouped_base_path}}[target]" class="" {{ readonly }} {{ disabled }}>
+                <div class="input-checkbox">
+                    <input type="checkbox" value="_blank" id="{{ field_id }}_target" name="{{grouped_base_path}}[target]" class="htmllink__target" {{ readonly }} {{ disabled }} {% if attribute_value.target|default('') == '_blank' %} checked="checked" {% endif %} />
+                    <label for="{{ field_id }}_target" class="input-proxy"></label>
+                    <label for="{{ field_id }}_target" class="htmllink__label-target">{{ _(field_name~'.target.label', translation_domain, null, null, 'In neuem Tab/Fenster öffnen') }}</label>
+                </div>
+                <ul class="errors"></ul></label>
+            <li>
+                <input type="hidden" value="0" id="{{ field_id }}_download_hidden" name="{{grouped_base_path}}[download]" class="" {{ readonly }} {{ disabled }}>
+                <div class="input-checkbox">
+                    <input type="checkbox" value="1" id="{{ field_id }}_download" name="{{grouped_base_path}}[download]" class="htmllink__download" {{ readonly }} {{ disabled }} {% if attribute_value.download|default(false) == true %} checked="checked" {% endif %} />
+                    <label for="{{ field_id }}_download" class="input-proxy"></label>
+                    <label for="{{ field_id }}_download">{{ _(field_name~'.download.label', translation_domain, null, null, 'Als direkter Download') }}</label>
+                </div>
+        </ul>
+        <ul class="htmllink-popup__buttons">
+            <li><button type="button" class="htmllink-popup__accept">{{ _('popup-link.accept', 'application.hrte') }}</button>
+            <li><button type="button" class="htmllink-popup__clear">{{ _('popup-link.clear', 'application.hrte') }}</button>
+            <li><button type="button" class="htmllink-popup__cancel">{{ _('popup-link.cancel', 'application.hrte') }}</button>
+            {# <li><button type="button" class="htmllink-popup__reset">{{ _('popup-link.reset', 'application.hrte') }}</button> #}
+        </ul>
+    </div>
+</div>
+{%- endblock popupwithpreview -%}

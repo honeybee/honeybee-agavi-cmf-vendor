@@ -68,6 +68,12 @@
     display: block;
 }
 
+.jsb_ .htmllink-controls,
+.jsb_ .htmllink-popup__buttons,
+.jsb_ .htmllink-popup h2 {
+    display: none;
+}
+
 .htmllink-popup__inputs {
     @extend %list-bare;
     margin-bottom: 1em;
@@ -97,5 +103,9 @@
 
 .htmllink-popup__cancel {
     @include button-emphasized-navigational;
+}
+
+.htmllink-popup__clear {
+    @include button-normal-warning;
 }
 
