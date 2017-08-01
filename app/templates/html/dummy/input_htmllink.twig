@@ -59,7 +59,7 @@
             } %}
         </div><!--
         --><div class="layout__item u-1-of-2-lap-and-up">
-            {% include "html/attribute/html-link/as_input.twig" with {
+            {% embed "html/attribute/html-link/as_input.twig" with {
                 field_name: "Required-Website",
                 html_attributes: {},
                 field_id: "htmllinkinput4",
@@ -71,7 +71,21 @@
                 readonly: "",
                 disabled: "",
                 required: "required",
+                errors: [
+                    'This is a specific input error',
+                ],
+                translations: {
+                    placeholder: "A valid awesome URL",
+                    pattern: "",
+                    input_help: "some help text",
+                    input_hint: "",
+                    input_focus_hint: ""
+                }
             } %}
+                {% block htmllink_field_extra %}
+                <p>This is some manually added additional text below the whole input area</p>
+                {% endblock %}
+            {% endembed %}
         </div>
     </div>
 </div>
