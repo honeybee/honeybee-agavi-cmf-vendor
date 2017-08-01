@@ -1,0 +1,77 @@
+<div class="sheet theme-preview__input-html-link">
+    <h1>Input: Text</h1>
+    <div class="layout">
+        {# Text input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/html-link/as_input.twig" with {
+                field_name: "Website",
+                html_attributes: {},
+                field_id: "htmllinkinput1",
+                attribute_value: {
+                    'href': 'https://example.com',
+                    'text': 'this is the link text',
+                    'title': 'this is some title for the link',
+                    'target': '_blank',
+                    'download': true
+                },
+                grouped_field_name: "htmllinkinput1",
+                grouped_base_path: "some[website]",
+                css: "jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup",
+                readonly: "",
+                disabled: "",
+                required: "",
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/html-link/as_input.twig" with {
+                field_name: "Empty-Website",
+                html_attributes: {},
+                field_id: "htmllinkinput2",
+                attribute_value: {
+                },
+                grouped_field_name: "htmllinkinput2",
+                grouped_base_path: "some[website]",
+                css: "jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup",
+                readonly: "",
+                disabled: "",
+                required: "",
+            } %}
+        </div>
+        {# readonly and required htmllink input #}
+        <div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/html-link/as_input.twig" with {
+                field_name: "Readonly-Website",
+                html_attributes: {},
+                field_id: "htmllinkinput3",
+                attribute_value: {
+                    'href': 'https://example.com',
+                    'text': 'this is the link text',
+                    'title': 'this is some title for the link',
+                    'target': '_blank',
+                    'download': true
+                },
+                grouped_field_name: "htmllinkinput3",
+                grouped_base_path: "some[website]",
+                css: "jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup",
+                readonly: "readonly",
+                disabled: "",
+                required: "",
+            } %}
+        </div><!--
+        --><div class="layout__item u-1-of-2-lap-and-up">
+            {% include "html/attribute/html-link/as_input.twig" with {
+                field_name: "Required-Website",
+                html_attributes: {},
+                field_id: "htmllinkinput4",
+                attribute_value: {
+                },
+                grouped_field_name: "htmllinkinput4",
+                grouped_base_path: "some[website]",
+                css: "jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup",
+                readonly: "",
+                disabled: "",
+                required: "required",
+            } %}
+        </div>
+    </div>
+</div>

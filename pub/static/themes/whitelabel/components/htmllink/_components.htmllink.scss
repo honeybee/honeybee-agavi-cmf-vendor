@@ -51,6 +51,14 @@
     text-align: left;
 }
 
+.htmllink-popup-preview--readonly {
+    @include input-textual-colors-disabled;
+}
+
+.htmllink-popup-preview--invalid {
+    @include input-textual-colors-invalid;
+}
+
 .mfp-content .htmllink-popup {
     display: block;
 }

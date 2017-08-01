@@ -1,7 +1,9 @@
 {%- block popupwithpreview -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
 <div class="htmllink-controls">
-    <div class="htmllink-popup-preview">{{ _(field_name~'.preview_link', translation_domain, null, null, '') }}<a href="{{ attribute_value.href|default('') }}" rel="noreferrer noopener" target="_blank">{{ attribute_value.text|default('') }}</a><span style="visibility:hidden">M</span></div>
+    <div class="htmllink-popup-preview {% if not readonly is empty %}htmllink-popup-preview--readonly{% endif %} {% if not required is empty and attribute.href|default('') is empty %}htmllink-popup-preview--invalid{% endif %}">
+        {{- _(field_name~'.preview_link', translation_domain, null, null, '') -}}
+        <a href="{{ attribute_value.href|default('') }}" rel="noreferrer noopener" target="_blank">{{- attribute_value.text|default('') -}}</a><span style="visibility:hidden">M</span></div>
     <button data-mfp-src="#{{ field_id }}-popup" class="htmllink-popup-trigger">
         <span>{{ _(field_name~'.add_link', translation_domain, null, null, '') }}</span>
         <span class="icon"></span>
@@ -50,8 +52,10 @@
                 </div>
         </ul>
         <ul class="htmllink-popup__buttons">
+            {%- if readonly is empty -%}
             <li><button type="button" class="htmllink-popup__accept">{{ _('popup-link.accept', 'application.hrte') }}</button>
             <li><button type="button" class="htmllink-popup__clear">{{ _('popup-link.clear', 'application.hrte') }}</button>
+            {%- endif -%}
             <li><button type="button" class="htmllink-popup__cancel">{{ _('popup-link.cancel', 'application.hrte') }}</button>
             {# <li><button type="button" class="htmllink-popup__reset">{{ _('popup-link.reset', 'application.hrte') }}</button> #}
         </ul>
