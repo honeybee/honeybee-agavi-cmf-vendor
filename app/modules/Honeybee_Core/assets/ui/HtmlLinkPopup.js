@@ -19,6 +19,7 @@ define([
         btnCancelSelector: '.htmllink-popup__cancel',
         btnResetSelector: '.htmllink-popup__reset',
         btnClearSelector: '.htmllink-popup__clear',
+        btnRemoveSelector: '.htmllink-remove',
         classReadonly: 'htmllink-popup-preview--readonly',
         classInvalid: 'htmllink-popup-preview--invalid',
         mfp: {
@@ -55,19 +56,20 @@ define([
         this.$btn_cancel = this.$widget.find(this.options.btnCancelSelector).first();
         this.$btn_reset = this.$widget.find(this.options.btnResetSelector).first();
         this.$btn_clear = this.$widget.find(this.options.btnClearSelector).first();
+        this.$btn_remove = this.$widget.find(this.options.btnRemoveSelector).first();
 
-        if (this.$trigger.length === 0 && this.$input_href.length === 0) {
+        if (this.$trigger.length !== 1 && this.$input_href.length !== 1) {
             this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
             return;
         }
 
-        this.initial = {
-            href: this.$input_href.val(),
-            text: this.$input_text.val(),
-            title: this.$input_title.val(),
-            target: this.$input_target.prop('checked') === true ? this.$input_target.val() : '',
-            rel: this.$input_rel.val(),
-            hreflang: this.$input_hreflang.val(),
+        this.initial = this.orig = {
+            href: this.$input_href.val()||'',
+            text: this.$input_text.val()||'',
+            title: this.$input_title.val()||'',
+            target: this.$input_target.prop('checked') === true ? this.$input_target.val()||'' : '',
+            rel: this.$input_rel.val()||'',
+            hreflang: this.$input_hreflang.val()||'',
             download: this.$input_download.prop('checked') === true
         };
 
@@ -116,6 +118,14 @@ define([
             that.$input_href.focus();
         });
 
+        this.$btn_remove.on('click', function(ev) {
+            ev.preventDefault();
+            that.clearInputs();
+            that.updatePreview();
+            var payload = {'field_name': that.options.field_name||'omgomgomg-doesntexist', 'instance':that.prefix};
+            jsb.fireEvent('HTMLLINKPOPUP:REMOVED', payload);
+        });
+
         this.updatePreview();
     }
 
@@ -124,12 +134,12 @@ define([
 
     HtmlLinkPopup.prototype.storeInputValues = function() {
         this.orig = {
-            href: this.$input_href.val(),
-            text: this.$input_text.val(),
-            title: this.$input_title.val(),
-            target: this.$input_target.prop('checked') === true ? this.$input_target.val() : '',
-            rel: this.$input_rel.val(),
-            hreflang: this.$input_hreflang.val(),
+            href: this.$input_href.val()||'',
+            text: this.$input_text.val()||'',
+            title: this.$input_title.val()||'',
+            target: this.$input_target.prop('checked') === true ? this.$input_target.val()||'' : '',
+            rel: this.$input_rel.val()||'',
+            hreflang: this.$input_hreflang.val()||'',
             download: this.$input_download.prop('checked') === true
         };
     }
@@ -147,13 +157,13 @@ define([
 
     HtmlLinkPopup.prototype.updatePreview = function() {
         this.$preview_link.prop('href', this.$input_href.val());
-        if (this.$input_href.is(':invalid')) {
+        if (~[].indexOf.call(document.querySelectorAll(":invalid"), this.$input_href[0])) {
             this.$preview.addClass(this.options.classInvalid);
         } else {
             this.$preview.removeClass(this.options.classInvalid);
         }
         var text = this.$input_text.val();
-        if (text.length > 0) {
+        if (text && text.length > 0) {
             this.$preview_link.text(this.$input_text.val());
         } else {
             this.$preview_link.text(this.$input_href.val());

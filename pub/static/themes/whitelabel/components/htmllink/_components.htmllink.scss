@@ -1,10 +1,22 @@
+.htmllink {
+    margin-bottom: 3px;
+}
+
 .htmllink-controls {
     position: relative;
 }
 
-.htmllink-popup-trigger {
+.htmllink-controls .htmllink-remove {
     @include button-emphasized-navigational;
-    // override button stylings
+
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    min-width: 2em;
+    min-height: 41px;
+
     &,
     &:focus,
     &:hover,
@@ -17,14 +29,46 @@
         margin: 1px;
     }
 
+    &,
+    &:focus,
+    &:hover,
+    &:active {
+        color: color(warning-primary);
+    }
+    &:disabled {
+        color: color(text-secondary);
+    }
+
+    &:disabled {
+        opacity: 0.3;
+    }
+}
+
+.htmllink-controls .htmllink-popup-trigger {
+    @include button-emphasized-navigational;
+
     display: inline-block;
     position: absolute;
     top: 0;
-    right: 0;
     bottom: 0;
-
+    right: 2em;
     min-width: 67.5px;
     min-height: 41px;
+
+    &,
+    &:focus,
+    &:hover,
+    &:active,
+    &:disabled,
+    &.disabled {
+        border-radius: 0;
+        border: 0;
+        margin: 1px;
+    }
+
+    &:focus {
+        z-index: 2;
+    }
 
     span {
         display: inline-block;
@@ -38,16 +82,13 @@
         background-size: contain;
         background-image: url('binaries/icons/hrte/addlink.svg');
     }
-
-    &:disabled {
-        opacity: 0.3;
-    }
 }
 
 .htmllink-popup-preview {
     @include input-textual-shape-default;
     @include input-textual-colors-default;
     width: 100%;
+    padding-right: 6em;
     text-align: left;
 }
 

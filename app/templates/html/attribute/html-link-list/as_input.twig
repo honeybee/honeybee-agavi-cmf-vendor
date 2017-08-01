@@ -1,14 +1,28 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set errors = errors | default([]) -%}
-<div class="hb-field {{ css|default('') }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+<div class="hb-field {{ css|default('') }}" data-jsb="{{ widget_options|default({})|json_encode }}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         <div class="hb-field__label">
             <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
-        {% for htmllink in attribute_value %}
-            {% include 'html/attribute/html-link/popup_with_preview.twig' %}
-        {% endfor %}
+        <div class="htmllinklist">
+            {%- for htmllink in attribute_value -%}
+                {%- include 'html/attribute/html-link/popup_with_preview.twig' with {
+                        grouped_base_path: grouped_base_path~"["~loop.index~"]",
+                        field_id: field_id~loop.index,
+                        attribute_value: htmllink,
+                    }
+                -%}
+            {%- endfor -%}
+            {%- include 'html/attribute/html-link/popup_with_preview.twig' with {
+                    grouped_base_path: grouped_base_path~"[0]",
+                    field_id: field_id~"0",
+                    attribute_value: empty_htmllink,
+                }
+            -%}
+                <button class="htmllink-add" title="{{ _(field_name~'.add_link_title', translation_domain, null, null, '') }}">+</button>
+            </div>
         </div><!--
         --><div class="hb-field__extra">
             {%- block htmllink_field_extra -%}{%- endblock -%}
