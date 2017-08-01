@@ -6,7 +6,8 @@ define([
     var default_options = {
         prefix: 'Honeybee_Core/ui/HtmlLinkPopup',
         triggerSelector: '.htmllink-popup-trigger',
-        previewSelector: '.htmllink-popup-preview a',
+        previewSelector: '.htmllink-popup-preview',
+        previewLinkSelector: '.htmllink-popup-preview a',
         inputHrefSelector: '.htmllink__href',
         inputTextSelector: '.htmllink__text',
         inputTitleSelector: '.htmllink__title',
@@ -18,6 +19,8 @@ define([
         btnCancelSelector: '.htmllink-popup__cancel',
         btnResetSelector: '.htmllink-popup__reset',
         btnClearSelector: '.htmllink-popup__clear',
+        classReadonly: 'htmllink-popup-preview--readonly',
+        classInvalid: 'htmllink-popup-preview--invalid',
         mfp: {
             type: 'inline',
             focus: '.htmllink__href',
@@ -40,6 +43,7 @@ define([
 
         this.$trigger = this.$widget.find(this.options.triggerSelector).first();
         this.$preview = this.$widget.find(this.options.previewSelector).first();
+        this.$preview_link = this.$widget.find(this.options.previewLinkSelector).first();
         this.$input_href = this.$widget.find(this.options.inputHrefSelector).first();
         this.$input_text = this.$widget.find(this.options.inputTextSelector).first();
         this.$input_title = this.$widget.find(this.options.inputTitleSelector).first();
@@ -104,14 +108,12 @@ define([
             ev.preventDefault();
             that.resetInputsToInitialValues();
             that.$input_href.focus();
-            that.updatePreview();
         });
 
         this.$btn_clear.on('click', function(ev) {
             ev.preventDefault();
             that.clearInputs();
             that.$input_href.focus();
-            that.updatePreview();
         });
 
         this.updatePreview();
@@ -144,19 +146,24 @@ define([
     }
 
     HtmlLinkPopup.prototype.updatePreview = function() {
-        this.$preview.prop('href', this.$input_href.val());
+        this.$preview_link.prop('href', this.$input_href.val());
+        if (this.$input_href.is(':invalid')) {
+            this.$preview.addClass(this.options.classInvalid);
+        } else {
+            this.$preview.removeClass(this.options.classInvalid);
+        }
         var text = this.$input_text.val();
         if (text.length > 0) {
-            this.$preview.text(this.$input_text.val());
+            this.$preview_link.text(this.$input_text.val());
         } else {
-            this.$preview.text(this.$input_href.val());
+            this.$preview_link.text(this.$input_href.val());
         }
-        this.$preview.prop('title', this.$input_title.val());
-        this.$preview.prop('hreflang', this.$input_hreflang.val());
+        this.$preview_link.prop('title', this.$input_title.val());
+        this.$preview_link.prop('hreflang', this.$input_hreflang.val());
         if (this.$input_download.prop('checked')) {
-            this.$preview.attr('download', 'download');
+            this.$preview_link.attr('download', 'download');
         } else {
-            this.$preview.removeAttr('download');
+            this.$preview_link.removeAttr('download');
         }
     }
 
