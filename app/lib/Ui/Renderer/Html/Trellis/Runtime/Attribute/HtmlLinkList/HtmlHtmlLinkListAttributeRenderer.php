@@ -5,7 +5,6 @@ namespace Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlLinkList;
 use Honeybee\Common\Util\StringToolkit;
 use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
 use Trellis\Runtime\Attribute\HtmlLink\HtmlLink;
-use Trellis\Runtime\Attribute\HtmlLink\HtmlLinkListAttribute;
 
 class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
 {
@@ -25,6 +24,23 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
+        $params['empty_htmllink'] = new HtmlLink([]);
+
+        $params['htmllink_widget'] = $this->getHtmlLinkWidgetImplementor();
+        $params['htmllink_widget_options'] = array_merge(
+            [
+                'field_name' => $params['field_name']
+            ],
+            (array)$this->getOption('htmllink_widget_options', [])
+        );
+
+        $params['widget'] = $this->getHtmlLinkWidgetImplementor();
+        $params['widget_options'] = array_merge(
+            [
+                'field_name' => $params['field_name']
+            ],
+            (array)$this->getOption('widget_options', [])
+        );
         return $params;
     }
 
@@ -55,8 +71,23 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
         return array_merge(parent::getDefaultTranslationKeys(), [ 'pattern' ]);
     }
 
+    protected function getHtmlLinkWidgetImplementor()
+    {
+        $default = '';
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
+            $default = 'jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup';
+        }
+        return $this->getOption('htmllink_widget', $default);
+    }
+
     protected function getWidgetImplementor()
     {
-        return $this->getOption('widget', 'jsb_Honeybee_Core/ui/HtmlLinkPopup');
+        $default = '';
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
+            $default = 'jsb_ jsb_Honeybee_Core/ui/HtmlLinkList';
+        }
+        return $this->getOption('widget', $default);
     }
 }
