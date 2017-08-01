@@ -121,16 +121,12 @@ define([
 
         this.$editor = this.$widget.find(this.options.editor_selector).first();
         if (this.$editor.length === 0) {
-            $(this.options.editor_selector);
+            this.$editor = $(this.options.editor_selector);
         }
 
-        if (this.$textarea.length !== 1) {
+        if (this.$textarea.length !== 1 || this.$editor.length !== 1) {
             this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
-            return;
-        }
-
-        if (this.$editor.length !== 1) {
-            this.logError(this.getPrefix() + " behaviour not applied as expected DOM doesn't match.");
+            this.$widget.find('.editor-menu,.editor-hrte').hide();
             return;
         }
 
