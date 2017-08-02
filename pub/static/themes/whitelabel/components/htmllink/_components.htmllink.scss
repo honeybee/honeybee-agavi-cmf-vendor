@@ -1,5 +1,38 @@
-.htmllink {
+.htmllinklist {
+    @extend %list-bare;
+}
+
+.htmllinklist__item {
     margin-bottom: 3px;
+    user-select: none;
+}
+
+.htmllink-handle {
+    display: none;
+}
+
+.htmllinklist.use-handle .htmllink-handle {
+    display: inline-block;
+    cursor: move;
+}
+.htmllinklist:not(.use-handle) .htmllink-popup-preview {
+    cursor: move;
+}
+
+.htmllinklist .sortable-placeholder {
+    @include input-textual-shape-default;
+    @include input-textual-colors-default;
+    border: 1px dashed color(black);
+}
+
+.htmllinklist .sortable-dragging {
+}
+
+.htmllink {
+}
+
+.htmllink-add {
+    @include button-emphasized-navigational;
 }
 
 .htmllink-controls {
@@ -23,6 +56,7 @@
     &:active,
     &:disabled,
     &.disabled {
+        border-top-right-radius: 0;
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
         border: 0;
@@ -68,19 +102,6 @@
 
     &:focus {
         z-index: 2;
-    }
-
-    span {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-    .icon {
-        width: 24px;
-        height: 24px;
-        background: transparent no-repeat center;
-        background-size: contain;
-        background-image: url('binaries/icons/hrte/addlink.svg');
     }
 }
 
@@ -155,6 +176,6 @@
 }
 
 .htmllink-popup__clear {
-    @include button-normal-warning;
+    @include button-emphasized-warning;
 }
 

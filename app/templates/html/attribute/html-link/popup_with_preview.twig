@@ -3,11 +3,10 @@
 <div class="htmllink {{ htmllink_widget|default('') }}" data-jsb="{{ htmllink_widget_options|default({})|json_encode }}">
     <div class="htmllink-controls">
         <div class="htmllink-popup-preview {% if not readonly is empty %}htmllink-popup-preview--readonly{% endif %} {% if not required is empty and attribute.href|default('') is empty %}htmllink-popup-preview--invalid{% endif %}">
+            <span class="htmllink-handle">::&nbsp;</span>
             {{- _(field_name~'.preview_link', translation_domain, null, null, '') -}}
             <a href="{{ attribute_value.href|default('') }}" rel="noreferrer noopener" target="_blank" {% if attribute_value.download|default(false) == true %} download="download" {% endif %}>{{- attribute_value.text|default('') -}}</a><span style="visibility:hidden">M</span></div>
-        <button data-mfp-src="#{{ field_id }}-popup" class="htmllink-popup-trigger">
-            <span>{{ _(field_name~'.add_link', translation_domain, null, null, '') }}</span>
-            <span class="icon"></span>
+        <button data-mfp-src="#{{ field_id }}-popup" class="htmllink-popup-trigger">{{ _(field_name~'.edit_link', translation_domain, null, null, '✎ bearbeiten') }}{# ✍✎ #}
         </button><button class="htmllink-remove" title="{{ _(field_name~'.remove_link_title', translation_domain, null, null, '') }}">X</button>
     </div>
     <div class="htmllink-popup" id="{{ field_id }}-popup">

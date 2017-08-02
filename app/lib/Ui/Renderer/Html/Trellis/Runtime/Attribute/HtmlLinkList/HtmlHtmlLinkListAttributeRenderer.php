@@ -34,10 +34,12 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
             (array)$this->getOption('htmllink_widget_options', [])
         );
 
-        $params['widget'] = $this->getHtmlLinkWidgetImplementor();
+        $params['widget'] = $this->getWidgetImplementor();
         $params['widget_options'] = array_merge(
             [
-                'field_name' => $params['field_name']
+                'field_name' => $params['field_name'],
+                'field_id' => $params['field_id'],
+                'grouped_base_path' => $params['grouped_base_path'],
             ],
             (array)$this->getOption('widget_options', [])
         );
