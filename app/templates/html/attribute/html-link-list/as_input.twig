@@ -6,23 +6,32 @@
             <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
-        <div class="htmllinklist">
-            {%- for htmllink in attribute_value -%}
-                {%- include 'html/attribute/html-link/popup_with_preview.twig' with {
-                        grouped_base_path: grouped_base_path~"["~loop.index~"]",
-                        field_id: field_id~loop.index,
-                        attribute_value: htmllink,
+            <ul class="htmllinklist">
+                <li class="htmllinklist__item sortable-placeholder"><div>{{ _(field_name~'.sortable_placeholder', translation_domain, null, null, 'Hier ablegen…') }}</div>
+                {%- for htmllink in attribute_value -%}
+                <li class="htmllinklist__item">{%- include 'html/attribute/html-link/popup_with_preview.twig' with {
+                            grouped_base_path: grouped_base_path~"["~loop.index~"]",
+                            field_id: field_id~loop.index,
+                            attribute_value: htmllink,
+                        }
+                    -%}
+                {%- endfor -%}
+                <li class="htmllinklist__item empty">{%- include 'html/attribute/html-link/popup_with_preview.twig' with {
+                        grouped_base_path: grouped_base_path~"[0]",
+                        field_id: field_id~"0",
+                        attribute_value: empty_htmllink,
                     }
                 -%}
-            {%- endfor -%}
-            {%- include 'html/attribute/html-link/popup_with_preview.twig' with {
-                    grouped_base_path: grouped_base_path~"[0]",
-                    field_id: field_id~"0",
-                    attribute_value: empty_htmllink,
-                }
-            -%}
-                <button class="htmllink-add" title="{{ _(field_name~'.add_link_title', translation_domain, null, null, '') }}">+</button>
-            </div>
+            </ul>
+            <button class="htmllink-add" title="{{ _(field_name~'.add_link_title', translation_domain, null, null, '') }}">{{ _(field_name~'.add_link', translation_domain, null, null, '+ Link hinzufügen') }}</button>
+            <script type="text/html" class="htmllinklist-template" data-field-id="{{field_id}}IDX" data-idx="IDX">
+                <li class="htmllinklist__item">{%- include 'html/attribute/html-link/popup_with_preview.twig' with {
+                        grouped_base_path: grouped_base_path~"[IDX]",
+                        field_id: field_id~"IDX",
+                        attribute_value: empty_htmllink,
+                    }
+                -%}
+            </script>
         </div><!--
         --><div class="hb-field__extra">
             {%- block htmllink_field_extra -%}{%- endblock -%}

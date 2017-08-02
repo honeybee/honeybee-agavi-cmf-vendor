@@ -3,9 +3,13 @@
     <div class="hb-field__content">
         <div class="hb-field__label">{{ _(field_name~'.field_name', translation_domain) }}</div><!--
         --><div class="hb-field__value">
-        {% for htmllink in attribute_value %}
-            <a href="{{ attribute_value.href|default('') }}" target="__blank" rel="noopener noreferrer" title="{{ attribute_value.title|default('') }}">{{ attribute_value.text|default('') | truncate(options.truncate|default(30), false, "…") }}</a>
-        {% endfor %}
+            {%- if attribute_value is iterable -%}
+                <ul class="html-link-list">
+                {%- for htmllink in attribute_value -%}
+                    <li><a href="{{ htmllink.href|default('') }}" target="__blank" rel="noopener noreferrer" title="{{ htmllink.title|default('') }}">{{ htmllink.text|default(htmllink.href|default('missing')) | truncate(options.truncate|default(30), false, "…") }}</a>
+                {%- endfor -%}
+                </ul>
+            {% endif%}
         </div>
     </div>
 </div>

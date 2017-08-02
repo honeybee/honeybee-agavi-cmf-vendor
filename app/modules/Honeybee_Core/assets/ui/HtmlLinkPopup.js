@@ -122,7 +122,7 @@ define([
             ev.preventDefault();
             that.clearInputs();
             that.updatePreview();
-            var payload = {'field_name': that.options.field_name||'omgomgomg-doesntexist', 'instance':that.prefix};
+            var payload = {'field_name': that.options.field_name||'omgomgomg-missing', 'widget_element':that.$widget};
             jsb.fireEvent('HTMLLINKPOPUP:REMOVED', payload);
         });
 
