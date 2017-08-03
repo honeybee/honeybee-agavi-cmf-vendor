@@ -8,12 +8,12 @@ use AgaviValidator;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\EntityTypeInterface;
-use Honeygavi\Request\HoneybeeUploadedFile;
 use Honeybee\Model\Aggregate\AggregateRootInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Honeybee\Model\Command\AggregateRootCommand;
 use Honeybee\Model\Command\AggregateRootCommandBuilder;
 use Honeybee\Model\Command\AggregateRootTypeCommandInterface;
+use Honeygavi\Request\HoneybeeUploadedFile;
 use Shrink0r\Monatic\Result;
 use Shrink0r\Monatic\Success;
 use Trellis\Runtime\Attribute\AttributeInterface;
@@ -499,6 +499,18 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                 $this,
                 self::mapErrorCode($this->getParameter('severity', 'error'))
             );
+            // when attribute has a ComplexValue object we should add the sub property path to the payload_path
+            if (isset($builder_incident['path_parts']) && !empty($builder_incident['path_parts'])) {
+                $parts = $builder_incident['path_parts'];
+                $path = '';
+                if (count($parts)) {
+                    $path = sprintf('[%s]', implode('][', $parts));
+                }
+                $payload_path = $payload_path.$path;
+            }
+            if ($this->getParameter('log_incidents', AgaviConfig::get('core.log_incidents', false))) {
+                error_log('INCIDENT: '.$payload_path.' – '.$builder_incidents['path'].'.'.$builder_incident_name);
+            }
             $this->throwError(
                 $builder_incidents['path'] . '.' . $builder_incident_name,
                 $payload_path
