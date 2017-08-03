@@ -476,6 +476,9 @@ EOT;
 
         $list_filter_map = new ListFilterMap();
         foreach ($list_config_filters as $filter_name => $value) {
+            if (strpos($filter_name, '.') !== false) {
+                continue;
+            }
             $list_filter_map->setItem(
                 $filter_name,
                 new ListFilter(
