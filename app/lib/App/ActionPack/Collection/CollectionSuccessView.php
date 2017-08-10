@@ -476,15 +476,17 @@ EOT;
 
         $list_filter_map = new ListFilterMap();
         foreach ($list_config_filters as $filter_name => $value) {
-            if (strpos($filter_name, '.') !== false) {
-                continue;
+            $attribute = null;
+            if (strpos($filter_name, '.') === false && $type->hasAttribute($filter_name)) {
+                $attribute = $type->getAttribute($filter_name);
             }
+
             $list_filter_map->setItem(
                 $filter_name,
                 new ListFilter(
                     $filter_name,
                     $value,
-                    $type->hasAttribute($filter_name) ? $type->getAttribute($filter_name) : null
+                    $attribute
                 )
             );
         }

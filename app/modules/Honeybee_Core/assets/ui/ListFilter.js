@@ -7,7 +7,6 @@ define([
         excluded_inputs_selector: 'form[name="jumpToPage"] input',
         target_form_selector: '#search_form',
         target_form_filter_list_selector: '.search__additional-inputs',
-        filter_control_selector: '[name="filter[{FILTER_NAME}]"]', // forms control in the whole document
         trigger_selector: '.hb-list-filter__trigger',
         quick_label_selector: '.hb-list-filter__quick-label',
         quick_clear_selector: '.hb-list-filter__clear',
@@ -46,7 +45,7 @@ define([
                 return;
             }
         }
-        this.filter_control_selector = this.options.filter_control_selector.replace('{FILTER_NAME}', this.name);
+        this.filter_control_selector = '[name="filter[' + this.name + ']"]';    // selects form controls in the whole document
         this.$target_control = this.$target_form.find(this.filter_control_selector);
         // target input must always exist (disabled: filter inactive; enabled: filter active)
         if (this.$target_control.length === 0) {

@@ -41,7 +41,8 @@ define([
         this.$activity_map.on('click', this.options.filter_trigger_selector, function(e) {
             e.preventDefault();
             var $target = $(e.target);
-            var filter_id = $target.attr('href').replace('#', '');
+            var filter_name = $target.attr('href').replace('#', '');
+            var filter_id = _.snakeCase(filter_name);
 
             self.addFilter(filter_id);
         });

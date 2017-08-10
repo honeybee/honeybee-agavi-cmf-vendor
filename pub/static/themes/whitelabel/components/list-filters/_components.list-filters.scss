@@ -9,8 +9,7 @@ $quick_controls_height: 2 * $base-spacing;
 .hb-list-filter__trigger { display: none; }
 .hb-list-filter__trigger:checked + .hb-list-filter__content { display: inherit; }
 
-// list-filters
-.hb-list-filters {
+.hb-list-filter {
     // javascript not loaded
     &.jsb_ {
         .hb-list-filter__clear { display: none; }
@@ -18,20 +17,19 @@ $quick_controls_height: 2 * $base-spacing;
 
     // javascript loaded
     &:not(jsb_) {
+        .hb-list-filter__quick-label {
+            @include button-states {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+        .hb-list-filter__clear {
+            @include button-states {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            };
+        }
     }
-}
-
-.hb-list-filters {
-    width: 100%;
-}
-
-.hb-list-filters__toggle {
-    flex-grow: 0;
-    flex-shrink: 2;
-    flex-basis: 2 * $base-spacing;
-
-    padding: $small-spacing;
-    box-sizing: border-box !important; // override icon-mixin   @todo remove !important
 }
 
 // quick controls
@@ -59,29 +57,6 @@ $quick_controls_height: 2 * $base-spacing;
 .hb-list-filter__quick-label {
     white-space: nowrap;
     width: auto;
-    @include button-states {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-    }
-}
-.hb-list-filter__clear {
-    @include button-states {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-    };
-}
-
-.hb-list-filters__list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    display: inline-flex;
-    flex-wrap: wrap;
-}
-
-.hb-list-filters__list-item {
-
 }
 
 // list-filter
@@ -131,6 +106,19 @@ $quick_controls_height: 2 * $base-spacing;
 .hb-list-filter__label { display: none; }
 
 // list-filters related
+
+.hb-list-filters {
+    width: 100%;
+}
+.hb-list-filters__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    display: inline-flex;
+    flex-wrap: wrap;
+}
+// .hb-list-filters__list-item {}
 
 .search__list-filters-control {
     // javascript not loaded
