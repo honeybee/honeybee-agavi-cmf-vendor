@@ -730,16 +730,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.2.5",
+            "version": "0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "488cd7c37716eb34b6e6d90c9e190b6cd190110d"
+                "reference": "0c9cbbfcd7cabf9d1d175f19d1ef990882e2fd2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/488cd7c37716eb34b6e6d90c9e190b6cd190110d",
-                "reference": "488cd7c37716eb34b6e6d90c9e190b6cd190110d",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/0c9cbbfcd7cabf9d1d175f19d1ef990882e2fd2d",
+                "reference": "0c9cbbfcd7cabf9d1d175f19d1ef990882e2fd2d",
                 "shasum": ""
             },
             "require": {
@@ -820,7 +820,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2017-08-15T11:43:18+00:00"
+            "time": "2017-08-15T13:21:06+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -3231,7 +3231,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2017-08-07T09:49:04+00:00"
+            "time": "2017-08-07 09:49:04"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4044,7 +4044,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-08-07T09:29:08+00:00"
+            "time": "2017-08-07 09:29:08"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
