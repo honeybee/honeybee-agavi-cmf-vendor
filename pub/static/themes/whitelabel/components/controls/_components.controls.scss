@@ -1,17 +1,31 @@
 .controls {
     // @extend %sheet;
 
-    .search--with-additional-markup {
-        form {
-            @include media-query(lap-and-up) {
-                display: flex;
-                flex-wrap: nowrap;
+    .search__content {
+        > form {
+            display: flex;
+            flex-wrap: wrap;
 
-                // top line
-                .search__list-filters-control { flex: 0 0 10%; }
-                .search__activity-layout { flex: 1 1 90%; }
+            .search__list-filters-control { flex: 1 0 100%; }
+            .search__activity-layout {
+                display: inline-flex;
+                flex-wrap: nowrap;
+                flex: 1 0 0;
+            }
+            .search__input-box { flex: 2 1 auto; }
+            .search__submit-box {
+                flex: 1 1 0;
+                display: flex; // center content vertically
+            }
+
+            @include media-query(lap-and-up) {
+                flex-wrap: nowrap;
+                .search__list-filters-control {
+                    flex: 0 0; // flex-grow: 0; flex-basis: 0;
+                }
             }
         }
-        .search__list-filters-layout { height: 0; display: inline; }
+        // .search__list-filters { line-height: 0; font-size: 0; } // remove height when empty
+        // .hb-list-filters__content { line-height: $line-height; font-size: $font-size } // restore for actual content
     }
 }

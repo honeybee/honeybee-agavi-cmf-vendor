@@ -120,13 +120,10 @@
             @extend .u-5-of-8-lap-and-up;
             @extend .u-4-of-12-desk;
         }
-
-        .search__input-box { @extend %lap-and-up-9-of-10; }
-        .search__submit-box { @extend %lap-and-up-1-of-10; }
     }
 
     .search__content {
-        form { width: 100%; display: inline-flex; }
+        > form { width: 100%; display: inline-flex; }
         .search-description { display: none; }
     }
 

@@ -234,38 +234,42 @@ EOT;
 
     protected function setSearchForm(AgaviRequestDataHolder $request_data)
     {
+        $view_config = $this->getServiceLocator()->getViewConfigService()->getViewConfig($this->getViewScope());
+        $view_settings = $view_config->getSettings();
         $activity_service = $this->getServiceLocator()->getActivityService();
+
         $search_activity = $activity_service->getActivity($this->getViewScope(), 'search');
+        $rendered_list_filters_control = $rendered_list_filters = '';
         $td = $this->getTranslationDomainPrefix() . '.activity';
-
-        $list_filter_map = $this->getListFilterMap();
-        $active_list_filter_map = $this->getActiveListFilterMap($request_data);
-
         $form_parameters = [ 'sort' => $request_data->getParameter('sort') ];
-        // add initialized filters to search form
-        foreach ($active_list_filter_map as $filter) {
-            $form_parameters[sprintf('filter[%s]', $filter->getName())] = $filter->getCurrentValue();
-        }
 
-        $list_filter_map->append($active_list_filter_map);
-        $list_filters_render_settings = [
-            // 'configured_list_filters' => $list_filter_map,
-            'form_parameters' => $form_parameters
-        ];
-        $rendered_list_filters = $this->getRenderedListFilters($list_filter_map, $list_filters_render_settings);
-        $rendered_list_filters_control = '';
-        if (!$list_filter_map->isEmpty()) {
-            $rendered_list_filters_control = $this->renderSubject(
-                $this->buildListFiltersActivityMap($list_filter_map),
-                [
-                    'as_dropdown' => true,
-                    'emphasized' => true,
-                    'css' => 'hb-list-filters-control activity-map',
-                    // 'name' => 'list-filters-control',    // @todo fix css support for name
-                    'default_description' => $this->translation_manager->_('collection.list_filters.description', $td),
-                    'dropdown_label' => $this->translation_manager->_('collection.add_list_filter', $td)
-                ]
-            );
+        if ($view_settings->get('enable_list_filters', true)) {
+            $list_filter_map = $this->getListFilterMap();
+            $active_list_filter_map = $this->getActiveListFilterMap($request_data);
+            // add initialized filters to search form
+            foreach ($active_list_filter_map as $filter) {
+                $form_parameters[sprintf('filter[%s]', $filter->getName())] = $filter->getCurrentValue();
+            }
+
+            $list_filter_map->append($active_list_filter_map);
+            $list_filters_render_settings = [
+                // 'configured_list_filters' => $list_filter_map,
+                'form_parameters' => $form_parameters
+            ];
+            $rendered_list_filters = $this->getRenderedListFilters($list_filter_map, $list_filters_render_settings);
+            if (!$list_filter_map->isEmpty()) {
+                $rendered_list_filters_control = $this->renderSubject(
+                    $this->buildListFiltersActivityMap($list_filter_map),
+                    [
+                        'as_dropdown' => true,
+                        'emphasized' => true,
+                        'css' => 'hb-list-filters-control activity-map',
+                        // 'name' => 'list-filters-control',    // @todo fix css support for activity-map name
+                        'default_description' => $this->translation_manager->_('collection.list_filters.description', $td),
+                        'dropdown_label' => $this->translation_manager->_('collection.add_list_filter', $td)
+                    ]
+                );
+            }
         }
 
         $rendered_search_form = $this->renderSubject(

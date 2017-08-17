@@ -1,0 +1,106 @@
+$enable-bubbles: true !default;
+$filter_value_background: if($enable-bubbles, color(lightgrey1), color(lightgrey2));
+$quick_controls_height: 2 * $base-spacing;
+
+// show/hide triggers
+
+.hb-list-filter,
+.hb-list-filter__content,
+.hb-list-filter__trigger { display: none; }
+.hb-list-filter__trigger:checked + .hb-list-filter__content { display: inherit; }
+
+.hb-list-filter {
+    // javascript not loaded
+    &.jsb_ {
+        .hb-list-filter__clear { display: none; }
+    }
+
+    // javascript loaded
+    &:not(jsb_) {
+        .hb-list-filter__quick-label {
+            @include button-states {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+        .hb-list-filter__clear {
+            @include button-states {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            };
+        }
+    }
+}
+
+// quick controls
+
+.hb-list-filter__quick-control {
+    // position: relative;
+    display: inline-flex;
+    flex-wrap: nowrap;
+
+    margin: 2px;
+    margin-right: $small-spacing;
+    margin-top: $small-spacing;
+    height: 1.5em;
+}
+
+.hb-list-filter__clear,
+.hb-list-filter__quick-label {
+    @include button-colors-emphasized-navigational;
+    @include button-shape;
+    @include typography-default;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.hb-list-filter__quick-label {
+    white-space: nowrap;
+    width: auto;
+}
+
+// list-filter
+
+.hb-list-filter {
+    display: none;
+
+    &[data-hb-filter-active],
+    &.hb-list-filter--active { display: initial; }
+
+    .selectize-control { width: 100%; }
+}
+
+.hb-list-filter__toggle:focus,
+.hb-list-filter__clear:focus {
+    @include outline;
+}
+
+.hb-list-filter__filter-control {
+    @include sheet($filter_value_background);
+    border-radius: $buttons-border-radius;
+    min-width: 250px;
+    padding: $small-spacing;
+
+    @if $enable-bubbles {
+        position: absolute;
+        @include zindex('popover');
+        @include shadow-overlay;
+        margin-top: 10px;
+        border-radius: $buttons-border-radius;
+        background-color: color(lightgrey1);
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 20px;
+            border-width: 0 7px 10px;
+            border-style: solid;
+            border-color: $filter_value_background transparent;
+            display: block;
+            width: 0;
+        }
+    }
+}
+
+.hb-list-filter__label { display: none; }

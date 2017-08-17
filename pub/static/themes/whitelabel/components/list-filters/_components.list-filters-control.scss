@@ -1,0 +1,22 @@
+.hb-list-filters-control {
+    // javascript not loaded
+    &.jsb_ { display: none; }
+
+    .base-dropdown__more {
+        // @include flyout--popover('list-filters-control');
+        left: 0;
+        right: initial;
+    }
+    .base-dropdown__toggle-icon { display: none; }
+    .activity-map {
+        .base-dropdown__toggle {
+            @include hb-icon-pseudo-el(funnel);
+            @include button-states {
+                padding: $small-spacing;
+            }
+        }
+        &.destructive .base-dropdown__toggle:before {
+            content: map-get($hb-icon, 'cross') !important;
+        }
+    }
+}
