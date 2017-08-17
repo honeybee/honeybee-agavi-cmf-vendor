@@ -42,6 +42,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
         $this->twig_string_renderer = TwigRenderer::create(
             [
+                'cache_scope' => spl_object_hash($this),
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,
@@ -160,6 +161,7 @@ class SkeletonGenerator implements SkeletonGeneratorInterface
 
         $twig_renderer = TwigRenderer::create(
             [
+                'cache_scope' => 'skeletontemplates',
                 'twig_options' => [
                     'autoescape' => false,
                     'cache' => false,

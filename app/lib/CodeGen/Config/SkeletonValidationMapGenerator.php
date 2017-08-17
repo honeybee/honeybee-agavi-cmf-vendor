@@ -21,6 +21,7 @@ class SkeletonValidationMapGenerator implements ConfigGeneratorInterface
 
         $this->twig_renderer = TwigRenderer::create(
             [
+                'cache_scope' => spl_object_hash($this),
                 'twig_options' => [ 'autoescape' => false ],
                 'template_paths' => [ $this->template_path ]
             ]

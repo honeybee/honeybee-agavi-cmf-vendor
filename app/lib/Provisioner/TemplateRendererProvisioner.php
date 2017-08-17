@@ -125,9 +125,7 @@ class TemplateRendererProvisioner extends AbstractProvisioner
             $loader->setAllowedExtensions((array)$settings->get('allowed_template_extensions'));
         }
 
-        if (!$settings->has('cache_scope')) {
-            $loader->setScope(spl_object_hash($loader)); // unique scope for each new loader instance
-        } else {
+        if ($settings->has('cache_scope')) {
             $loader->setScope($settings->get('cache_scope', FilesystemLoader::SCOPE_DEFAULT));
         }
 

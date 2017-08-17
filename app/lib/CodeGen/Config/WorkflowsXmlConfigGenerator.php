@@ -21,12 +21,13 @@ class WorkflowsXmlConfigGenerator implements ConfigGeneratorInterface
 
         $twig_renderer = TwigRenderer::create(
             [
+                'cache_scope' => spl_object_hash($this),
                 'twig_options' => [ 'autoescape' => false ],
                 'template_paths' => $template_paths
             ]
         );
 
-        $files = array_map(function($abs_config_file_path) {
+        $files = array_map(function ($abs_config_file_path) {
             return str_replace(
                 AgaviConfig::get('core.module_dir'),
                 '',

@@ -30,6 +30,7 @@ class NamespaceAutoloadGenerator implements ConfigGeneratorInterface
 
             $twig_renderer = TwigRenderer::create(
                 [
+                    'cache_scope' => spl_object_hash($this),
                     'twig_options' => [ 'autoescape' => false ],
                     'template_paths' => [ __DIR__ . DIRECTORY_SEPARATOR . 'templates' ]
                 ]
