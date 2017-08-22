@@ -139,7 +139,7 @@ class TwigRenderer extends AgaviTwigRenderer
         $twig = parent::getEngine();
 
         foreach ($this->getParameter('extensions', array()) as $extension_class_name) {
-            $ext = new $extension_class_name();
+            $ext = $this->getContext()->getServiceLocator()->make($extension_class_name);
 
             // as the renderer is reusable it may have the extension already
             if (!$twig->hasExtension($ext->getName())) {
