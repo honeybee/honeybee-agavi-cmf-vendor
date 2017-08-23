@@ -506,17 +506,20 @@ EOT;
         $type = $this->getAttribute('resource_type');
 
         $list_filter_map = new ListFilterMap();
-        foreach ($configured_list_filters as $filter_name => $value) {
+        foreach ($configured_list_filters as $filter_name => $settings) {
+            $settings = new Settings((array)$settings);
+            $implementor = $settings->get('implementor', ListFilter::CLASS);
+            $attribute_path = $settings->get('attribute_path', $filter_name);
             $filter_value = null;
             if ($list_filter_values_map && $list_filter_values_map->hasKey($filter_name)) {
                 $filter_value = $list_filter_values_map->getItem($filter_name)->getCurrentValue();
             }
             $list_filter_map->setItem(
                 $filter_name,
-                new ListFilter(
+                new $implementor(
                     $filter_name,
                     $filter_value,
-                    $type->hasAttribute($filter_name) ? $type->getAttribute($filter_name) : null
+                    $type->hasAttribute($attribute_path) ? $type->getAttribute($attribute_path) : null
                 )
             );
         }
