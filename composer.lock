@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2b4eee216b3c614f92ba7aa0d4cd3ca7",
+    "content-hash": "efd2f358430f3c45d0af6af84ca83ee0",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -666,16 +666,16 @@
         },
         {
             "name": "honeybee/agavi",
-            "version": "1.0.9",
+            "version": "1.0.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/agavi.git",
-                "reference": "6b135553231d91763823a9d64b218ca25f045d71"
+                "reference": "b9c0422c1c64b944f7707261014305262f5b226f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/agavi/zipball/6b135553231d91763823a9d64b218ca25f045d71",
-                "reference": "6b135553231d91763823a9d64b218ca25f045d71",
+                "url": "https://api.github.com/repos/honeybee/agavi/zipball/b9c0422c1c64b944f7707261014305262f5b226f",
+                "reference": "b9c0422c1c64b944f7707261014305262f5b226f",
                 "shasum": ""
             },
             "require": {
@@ -726,7 +726,7 @@
                 "framework",
                 "mvc"
             ],
-            "time": "2017-03-23T14:29:37+00:00"
+            "time": "2017-08-23T10:02:17+00:00"
         },
         {
             "name": "honeybee/honeybee",
@@ -3231,7 +3231,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2017-08-07 09:49:04"
+            "time": "2017-08-07T09:49:04+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -4044,7 +4044,7 @@
                 "github",
                 "test"
             ],
-            "time": "2017-08-07 09:29:08"
+            "time": "2017-08-07T09:29:08+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
