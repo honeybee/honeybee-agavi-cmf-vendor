@@ -77,7 +77,7 @@ class HtmlListFilterRenderer extends Renderer
         return $params;
     }
 
-    public function getTranslations($domain = null)
+    protected function getTranslations($domain = null)
     {
         $translations = [];
         $filter_id = $this->list_filter->getId();
@@ -106,7 +106,7 @@ class HtmlListFilterRenderer extends Renderer
         return $translations;
     }
 
-    public function lookupTranslation($text, $params = [], $fallback = null, $domain = null, $locale = null)
+    protected function lookupTranslation($text, $params = [], $fallback = null, $domain = null, $locale = null)
     {
         $filter_name = $this->list_filter->getName();
         return $this->_(

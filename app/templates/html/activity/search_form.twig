@@ -1,9 +1,9 @@
 <div class="search__content">
     <label for="{{ form_id }}search" class="search-description">{{ _('search.description', translation_domain) }}</label>
     <form action="{{ link }}" method="{{ form_method }}" class="{{ form_css|default('')|join(' ') }}" id="{{ form_id }}" data-hb-translation-domain="{{ translation_domain }}">
-        {% if rendered_additional_markup.list_filters_control is not empty %}
+        {% if rendered_list_filters_control is defined and rendered_list_filters_control is not empty %}
             <div class="hb-list-filters-control search__list-filters-control jsb_ jsb_Honeybee_Core/ui/ListFiltersControl">
-                {{ rendered_additional_markup.list_filters_control|raw }}
+                {{ rendered_list_filters_control|raw }}
             </div>
         {% endif %}
         <div class="search__activity-layout layout--flush">
@@ -20,7 +20,7 @@
         {% endfor %}
         </div>
     </form>
-    {% if rendered_additional_markup.list_filters is not empty -%}
-        {{ rendered_additional_markup.list_filters|raw }}
+    {% if rendered_list_filters is defined and rendered_list_filters is not empty -%}
+        {{ rendered_list_filters|raw }}
     {%- endif %}
 </div>
