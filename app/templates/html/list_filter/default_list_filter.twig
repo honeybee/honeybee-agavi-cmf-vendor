@@ -38,8 +38,6 @@
                 <label for="list_filter_{{ filter_id }}_control">{{ translations.filter_label_with_value|default(translations.filter_label|replace({'{VALUE}': filter_value})) }}</label>
             </div><!--
             --><div class="hb-list-filter__value">
-
-                {%- block filter_input %}
                     {% if form_parameters is not empty -%}
                         <form action="{{ form_url }}" method="GET" class="hb-list-filter__form" id="filter_{{ filter_id }}_form">
                             {% for param_name, param_value in form_parameters if param_name != 'filter[' ~filter_name~ ']' -%}
@@ -47,15 +45,15 @@
                             {%- endfor -%}
                     {% endif -%}
 
+                    {%- block filter_input %}
                     <input id="list_filter_{{ filter_id }}_control" type="text" value="{{ filter_value|escape('html_attr') }}" name="filter[{{ filter_name }}]"
                         {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}" {{ pattern|default('')|raw }}
                         placeholder="{{ translations.filter_placeholder }}" title="{{ translations.filter_label }}" />
+                    {% endblock -%}
 
                     {% if form_parameters is not empty %}
                         </form>
                     {% endif %}
-                {% endblock -%}
-
             </div>
         </div>
     </div>
