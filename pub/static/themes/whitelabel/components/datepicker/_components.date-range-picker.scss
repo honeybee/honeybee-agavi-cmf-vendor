@@ -1,0 +1,25 @@
+.date-range-picker__custom-controls {
+    display: flex;
+    padding: $small-spacing;
+    button { flex-basis: 50%; }
+}
+
+.date-range-picker__custom-values {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.date-range-picker__range-limit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.date-range-picker__comparator {
+    margin-right: $small-spacing;
+
+    select,
+    select:focus {
+        width: auto;
+    }
+}

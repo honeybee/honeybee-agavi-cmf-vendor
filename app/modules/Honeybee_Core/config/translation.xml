@@ -123,6 +123,35 @@
                     </ae:parameter>
                 </message_translator>
             </translator>
+
+            <translator domain="application">
+                <message_translator class="AgaviSimpleTranslator">
+                    <ae:parameter name="ui">
+                        <ae:parameter name="de">
+                            <ae:parameter name="date_range_picker_next_hour">nächste Stunde</ae:parameter>
+                            <ae:parameter name="date_range_picker_next_day">nächste Tag</ae:parameter>
+                            <ae:parameter name="date_range_picker_next_week">nächste Woche</ae:parameter>
+                            <ae:parameter name="date_range_picker_next_month">nächste Monat</ae:parameter>
+                            <ae:parameter name="date_range_picker_custom">Zeitraum eingeben</ae:parameter>
+                            <ae:parameter name="date_range_picker_placeholder">Datum eingeben</ae:parameter>
+                            <ae:parameter name="date_range_picker_gte">ab</ae:parameter>
+                            <ae:parameter name="date_range_picker_lte">bis</ae:parameter>
+                        </ae:parameter>
+                        <ae:parameter name="en">
+                            <ae:parameter name="date_range_picker_next_hour">next hour</ae:parameter>
+                            <ae:parameter name="date_range_picker_next_day">next day</ae:parameter>
+                            <ae:parameter name="date_range_picker_next_week">next week</ae:parameter>
+                            <ae:parameter name="date_range_picker_next_month">next month</ae:parameter>
+                            <ae:parameter name="date_range_picker_custom">custom range</ae:parameter>
+                            <ae:parameter name="date_range_picker_placeholder">Select date</ae:parameter>
+                            <ae:parameter name="date_range_picker_gte">from</ae:parameter>
+                            <ae:parameter name="date_range_picker_lte">to</ae:parameter>
+                        </ae:parameter>
+                    </ae:parameter>
+                </message_translator>
+            </translator>
+
+
         </translators>
     </ae:configuration>
 </ae:configurations>

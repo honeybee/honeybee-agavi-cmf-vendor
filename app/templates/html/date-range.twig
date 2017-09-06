@@ -1,0 +1,38 @@
+<div class="{{css_prefix}}date-range-picker date-range-picker {% if widget_enabled %}jsb_ jsb_Honeybee_Core/ui/DateRangePicker{% endif %}" data-hb-date-range-values="{{ range_values|json_encode }}" {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
+    <div class="date-range-picker__input input-choice">
+        <select name="{{ control_name }}" data-js-current-value="{{ current_value }}" id="{{ control_id }}">
+            {% for value, label in choice_options %}
+                <option value="{{ value }}" {% if value == current_value %}selected{% endif %}>{{ _(translation_key_prefix ~ 'picker_' ~ label, translation_domain) }}</option>
+            {% endfor %}
+            {% if current_value is not empty and current_value not in choice_options|keys %}
+                <option class="date-range-picker__input-custom" value="{{ current_value }}" selected>{{ _(translation_key_prefix ~ 'picker_custom', translation_domain) }}</option>
+            {% endif %}
+        </select>
+    </div>
+    <div class="date-range-picker__custom" style="display: none;">
+        <div class="date-range-picker__custom-controls">
+            <button type="button" class="date-range-picker__custom-add activity positive">+</button>
+            <button type="button" class="date-range-picker__custom-remove activity destructive">-</button>
+        </div>
+        <div class="date-range-picker__custom-values"></div>
+    </div>
+    <div class="date-range-picker__templates" style="display: none;">
+        <div data-hb-template="datepicker">
+            <div class="date-range-picker__range-limit">
+                <div class="date-range-picker__comparator">
+                    <select>
+                        <option value="gte">{{ _(translation_key_prefix ~ 'picker_gte', translation_domain) }}</option>
+                        <option value="lte">{{ _(translation_key_prefix ~ 'picker_lte', translation_domain) }}</option>
+                    </select>
+                </div>
+                <div class="datepicker-controls-wrapper">
+                    <input type="text" class="datepicker-input" placeholder="{{ _(translation_key_prefix ~ 'picker_placeholder') }}">
+                    <button type="button" class="datepicker-toggle activity" style="display: none;">
+                        <span class="datepicker-toggle__icon"></span>
+                        <span class="datepicker-toggle__label">{{ _(translation_key_prefix ~ 'picker_toggle', translation_domain) }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
