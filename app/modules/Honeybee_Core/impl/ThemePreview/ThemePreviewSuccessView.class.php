@@ -1,10 +1,11 @@
 <?php
 
-use Honeygavi\App\Base\View;
 use Honeybee\Infrastructure\Config\Settings;
+use Honeygavi\App\Base\View;
 use Honeygavi\Ui\Activity\Activity;
 use Honeygavi\Ui\Activity\ActivityMap;
 use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\Renderer\Html\Honeygavi\Ui\ValueObjects\HtmlTimestampRangeRenderer;
 
 class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
 {
@@ -123,6 +124,7 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
             '_activity_custom_template_activity_group',
             $this->getInnerActivityCustomTemplateActivityMap()
         );
+        $this->setAttribute('_rendererd_date_range', $this->getRenderedDatePicker());
     }
 
     protected function getRendererdActivityMaps()
@@ -358,6 +360,19 @@ class Honeybee_Core_ThemePreview_ThemePreviewSuccessView extends View
         }
 
         return $rendererd_breadcrumbs;
+    }
+
+    protected function getRenderedDatePicker()
+    {
+        $input_name = 'choice_date_range_1';
+        $this->setAttribute('choice_date_range_input_name', $input_name);
+        $range = 'range(gte:now,lte:+1month)';
+
+        return $this->renderSubject(
+            $range,
+            [ 'control_name ' => $input_name ],
+            [ 'renderer' => HtmlTimestampRangeRenderer::CLASS ]
+        );
     }
 
     protected function getSampleBreadcrumbsActivities()
