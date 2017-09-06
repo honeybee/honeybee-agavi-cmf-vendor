@@ -37,6 +37,7 @@ class HtmlListFilterMapRenderer extends Renderer
         $params = parent::getTemplateParameters();
 
         $params['rendered_list_filters'] = $this->renderListFilters();
+        $params['active_list_filters'] = (array)$this->getActiveListFilters();
         $params['css'] = (string)$this->getOption('css', '');
 
         return $params;
@@ -72,6 +73,18 @@ class HtmlListFilterMapRenderer extends Renderer
         }
 
         return $rendered_filters;
+    }
+
+    protected function getActiveListFilters()
+    {
+        $active_list_filters = [];
+        foreach ($this->getPayload('subject') as $list_filter) {
+            $filter_value = $list_filter->getCurrentValue();
+            if (!is_null($filter_value)) {
+                $active_list_filters[$list_filter->getName()] = $filter_value;
+            }
+        }
+        return $active_list_filters;
     }
 
     protected function getDefaultTemplateIdentifier()

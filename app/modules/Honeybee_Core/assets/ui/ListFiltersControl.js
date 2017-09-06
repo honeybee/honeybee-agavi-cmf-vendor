@@ -6,7 +6,8 @@ define([
         activity_map_selector: '.activity-map',
         toggle_selector: '.base-dropdown__toggle',
         dropdown_selector: '.base-dropdown__more',
-        filter_trigger_selector: '.activity'
+        filter_trigger_selector: '.activity',
+        list_fiter_list_selector: '.hb-list-filters__list'
     };
 
     function ListFiltersControl(dom_element, options)
@@ -42,16 +43,26 @@ define([
             e.preventDefault();
             var $target = $(e.target);
             var filter_name = $target.attr('href').replace('#', '');
-            var filter_id = _.snakeCase(filter_name);
 
-            self.addFilter(filter_id);
+            self.addFilter(filter_name);
         });
 
         this.$activity_map.on('cli')
     };
 
-    ListFiltersControl.prototype.addFilter = function(filter_id) {
-        jsb.fireEvent('LIST_FILTER_' + filter_id.toUpperCase() + ':ACTION', { action: 'ADD_LIST_FILTER' } );
+    ListFiltersControl.prototype.addFilter = function(filter_name) {
+        var $filter_list = $(this.options.list_fiter_list_selector);
+        var filter_selector = '[data-hb-filter-name="' + filter_name + '"]';
+        if ($filter_list.find(filter_selector).length === 0) {
+            // clone template
+            var filter_template = $('#list_filter_templates')
+                .find(filter_selector)
+                .html();
+            $filter_list.append($.parseHTML(filter_template));
+            // execute jsb
+            jsb.applyBehaviour($filter_list.get(0));
+        }
+        jsb.fireEvent('LIST_FILTER_' + _.snakeCase(filter_name).toUpperCase() + ':ACTION', { action: 'TOGGLE_FILTER' } );
     };
 
     ListFiltersControl.prototype.clearAllFilters = function() {

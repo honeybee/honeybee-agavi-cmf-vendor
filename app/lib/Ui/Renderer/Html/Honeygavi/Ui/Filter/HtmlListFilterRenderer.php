@@ -46,7 +46,6 @@ class HtmlListFilterRenderer extends Renderer
             $params['attribute_type_name'] = $this->name_resolver->resolve($this->attribute);
         }
 
-        // $params['filter_value_translation'] = $this->getTranslatedFilterValue($this->list_filter);
         $params['filter_value'] = $this->list_filter->getCurrentValue();
         $params['filter_name'] = $this->list_filter->getName();
         $params['filter_id'] = $this->list_filter->getId();   // we don't want dots

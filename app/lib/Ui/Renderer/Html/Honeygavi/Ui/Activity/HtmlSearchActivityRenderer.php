@@ -37,16 +37,8 @@ class HtmlSearchActivityRenderer extends HtmlActivityRenderer
             if (!$list_filter_map->isEmpty()) {
                 // add active list filters to search form
                 $params['form_parameters'] = (array)$params['form_parameters'];
-                foreach ($list_filter_map as $filter) {
-                    if ($filter_value = $filter->getCurrentValue()) {
-                        $params['form_parameters'][sprintf('filter[%s]', $filter->getName())] = $filter_value;
-                    }
-                }
                 // render list filters
-                $params['rendered_list_filters'] = $this->renderListFilters(
-                    $list_filter_map,
-                    [ 'form_parameters' => $params['form_parameters'] ]
-                );
+                $params['rendered_list_filters'] = $this->renderListFilters($list_filter_map);
                 // render list filters control activity map
                 $params['rendered_list_filters_control'] = $this->renderListFiltersControl($list_filter_map);
             }
@@ -176,7 +168,7 @@ class HtmlSearchActivityRenderer extends HtmlActivityRenderer
                 new Activity([
                     'name' => $activity_name,
                     'scope' => 'list_filters',
-                    'url' => Url::createUri(sprintf('#%s', $list_filter->getId())),
+                    'url' => Url::createUri(sprintf('#%s', $list_filter->getName())),
                     'label' => sprintf('%s.label', $activity_name),
                     'description' => sprintf('%s.description', $activity_name),
                     'verb' => 'read',

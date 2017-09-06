@@ -2,10 +2,19 @@
 <div class="hb-list-filters {{ css }}">
     <div class="hb-list-filters__content">
         <ul class="hb-list-filters__list">
-            {%- for filter_id, rendered_filter in rendered_list_filters -%}
-                {{ rendered_filter|raw }}
-            {%- endfor -%}
+            {%- for filter_name, rendered_filter in rendered_list_filters %}
+                {%- if filter_name in active_list_filters|keys %}
+                    {{ rendered_filter|raw }}
+                {%- endif %}
+            {%- endfor %}
         </ul>
+    </div>
+    <div id="list_filter_templates" style="display:none;">
+        {%- for filter_name, rendered_filter in rendered_list_filters -%}
+            <script data-hb-filter-name="{{ filter_name }}" type="text/template">
+                {{ rendered_filter|raw }}
+            </script>
+        {%- endfor -%}
     </div>
 </div>
 {%- endblock -%}

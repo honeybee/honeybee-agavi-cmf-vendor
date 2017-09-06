@@ -19,7 +19,7 @@
             }
 
             @include media-query(lap-and-up) {
-                flex-wrap: nowrap;
+                // flex-wrap: nowrap;
                 .search__list-filters-control {
                     flex: 0 0; // flex-grow: 0; flex-basis: 0;
                 }

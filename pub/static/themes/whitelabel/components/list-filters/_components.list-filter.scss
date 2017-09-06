@@ -4,7 +4,6 @@ $quick_controls_height: 2 * $base-spacing;
 
 // show/hide triggers
 
-.hb-list-filter,
 .hb-list-filter__content,
 .hb-list-filter__trigger { display: none; }
 .hb-list-filter__trigger:checked + .hb-list-filter__content { display: inherit; }

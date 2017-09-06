@@ -3,7 +3,7 @@
 {%- block filter_input %}
     <div class="hb-list-filter__control jsb_ jsb_Honeybee_Core/ui/SelectBox">
     {% if allowed_values is defined and allowed_values %}
-        <select id="{{ filter_id }}" name="filter[{{ filter_name }}]" {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}" {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
+        <select id="{{ filter_id }}" name="filter[{{ filter_name }}]" {{ readonly|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}" {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
             {% if add_empty_option|default(false) -%}
             <option value="{{ empty_option_value|default('__empty') }}">{{ empty_option_name|raw }}</option>
             {% endif %}

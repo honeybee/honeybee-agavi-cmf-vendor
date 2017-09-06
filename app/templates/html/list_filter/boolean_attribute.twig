@@ -2,12 +2,12 @@
 {%- block filter_input %}
 <div class="hb-list-filter__choice-layout layout--flush">
     <div class="1/2 hb-list-filter__choice-box">
-        <input type="radio" name="filter[{{ filter_id }}]" value="0" {% if filter_value == '0' %}checked{% endif %} />
-        <span>{{ _('filter_' ~ filter_id ~ '.quick_label.value_0', translation_domain, null, null, '0') }}</span>
+        <input type="radio" name="filter[{{ filter_id }}]" value="0" {% if filter_value == '0' %}checked{% endif %}>
+        <span>{{ _(filter_id ~ '.quick_label.value_0', translation_domain, null, null, '0') }}</span>
     </div><!--
     --><div class="1/2 hb-list-filter__choice-box">
-        <input type="radio" name="filter[{{ filter_id }}]" value="1" {% if filter_value == '1' %}checked{% endif %} />
-        <span>{{ _('filter_' ~ filter_id ~ '.quick_label.value_1', translation_domain, null, null, '1') }}</span>
+        <input type="radio" name="filter[{{ filter_id }}]" value="1" {% if filter_value == '1' %}checked{% endif %}>
+        <span>{{ _(filter_id ~ '.quick_label.value_1', translation_domain, null, null, '1') }}</span>
     </div>
 </div>
 {%- endblock -%}
