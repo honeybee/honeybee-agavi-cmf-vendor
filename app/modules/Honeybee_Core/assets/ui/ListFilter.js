@@ -3,59 +3,44 @@ define([
 ], function(Widget) {
     var default_options = {
         prefix: 'Honeybee_Core/ui/ListFilter',
-        listen_on_local_control: true,
         excluded_inputs_selector: 'form[name="jumpToPage"] input',
-        target_form_selector: '#search_form',
-        target_form_filter_list_selector: '.search__additional-inputs',
+        filter_selector: '.hb-list-filter',
         trigger_selector: '.hb-list-filter__trigger',
         quick_label_selector: '.hb-list-filter__quick-label',
         quick_clear_selector: '.hb-list-filter__clear',
-        filter_toggle_selector: '.hb-list-filter__toggle'
-    };
-
-    var translations = {
-        'quick_label': '{FILTER_NAME}: {VALUE}',
-        'quick_label.title': 'Show/Hide filter',
-        'quick_clear': 'x',
-        'quick_clear.description': 'Clear filter'
+        filter_toggle_selector: '.hb-list-filter__toggle',
+        translations: {
+            'quick_label': '{FILTER_NAME}: {VALUE}',
+            'quick_label.title': 'Show/Hide filter',
+            'quick_clear': 'x',
+            'quick_clear.description': 'Clear filter'
+        }
     };
 
     function ListFilter(dom_element, options)
     {
         var self = this;
+        if (!dom_element) {
+            return;
+        }
+        this.init(dom_element, _.merge({}, default_options, options));
+        this.jsb_off_handler = [];
 
-        this.init(dom_element, default_options);
-        this.addOptions(options);
-
-        this.translations = $.extend({}, translations, this.options.translations);
+        this.translations = _.merge({}, this.options.translations);
 
         this.id = _.snakeCase(this.options.filter_id || this.$widget.data('hbFilterId'));
         if (!this.id) {
-            console.error(this.prefix + ' - Cannot initialize a filter with invalid identifier.');
+            this.logError(this.prefix + ' - Cannot initialize a filter with invalid identifier.');
             return;
         }
         // note: 'name' falling back to 'id' can cause problems with names containing dots (attribute paths, ES multifields, etc)
         this.name = this.options.filter_name || this.$widget.data('hbFilterName') || this.id;
-        // target form contains the active/inactive filter control
-        this.$target_form = $(this.options.target_form_selector);
-        if (this.$target_form.length === 0) {
-            this.$target_form = this.$widget.find('form');
-            if (this.$target_form.length === 0) {
-                this.logError('Cannot find a form for the list-filters.');
-                return;
-            }
+        this.filter_control_selector = '[name="filter[' + this.name + ']"]';
+        this.$control = this.$widget.find(this.filter_control_selector);    // @todo Don't rely on DOM state. Get control on-the-fly
+        if (this.$control.length === 0) {
+            this.logError(this.prefix + ' - Cannot initialize a filter as no control has been found.');
+            return;
         }
-        this.filter_control_selector = '[name="filter[' + this.name + ']"]';    // selects form controls in the whole document
-        this.$target_control = this.$target_form.find(this.filter_control_selector);
-        // target input must always exist (disabled: filter inactive; enabled: filter active)
-        if (this.$target_control.length === 0) {
-            this.$target_control = $('<input type="hidden" />')
-                .attr('name', 'filter[' + this.name + ']')
-                .prop('disabled', true)
-                .appendTo(this.$target_form.find(this.options.target_form_filter_list_selector));
-        }
-        // can have a local control to trigger changes to target filter control
-        this.$default_control = this.$widget.find(this.filter_control_selector);
 
         this.addListeners();
     };
@@ -66,11 +51,37 @@ define([
     ListFilter.prototype.addListeners = function() {
         var self = this;
 
+        this.addQuickControlListeners();
+        this.addCommandListeners();
+        this.addControlListeners();
+
+        return this;
+    };
+
+    ListFilter.prototype.addQuickControlListeners = function() {
+        var self = this;
+
+        this.$widget.on('click', this.options.filter_toggle_selector, function(e) {
+            // remove no-js toggling behavior
+            // toggle() runs more code than just toggling filter visibility
+            e.preventDefault();
+            self.toggle();
+        });
+        this.$widget.on('click', this.options.quick_clear_selector, function(e) {
+            self.clear();
+        });
+
+        return this;
+    };
+
+    ListFilter.prototype.addCommandListeners = function() {
+        var self = this;
+        var off_handler;
+
         // commands for this filter
         jsb.whenFired('LIST_FILTER_' + this.id.toUpperCase() + ':ACTION', function(values, event_name) {
             switch(values.action) {
-                case 'ADD_LIST_FILTER':
-                    self.activate();
+                case 'TOGGLE_FILTER':
                     self.toggle(values.show);
                     break;
                 default:
@@ -99,30 +110,15 @@ define([
             }
         });
 
-        // quick control
-        this.$widget.on('click', this.options.filter_toggle_selector, function(e) {
-            // remove no-js toggling behavior
-            // toggle() runs more code than just toggling filter visibility
-            e.preventDefault();
-            self.toggle();
-        });
-        this.$widget.on('click', this.options.quick_clear_selector, function(e) {
-            self.clear();
-        });
+        return this;
+    };
 
-        // target form
-        this.$target_control.on('change', function(e) {
-            self.onTargetChange($(this).val());
-        });
+    ListFilter.prototype.addControlListeners = function() {
+        var self = this;
 
-        // if default control is present update target control, when changed
-        if (this.$target_control.length > 0 && this.$default_control.length > 0 && !this.$default_control.is(this.$target_control)) {
-            this.$default_control.on('change', function(e) {
-                var value = $(this).val();
-                self.setTargetControl(value, 'silent');
-                self.onTargetChange(value);
-            });
-        }
+        this.$widget.on('change', this.filter_control_selector, function(e) {
+            self.onControlChange.call(self, $(this).val());
+        });
 
         return this;
     };
@@ -155,38 +151,25 @@ define([
                     exclude: [ self.id ]
                 }
             );
-            // this.$widget.find(selectors.trigger).not($trigger)
-            //     .filter(function() { return $(this).is($trigger) === false; })
-            //     .prop('checked', false);
-            this.$default_control.focus();
+            this.$control.focus();
         }
-
-        return this;
-    };
-
-    ListFilter.prototype.activate = function() {
-        if (!this.isActive()) {
-            this.$target_control.prop('disabled', false);
-        }
-        this.$widget.addClass('hb-list-filter--active');
 
         return this;
     };
 
     ListFilter.prototype.clear = function() {
-        this.$target_control.prop('disabled', true);
-        this.$widget.removeClass('hb-list-filter--active');
-        jsb.fireEvent('LIST_FILTER:CLEARED', { filter_id: self.id });
+        this.$widget.closest(this.options.filter_selector).remove();
+        jsb.fireEvent('LIST_FILTER:CLEARED', { filter_id: this.id });
 
-        return this;
+        delete this;
     };
 
-    ListFilter.prototype.setQuickLabel = function(value) {
+    ListFilter.prototype.setQuickLabel = function(value, default_value) {
         // Label: quick_label, <filter>.quick_label
         // Label Title: quick_label.title, <filter>.quick_label.title
         // Translated Value: <filter>.quick_label.value_<value>
         var translated_value, quick_label, quick_label_title;
-        value = value || this.$target_control.val() || '...';
+        value = value || this.$control.val() || default_value || '...';
 
         translated_value = this.translations['quick_label_value_' + value] || value;
         quick_label = this.translations['quick_label'];
@@ -201,31 +184,18 @@ define([
             .html(value);
 
         return this;
-    }
+    };
 
-    ListFilter.prototype.setTargetControl = function(value, silent) {
-        this.$target_control.val(value);
+    ListFilter.prototype.setControl = function(value, silent) {
+        this.$control.val(value);
         if (!silent) {
-            this.$target_control.change();
+            this.$control.change();
         }
         return this;
     };
 
-    ListFilter.prototype.onTargetChange = function(value) {
-        var $update_inputs;
-        // propagate change to same-name controls on the document
-        $update_inputs = $(this.filter_control_selector)
-            .not(this.$target_control)
-            .not(this.options.excluded_inputs_selector);
-        // trigger change (and prevent loop, if default control is present)
-        $update_inputs.not(this.$default_control).change();
-
+    ListFilter.prototype.onControlChange = function(value) {
         this.setQuickLabel(value);
-
-    };
-
-    ListFilter.prototype.isActive = function() {
-        return this.$target_control.prop('disabled') !== true;
     };
 
     return ListFilter;

@@ -21,7 +21,7 @@ class ListFilter implements ListFilterInterface
 
     public function getId()
     {
-        return StringToolkit::asSnakeCase($this->getName());
+        return str_replace('.', '_', StringToolkit::asSnakeCase($this->getName()));
     }
 
     public function getName()

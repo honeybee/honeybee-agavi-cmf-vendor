@@ -19,8 +19,8 @@
             <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
         {% endfor %}
         </div>
+        {% if rendered_list_filters is defined and rendered_list_filters is not empty -%}
+            {{ rendered_list_filters|raw }}
+        {%- endif %}
     </form>
-    {% if rendered_list_filters is defined and rendered_list_filters is not empty -%}
-        {{ rendered_list_filters|raw }}
-    {%- endif %}
 </div>
