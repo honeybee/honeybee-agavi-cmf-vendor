@@ -1,0 +1,15 @@
+{%- extends 'html/list_filter/default_list_filter.twig' -%}
+{%- block filter_input %}
+<div class="hb-list-filter__control hb-list-filter__datepicker">
+    <div class="datepicker-controls-wrapper">
+        <input type="text" class="datepicker-input" name="filter[{{ filter_name }}]" value="{{ filter_value }}"
+            id="list_filter_{{ filter_id }}" placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}">
+        {% if widget_enabled %}
+        <button type="button" class="datepicker-toggle" style="display: none;">
+            <span class="datepicker-toggle__icon"></span>
+            <span class="datepicker-toggle__label">{{ _('toggle', translation_domain) }}</span>
+        </button>
+        {% endif %}
+    </div>
+</div>
+{% endblock -%}

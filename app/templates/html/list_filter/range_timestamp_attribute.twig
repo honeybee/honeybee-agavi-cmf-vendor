@@ -1,0 +1,6 @@
+{%- extends 'html/list_filter/default_list_filter.twig' -%}
+{%- block filter_input %}
+<div class="hb-list-filter__control">
+    {{ rendered_date_range|raw }}
+</div>
+{% endblock -%}
