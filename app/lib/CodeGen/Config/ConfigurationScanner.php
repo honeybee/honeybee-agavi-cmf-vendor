@@ -117,16 +117,10 @@ class ConfigurationScanner
                     $configs_to_include['routing']['honeybee_modules'][] = $module_name;
                 }
                 $configs_to_include['aggregate_root_type_map'][] = $aggregate_root_schema_file->getRealPath();
-
-                $projections_directory = sprintf('%s/projection/', dirname($aggregate_root_schema_file->getRealPath()));
-                $projection_schemas = Finder::create()
-                    ->files()
-                    ->name('*.xml')
-                    ->sortByName()
-                    ->in($projections_directory);
-                foreach ($projection_schemas as $entity_schema_file) {
-                    $configs_to_include['projection_type_map'][] = $entity_schema_file->getRealPath();
-                }
+            }
+            $projection_schemas = Finder::create()->files()->path('entity_schema/projection/')->name('*.xml')->sortByName()->in($module_dir.'/config');
+            foreach ($projection_schemas as $entity_schema_file) {
+                $configs_to_include['projection_type_map'][] = $entity_schema_file->getRealPath();
             }
 
             // add non-honeybee module routings separately
