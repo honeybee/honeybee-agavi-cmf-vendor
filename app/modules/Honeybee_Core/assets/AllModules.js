@@ -29,7 +29,8 @@ define([
     "Honeybee_Core/ui/EntityReferenceList",
     "Honeybee_Core/ui/HtmlRichTextEditor",
     "Honeybee_Core/ui/HtmlLinkPopup",
-    "Honeybee_Core/ui/GlobalErrors"
+    "Honeybee_Core/ui/GlobalErrors",
+    "Honeybee_Core/ui/list-filter/BooleanListFilter"
 ], function($, jsb) {
 
     // nothing to do here, only use to load all stuff at once

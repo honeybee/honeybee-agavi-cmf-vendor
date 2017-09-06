@@ -100,3 +100,12 @@ $quick_controls_height: 2 * $base-spacing;
     white-space: nowrap;
     width: auto;
 }
+
+// boolean list-filter
+
+.hb-list-filter__choice {
+    label {
+        display: inline;
+        margin-left: $small-spacing;
+    }
+}
