@@ -96,6 +96,7 @@ define([
 
         this.initial_picker_settings.displayFormat = this.options.display_format || this.$widget.data('displayFormat') || default_options.displayFormat;
         this.initial_picker_settings.defaultDisplayMode = this.options.display_mode || this.$widget.data('displayMode') || default_options.displayMode;
+        this.initial_picker_settings.onSetSelectedDate = (this.options.onSetSelectedDate || this.onSelect || Function()).bind(this);
 
         // create/attach datepicker
         this.picker = new dtlp(this.initial_picker_settings);
@@ -134,6 +135,10 @@ define([
             // now shrink the widht from the really high inital CSS value down to fit the content
             $picker_content.width(new_width);
         }
+    };
+
+    DatePicker.prototype.getPicker = function() {
+        return this.picker;
     };
 
     return DatePicker;

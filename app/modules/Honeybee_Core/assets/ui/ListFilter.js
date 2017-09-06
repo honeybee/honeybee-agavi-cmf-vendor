@@ -117,7 +117,7 @@ define([
         var self = this;
 
         this.$widget.on('change', this.filter_control_selector, function(e) {
-            self.onControlChange.call(self, $(this).val());
+            self.onControlChange.call(self, $(e.target).val());
         });
 
         return this;
@@ -171,9 +171,9 @@ define([
         var translated_value, quick_label, quick_label_title;
         value = value || this.$control.val() || default_value || '...';
 
-        translated_value = this.translations['quick_label_value_' + value] || value;
+        translated_value = this.translations['quick_label.value_' + value] || value;
         quick_label = this.translations['quick_label'];
-        quick_label_title = this.translations['quick_label_title'];
+        quick_label_title = this.translations['quick_label.title'];
 
         if (quick_label) {
             value = quick_label.replace('{VALUE}', translated_value);
