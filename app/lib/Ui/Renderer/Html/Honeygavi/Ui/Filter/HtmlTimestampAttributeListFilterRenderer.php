@@ -15,7 +15,10 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
     {
         parent::validate();
 
-        $this->default_choice_options = HtmlTimestampRangeRenderer::$default_choice_options;
+        $this->default_choice_options = (array)$this->getOption(
+            'choice_options',
+            HtmlTimestampRangeRenderer::$default_choice_options
+        );
     }
 
     protected function getDefaultTemplateIdentifier()
@@ -31,7 +34,7 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
     {
         $params = parent::getTemplateParameters();
 
-        $params['choice_options'] = (array)$this->getOption('choice_options', $this->default_choice_options);
+        $params['choice_options'] = $this->default_choice_options;
         $params['rendered_date_range'] = $this->renderDateRange($params['filter_value']);
 
         return $params;
@@ -42,6 +45,7 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
         $render_settings = [
             'control_name' => 'filter[' . $this->list_filter->getName() . ']',
             'current_value' => $range_value,
+            'choice_options' => (array)$this->getOption('choice_options', $this->default_choice_options),
             'translation_key_prefix' => $this->list_filter->getId() . '.',
             'widget_enabled' => false, // list-filter widget takes care of it
             'css_prefix' => 'hb-list-filter-',
@@ -92,30 +96,39 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
     // @todo Add a getTranslatedValue()
     protected function getTranslatedQuickLabel()
     {
-        $filter_id = $this->list_filter->getName();
-        $range_translation = '{COMPARATOR} {COMPARAND}, ';
         $value = '';
-        foreach (HtmlTimestampRangeRenderer::getRangeLimits($this->list_filter->getCurrentValue()) as $range) {
-            $comparator_translation = $this->_($filter_id . '.picker_' . $range['comparator'], null, null, null, $range['comparator']);
-            if ($date = \DateTimeImmutable::createFromFormat(DateAttribute::FORMAT_ISO8601, $range['comparand'])) {
-                $comparand_translation = $date->format($this->getOption('quick_label_date_format', 'j M Y'));
-            } elseif (array_key_exists($range['comparand'], $this->default_choice_options)) {
-                $translation_key = $filter_id . '.picker_' . $this->default_choice_options[$range['comparand']];
-                $comparand_translation = $this->_($translation_key, null, null, null, $range['comparand']);
-            } else {
-                $comparand_translation = $range['comparand'];
+        $filter_name = $this->list_filter->getName();
+        $range_translation = '{COMPARATOR} {COMPARAND}, ';
+        $current_value = $this->list_filter->getCurrentValue();
+        $default_option = $this->default_choice_options[$current_value] ?? null;
+        $has_value_translation = $default_option
+            && $translated_value = $this->_($filter_name . '.picker_' . $default_option);
+
+        if ($has_value_translation) {
+            $value = $translated_value;
+        } else {
+            foreach (HtmlTimestampRangeRenderer::getRangeLimits($current_value) as $range) {
+                $comparator_translation = $this->_($filter_name . '.picker_' . $range['comparator'], null, null, null, $range['comparator']);
+                if ($date = \DateTimeImmutable::createFromFormat(DateAttribute::FORMAT_ISO8601, $range['comparand'])) {
+                    $comparand_translation = $date->format($this->getOption('quick_label_date_format', 'j M Y'));
+                } elseif (array_key_exists($range['comparand'], $this->default_choice_options)) {
+                    $translation_key = $filter_name . '.picker_' . $this->default_choice_options[$range['comparand']];
+                    $comparand_translation = $this->_($translation_key, null, null, null, $range['comparand']);
+                } else {
+                    $comparand_translation = $range['comparand'];
+                }
+                $range_value = str_replace('{COMPARATOR}', $comparator_translation, $range_translation);
+                $range_value = str_replace('{COMPARAND}', $comparand_translation, $range_value);
+                $value .= $range_value;
             }
-            $range_value = str_replace('{COMPARATOR}', $comparator_translation, $range_translation);
-            $range_value = str_replace('{COMPARAND}', $comparand_translation, $range_value);
-            $value .= $range_value;
+            $value = rtrim(trim($value), ',');
         }
-        $value = rtrim(trim($value), ',');
         $params = [
-            'id' => $filter_id,
+            'id' => $filter_name,
             'name' => $this->list_filter->getName(),
             'value' => $value
         ];
-        $quick_label_translation = $this->lookupTranslation('quick_label', [ 'value' => '{VALUE}' ] + $params, "$filter_id: {VALUE}");
+        $quick_label_translation = $this->lookupTranslation('quick_label', [ 'value' => '{VALUE}' ] + $params, "$filter_name: {VALUE}");
 
         return str_replace('{VALUE}', $value, $quick_label_translation);
     }
