@@ -79,7 +79,7 @@ define([
         var off_handler;
 
         // commands for this filter
-        jsb.whenFired('LIST_FILTER_' + this.id.toUpperCase() + ':ACTION', function(values, event_name) {
+        off_handler = jsb.whenFired('LIST_FILTER_' + this.id.toUpperCase() + ':ACTION', function(values, event_name) {
             switch(values.action) {
                 case 'TOGGLE_FILTER':
                     self.toggle(values.show);
@@ -88,9 +88,10 @@ define([
                     self.logWarn('ListFilter action not recognized.');
             }
         });
+        this.jsb_off_handler.push(off_handler);
 
         // commands for all the filters
-        jsb.whenFired('LIST_FILTER:ACTION', function(values, event_name) {
+        off_handler = jsb.whenFired('LIST_FILTER:ACTION', function(values, event_name) {
             switch(values.action) {
                 case 'TOGGLE':
                     values.exclude = values.exclude || [ self.id ]; // if not defined exclude self.id, to prevent loops
@@ -109,6 +110,7 @@ define([
                     self.logWarn('ListFilter action not recognized.');
             }
         });
+        this.jsb_off_handler.push(off_handler);
 
         return this;
     };
@@ -160,6 +162,12 @@ define([
     ListFilter.prototype.clear = function() {
         this.$widget.closest(this.options.filter_selector).remove();
         jsb.fireEvent('LIST_FILTER:CLEARED', { filter_id: this.id });
+
+        // remove event handlers (@todo Can't make Jsb to remove them...)
+        for (var i = 0; i < this.jsb_off_handler.length; i++) {
+            this.jsb_off_handler[i].dontLeak(this);
+        }
+        jsb.fireEvent('Jsb::REMOVED_INSTANCE', this);
 
         delete this;
     };

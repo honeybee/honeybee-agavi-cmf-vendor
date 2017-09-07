@@ -61,8 +61,9 @@ define([
             $filter_list.append($.parseHTML(filter_template));
             // execute jsb
             jsb.applyBehaviour($filter_list.get(0));
+        } else {
+            jsb.fireEvent('LIST_FILTER_' + _.snakeCase(filter_name).toUpperCase() + ':ACTION', { action: 'TOGGLE_FILTER' } );
         }
-        jsb.fireEvent('LIST_FILTER_' + _.snakeCase(filter_name).toUpperCase() + ':ACTION', { action: 'TOGGLE_FILTER' } );
     };
 
     ListFiltersControl.prototype.clearAllFilters = function() {
