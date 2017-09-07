@@ -30,6 +30,9 @@ define([
         date_range_picker_config.custom_text = this.translations.picker_custom || date_range_picker_config.custom_text;
 
         this.range_picker = new DateRangePicker($range_picker.get(0), date_range_picker_config);
+
+        // update quick-label
+        this.$control.change();
     };
 
     DateRangePickerListFilter.prototype = new ListFilter();

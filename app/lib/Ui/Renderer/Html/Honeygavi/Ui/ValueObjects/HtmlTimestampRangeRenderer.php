@@ -30,11 +30,18 @@ class HtmlTimestampRangeRenderer extends GenericSubjectRenderer
 
     protected function validate()
     {
-        $range_limits = $this->getRangeLimits($this->getPayload('subject'));
         $comparand_regex = '#(?<operation>[+-]?)\s*(?<amount>\d+?)\s*(?<unit>' + join('|', $this->supported_periods) + '?)#U';
+        $range_value = $this->getPayload('subject');
+        $default_value = $this->getOption('default_value', 'range(gte:now)');
+
+        // @todo support empty value?
+        if (empty($range_value)) {
+            $range_value = $default_value;
+        }
+        $range_limits = $this->getRangeLimits($range_value);
 
         if (empty($range_limits)) {
-            throw new RuntimeError('No valid range provided');
+            $range_limits = $this->getRangeLimits($default_value);
         }
         $this->date_format = $this->getOption('date_format', self::DEFAULT_FORMAT);
         // validate limits
@@ -88,6 +95,7 @@ class HtmlTimestampRangeRenderer extends GenericSubjectRenderer
         $params['translation_key_prefix'] = (string)$this->getOption('translation_key_prefix', 'date_range_');
         $params['widget_enabled'] = (bool)$this->getOption('widget_enabled', true);
         $params['widget_options'] = (array)$this->getOption('widget_options', []);
+        $params['widget_options']['default_custom_value'] = $this->getOption('default_value', 'range(gte:now)');
         $params['css_prefix'] = (string)$this->getOption('css_prefix');
 
         return $params;
