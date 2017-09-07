@@ -1,5 +1,5 @@
 {%- block list_filter -%} {# this block exists for whitespace control #}
-<li class="hb-list-filter hb-list-filter-{{ filter_id }} hb-list-filters__list-item {{ css|default('') }} {% if filter_value is not null %}hb-list-filter--active{% endif %}"
+<li class="hb-list-filter hb-list-filter-{{ filter_id }} hb-list-filters__list-item {{ css|default('') }} {% if filter_value is not null %}hb-list-filter--active{% endif %} hb-list-filter--prevent-autotoggle"
     id="list_filter_{{ filter_id }}" data-hb-filter-id="{{ filter_id }}" data-hb-filter-name="{{ filter_name }}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}>
 

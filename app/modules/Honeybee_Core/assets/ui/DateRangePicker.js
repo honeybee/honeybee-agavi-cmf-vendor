@@ -185,8 +185,6 @@ define([
             var valid_value = self.validateLimitValue(picker.getOutputElement().val());
             if (valid_value) {
                 range_value += limit.comparator.val() + ':' + valid_value + ',';
-            } else {
-                console.log('Invalid date skipped.');
             }
         });
 

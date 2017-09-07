@@ -150,6 +150,7 @@ class HtmlSearchActivityRenderer extends HtmlActivityRenderer
                     'as_dropdown' => true,
                     'emphasized' => true,
                     'css' => 'hb-list-filters-control activity-map',
+                    'more_css' => 'hb-list-filter--prevent-autotoggle',
                     // 'name' => 'list-filters-control',    // @todo fix css support for activity-map name
                     'default_description' => $this->_('collection.list_filters.description'),
                     'dropdown_label' => $this->_('collection.add_list_filter')

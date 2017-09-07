@@ -6,6 +6,7 @@ define([
 
     appendRequiredAttributeToAllDataRequiredFields();
     handleFlyoutSpecifics();
+    handleListFilterSpecifics();
     handleLoadingState(
         config.get('widgets.handle_loading', false),
         config.get('widgets.loading_classname', 'hb-js-widget--busy'),
@@ -79,6 +80,16 @@ define([
         });
         $(document).on("mouseout", ".hb-js-flyout-toggle", function(ev) {
             $(this).siblings(".hb-js-flyout-toggle").removeClass("hover");
+        });
+    }
+
+    function handleListFilterSpecifics() {
+        $(document).on("click", function(ev) {
+            var $target = $(ev.target);
+            var prevent_autotoggle = $target.closest('.hb-list-filter--prevent-autotoggle').length === 0;
+            if ($target.not('.hb-list-filter__toggle') !== 0 && prevent_autotoggle) {
+                $('input.hb-list-filter__trigger').prop('checked', false);
+            }
         });
     }
 
