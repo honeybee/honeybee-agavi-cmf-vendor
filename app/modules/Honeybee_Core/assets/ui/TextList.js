@@ -39,7 +39,7 @@ define([
         var $item_labels = this.$input_element.children("label");
 
         $select.attr("multiple", true);
-        $select.attr("name", $text_input.attr("name"));
+        $select.attr("name", $text_input.attr("name") || this.$widget.data('grouped-field-name'));
         $select.prop("disabled", !this.isReadable);
         $select.prop("required", this.isRequired());
 

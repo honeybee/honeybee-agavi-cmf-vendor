@@ -6,7 +6,7 @@
 <div
     class="hb-field {{ css|default('') }}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
-    data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
+    data-hb-field-name="{{ field_name }}" data-grouped-field-name="{{ grouped_field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}>
     <div class="hb-field__content">
         <div class="hb-field__label">
             <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
