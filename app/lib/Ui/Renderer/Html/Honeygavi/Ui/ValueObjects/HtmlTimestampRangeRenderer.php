@@ -30,7 +30,7 @@ class HtmlTimestampRangeRenderer extends GenericSubjectRenderer
 
     protected function validate()
     {
-        $comparand_regex = '#(?<operation>[+-]?)\s*(?<amount>\d+?)\s*(?<unit>' + join('|', $this->supported_periods) + '?)#U';
+        $comparand_regex = '#(?<operation>[+-]?)\s*(?<amount>\d+?)\s*(?<unit>' . join('|', $this->supported_periods) . '?)#U';
         $range_value = $this->getPayload('subject');
         $default_value = $this->getOption('default_value', 'range(gte:now)');
 
