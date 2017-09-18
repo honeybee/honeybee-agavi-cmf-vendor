@@ -5,6 +5,7 @@ namespace Honeygavi\Routing;
 use AgaviContext;
 use AgaviExecutionContainer;
 use AgaviRoutingCallback;
+use AgaviWebRequest;
 
 /**
  * Inspects the Accept HTTP header and sets the output_type according to
@@ -45,7 +46,12 @@ class NegotiateOutputTypeRoutingCallback extends AgaviRoutingCallback
      */
     public function onMatched(array &$parameters, AgaviExecutionContainer $container)
     {
-        $request_data = $this->context->getRequest()->getRequestData();
+        $request = $this->context->getRequest();
+        if (!$request instanceof AgaviWebRequest) {
+            return true;
+        }
+
+        $request_data = $request->getRequestData();
 
         // allow the route to match even though the Accept header is missing
         // we don't set a default output type, as the application has one
