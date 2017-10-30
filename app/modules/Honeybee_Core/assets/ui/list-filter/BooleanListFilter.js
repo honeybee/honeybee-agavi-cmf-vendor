@@ -15,9 +15,13 @@ define([
     BooleanListFilter.prototype.constructor = BooleanListFilter;
 
     BooleanListFilter.prototype.setQuickLabel = function(value) {
-        var control_label = this.$widget.find(this.options.control_label_selector).text();
+        var $control = this.getControl();
+        var control_val = $control.filter(':checked').val();
+        var value = this.translations['value_' + control_val]
+            ? control_val
+            : this.$widget.find(this.options.control_label_selector).text();
 
-        ListFilter.prototype.setQuickLabel.call(this, control_label, value);
+        ListFilter.prototype.setQuickLabel.call(this, value);
 
         return this;
     };

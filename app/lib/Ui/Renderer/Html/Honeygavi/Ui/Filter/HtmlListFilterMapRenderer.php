@@ -57,10 +57,11 @@ class HtmlListFilterMapRenderer extends Renderer
             $render_settings = new Settings([
                 'view_scope' => $view_scope,
                 'value' => $list_filter->getCurrentValue(), // ease resuse of attribute-renderers
-                'form_parameters' => $this->getOption('form_parameters', [])    // propagate params to keep current filtering
+                'form_parameters' => $this->getOption('form_parameters', []) // keep current filtering (if rendering each filter in a separated form)
             ]);
+            $config_key = $list_filter->getSettings()->get('config_key');
 
-            $rendered_filters[$list_filter->getName()] = $this->renderer_service->renderSubject(
+            $rendered_filters[$config_key] = $this->renderer_service->renderSubject(
                 $list_filter,
                 $this->output_format,
                 $renderer_config,
@@ -80,8 +81,9 @@ class HtmlListFilterMapRenderer extends Renderer
         $active_list_filters = [];
         foreach ($this->getPayload('subject') as $list_filter) {
             $filter_value = $list_filter->getCurrentValue();
+            $config_key = $list_filter->getSettings()->get('config_key');
             if (!is_null($filter_value)) {
-                $active_list_filters[$list_filter->getName()] = $filter_value;
+                $active_list_filters[$config_key] = $filter_value;
             }
         }
         return $active_list_filters;

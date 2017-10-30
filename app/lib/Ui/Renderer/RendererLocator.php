@@ -8,6 +8,7 @@ use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeygavi\Ui\Filter\ListFilterInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use Psr\Log\LoggerInterface;
+use Trellis\Runtime\Attribute\Attribute;
 
 class RendererLocator implements RendererLocatorInterface
 {
@@ -204,10 +205,11 @@ class RendererLocator implements RendererLocatorInterface
     {
         $modifier = '';
         if ($subject instanceof ListFilterInterface) {
-            $attr = $subject->getAttribute();
-            if ($attr) {
-                $attr_class = new \ReflectionClass($attr);
-                $modifier = $attr_class->getShortName();
+            $subject_attr = $subject->getAttribute();
+            if ($subject_attr) {
+                $subject_attr_class = new \ReflectionClass($subject_attr);
+                $attr_class = new \ReflectionClass(Attribute::CLASS);
+                $modifier = str_replace($attr_class->getShortName(), '', $subject_attr_class->getShortName());
             }
         }
 

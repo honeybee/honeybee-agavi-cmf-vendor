@@ -34,6 +34,7 @@ $selectize-spacing: 3px;
     }
 
     // Multi selectize (Multiple choice select & Text-List)
+    input.selectized ~ &,
     select[multiple] ~ & {
         .selectize-input.selectize-input {
             .item {

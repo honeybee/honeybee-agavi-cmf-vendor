@@ -2,6 +2,7 @@
 
 namespace Honeygavi\Ui\Renderer\Html\Honeygavi\Ui\Activity;
 
+use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeygavi\Ui\Activity\Activity;
@@ -12,8 +13,6 @@ use Honeygavi\Ui\Filter\ListFilterMap;
 
 class HtmlSearchActivityRenderer extends HtmlActivityRenderer
 {
-    protected $type;
-
     protected function validate()
     {
         parent::validate();
@@ -32,77 +31,30 @@ class HtmlSearchActivityRenderer extends HtmlActivityRenderer
     {
         $params = parent::getTemplateParameters();
 
-        if ($this->getOption('enable_list_filters', true)) {
-            $list_filter_map = $this->getListFilterMap();
-            if (!$list_filter_map->isEmpty()) {
-                // add active list filters to search form
-                $params['form_parameters'] = (array)$params['form_parameters'];
-                // render list filters
-                $params['rendered_list_filters'] = $this->renderListFilters($list_filter_map);
-                // render list filters control activity map
-                $params['rendered_list_filters_control'] = $this->renderListFiltersControl($list_filter_map);
-            }
-        }
+        $params['form_parameters'] = (array)$params['form_parameters'];
+        $params = array_replace($params, $this->getListFilterParams());
 
         return $params;
     }
 
-    protected function getListFilterMap()
+    protected function getListFilterParams()
     {
-        $defined_list_filters = $this->getOption('defined_list_filters', []);
-        $list_filters_values = $this->getOption('list_filters_values', []);
-        $list_filter_map = new ListFilterMap();
+        $list_filter_params = [];
 
-        // defined filters
-        foreach ($defined_list_filters as $filter_name => $settings) {
-            $settings = new Settings((array)$settings);
-
-            $filter_implementor = $settings->get('implementor', ListFilter::CLASS);
-            $filter_value = $list_filters_values[$filter_name] ?? null;
-
-            $list_filter_map->setItem(
-                $filter_name,
-                new $filter_implementor(
-                    $filter_name,
-                    $filter_value,
-                    $this->resolveFilterAttribute($filter_name, $settings->get('attribute_path'))
-                )
+        if ($this->getOption('enable_list_filters', true)) {
+            $list_filter_map = $this->list_filter_service->buildMapFor(
+                $this->getOption('defined_list_filters'),
+                $this->getOption('list_filters_values'),
+                $this->getPayload('resource')->getType()->getVariantPrefix()
             );
-        }
-        // undefined filters
-        foreach ($list_filters_values as $filter_name => $filter_value) {
-            if ($list_filter_map->hasKey($filter_name)) {
-                continue;
+
+            if (!$list_filter_map->isEmpty()) {
+                $list_filter_params['rendered_list_filters'] = $this->renderListFilters($list_filter_map);
+                $list_filter_params['rendered_list_filters_control'] = $this->renderListFiltersControl($list_filter_map);
             }
-            $list_filter_map->setItem(
-                $filter_name,
-                new ListFilter(
-                    $filter_name,
-                    $filter_value,
-                    $this->resolveFilterAttribute($filter_name)
-                )
-            );
         }
 
-        return $list_filter_map;
-    }
-
-    protected function resolveFilterAttribute($filter_name, $attribute_path = null)
-    {
-        $type = $this->getPayload('resource')->getType();
-
-        if (!empty($attribute_path)) {
-            $attribute_path = $attribute_path;
-        } elseif (strpos($filter_name, '.') === false) {
-            // filter name can be used as attribute path (dots not supported)
-            $attribute_path = $filter_name;
-        } else {
-            $attribute_path = '';
-        }
-
-        return $type->hasAttribute($attribute_path)
-            ? $type->getAttribute($attribute_path)
-            : null;
+        return $list_filter_params;
     }
 
     protected function renderListFilters(ListFilterMap $list_filter_map, $render_settings = [])
@@ -163,13 +115,14 @@ class HtmlSearchActivityRenderer extends HtmlActivityRenderer
     {
         $list_filters_activity_map = new ActivityMap();
         foreach ($list_filter_map as $list_filter) {
-            $activity_name = 'list_filter_' . $list_filter->getName();
+            $config_key = $list_filter->getSettings()->get('config_key');
+            $activity_name = 'list_filter_' . $config_key;
             $list_filters_activity_map->setItem(
                 $activity_name,
                 new Activity([
                     'name' => $activity_name,
                     'scope' => 'list_filters',
-                    'url' => Url::createUri(sprintf('#%s', $list_filter->getName())),
+                    'url' => Url::createUri(sprintf('#%s', $config_key)),
                     'label' => sprintf('%s.label', $activity_name),
                     'description' => sprintf('%s.description', $activity_name),
                     'verb' => 'read',

@@ -54,7 +54,8 @@ class SubjectNameResolver implements NameResolverInterface
                 if ($subject instanceof ActivityInterface) {
                     $subject_name = $subject->getName() . $subject_name;
                 } elseif ($subject instanceof ListFilterInterface) {
-                    $subject_name = $subject->getName() . $subject_name;
+                    $config_key = $subject->getSettings()->get('config_key', $subject->getName());
+                    $subject_name = $config_key . $subject_name;
                 }
             }
 

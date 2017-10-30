@@ -244,7 +244,7 @@ EOT;
                 'search_value' => $request_data->getParameter('search'),
                 'form_parameters' => [ 'sort' => $request_data->getParameter('sort') ],
                 'enable_list_filters' => $view_settings->get('enable_list_filters', AgaviConfig::get('list_filters.enable', true)),
-                'defined_list_filters' => $view_settings->get('list_filters', []),
+                'defined_list_filters' => $view_settings->get('list_filters'),
                 'list_filters_values' => $request_data->getParameter('list_config')->getFilter()
             ],
             $view_config_service->getRendererConfig($view_scope, $this->getOutputFormat(), 'search_activity'),

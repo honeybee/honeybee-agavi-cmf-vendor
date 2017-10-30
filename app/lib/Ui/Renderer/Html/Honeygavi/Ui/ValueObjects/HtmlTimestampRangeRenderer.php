@@ -16,10 +16,10 @@ class HtmlTimestampRangeRenderer extends GenericSubjectRenderer
      */
     public static $default_choice_options = [
         // value => label
-        'range(gte:now,lte:+1 hour)' => 'next_hour',
-        'range(gte:now,lte:+1 day)' => 'next_day',
-        'range(gte:now,lte:+1 week)' => 'next_week',
-        'range(gte:now,lte:+1 month)' => 'next_month'
+        'range(gte:now,lte:now+1 hour)' => 'next_hour',
+        'range(gte:now,lte:now+1 day)' => 'next_day',
+        'range(gte:now,lte:now+1 week)' => 'next_week',
+        'range(gte:now,lte:now+1 month)' => 'next_month'
     ];
 
     protected $supported_comparators = [ 'gte', 'gt', 'lte', 'lt' ];

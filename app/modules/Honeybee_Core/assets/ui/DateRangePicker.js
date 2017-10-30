@@ -1,10 +1,3 @@
-/*
-    TODO:
-    - get range parts. Use the renderer? Will need to compose them anyway later via JS
-    - try to avoid using date values: it won't reselect the value, few seconds (or days) after the POST
-    OPTIONAL:
-    - add '+' button to allow to add multiple range limits?
-*/
 define([
     "Honeybee_Core/Widget",
     "Honeybee_Core/ui/SelectBox",
@@ -15,7 +8,7 @@ define([
         prefix: 'Honeybee_Core/ui/DateRangePicker',
         default_control_selector: '.date-range-picker__input [name]',
         limit_input_template_selector: '[data-hb-template=datepicker]',
-        custom_controls_selector: '.date-range-picker__custom', // @todo Try to not have it configurable
+        custom_controls_selector: '.date-range-picker__custom',
         custom_text: 'Custom: {VALUE}',
         default_custom_value: 'range(gte:now)',
         date_picker_config: {},
@@ -47,7 +40,7 @@ define([
         this.$custom = this.$widget.find(this.options.custom_controls_selector);
 
         var regex_periods = Object.keys(this.options.period_map).join('|');
-        this.date_math_regex = new RegExp('([+-])(\\d+)\\s*(' + regex_periods + ')', 'g');
+        this.date_math_regex = new RegExp('([+-])(\\d+)\\s*(' + regex_periods + ')(/\w{1})*', 'g');
         this.range_limits = [];
 
         this.options.date_picker_config.onSetSelectedDate = this.onSelectDate;
@@ -98,11 +91,10 @@ define([
             return;
 
         var custom_value = this.buildCustomValue();
-        this.$default_control.find('.date-range-picker__input-custom').val(custom_value);
-        this.$default_control.val(custom_value) // or chain .prop('selected', true) to the previous line
+        this.$default_control.val(custom_value)
 
         if (!silent) {
-            this.$default_control.change();    // @todo Verify it works also with selectize
+            this.$default_control.change();
         }
     };
 

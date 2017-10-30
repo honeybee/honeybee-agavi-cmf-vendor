@@ -1,0 +1,43 @@
+// text-list list-filter
+
+
+// @TODO: Move template, renderer, widget from project! (following style is useless here alone)
+
+// @todo Remove coupling with text-list component
+
+.hb-list-filter:not(.jsb_) {
+    .hb-list-filter__text-list {
+        .input_help { display: none; }
+    }
+}
+
+.hb-list-filter__text-list {
+    @include media-query(lap-and-up) {
+        max-width: 40em;
+    }
+
+    .text-list__suggestions {
+        font-style: italic;
+        margin: auto;
+        max-width: 50em;
+        text-align: center;
+// height: 0;       // @todo Test with empty allowed_values
+
+        .text-list__suggested-value {
+            display: inline-block;
+            list-style: none;
+            margin-top: $small-spacing;
+            margin-right: $small-spacing;
+
+            input {
+                @include button-shape-normal-positive-hover;
+                @include button-shadow-normal-positive-hover;
+                cursor: inherit;
+                user-select: inherit;
+                text-overflow: clip;
+            }
+        }
+    }
+}
+
+//.hb-list-filter__control--as_array

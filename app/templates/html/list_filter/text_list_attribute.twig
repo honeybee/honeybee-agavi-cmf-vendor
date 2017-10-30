@@ -1,0 +1,45 @@
+{%- set widget_classes = widget_classes|default('jsb_ jsb_Honeybee_Core/ui/list-filter/TextListListFilter') -%}
+{%- set join_values = join_values|default(false) -%}
+{%- set input_allowed = input_allowed|default(join_values) -%}
+
+{%- extends 'html/list_filter/default_list_filter.twig' -%}
+
+{%- block filter_input %}
+    <div class="hb-list-filter__control {% if not join_values %}hb-list-filter__control--as_array{% endif %}" data-hb-value="{{ filter_value_as_array|json_encode }}">
+        <div class="hb-list-filter__text-list input-text-list"> {# do we need this block? #}
+
+            <div class="input-text-list__box">
+                <div class="input-text-list__input">
+                {% if join_values %}
+                    <input type="text" name="filter[{{ filter_name }}]" value="{{ filter_value }}" id="list_filter_{{ config_key }}_control" class="hb-list-filter__main-control" {{ not input_allowed ? 'disabled' }} {{ pattern|default('') }} placeholder="{{ placeholder|default('') }}">
+                {% else %}
+                    <input type="text" name="filter[{{ filter_name }}][]" value="" id="list_filter_{{ config_key }}_control" class="hb-list-filter__add-value" {{ not input_allowed ? 'disabled'}} {{ pattern|default('') }}  placeholder="{{ placeholder|default('') }}">
+                {% endif %}
+
+                {% if translations.input_help is defined and translations.input_help is not empty %}
+                    <div class="input_help">{{ translations.input_help|raw }}</div>
+                {% endif %}
+                </div>
+
+                <ul class="text-list__suggestions">
+                {%- for value in allowed_values -%}
+                    {% set checked = value in filter_value_as_array %}
+                    <li class="text-list__suggested-value">
+                    {% if join_values -%}
+                        <label>
+                            <span class="visuallyhidden">{{ translations['value_'~value]|default(value) }}</span>
+                            <input type="text" class="{{ checked ? 'text-list__item--checked' }}" value="{{ value }}" readonly>
+                        </label>
+                    {% else -%}
+                        <label class="text-list__item">
+                            <input type="checkbox" class="{{ checked ? 'text-list__item--checked' }}" value="{{ value }}" name="filter[{{ filter_name }}][]" {{ checked ? 'checked' }}>
+                            <span>{{ translations['value_'~value]|default(value) }}</span>
+                        </label>
+                    {% endif -%}
+                    </li>
+                {% endfor -%}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock -%}
