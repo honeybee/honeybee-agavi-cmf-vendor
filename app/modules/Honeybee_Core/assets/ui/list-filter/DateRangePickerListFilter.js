@@ -32,7 +32,7 @@ define([
         this.range_picker = new DateRangePicker($range_picker.get(0), date_range_picker_config);
 
         // update quick-label
-        this.$control.change();
+        this.getControl().change();
     };
 
     DateRangePickerListFilter.prototype = new ListFilter();
@@ -57,7 +57,7 @@ define([
 
     DateRangePickerListFilter.prototype.getQuickLabelValue = function(value) {
         var self = this;
-        var selected_choice = this.$widget.find(this.filter_control_selector).find(':selected');
+        var selected_choice = this.getControl().find(':selected');
         value = '';
 
         if (selected_choice.is('.date-range-picker__input-custom')) {

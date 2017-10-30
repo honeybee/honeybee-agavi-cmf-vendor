@@ -184,6 +184,17 @@
                     <class>Honeygavi\Ui\Activity\WorkflowActivityService</class>
                 </service>
 
+                <service name="honeybee.ui.list_filter_service">
+                    <class>Honeygavi\Ui\Filter\ListFilterService</class>
+                    <provisioner>
+                        <class>Honeygavi\Provisioner\DefaultProvisioner</class>
+                        <settings>
+                            <setting name="share">true</setting>
+                            <setting name="alias">Honeygavi\Ui\Filter\ListFilterServiceInterface</setting>
+                        </settings>
+                    </provisioner>
+                </service>
+
                 <service name="honeybee.ui.view_config_service">
                     <class>Honeygavi\Ui\ViewConfig\ViewConfigService</class>
                     <settings>

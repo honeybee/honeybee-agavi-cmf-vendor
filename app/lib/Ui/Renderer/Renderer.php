@@ -10,11 +10,12 @@ use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
-use Honeygavi\Template\TemplateRendererInterface;
 use Honeybee\Projection\ProjectionTypeMap;
+use Honeygavi\Template\TemplateRendererInterface;
 use Honeygavi\Ui\Activity\ActivityInterface;
 use Honeygavi\Ui\Activity\ActivityServiceInterface;
 use Honeygavi\Ui\Activity\Url;
+use Honeygavi\Ui\Filter\ListFilterServiceInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatServiceInterface;
 use Honeygavi\Ui\Renderer\RendererServiceInterface;
@@ -38,6 +39,7 @@ abstract class Renderer implements RendererInterface
     protected $view_config_service;
     protected $view_template_service;
     protected $activity_service;
+    protected $list_filter_service;
     protected $expression_service;
     protected $name_resolver;
     protected $resource_type_map;
@@ -60,6 +62,7 @@ abstract class Renderer implements RendererInterface
         ViewConfigServiceInterface $view_config_service,
         ViewTemplateServiceInterface $view_template_service,
         ActivityServiceInterface $activity_service,
+        ListFilterServiceInterface $list_filter_service,
         ExpressionServiceInterface $expression_service,
         NameResolverInterface $name_resolver,
         ProjectionTypeMap $resource_type_map,
@@ -76,6 +79,7 @@ abstract class Renderer implements RendererInterface
         $this->view_config_service = $view_config_service;
         $this->view_template_service = $view_template_service;
         $this->activity_service = $activity_service;
+        $this->list_filter_service = $list_filter_service;
         $this->expression_service = $expression_service;
         $this->name_resolver = $name_resolver;
         $this->resource_type_map = $resource_type_map;

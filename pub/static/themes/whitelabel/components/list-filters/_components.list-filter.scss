@@ -1,3 +1,5 @@
+@import "components.text_list-list_filter";
+
 $enable-bubbles: true !default;
 $filter_value_background: if($enable-bubbles, color(lightgrey1), color(lightgrey2));
 $quick_controls_height: 2 * $base-spacing;
@@ -50,6 +52,7 @@ $quick_controls_height: 2 * $base-spacing;
     border-radius: $buttons-border-radius;
     min-width: 250px;
     padding: $small-spacing;
+    margin-right: $base-spacing*2;
 
     @if $enable-bubbles {
         position: absolute;
@@ -99,13 +102,22 @@ $quick_controls_height: 2 * $base-spacing;
 .hb-list-filter__quick-label {
     white-space: nowrap;
     width: auto;
+    max-width: 30*$base-spacing;
+    text-overflow: ellipsis;
 }
+
 
 // boolean list-filter
 
-.hb-list-filter__choice {
+.hb-list-filter__boolean {
     label {
         display: inline;
         margin-left: $small-spacing;
     }
 }
+
+
+// datetime list-filter
+
+// .hb-list-filter__timestamp {}
+// .hb-list-filter__range_timestamp {}

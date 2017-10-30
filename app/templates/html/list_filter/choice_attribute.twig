@@ -1,18 +1,22 @@
-{%- set css = css ~ ' input-choice' -%}
+{%- set widget_classes = widget_classes|default('jsb_ jsb_Honeybee_Core/ui/list-filter/ChoiceListFilter')-%}
+
 {%- extends 'html/list_filter/default_list_filter.twig' -%}
+
 {%- block filter_input %}
-    <div class="hb-list-filter__control jsb_ jsb_Honeybee_Core/ui/SelectBox">
+    <div class="hb-list-filter__control input-choice jsb_ jsb_Honeybee_Core/ui/SelectBox">
     {% if allowed_values is defined and allowed_values %}
-        <select id="{{ filter_id }}" name="filter[{{ filter_name }}]" {{ readonly|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}" {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
-            {% if add_empty_option|default(false) -%}
+        <select id="{{ filter_name }}" name="filter[{{ filter_name }}]" {{ readonly|default('') }} {{ required|default('') }} title="{{ translations.title|default('') }}" {% if tabindex is defined %}tabindex="{{ tabindex }}"{% endif %}>
+            {% if add_empty_option|default(false) and empty_option_value|default('__empty') not in allowed_values -%}
             <option value="{{ empty_option_value|default('__empty') }}">{{ empty_option_name|raw }}</option>
             {% endif %}
             {% for allowed_value in allowed_values %}
                 <option value="{{ allowed_value }}"
                     {% if allowed_value == filter_value %}selected="selected"{% endif %}
-                >{{ _(allowed_value, translation_domain) }}</option>
+                >{{ translations['value_'~allowed_value]|default(allowed_value) }}</option>
             {% endfor %}
         </select>
+    {% else %}
+        {{ parent() }}
     {% endif %}
     </div>
 {% endblock -%}
