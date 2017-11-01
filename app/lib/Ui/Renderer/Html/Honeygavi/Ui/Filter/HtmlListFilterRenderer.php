@@ -3,29 +3,44 @@
 namespace Honeygavi\Ui\Renderer\Html\Honeygavi\Ui\Filter;
 
 use Honeybee\Common\Error\RuntimeError;
+use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeygavi\Ui\Filter\ListFilter;
 use Honeygavi\Ui\Filter\ListFilterInterface;
 use Honeygavi\Ui\Renderer\Renderer;
+use Trellis\Runtime\Attribute\AttributeInterface;
 
 class HtmlListFilterRenderer extends Renderer
 {
     const STATIC_TRANSLATION_PATH = 'list_filters';
 
+    const EMPTY_FILTER_VALUE = '__empty';
+
+    const OP_AND = ','; // see ListConfig
+
     protected $list_filter;
     protected $attribute;
 
-    protected function getDefaultTemplateIdentifier()
+    protected function setUp($payload, $settings)
     {
-        return $this->output_format->getName() . '/list_filter/pick_template.twig';
+        parent::setUp($payload, $settings);
+        $this->list_filter = $payload['subject'];
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->list_filter = null;
     }
 
     protected function validate()
     {
-        if (!$this->getPayload('subject') instanceof ListFilterInterface) {
+        if (!$this->list_filter instanceof ListFilterInterface) {
             throw new RuntimeError('Payload "subject" must be an instance of: ' . ListFilterInterface::CLASS);
         }
-
-        $this->list_filter = $this->getPayload('subject');
-        $this->attribute = $this->getPayload('attribute', $this->list_filter->getAttribute());
+        $attribute = $this->list_filter->getAttribute();
+        if ($attribute && !$attribute instanceof AttributeInterface) {
+            throw new RuntimeError('Filter attribute must be an instance of: ' . AttributeInterface::CLASS);
+        }
     }
 
     protected function doRender()
@@ -33,94 +48,161 @@ class HtmlListFilterRenderer extends Renderer
         return $this->getTemplateRenderer()->render($this->getTemplateIdentifier(), $this->getTemplateParameters());
     }
 
+    protected function getDefaultTemplateIdentifier()
+    {
+        return $this->output_format->getName() . '/list_filter/pick_template.twig';
+    }
+
     protected function getTemplateParameters()
     {
         $params = parent::getTemplateParameters();
 
+        $attribute = $this->list_filter->getAttribute();
+
         // params for pick-template
-        $params['resource_type_prefix'] = $this->getPayload('resource')->getType()->getPrefix();
+        $params['resource_type_prefix'] = $this->list_filter->getSettings()->get(
+            'resource_type_prefix',
+            $this->getPayload('resource')->getType()->getPrefix()
+        );
         $params['attribute_name'] = 'missing';
         $params['attribute_type_name'] = 'missing';
-        if ($this->attribute) {
-            $params['attribute_name'] = $this->attribute->getName();
-            $params['attribute_type_name'] = $this->name_resolver->resolve($this->attribute);
+        if ($attribute) {
+            $params['attribute_name'] = $attribute->getName();
+            $params['attribute_type_name'] = $this->name_resolver->resolve($attribute);
         }
-
-        $params['filter_value'] = $this->list_filter->getCurrentValue();
+        $params['filter_value'] = $this->determineFilterValue();
         $params['filter_name'] = $this->list_filter->getName();
-        $params['filter_id'] = $this->list_filter->getId();   // we don't want dots
+        $params['config_key'] = $this->getFilterConfigKey();
         $params['html_attributes'] = $this->getOption('html_attributes', []);
-
         // render inner form, when form-parameters are passed (e.g to support no-js submit of filter)
         $params['form_parameters'] = $this->getOption('form_parameters', []);
         $params['form_url'] = $this->url_generator->generateUrl(null);
-
         $params['widget_enabled'] = $this->isWidgetEnabled();
         $params['widget_options'] = $this->getWidgetOptions();
         $params['widget_options']['translations'] = $params['translations'];
-
+        $params['widget_classes'] = $this->isWidgetEnabled() ? sprintf(' jsb_ %s', $this->getWidgetImplementor()) : '';
         if ($this->hasOption('tabindex')) {
             $params['tabindex'] = $this->getOption('tabindex');
         }
-
         $params['css_prefix'] = $this->getOption('css_prefix', 'hb-list-filter');
         $css = (string)$this->getOption('css', '');
-        if ($this->attribute) {
+        if ($attribute) {
             $css .= sprintf(' %s_%s', $params['css_prefix'], $params['attribute_name']);
-        }
-        if ($this->isWidgetEnabled()) {
-            $css .= sprintf(' jsb_ %s', $this->getWidgetImplementor());
         }
         $params['css'] = $css;
 
         return $params;
     }
 
+    protected function determineFilterValue()
+    {
+        // get value according to options
+        $current_value = $this->list_filter->getCurrentValue();
+        $value = $current_value ?? $this->getOption('default_value');
+        // and ensure it's a string
+        $value = $value instanceof SettingsInterface ? $value->toArray() : (array)$value;
+        $value = join(static::OP_AND, $value);
+
+        return (string)$value;
+    }
+
+    protected function getFilterConfigKey()
+    {
+        return $this->list_filter->getSettings()->get('config_key');
+    }
+
     protected function getTranslations($domain = null)
     {
-        $translations = [];
-        $filter_id = $this->list_filter->getId();
+        $i18n = [];
+        $config_key = $this->getFilterConfigKey();
         $filter_name = $this->list_filter->getName();
-        $filter_value = $this->list_filter->getCurrentValue();
+        $filter_value = $this->determineFilterValue();
+
         $params = [
-            'id' => $filter_id,
+            'config_key' => $config_key,
             'name' => $filter_name,
             'value' => $filter_value
         ];
 
-        $translations['quick_label'] = $this->lookupTranslation('quick_label', [ 'value' => '{VALUE}' ] + $params, "$filter_name: {VALUE}");
-        $translations['quick_label_title'] = $this->lookupTranslation('quick_label.title', $params);
-        $translations['quick_clear'] = $this->lookupTranslation('quick_clear', $params, 'x');
-        $translations['quick_clear_title'] = $this->lookupTranslation('quick_clear.title', $params);
-        $translations['filter_label'] = $this->lookupTranslation(
+        // values translations
+        $i18n += $this->getValuesTranslations();
+        $i18n['filter_value_translation'] = $i18n['filter_value_translation']
+            ?? $i18n['value_' . $filter_value]
+            ?? $filter_value;
+
+        // quick control
+        $i18n['quick_label'] = $this->lookupTranslation(
+            'quick_label',
+            [ 'value' => '{VALUE}' ] + $params,  // lookup without value
+            "$filter_name: {VALUE}"
+        );
+        $i18n['quick_label_with_current_value'] = str_replace(
+            '{VALUE}',
+            $i18n['filter_value_translation'],
+            $i18n['quick_label']
+        );
+        $i18n['quick_label_title'] = $this->lookupTranslation('quick_label.title', $params);
+        $i18n['quick_clear'] = $this->lookupTranslation('quick_clear', $params, 'x');
+        $i18n['quick_clear_title'] = $this->lookupTranslation('quick_clear.title', $params);
+        // filter detail
+        $i18n['filter_label'] = $this->lookupTranslation(
             'filter_label',
             [ 'value' => '{VALUE}' ] + $params,  // lookup without value
-            $translations['quick_label']
+            $i18n['quick_label']
         );
-        $translations['filter_placeholder'] = $this->lookupTranslation('filter_placeholder', $params, '');
+        $i18n['filter_label_with_current_value'] = str_replace(
+            '{VALUE}',
+            $i18n['filter_value_translation'],
+            $i18n['filter_label']
+        );
+        $i18n['filter_placeholder'] = $this->lookupTranslation('filter_placeholder', $params, '');
+        $i18n['input_help'] = $this->lookupTranslation('input_help', $params, '');
 
-        // value tranlsations
-        // @todo Support translation of values
-
-        return $translations;
+        return $i18n;
     }
 
-    protected function lookupTranslation($text, $params = [], $fallback = null, $domain = null, $locale = null)
+    protected function lookupTranslation($text, array $params = null, $fallback = null, $domain = null, $locale = null)
     {
-        $filter_name = $this->list_filter->getName();
+        $config_key = $params['config_key'] ?? $this->getFilterConfigKey();
+        $value = $params['value'] ?? '{NOVALUE}';
+
         return $this->_(
-            $filter_name . ".$text.value_" . $params['value'],
+            $config_key . ".$text.value_" . $value,
             $domain,
             $locale,
             $params,
             $this->_(
-                $filter_name . ".$text",
+                $config_key . ".$text",
                 $domain,
                 $locale,
                 $params,
                 $this->_($text, $domain, $locale, $params, $fallback)
             )
         );
+    }
+
+    protected function getValuesTranslations(array $default_values = [])
+    {
+        $config_key = $this->getFilterConfigKey();
+        $translations = [];
+
+        // translate also current string value
+        $filter_value = $this->determineFilterValue();
+        if (!empty($filter_value) && is_string($filter_value)) {
+            $default_values[] = $filter_value;
+        }
+        $values = array_replace($default_values, $this->getAllowedValues());
+
+        foreach ($values as $value) {
+            $translations['value_' . $value] = $this->_($config_key . '.value_' . $value, null, null, null, $value);
+        }
+
+        return $translations;
+    }
+
+    protected function getAllowedValues()
+    {
+        return $this->getOption('allowed_values', []);
     }
 
     protected function isWidgetEnabled()
@@ -130,7 +212,13 @@ class HtmlListFilterRenderer extends Renderer
 
     protected function getWidgetOptions()
     {
-        $widget_options = [];
+        $widget_options = [
+            'prefix' => sprintf(
+                '%s[%s]',
+                str_replace('jsb_', '', $this->getWidgetImplementor()),
+                $this->list_filter->getName()
+            )
+        ];
         if ($this->hasOption('tabindex')) {
             $widget_options['tabindex'] = $this->getOption('tabindex');
         }

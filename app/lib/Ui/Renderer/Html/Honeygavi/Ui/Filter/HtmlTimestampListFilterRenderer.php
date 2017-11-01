@@ -9,18 +9,8 @@ use Honeygavi\Ui\Renderer\Html\Honeygavi\Ui\ValueObjects\HtmlTimestampRangeRende
 use Trellis\Runtime\Attribute\Date\DateAttribute;
 use Trellis\Runtime\Attribute\Timestamp\TimestampAttribute;
 
-class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
+class HtmlTimestampListFilterRenderer extends HtmlListFilterRenderer
 {
-    protected function validate()
-    {
-        parent::validate();
-
-        $this->default_choice_options = (array)$this->getOption(
-            'choice_options',
-            HtmlTimestampRangeRenderer::$default_choice_options
-        );
-    }
-
     protected function getDefaultTemplateIdentifier()
     {
         if ((bool)$this->getOption('as_range', true)) {
@@ -34,10 +24,15 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
     {
         $params = parent::getTemplateParameters();
 
-        $params['choice_options'] = $this->default_choice_options;
+        $params['choice_options'] = $this->getDefaultChoiceOptions();
         $params['rendered_date_range'] = $this->renderDateRange($params['filter_value']);
 
         return $params;
+    }
+
+    protected function getDefaultChoiceOptions()
+    {
+        return (array)$this->getOption('choice_options', HtmlTimestampRangeRenderer::$default_choice_options);
     }
 
     protected function renderDateRange($range_value)
@@ -45,8 +40,8 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
         $render_settings = [
             'control_name' => 'filter[' . $this->list_filter->getName() . ']',
             'current_value' => $range_value,
-            'choice_options' => (array)$this->getOption('choice_options', $this->default_choice_options),
-            'translation_key_prefix' => $this->list_filter->getId() . '.',
+            'choice_options' => $this->getDefaultChoiceOptions(),
+            'translation_key_prefix' => $this->getFilterConfigKey() . '.',
             'widget_enabled' => false, // list-filter widget takes care of it
             'css_prefix' => 'hb-list-filter-',
             'translation_domain' => $this->getTranslationDomain()
@@ -83,36 +78,39 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
 
     protected function getTranslations($domain = null)
     {
-        $translations = parent::getTranslations($domain);
+        $i18n = parent::getTranslations($domain);
 
-        $translations['picker_custom'] = $this->_($this->list_filter->getId() . '.picker_custom');
-        $translations['quick_label_comparator_gte'] = $this->_($this->list_filter->getId() . '.picker_gte');
-        $translations['quick_label_comparator_lte'] = $this->_($this->list_filter->getId() . '.picker_lte');
-        $translations['quick_label_with_value'] = $this->getTranslatedQuickLabel();
+        $i18n['picker_custom'] = $this->lookupTranslation('picker_custom');
+        $i18n['picker_placeholder'] = $this->lookupTranslation('picker_placeholder', null, '');
+        $i18n['quick_label_comparator_gte'] = $this->lookupTranslation('picker_gte');
+        $i18n['quick_label_comparator_lte'] = $this->lookupTranslation('picker_lte');
+        $i18n['quick_label_with_value'] = $this->getTranslatedQuickLabel();
 
-        return $translations;
+        return $i18n;
     }
 
-    // @todo Add a getTranslatedValue()
     protected function getTranslatedQuickLabel()
     {
         $value = '';
         $filter_name = $this->list_filter->getName();
+        $config_key = $this->getFilterConfigKey();
         $range_translation = '{COMPARATOR} {COMPARAND}, ';
-        $current_value = $this->list_filter->getCurrentValue();
-        $default_option = $this->default_choice_options[$current_value] ?? null;
+        $current_value = $this->determineFilterValue();
+        $default_choice_options = $this->getDefaultChoiceOptions();
+        $default_option = $default_choice_options[$current_value] ?? null;
         $has_value_translation = $default_option
-            && $translated_value = $this->_($filter_name . '.picker_' . $default_option);
+            && $translated_value = $this->_($config_key . '.picker_' . $default_option);
 
         if ($has_value_translation) {
             $value = $translated_value;
         } else {
+            // formatted translations for range-limits
             foreach (HtmlTimestampRangeRenderer::getRangeLimits($current_value) as $range) {
-                $comparator_translation = $this->_($filter_name . '.picker_' . $range['comparator'], null, null, null, $range['comparator']);
+                $comparator_translation = $this->_($config_key . '.picker_' . $range['comparator'], null, null, null, $range['comparator']);
                 if ($date = \DateTimeImmutable::createFromFormat(DateAttribute::FORMAT_ISO8601, $range['comparand'])) {
                     $comparand_translation = $date->format($this->getOption('quick_label_date_format', 'j M Y'));
-                } elseif (array_key_exists($range['comparand'], $this->default_choice_options)) {
-                    $translation_key = $filter_name . '.picker_' . $this->default_choice_options[$range['comparand']];
+                } elseif (array_key_exists($range['comparand'], $default_choice_options)) {
+                    $translation_key = $config_key . '.picker_' . $default_choice_options[$range['comparand']];
                     $comparand_translation = $this->_($translation_key, null, null, null, $range['comparand']);
                 } else {
                     $comparand_translation = $range['comparand'];
@@ -124,7 +122,7 @@ class HtmlTimestampAttributeListFilterRenderer extends HtmlListFilterRenderer
             $value = rtrim(trim($value), ',');
         }
         $params = [
-            'id' => $filter_name,
+            'config_key' => $config_key,
             'name' => $this->list_filter->getName(),
             'value' => $value
         ];

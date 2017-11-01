@@ -8,6 +8,10 @@ use AgaviContext;
 use Auryn\Injector as DiContainer;
 use Closure;
 use Honeybee\Common\Error\RuntimeError;
+use Honeybee\Infrastructure\Config\Settings;
+use Honeybee\ServiceDefinitionInterface;
+use Honeybee\ServiceLocatorInterface;
+use Honeybee\ServiceProvisionerInterface;
 use Honeygavi\Provisioner\AclServiceProvisioner;
 use Honeygavi\Provisioner\ActivityServiceProvisioner;
 use Honeygavi\Provisioner\AuthenticationServiceProvisioner;
@@ -41,10 +45,6 @@ use Honeygavi\Provisioner\ViewConfigServiceProvisioner;
 use Honeygavi\Provisioner\ViewTemplateServiceProvisioner;
 use Honeygavi\Provisioner\WorkflowActivityServiceProvisioner;
 use Honeygavi\Provisioner\WorkflowServiceProvisioner;
-use Honeybee\Infrastructure\Config\Settings;
-use Honeybee\ServiceDefinitionInterface;
-use Honeybee\ServiceLocatorInterface;
-use Honeybee\ServiceProvisionerInterface;
 
 class ServiceProvisioner implements ServiceProvisionerInterface
 {

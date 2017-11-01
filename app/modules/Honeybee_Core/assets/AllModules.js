@@ -18,7 +18,7 @@ define([
 
     "Honeybee_Core/ui/Autostart",
     "Honeybee_Core/ui/ListFilter",
-    "Honeybee_Core/ui/ListFiltersControl",
+    "Honeybee_Core/ui/ListFiltersController",
     "Honeybee_Core/ui/DatePicker",
     "Honeybee_Core/ui/DateRangePicker",
     "Honeybee_Core/ui/SelectBox",
@@ -32,8 +32,10 @@ define([
     "Honeybee_Core/ui/HtmlLinkPopup",
     "Honeybee_Core/ui/GlobalErrors",
     "Honeybee_Core/ui/list-filter/BooleanListFilter",
+    "Honeybee_Core/ui/list-filter/ChoiceListFilter",
     "Honeybee_Core/ui/list-filter/DatePickerListFilter",
-    "Honeybee_Core/ui/list-filter/DateRangePickerListFilter"
+    "Honeybee_Core/ui/list-filter/DateRangePickerListFilter",
+    "Honeybee_Core/ui/list-filter/TextListListFilter"
 ], function($, jsb) {
 
     // nothing to do here, only use to load all stuff at once
