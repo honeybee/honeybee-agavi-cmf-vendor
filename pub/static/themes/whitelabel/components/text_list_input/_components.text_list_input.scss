@@ -19,7 +19,7 @@
             padding-right: 0.5 * $base-spacing;
 
             @include typography-interactive;
-            background-color: color(grey-warm-light);
+            background-color: color(background-neutral);
             color: color(black);
 
             &::after {

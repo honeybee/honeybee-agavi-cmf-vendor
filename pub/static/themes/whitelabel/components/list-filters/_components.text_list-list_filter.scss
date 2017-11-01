@@ -1,6 +1,10 @@
 
 // @todo Remove coupling with text-list component
 
+.hb-list-filter__filter-control {
+    min-width: 300px;
+}
+
 .hb-list-filter:not(.jsb_) {
     .hb-list-filter__text-list {
         .input_help { display: none; }

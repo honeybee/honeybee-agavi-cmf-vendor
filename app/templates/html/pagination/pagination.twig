@@ -16,7 +16,7 @@
                 {% for param_name, param_value in url_parameters %}
                 <input type="hidden" name="{{ param_name }}" value="{{ param_value }}" />
                 {% endfor %}
-                <input type="number" min="1" max="{{ number_of_pages }}" step="1" value="{{ current_page_number }}" name="page" id="pager__current_page" class="pager__current_page" {% if number_of_pages <= 1 %}disabled{% endif %}/><!--
+                <input type="number" min="1" max="{{ number_of_pages }}" step="1" value="{{ current_page_number }}" name="page" class="pager__current_page" {% if number_of_pages <= 1 %}disabled{% endif %}/><!--
                 --><button name="jumpToPage" class="pager__go" title="{{_('pager.jump_to_page.title', translation_domain)}}" {% if number_of_pages <= 1 %}disabled{% endif %}>{{ _('pager.jump_to_page.title', translation_domain) }}</button>
                 <span class="pager__total">{{ _('pager.of_total.title', translation_domain, null, [ number_of_pages ]) }}</span>
             </form>
