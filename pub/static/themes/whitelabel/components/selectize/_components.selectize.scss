@@ -40,8 +40,15 @@ $selectize-spacing: 3px;
             .item {
                 @include button-shape-emphasized-navigational-default;
                 @include button-colors-emphasized-navigational-default;
-                margin: $selectize-spacing $selectize-spacing $selectize-spacing 0;
-                line-height: $line-height;
+                &.active {
+                    @include button-shape-emphasized-navigational-active;
+                    @include button-colors-emphasized-navigational-active;
+                }
+                &,
+                &.active {
+                    margin: $selectize-spacing $selectize-spacing $selectize-spacing 0;
+                    line-height: $line-height;
+                }
             }
 
             // some browsers need an explicit height
@@ -101,8 +108,11 @@ $selectize-spacing: 3px;
         .selectize-input.selectize-input {
             &.has-items {
                 .item {
-                    position: relative;
-                    padding-right: $base-spacing * 1.5;
+                    &,
+                    &.active {
+                        position: relative;
+                        padding-right: $base-spacing * 1.5;
+                    }
                 }
 
                 .remove {

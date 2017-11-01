@@ -299,4 +299,3 @@ class ListConfig extends Object implements ListConfigInterface
         $this->settings = $settings;
     }
 }
-
