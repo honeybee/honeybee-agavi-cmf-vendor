@@ -26,11 +26,11 @@
                     </select>
                 </div>
                 <div class="datepicker-controls-wrapper">
-                    <input type="text" class="datepicker-input" placeholder="{{ _(translation_key_prefix ~ 'picker_placeholder') }}">
                     <button type="button" class="datepicker-toggle activity" style="display: none;">
                         <span class="datepicker-toggle__icon"></span>
                         <span class="datepicker-toggle__label">{{ _(translation_key_prefix ~ 'picker_toggle', translation_domain) }}</span>
                     </button>
+                    <input type="text" class="datepicker-input" placeholder="{{ _(translation_key_prefix ~ 'picker_placeholder', translation_domain, null, null, '') }}">
                 </div>
             </div>
         </div>

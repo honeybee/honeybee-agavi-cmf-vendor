@@ -8,15 +8,15 @@
         --><div class="hb-field__value">
         {% spaceless %}
             <div class="datepicker-controls-wrapper">
-                <input type="text" class="datepicker-input {% if readonly is not empty %}readonly{% endif %}" name="{{ grouped_field_name }}" value="{{ attribute_value }}" id="{{ field_id }}"
-                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
-                {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
                 {% if readonly is empty and disabled is empty and widget_enabled %}
                 <button type="button" class="datepicker-toggle" style="display: none;">
                     <span class="datepicker-toggle__icon"></span>
                     <span class="datepicker-toggle__label">{{ _('toggle', translation_domain) }}</span>
                 </button>
                 {% endif %}
+                <input type="text" class="datepicker-input {% if readonly is not empty %}readonly{% endif %}" name="{{ grouped_field_name }}" value="{{ attribute_value }}" id="{{ field_id }}"
+                {{ readonly|default('') }} {{ disabled|default('') }} {{ required|default('') }} maxlength="{{ maxlength|default('') }}"
+                {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
             </div>
             <ul class="errors">
                 {%- block field_errors  -%}

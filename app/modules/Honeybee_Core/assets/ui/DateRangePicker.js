@@ -87,11 +87,12 @@ define([
     };
 
     DateRangePicker.prototype.updateCustom = function(silent) {
-        if (!this.$default_control.find(':selected').is('.date-range-picker__input-custom'))
+        var $selected_option = this.$default_control.find(':selected');
+        if (!$selected_option.is('.date-range-picker__input-custom'))
             return;
 
         var custom_value = this.buildCustomValue();
-        this.$default_control.val(custom_value)
+        $selected_option.val(custom_value);
 
         if (!silent) {
             this.$default_control.change();
@@ -133,6 +134,11 @@ define([
     };
 
     DateRangePicker.prototype.addLimit = function(comparator, value) {
+        if (!isNaN(this.options.limit_max_count) && this.range_limits.length === +this.options.limit_max_count) {
+            console.log('Maximum number of limits has been reached.');
+            return;
+        }
+
         comparator = comparator || 'lte';
         value = this.validateLimitValue(value) || value;
 
@@ -170,17 +176,17 @@ define([
 
     DateRangePicker.prototype.buildCustomValue = function() {
         var self = this;
-        var range_value = '';
+        var ranges = [];
 
         this.range_limits.forEach(function(limit) {
             var picker = limit.widget.getPicker();
             var valid_value = self.validateLimitValue(picker.getOutputElement().val());
             if (valid_value) {
-                range_value += limit.comparator.val() + ':' + valid_value + ',';
+                ranges.push(limit.comparator.val() + ':' + valid_value);
             }
         });
 
-        return range_value ? 'range(' + range_value + ')' : this.options.default_custom_value;
+        return ranges.length > 0 ? 'range(' + ranges.join(',') + ')' : this.options.default_custom_value;
     };
 
     DateRangePicker.prototype.validateLimitValue = function(value) {
