@@ -66,8 +66,7 @@ define([
             $select_control.attr({
                 id: $source_control.attr('id'),
                 name: $source_control.attr('name'),
-                class: $source_control.attr('class'),
-                disabled: $source_control.attr('disabled')
+                class: $source_control.attr('class')
             });
             this.getControl().replaceWith($select_control);
         }
