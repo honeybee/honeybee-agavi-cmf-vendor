@@ -83,4 +83,11 @@ class Activity extends Configurable implements ActivityInterface
     {
         $this->url = $url;
     }
+
+    public function withUrl(Url $url)
+    {
+        $activity = clone $this;
+        $activity->setUrl($url);
+        return $activity;
+    }
 }

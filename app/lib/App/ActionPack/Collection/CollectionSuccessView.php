@@ -21,13 +21,7 @@ class CollectionSuccessView extends View
                     $this->getContext()->getRouting()->gen(null, [], [ 'relative' => false ])
                 );
             } else {
-                $this->getResponse()->setRedirect(
-                    $this->getContext()->getRouting()->gen(
-                        'module.collection',
-                        [ 'module' => $this->getAttribute('resource_type'), 'sort' => 'modified_at:desc' ],
-                        [ 'relative' => false ]
-                    )
-                );
+                $this->redirectAfterCreate($request_data);
             }
             return;
         }
@@ -43,6 +37,9 @@ class CollectionSuccessView extends View
         $this->setSearchForm($request_data);
         $this->setSortActivities($request_data);
         $this->setPagination($request_data);
+
+        // store URL for redirects to the current collection view (from create or task/proceed success views)
+        $this->user->setAttribute($resource_type->getPrefix(), $this->routing->gen(null), "collection_views");
     }
 
     public function executeHaljson(AgaviRequestDataHolder $request_data)
@@ -389,5 +386,22 @@ EOT;
         $this->setAttribute('rendered_pagination', $rendered_pagination);
 
         return $rendered_pagination;
+    }
+
+    protected function redirectAfterCreate(AgaviRequestDataHolder $request_data)
+    {
+        $resource_type = $this->getAttribute('resource_type');
+        $url = $this->user->getAttribute($resource_type->getPrefix(), 'collection_views');
+        if (!empty($url)) {
+            $this->getResponse()->setRedirect($url);
+        } else {
+            $this->getResponse()->setRedirect(
+                $this->getContext()->getRouting()->gen(
+                    'module.collection',
+                    [ 'module' => $resource_type, 'sort' => 'modified_at:desc' ],
+                    [ 'relative' => false ]
+                )
+            );
+        }
     }
 }

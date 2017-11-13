@@ -13,14 +13,15 @@ use AgaviWebResponse;
 use Exception;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Common\Util\StringToolkit;
-use Honeygavi\App\ActionPack\Create\CreateInputView;
-use Honeygavi\App\ActionPack\Resource\Modify\ModifyInputView;
-use Honeygavi\Logging\LogTrait;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Projection\ProjectionInterface;
+use Honeygavi\App\ActionPack\Create\CreateInputView;
+use Honeygavi\App\ActionPack\Resource\Modify\ModifyInputView;
+use Honeygavi\Logging\LogTrait;
 use Honeygavi\Ui\Activity\PrimaryActivityMap;
+use Honeygavi\Ui\Activity\Url;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 use ReflectionClass;
 
@@ -771,7 +772,7 @@ class View extends AgaviView
         $view_action = 'view' . str_replace($prefix, '', $action);
         if ($this instanceof CreateInputView) {
             $view_action .= ' view-create';
-        } else  if ($this instanceof ModifyInputView) {
+        } elseif ($this instanceof ModifyInputView) {
             $view_action .= ' view-resource-modify';
         }
         // api_login_error_view
@@ -903,9 +904,20 @@ class View extends AgaviView
         $activity_service = $this->getServiceLocator()->getActivityService();
 
         $primary_activities_container = $activity_service->getContainer($container_scope_key);
-        $primary_activities = new PrimaryActivityMap(
-            $primary_activities_container->getActivityMap()->getItems()
-        );
+        $items = [];
+        foreach ($primary_activities_container->getActivityMap()->getItems() as $item) {
+            // the default skeleton has "back_to_collection" activities in XML configured. we try to return to the
+            // last seen collection view for the current resource type with all sort/filter/etc previously set
+            if ($item->getName() === 'back_to_collection' && $this->hasAttribute('resource')) {
+                $prefix = $this->getAttribute('resource')->getType()->getPrefix();
+                $url = $this->user->getAttribute($prefix ?? 'some-non-existant-key', 'collection_views');
+                if (!empty($url)) {
+                    $item = $item->withUrl(Url::createUri($url));
+                }
+            }
+            $items[] = $item;
+        }
+        $primary_activities = new PrimaryActivityMap($items);
 
         $rendered_primary_activities = $this->renderSubject(
             $primary_activities,
