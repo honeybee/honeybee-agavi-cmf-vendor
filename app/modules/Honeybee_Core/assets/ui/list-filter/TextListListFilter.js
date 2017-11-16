@@ -62,7 +62,7 @@ define([
         if (!this.options.join_values) {
             // select multiple to submit multiple values
             $source_control = this.getControl();
-            $select_control = $('<select multiple>');
+            $select_control = $('<select multiple></select>');
             $select_control.attr({
                 id: $source_control.attr('id'),
                 name: $source_control.attr('name'),
@@ -96,8 +96,7 @@ define([
                 option_create: function(data, escape) {
                     return '<div class="create">+ <strong>' + escape(data.input) + '</strong>&hellip;</div>';
                 }
-            },
-            onFocus: this.focusControl
+            }
         };
         this.getControl().selectize(selectize_config);
 
