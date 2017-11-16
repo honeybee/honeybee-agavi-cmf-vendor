@@ -11,7 +11,6 @@ define([
     var default_options = {
         prefix: 'Honeybee_Core/ui/CharCounter',
         template: '{COUNT}',
-        register_autoupdate: true,
         show_counter: true
     };
 
@@ -27,6 +26,7 @@ define([
         } else {
             this.$target = this.$widget;
         }
+        this.valid_length = this.options.valid_length || this.$target.prop('maxLength') || this.$target.data('maxlength');
 
         if (this.options.counter_selector) {
             this.$counter = this.$widget.find(this.options.counter_selector).hide();
@@ -42,13 +42,10 @@ define([
             this.getTargetVal = this.options.getTargetVal;
         }
 
-        if (this.options.register_autoupdate !== false) {
-            this.$target.on('input', function(e) {
-                that.updateCount();
-            });
-        }
-
         this.updateCount();
+
+        this.$target.on('input', this.onTargetInput.bind(this));
+
         if (this.options.show_counter === true) {
             this.$counter.show();
         }
@@ -59,10 +56,13 @@ define([
     CharCounter.prototype = new Widget();
     CharCounter.prototype.constructor = CharCounter;
 
-    CharCounter.prototype.updateCount = function() {
-        var val = this.getTargetVal();
-        this.$counter.html(this.options.template.replace(/{COUNT}/, val.length));
-        this.$counter.attr('data-count', val.length);
+    CharCounter.prototype.updateCount = function(target_value) {
+        target_value = target_value || this.getTargetVal();
+
+        this.$counter.html(this.options.template.replace(/{COUNT}/, target_value.length));
+        this.$counter.attr('data-count', target_value.length);
+
+        this.checkTargetValidity(target_value);
     };
 
     CharCounter.prototype.setValidity = function(valid) {
@@ -71,7 +71,7 @@ define([
         } else {
             this.$counter.addClass('hb-counter--invalid');
         }
-    }
+    };
 
     CharCounter.prototype.getCount = function() {
         return this.$counter.data('count') || 0;
@@ -87,7 +87,24 @@ define([
 
     CharCounter.prototype.getTargetVal = function() {
         return this.$target.val();
-    }
+    };
+
+    CharCounter.prototype.checkTargetValidity = function(target_value) {
+        if (isNaN(this.valid_length)) {
+            return;
+        }
+        target_value = target_value || this.getTargetVal();
+
+        if (this.valid_length !== -1 && target_value.length > this.valid_length) {
+            this.setValidity(false);
+        } else {
+            this.setValidity(true);
+        }
+    };
+
+    CharCounter.prototype.onTargetInput = function(e) {
+        this.updateCount();
+    };
 
     return CharCounter;
 });

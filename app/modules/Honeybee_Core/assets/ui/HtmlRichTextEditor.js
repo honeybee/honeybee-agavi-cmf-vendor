@@ -96,7 +96,6 @@ define([
 
     function HtmlRichTextEditor(dom_element, options) {
         var that = this;
-        var counter_config;
 
         if (!('contentEditable' in document.body) || !DOMPurify.isSupported) {
             return;
@@ -212,11 +211,7 @@ define([
 
         // add counter to editor
         if (this.options.counter_enabled === true) {
-            // @todo Doesn't count correctly on the editor content yet
-            counter_config = this.options.counter_config || {};
-            counter_config.register_autoupdate =  false;
-            counter_config.getTargetVal = this.editor.getHTML.bind(this.editor);
-            this.char_counter = new CharCounter(this.$editor[0], counter_config);
+            this.initCounter();
         }
 
         // set initial content of squire editor
@@ -347,10 +342,6 @@ define([
             if (that.validate(sanitized_html)) {
                 that.$textarea.val(sanitized_html);
             }
-            // counter register_autoupdate is false
-            if (that.char_counter) {
-                that.char_counter.updateCount();
-            }
         });
 
         editor.addEventListener('undoStateChange', function(ev) {
@@ -396,11 +387,6 @@ define([
         if (this.maxlength !== -1 && text.length > this.maxlength) {
             valid = false;
         }
-
-        if (this.char_counter) {
-            this.char_counter.setValidity(valid);
-        }
-
         if (valid) {
             this.$textarea.removeClass('invalid');
         } else {
@@ -409,6 +395,14 @@ define([
         jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
 
         return valid;
+    };
+
+    HtmlRichTextEditor.prototype.initCounter = function() {
+        // @todo Count length of content stripped of markup?
+        var counter_config = this.options.counter_config || {};
+        counter_config.getTargetVal = this.editor._getHTML.bind(this.editor);
+
+        this.char_counter = new CharCounter(this.$editor[0], counter_config);
     };
 
     HtmlRichTextEditor.prototype.updateUI = function() {
