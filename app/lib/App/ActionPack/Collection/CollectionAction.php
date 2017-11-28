@@ -30,6 +30,7 @@ class CollectionAction extends Action
         $display_mode = $this->getDisplayMode($request_data);
 
         $this->setAttribute('command', $this->dispatchCommand($request_data->getParameter('command')));
+        $this->setAttribute('resource_collection', new ResourceCollection([]));
         $this->setAttribute('resource_type', $this->getProjectionType());
         $this->setAttribute('display_mode', $display_mode);
         $this->setAttribute('view_scope', $this->getScopeKey());
