@@ -49,7 +49,7 @@ By default *list filters* are enabled. Is possible to disable them:
 <view_config scope="application">
     <settings>
         <setting name="enable_list_filters">false</setting>
-    </setting>
+    </settings>
 </settings>
 ```
 Per-view setting has priority over the global setting
