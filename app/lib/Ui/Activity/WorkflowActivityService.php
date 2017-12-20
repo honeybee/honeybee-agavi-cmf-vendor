@@ -38,16 +38,17 @@ class WorkflowActivityService extends Object
                         $this->createWorkflowActivity($aggregate_root_type, $event_name)
                     );
                 }
-                $read_only_actions = [];
-                if ($state->hasOption('read_only_actions')) {
-                    $read_only_actions = $state->getOption('read_only_actions')->toArray();
-                }
-                foreach ($read_only_actions as $action_name => $read_only_action) {
-                    $step_activities->setItem(
-                        $action_name,
-                        $this->createReadOnlyActivity($aggregate_root_type, $action_name, $read_only_action)
-                    );
-                }
+            }
+
+            $read_only_actions = [];
+            if ($state->hasOption('read_only_actions')) {
+                $read_only_actions = $state->getOption('read_only_actions')->toArray();
+            }
+            foreach ($read_only_actions as $action_name => $read_only_action) {
+                $step_activities->setItem(
+                    $action_name,
+                    $this->createReadOnlyActivity($aggregate_root_type, $action_name, $read_only_action)
+                );
             }
 
             $workflow_activities[$state->getName()] = $step_activities;
