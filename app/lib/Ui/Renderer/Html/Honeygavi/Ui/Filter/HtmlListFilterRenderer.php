@@ -200,9 +200,18 @@ class HtmlListFilterRenderer extends Renderer
         return $translations;
     }
 
+    /**
+     * @return array
+     */
     protected function getAllowedValues()
     {
-        return $this->getOption('allowed_values', []);
+        $allowed_values = $this->getOption('allowed_values', []);
+        // retrieve the array of allowed values from the provided setting name
+        if (is_string($allowed_values)) {
+            $allowed_values = $this->environment->getSettings()->get($allowed_values, []);
+        }
+
+        return (array)$allowed_values;
     }
 
     protected function isWidgetEnabled()

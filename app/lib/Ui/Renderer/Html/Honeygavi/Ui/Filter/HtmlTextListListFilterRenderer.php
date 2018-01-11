@@ -83,6 +83,9 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
         return $translations;
     }
 
+    /**
+     * @return array
+     */
     protected function getAllowedValues()
     {
         $attribute = $this->list_filter->getAttribute();
@@ -90,7 +93,12 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
         if ($attribute instanceof TextListAttribute) {
             $allowed_values = (array)$attribute->getOption(TextListAttribute::OPTION_ALLOWED_VALUES, []);
         } else {
-            $allowed_values = (array)$this->getOption('allowed_values', []);
+            $allowed_values = $this->getOption('allowed_values', []);
+            // retrieve the array of allowed values from the provided setting name
+            if (is_string($allowed_values)) {
+                $allowed_values = $this->environment->getSettings()->get($allowed_values, []);
+            }
+            $allowed_values = (array)$allowed_values;
         }
 
         if ($this->getOption('input_allowed', $this->getOption('join_values', false))) {

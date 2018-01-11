@@ -9,6 +9,9 @@ class HtmlBooleanListFilterRenderer extends HtmlListFilterRenderer
         return $this->output_format->getName() . '/list_filter/boolean_attribute.twig';
     }
 
+    /**
+     * @return array
+     */
     protected function getAllowedValues()
     {
         return [ '0', '1' ];
