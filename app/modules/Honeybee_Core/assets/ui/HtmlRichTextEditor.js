@@ -341,6 +341,9 @@ define([
             // the editor won't prevent from typing, once reached the textarea maxlength
             if (that.validate(sanitized_html)) {
                 that.$textarea.val(sanitized_html);
+                if (that.options.trigger_textarea_change_event) {
+                    that.$textarea.change();
+                }
             }
         });
 
