@@ -4,8 +4,8 @@ namespace Honeygavi\Template\Twig\Extension;
 
 use Honeygavi\Ui\TranslatorInterface;
 use Twig_Extension;
-use Twig_Filter_Method;
-use Twig_Function_Method;
+use Twig_Filter;
+use Twig_Function;
 
 /**
  * Extension that wraps the TranslatorInterface methods to make them available in twig templates.
@@ -22,22 +22,90 @@ class TranslatorExtension extends Twig_Extension
     public function getFilters()
     {
         return [
-            'translate' => new Twig_Filter_Method($this, 'translate'),
-            'translateCurrency' => new Twig_Filter_Method($this, 'translateCurrency'),
-            'translateNumber' => new Twig_Filter_Method($this, 'translateNumber'),
-            'translateDate' => new Twig_Filter_Method($this, 'translateDate'),
-            'translatePlural' => new Twig_Filter_Method($this, 'translatePlural'),
+            new Twig_Filter('translate', function (
+                $message,
+                $domain = null,
+                $locale = null,
+                array $params = null,
+                $fallback = null
+            ) {
+                return $this->translate($message, $domain, $locale, $params, $fallback);
+            }),
+            new Twig_Filter('translateCurrency', function ($currency, $domain = null, $locale = null) {
+                return $this->translateCurrency($currency, $domain, $locale);
+            }),
+            new Twig_Filter('translateNumber', function ($number, $domain = null, $locale = null) {
+                return $this->translateNumber($number, $domain, $locale);
+            }),
+            new Twig_Filter('translateDate', function ($date, $domain = null, $locale = null) {
+                return $this->translateDate($date, $domain, $locale);
+            }),
+            new Twig_Filter('translatePlural', function (
+                $message_singular,
+                $message_plural,
+                $amount,
+                $domain = null,
+                $locale = null,
+                array $params = null,
+                $fallback_singular = null,
+                $fallback_plural = null
+            ) {
+                return $this->translatePlural(
+                    $message_singular,
+                    $message_plural,
+                    $amount,
+                    $domain,
+                    $locale,
+                    $params,
+                    $fallback_singular,
+                    $fallback_plural
+                );
+            }),
         ];
     }
 
     public function getFunctions()
     {
         return [
-            '_' => new Twig_Function_Method($this, 'translate'),
-            '_c' => new Twig_Function_Method($this, 'translateCurrency'),
-            '_n' => new Twig_Function_Method($this, 'translateNumber'),
-            '_d' => new Twig_Function_Method($this, 'translateDate'),
-            '__' => new Twig_Function_Method($this, 'translatePlural'),
+            new Twig_Function('_', function (
+                $message,
+                $domain = null,
+                $locale = null,
+                array $params = null,
+                $fallback = null
+            ) {
+                return $this->translate($message, $domain, $locale, $params, $fallback);
+            }),
+            new Twig_Function('_c', function ($currency, $domain = null, $locale = null) {
+                return $this->translateCurrency($currency, $domain, $locale);
+            }),
+            new Twig_Function('_n', function ($number, $domain = null, $locale = null) {
+                return $this->translateNumber($number, $domain, $locale);
+            }),
+            new Twig_Function('_d', function ($date, $domain = null, $locale = null) {
+                return $this->translateDate($date, $domain, $locale);
+            }),
+            new Twig_Function('__', function (
+                $message_singular,
+                $message_plural,
+                $amount,
+                $domain = null,
+                $locale = null,
+                array $params = null,
+                $fallback_singular = null,
+                $fallback_plural = null
+            ) {
+                return $this->translatePlural(
+                    $message_singular,
+                    $message_plural,
+                    $amount,
+                    $domain,
+                    $locale,
+                    $params,
+                    $fallback_singular,
+                    $fallback_plural
+                );
+            }),
         ];
     }
 

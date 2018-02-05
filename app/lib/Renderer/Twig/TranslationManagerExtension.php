@@ -3,7 +3,7 @@ namespace Honeygavi\Renderer\Twig;
 
 use AgaviContext;
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_Function;
 
 /**
  * Twig extension to have AgaviTranslationManager methods available as simple
@@ -13,13 +13,47 @@ class TranslationManagerExtension extends Twig_Extension
 {
     public function getFunctions()
     {
-        return array(
-            '_' => new Twig_Function_Method($this, 'translate'),
-            '_c' => new Twig_Function_Method($this, 'translateCurrency'),
-            '_n' => new Twig_Function_Method($this, 'translateNumber'),
-            '_d' => new Twig_Function_Method($this, 'translateDate'),
-            '__' => new Twig_Function_Method($this, 'translatePlural')
-        );
+        return [
+            new Twig_Function('_', function (
+                $message,
+                $domain = null,
+                $locale = null,
+                array $parameters = null,
+                $defaultTranslation = null
+            ) {
+                return $this->translate($message, $domain, $locale, $parameters, $defaultTranslation);
+            }),
+            new Twig_Function('_c', function ($number, $domain = null, $locale = null) {
+                return $this->translateCurrency($number, $domain, $locale);
+            }),
+            new Twig_Function('_n', function ($number, $domain = null, $locale = null) {
+                return $this->translateNumber($number, $domain, $locale);
+            }),
+            new Twig_Function('_d', function ($date, $domain = null, $locale = null) {
+                return $this->translateDate($date, $domain, $locale);
+            }),
+            new Twig_Function('__', function (
+                $singularMessage,
+                $pluralMessage,
+                $amount,
+                $domain = null,
+                $locale = null,
+                array $parameters = null,
+                $defaultSingularTranslation = null,
+                $defaultPluralTranslation = null
+            ) {
+                return $this->translatePlural(
+                    $singularMessage,
+                    $pluralMessage,
+                    $amount,
+                    $domain,
+                    $locale,
+                    $parameters,
+                    $defaultSingularTranslation,
+                    $defaultPluralTranslation
+                );
+            }),
+        ];
     }
 
     /**

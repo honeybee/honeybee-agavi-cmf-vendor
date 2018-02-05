@@ -3,17 +3,18 @@
 namespace Honeygavi\Renderer\Twig;
 
 use Michelf\Markdown;
-
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_Function;
 
 class MarkdownExtension extends Twig_Extension
 {
     public function getFunctions()
     {
-        return array(
-            'markdown' => new Twig_Function_Method($this, 'markdown')
-        );
+        return [
+            new Twig_Function('markdown', function ($markdown_text) {
+                return $this->markdown($markdown_text);
+            }),
+        ];
     }
 
     public function markdown($markdown_text)

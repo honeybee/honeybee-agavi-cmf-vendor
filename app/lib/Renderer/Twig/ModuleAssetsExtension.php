@@ -4,15 +4,17 @@ namespace Honeygavi\Renderer\Twig;
 
 use Honeygavi\Filter\AssetCompiler;
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_Function;
 
 class ModuleAssetsExtension extends Twig_Extension
 {
     public function getFunctions()
     {
-        return array(
-            'embed_all_main_modules' => new Twig_Function_Method($this, 'embedAllMainModules'),
-        );
+        return [
+            new Twig_Function('embed_all_main_modules', function () {
+                return $this->embedAllMainModules();
+            }),
+        ];
     }
 
     public function embedAllMainModules()

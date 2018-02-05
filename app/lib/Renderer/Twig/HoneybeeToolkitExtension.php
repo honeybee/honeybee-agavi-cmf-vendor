@@ -4,7 +4,7 @@ namespace Honeygavi\Renderer\Twig;
 
 use AgaviConfig;
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_Function;
 
 /**
  * Twig extension to have AgaviConfig methods available as simple
@@ -16,9 +16,11 @@ class HoneybeeToolkitExtension extends Twig_Extension
 {
     public function getFunctions()
     {
-        return array(
-            'ac' => new Twig_Function_Method($this, 'ac'),
-        );
+        return [
+            new Twig_Function('ac', function ($setting_name, $default_value = null) {
+                return $this->ac($setting_name, $default_value);
+            }),
+        ];
     }
 
     /**

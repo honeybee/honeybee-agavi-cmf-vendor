@@ -4,8 +4,8 @@ namespace Honeygavi\Template\Twig\Extension;
 
 use Honeybee\Common\Util\StringToolkit;
 use Twig_Extension;
-use Twig_Filter_Method;
-use Twig_Function_Method;
+use Twig_Filter;
+use Twig_Function;
 
 /**
  * Extension that adds some filters that may be useful.
@@ -15,21 +15,37 @@ class ToolkitExtension extends Twig_Extension
     public function getFilters()
     {
         return array(
-            'cast_to_array' => new Twig_Filter_Method($this, 'castToArray'),
-            'as_studly_caps' => new Twig_Filter_Method($this, 'asStudlyCaps'),
-            'as_camel_case' => new Twig_Filter_Method($this, 'asCamelCase'),
-            'as_snake_case' => new Twig_Filter_Method($this, 'asSnakeCase'),
-            'format_bytes' => new Twig_Filter_Method($this, 'formatBytes')
+            new Twig_Filter('cast_to_array', function ($value) {
+                return $this->castToArray($value);
+            }),
+            new Twig_Filter('as_studly_caps', function ($value) {
+                return $this->asStudlyCaps($value);
+            }),
+            new Twig_Filter('as_camel_case', function ($value) {
+                return $this->asCamelCase($value);
+            }),
+            new Twig_Filter('as_snake_case', function ($value) {
+                return $this->asSnakeCase($value);
+            }),
+            new Twig_Filter('format_bytes', function ($value) {
+                return $this->formatBytes($value);
+            }),
         );
     }
 
     public function getFunctions()
     {
-        return array(
-            'starts_with' => new Twig_Function_Method($this, 'startsWith'),
-            'ends_with' => new Twig_Function_Method($this, 'endsWith'),
-            'replace' => new Twig_Function_Method($this, 'replace'),
-        );
+        return [
+            new Twig_Function('starts_with', function ($haystack, $needle) {
+                return $this->startsWith($haystack, $needle);
+            }),
+            new Twig_Function('ends_with', function ($haystack, $needle) {
+                return $this->endsWith($haystack, $needle);
+            }),
+            new Twig_Function('replace', function ($subject, $search, $replace, $count = null) {
+                return $this->replace($subject, $search, $replace, $count);
+            }),
+        ];
     }
 
     public function castToArray($value)

@@ -4,7 +4,7 @@ namespace Honeygavi\Template\Twig\Extension;
 
 use Honeybee\EnvironmentInterface;
 use Twig_Extension;
-use Twig_Function_Method;
+use Twig_Function;
 
 /**
  * Extension that wraps the EnvironmentInterface methods to make them available in twig templates.
@@ -21,7 +21,9 @@ class EnvironmentExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            'getEnvironment' => new Twig_Function_Method($this, 'getEnvironment'),
+            new Twig_Function('getEnvironment', function () {
+                return $this->getEnvironment();
+            }),
         ];
     }
 

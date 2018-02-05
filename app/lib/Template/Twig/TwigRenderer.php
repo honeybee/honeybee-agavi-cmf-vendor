@@ -18,7 +18,7 @@ class TwigRenderer implements TemplateRendererInterface
 
     protected static $default_settings = [
         'twig_options' => [
-            'autoescape' => true,
+            'autoescape' => 'html',
             'cache' => false,
             'debug' => false,
             'strict_variables' => true,
@@ -99,7 +99,7 @@ class TwigRenderer implements TemplateRendererInterface
      *
      * Default twig environment options used are:
      *
-     * - 'autoescape': true
+     * - 'autoescape': 'html'
      * - 'cache': false
      * - 'debug': false
      * - 'strict_variables: true
