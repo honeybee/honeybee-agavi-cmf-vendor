@@ -142,13 +142,13 @@ class TwigRenderer extends AgaviTwigRenderer
             $ext = $this->getContext()->getServiceLocator()->make($extension_class_name);
 
             // as the renderer is reusable it may have the extension already
-            if (!$twig->hasExtension($ext->getName())) {
+            if (!$twig->hasExtension($extension_class_name)) {
                 $twig->addExtension($ext);
             }
 
             if ($this->getParameter('use_haml', false)) {
                 $ext = new MtHamlTwigExtension($this->getMtHaml());
-                if (!$twig->hasExtension($ext->getName())) {
+                if (!$twig->hasExtension(MtHamlTwigExtension::class)) {
                     $twig->addExtension($ext);
                 }
             }
