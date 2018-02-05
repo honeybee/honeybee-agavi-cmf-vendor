@@ -5,9 +5,9 @@ namespace Honeygavi\Ui\ViewConfig;
 use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class ViewConfigService extends Object implements ViewConfigServiceInterface
+class ViewConfigService extends BaseObject implements ViewConfigServiceInterface
 {
     protected $config;
 

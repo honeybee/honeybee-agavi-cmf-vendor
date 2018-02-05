@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\Activity;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Url extends Object
+class Url extends BaseObject
 {
     const TYPE_URI = 'uri';
 

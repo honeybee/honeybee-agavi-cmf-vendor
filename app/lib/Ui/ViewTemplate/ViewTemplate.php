@@ -2,10 +2,10 @@
 
 namespace Honeygavi\Ui\ViewTemplate;
 
-use Trellis\Common\Object;
 use Honeygavi\Ui\ViewTemplate\Part\TabList;
+use Trellis\Common\BaseObject;
 
-class ViewTemplate extends Object implements ViewTemplateInterface
+class ViewTemplate extends BaseObject implements ViewTemplateInterface
 {
     protected $name;
 

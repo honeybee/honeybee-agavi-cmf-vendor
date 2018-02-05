@@ -4,9 +4,9 @@ namespace Honeygavi\Provisioner;
 
 use Auryn\Injector as DiContainer;
 use Psr\Log\LoggerInterface;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-abstract class AbstractProvisioner extends Object implements ProvisionerInterface
+abstract class AbstractProvisioner extends BaseObject implements ProvisionerInterface
 {
     protected $di_container;
 

@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\ViewTemplate\Part;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Group extends Object implements GroupInterface
+class Group extends BaseObject implements GroupInterface
 {
     protected $name;
 

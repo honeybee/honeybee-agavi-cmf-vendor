@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\Navigation;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Navigation extends Object implements NavigationInterface
+class Navigation extends BaseObject implements NavigationInterface
 {
     protected $name;
 

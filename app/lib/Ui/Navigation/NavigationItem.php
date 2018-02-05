@@ -2,10 +2,10 @@
 
 namespace Honeygavi\Ui\Navigation;
 
-use Trellis\Common\Object;
 use Honeygavi\Ui\Activity\ActivityInterface;
+use Trellis\Common\BaseObject;
 
-class NavigationItem extends Object implements NavigationItemInterface
+class NavigationItem extends BaseObject implements NavigationItemInterface
 {
     protected $activity;
 

@@ -2,10 +2,10 @@
 
 namespace Honeygavi\Ui\ViewTemplate;
 
-use Trellis\Common\Object;
 use Honeybee\Common\Error\RuntimeError;
+use Trellis\Common\BaseObject;
 
-class ViewTemplatesContainer extends Object implements ViewTemplatesContainerInterface
+class ViewTemplatesContainer extends BaseObject implements ViewTemplatesContainerInterface
 {
     protected $scope;
 

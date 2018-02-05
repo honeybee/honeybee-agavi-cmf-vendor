@@ -6,9 +6,9 @@ use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Model\Aggregate\AggregateRootTypeInterface;
 use Honeybee\ServiceLocatorInterface;
 use Honeygavi\Ui\Activity\ActivityContainerMap;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class WorkflowActivityService extends Object
+class WorkflowActivityService extends BaseObject
 {
     protected $service_locator;
 

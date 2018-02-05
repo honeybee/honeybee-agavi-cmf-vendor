@@ -2,7 +2,7 @@
 
 namespace Honeygavi\Security\Acl;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 use Honeybee\Common\Error\RuntimeError;
 use Honeygavi\Security\Acl\Permission\Permission;
 use Honeygavi\Security\Acl\Permission\PermissionListMap;
@@ -13,7 +13,7 @@ use Zend\Permissions\Acl\Resource\GenericResource;
 use Zend\Permissions\Acl\Role\GenericRole;
 use Zend\Permissions\Acl\Acl;
 
-class AclService extends Object implements AclServiceInterface
+class AclService extends BaseObject implements AclServiceInterface
 {
     /**
      * @var array ids of roles defined by default

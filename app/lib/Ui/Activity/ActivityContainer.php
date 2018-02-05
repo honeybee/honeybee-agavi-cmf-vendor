@@ -2,10 +2,10 @@
 
 namespace Honeygavi\Ui\Activity;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 use Honeybee\Common\Error\RuntimeError;
 
-class ActivityContainer extends Object implements ActivityContainerInterface
+class ActivityContainer extends BaseObject implements ActivityContainerInterface
 {
     protected $scope;
 

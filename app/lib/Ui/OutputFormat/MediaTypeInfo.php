@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\OutputFormat;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class MediaTypeInfo extends Object implements MediaTypeInfoInterface
+class MediaTypeInfo extends BaseObject implements MediaTypeInfoInterface
 {
     protected $name;
     protected $title = '';

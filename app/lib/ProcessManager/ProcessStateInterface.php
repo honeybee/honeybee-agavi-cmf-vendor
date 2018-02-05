@@ -2,9 +2,9 @@
 
 namespace Honeygavi\ProcessManager;
 
-use Trellis\Common\ObjectInterface;
+use Trellis\Common\BaseObjectInterface;
 
-interface ProcessStateInterface extends ObjectInterface
+interface ProcessStateInterface extends BaseObjectInterface
 {
     public function getUuid();
 

@@ -7,9 +7,9 @@ use Auryn\Injector as DiContainer;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeybee\ServiceDefinitionInterface;
 use Psr\Log\LoggerInterface;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class LoggerProvisioner extends Object implements ProvisionerInterface
+class LoggerProvisioner extends BaseObject implements ProvisionerInterface
 {
     protected $di_container;
 

@@ -2,12 +2,12 @@
 
 namespace Honeygavi\Ui\ViewConfig;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\ArrayConfig;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
 
-class ViewConfig extends Object implements ViewConfigInterface
+class ViewConfig extends BaseObject implements ViewConfigInterface
 {
     protected $scope = 'default';
     protected $activities;

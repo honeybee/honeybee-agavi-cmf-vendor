@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\ViewTemplate\Part;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Tab extends Object implements TabInterface
+class Tab extends BaseObject implements TabInterface
 {
     protected $name;
 

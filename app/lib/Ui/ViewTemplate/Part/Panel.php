@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\ViewTemplate\Part;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Panel extends Object implements PanelInterface
+class Panel extends BaseObject implements PanelInterface
 {
     protected $name;
 

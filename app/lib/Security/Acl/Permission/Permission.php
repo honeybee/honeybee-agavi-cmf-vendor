@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Security\Acl\Permission;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Permission extends Object implements PermissionInterface
+class Permission extends BaseObject implements PermissionInterface
 {
     const ALLOW = 'allow';
 

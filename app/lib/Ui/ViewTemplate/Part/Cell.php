@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\ViewTemplate\Part;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Cell extends Object implements CellInterface
+class Cell extends BaseObject implements CellInterface
 {
     protected $css;
 

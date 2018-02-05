@@ -3,9 +3,9 @@
 namespace Honeygavi\Ui\Renderer\VndError;
 
 use Honeygavi\Ui\Renderer\GenericLink;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class VndError extends Object
+class VndError extends BaseObject
 {
     protected $logref;
     protected $message;

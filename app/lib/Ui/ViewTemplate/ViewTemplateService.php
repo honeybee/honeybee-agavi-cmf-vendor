@@ -3,6 +3,7 @@
 namespace Honeygavi\Ui\ViewTemplate;
 
 use Honeybee\Common\Error\RuntimeError;
+use Honeybee\EnvironmentInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
@@ -18,10 +19,9 @@ use Honeygavi\Ui\ViewTemplate\Part\Row;
 use Honeygavi\Ui\ViewTemplate\Part\RowList;
 use Honeygavi\Ui\ViewTemplate\Part\Tab;
 use Honeygavi\Ui\ViewTemplate\Part\TabList;
-use Honeybee\EnvironmentInterface;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class ViewTemplateService extends Object implements ViewTemplateServiceInterface
+class ViewTemplateService extends BaseObject implements ViewTemplateServiceInterface
 {
     protected $config;
 

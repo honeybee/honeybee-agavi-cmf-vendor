@@ -3,11 +3,11 @@
 namespace Honeygavi\Ui\Navigation;
 
 use Honeybee\Common\Error\RuntimeError;
-use Honeygavi\Ui\Activity\ActivityServiceInterface;
 use Honeybee\Infrastructure\Config\ConfigInterface;
-use Trellis\Common\Object;
+use Honeygavi\Ui\Activity\ActivityServiceInterface;
+use Trellis\Common\BaseObject;
 
-class NavigationService extends Object implements NavigationServiceInterface
+class NavigationService extends BaseObject implements NavigationServiceInterface
 {
     protected $navigations_config;
 

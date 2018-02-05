@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\OutputFormat;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class OutputFormat extends Object implements OutputFormatInterface
+class OutputFormat extends BaseObject implements OutputFormatInterface
 {
     protected $name;
     protected $renderer_locator = '';

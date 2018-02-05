@@ -8,10 +8,10 @@ use Honeybee\Common\ScopeKeyInterface;
 use Honeybee\Model\Aggregate\AggregateRootTypeMap;
 use Honeygavi\Ui\UrlGeneratorInterface;
 use QL\UriTemplate\UriTemplate;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 use Honeybee\EnvironmentInterface;
 
-class ActivityService extends Object implements ActivityServiceInterface
+class ActivityService extends BaseObject implements ActivityServiceInterface
 {
     const WORKFLOW_SCOPE_PATTERN = '%s.%s';
 

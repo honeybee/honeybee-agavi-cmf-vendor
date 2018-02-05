@@ -22,9 +22,9 @@ use Honeybee\Infrastructure\DataAccess\Query\RangeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SearchCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SortCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SpatialCriteria;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class ListConfig extends Object implements ListConfigInterface
+class ListConfig extends BaseObject implements ListConfigInterface
 {
     protected $filter;
     protected $limit;
@@ -52,7 +52,7 @@ class ListConfig extends Object implements ListConfigInterface
             foreach ($this->getFilter() as $attribute_path => $value) {
                 if (is_array($value)) {
                     $filter_criteria[] = $this->buildAttributeFilterFor($attribute_path, $value);
-                } else if (!preg_match_all(
+                } elseif (!preg_match_all(
                     '#(?<criteria>\w+)\((?<value>.+)\)(?:,|$)#U',
                     $value,
                     $matches,

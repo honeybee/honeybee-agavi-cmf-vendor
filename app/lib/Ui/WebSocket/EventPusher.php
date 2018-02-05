@@ -2,13 +2,13 @@
 
 namespace Honeygavi\Ui\WebSocket;
 
+use Exception;
 use Ratchet\ConnectionInterface;
 use Ratchet\MessageComponentInterface;
-use Trellis\Common\Object;
 use SplObjectStorage;
-use Exception;
+use Trellis\Common\BaseObject;
 
-class EventPusher extends Object implements MessageComponentInterface
+class EventPusher extends BaseObject implements MessageComponentInterface
 {
     protected $clients;
 

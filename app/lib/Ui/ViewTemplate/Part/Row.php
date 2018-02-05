@@ -2,9 +2,9 @@
 
 namespace Honeygavi\Ui\ViewTemplate\Part;
 
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 
-class Row extends Object implements RowInterface
+class Row extends BaseObject implements RowInterface
 {
     protected $css;
 

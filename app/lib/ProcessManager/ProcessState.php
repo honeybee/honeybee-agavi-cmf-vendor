@@ -4,11 +4,11 @@ namespace Honeygavi\ProcessManager;
 
 use Honeybee\Common\Error\RuntimeError;
 use Ramsey\Uuid\Uuid as UuidGenerator;
-use Trellis\Common\Object;
+use Trellis\Common\BaseObject;
 use Workflux\ExecutionContext;
 use Workflux\StatefulSubjectInterface;
 
-class ProcessState extends Object implements ProcessStateInterface, StatefulSubjectInterface
+class ProcessState extends BaseObject implements ProcessStateInterface, StatefulSubjectInterface
 {
     /**
      * @hiddenProperty
