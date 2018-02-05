@@ -84,13 +84,13 @@ class FilesystemLoader extends Twig_Loader_Filesystem
     /**
      * Only delegate to parent::findTemplate if name has an allowed extension.
      */
-    protected function findTemplate($name)
+    protected function findTemplate($name, $throw = true)
     {
         if ($this->hasAllowedExtensions()) {
             $this->checkAllowedExtensions($name);
         }
 
-        return parent::findTemplate($name);
+        return parent::findTemplate($name, $throw);
     }
 
     /**
