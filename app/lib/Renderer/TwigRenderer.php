@@ -13,9 +13,9 @@ use Twig_Loader_String;
 use Twig_Template;
 
 use MtHaml\Environment as MtHamlEnvironment;
-use MtHaml\Support\Twig\Loader as MtHamlTwigLoader;
 use MtHaml\Support\Twig\Extension as MtHamlTwigExtension;
 use MtHaml\Filter\Markdown\MichelfMarkdown as MtHamlMarkdownFilter;
+use Honeygavi\Template\Twig\Loader\MtHamlTwigLoader;
 
 use Michelf\MarkdownExtra;
 
