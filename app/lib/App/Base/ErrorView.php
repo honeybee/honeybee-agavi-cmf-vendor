@@ -403,12 +403,12 @@ class ErrorView extends View
 
     protected function getTitle()
     {
-        return self::DEFAULT_ERROR_TITLE;
+        return $this->getAttribute('_title', null, self::DEFAULT_ERROR_TITLE);
     }
 
     protected function getMessage()
     {
-        return self::DEFAULT_ERROR_MESSAGE;
+        return $this->getAttribute('_message', null, self::DEFAULT_ERROR_MESSAGE);
     }
 
     protected function getHttpStatusCode()
@@ -418,7 +418,7 @@ class ErrorView extends View
 
     protected function getLogref()
     {
-        return 'error';
+        return $this->getAttribute('_logref', null, 'error');
     }
 
     protected function getUsageInfo()
