@@ -136,16 +136,12 @@ class AssetCompiler
 
         $output_file = $theme_directory . DIRECTORY_SEPARATOR . self::THEME_MAIN_CSS_FILE;
 
-        //$cmd = $this->getThemeCompilationCommand($theme_directory, $style); // see method below
         $cmd = $this->getScssCommand($input_file, $output_file, $style);
 
         $report[$theme_directory] = self::runCommand($cmd, $theme_directory);
         $report[$theme_directory]['name'] = 'Theme ' . basename($theme_directory);
 
-        $cmd = $this->getAutoprefixerCommand($output_file, $output_file);
-        $report[$theme_directory]['autoprefixer'] = self::runCommand($cmd, $theme_directory);
-
-        if (!$report[$theme_directory]['success'] || !$report[$theme_directory]['autoprefixer']['success']) {
+        if (!$report[$theme_directory]['success']) {
             $success = false;
         }
 
@@ -181,9 +177,6 @@ class AssetCompiler
 
             $report[$module_directory] = self::runCommand($cmd, $module_directory);
             $report[$module_directory]['name'] = 'Module ' . $module_name;
-
-            $cmd = $this->getAutoprefixerCommand($output_file, $output_file);
-            $report[$module_directory]['autoprefixer'] = self::runCommand($cmd, $module_directory);
 
             if (!$report[$module_directory]['success']) {
                 $success = false;
@@ -288,44 +281,6 @@ class AssetCompiler
             $this->getSassCliOptions(),
             ProcessUtils::escapeArgument($input_file),
             ProcessUtils::escapeArgument($output_file)
-        );
-
-        return $command;
-    }
-
-    /**
-     * Returns a shell command that adds vendor prefixes to CSS rules depending on browser stats of caniuseCOM.
-     *
-     * @param string $input_file full path to .css file
-     * @param string $output_file full path to .css file (will use $input_file if empty)
-     * @param string $browsers versions of browsers that should be taken into account for adding vendor prefixes
-     *
-     * @return string autoprefixer compilation command
-     */
-    public function getAutoprefixerCommand($input_file, $output_file)
-    {
-        if (empty($output_file)) {
-            $output_file = $input_file;
-        }
-
-        /*
-         * RUBYOPT="" LANG=en_US.UTF-8
-         * './node_modules/.bin/autoprefixer' --browsers '> 2% ...'
-         * --output '/some/output_file.css' 'some_input_file.css'
-         */
-        $command = sprintf(
-            '%s %s --browsers %s --output %s %s %s',
-            AgaviConfig::get('autoprefixer.env', 'RUBYOPT="" LANG=en_US.UTF-8'),
-            ProcessUtils::escapeArgument(
-                AgaviConfig::get(
-                    'autoprefixer.cmd',
-                    AgaviConfig::get('core.cms_dir') . '/node_modules/.bin/autoprefixer'
-                )
-            ),
-            ProcessUtils::escapeArgument(AgaviConfig::get('autoprefixer.browsers', '> 1%, last 3 versions, IE >= 9')),
-            ProcessUtils::escapeArgument($output_file),
-            $this->getAutoprefixerCliOptions(),
-            ProcessUtils::escapeArgument($input_file)
         );
 
         return $command;
@@ -497,26 +452,6 @@ class AssetCompiler
         }
 
         return $sass_options;
-    }
-
-    /**
-     * @param string $additional_arguments additional CLI arguments to use (like --map); please escape the arguments!
-     *
-     * @return string default CLI options for autoprefixer commands
-     */
-    protected function getAutoprefixerCliOptions($additional_arguments = '')
-    {
-        $options = AgaviConfig::get('autoprefixer.cli_options', '');
-
-        if (true === AgaviConfig::get('autoprefixer.debug', false)) {
-            $options .= " '--map' ";
-        }
-
-        if (!empty($additional_arguments)) {
-            $options .= ' ' . $additional_arguments . ' ';
-        }
-
-        return $options;
     }
 
     /**

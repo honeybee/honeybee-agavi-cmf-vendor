@@ -1,0 +1,101 @@
+@import "calendar_mixins";
+
+.calendar {
+    @include calendar-layout;
+    background-color: white;
+    color: #000;
+
+    .calendar__header {
+        text-align: center;
+
+        button {
+            padding-top: 0 1em;
+        }
+    }
+
+    .weekday,
+    .calendar-week {
+        padding: 1em;
+        text-align: right;
+    }
+
+    .calendar-week {
+        font-size: 0.6em;
+        padding: 0.6em;
+    }
+
+    .day:not(.day--disabled):hover {
+        background-color: #ccc;
+        button::after {
+            content: attr(data-hint-hover);
+        }
+    }
+
+    .weekday,
+    .calendar-week,
+    .day--excess {
+        color: #bbb;
+    }
+
+    .weekend {
+        background-color: #eee;
+    }
+
+    .day--today {
+        color: #00c;
+        button {
+            border-color: #77f;
+        }
+        button::after {
+            content: attr(data-hint-today);
+        }
+    }
+
+    .day--current {
+        color: #070;
+        button {
+            border-color: #7c7;
+        }
+        button::after {
+            content: attr(data-hint-current);
+        }
+    }
+
+    .day--selected {
+        button {
+            border-color: #f77;
+        }
+        button::after {
+            content: attr(data-hint-selectable);
+            color: #f77;
+        }
+    }
+
+    .day--disabled {
+        color: #c77;
+    }
+
+    button {
+        background-color: transparent;
+        text-align: right;
+        border: 1px solid transparent;
+        font-size: inherit;
+        color: inherit;
+
+        &::after {
+            bottom: 2px;
+            left: 2px;
+            right: 2px;
+            font-size: 8px;
+        }
+    }
+
+    @include calendar-table;
+}
+
+.calendar--list .calendar {
+    @include calendar-list;
+}
+.calendar--table .calendar {
+    @include calendar-table;
+}

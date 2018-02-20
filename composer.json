@@ -93,8 +93,8 @@
         "js": "bin/cli honeybee.core.util.compile_js",
         "init-standalone": [
             "@config-build",
-            "npm install",
-            "./node_modules/.bin/bower install",
+            "npm install npm@latest",
+            "npm install --global-style",
             "@css",
             "@js",
             "bin/wget_packages",

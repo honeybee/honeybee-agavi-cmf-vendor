@@ -1,0 +1,161 @@
+@mixin calendar-layout {
+    .calendar__header {
+        .month,
+        .year {
+            display: inline-block;
+            width: 50%;
+        }
+
+        button,
+        span {
+            display: inline-block;
+        }
+
+        button {
+            width: 25%;
+        }
+
+        span {
+            width: 50%;
+        }
+    }
+
+    button {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        padding: 1em;
+
+        &::after {
+            position: absolute;
+        }
+    }
+}
+
+@mixin calendar-table-layout {
+    display: inline-block;
+
+    .calendar__body {
+        display: table;
+    }
+
+    .weekdays {
+        display: table-header-group;
+
+        > div {
+            display: table-row;
+
+            > div {
+                display: table-cell;
+            }
+        }
+    }
+
+    .weeks {
+        display: table-row-group;
+    }
+
+    .week {
+        display: table-row;
+    }
+
+    .calendar-week,
+    .day {
+        display: table-cell;
+    }
+}
+
+@mixin calendar-list-layout {
+    min-width: 320px; //never be narrower than a classic iPhone
+    margin-top: 1em;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    .calendar__body {
+        display: block;
+    }
+
+    .calendar-week {
+        text-align: left;
+
+        &.is-empty {
+            display: none;
+        }
+    }
+
+    .weeks,
+    .week,
+    .day {
+        display: block;
+    }
+
+    .weekday,
+    .day--excess {
+        display: none;
+    }
+
+    .week--excess {
+        display: none;
+    }
+}
+
+
+@mixin calendar-list {
+
+    @include calendar-list-layout;
+
+    .calendar-week {
+        color: inherit;
+        border-bottom: 3px solid #ccc;
+
+        .min {
+            display: none;
+        }
+
+        .long {
+            display: inline;
+        }
+    }
+
+    .day {
+        .min,
+        .short {
+            display: none;
+        }
+
+        .long {
+            display: inline;
+        }
+    }
+}
+
+@mixin calendar-table {
+    @include calendar-table-layout;
+
+    .day {
+        .min {
+            display: inline;
+        }
+
+        .short,
+        .long {
+            display: none;
+        }
+
+    }
+
+    .calendar-week {
+        border-bottom: none;
+
+        .min {
+            display: inline;
+        }
+
+        .long {
+            display: none;
+        }
+    }
+
+}

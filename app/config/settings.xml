@@ -93,12 +93,7 @@
 
         <settings prefix="sass.">
             <!-- <setting name="cmd">/opt/ruby/bin/sass</setting> -->
-            <setting name="style">compressed</setting> <!-- nested | expanded | compact | compressed -->
-        </settings>
-
-        <settings prefix="autoprefixer.">
-            <!-- <setting name="cmd">/some/path/to/node_modules/.bin/autoprefixer</setting> -->
-            <setting name="browsers"><![CDATA[ > 1%, last 3 versions, IE >= 9, Firefox ESR ]]></setting>
+            <setting name="style">nested</setting> <!-- nested | expanded | compact | compressed -->
         </settings>
 
         <settings prefix="themes.">
@@ -107,7 +102,7 @@
         </settings>
 
         <settings prefix="requirejs.">
-            <setting name="use_optimized">true</setting>
+            <setting name="use_optimized">false</setting>
             <setting name="additional_config">waitSeconds: 30</setting>
             <setting name="optimize_style">uglify2</setting>
             <setting name="cmd_rjs">node_modules/.bin/r.js</setting>

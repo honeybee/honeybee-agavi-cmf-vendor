@@ -29,7 +29,7 @@ class Honeybee_Core_Util_CompileScss_CompileScssErrorView extends View
 
         foreach ($report as $directory => $data) {
             $success = 'OK';
-            if (!$data['success'] || (!empty($data['autoprefixer'] && !$data['autoprefixer']['success']))) {
+            if (!$data['success']) {
                 $success = 'FAILED';
             }
             $error_message .= $data['name'] . ': ' . $success;
@@ -42,15 +42,6 @@ class Honeybee_Core_Util_CompileScss_CompileScssErrorView extends View
                     $error_message .= 'STDERR: ' . PHP_EOL . $data['stderr'];
                 }
                 if (empty($data['stdout']) && empty($data['stderr'])) {
-                    $error_message .= PHP_EOL;
-                }
-                if (!empty($data['autoprefixer']['stdout'])) {
-                    $error_message .= 'Autoprefixer STDOUT: ' . PHP_EOL . $data['autoprefixer']['stdout'];
-                }
-                if (!empty($data['autoprefixer']['stderr'])) {
-                    $error_message .= 'Autoprefixer STDERR: ' . PHP_EOL . $data['autoprefixer']['stderr'];
-                }
-                if (empty($data['autoprefixer']['autoprefixer']['stdout']) && empty($data['autoprefixer']['stderr'])) {
                     $error_message .= PHP_EOL;
                 }
             }

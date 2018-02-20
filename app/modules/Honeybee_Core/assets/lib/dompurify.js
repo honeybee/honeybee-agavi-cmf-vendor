@@ -1,1 +1,1 @@
-../../../../../vendor/bower_components/dompurify/src/purify.js
+../../../../../vendor/node_modules/honeybee/node_modules/dompurify/dist/purify.js

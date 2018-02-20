@@ -1,1 +1,68 @@
-../../../../../vendor/bower_components/datetime-local-picker/src/calendar.tmpl.html
+<div class="<%- settings.cssClasses.calendars %> <%- css %>" data-nom="<%- numberOfMonths %>">
+    <div class="<%- settings.cssClasses.calendarsHeader %>">
+        <button type="button" class="<%- settings.cssClasses.selectToday %>"><%- i18n.selectToday %></button><!--
+        --><button type="button" class="<%- settings.cssClasses.selectCurrent %>"><%- i18n.selectCurrent %>:
+        <abbr class="min" title="<% if (currentDate) print(currentDate.format('LLLL')) %>"><% if (currentDate) print(currentDate.format("L")) %></abbr>
+            <abbr class="short" title="<% if (currentDate) print(currentDate.format('LLLL')) %>"><% if (currentDate) print(currentDate.format("dddd, LL")) %></abbr>
+            <span class="long"><% if (currentDate) print(currentDate.format("LLLL")) %></span>
+        </button>
+    </div>
+    <div class="<%- settings.cssClasses.calendarsBody %>">
+        <div class="<%- settings.cssClasses.calendarsBodyInner %>">
+            <% _.forEach(calendars, function(calendar) { %>
+            <div class="<%- settings.cssClasses.calendar %>" data-month="<%- date.toISOString("YYYYMM") %>">
+                <div class="<%- settings.cssClasses.calendarHeader %>">
+                    <div class="month">
+                        <button type="button" class="<%- settings.cssClasses.gotoPrevMonth %>" title="<%- i18n.gotoPrevMonthTitle %>">&lt;</button><!--
+                        --><span class="month-title"><%- calendar.header.month %></span><!--
+                        --><button type="button" class="<%- settings.cssClasses.gotoNextMonth %>" title="<%- i18n.gotoNextMonthTitle %>">&gt;</button>
+                    </div><!--
+                    --><div class="year">
+                        <button type="button" class="<%- settings.cssClasses.gotoPrevYear %>" title="<%- i18n.gotoPrevYearTitle %>">&lt;</button><!--
+                        --><span class="year-title"><%- calendar.header.year %></span><!--
+                        --><button type="button" class="<%- settings.cssClasses.gotoNextYear %>" title="<%- i18n.gotoNextYearTitle %>">&gt;</button>
+                    </div>
+                </div>
+                <div class="<%- settings.cssClasses.calendarBody %>">
+                    <div class="weekdays">
+                        <div>
+                            <div class="calendar-week <%- settings.cssClasses.isEmpty %>"><!-- --></div>
+                            <% _.forEach(calendar.weekdays, function(weekday) { %>
+                            <div class="<%- weekday.css %>"><abbr title="<%- weekday.fullName %>"><%- weekday.content %></abbr></div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    <div class="weeks">
+                        <% _.forEach(calendar.weeks, function(week) { %>
+                        <div class="<%- week.css %> <%- week.excess ? settings.cssClasses.weekExcess : "" %>">
+                            <div class="<%- week.weekNumberCSS %>">
+                                <abbr class="min" title="<%- week.nameLongYear %>"><%- week.nameMin %></abbr>
+                                <abbr class="long" title="<%- week.nameLongYear %>"><%- week.nameLong %></abbr>
+                            </div>
+                            <% _.forEach(week.days, function(day) { %>
+                            <div class="<%- day.css %>" data-ymd="<%- day.ymd %>" data-iso-date="<%- day.isoDate %>">
+                                <button type="button" class="set-day"
+                                    title="<%- day.date.format('dddd, LL') %>"
+                                    data-hint-today="<%- i18n.hintToday %>"
+                                    data-hint-current="<%- i18n.hintCurrent %>"
+                                    data-hint-selectable="<%- i18n.hintSelectable %>"
+                                    data-hint-hover="<%- i18n.hintHover %>"
+                                >
+                                    <abbr class="min" title="<%- day.date.format('dddd, LL') %>"><%- day.date.date() %></abbr>
+                                    <abbr class="short" title="<%- day.date.format('dddd, LL') %>"><%- day.date.format("L") %></abbr>
+                                    <span class="long"><%- day.date.format("dddd, LL") %></span>
+                                </button>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <% }); %>
+                    </div>
+                </div>
+                <div class="<%- settings.cssClasses.calendarFooter %>"><%- calendar.footer.content %></div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <div class="<%- settings.cssClasses.calendarsFooter %>">
+    </div>
+</div>

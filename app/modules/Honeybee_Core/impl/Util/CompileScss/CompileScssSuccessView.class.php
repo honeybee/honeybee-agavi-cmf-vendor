@@ -26,15 +26,6 @@ class Honeybee_Core_Util_CompileScss_CompileScssSuccessView extends View
                 if (empty($data['stdout']) && empty($data['stderr'])) {
                     $message .= PHP_EOL;
                 }
-                if (!empty($data['autoprefixer']['stdout'])) {
-                    $message .= 'Autoprefixer STDOUT: ' . PHP_EOL . $data['autoprefixer']['stdout'];
-                }
-                if (!empty($data['autoprefixer']['stderr'])) {
-                    $message .= 'Autoprefixer STDERR: ' . PHP_EOL . $data['autoprefixer']['stderr'];
-                }
-                if (empty($data['autoprefixer']['autoprefixer']['stdout']) && empty($data['autoprefixer']['stderr'])) {
-                    $message .= PHP_EOL;
-                }
             }
         }
 
