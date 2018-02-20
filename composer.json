@@ -95,6 +95,7 @@
             "@config-build",
             "npm install npm@latest",
             "npm install --global-style",
+            "cp -r node_modules vendor/",
             "@css",
             "@js",
             "bin/wget_packages",

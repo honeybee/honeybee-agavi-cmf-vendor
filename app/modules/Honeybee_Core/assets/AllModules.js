@@ -13,7 +13,6 @@ define([
     "dompurify",
     "moment",
     "ldsh!Honeybee_Core/lib/calendar.tmpl",
-    "Honeybee_Core/lib/lodash",
     "Honeybee_Core/lib/selectrect",
 
     "Honeybee_Core/ui/Autostart",

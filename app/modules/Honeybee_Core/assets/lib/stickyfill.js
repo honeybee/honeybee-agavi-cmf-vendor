@@ -1,1 +1,1 @@
-../../../../../vendor/node_modules/honeybee/node_modules/stickyfilljs/dist/stickyfill.js
+../../../../../vendor/node_modules/stickyfilljs/dist/stickyfill.js

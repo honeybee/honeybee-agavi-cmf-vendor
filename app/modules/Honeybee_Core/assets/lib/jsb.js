@@ -1,1 +1,1 @@
-../../../../../vendor/node_modules/honeybee/node_modules/node-jsb/jsb.js
+../../../../../vendor/node_modules/node-jsb/jsb.js

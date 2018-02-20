@@ -1,1 +1,1 @@
-../../../../../vendor/node_modules/honeybee/node_modules/jquery/dist/jquery.js
+../../../../../vendor/node_modules/jquery/dist/jquery.js

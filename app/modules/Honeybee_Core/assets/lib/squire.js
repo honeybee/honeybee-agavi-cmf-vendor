@@ -1,1 +1,1 @@
-../../../../../vendor/node_modules/honeybee/node_modules/squire-rte/build/squire-raw.js
+../../../../../vendor/node_modules/squire-rte/build/squire-raw.js
