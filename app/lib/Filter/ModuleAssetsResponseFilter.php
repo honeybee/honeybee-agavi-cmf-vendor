@@ -153,9 +153,12 @@ class ModuleAssetsResponseFilter extends AgaviFilter implements AgaviIGlobalFilt
                     $requires .= 'require(["' . $module . '/Main"]);';
                 }
             }*/
-            $requires = 'require(["Honeybee_Core/AllModules"]);';
+            $requires = 'require('.
+                '["Honeybee_Core/AllModules", "jsb"], '.
+                'function(a, jsb) { jsb.applyBehaviour(window.document); }'.
+                ');';
         } else {
-            $requires = 'require(["Honeybee_Core/Widget"]);';
+            $requires = 'require(["jsb"], function(jsb) { jsb.applyBehaviour(window.document); });';
         }
 
         $output = '';
