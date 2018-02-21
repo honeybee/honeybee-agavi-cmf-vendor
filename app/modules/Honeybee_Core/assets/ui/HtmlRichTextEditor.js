@@ -4,7 +4,10 @@ define([
     "squire",
     "dompurify",
     "magnific-popup",
-], function(Widget, CharCounter, Squire, DOMPurify) {
+    "jsb",
+    "jquery",
+    "lodash"
+], function(Widget, CharCounter, Squire, DOMPurify, mfp, jsb, $, _) {
 
     // only allow the following tags when pasting contents into the richtext editor
     var ALLOWED_TAGS_ON_PASTE = [
@@ -22,23 +25,65 @@ define([
     // forbid all other tags when pasting contents into the richtext editor
     var FORBIDDEN_TAGS_ON_PASTE = [
         // HTML
-        'span','abbr','acronym','p','div','em','strong','sub','sup','strike','hr','h1','h2','h3','h4','h5','h6','address','area','article','aside','audio','bdi','bdo','big','blink','blockquote','body','button','canvas','caption','center','cite','code','col','colgroup','content','data','datalist','dd','decorator','del','details','dfn','dir','dl','dt','element','fieldset','figcaption','figure','font','footer','form','head','header','hgroup','html','img','input','ins','kbd','label','legend','main','map','mark','marquee','menu','menuitem','meter','nav','nobr','optgroup','option','output','pre','progress','q','rp','rt','ruby','samp','section','select','shadow','source','spacer','strike','style','summary','table','tbody','td','template','textarea','tfoot','th','thead','time','tr','track','tt','var','video','wbr',
+        'span','abbr','acronym','p','div','em','strong','sub','sup','strike','hr','h1','h2','h3','h4','h5','h6',
+        'address','area','article','aside','audio','bdi','bdo','big','blink','blockquote','body','button','canvas',
+        'caption','center','cite','code','col','colgroup','content','data','datalist','dd','decorator','del','details',
+        'dfn','dir','dl','dt','element','fieldset','figcaption','figure','font','footer','form','head','header',
+        'hgroup','html','img','input','ins','kbd','label','legend','main','map','mark','marquee','menu','menuitem',
+        'meter','nav','nobr','optgroup','option','output','pre','progress','q','rp','rt','ruby','samp','section',
+        'select','shadow','source','spacer','strike','style','summary','table','tbody','td','template','textarea',
+        'tfoot','th','thead','time','tr','track','tt','var','video','wbr',
         // SVG
-        'svg','altglyph','altglyphdef','altglyphitem','animatecolor','animatemotion','animatetransform','circle','clippath','defs','desc','ellipse','filter','font','g','glyph','glyphref','hkern','image','line','lineargradient','marker','mask','metadata','mpath','path','pattern','polygon','polyline','radialgradient','rect','stop','switch','symbol','text','textpath','title','tref','tspan','view','vkern',
+        'svg','altglyph','altglyphdef','altglyphitem','animatecolor','animatemotion','animatetransform','circle',
+        'clippath','defs','desc','ellipse','filter','font','g','glyph','glyphref','hkern','image','line',
+        'lineargradient','marker','mask','metadata','mpath','path','pattern','polygon','polyline','radialgradient',
+        'rect','stop','switch','symbol','text','textpath','title','tref','tspan','view','vkern',
         // SVG Filters
-        'feBlend','feColorMatrix','feComponentTransfer','feComposite','feConvolveMatrix','feDiffuseLighting','feDisplacementMap','feFlood','feFuncA','feFuncB','feFuncG','feFuncR','feGaussianBlur','feMerge','feMergeNode','feMorphology','feOffset','feSpecularLighting','feTile','feTurbulence',
+        'feBlend','feColorMatrix','feComponentTransfer','feComposite','feConvolveMatrix','feDiffuseLighting',
+        'feDisplacementMap','feFlood','feFuncA','feFuncB','feFuncG','feFuncR','feGaussianBlur','feMerge','feMergeNode',
+        'feMorphology','feOffset','feSpecularLighting','feTile','feTurbulence',
         // MathML
-        'math','menclose','merror','mfenced','mfrac','mglyph','mi','mlabeledtr','mmuliscripts','mn','mo','mover','mpadded','mphantom','mroot','mrow','ms','mpspace','msqrt','mystyle','msub','msup','msubsup','mtable','mtd','mtext','mtr','munder','munderover',
+        'math','menclose','merror','mfenced','mfrac','mglyph','mi','mlabeledtr','mmuliscripts','mn','mo','mover',
+        'mpadded','mphantom','mroot','mrow','ms','mpspace','msqrt','mystyle','msub','msup','msubsup','mtable','mtd',
+        'mtext','mtr','munder','munderover',
     ];
 
     // forbid all other attributes when pasting contents into the richtext editor
     var FORBIDDEN_ATTRS_ON_PASTE = [
         // HTML
-        'accept','action','align','alt','autocomplete','background','bgcolor','border','cellpadding','cellspacing','checked','cite','class','clear','color','cols','colspan','coords','datetime','default','dir','disabled','download','enctype','face','for','headers','height','hidden','high','hreflang','id','ismap','label','list','loop', 'low','max','maxlength','media','method','min','multiple','name','noshade','novalidate','nowrap','open','optimum','pattern','placeholder','poster','preload','pubdate','radiogroup','readonly','required','rev','reversed','rows','rowspan','spellcheck','scope','selected','shape','size','span','srclang','start','src','step','style','summary','tabindex','type','usemap','valign','value','width','xmlns',
+        'accept','action','align','alt','autocomplete','background','bgcolor','border','cellpadding','cellspacing',
+        'checked','cite','class','clear','color','cols','colspan','coords','datetime','default','dir','disabled',
+        'download','enctype','face','for','headers','height','hidden','high','hreflang','id','ismap','label','list',
+        'loop', 'low','max','maxlength','media','method','min','multiple','name','noshade','novalidate','nowrap','open',
+        'optimum','pattern','placeholder','poster','preload','pubdate','radiogroup','readonly','required','rev',
+        'reversed','rows','rowspan','spellcheck','scope','selected','shape','size','span','srclang','start','src',
+        'step','style','summary','tabindex','type','usemap','valign','value','width','xmlns',
         // SVG
-        'accent-height','accumulate','additivive','alignment-baseline','ascent','attributename','attributetype','azimuth','basefrequency','baseline-shift','begin','bias','by','clip','clip-path','clip-rule','color','color-interpolation','color-interpolation-filters','color-profile','color-rendering','cx','cy','d','dx','dy','diffuseconstant','direction','display','divisor','dur','edgemode','elevation','end','fill','fill-opacity','fill-rule','filter','flood-color','flood-opacity','font-family','font-size','font-size-adjust','font-stretch','font-style','font-variant','font-weight','fx', 'fy','g1','g2','glyph-name','glyphref','gradientunits','gradienttransform','image-rendering','in','in2','k','k1','k2','k3','k4','kerning','keypoints','keysplines','keytimes','lengthadjust','letter-spacing','kernelmatrix','kernelunitlength','lighting-color','local','marker-end','marker-mid','marker-start','markerheight','markerunits','markerwidth','maskcontentunits','maskunits','max','mask','mode','min','numoctaves','offset','operator','opacity','order','orient','orientation','origin','overflow','paint-order','path','pathlength','patterncontentunits','patterntransform','patternunits','points','preservealpha','r','rx','ry','radius','refx','refy','repeatcount','repeatdur','restart','result','rotate','scale','seed','shape-rendering','specularconstant','specularexponent','spreadmethod','stddeviation','stitchtiles','stop-color','stop-opacity','stroke-dasharray','stroke-dashoffset','stroke-linecap','stroke-linejoin','stroke-miterlimit','stroke-opacity','stroke','stroke-width','surfacescale','targetx','targety','transform','text-anchor','text-decoration','text-rendering','textlength','u1','u2','unicode','values','viewbox','visibility','vert-adv-y','vert-origin-x','vert-origin-y','word-spacing','wrap','writing-mode','xchannelselector','ychannelselector','x','x1','x2','y','y1','y2','z','zoomandpan',
+        'accent-height','accumulate','additivive','alignment-baseline','ascent','attributename','attributetype',
+        'azimuth','basefrequency','baseline-shift','begin','bias','by','clip','clip-path','clip-rule','color',
+        'color-interpolation','color-interpolation-filters','color-profile','color-rendering','cx','cy','d','dx','dy',
+        'diffuseconstant','direction','display','divisor','dur','edgemode','elevation','end','fill','fill-opacity',
+        'fill-rule','filter','flood-color','flood-opacity','font-family','font-size','font-size-adjust','font-stretch',
+        'font-style','font-variant','font-weight','fx', 'fy','g1','g2','glyph-name','glyphref','gradientunits',
+        'gradienttransform','image-rendering','in','in2','k','k1','k2','k3','k4','kerning','keypoints','keysplines',
+        'keytimes','lengthadjust','letter-spacing','kernelmatrix','kernelunitlength','lighting-color','local',
+        'marker-end','marker-mid','marker-start','markerheight','markerunits','markerwidth','maskcontentunits',
+        'maskunits','max','mask','mode','min','numoctaves','offset','operator','opacity','order','orient','orientation',
+        'origin','overflow','paint-order','path','pathlength','patterncontentunits','patterntransform','patternunits',
+        'points','preservealpha','r','rx','ry','radius','refx','refy','repeatcount','repeatdur','restart','result',
+        'rotate','scale','seed','shape-rendering','specularconstant','specularexponent','spreadmethod','stddeviation',
+        'stitchtiles','stop-color','stop-opacity','stroke-dasharray','stroke-dashoffset','stroke-linecap',
+        'stroke-linejoin','stroke-miterlimit','stroke-opacity','stroke','stroke-width','surfacescale','targetx',
+        'targety','transform','text-anchor','text-decoration','text-rendering','textlength','u1','u2','unicode',
+        'values','viewbox','visibility','vert-adv-y','vert-origin-x','vert-origin-y','word-spacing','wrap',
+        'writing-mode','xchannelselector','ychannelselector','x','x1','x2','y','y1','y2','z','zoomandpan',
         // MathML
-        'accent','accentunder','bevelled','close','columnsalign','columnlines','columnspan','denomalign','depth','display','displaystyle','fence','frame','largeop','length','linethickness','lspace','lquote','mathbackground','mathcolor','mathsize','mathvariant','maxsize','minsize','movablelimits','notation','numalign','open','rowalign','rowlines','rowspacing','rowspan','rspace','rquote','scriptlevel','scriptminsize','scriptsizemultiplier','selection','separator','separators','stretchy','subscriptshift','supscriptshift','symmetric','voffset',
+        'accent','accentunder','bevelled','close','columnsalign','columnlines','columnspan','denomalign','depth',
+        'display','displaystyle','fence','frame','largeop','length','linethickness','lspace','lquote','mathbackground',
+        'mathcolor','mathsize','mathvariant','maxsize','minsize','movablelimits','notation','numalign','open',
+        'rowalign','rowlines','rowspacing','rowspan','rspace','rquote','scriptlevel','scriptminsize',
+        'scriptsizemultiplier','selection','separator','separators','stretchy','subscriptshift','supscriptshift',
+        'symmetric','voffset',
         // XML
         'xlink:href','xml:id','xlink:title','xml:space','xmlns:xlink'
     ];

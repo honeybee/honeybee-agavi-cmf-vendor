@@ -1,6 +1,8 @@
 define([
-    'Honeybee_Core/Widget'
-], function(Widget) {
+    "Honeybee_Core/Widget",
+    "jquery",
+    "jsb"
+], function(Widget, $, jsb) {
 
     /* By default the widget expects to be applied to a input control supporting val().
        If applied to other elements provide target_selector and getTargetVal.
@@ -16,7 +18,6 @@ define([
 
     function CharCounter(dom_element, options) {
         var that = this;
-        var $scope = $;
 
         this.init(dom_element, default_options);
         this.addOptions(options);

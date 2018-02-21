@@ -1,7 +1,10 @@
 define([
     "Honeybee_Core/ui/EmbeddedEntityList",
-    "selectize"
-], function(EmbeddedEntityList) {
+    "jsb",
+    "selectize",
+    "jquery",
+    "lodash"
+], function(EmbeddedEntityList, jsb, selectize, $, _) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/ReferenceEntityList"

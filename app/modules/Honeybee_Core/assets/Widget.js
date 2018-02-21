@@ -4,7 +4,7 @@ define([
     "jquery",
     "jsb",
     "Honeybee_Core/ui/Autostart"
-], function(Logging, _) {
+], function(Logging, _, $, jsb, Autostart) {
 
     "use strict";
 

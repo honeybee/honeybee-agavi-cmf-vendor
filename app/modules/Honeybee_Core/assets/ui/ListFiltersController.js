@@ -1,6 +1,8 @@
 define([
-    "Honeybee_Core/Widget"
-], function(Widget) {
+    "Honeybee_Core/Widget",
+    "jsb",
+    "jquery"
+], function(Widget, jsb, $) {
 
     "use strict";
 
@@ -24,7 +26,7 @@ define([
         this.$activity_map = this.$widget.find(this.options.activity_map_selector);
 
         this.addListeners();
-    };
+    }
 
     ListFiltersController.prototype = new Widget();
     ListFiltersController.prototype.constructor = ListFiltersController;
@@ -75,7 +77,7 @@ define([
 
         if ($filter_list.find(filter_selector).length === 0) {
             // clone template
-            var $filter_template = $('#list_filter_templates').find(filter_selector);
+            $filter_template = $('#list_filter_templates').find(filter_selector);
             if ($filter_template.length === 0) {
                 this.logWarn('Unable to add "' + filter_id + '" filter');
             }

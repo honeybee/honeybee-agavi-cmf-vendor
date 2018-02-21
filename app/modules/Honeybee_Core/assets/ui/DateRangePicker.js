@@ -2,8 +2,11 @@ define([
     "Honeybee_Core/Widget",
     "Honeybee_Core/ui/SelectBox",
     "Honeybee_Core/ui/DatePicker",
-    "moment"
-], function(Widget, SelectBox, DatePicker, moment) {
+    "moment",
+    "lodash",
+    "jquery",
+    "jsb"
+], function(Widget, SelectBox, DatePicker, moment, _, $, jsb) {
     var default_options = {
         prefix: 'Honeybee_Core/ui/DateRangePicker',
         default_control_selector: '.date-range-picker__input [name]',
@@ -46,7 +49,7 @@ define([
         this.options.date_picker_config.onSetSelectedDate = this.onSelectDate;
 
         this.initUi();
-    };
+    }
 
     DateRangePicker.prototype = new Widget();
     DateRangePicker.prototype.constructor = DateRangePicker;
@@ -172,7 +175,7 @@ define([
             .remove();
 
         return true;
-    }
+    };
 
     DateRangePicker.prototype.buildCustomValue = function() {
         var self = this;
@@ -192,7 +195,7 @@ define([
     DateRangePicker.prototype.validateLimitValue = function(value) {
         var match, now, period;
         if (!_.isString(value)) {
-            return false
+            return false;
         }
         if (!moment(value, moment.ISO_8601, true).isValid()) {
             now = moment();
@@ -222,7 +225,7 @@ define([
 
     DateRangePicker.prototype.getLimits = function() {
         return this.range_limits;
-    }
+    };
 
     // DatetimeLocaPicker doesn't trigger change event, but provides a change callback
     // @todo Remove if behaviour gets fixed

@@ -1,6 +1,9 @@
 define([
-    "Honeybee_Core/Widget"
-], function(Widget) {
+    "Honeybee_Core/Widget",
+    "jsb",
+    "jquery",
+    "lodash"
+], function(Widget, jsb, $, _) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/EmbeddedEntityList",

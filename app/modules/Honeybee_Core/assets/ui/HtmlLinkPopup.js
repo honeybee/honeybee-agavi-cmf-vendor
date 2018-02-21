@@ -1,7 +1,10 @@
 define([
     "Honeybee_Core/Widget",
-    "magnific-popup"
-], function(Widget, mfp) {
+    "magnific-popup",
+    "jsb",
+    "jquery",
+    "lodash"
+], function(Widget, mfp, jsb, $, _) {
 
     var default_options = {
         prefix: 'Honeybee_Core/ui/HtmlLinkPopup',
@@ -142,7 +145,7 @@ define([
             hreflang: this.$input_hreflang.val()||'',
             download: this.$input_download.prop('checked') === true
         };
-    }
+    };
 
     HtmlLinkPopup.prototype.restoreInputValues = function() {
         this.$input_href.val(this.orig.href);
@@ -153,7 +156,7 @@ define([
         this.$input_rel.val(this.orig.rel);
         this.$input_hreflang.val(this.orig.hreflang);
         this.$input_download.prop('checked', this.orig.download);
-    }
+    };
 
     HtmlLinkPopup.prototype.updatePreview = function() {
         this.$preview_link.prop('href', this.$input_href.val());
@@ -177,7 +180,7 @@ define([
             this.$preview_link.removeAttr('download');
             this.$preview_link.prop('download', false);
         }
-    }
+    };
 
     HtmlLinkPopup.prototype.resetInputsToInitialValues = function() {
         this.$input_href.val(this.initial.href);
@@ -188,7 +191,7 @@ define([
         this.$input_rel.val(this.initial.rel);
         this.$input_hreflang.val(this.initial.hreflang);
         this.$input_download.prop('checked', this.initial.download);
-    }
+    };
 
     HtmlLinkPopup.prototype.clearInputs = function() {
         this.$input_href.val('');
@@ -199,7 +202,7 @@ define([
         this.$input_rel.val('');
         this.$input_hreflang.val('');
         this.$input_download.prop('checked', false);
-    }
+    };
 
     return HtmlLinkPopup;
 });

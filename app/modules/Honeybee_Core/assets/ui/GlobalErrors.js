@@ -1,7 +1,9 @@
 define([
     "Honeybee_Core/Widget",
-    "lodash"
-], function(Widget, _) {
+    "lodash",
+    "jsb",
+    "jquery"
+], function(Widget, _, jsb, $) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/GlobalErrors",

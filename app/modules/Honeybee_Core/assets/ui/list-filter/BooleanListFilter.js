@@ -1,6 +1,9 @@
 define([
-    "Honeybee_Core/ui/ListFilter"
-], function(ListFilter) {
+    "Honeybee_Core/ui/ListFilter",
+    "lodash",
+    "jquery",
+    "jsb"
+], function(ListFilter, _, $, jsb) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/list-filter/BooleanListFilter",
@@ -9,7 +12,7 @@ define([
 
     function BooleanListFilter(dom_element, options) {
         ListFilter.call(this, dom_element, _.merge({}, default_options, options));
-    };
+    }
 
     BooleanListFilter.prototype = new ListFilter();
     BooleanListFilter.prototype.constructor = BooleanListFilter;

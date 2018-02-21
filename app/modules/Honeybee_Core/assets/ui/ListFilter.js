@@ -1,6 +1,9 @@
 define([
     "Honeybee_Core/Widget",
-], function(Widget) {
+    "jsb",
+    "jquery",
+    "lodash"
+], function(Widget, jsb, $, _) {
 
     "use strict";
 
@@ -40,7 +43,7 @@ define([
         this.control_selector = this.options.control_selector || '[name="' + this.control_name + '"]';
 
         this.addListeners();
-    };
+    }
 
     ListFilter.prototype = new Widget();
     ListFilter.prototype.constructor = ListFilter;

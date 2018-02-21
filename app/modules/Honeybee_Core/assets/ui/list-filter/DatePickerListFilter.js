@@ -1,8 +1,11 @@
 define([
     "Honeybee_Core/ui/ListFilter",
     "Honeybee_Core/ui/DatePicker",
-    "Honeybee_Core/lib/DatetimeLocalPicker"
-], function(ListFilter, DatePicker, DatetimeLocalPicker) {
+    "Honeybee_Core/lib/DatetimeLocalPicker",
+    "lodash",
+    "jquery",
+    "jsb"
+], function(ListFilter, DatePicker, DatetimeLocalPicker, _, $, jsb) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/list-filter/DatePickerListFilter",
@@ -19,7 +22,7 @@ define([
 
         this.date_picker_widget = new DatePicker(date_picker_element, date_picker_options);
         this.date_picker = this.date_picker_widget.getPicker();
-        if (!this.date_picker_widget || !this.date_picker instanceof DatetimeLocalPicker) {
+        if (!this.date_picker_widget || !(this.date_picker instanceof DatetimeLocalPicker)) {
             console.log('There was a problem with initialising the DatePicker. Please check the DOM or the provided settings.');
             return;
         }
@@ -39,7 +42,7 @@ define([
                 value = this.date_picker
                     .parseDate(value)
                     .local()
-                    .format(this.options.quick_label_date_display_format)
+                    .format(this.options.quick_label_date_display_format);
             }
         }
 

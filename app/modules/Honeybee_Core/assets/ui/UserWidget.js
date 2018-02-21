@@ -1,6 +1,7 @@
 define([
     "Honeybee_Core/Widget",
-], function(Widget) {
+    "jquery"
+], function(Widget, $) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/UserWidget",

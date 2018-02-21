@@ -2,7 +2,7 @@ define([
     "Honeybee_Core/Config",
     "jquery",
     "jsb"
-], function(config) {
+], function(config, $, jsb) {
 
     appendRequiredAttributeToAllDataRequiredFields();
     handleFlyoutSpecifics();

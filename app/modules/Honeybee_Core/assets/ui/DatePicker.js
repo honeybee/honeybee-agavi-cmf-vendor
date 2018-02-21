@@ -1,8 +1,10 @@
 define([
     "Honeybee_Core/Widget",
     "ldsh!Honeybee_Core/lib/calendar.tmpl",
-    "Honeybee_Core/lib/DatetimeLocalPicker"
-], function(Widget, calendars_tmpl, dtlp) {
+    "Honeybee_Core/lib/DatetimeLocalPicker",
+    "jquery",
+    "jsb"
+], function(Widget, calendars_tmpl, dtlp, $, jsb) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/DatePicker",

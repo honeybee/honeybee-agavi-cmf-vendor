@@ -1,7 +1,10 @@
 define([
     "Honeybee_Core/Widget",
-    "magnific-popup"
-], function(Widget) {
+    "magnific-popup",
+    "lodash",
+    "jquery",
+    "jsb"
+], function(Widget, mfp, _, $, jsb) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/AssetList"

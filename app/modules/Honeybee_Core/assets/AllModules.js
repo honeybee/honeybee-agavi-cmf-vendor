@@ -1,11 +1,10 @@
 define([
     "jquery",
     "jsb",
-
+    "lodash",
     "Honeybee_Core/Config",
     "Honeybee_Core/Logging",
     "Honeybee_Core/Widget",
-
     "magnific-popup",
     "selectize",
     "stickyfill",
@@ -14,7 +13,6 @@ define([
     "moment",
     "ldsh!Honeybee_Core/lib/calendar.tmpl",
     "Honeybee_Core/lib/selectrect",
-
     "Honeybee_Core/ui/Autostart",
     "Honeybee_Core/ui/ListFilter",
     "Honeybee_Core/ui/ListFiltersController",
@@ -22,6 +20,7 @@ define([
     "Honeybee_Core/ui/DateRangePicker",
     "Honeybee_Core/ui/SelectBox",
     "Honeybee_Core/ui/TextList",
+    "Honeybee_Core/ui/AssetList",
     "Honeybee_Core/ui/ImageList",
     "Honeybee_Core/ui/Tabs",
     "Honeybee_Core/ui/ActionGroup",
@@ -35,7 +34,43 @@ define([
     "Honeybee_Core/ui/list-filter/DatePickerListFilter",
     "Honeybee_Core/ui/list-filter/DateRangePickerListFilter",
     "Honeybee_Core/ui/list-filter/TextListListFilter"
-], function($, jsb) {
+], function(
+    $,
+    jsb,
+    _,
+    Config,
+    Logging,
+    Widget,
+    mfp,
+    selectize,
+    stickyfill,
+    squire,
+    dompurify,
+    moment,
+    calendar_tmpl,
+    selectrect,
+    Autostart,
+    Listfilter,
+    ListFiltersController,
+    DatePicker,
+    DateRangePicker,
+    SelectBox,
+    TextList,
+    AssetList,
+    ImageList,
+    Tabs,
+    ActionGroup,
+    EmbeddedEntityList,
+    EntityReferenceList,
+    HtmlRichTextEditor,
+    HtmlLinkPopup,
+    GlobalErrors,
+    BooleanListFilter,
+    ChoiceListFilter,
+    DatePickerListFilter,
+    DateRangePickerListFilter,
+    TextListListFilter
+) {
 
     // nothing to do here, only use to load all stuff at once
     // when AgaviConfig setting "requirejs.use_optimized" is "true"

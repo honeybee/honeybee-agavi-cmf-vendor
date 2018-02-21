@@ -25,7 +25,7 @@ define([
 ], function(config) {
 
     "use strict";
-    
+
     var __log = function(prefix, log_type, args) {
         var i = 0;
 

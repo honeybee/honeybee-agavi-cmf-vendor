@@ -1,7 +1,10 @@
 define([
     "Honeybee_Core/ui/ListFilter",
-    "selectize"
-], function(ListFilter) {
+    "selectize",
+    "lodash",
+    "jquery",
+    "jsb"
+], function(ListFilter, selectize, _, $, jsb) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/list-filter/TextListListFilter",
@@ -12,7 +15,7 @@ define([
     };
 
     function TextListListFilter(dom_element, options) {
-        var $dom_element, filter_name, options;
+        var $dom_element, filter_name;
         $dom_element = $(dom_element);
         options = _.merge({}, default_options, options);
 

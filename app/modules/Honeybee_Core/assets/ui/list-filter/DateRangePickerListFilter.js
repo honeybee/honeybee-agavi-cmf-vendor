@@ -1,7 +1,10 @@
 define([
     "Honeybee_Core/ui/ListFilter",
-    "Honeybee_Core/ui/DateRangePicker"
-], function(ListFilter, DateRangePicker) {
+    "Honeybee_Core/ui/DateRangePicker",
+    "lodash",
+    "jquery",
+    "jsb"
+], function(ListFilter, DateRangePicker, _, $, jsb) {
     var default_options = {
         prefix: 'Honeybee_Core/ui/list-filter/DateRangePickerListFilter',
         date_range_picker_selector: '.date-range-picker',
@@ -33,7 +36,7 @@ define([
 
         // update quick-label
         this.getControl().change();
-    };
+    }
 
     DateRangePickerListFilter.prototype = new ListFilter();
     DateRangePickerListFilter.prototype.constructor = DateRangePickerListFilter;
@@ -68,7 +71,7 @@ define([
             value = value.replace(/[\,\s]+$/, '');
             if (value.length === 0) {
                 value = selected_choice.text();
-            };
+            }
         } else {
             // @todo When translated values support is complete, rely on it rather than the select-option text
             value = selected_choice.text();

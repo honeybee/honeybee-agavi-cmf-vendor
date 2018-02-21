@@ -1,6 +1,8 @@
 define([
-    "Honeybee_Core/Widget"
-], function(Widget) {
+    "Honeybee_Core/Widget",
+    "jsb",
+    "jquery"
+], function(Widget, jsb, $) {
 
     var default_options = {
         prefix: 'Honeybee_Core/ui/HtmlLinkList',

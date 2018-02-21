@@ -1,8 +1,11 @@
 define([
     "Honeybee_Core/Widget",
     "Honeybee_Core/lib/selectrect",
-    "magnific-popup"
-], function(Widget, selectrect) {
+    "magnific-popup",
+    "jsb",
+    "jquery",
+    "lodash"
+], function(Widget, selectrect, mfp, jsb, $, _) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/ImageList"

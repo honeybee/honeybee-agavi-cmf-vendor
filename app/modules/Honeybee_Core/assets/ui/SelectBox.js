@@ -1,7 +1,8 @@
 define([
     "Honeybee_Core/Widget",
-    "selectize"
-], function(Widget) {
+    "selectize",
+    "jquery"
+], function(Widget, selectize, $) {
 
     var default_options = {
         prefix: "Honeybee_Core/ui/SelectBox",

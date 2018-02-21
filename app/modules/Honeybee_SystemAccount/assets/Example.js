@@ -1,7 +1,7 @@
 define([
     "jquery",
     "jsb"
-], function() {
+], function($, jsb) {
 
     "use strict";
 
