@@ -614,7 +614,7 @@ define([
                 //var $newthumbitem = $thumbitem_tpl.clone();
 
                 // prevent flickering while loading after setting the new 'src'
-                $newthumbitem.load(function() {
+                $newthumbitem.on('load', function() {
                     $newthumbitem.removeClass('hb-js-uploading');
                 });
                 $newthumbitem.find(".imagelist__thumb-img").attr('src', response_json.file.download_url||'');

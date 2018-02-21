@@ -68,6 +68,7 @@ define([
         that.$widget.find('.ag__more .action').on('click', function(ev) {
             ev.preventDefault();
             that.$trigger.removeAttr('checked');
+            that.$trigger.prop('checked', false);
             var $action = $(this);
             $action.parent('li').addClass('active').siblings().removeClass('active');
             var new_text = $action.text();

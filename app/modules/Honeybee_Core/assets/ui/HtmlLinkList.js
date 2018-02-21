@@ -40,7 +40,7 @@ define([
         this.$placeholder.detach();
 
         this.$items = this.$list.children();
-        this.idx = this.$list.children().size();
+        this.idx = this.$list.children().length;
         this.template = this.$template.html();
 
         this.$template.remove();

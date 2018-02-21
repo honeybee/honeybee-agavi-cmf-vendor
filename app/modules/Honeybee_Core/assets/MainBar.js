@@ -59,7 +59,7 @@ define([
         var that = this;
 
         this.$triggers.on('click', function(ev) {
-            that.$triggers.filter(':checked').not(this).removeAttr('checked'); // uncheck all other checked triggers
+            that.$triggers.filter(':checked').not(this).prop('checked', false); // uncheck all other checked triggers
 
             if (this.id === 'mainbar__trigger-batch' && this.checked === true) {
                 that.selectmode = true;
