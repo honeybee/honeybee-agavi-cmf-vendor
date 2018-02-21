@@ -190,7 +190,7 @@ define([
                 $(behavior_el).removeClass('jsb__').addClass('jsb_');
             }
         });
-        jsb.applyBehaviour($item);
+        jsb.applyBehaviour($item.get(0));
         $item.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-embed-action').on('click', function(event) {
             self.handleAction(event, $item);
             // prevent double event triggering when using label+input inside hb-embed-action
