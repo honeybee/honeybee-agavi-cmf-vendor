@@ -355,10 +355,8 @@
         };
 
         sel.selection = unscale_selection(sel);
-        console.log(sel);
 
         function pointerdown(ev) {
-            console.log(ev);
             ev.stopPropagation();
             ev.preventDefault();
             var coords = correct_coordinates(sel, ev);
