@@ -1,6 +1,6 @@
 {%- block field -%} {# this block exists for whitespace control #}
 {%- set isReadable = not (disabled == 'disabled' or readonly == 'readonly') -%}
-<div class="hb-field hb-imagelist {{ css|default('') }} {% if widget_enabled %}{% if not is_embedded %}jsb_{% endif %} jsb_Honeybee_Core/ui/ImageList{% endif %} {% if not isReadable %}hb-imagelist--readonly{% endif %}"
+<div class="hb-field hb-imagelist {{ css|default('') }} {% if not isReadable %}hb-imagelist--readonly{% endif %}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
     data-id="{{field_id}}" data-hb-field-name="{{ field_name }}" {% for attr, val in html_attributes %} {{ attr }}="{{ val }}" {% endfor %}
     data-attribute-path="{{ attribute_path }}" data-resource-type-prefix="{{ resource_type_prefix }}" data-resource-type-name="{{ resource_type_name }}"
