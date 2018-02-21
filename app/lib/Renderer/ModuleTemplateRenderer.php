@@ -113,43 +113,43 @@ class ModuleTemplateRenderer
         }
 
         $message = new Message();
-        if ($twig_template->hasBlock('subject')) {
+        if ($twig_template->hasBlock('subject', $variables)) {
             $message->setSubject($twig_template->renderBlock('subject', $variables));
         }
 
-        if ($twig_template->hasBlock('body_html')) {
+        if ($twig_template->hasBlock('body_html', $variables)) {
             $message->setBodyHtml($twig_template->renderBlock('body_html', $variables));
         }
 
-        if ($twig_template->hasBlock('body_text')) {
+        if ($twig_template->hasBlock('body_text', $variables)) {
             $message->setBodyText($twig_template->renderBlock('body_text', $variables));
         }
 
-        if ($twig_template->hasBlock('from')) {
+        if ($twig_template->hasBlock('from', $variables)) {
             $message->setFrom($twig_template->renderBlock('from', $variables));
         }
 
-        if ($twig_template->hasBlock('to')) {
+        if ($twig_template->hasBlock('to', $variables)) {
             $message->setTo($twig_template->renderBlock('to', $variables));
         }
 
-        if ($twig_template->hasBlock('cc')) {
+        if ($twig_template->hasBlock('cc', $variables)) {
             $message->setCc($twig_template->renderBlock('cc', $variables));
         }
 
-        if ($twig_template->hasBlock('bcc')) {
+        if ($twig_template->hasBlock('bcc', $variables)) {
             $message->setBcc($twig_template->renderBlock('bcc', $variables));
         }
 
-        if ($twig_template->hasBlock('return_path')) {
+        if ($twig_template->hasBlock('return_path', $variables)) {
             $message->setReturnPath($twig_template->renderBlock('return_path', $variables));
         }
 
-        if ($twig_template->hasBlock('sender')) {
+        if ($twig_template->hasBlock('sender', $variables)) {
             $message->setSender($twig_template->renderBlock('sender', $variables));
         }
 
-        if ($twig_template->hasBlock('reply_to')) {
+        if ($twig_template->hasBlock('reply_to', $variables)) {
             $message->setReplyTo($twig_template->renderBlock('reply_to', $variables));
         }
 
