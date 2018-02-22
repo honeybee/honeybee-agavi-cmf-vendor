@@ -174,11 +174,9 @@ define([
         this.$preview_link.prop('title', this.$input_title.val());
         this.$preview_link.prop('hreflang', this.$input_hreflang.val());
         if (this.$input_download.prop('checked')) {
-            this.$preview_link.prop('download', true);
             this.$preview_link.attr('download', 'download');
         } else {
             this.$preview_link.removeAttr('download');
-            this.$preview_link.prop('download', false);
         }
     };
 
