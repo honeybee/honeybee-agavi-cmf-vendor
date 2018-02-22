@@ -49,7 +49,16 @@ class SuggestionsSuccessView extends View
         foreach ($query_result->getResults() as $resource) {
             $suggestion = [ 'identifier' => $resource->getIdentifier() ];
             foreach ($display_attribute_names as $display_attribute_name) {
-                $suggestion[$display_attribute_name] = AttributeValuePath::getAttributeValueByPath($resource, $display_attribute_name);
+                $value = AttributeValuePath::getAttributeValueByPath($resource, $display_attribute_name);
+                if (is_array($value)) {
+                    $value = array_map(function($item) {
+                        if (is_callable([ $item, 'toArray' ])) {
+                            return $item->toArray();
+                        }
+                        return $item;
+                    }, $value);
+                }
+                $suggestion[$display_attribute_name] = $value;
             }
             $suggestions[$resource->getIdentifier()] = $suggestion;
         }
