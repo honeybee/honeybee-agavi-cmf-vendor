@@ -68,7 +68,7 @@ class HtmlHtmlLinkAttributeRenderer extends HtmlAttributeRenderer
         $default = '';
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
         if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
-            $default = 'jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup';
+            $default = 'jsb_Honeybee_Core/ui/HtmlLinkPopup';
         }
         return $this->getOption('htmllink_widget', $default);
     }

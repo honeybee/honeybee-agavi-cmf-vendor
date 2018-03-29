@@ -88,7 +88,7 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
         $default = '';
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
         if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
-            $default = 'jsb_ jsb_Honeybee_Core/ui/HtmlLinkList';
+            $default = 'jsb_Honeybee_Core/ui/HtmlLinkList';
         }
         return $this->getOption('widget', $default);
     }
