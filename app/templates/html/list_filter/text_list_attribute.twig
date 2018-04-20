@@ -1,6 +1,7 @@
 {%- set widget_classes = widget_classes|default('jsb_ jsb_Honeybee_Core/ui/list-filter/TextListListFilter') -%}
+{%- set allowed_values = allowed_values|default({}) -%}
 {%- set join_values = join_values|default(false) -%}
-{%- set input_allowed = input_allowed|default(join_values) -%}
+{%- set input_allowed = input_allowed|default(allowed_values|length == 0 ? true : join_values) -%}
 
 {%- extends 'html/list_filter/default_list_filter.twig' -%}
 

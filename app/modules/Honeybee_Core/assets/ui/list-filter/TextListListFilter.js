@@ -80,6 +80,11 @@ define([
             })
             .get();
 
+        selectize.define('override_function', function(options) {
+            for (functionName in options) {
+                this[functionName] = options[functionName];
+            }
+        });
         selectize_config = {
             options: this.allowed_options,
             items: current_values,
@@ -92,7 +97,8 @@ define([
                     title: this.options.remove_title,
                     className: this.options.remove_button_class
                 },
-                'restore_on_backspace': {}
+                'restore_on_backspace': {},
+                'override_function': {}
             },
             create: this.options.input_allowed,
             render: {
@@ -101,6 +107,9 @@ define([
                 }
             }
         };
+        if (!this.options.input_allowed) {
+            selectize_config.plugins.override_function['showInput'] = function() { this.hideInput(); };
+        }
         this.getControl().selectize(selectize_config);
 
         // replace controls with selectized input

@@ -37,7 +37,7 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
         // and ensure it's an array
         $values = $value instanceof SettingsInterface ? $value->toArray() : (array)$value;
         // get junction values
-        if ($this->getOption('join_values', false) && count($values) === 1) {
+        if ($this->getJoinValuesOption() && count($values) === 1) {
             $values = explode(static::OP_AND, $values[0]);
         }
         // remove empty values
@@ -84,9 +84,23 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
     }
 
     /**
+     * Return configured allowed-values. Include user inputs when nothing is configured.
      * @return array
      */
     protected function getAllowedValues()
+    {
+        $allowed_values = $this->getConfiguredAllowedValues();
+
+        if ($this->getInputAllowedOption($this->getJoinValuesOption())) {
+            $allowed_values = array_unique(
+                array_merge($allowed_values, $this->determineFilterValues())
+            );
+        }
+
+        return $allowed_values;
+    }
+
+    protected function getConfiguredAllowedValues()
     {
         $attribute = $this->list_filter->getAttribute();
 
@@ -99,12 +113,6 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
                 $allowed_values = $this->environment->getSettings()->get($allowed_values, []);
             }
             $allowed_values = (array)$allowed_values;
-        }
-
-        if ($this->getOption('input_allowed', $this->getOption('join_values', false))) {
-            $allowed_values = array_unique(
-                array_merge($allowed_values, $this->determineFilterValues())
-            );
         }
 
         return $allowed_values;
@@ -126,12 +134,27 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
     protected function getTextListSettings()
     {
         // join values changes logical operator (true = AND, false = OR)
-        $join_values = $this->getOption('join_values', false);
+        $join_values = $this->getJoinValuesOption();
 
         return [
             'join_values' => $join_values,
-            'input_allowed' => $this->getOption('input_allowed', $join_values)
+            'input_allowed' => $this->getInputAllowedOption($join_values)
         ];
+    }
+
+    /**
+     * Input is allowed when no specific allowed-values or no specific option is specified
+     */
+    protected function getInputAllowedOption($default = false)
+    {
+        $default = count($this->getConfiguredAllowedValues()) === 0 ? true : $default;
+
+        return $this->getOption('input_allowed', $default);
+    }
+
+    protected function getJoinValuesOption($default = false)
+    {
+        return $this->getOption('join_values', $default);
     }
 
     protected function getWidgetImplementor()

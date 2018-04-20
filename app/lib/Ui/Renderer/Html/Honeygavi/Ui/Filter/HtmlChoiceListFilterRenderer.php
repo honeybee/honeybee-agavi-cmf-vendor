@@ -37,6 +37,19 @@ class HtmlChoiceListFilterRenderer extends HtmlListFilterRenderer
      */
     protected function getAllowedValues()
     {
+        $allowed_values = $this->getConfiguredAllowedValues();
+
+        // add eventual empty option to allowed values
+        $empty_option_settings = $this->getEmptyOptionSettings();
+        if ($empty_option_settings['add_empty_option']) {
+            array_unshift($allowed_values, $empty_option_settings['empty_option_value']);
+        }
+
+        return $allowed_values;
+    }
+
+    protected function getConfiguredAllowedValues()
+    {
         $attribute = $this->list_filter->getAttribute();
 
         if ($attribute instanceof ChoiceAttribute) {
@@ -48,12 +61,6 @@ class HtmlChoiceListFilterRenderer extends HtmlListFilterRenderer
                 $allowed_values = $this->environment->getSettings()->get($allowed_values, []);
             }
             $allowed_values = (array)$allowed_values;
-        }
-
-        // add eventual empty option to allowed values
-        $empty_option_settings = $this->getEmptyOptionSettings();
-        if ($empty_option_settings['add_empty_option']) {
-            array_unshift($allowed_values, $empty_option_settings['empty_option_value']);
         }
 
         return $allowed_values;
