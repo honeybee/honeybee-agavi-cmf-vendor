@@ -22,6 +22,8 @@ use Honeybee\Infrastructure\DataAccess\Query\RangeCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SearchCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SortCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SpatialCriteria;
+use Honeygavi\Ui\Filter\FilterCriteria;
+use Honeygavi\Ui\Filter\ListFilterValue;
 use Trellis\Common\BaseObject;
 
 class ListConfig extends BaseObject implements ListConfigInterface
@@ -49,36 +51,27 @@ class ListConfig extends BaseObject implements ListConfigInterface
     {
         $filter_criteria = [];
         if ($this->hasFilter()) {
-            foreach ($this->getFilter() as $attribute_path => $value) {
-                if (is_array($value)) {
-                    $filter_criteria[] = $this->buildAttributeFilterFor($attribute_path, $value);
-                } elseif (!preg_match_all(
-                    '#(?<criteria>\w+)\((?<value>.+)\)(?:,|$)#U',
-                    $value,
-                    $matches,
-                    PREG_SET_ORDER
-                )) {
-                    $matches = explode(',', $value);
-                    foreach ($matches as $match) {
-                        $filter_criteria[] = $this->buildAttributeFilterFor($attribute_path, $match);
-                    }
+            foreach ($this->getFilter() as $attribute_path => $filter_value) {
+                if ($filter_value->getOperator() === ListFilterValue::OP_OR) {
+                    $filter_criteria[] = $this->buildAttributeFilterFor($attribute_path, $filter_value->getValues());
                 } else {
-                    foreach ($matches as $match) {
-                        switch ($match['criteria']) {
-                            case 'range':
-                                $filter_criteria[] = $this->buildRangeFilterFor($attribute_path, $match['value']);
-                                break;
-                            case 'spatial':
-                                $filter_criteria[] = $this->buildSpatialFilterFor($attribute_path, $match['value']);
-                                break;
-                            case 'match':
-                                $filter_criteria[] = $this->buildMatchFilterFor($attribute_path, $match['value']);
-                                break;
-                            default:
-                                // better fallback for regex gone wrong
-                                $filter_criteria = [];
-                                $filter_criteria[] = $this->buildAttributeFilterFor($attribute_path, $value);
-                                //throw new RuntimeError('Unsupported query criteria: ' . $match['criteria']);
+                    foreach ($filter_value as $criteria) {
+                        if ($criteria instanceof FilterCriteria) {
+                            switch ($criteria->getCriteria()) {
+                                case FilterCriteria::RANGE_CRITERIA:
+                                    $filter_criteria[] = $this->buildRangeFilterFor($attribute_path, $criteria->getValue());
+                                    break;
+                                case FilterCriteria::SPATIAL_CRITERIA:
+                                    $filter_criteria[] = $this->buildSpatialFilterFor($attribute_path, $criteria->getValue());
+                                    break;
+                                case FilterCriteria::MATCH_CRITERIA:
+                                    $filter_criteria[] = $this->buildMatchFilterFor($attribute_path, $criteria->getValue());
+                                    break;
+                                default:
+                                    throw new RuntimeError('Unsupported query criteria: ' . $match['criteria']);
+                            }
+                        } else {
+                            $filter_criteria[] = $this->buildAttributeFilterFor($attribute_path, $criteria);
                         }
                     }
                 }

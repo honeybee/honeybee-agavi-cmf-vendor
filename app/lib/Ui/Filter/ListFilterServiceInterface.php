@@ -10,7 +10,7 @@ interface ListFilterServiceInterface
 
     public function buildMapFor(
         SettingsInterface $defined_list_filters,
-        SettingsInterface $list_filter_values,
+        array $list_filter_values,
         $resource_type_variant_prefix = ''
     );
 }

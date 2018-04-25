@@ -51,7 +51,7 @@ class ListFilterService implements ListFilterServiceInterface
 
     public function buildMapFor(
         SettingsInterface $defined_list_filters,
-        SettingsInterface $list_filter_values,
+        array $list_filter_values,
         $resource_type_variant_prefix = ''
     ) {
         $list_filter_map = new ListFilterMap;
@@ -75,13 +75,13 @@ class ListFilterService implements ListFilterServiceInterface
     public function loadFilterDefinitions(
         ListFilterMap $list_filter_map,
         SettingsInterface $defined_list_filters,
-        SettingsInterface $list_filter_values,
+        array $list_filter_values,
         $default_resource_type_variant_prefix = ''
     ) {
         foreach ($defined_list_filters as $filter_name => $settings) {
             $settings = $settings ?? new Settings;
             $filter_implementor = $settings->get('implementor', static::DEFAULT_FILTER_IMPLEMENTOR);
-            $filter_value = $list_filter_values->get($filter_name);
+            $filter_value = $list_filter_values[$filter_name] ?? new ListFilterValue;
             $filter_settings = $settings->toArray() + [ 'resource_type_variant_prefix' => $default_resource_type_variant_prefix ];
 
             $filter_attribute = $this->resolveAttributeFor(
@@ -105,11 +105,11 @@ class ListFilterService implements ListFilterServiceInterface
     public function loadUndefinedFilters(
         ListFilterMap $list_filter_map,
         SettingsInterface $defined_list_filters,
-        SettingsInterface $list_filter_values,
+        array $list_filter_values,
         $resource_type_variant_prefix = ''
     ) {
         $undefined_filters = array_filter(
-            $list_filter_values->toArray(),
+            $list_filter_values,
             function ($filter_name) use ($defined_list_filters) {
                 return $defined_list_filters->has($filter_name) === false;
             },

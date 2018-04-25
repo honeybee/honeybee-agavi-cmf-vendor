@@ -3,10 +3,13 @@
 namespace Honeygavi\Ui\Renderer\Html\Honeygavi\Ui\Filter;
 
 use Honeybee\Infrastructure\Config\SettingsInterface;
+use Honeygavi\Ui\Filter\ListFilterValue;
 use Trellis\Runtime\Attribute\TextList\TextListAttribute;
 
 class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
 {
+    const RENDER_MULTIPLE_VALUE = true;
+
     protected function getDefaultTemplateIdentifier()
     {
         return $this->output_format->getName() . '/list_filter/text_list_attribute.twig';
@@ -17,6 +20,7 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
         $params = parent::getTemplateParameters();
 
         $params['filter_value_as_array'] = $this->determineFilterValues();
+        $params['join_delimiter'] = self::DELIMITER_AND;
         $params = $this->getTextListSettings() + $params;
         $params['allowed_values'] = $this->getAllowedValues();
         $params['placeholder'] = $this->lookupTranslation('placeholder');
@@ -24,22 +28,11 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
         return $params;
     }
 
-    protected function determineFilterValue()
-    {
-        return join(static::OP_AND, $this->determineFilterValues());
-    }
-
     protected function determineFilterValues()
     {
         // get value according to options
         $current_value = $this->list_filter->getCurrentValue();
-        $value = $current_value ?? $this->getOption('default_value');
-        // and ensure it's an array
-        $values = $value instanceof SettingsInterface ? $value->toArray() : (array)$value;
-        // get junction values
-        if ($this->getJoinValuesOption() && count($values) === 1) {
-            $values = explode(static::OP_AND, $values[0]);
-        }
+        $values = $current_value->isEmpty() ? (array)$this->getOption('default_values') : $current_value->getValues();
         // remove empty values
         $values = array_filter($values, function ($value) {
             return !empty(trim($value));
@@ -77,7 +70,7 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
             $value_translations[] = $translations['value_'.$value] ?? $value;
         }
         if (!empty($value_translations)) {
-            $translations['filter_value_translation'] = join(static::OP_AND . ' ', $value_translations);
+            $translations['filter_value_translation'] = join(self::DELIMITER_AND . ' ', $value_translations);
         }
 
         return $translations;
@@ -154,6 +147,15 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
 
     protected function getJoinValuesOption($default = false)
     {
+        $operator = $this->determineFilterOperator();
+        switch ($operator) {
+            case ListFilterValue::OP_OR:
+            case ListFilterValue::OP_AND:
+                $default = $operator;
+                break;
+            default:
+                break;
+        }
         return $this->getOption('join_values', $default);
     }
 

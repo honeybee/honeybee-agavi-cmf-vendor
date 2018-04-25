@@ -6,16 +6,15 @@ use Honeybee\Common\Error\RuntimeError;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeygavi\Ui\Filter\ListFilter;
 use Honeygavi\Ui\Filter\ListFilterInterface;
+use Honeygavi\Ui\Filter\ListFilterValue;
 use Honeygavi\Ui\Renderer\Renderer;
 use Trellis\Runtime\Attribute\AttributeInterface;
 
 class HtmlListFilterRenderer extends Renderer
 {
     const STATIC_TRANSLATION_PATH = 'list_filters';
-
-    const EMPTY_FILTER_VALUE = '__empty';
-
-    const OP_AND = ','; // see ListConfig
+    const EMPTY_FILTER_VALUE = ListFilterValue::EMPTY_FILTER_VALUE;
+    const DELIMITER_AND = ListFilterValue::DELIMITER_AND;
 
     protected $list_filter;
     protected $attribute;
@@ -30,6 +29,7 @@ class HtmlListFilterRenderer extends Renderer
     {
         parent::tearDown();
         $this->list_filter = null;
+        $this->attribute = null;
     }
 
     protected function validate()
@@ -72,6 +72,7 @@ class HtmlListFilterRenderer extends Renderer
         }
         $params['filter_value'] = $this->determineFilterValue();
         $params['filter_name'] = $this->list_filter->getName();
+        $params['empty_filter_value'] = $this->getOption('empty_filter_value', static::EMPTY_FILTER_VALUE);
         $params['config_key'] = $this->getFilterConfigKey();
         $params['html_attributes'] = $this->getOption('html_attributes', []);
         // render inner form, when form-parameters are passed (e.g to support no-js submit of filter)
@@ -94,14 +95,17 @@ class HtmlListFilterRenderer extends Renderer
         return $params;
     }
 
+    protected function determineFilterOperator()
+    {
+        return $this->list_filter->getCurrentValue()->getOperator();
+    }
+
     protected function determineFilterValue()
     {
         // get value according to options
         $current_value = $this->list_filter->getCurrentValue();
-        $value = $current_value ?? $this->getOption('default_value');
-        // and ensure it's a string
-        $value = $value instanceof SettingsInterface ? $value->toArray() : (array)$value;
-        $value = join(static::OP_AND, $value);
+        $default_value = $this->getOption('default_values', [])[0] ?? null;
+        $value = $current_value->isEmpty() ? $default_value : $current_value->last();
 
         return (string)$value;
     }

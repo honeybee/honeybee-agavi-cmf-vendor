@@ -49,7 +49,7 @@ class ListConfigValidator extends AgaviValidator
             'min' => 1
         ),
         'filter' => array(
-            'class' => ArrayValidator::CLASS
+            'class' => ListFilterArrayValidator::CLASS
         ),
         'sort' => [
             'class' => SortSyntaxValidator::CLASS,

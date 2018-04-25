@@ -19,7 +19,7 @@ class ListFilter implements ListFilterInterface
 
     public function __construct(
         $name,
-        $current_value = null,
+        FilterValueInterface $current_value,
         Attribute $attribute = null,
         $settings = []
     ) {
@@ -60,7 +60,7 @@ class ListFilter implements ListFilterInterface
         return [
             'name' => $this->getName(),
             'attribute' => $this->getAttribute(),
-            'current_value' => $this->getCurrentValue(),
+            'current_value' => $this->getCurrentValue()->toArray(),
             'settings' => $this->settings->toArray()
         ];
     }

@@ -44,7 +44,7 @@ class HtmlSearchActivityRenderer extends HtmlActivityRenderer
         if ($this->getOption('enable_list_filters', true)) {
             $list_filter_map = $this->list_filter_service->buildMapFor(
                 $this->getOption('defined_list_filters') ?? new Settings,
-                $this->getOption('list_filters_values') ?? new Settings,
+                (array) $this->getOption('list_filters_values'),
                 $this->getPayload('resource')->getType()->getVariantPrefix()
             );
 

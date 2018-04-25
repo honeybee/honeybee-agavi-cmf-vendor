@@ -12,7 +12,7 @@
             <div class="input-text-list__box">
                 <div class="input-text-list__input">
                 {% if join_values %}
-                    <input type="text" name="filter[{{ filter_name }}]" value="{{ filter_value }}" id="list_filter_{{ config_key }}_control" class="hb-list-filter__main-control" {{ not input_allowed ? 'disabled' }} {{ pattern|default('') }} placeholder="{{ placeholder|default('') }}">
+                    <input type="text" name="filter[{{ filter_name }}]" value="{{ filter_value_as_array|join(join_delimiter) }}" id="list_filter_{{ config_key }}_control" class="hb-list-filter__main-control" {{ not input_allowed ? 'disabled' }} {{ pattern|default('') }} placeholder="{{ placeholder|default('') }}">
                 {% else %}
                     <input type="text" name="filter[{{ filter_name }}][]" value="" id="list_filter_{{ config_key }}_control" class="hb-list-filter__add-value" {{ not input_allowed ? 'disabled'}} {{ pattern|default('') }}  placeholder="{{ placeholder|default('') }}">
                 {% endif %}

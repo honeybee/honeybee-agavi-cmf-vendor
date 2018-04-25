@@ -7,8 +7,10 @@ use Honeybee\Common\Util\StringToolkit;
 use Honeybee\Infrastructure\Config\ConfigInterface;
 use Honeygavi\Ui\Filter\ListFilterInterface;
 use Honeygavi\Ui\OutputFormat\OutputFormatInterface;
+use Honeygavi\Ui\Renderer\Html\Honeygavi\Ui\Filter\HtmlTextListListFilterRenderer;
 use Psr\Log\LoggerInterface;
 use Trellis\Runtime\Attribute\Attribute;
+use Trellis\Runtime\Attribute\ListAttribute;
 
 class RendererLocator implements RendererLocatorInterface
 {
@@ -16,6 +18,8 @@ class RendererLocator implements RendererLocatorInterface
     const DEFAULT_LOOKUP_NAMESPACE = 'Honeygavi\\Ui\\Renderer';
     const DEFAULT_LOOKUP_MODIFIER = '';
     const DEFAULT_LOOKUP_SUFFIX = 'Renderer';
+
+    const DEFAULT_LIST_FILTER_RENDERER_FOR_MULTIPLE_VALUE = HtmlTextListListFilterRenderer::class;
 
     protected $logger;
     protected $output_format;
@@ -141,6 +145,8 @@ class RendererLocator implements RendererLocatorInterface
                     )
                 );
             }
+
+            $implementor = $this->getCompatibleImplementor($subject, $implementor);
         }
 
         if ($logging_enabled) {
@@ -223,5 +229,35 @@ class RendererLocator implements RendererLocatorInterface
         $type_parts[] = StringToolkit::asStudlyCaps($this->output_format_name) . $type_modifier . $type_name;
 
         return implode('\\', $type_parts);
+    }
+
+    protected function getCompatibleImplementor($subject, $implementor, ConfigInterface $renderer_config = null)
+    {
+        $logging_enabled = false;
+        if (!empty($renderer_config)) {
+            $logging_enabled = $renderer_config->get('logging_enabled', false);
+        }
+
+        if ($subject instanceof ListFilterInterface) {
+            $renders_multiple = defined("$implementor::RENDER_MULTIPLE_VALUE") && $implementor::RENDER_MULTIPLE_VALUE;
+            $has_multiple_value = $subject->getCurrentValue()->isMultiple();
+            $has_list_attribute = $subject->getAttribute() instanceof ListAttribute;
+
+            if (($has_multiple_value || $has_list_attribute) && $renders_multiple === false) {
+                if ($logging_enabled) {
+                    $this->logger->debug(
+                        sprintf(
+                            '[%s] [OutputFormat=%s] [Subject=%s] Renderer "%s" is unable to render multiple values.',
+                            __METHOD__,
+                            $this->output_format_name,
+                            is_object($subject) ? get_class($subject) : gettype($subject),
+                            $implementor
+                        )
+                    );
+                }
+                $implementor = static::DEFAULT_LIST_FILTER_RENDERER_FOR_MULTIPLE_VALUE;
+            }
+        }
+        return $implementor;
     }
 }
