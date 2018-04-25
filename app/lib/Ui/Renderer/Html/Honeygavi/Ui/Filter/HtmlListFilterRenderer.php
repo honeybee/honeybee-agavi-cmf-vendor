@@ -145,9 +145,9 @@ class HtmlListFilterRenderer extends Renderer
             $i18n['filter_value_translation'],
             $i18n['quick_label']
         );
-        $i18n['quick_label_title'] = $this->lookupTranslation('quick_label_title', $params);
+        $i18n['quick_label_title'] = $this->lookupTranslation('quick_label_title', $params, '');
         $i18n['quick_clear'] = $this->lookupTranslation('quick_clear', $params, 'x');
-        $i18n['quick_clear_title'] = $this->lookupTranslation('quick_clear_title', $params);
+        $i18n['quick_clear_title'] = $this->lookupTranslation('quick_clear_title', $params, '');
         // filter detail
         $i18n['filter_label'] = $this->lookupTranslation(
             'filter_label',
