@@ -147,14 +147,14 @@ class HtmlTextListListFilterRenderer extends HtmlListFilterRenderer
 
     protected function getJoinValuesOption($default = false)
     {
-        $operator = $this->determineFilterOperator();
-        switch ($operator) {
+        switch ($this->determineFilterOperator()) {
             case ListFilterValue::OP_OR:
+                $default = false;
+                break;
             case ListFilterValue::OP_AND:
-                $default = $operator;
+                $default = true;
                 break;
             default:
-                break;
         }
         return $this->getOption('join_values', $default);
     }
