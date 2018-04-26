@@ -135,9 +135,10 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
             // @todo Should default-activity rels be used just when a replacement default content/label is not provided?
             $default_rels = $this->getOption('default_activity_rels', $default_activity->getRels());
         }
-        // don't render primary activity in (more)activities list when no dropdown-label was given and "as_list" is true
-        // thus, when a dropdown_label was specified the (more) activities are ALL activities
-        if (!$this->getOption('dropdown_label', false) && !$this->getOption('as_list')) {
+        // the default activity is used as label (and thus removed from the more-activities):
+        // - when rendering "as_splitbutton" (note: label is an activity)
+        // - when rendering "as_dropdown" and there is no valid label  (note: label is a string)
+        if (empty($this->getOption('dropdown_label')) && !$this->getOption('as_list')) {
             unset($rendered_activities[$default_name]);
         }
         $params = [
