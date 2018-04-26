@@ -19,6 +19,7 @@ use Honeybee\Infrastructure\DataAccess\Query\SearchCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SortCriteria;
 use Honeybee\Infrastructure\DataAccess\Query\SpatialCriteria;
 use Honeygavi\Ui\ListConfig;
+use Honeygavi\Ui\Filter\ListFilterValue;
 
 return [
     // no arguments
@@ -53,7 +54,7 @@ return [
     [
         'list_config' => new ListConfig([
             'search' => 'test string',
-            'filter' => [ 'test_filter' => 'test_value' ],
+            'filter' => [ 'test_filter' => new ListFilterValue('test_value') ],
             'sort' => 'created_at:desc',
             'limit' => 20,
             'offset' => 40
@@ -71,8 +72,8 @@ return [
         'list_config' => new ListConfig([
             'search' => 'test string',
             'filter' => [
-                'test_filter' => 'test_value',
-                'another_filter' => '!another value,yes sir'
+                'test_filter' => new ListFilterValue('test_value'),
+                'another_filter' => new ListFilterValue('!another value,yes sir')
             ],
             'sort' => 'created_at:desc',
             'limit' => 20,
@@ -95,8 +96,8 @@ return [
         'list_config' => new ListConfig([
             'search' => 'test string',
             'filter' => [
-                'range' => 'range(gt:2016-07-05,lte:2016-07-07)',
-                'spatial' => 'spatial(in:circle([12.1,12.2],1mile))'
+                'range' => new ListFilterValue('range(gt:2016-07-05,lte:2016-07-07)'),
+                'spatial' => new ListFilterValue('spatial(in:circle([12.1,12.2],1mile))')
             ],
             'sort' => 'created_at:desc',
             'limit' => 20,
@@ -125,9 +126,9 @@ return [
         'list_config' => new ListConfig([
             'search' => 'test string',
             'filter' => [
-                'range' => 'range(lt:2016-07-08,gte:2016-07-05),range(!eq:2016-07-06)',
-                'spatial' => 'spatial(in:circle([12.1,12.2],2.5km)),spatial(!in:box([1,2],[2,1]))',
-                'spatial_alt' => 'spatial(in:polygon([12.1,2.2],[1,2],[2,1])),spatial(!in:annulus([1,2.1],4,5))'
+                'range' => new ListFilterValue('range(lt:2016-07-08,gte:2016-07-05),range(!eq:2016-07-06)'),
+                'spatial' => new ListFilterValue('spatial(in:circle([12.1,12.2],2.5km)),spatial(!in:box([1,2],[2,1]))'),
+                'spatial_alt' => new ListFilterValue('spatial(in:polygon([12.1,2.2],[1,2],[2,1])),spatial(!in:annulus([1,2.1],4,5))')
             ],
             'sort' => 'created_at:desc,modified_at:asc',
             'limit' => 20,
