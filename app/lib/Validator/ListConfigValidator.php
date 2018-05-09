@@ -30,19 +30,22 @@ class ListConfigValidator extends AgaviValidator
             'class' => AgaviNumberValidator::CLASS,
             'min' => 0,
             'max' => 2147483647,
-            'type' => 'integer'
+            'type' => 'integer',
+            'cast_to' => 'integer'
         ),
         'limit' => array(
             'class' => AgaviNumberValidator::CLASS,
             'min' => 1,
             'max' => 2147483647,
-            'type' => 'integer'
+            'type' => 'integer',
+            'cast_to' => 'integer'
         ),
         'page' => array(
             'class' => AgaviNumberValidator::CLASS,
             'min' => 1,
             'max' => 2147483647,
-            'type' => 'integer'
+            'type' => 'integer',
+            'cast_to' => 'integer'
         ),
         'search' => array(
             'class' => AgaviStringValidator::CLASS,
@@ -125,6 +128,11 @@ class ListConfigValidator extends AgaviValidator
     protected function createChildValidator($argument_name, array $validator_definition)
     {
         $validator = new $validator_definition['class'];
+
+        if (!isset($validator_definition['export'])) {
+            $validator_definition['export'] = $argument_name;
+        }
+
         $validator_definition['required'] = isset($validator_definition['required'])
             ? $validator_definition['required']
             : false;
