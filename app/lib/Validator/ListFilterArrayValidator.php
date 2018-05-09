@@ -2,6 +2,7 @@
 
 namespace Honeygavi\Validator;
 
+use Honeygavi\Ui\Filter\FilterValueInterface;
 use Honeygavi\Ui\Filter\ListFilterValue;
 
 class ListFilterArrayValidator extends ArrayValidator
@@ -11,7 +12,7 @@ class ListFilterArrayValidator extends ArrayValidator
         $value_implementor = $this->getParameter('value_implementor', ListFilterValue::class);
 
         $value = array_map(function ($val) use ($value_implementor) {
-            return new $value_implementor($val);
+            return $val instanceof FilterValueInterface ? $val : new $value_implementor($val);
         }, $value);
 
         parent::export($value, $argument, $result);
