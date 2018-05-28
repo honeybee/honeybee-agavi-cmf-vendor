@@ -15,7 +15,7 @@
         <!-- default http headers that may be included in all output types -->
         <ae:parameter name="default_http_headers">
             <ae:parameter name="X-Content-Type-Options">nosniff</ae:parameter>
-            <ae:parameter name="X-Frame-Options">SAMEORIGIN</ae:parameter>
+            <!-- <ae:parameter name="X-Frame-Options">SAMEORIGIN</ae:parameter> -->
             <!-- <ae:parameter name="Access-Control-Allow-Origin">*</ae:parameter> -->
             <!-- <ae:parameter name="Access-Control-Allow-Credentials">true</ae:parameter> -->
             <!-- <ae:parameter name="Access-Control-Allow-Methods">GET,POST,DELETE,PUT,OPTIONS</ae:parameter> -->
