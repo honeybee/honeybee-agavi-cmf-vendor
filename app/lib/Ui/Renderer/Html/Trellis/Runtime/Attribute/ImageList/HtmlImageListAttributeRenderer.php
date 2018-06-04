@@ -9,13 +9,9 @@ class HtmlImageListAttributeRenderer extends HtmlAttributeRenderer
 {
     protected function getDefaultTemplateIdentifier()
     {
-        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
-
-        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
+        if ($this->hasInputViewScope()) {
             return $this->output_format->getName() . '/attribute/image-list/as_tabs.twig';
         }
-
         return $this->output_format->getName() . '/attribute/image-list/as_itemlist_item_cell.twig';
     }
 

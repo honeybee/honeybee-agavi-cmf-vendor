@@ -256,6 +256,14 @@ abstract class AttributeRenderer extends Renderer
         return (bool)($this->getOption('required', $this->attribute->getOption('mandatory', false)));
     }
 
+    protected function hasInputViewScope()
+    {
+        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
+        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
+
+        return StringToolkit::endsWith($view_scope, $input_suffixes);
+    }
+
     protected function getInputViewTemplateNameSuffixes($output_format_name = '')
     {
         $input_view_template_name_suffixes = (array)$this->getOption(

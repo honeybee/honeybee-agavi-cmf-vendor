@@ -10,13 +10,9 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
 {
     protected function getDefaultTemplateIdentifier()
     {
-        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
-
-        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
+        if ($this->hasInputViewScope()) {
             return $this->output_format->getName() . '/attribute/html-link-list/as_input.twig';
         }
-
         return $this->output_format->getName() . '/attribute/html-link-list/as_itemlist_item_cell.twig';
     }
 
@@ -79,10 +75,7 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
     protected function getHtmlLinkWidgetImplementor()
     {
         $default = '';
-        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
-
-        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
+        if ($this->hasInputViewScope()) {
             $default = 'jsb_Honeybee_Core/ui/HtmlLinkPopup';
         }
         return $this->getOption('htmllink_widget', $default);
@@ -91,10 +84,7 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
     protected function getWidgetImplementor()
     {
         $default = '';
-        $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
-
-        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
+        if ($this->hasInputViewScope()) {
             $default = 'jsb_Honeybee_Core/ui/HtmlLinkList';
         }
         return $this->getOption('widget', $default);
