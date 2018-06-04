@@ -26,7 +26,10 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
 
         $params['empty_htmllink'] = new HtmlLink([]);
 
-        $params['htmllink_widget'] = $this->getHtmlLinkWidgetImplementor();
+        $params['htmllink_widget'] = $this->getWidgetCss(
+            $this->getHtmlLinkWidgetImplementor(),
+            $params['is_embedded']
+        );
         $params['htmllink_widget_options'] = array_merge(
             [
                 'field_name' => $params['field_name']
@@ -77,8 +80,10 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
     {
         $default = '';
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
-            $default = 'jsb_ jsb_Honeybee_Core/ui/HtmlLinkPopup';
+        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
+
+        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
+            $default = 'jsb_Honeybee_Core/ui/HtmlLinkPopup';
         }
         return $this->getOption('htmllink_widget', $default);
     }
@@ -87,7 +92,9 @@ class HtmlHtmlLinkListAttributeRenderer extends HtmlAttributeRenderer
     {
         $default = '';
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
+        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
+
+        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
             $default = 'jsb_Honeybee_Core/ui/HtmlLinkList';
         }
         return $this->getOption('widget', $default);

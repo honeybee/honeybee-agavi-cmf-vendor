@@ -24,8 +24,10 @@ class HtmlHtmlLinkAttributeRenderer extends HtmlAttributeRenderer
     {
         $params = parent::getTemplateParameters();
 
-        $params['htmllink_widget'] = $this->getHtmlLinkWidgetImplementor();
-
+        $params['htmllink_widget'] = $this->getWidgetCss(
+            $this->getHtmlLinkWidgetImplementor(),
+            $params['is_embedded']
+        );
         $params['htmllink_widget_options'] = array_merge(
             [
                 'field_name' => $params['field_name']
@@ -67,7 +69,9 @@ class HtmlHtmlLinkAttributeRenderer extends HtmlAttributeRenderer
     {
         $default = '';
         $view_scope = $this->getOption('view_scope', 'missing_view_scope.collection');
-        if (StringToolkit::endsWith($view_scope, 'modify') || StringToolkit::endsWith($view_scope, 'create')) {
+        $input_suffixes = $this->getInputViewTemplateNameSuffixes($this->output_format->getName());
+
+        if (StringToolkit::endsWith($view_scope, $input_suffixes)) {
             $default = 'jsb_Honeybee_Core/ui/HtmlLinkPopup';
         }
         return $this->getOption('htmllink_widget', $default);

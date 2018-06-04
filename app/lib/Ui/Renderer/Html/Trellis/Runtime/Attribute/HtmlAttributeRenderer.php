@@ -34,7 +34,7 @@ class HtmlAttributeRenderer extends AttributeRenderer
             (string)$this->getOption('css', '')
         );
         if ($this->isWidgetEnabled()) {
-            $css .= sprintf(' %s %s', $params['is_embedded'] ? ' jsb__' : ' jsb_', $this->getWidgetImplementor());
+            $css .= $this->getWidgetCss($this->getWidgetImplementor(), $params['is_embedded']);
         }
 
         $params['css'] = $css;
@@ -91,6 +91,13 @@ class HtmlAttributeRenderer extends AttributeRenderer
     protected function isDisabled()
     {
         return (bool)($this->getOption('disabled', false));
+    }
+
+    protected function getWidgetCss($widget_implementor, $is_embedded)
+    {
+        // prefix 'jsb_' triggers widget loading. prefix 'jsb__' prevents loading of nested widgets
+        // (@see Honeybee_Core/assets/ui/EmbeddedEntityList.js)
+        return sprintf('%s %s', $is_embedded ? ' jsb__' : ' jsb_', $widget_implementor);
     }
 
     protected function getWidgetImplementor()
