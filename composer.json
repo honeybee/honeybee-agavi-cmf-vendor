@@ -51,7 +51,7 @@
     "require": {
         "php": ">=7.0.0",
         "lib-libxml": "*",
-        "honeybee/agavi": "1.0.11",
+        "honeybee/agavi": "1.0.12",
         "honeybee/honeybee": "^0.2.13",
         "michelf/php-markdown": "^1.7",
         "monolog/monolog": "^1.22",
