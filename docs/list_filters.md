@@ -104,3 +104,21 @@ Although all the filters are applied with *AND logic*, a single filter can choos
 * for *OR* filtering, the values are kept in an array:
 ```...&filter[role][]=admin&filter[role][]=editor&filter[role][]=user```
 In this case the default CriteriaQueryTranslation takes care of using the proper filter (*terms* filter with Elasticearch)
+
+## Tips
+
+* Translation of values is supported mostly everywhere. Just use the **config_key** + *.value_* + **value**.
+The translation for the quick-control label usually provides a translation containing the *{VALUE}* placeholder, so that a different value translation can be placed there dynamically when needed (e.g. inside javascript widgets).
+```
+<ae:parameter name="workflow_state.quick_label">Status: {VALUE}</ae:parameter>
+<ae:parameter name="workflow_state.value_edit">In Bearbeitung</ae:parameter>
+<ae:parameter name="workflow_state.value_review">Prüfung</ae:parameter>
+<ae:parameter name="workflow_state.value_published">Veröffentlicht</ae:parameter>
+<ae:parameter name="workflow_state.value_archived">Archiviert</ae:parameter>
+<ae:parameter name="workflow_state.value_deleted">Gelöscht</ae:parameter>
+```
+
+
+* beware the translation domain: by default filters are translated in the *current resource* translation domain (according to the **view_scope**). The filter control is an activity map so translations goes in the *".activity"* domain, usually with the translation key composed by the prefix *list_filter_* + **config_key** (e.g. *list_filter_role* in *honeybee.system_account.user.activity*). All the other translations go instead in the *".list_filters"* domain.
+
+* A custom **translation_domain** setting can be provided to the renderer (e.g in order to have common translations among views).
