@@ -389,6 +389,30 @@ class AggregateRootTypeCommandValidatorTest extends HoneybeeAgaviUnitTestCase
         );
     }
 
+    public function testExecuteWithEmbeddedTemplatePayload()
+    {
+        $result = $this->createValidator()->execute(
+            $request_data = new AgaviWebRequestDataHolder([
+                AgaviWebRequestDataHolder::SOURCE_PARAMETERS => [
+                    'create_author' => [
+                        'firstname' => 'Mr',
+                        'lastname' => 'HasNoType',
+                        'email' => 'Iaminitforthetech@hodlhodl.kom',
+                        'books' => [ [
+                            '@type' => 'book',
+                            'identifier' => 'a7cec777-d932-4bbd-8156-261138d3fe39',
+                            'referenced_identifier' => '',
+                            'title' => 'book wat?!', // shouldn't be required here, as these infos are added during the projection processing
+                            '__template' => true // when present, this should lead to the validator ignoring this whole book item
+                        ] ]
+                    ]
+                ]
+            ])
+        );
+        $this->assertEquals(AggregateRootTypeCommandValidator::SUCCESS, $result);
+        $this->assertCount(0, $request_data->getParameter('__command')->getEmbeddedEntityCommands());
+    }
+
     public function testExecuteWithExcessEmbeddedEntities()
     {
         $validator = $this->createValidator();
