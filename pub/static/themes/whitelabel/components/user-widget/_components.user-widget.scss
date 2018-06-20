@@ -81,6 +81,13 @@ $user-widget-avatar-size: $base-spacing*3 !default;
     // }
 }
 
+%user-widget--no_avatar,
+.user-widget--no_avatar {
+    .user-dropdown__toggle {
+        padding-left: $base-spacing;
+        .user-widget__label { margin: auto; }
+    }
+}
 
 %user-widget--palm-minimized,
 .user-widget--palm-minimized {

@@ -1,7 +1,7 @@
 <?php
 
-use Honeygavi\App\Base\View;
 use Honeybee\Common\Error\RuntimeError;
+use Honeygavi\App\Base\View;
 
 class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
 {
@@ -157,13 +157,15 @@ class Honeybee_SystemAccount_User_Login_LoginSuccessView extends View
     {
         if ($this->user->hasAttribute('avatar')) {
             $user_avatar_url = $this->user->getAttribute('avatar');
-        } else {
+        } elseif (AgaviConfig::get('ui.enable_gravatar', false)) {
             // generate Gravatar url
             $gravatar_template = AgaviConfig::get('core.gravatar_template', self::GRAVATAR_TEMPLATE);
             $user_email = trim($this->user->getAttribute('email'));
             $user_email_md5 = md5(strtolower($user_email));
             $user_avatar_url = str_replace('{MD5_HASH}', $user_email_md5, $gravatar_template);
             // @todo add additional gravatar options as 'size' and 'default'
+        } else {
+            $user_avatar_url = '';
         }
 
         return $user_avatar_url;
