@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "49a47330b8edb9180940931757625aa0",
+    "content-hash": "bfb698e025b747435e02a07d56600398",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -732,16 +732,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.2.13",
+            "version": "0.2.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "29cab63a125d686420ff2ea370ba40978775575a"
+                "reference": "a58db841a9eb1777b5e84b60d21f012e9b794162"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/29cab63a125d686420ff2ea370ba40978775575a",
-                "reference": "29cab63a125d686420ff2ea370ba40978775575a",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/a58db841a9eb1777b5e84b60d21f012e9b794162",
+                "reference": "a58db841a9eb1777b5e84b60d21f012e9b794162",
                 "shasum": ""
             },
             "require": {
@@ -821,7 +821,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2018-04-23T10:25:56+00:00"
+            "time": "2018-07-02T10:55:08+00:00"
         },
         {
             "name": "honeybee/trellis",
