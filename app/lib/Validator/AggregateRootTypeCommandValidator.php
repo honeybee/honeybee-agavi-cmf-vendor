@@ -125,7 +125,7 @@ class AggregateRootTypeCommandValidator extends AgaviValidator
                     $value_path = $current_prefix . '.' . $position;
                     if ($attribute instanceof EmbeddedEntityListAttribute) {
                         // if a form was submitted with js deactivated, we need to filter out the embed templates
-                        if (array_key_exists('__template', $embed_payload)) {
+                        if (empty($embed_payload) || array_key_exists('__template', $embed_payload)) {
                             continue;
                         }
 
