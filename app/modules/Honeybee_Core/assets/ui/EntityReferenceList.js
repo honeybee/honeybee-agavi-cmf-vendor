@@ -25,12 +25,16 @@ define([
     ReferenceEntityList.prototype.loadSuggestions = function(query, callback) {
         if (!query.length) return callback();
 
+        this.$select[0].selectize.$control.addClass('loading');
         $.ajax({
             url: this.buildSuggestUrl(query, this.getActiveReferenceType()),
             type: 'GET',
             dataType: 'json',
             error: function() { callback(); },
-            success: function(res) { callback(res.data); }
+            success: function(res) { callback(res.data); },
+            complete: function () {
+                this.$select[0].selectize.$control.removeClass('loading');
+            }.bind(this)
         });
     };
 

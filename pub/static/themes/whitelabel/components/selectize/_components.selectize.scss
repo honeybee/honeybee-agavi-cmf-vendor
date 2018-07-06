@@ -7,6 +7,22 @@ $input-padding: 10px !default;
 $selectize-spacing: 3px;
 
 .selectize-control {
+
+    position:relative;
+
+    &.loading {
+        @include hb-icon-pseudo-el(
+            (
+                icon-name: hour-glass,
+                hide-content: false,
+            )
+        ) {
+            position: absolute;
+            right: 0;
+            padding: $small-spacing;
+        }
+    }
+
     .selectize-input {
         @include input-textual-default();
         padding: 0;
