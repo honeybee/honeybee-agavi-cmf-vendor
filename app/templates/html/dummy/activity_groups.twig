@@ -10,7 +10,7 @@
         {% endif -%}
 
             <div class="layout__item lap-and-up-1/{{ columns_number }} palm-1/1">
-                <h6>{{ group_name|replace('-',' ') }}</h6>
+                <h6>{{ group_name|replace({'-':' '}) }}</h6>
                 {{ activity_group|raw }}
             </div>
 
