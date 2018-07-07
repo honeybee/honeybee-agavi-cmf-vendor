@@ -48,6 +48,10 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
             $params['css'] .= ' hb-entity-list__inline-mode';
         }
 
+        if (!$this->hasValidAttributeValue()) {
+            $params['css'] .= ' invalid';
+        }
+
         return $params;
     }
 
@@ -200,6 +204,7 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
     {
         $embedded_entity_list = clone $this->getPayload('resource')->getValue($attribute_name);
 
+        // if inline_mode is not configured then check for provided types and fill the types missing.
         if ($this->attribute->getOption('inline_mode', false)) {
             $served_types = [];
             foreach ($embedded_entity_list as $entity) {
@@ -225,10 +230,6 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
         // check options against actual value
         $items_number = count($list_attribute);
         $min_count = $this->getMinCount($is_required);
-
-        if (is_numeric($min_count) && $items_number < $min_count) {
-            $is_required = true;
-        }
 
         return $is_required;
     }
@@ -278,6 +279,15 @@ class HtmlEmbeddedEntityListAttributeRenderer extends HtmlAttributeRenderer
     protected function getMaxCount()
     {
         return $this->getOption('max_count', $this->attribute->getOption(ListAttribute::OPTION_MAX_COUNT));
+    }
+
+    protected function hasValidAttributeValue()
+    {
+        $value = $this->determineAttributeValue($this->attribute->getName());
+        $resource = $this->getPayload('resource');
+        $validation_result = $this->attribute->getValidator()->validate($value, $resource);
+
+        return $validation_result->getViolatedRules()->isEmpty();
     }
 
     protected function isAddItemAllowed()

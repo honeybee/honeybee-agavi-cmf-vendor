@@ -3,7 +3,8 @@ define([
     "jsb",
     "selectize",
     "jquery",
-    "lodash"
+    "lodash",
+    "Honeybee_Core/ui/SelectizePlugins"
 ], function(EmbeddedEntityList, jsb, selectize, $, _) {
 
     var default_options = {
@@ -109,6 +110,9 @@ define([
 
     ReferenceEntityList.prototype.appendEntityPlaceholder = function(entity_identifer) {
         var $placeholder = this.cloneItem(this.templates[this.getActiveReferenceType()], true);
+        if (!$placeholder) {
+            throw Error('Unable to clone item.');
+        }
         $placeholder.addClass('hb-embed-item-placeholder');
         $placeholder.attr('data-placeholder-identifier', entity_identifer);
         $placeholder.data('placeholder-identifier', entity_identifer);
@@ -226,6 +230,8 @@ define([
     ReferenceEntityList.prototype.buildSelectForInitalValues = function() {
         var $select = $("<select></select>");
         $select.attr("multiple", true);
+        // 'required' relevant for initialisation; after could be removed/ignored
+        $select.attr('required', this.options.isRequired);
         _.each(this.options.initial_value, function(select_value) {
             var $option = $("<option></option>");
             $option.attr("value", select_value.value);
@@ -247,6 +253,7 @@ define([
 
         this.$select = this.buildSelectForInitalValues();
         this.$widget.find('> .hb-field__content > .hb-autocomplete').replaceWith(this.$select);
+        this.$widget.removeClass('invalid'); // selectize will revalidate
         this.$select.selectize({
             maxItems: this.options.max_count,
             minItems: this.options.min_count,
@@ -262,11 +269,18 @@ define([
                     label: this.options.remove_label,
                     title: this.options.remove_title,
                     className: this.options.remove_button_class
+                },
+                "function_override": {
+                    functions: {
+                        refreshValidityState: _.curry(this.customRefreshValidityState)(this)
+                    }
                 }
             },
             load: this.loadSuggestions.bind(this),
             onItemAdd: this.onItemAdded.bind(this),
-            onItemRemove: this.onItemRemoved.bind(this)
+            onItemRemove: this.onItemRemoved.bind(this),
+            onBlur: this.updateUi.bind(this, false),
+            onFocus: this.updateUi.bind(this, false)
         });
 
         if (this.options.isReadonly === true) {
@@ -282,6 +296,50 @@ define([
             this.purgeSelectizeQueryCache();
         }
         EmbeddedEntityList.prototype.handleAction.call(this, event, $target_item);
+    };
+
+    ReferenceEntityList.prototype.updateValidity = function(invalid) {
+        var invalid = invalid || this.isInvalid();
+        jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
+
+        return invalid;
+    }
+
+    // ReferenceEntityList.prototype.isInvalid = function() {
+    //     // Additional validation goes here
+    //     return EmbeddedEntityList.prototype.isInvalid.call(this);;
+    // };
+
+
+    //
+    // Selectize function overrides
+    //  (this = selectize)
+    //
+
+    ReferenceEntityList.prototype.customRefreshValidityState = function(context, original) {
+        // fix code from original selectize method:
+        // - use custom validation
+        // - use just input caret to mark validation; ignore valdidation of orgiginal input
+        var invalid, message;
+
+        invalid = context.isInvalid.call(context);
+        context.updateValidity.call(context, invalid);
+
+        this.isInvalid = invalid;
+        this.$control_input.prop('required', invalid);
+        this.$input.prop('required', false);
+
+        // report validation message
+        if (invalid) {
+            validity_message = 'Minimum: ' + ~~context.options.min_count + '. Maximum: ' + ~~context.options.max_count;
+        } else {
+            validity_message = '';
+        }
+        if (this.$control_input[0].setCustomValidity) {
+            this.$control_input[0].setCustomValidity(validity_message);
+        } else if (validity_message.length) {
+            console.warn(context.getPrefix() + ' - ' + validity_message);
+        }
     };
 
     return ReferenceEntityList;

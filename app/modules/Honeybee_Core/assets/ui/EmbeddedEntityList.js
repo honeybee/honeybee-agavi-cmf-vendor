@@ -17,7 +17,6 @@ define([
         }
 
         this.init(dom_element, _.merge({}, default_options, options));
-        this.is_valid = false;
         this.cur_item_index = -1;
         this.templates = this.loadEmbedTemplates();
         this.$entities_list = this.$widget.find('> .hb-field__value > .hb-entity-list:not(.hb-entity-templates)');
@@ -231,20 +230,55 @@ define([
         this.updateUi();
     };
 
-    EmbeddedEntityList.prototype.updateUi = function() {
+    EmbeddedEntityList.prototype.updateUi = function(update_validity) {
         if(this.isClonable()) {
             this.$widget.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-action__add-embed').removeClass('visuallyhidden');
         } else {
             this.$widget.find('> .hb-embed-item__header > .hb-embed-item__controls > .hb-embed-actions .hb-action__add-embed').addClass('visuallyhidden');
         }
 
-        if(this.options.min_count !== null &&
-            this.$entities_list.find('> .hb-embed-item').length < this.options.min_count
-        ) {
-            this.is_valid = false;
-        } else {
-            this.is_valid = true;
+        if (update_validity !== false) {
+            this.updateValidity();
         }
+    };
+
+    EmbeddedEntityList.prototype.updateValidity = function(invalid) {
+        var invalid = invalid || this.isInvalid();
+        if (invalid) {
+            this.$widget.addClass('invalid');
+        } else {
+            this.$widget.removeClass('invalid');
+        }
+        jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
+
+        return invalid;
+    }
+
+    EmbeddedEntityList.prototype.isInvalid = function() {
+        var item_count, type_count
+
+        item_count = this.$entities_list.find('> .hb-embed-item').length;
+        if (item_count === 0 && !this.isRequired()) {
+            return false;
+        }
+
+        type_count = this.$widget.find('> .hb-field__content > .hb-embed-type-selector .activity').length;
+        if (this.options.inline_mode === true && item_count < type_count) {
+            return true;
+        }
+
+        if(this.options.min_count !== null &&
+            item_count < parseInt(this.options.min_count)
+        ) {
+            return true;
+        }
+        if(this.options.max_count !== null &&
+            item_count > parseInt(this.options.max_count)
+        ) {
+            return true;
+        }
+
+        return false;
     };
 
     EmbeddedEntityList.prototype.isClonable = function() {

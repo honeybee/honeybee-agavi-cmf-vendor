@@ -33,7 +33,8 @@ define([
     "Honeybee_Core/ui/list-filter/ChoiceListFilter",
     "Honeybee_Core/ui/list-filter/DatePickerListFilter",
     "Honeybee_Core/ui/list-filter/DateRangePickerListFilter",
-    "Honeybee_Core/ui/list-filter/TextListListFilter"
+    "Honeybee_Core/ui/list-filter/TextListListFilter",
+    "Honeybee_Core/ui/SelectizePlugins"
 ], function(
     $,
     jsb,
