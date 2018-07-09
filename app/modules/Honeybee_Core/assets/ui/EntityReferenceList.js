@@ -26,16 +26,12 @@ define([
     ReferenceEntityList.prototype.loadSuggestions = function(query, callback) {
         if (!query.length) return callback();
 
-        this.$select[0].selectize.$control.addClass('loading');
         $.ajax({
             url: this.buildSuggestUrl(query, this.getActiveReferenceType()),
             type: 'GET',
             dataType: 'json',
             error: function() { callback(); },
-            success: function(res) { callback(res.data); },
-            complete: function () {
-                this.$select[0].selectize.$control.removeClass('loading');
-            }.bind(this)
+            success: function(res) { callback(res.data); }
         });
     };
 
@@ -49,6 +45,8 @@ define([
             this.$select[0].selectize.options[entity_identifer],
             this.getActiveReferenceType()
         );
+        this.$select[0].selectize.refreshState();
+        this.updateValidity();
     };
 
     ReferenceEntityList.prototype.onItemRemoved = function(ref_id) {
@@ -64,6 +62,8 @@ define([
             }).remove();
             this.removeEntityPlaceholder(ref_id);
         }
+        this.$select[0].selectize.refreshState();
+        this.updateValidity();
     };
 
     ReferenceEntityList.prototype.appendEntityReference = function(reference_embed_data, type_prefix) {
@@ -81,6 +81,7 @@ define([
             dataType: 'html',
             data: this.buildRenderPostData(reference_embed_data, type_prefix),
             beforeSend: function() {
+                self.$select[0].selectize.getItem(reference_embed_data.identifier).addClass('loading');
                 if (self.options.inline_mode === false) {
                     // appendEntityPlaceholder increments the cur_item_index
                     self.appendEntityPlaceholder(reference_embed_data.identifier);
@@ -91,10 +92,14 @@ define([
                 self.logError("An unexpected error occured while rendering reference-embed serverside.", arguments);
             },
             success: function(html_item) {
+                self.$select[0].selectize.getItem(reference_embed_data.identifier).removeClass('loading');
                 if (self.options.inline_mode === true) {
                     self.$entities_list.html(html_item);
                 } else {
-                    self.replaceEntityPlaceholder(reference_embed_data.identifier, html_item);
+                    if (false === self.replaceEntityPlaceholder(reference_embed_data.identifier, html_item)) {
+                        self.logWarn("Reference-embed '"+ reference_embed_data.identifier +"' was not set correctly", arguments);
+                        return false;
+                    }
                 }
                 // don't increment index (appendEntityPlaceholder already did it)
                 self.registerItem(self.$entities_list.find('> li:last-child'), false);
@@ -111,7 +116,7 @@ define([
     ReferenceEntityList.prototype.appendEntityPlaceholder = function(entity_identifer) {
         var $placeholder = this.cloneItem(this.templates[this.getActiveReferenceType()], true);
         if (!$placeholder) {
-            throw Error('Unable to clone item.');
+            throw Error('Unable to add item.');
         }
         $placeholder.addClass('hb-embed-item-placeholder');
         $placeholder.attr('data-placeholder-identifier', entity_identifer);
@@ -123,6 +128,9 @@ define([
     ReferenceEntityList.prototype.replaceEntityPlaceholder = function(entity_identifer, html_item) {
         var placeholder_query = '.hb-embed-item-placeholder[data-placeholder-identifier="{REF_ID}"]'.replace('{REF_ID}', entity_identifer);
         var $placeholder = this.$entities_list.find('> li').filter(placeholder_query);
+        if (!$placeholder) {
+            return false;
+        }
         var $new_item = $(html_item).filter('.hb-embed-item');
         var placeholder_input_group = $placeholder.attr('data-input-group');
         var new_item_input_group = $new_item.attr('data-input-group');
@@ -272,7 +280,7 @@ define([
                 },
                 "function_override": {
                     functions: {
-                        refreshValidityState: _.curry(this.customRefreshValidityState)(this)
+                        refreshValidityState: _.partial(this.customRefreshValidityState, this)
                     }
                 }
             },
@@ -286,6 +294,8 @@ define([
         if (this.options.isReadonly === true) {
             this.$select[0].selectize.disable();
         }
+
+        this.updateUi();
     };
 
     ReferenceEntityList.prototype.handleAction = function(event, $target_item) {
@@ -299,10 +309,11 @@ define([
     };
 
     ReferenceEntityList.prototype.updateValidity = function(invalid) {
-        var invalid = invalid || this.isInvalid();
-        jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
+        if (typeof invalid !== 'undefined') {
+            invalid = this.$select.is('.selectized') ? this.$select[0].selectize.isInvalid : this.isInvalid();
+        }
 
-        return invalid;
+        return EmbeddedEntityList.prototype.updateValidity.call(this, invalid);
     }
 
     // ReferenceEntityList.prototype.isInvalid = function() {
@@ -317,13 +328,12 @@ define([
     //
 
     ReferenceEntityList.prototype.customRefreshValidityState = function(context, original) {
-        // fix code from original selectize method:
+        // change behaviour of original selectize method:
         // - use custom validation
         // - use just input caret to mark validation; ignore valdidation of orgiginal input
         var invalid, message;
 
         invalid = context.isInvalid.call(context);
-        context.updateValidity.call(context, invalid);
 
         this.isInvalid = invalid;
         this.$control_input.prop('required', invalid);
@@ -338,7 +348,7 @@ define([
         if (this.$control_input[0].setCustomValidity) {
             this.$control_input[0].setCustomValidity(validity_message);
         } else if (validity_message.length) {
-            console.warn(context.getPrefix() + ' - ' + validity_message);
+            // console.warn(context.getPrefix() + ' - ' + validity_message);
         }
     };
 

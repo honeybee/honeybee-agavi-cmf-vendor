@@ -7,7 +7,7 @@ define([
     "use strict";
 
     var default_options = {
-        prefix: "Honeybee_Core/ui/Tabs",
+        prefix: "Honeybee_Core/ui/Tabs"
     };
 
     function Tabs(dom_element, options) {

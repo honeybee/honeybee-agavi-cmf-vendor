@@ -17,9 +17,10 @@ define([
      *         {
      *             ... overriding function code ...
      *
-     *             // original_function: curried already by the plugin
+     *             // original_function: partially applied already by the plugin
      *             // context: usually the execution context object (your widget)
-     *                         can be curried too when providing the plugin options
+     *                         it can be partially applied too when providing the plugin options
+     *                          e.g.  _.curry(callback)(context)  or  _.partial(callback, context, arg1)
      *             // this: selectize instance
      *             // call parent: original_function.call(this);
      *

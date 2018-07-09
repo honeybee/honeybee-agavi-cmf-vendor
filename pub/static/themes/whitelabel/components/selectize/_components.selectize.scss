@@ -19,6 +19,7 @@ $selectize-spacing: 3px;
         ) {
             position: absolute;
             right: 0;
+            bottom: 0;
             padding: $small-spacing;
         }
     }
@@ -53,6 +54,9 @@ $selectize-spacing: 3px;
     input.selectized ~ &,
     select[multiple] ~ & {
         .selectize-input.selectize-input {
+            // UX: provide click-space for getting input-caret
+            padding-right: $small-spacing;
+
             .item {
                 @include button-shape-emphasized-navigational-default;
                 @include button-colors-emphasized-navigational-default;
@@ -60,8 +64,13 @@ $selectize-spacing: 3px;
                     @include button-shape-emphasized-navigational-active;
                     @include button-colors-emphasized-navigational-active;
                 }
+                &.disabled {
+                    @include button-shape-emphasized-navigational-disabled;
+                    @include button-colors-emphasized-navigational-disabled;
+                }
                 &,
-                &.active {
+                &.active,
+                &.disabled {
                     margin: $selectize-spacing $selectize-spacing $selectize-spacing 0;
                     line-height: $line-height;
                 }
@@ -125,14 +134,24 @@ $selectize-spacing: 3px;
             &.has-items {
                 .item {
                     &,
-                    &.active {
+                    &.active,
+                    &.disabled,
+                    &.loading {
                         position: relative;
                         padding-right: $base-spacing * 1.5;
+                    }
+                    &.disabled,
+                    &.loading {
+                        @include button-colors-emphasized-navigational-disabled;
                     }
                 }
 
                 .remove {
                     position: absolute;
+                }
+                .disabled,
+                .loading {
+                    .remove { @include button-colors-normal-navigational-disabled; }
                 }
             }
         }

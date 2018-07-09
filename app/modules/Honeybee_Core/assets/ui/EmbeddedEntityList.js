@@ -210,6 +210,10 @@ define([
             });
     };
 
+    EmbeddedEntityList.prototype.getItems = function() {
+        return this.$entities_list.find('> .hb-embed-item');
+    };
+
     EmbeddedEntityList.prototype.handleAction = function(event, $target_item) {
         var $action = $(event.currentTarget);
         if (!this.isWriteable()) {
@@ -244,11 +248,7 @@ define([
 
     EmbeddedEntityList.prototype.updateValidity = function(invalid) {
         var invalid = invalid || this.isInvalid();
-        if (invalid) {
-            this.$widget.addClass('invalid');
-        } else {
-            this.$widget.removeClass('invalid');
-        }
+        this.$widget.toggleClass('invalid', invalid);
         jsb.fireEvent('TABS:UPDATE_ERROR_BUBBLES');
 
         return invalid;
@@ -257,7 +257,8 @@ define([
     EmbeddedEntityList.prototype.isInvalid = function() {
         var item_count, type_count
 
-        item_count = this.$entities_list.find('> .hb-embed-item').length;
+        item_count = this.getItems().length;
+
         if (item_count === 0 && !this.isRequired()) {
             return false;
         }
@@ -282,7 +283,7 @@ define([
     };
 
     EmbeddedEntityList.prototype.isClonable = function() {
-        return !this.options.max_count || this.$entities_list.find('> .hb-embed-item').length < this.options.max_count;
+        return !this.options.max_count || this.getItems().length < this.options.max_count;
     }
 
     EmbeddedEntityList.prototype.isWriteable = function() {
