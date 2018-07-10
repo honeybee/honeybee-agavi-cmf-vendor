@@ -1,7 +1,7 @@
 {%- block userwidget -%}
 
-<div class="user-widget {{ user_data.avatar_url is empty and not ac('ui.enable_gravatar', false) ? ' user-widget--no_avatar' }}" >
-    {% if user_data.avatar_url is empty and ac('ui.enable_gravatar', false) %}
+<div class="user-widget {{ user_data.avatar_url is empty and not ac('ui.enable_gravatar', gravatar_enabled|default(false)) ? ' user-widget--no_avatar' }}" >
+    {% if user_data.avatar_url is empty and ac('ui.enable_gravatar', gravatar_enabled|default(false)) %}
         <img class="user-widget__avatar base-dropdown__toggle-icon" src="//www.gravatar.com/avatar/noavatar" />
     {% elseif user_data.avatar_url is not empty %}
         <img class="user-widget__avatar base-dropdown__toggle-icon" src="{{ user_data.avatar_url }}" />

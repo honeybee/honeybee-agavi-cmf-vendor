@@ -107,10 +107,30 @@
 
     <div class="sheet component-user">
         <h1>Component: User</h1>
-
-        {% include "html/ui/user-widget.twig" with {
-            user_data: user,
-        } %}
+        <div class="layout">
+            <div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                <div class="user__wrapper">
+                    {% include "html/ui/user-widget.twig" with {
+                        user_data: user,
+                        gravatar_enabled: true
+                    } %}
+                </div>
+            </div><!--
+            --><div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                <div class="user__wrapper">
+                    {% include "html/ui/user-widget.twig" with {
+                        user_data: user|merge({'avatar_url': '/static/themes/whitelabel/binaries/icons/favicon-64.png'}),
+                    } %}
+                </div>
+            </div><!--
+            --><div class="layout__item u-1-of-3-lap-and-up u-1-of-1-palm">
+                <div class="user__wrapper">
+                    {% include "html/ui/user-widget.twig" with {
+                        user_data: user,
+                    } %}
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="sheet component-pager">
