@@ -117,7 +117,7 @@ define([
             var $template = $(template).remove();
             var tpl_name = $(template).data('embed-type');
             if (tpl_name) {
-                $template.find('> :input[name$="[__template]"]').remove();
+                $template.find('> :input[name$="[__template]"], > .hb-embed-item__content > :input[name$="[__template]"]').remove();
                 templates[tpl_name] = $template;
                 self.cur_item_index++;
             }
