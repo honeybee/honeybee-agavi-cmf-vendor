@@ -16,6 +16,7 @@ class HtmlActivityRenderer extends ActivityRenderer
         ];
 
         $params = [];
+        $params['target'] = $this->getOption('target');
         $params['css'] = $this->getOption('css', $default_css);
         $params['form_id'] = $this->getOption('form_id', $activity->getSettings()->get('form_id', 'formid'));
         $params['form_parameters'] = $this->getOption('form_parameters', $activity->getUrl()->getParameters());

@@ -1,1 +1,6 @@
-<a href="{{ link }}" rel="{{ activity.rels|default([])|join(' ') }}" class="{{ css|default('')|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}" title="{{ activity_description|default('') }}" {% if disabled %} tabindex="-1"{% endif %}>{{ activity_label|default('missing activity_label') }}</a>
+<a href="{{ link }}" rel="{{ activity.rels|default([])|join(' ') }}" class="{{ css|default('')|join(' ') }} {{ activity.settings.css|default('')|join(' ') }}"
+    title="{{ activity_description|default('') }}"
+    {%- if download|default(false) == true %} download{% endif %}
+    {%- if target|default('') is not empty %} target="{{ target|default() }}" {%- endif %}
+    {% if disabled %} tabindex="-1"{% endif -%}
+>{{ activity_label|default('missing activity_label') }}</a>
