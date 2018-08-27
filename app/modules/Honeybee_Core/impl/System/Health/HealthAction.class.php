@@ -6,6 +6,7 @@ use Honeybee\Infrastructure\DataAccess\Connector\Status;
 
 /**
  * Compile information about the application's status and return success or error without further info.
+ * The connections are only actually used for checks when verbose request parameter is set (?v=1).
  */
 class Honeybee_Core_System_HealthAction extends Action implements ShutdownListenerInterface
 {
@@ -13,12 +14,17 @@ class Honeybee_Core_System_HealthAction extends Action implements ShutdownListen
     {
         $this->getContext()->addShutdownListener($this);
 
+        $verbose = $request_data->getParameter('v', false) || $request_data->getParameter('verbose', false);
+        $this->setAttribute('verbose', $verbose);
+
         $status = Status::UNKNOWN;
         try {
             $connector_service = $this->getServiceLocator()->getConnectorService();
-            $connections_report = $connector_service->getStatusReport()->toArray();
-            if ($connections_report['status'] !== Status::FAILING) {
-                $status = Status::WORKING;
+            if ($verbose) {
+                $connections_report = $connector_service->getStatusReport()->toArray();
+                if ($connections_report['status'] !== Status::FAILING) {
+                    $status = Status::WORKING;
+                }
             }
         } catch (Exception $e) {
             $this->logError('Error while getting system status:', $e);
