@@ -14,6 +14,7 @@
             </validator>
             <validator class="boolean" required="false">
                 <argument>v</argument>
+                <ae:parameter name="description">Use verbose parameter to actually run connector checks.</ae:parameter>
             </validator>
 
         </validators>

@@ -7,11 +7,13 @@ class Honeybee_Core_System_Health_HealthSuccessView extends View
 {
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
-        if ($this->getAttribute('status') === Status::FAILING) {
-            return $this->cliError(Status::FAILING);
+        $status = $this->getAttribute('status', 'ERROR');
+
+        if ($status === Status::FAILING || $status === 'ERROR') {
+            return $this->cliError($status);
         }
 
-        return $this->cliMessage(Status::WORKING);
+        return $this->cliMessage($status);
     }
 
     /**
@@ -28,16 +30,19 @@ class Honeybee_Core_System_Health_HealthSuccessView extends View
                 $this->getResponse()->setHttpHeader('Content-Disposition', 'inline');
             }
 
-            if ($this->getAttribute('status') === Status::FAILING) {
+            $status = $this->getAttribute('status', 'ERROR');
+            if ($status === Status::FAILING || $status === 'ERROR') {
                 if ($this->getResponse() instanceof AgaviWebResponse) {
                     $this->getResponse()->setHttpStatusCode('500');
                 } elseif ($this->getResponse() instanceof AgaviConsoleResponse) {
                     $this->getResponse()->setExitCode(1);
                 }
                 return Status::FAILING;
+            } elseif ($status === Status::WORKING) {
+                return Status::WORKING;
             }
 
-            return Status::WORKING;
+            return $status; // Status::UNKNOWN
         }
     }
 }

@@ -22,11 +22,15 @@ class Honeybee_Core_System_HealthAction extends Action implements ShutdownListen
             $connector_service = $this->getServiceLocator()->getConnectorService();
             if ($verbose) {
                 $connections_report = $connector_service->getStatusReport()->toArray();
-                if ($connections_report['status'] !== Status::FAILING) {
+                if ($connections_report['status'] === Status::FAILING) {
+                    $status = Status::FAILING;
+                } elseif ($connections_report['status'] === Status::WORKING) {
                     $status = Status::WORKING;
                 }
+            } else {
+                $status = Status::UNKNOWN; // w/o "?v=1" we assume connectors are probably working and return 200
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $this->logError('Error while getting system status:', $e);
             return 'Error';
         }

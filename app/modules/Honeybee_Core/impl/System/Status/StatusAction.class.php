@@ -17,7 +17,9 @@ class Honeybee_Core_System_StatusAction extends Action implements ShutdownListen
         try {
             $connector_service = $this->getServiceLocator()->getConnectorService();
             $connections_report = $connector_service->getStatusReport()->toArray();
-            if ($connections_report['status'] !== Status::FAILING) {
+            if ($connections_report['status'] === Status::FAILING) {
+                $status = Status::FAILING;
+            } elseif ($connections_report['status'] === Status::WORKING) {
                 $status = Status::WORKING;
             }
         } catch (Exception $e) {
