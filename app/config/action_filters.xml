@@ -6,7 +6,7 @@
     <ae:configuration environment="development.*" context="web">
         <filters>
 
-            <filter name="ExecutionTimeFilter" class="AgaviExecutionTimeFilter">
+            <filter name="ExecutionTimeFilter" class="AgaviExecutionTimeFilter" enabled="false">
                 <ae:parameter name="comment">On</ae:parameter>
                 <ae:parameter name="output_types">
                     <ae:parameter>html</ae:parameter>
