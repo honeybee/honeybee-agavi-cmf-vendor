@@ -27,11 +27,6 @@ abstract class Action extends AgaviAction implements ILogger, ResourceInterface,
 {
     use LogTrait;
 
-    public function executeOptions(AgaviRequestDataHolder $request_data)
-    {
-        return 'Success';
-    }
-
     /**
      * Default error handling for method Read (GET Requests)
      *
