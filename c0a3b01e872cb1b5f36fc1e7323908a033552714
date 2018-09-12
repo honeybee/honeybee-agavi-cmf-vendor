@@ -1,0 +1,3 @@
+TODO:
+- add controls to perform __action on items list, when JS is disabled
+  (e.g. remove item, update items payload, sort/move items; see embed-actions)
