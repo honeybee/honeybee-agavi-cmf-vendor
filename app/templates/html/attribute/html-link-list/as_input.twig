@@ -6,6 +6,7 @@
             <label for="{{ field_id }}" class="{#mandatory#}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
+            <input type="hidden" name="{{ grouped_base_path }}[]">
             <ul class="htmllinklist">
                 <li class="htmllinklist__item sortable-placeholder"><div>{{ _(field_name~'.sortable_placeholder', translation_domain, null, null, 'Hier ablegen…') }}</div>
                 {%- for htmllink in attribute_value -%}
