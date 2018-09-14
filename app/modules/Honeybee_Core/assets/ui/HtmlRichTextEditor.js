@@ -134,8 +134,11 @@ define([
             WHOLE_DOCUMENT: false,
             RETURN_DOM: false,
             RETURN_DOM_FRAGMENT: false,
-            FORBID_TAGS: [ 'style' ],
-            FORBID_ATTR: []
+            FORBID_TAGS: FORBIDDEN_TAGS_ON_PASTE,
+            FORBID_ATTR: FORBIDDEN_ATTRS_ON_PASTE,
+            ALLOW_TAGS: ALLOWED_TAGS_ON_PASTE,
+            ALLOWED_ATTR: ALLOWED_ATTRS_ON_PASTE,
+            ALLOW_DATA_ATTR: false,
         }
     };
 
