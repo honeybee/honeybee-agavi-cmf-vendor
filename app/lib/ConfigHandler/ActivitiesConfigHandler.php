@@ -265,7 +265,7 @@ class ActivitiesConfigHandler extends BaseConfigHandler
             $idx = $element->hasAttribute('name') ? trim($element->getAttribute('name')) : count(array_values($params));
 
             if ($element->hasChild('url_params')) {
-                $params[$index] = $this->parseUrlParameters($element->getChild('url_params'));
+                $params[$idx] = $this->parseUrlParameters($element->getChild('url_params'));
             } elseif (1 < $element->countChildren('url_param')) {
                 $params[$idx] = $this->parseUrlParameters($element);
             } else {
