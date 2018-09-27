@@ -52,8 +52,10 @@ class HttpStatus405Filter extends AgaviFilter implements AgaviIGlobalFilter
 
             $controller = $this->getContext()->getController();
 
-            $action_instance = $container->getActionInstance();
-            if (!$this->getParameter('action_filter')) {
+            if ($this->getParameter('action_filter')) {
+                // trigger action instance
+                $action_instance = $container->getActionInstance();
+            } else {
                 // in a global filter the action instance is not yet initialized
                 $action_instance = $controller->createActionInstance(
                     $container->getModuleName(),
