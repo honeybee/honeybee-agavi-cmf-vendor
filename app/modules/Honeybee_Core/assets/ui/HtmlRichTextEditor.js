@@ -134,11 +134,8 @@ define([
             WHOLE_DOCUMENT: false,
             RETURN_DOM: false,
             RETURN_DOM_FRAGMENT: false,
-            FORBID_TAGS: FORBIDDEN_TAGS_ON_PASTE,
-            FORBID_ATTR: FORBIDDEN_ATTRS_ON_PASTE,
-            ALLOW_TAGS: ALLOWED_TAGS_ON_PASTE,
-            ALLOWED_ATTR: ALLOWED_ATTRS_ON_PASTE,
-            ALLOW_DATA_ATTR: false,
+            FORBID_TAGS: [ 'style' ],
+            FORBID_ATTR: []
         }
     };
 
@@ -426,7 +423,10 @@ define([
 
     HtmlRichTextEditor.prototype.sanitize = function(text) {
         var sanitized_html = DOMPurify.sanitize(text, this.options.dompurify_sync_config);
-        if (sanitized_html === '<div class="hb-paragraph"><br></div>') {
+        if ((sanitized_html === '<div class="hb-paragraph"><br></div>') ||
+            (sanitized_html === '<br>') ||
+            (sanitized_html === '<div><br></div>')
+        ) {
             sanitized_html = ''; // strip squire leftover when there's no real content
         }
         return sanitized_html;

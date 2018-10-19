@@ -2,16 +2,16 @@
   "name": "honeybee",
   "description": "Defines the node/frontend dependencies for honeybee.",
   "author": "Thorsten Schmitt-Rink <thorsten.schmitt-rink@berlinonline.de>",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "dompurify": "^1.0.5",
+    "dompurify": "^1.0.8",
     "jquery": "^3.3.1",
     "moment": "^2.20.1",
     "node-jsb": "^3.0.0",
     "requirejs": "^2.3.5",
-    "squire-rte": "^1.8.14",
+    "squire-rte": "^1.9.0",
     "stickyfilljs": "^2.0.3"
   },
   "files": [
