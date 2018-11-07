@@ -1,8 +1,5 @@
 {%- block field -%} {# this block exists for whitespace control #}
-{%- set errors = errors | default([]) -%}
 {%- set isReadable = (disabled is empty and readonly is empty) -%}
-{%- set min_count = widget_options.min_count | default(0) -%}
-{%- set unchecked_options = unchecked_options | default([]) -%}
 <div
     class="hb-field {{ css|default('') }}"
     {% if widget_enabled %} data-jsb="{{ widget_options|json_encode }}" {% endif %}
@@ -12,6 +9,7 @@
             <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
+            <input type="hidden" name="{{ grouped_field_name }}" {{ disabled|default('') }} />
             <div class="input-text-list">
                 {% for value in attribute_value %}
                     <label class="text-list__item">
@@ -19,7 +17,7 @@
                         <span>{{value}}</span>
                     </label>
                 {% endfor %}
-                {% for unchecked_option in unchecked_options %}
+                {% for unchecked_option in unchecked_options|default([]) %}
                     <label class="text-list__item">
                         <input type="checkbox" value="{{unchecked_option}}" name="{{ grouped_field_name }}" {% if not isReadable %}disabled{% endif %} />
                         <span>{{unchecked_option}}</span>
@@ -28,13 +26,13 @@
                 <div class="input-text-list__box">
                     {% if allowed_values|default([]) is empty %}
                     <input type="text" name="{{ grouped_field_name }}" id="{{ field_id }}"
-                        {{ readonly|default('') }} {{ disabled|default('') }} {% if attribute_value|length < min_count %} required {% endif %}
+                        {{ readonly|default('') }} {{ disabled|default('') }} {% if attribute_value|length < widget_options.min_count|default(0) %}{{ required }}{% endif %}
                         {{ pattern|default('')|raw }} placeholder="{{ translations.placeholder|default('') }}" title="{{ translations.title|default('') }}" />
                     {% endif %}
                 </div>
                 <ul class="errors">
                     {%- block field_errors  -%}
-                        {%- for error in errors -%}
+                        {%- for error in errors|default([]) -%}
                             <li class="error">{{error}}</li>
                         {%- endfor -%}
                     {%- endblock  -%}
