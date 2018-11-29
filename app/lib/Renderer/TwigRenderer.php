@@ -9,7 +9,7 @@ use AgaviToolkit;
 use AgaviTwigRenderer;
 
 use Twig_Environment;
-use Twig_Loader_String;
+use Twig_Loader_Array;
 use Twig_Template;
 
 use MtHaml\Environment as MtHamlEnvironment;
@@ -213,8 +213,12 @@ class TwigRenderer extends AgaviTwigRenderer
             $source = $pathinfo['basename'];
         } else {
             // a stream template or whatever; either way, it's something Twig can't load directly :S
-            $twig->setLoader(new Twig_Loader_String());
             $source = file_get_contents($path);
+            $name = sprintf('__some_string_template__%s', hash('sha256', $source, false));
+            $loader = new Twig_Loader_Array([
+                $name => $source,
+            ]);
+            $twig->setLoader($loader);
         }
 
         return $source;
