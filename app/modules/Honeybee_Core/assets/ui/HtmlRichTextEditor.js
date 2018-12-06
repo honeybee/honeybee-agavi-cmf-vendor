@@ -96,11 +96,17 @@ define([
         hide_textarea: true,
         // element that will be used as editor for the textarea content
         editor_selector: '.editor-hrte',
+        // html content recognised as blank/empty lines
+        empty_content_html: [
+            '<br>',
+            '<div><br></div>'
+        ],
         // Squire options to use
         squire_config: {
+            // note: config of blockTag & blockAttributes should be honoured: by DOMPurify config and when sanitizing
             blockTag: 'DIV',
             blockAttributes: {
-                'class': 'hb-paragraph'
+                'class': 'hb-paragraph' // this can be overridden by custom options; sanitize() should be aware of that
             },
             tagAttributes: {
                 ul: null,
@@ -134,8 +140,11 @@ define([
             WHOLE_DOCUMENT: false,
             RETURN_DOM: false,
             RETURN_DOM_FRAGMENT: false,
-            FORBID_TAGS: [ 'style' ],
-            FORBID_ATTR: []
+            FORBID_TAGS: FORBIDDEN_TAGS_ON_PASTE,
+            FORBID_ATTR: FORBIDDEN_ATTRS_ON_PASTE,
+            ALLOWED_TAGS: ALLOWED_TAGS_ON_PASTE,
+            ALLOWED_ATTR: ALLOWED_ATTRS_ON_PASTE,
+            ALLOW_DATA_ATTR: false
         }
     };
 
@@ -150,6 +159,7 @@ define([
 
         this.init(dom_element, default_options);
         this.addOptions(options);
+        this.keepSyncOptionsConsistent();
 
         // a custom sanitization function may be specified for initial setHTML call and pasting content
         if (typeof this.options.sanitizeToDOMFragment !== 'function') {
@@ -332,7 +342,7 @@ define([
                         var $link = $(link);
                         that.$editor_popup_link.find('.editor-popup-link__input-url').first().val($link.prop('href') || '');
                         that.$editor_popup_link.find('.editor-popup-link__input-title').first().val($link.prop('title') || '');
-                        var target = $link.prop('target');
+                        var target = $link.prop('target') || '';
                         if (target.search(/_blank/i) >= 0) {
                             that.$editor_popup_link.find('.editor-popup-link__input-target').first().prop('checked', true);
                         } else {
@@ -375,10 +385,19 @@ define([
     HtmlRichTextEditor.prototype.constructor = HtmlRichTextEditor;
 
     HtmlRichTextEditor.prototype.createSquireInstance = function() {
-        var that = this;
+        var that = this,
+            editor_block_element, block_attributes, attr_name;
 
         // init Squire instance
         var editor = new Squire(this.$editor[0], this.options.squire_config);
+
+        // ensure that configured squire blockTag/blockAttributes containing a line break are recognised as empty line
+        editor_block_element = editor.createElement(
+            editor._config.blockTag,
+            editor._config.blockAttributes,
+            [ document.createElement('br') ]
+        );
+        this.options.empty_content_html.push(editor_block_element.outerHTML);
 
         // sync content to textarea on input
         editor.addEventListener('input', function(ev) {
@@ -421,12 +440,11 @@ define([
         return editor;
     };
 
+    // called onInput
+    // dompurify-sync-config should NOT filter the line-break-tags (<br>, <div>)
     HtmlRichTextEditor.prototype.sanitize = function(text) {
         var sanitized_html = DOMPurify.sanitize(text, this.options.dompurify_sync_config);
-        if ((sanitized_html === '<div class="hb-paragraph"><br></div>') ||
-            (sanitized_html === '<br>') ||
-            (sanitized_html === '<div><br></div>')
-        ) {
+        if (this.options.empty_content_html.indexOf(sanitized_html) !== -1) {
             sanitized_html = ''; // strip squire leftover when there's no real content
         }
         return sanitized_html;
@@ -634,6 +652,23 @@ define([
     HtmlRichTextEditor.prototype.isLink = function() {
         return this.queryCommandState('A');
     };
+
+    HtmlRichTextEditor.prototype.keepSyncOptionsConsistent = function() {
+        var sync_config = this.options.dompurify_sync_config;
+        var editor_config = this.options.squire_config;
+        // ensure DOMPurify doesn't forbid the blockTag configured for Squire
+        if (_.isString(editor_config.blockTag)) {
+            var editor_block_tag = _.lowerCase(editor_config.blockTag);
+            _.pull(this.options.dompurify_sync_config.FORBID_TAGS, _.lowerCase(editor_config.blockTag));
+            this.options.dompurify_sync_config.ALLOWED_TAGS = [ _.lowerCase(editor_config.blockTag) ].concat(this.options.dompurify_sync_config.ALLOWED_TAGS || []);
+        }
+        // ensure DOMPurify doesn't forbid the blockAttributes configured for Squire
+        if (_.isPlainObject(editor_config.blockAttributes)) {
+            var block_attribute_names = _.keys(editor_config.blockAttributes);
+            _.pullAll(this.options.dompurify_sync_config.FORBID_ATTR, block_attribute_names);
+            this.options.dompurify_sync_config.ALLOWED_ATTR = block_attribute_names.concat(this.options.dompurify_sync_config.ALLOWED_ATTR || []);
+        }
+    }
 
     return HtmlRichTextEditor;
 });
