@@ -241,7 +241,8 @@ class LoggerManager extends AgaviLoggerManager implements ILogger//, \Psr\Log\Lo
         $logger_message->setParameter('scope', trim($scope));
 
         // might be a PSR-3 compatible log call with templated message and context array
-        if (2 === count($log_message_parts)
+        if (is_array($log_message_parts)
+            && 2 === count($log_message_parts)
             && is_string($log_message_parts[0])
             && is_array($log_message_parts[1])
             && ArrayToolkit::isAssoc($log_message_parts[1])
