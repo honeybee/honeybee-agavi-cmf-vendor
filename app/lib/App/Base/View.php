@@ -639,15 +639,22 @@ class View extends AgaviView
              * @todo Would a 500 error actually be more correct? Yes maybe, but we executed the action. Hm. Meh.
              */
             if (!AgaviConfig::get('core.debug', false)) {
+                $uri = '';
+                if (php_sapi_name() !== 'cli' && isset($_SERVER['REQUEST_URI'])) {
+                    $uri = $_SERVER['REQUEST_URI'];
+                } else {
+                    $uri = $this->routing->getInput();
+                }
                 $this->logError(
                     sprintf(
                         'The view "%1$s" does not implement an "%2$s()" method. ' .
                         'Sending a generic 406 response (as debug is false). ' .
                         'The view should implement "%1$s::%2$s()" or handle this ' .
-                        'situation in one of the base views (e.g. "%3$s").',
+                        'situation in one of the base views (e.g. "%3$s"). URI="%4$s".',
                         get_class($this),
                         $method_name,
-                        get_class()
+                        get_class(),
+                        $uri
                     )
                 );
 
