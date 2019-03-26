@@ -39,6 +39,20 @@ class HtmlGeoPointAttributeRenderer extends HtmlAttributeRenderer
         return $params;
     }
 
+    protected function getDefaultTranslationKeys()
+    {
+        $default_translation_keys = parent::getDefaultTranslationKeys();
+
+        $field_translation_keys = [
+            'title_lon',
+            'title_lat',
+            'placeholder_lon',
+            'placeholder_lat'
+        ];
+
+        return array_unique(array_merge($default_translation_keys, $field_translation_keys));
+    }
+
     protected function getWidgetOptions()
     {
         $widget_options = parent::getWidgetOptions();
