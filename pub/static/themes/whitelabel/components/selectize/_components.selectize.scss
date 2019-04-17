@@ -51,8 +51,7 @@ $selectize-spacing: 3px;
     }
 
     // Multi selectize (Multiple choice select & Text-List)
-    input.selectized ~ &,
-    select[multiple] ~ & {
+    &.multi {
         .selectize-input.selectize-input {
             // UX: provide click-space for getting input-caret
             padding-right: $small-spacing;
@@ -86,7 +85,7 @@ $selectize-spacing: 3px;
     }
 
     // Single selectize (Single choice select)
-    select:not([multiple]) ~ & {
+    &.single {
         .selectize-input.selectize-input {
             padding: 0;
 
@@ -193,10 +192,12 @@ $selectize-spacing: 3px;
 .input-choice {
     .selectize-input.selectize-input {
         // hide caret
-        > input { @include visuallyhidden; }
+        // > input { @include visuallyhidden; }
 
         // maintain minimum height (of line-height + padding) when empty and without caret
         &.not-full {
+            // @TODO: Selectize has a bug never removing the 'not-full' class, when in single mode over an <input>
+            //        This will show the caret even when the input is full, wrapping to a new line
             overflow: auto; // create block formatting context
             &:after {
                 content: '\00a0';
@@ -208,11 +209,13 @@ $selectize-spacing: 3px;
             }
 
             // fix flickering issue (Selectize append .dropdown-active for some milliseconds when focused)
-            & ~ .selectize-dropdown { margin-left: -9999px; }
+            // & ~ .selectize-dropdown { margin-left: -9999px; }
+            // @TODO: check where the flickering happens and find a more specific selecor.
+            //        Cause when uncommented it breaks hiding the results and create-option.
         }
     }
 
-    select:not([multiple]) ~ .selectize-control {
+    .selectize-control.single {
         .item {
             // icon
             background-image: url(binaries/icons/chevron-down.svg);
