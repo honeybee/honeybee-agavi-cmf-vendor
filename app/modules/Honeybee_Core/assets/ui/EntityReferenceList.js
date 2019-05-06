@@ -267,7 +267,7 @@ define([
             minItems: this.options.min_count,
             hideSelected: true,
             highlight: true,
-            persist: false,
+            persist: true,
             create: false,
             valueField: suggest_options.value_field,
             labelField: suggest_options.suggest_field,
