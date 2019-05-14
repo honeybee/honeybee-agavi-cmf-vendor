@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "330ef013c5671072818c70d7f3e03334",
+    "content-hash": "dfe57a97949362a3ad2de4d38ab49b4a",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -732,16 +732,16 @@
         },
         {
             "name": "honeybee/honeybee",
-            "version": "0.2.20",
+            "version": "0.2.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/honeybee.git",
-                "reference": "6e46b4f20a0b8a3ce686565440f739960e325a05"
+                "reference": "d20c1c05c5000bd66ddc597be9b808ca0f536f6b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/6e46b4f20a0b8a3ce686565440f739960e325a05",
-                "reference": "6e46b4f20a0b8a3ce686565440f739960e325a05",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/d20c1c05c5000bd66ddc597be9b808ca0f536f6b",
+                "reference": "d20c1c05c5000bd66ddc597be9b808ca0f536f6b",
                 "shasum": ""
             },
             "require": {
@@ -823,7 +823,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2019-04-24T12:13:18+00:00"
+            "time": "2019-05-14T13:55:55+00:00"
         },
         {
             "name": "honeybee/trellis",
