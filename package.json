@@ -2,7 +2,7 @@
   "name": "honeybee",
   "description": "Defines the node/frontend dependencies for honeybee.",
   "author": "Thorsten Schmitt-Rink <thorsten.schmitt-rink@berlinonline.de>",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -11,6 +11,7 @@
     "moment": "^2.20.1",
     "node-jsb": "^3.0.0",
     "requirejs": "^2.3.5",
+    "selectize": "git+https://github.com/honeybee/selectize.js.git#v1.0.0",
     "squire-rte": "^1.9.0",
     "stickyfilljs": "^2.0.3"
   },
