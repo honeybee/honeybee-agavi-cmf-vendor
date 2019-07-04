@@ -66,7 +66,8 @@ class DefaultSetup implements MonologSetupInterface
         $buffer_size = $appender->getParameter('buffer_size', 0);
         $bubble = $appender->getParameter('bubble', true);
         $channel_name = $appender->getParameter('channel', $appender->getParameter('name', 'monolog-default'));
-        $default_file_path = AgaviConfig::get('core.app_dir') . '/log/' . $channel_name . '.log';
+        $default_file_path = AgaviConfig::get('core.log_dir', AgaviConfig::get('core.app_dir') . '/log') .
+            '/' . $channel_name . '.log';
         $file_path = preg_replace(
             '/[^a-zA-Z0-9-_\.\/]/',
             '',

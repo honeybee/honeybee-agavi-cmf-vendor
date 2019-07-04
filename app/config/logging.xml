@@ -109,10 +109,10 @@
                     <ae:parameter name="setup">Honeygavi\Logging\Monolog\BrowserConsoleSetup</ae:parameter>
                 </ae:parameters>
             </appender>
-            <!-- log all messages to %core.app_dir%/log/default.log -->
+            <!-- log all messages to %core.log_dir%/default.log -->
             <appender name="default" class="Honeygavi\Logging\FileLoggerAppender" layout="default" />
 
-            <!-- log all messages to %core.app_dir%/log/auth.log -->
+            <!-- log all messages to %core.log_dir%/auth.log -->
             <appender name="auth" class="Honeygavi\Logging\VerboseLoggerAppender" layout="default" />
 
             <appender name="trace" class="Honeygavi\Logging\FileLoggerAppender" layout="default" />
@@ -144,7 +144,7 @@
                 Use 'cycle' parameter to alter the cycle.
             <appender name="ApplicationLogAppender" class="AgaviRotatingFileLoggerAppender" layout="DateTimeLayout">
                 <ae:parameters>
-                    <ae:parameter name="dir">%core.app_dir%/log/</ae:parameter>
+                    <ae:parameter name="dir">%core.log_dir%/</ae:parameter>
                     <ae:parameter name="prefix">app-</ae:parameter>
                 </ae:parameters>
             </appender>

@@ -99,6 +99,18 @@ if ($cache_dir === false) {
     AgaviConfig::set('core.cache_dir_without_env', $cache_dir, true, true);
 }
 
+// default log dir
+$log_dir = getenv('APP_LOG_DIR');
+if ($log_dir === false) {
+    AgaviConfig::set(
+        'core.log_dir',
+        AgaviConfig::get('core.app_dir') . '/log',
+        true, // overwrite
+        true // readonly
+    );
+} else {
+    AgaviConfig::set('core.log_dir', $log_dir, true, true); // overwrite, readonly
+}
 // contexts are e.g. 'web', 'console', 'soap' or 'xmlrpc'
 $default_context = @$default_context ?: getenv('APP_CONTEXT');
 if (!$default_context) {

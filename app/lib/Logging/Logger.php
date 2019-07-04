@@ -181,7 +181,11 @@ class Logger extends AgaviLogger
         if (!isset($this->appenders[$name])) {
             if ($appender->getParameter('destination', null) === FileLoggerAppender::USE_APPENDER_NAME_AS_DESTINATION) {
                 $name = preg_replace('/[^a-zA-Z0-9-_\.\/]/', '', $name); // sanitize logger name to very basic name
-                $appender->setParameter('destination', \AgaviConfig::get('core.app_dir') . '/log/' . $name . '.log');
+                $appender->setParameter(
+                    'destination',
+                    \AgaviConfig::get('core.log_dir', \AgaviConfig::get('core.app_dir') . '/log') .
+                    '/' . $name . '.log'
+                );
             }
 
             $this->appenders[$name] = $appender;
