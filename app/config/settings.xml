@@ -92,8 +92,22 @@
         </settings>
 
         <settings prefix="sass.">
+            <!--
+                 @see AssetCompiler::getScssCommand(…)
+
+                 cmd_tpl: defaults to ruby sass command line with the following positional parameters used:
+
+                 #1: 'sass.env' – prefix of scss command; defaults to env vars
+                 #2: 'sass.cmd' – path to scss binary; defaults to /usr/local/bin/sass
+                 #3: 'sass.style' – defaults to 'compressed'
+                 #4: 'sass.cli_options' – additional cli arguments; defaults to no-cache/unix-newlines/precision=3
+                                            and when 'sass.debug' is true it adds: debug-info/line-numbers/line-comments
+                 #5: input file path
+                 #6: output file path
+            -->
+            <setting name="cmd_tpl">#1 #2 --scss #3 #4 #5 #6 -E "UTF-8"</setting>
             <!-- <setting name="cmd">/opt/ruby/bin/sass</setting> -->
-            <setting name="style">nested</setting> <!-- nested | expanded | compact | compressed -->
+            <setting name="style">compressed</setting>
         </settings>
 
         <settings prefix="themes.">
@@ -129,7 +143,7 @@
         </settings>
         <settings prefix="sass.">
             <setting name="cmd">/usr/bin/sass</setting>
-            <setting name="style">nested</setting>
+            <setting name="style">compressed</setting>
             <setting name="debug">false</setting>
         </settings>
         <settings prefix="requirejs.">
@@ -146,7 +160,7 @@
         </settings>
         <settings prefix="sass.">
             <setting name="cmd">/usr/local/bin/sass</setting>
-            <setting name="style">nested</setting>
+            <setting name="style">compressed</setting>
             <setting name="debug">false</setting>
         </settings>
         <settings prefix="requirejs.">

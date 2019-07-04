@@ -274,7 +274,11 @@ class AssetCompiler
          * '/some/input_file.scss' 'some_output_file.css'
          */
         $command = sprintf(
-            '%s %s --scss %s %s %s %s -E "UTF-8"',
+            str_replace(
+                [ '#1', '#2', '#3', '#4', '#5', '#6'],
+                [ '%1$s', '%2$s', '%3$s', '%4$s', '%5$s', '%6$s'],
+                AgaviConfig::get('sass.cmd_tpl', '#1 #2 --scss #3 #4 #5 #6 -E "UTF-8"')
+            ),
             AgaviConfig::get('sass.env', 'RUBYOPT="" LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8"'),
             ProcessUtils::escapeArgument(AgaviConfig::get('sass.cmd', '/usr/local/bin/sass')),
             ProcessUtils::escapeArgument('--style=' . $style),
@@ -303,7 +307,11 @@ class AssetCompiler
          * '/some/input_file.scss':'some_output_file.css'
          */
         $command = sprintf(
-            '%s %s --watch --scss %s %s %s:%s',
+            str_replace(
+                [ '#1', '#2', '#3', '#4', '#5', '#6'],
+                [ '%1$s', '%2$s', '%3$s', '%4$s', '%5$s', '%6$s'],
+                AgaviConfig::get('sass.watch_cmd_tpl', '#1 #2 --watch #3 #4 #5:#6')
+            ),
             AgaviConfig::get('sass.env', 'RUBYOPT="" LANG=en_US.UTF-8'),
             ProcessUtils::escapeArgument(AgaviConfig::get('sass.cmd', '/usr/local/bin/sass')),
             ProcessUtils::escapeArgument('--style=' . $style),
