@@ -26,15 +26,15 @@
             <connection name="Default.Mailer.Null" class="Honeybee\Infrastructure\DataAccess\Connector\SwiftMailer\NullConnector" />
 
             <connection name="Files.Local" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
-                <setting name="directory">%core.app_dir%/../data/files</setting>
+                <setting name="directory">%core.data_dir%/files</setting>
             </connection>
 
             <connection name="Files.Local.Temp" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
-                <setting name="directory">%core.app_dir%/../data/temp_files</setting>
+                <setting name="directory">%core.data_dir%/temp_files</setting>
             </connection>
 
             <connection name="ProcessState.Store" class="Honeybee\Infrastructure\DataAccess\Connector\Flysystem\LocalConnector">
-                <setting name="directory">%core.app_dir%/../data/process_states</setting>
+                <setting name="directory">%core.data_dir%/process_states</setting>
             </connection>
 
             <connection name="ProcessState.Cache" class="Honeybee\Infrastructure\DataAccess\Connector\Memory\ArrayConnector" />

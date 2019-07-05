@@ -75,42 +75,30 @@ AgaviConfig::set(
 );
 
 // allow a custom cache directory location
-$cache_dir = getenv('APP_CACHE_DIR');
 //$cache_dir = '/dev/shm/cache';
+$cache_dir = getenv('APP_CACHE_DIR');
 if ($cache_dir === false) {
-    // default cache directory takes environment into account to mitigate cases
-    // where the environment on a server is switched and the cache isn't cleared
-    AgaviConfig::set(
-        'core.cache_dir',
-        AgaviConfig::get('core.app_dir') . '/cache', // . AgaviConfig::get('core.environment'),
-        true, // overwrite
-        true // readonly
-    );
-    AgaviConfig::set(
-        'core.cache_dir_without_env',
-        AgaviConfig::get('core.app_dir') . '/cache',
-        true,
-        true
-    );
-} else {
-    // use cache directory given by environment variable
-    $cache_dir = realpath($cache_dir);
-    AgaviConfig::set('core.cache_dir', $cache_dir, true, true); // overwrite, readonly
-    AgaviConfig::set('core.cache_dir_without_env', $cache_dir, true, true);
+    $cache_dir = AgaviConfig::get('core.app_dir') . '/cache'; // . AgaviConfig::get('core.environment')
 }
+AgaviConfig::set('core.cache_dir', $cache_dir, true, true); // overwrite, readonly
+//if (!is_dir($cache_dir)) {
+//    mkdir($cache_dir, 0777, true);
+//}
 
 // default log dir
 $log_dir = getenv('APP_LOG_DIR');
 if ($log_dir === false) {
-    AgaviConfig::set(
-        'core.log_dir',
-        AgaviConfig::get('core.app_dir') . '/log',
-        true, // overwrite
-        true // readonly
-    );
-} else {
-    AgaviConfig::set('core.log_dir', $log_dir, true, true); // overwrite, readonly
+    $log_dir = AgaviConfig::get('core.app_dir') . '/log';
 }
+AgaviConfig::set('core.log_dir', $log_dir, true, true); // overwrite, readonly
+
+// default data dir
+$data_dir = getenv('APP_DATA_DIR');
+if ($data_dir === false) {
+    $data_dir = AgaviConfig::get('core.app_dir') . '/data';
+}
+AgaviConfig::set('core.data_dir', $data_dir, true, true); // overwrite, readonly
+
 // contexts are e.g. 'web', 'console', 'soap' or 'xmlrpc'
 $default_context = @$default_context ?: getenv('APP_CONTEXT');
 if (!$default_context) {

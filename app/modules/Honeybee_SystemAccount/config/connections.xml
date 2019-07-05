@@ -12,7 +12,7 @@
                 <setting name="port">%couchdb.port%</setting>
                 <setting name="transport">http</setting>
                 <setting name="database">%core.db_prefix%%2Bhoneybee-system_account</setting>
-                <setting name="status_test">/</setting>
+                <setting name="status_test">/%core.db_prefix%%2Bhoneybee-system_account</setting>
             </connection>
         </connections>
     </ae:configuration>
