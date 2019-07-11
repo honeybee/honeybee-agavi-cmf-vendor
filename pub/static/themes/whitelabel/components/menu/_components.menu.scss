@@ -21,6 +21,10 @@ $menu-toggle-transition-time: .3s !default;
     100% { opacity: 1; display: block; }
 }
 
+.menu__trigger:not(:checked) ~ .menu__panel {
+    visibility: hidden;
+}
+
 .menu__trigger:checked ~ .menu__backdrop {
     animation: MENU_BACKDROP 0.2s 1;
 }
