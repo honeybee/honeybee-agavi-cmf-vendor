@@ -52,7 +52,7 @@
         "php": ">=7.0.0",
         "lib-libxml": "*",
         "honeybee/agavi": "1.0.12",
-        "honeybee/honeybee": "^0.2.21",
+        "honeybee/honeybee": "dev-feature-elasticsearch7",
         "michelf/php-markdown": "^1.7",
         "monolog/monolog": "^1.22",
         "mthaml/mthaml": "^1.8",
