@@ -95,7 +95,7 @@ AgaviConfig::set('core.log_dir', $log_dir, true, true); // overwrite, readonly
 // default data dir
 $data_dir = getenv('APP_DATA_DIR');
 if ($data_dir === false) {
-    $data_dir = AgaviConfig::get('core.app_dir') . '/data';
+    $data_dir = AgaviConfig::get('core.app_dir') . '/../data';
 }
 AgaviConfig::set('core.data_dir', $data_dir, true, true); // overwrite, readonly
 
