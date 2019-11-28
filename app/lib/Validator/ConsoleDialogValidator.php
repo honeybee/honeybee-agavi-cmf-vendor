@@ -128,10 +128,12 @@ class ConsoleDialogValidator extends AgaviValidator
     {
         $this->printIntroduction();
 
+        $argvInput = new ArgvInput();
+        $input->setStream($this->input);
         if ($this->confirm) {
             // a simple yes/no confirmation dialog
             $this->data = $this->dialog->ask(
-                new ArgvInput,
+                $argvInput,
                 $this->output,
                 new ConfirmationQuestion($this->question, $this->default)
             );
@@ -142,14 +144,14 @@ class ConsoleDialogValidator extends AgaviValidator
                 return false;
             }
             $this->data = $this->dialog->ask(
-                new ArgvInput,
+                $argvInput,
                 $this->output,
                 new ChoiceQuestion($this->question, $this->choices, $this->default)
             );
         } else {
             // default behavior: ask for a valid value and allow autocompletion
             $this->data = $this->dialog->ask(
-                new ArgvInput,
+                $argvInput,
                 $this->output,
                 new Question($this->question, $this->default)
             );
@@ -235,9 +237,9 @@ class ConsoleDialogValidator extends AgaviValidator
         $helper_set = new HelperSet([ new FormatterHelper ]);
         $this->dialog = new QuestionHelper($this->output);
         $this->dialog->setHelperSet($helper_set);
-        if ($this->input) {
-            $this->dialog->setInputStream($this->input);
-        }
+        //if ($this->input) {
+        //    $this->dialog->setInputStream($this->input);
+        //}
 
         $this->random_id = uniqid('proxy_', true);
         $this->attempt = 0;

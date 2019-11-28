@@ -46,7 +46,7 @@ class RedirectValidator extends AgaviValidator
             new Constraints\Type([ 'type' => 'string' ]),
             new Constraints\Length([
                 'min' => $this->getParameter('min_length', 10),
-                'max' => $this->getParameter('max_length', 1000)
+                'max' => $this->getParameter('max_length', 4000)
             ]),
             new Constraints\Url([
                 'protocols' => $this->getParameter('allowed_protocols', [ 'http', 'https' ])

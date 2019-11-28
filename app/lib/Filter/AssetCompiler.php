@@ -6,7 +6,6 @@ use AgaviConfig;
 use InvalidArgumentException;
 use RuntimeException;
 use Symfony\Component\Process\Process;
-use Symfony\Component\Process\ProcessUtils;
 
 /**
  * The AssetPacker symlinks and compiles themes, compiles scss files and optimizes javascript files via r.js.
@@ -137,8 +136,9 @@ class AssetCompiler
         $output_file = $theme_directory . DIRECTORY_SEPARATOR . self::THEME_MAIN_CSS_FILE;
 
         $cmd = $this->getScssCommand($input_file, $output_file, $style);
+        $env = AgaviConfig::get('sass.env');
 
-        $report[$theme_directory] = self::runCommand($cmd, $theme_directory);
+        $report[$theme_directory] = self::runCommand($cmd, $theme_directory, $env);
         $report[$theme_directory]['name'] = 'Theme ' . basename($theme_directory);
 
         if (!$report[$theme_directory]['success']) {
@@ -174,8 +174,9 @@ class AssetCompiler
             $output_file =  $directory . DIRECTORY_SEPARATOR . self::MODULE_MAIN_CSS_FILE;
 
             $cmd = $this->getScssCommand($input_file, $output_file, $style);
+            $env = AgaviConfig::get('sass.env');
 
-            $report[$module_directory] = self::runCommand($cmd, $module_directory);
+            $report[$module_directory] = self::runCommand($cmd, $module_directory, $env);
             $report[$module_directory]['name'] = 'Module ' . $module_name;
 
             if (!$report[$module_directory]['success']) {
@@ -264,7 +265,7 @@ class AssetCompiler
      * @param string $output_file full path to .css file
      * @param string $style sass compilation style, e.g. "compressed" or "nested"
      *
-     * @return string sass scss compilation command
+     * @return array sass scss compilation command
      */
     public function getScssCommand($input_file, $output_file, $style = 'compressed')
     {
@@ -273,21 +274,18 @@ class AssetCompiler
          * '/opt/ruby/bin/sass' --scss --style nested --no-cache --unix-newlines --precision 3
          * '/some/input_file.scss' 'some_output_file.css'
          */
-        $command = sprintf(
-            str_replace(
-                [ '#1', '#2', '#3', '#4', '#5', '#6'],
-                [ '%1$s', '%2$s', '%3$s', '%4$s', '%5$s', '%6$s'],
-                AgaviConfig::get('sass.cmd_tpl', '#1 #2 --scss #3 #4 #5 #6 -E "UTF-8"')
-            ),
-            AgaviConfig::get('sass.env', 'RUBYOPT="" LC_ALL="en_US.UTF-8" LANG="en_US.UTF-8"'),
-            ProcessUtils::escapeArgument(AgaviConfig::get('sass.cmd', '/usr/local/bin/sass')),
-            ProcessUtils::escapeArgument('--style=' . $style),
-            $this->getSassCliOptions(),
-            ProcessUtils::escapeArgument($input_file),
-            ProcessUtils::escapeArgument($output_file)
-        );
+        $command = [
+            AgaviConfig::get('sass.cmd', '/usr/local/bin/sass'),
+            '--scss',
+            '--style='.$style,
+        ];
+        $sassCliOptions = $this->getSassCliOptions([]);
+        $files = [
+            $input_file,
+            $output_file,
+        ];
 
-        return $command;
+        return array_merge($command, $sassCliOptions, $files);
     }
 
     /**
@@ -297,7 +295,7 @@ class AssetCompiler
      * @param string $output_file full path to .css file
      * @param string $style sass compilation style, e.g. "compressed" or "nested"
      *
-     * @return string sass scss watch command
+     * @return array sass scss watch command
      */
     public function getScssWatchCommand($input_file, $output_file, $style = 'compressed')
     {
@@ -306,21 +304,16 @@ class AssetCompiler
          * '/opt/ruby/bin/sass' --watch --scss --style nested --no-cache --unix-newlines --precision 3
          * '/some/input_file.scss':'some_output_file.css'
          */
-        $command = sprintf(
-            str_replace(
-                [ '#1', '#2', '#3', '#4', '#5', '#6'],
-                [ '%1$s', '%2$s', '%3$s', '%4$s', '%5$s', '%6$s'],
-                AgaviConfig::get('sass.watch_cmd_tpl', '#1 #2 --watch #3 #4 #5:#6')
-            ),
-            AgaviConfig::get('sass.env', 'RUBYOPT="" LANG=en_US.UTF-8'),
-            ProcessUtils::escapeArgument(AgaviConfig::get('sass.cmd', '/usr/local/bin/sass')),
-            ProcessUtils::escapeArgument('--style=' . $style),
-            $this->getSassCliOptions("--trace"),
-            ProcessUtils::escapeArgument($input_file),
-            ProcessUtils::escapeArgument($output_file)
-        );
+        $command = [
+            AgaviConfig::get('sass.env', ''),
+            AgaviConfig::get('sass.cmd', '/usr/local/bin/sass'),
+            '--watch',
+            '--style='.$style,
+        ];
+        $sassCliOptions = $this->getSassCliOptions(['--trace']);
+        $files = [$input_file.':'.$output_file];
 
-        return $command;
+        return array_merge($command, $sassCliOptions, $files);
     }
 
     /**
@@ -343,14 +336,12 @@ class AssetCompiler
 
         $name = basename($buildfile);
 
-        $rjs_compile_command = sprintf(
-            '%s -o %s %s',
-            ProcessUtils::escapeArgument(
-                AgaviConfig::get('requirejs.cmd_rjs', 'vendor/node_modules/honeybee/node_modules/.bin/r.js')
-            ),
-            ProcessUtils::escapeArgument($buildfile),
-            ProcessUtils::escapeArgument('optimize=' . $style)
-        );
+        $rjs_compile_command = [
+            AgaviConfig::get('requirejs.cmd_rjs', 'vendor/node_modules/honeybee/node_modules/.bin/r.js'),
+            '-o',
+            $buildfile,
+            'optimize='.$style,
+        ];
 
         $report[$name] = self::runCommand($rjs_compile_command, AgaviConfig::get('core.cms_dir'));
         $report[$name]['name'] = $name;
@@ -384,28 +375,29 @@ class AssetCompiler
     /**
      * Runs the given command in the given working directory.
      *
-     * @param string $command command to execute (please escape arguments via e.g. using ProcessUtils::escapeArgument())
+     * @param array $command command to execute
      * @param string $working_directory
+     * @param array|null $env
      *
      * @return array with "exitcode", "exitcode_text", "stdout", "stderr" and "success" flag
      *
      * @throws \InvalidArgumentException when working directory is not readable
      * @throws \Symfony\Component\Process\Exception\RuntimeException on errors executing the command
      */
-    public static function runCommand($command, $working_directory)
+    public static function runCommand($command, $working_directory, array $env = null)
     {
         if (!is_readable($working_directory)) {
             throw new InvalidArgumentException('Given working directory is not readable: ' . $working_directory);
         }
 
         $result = array(
-            'cmd' => $command,
+            'cmd' => implode(' ', $command),
             'stdout' => '',
             'stderr' => '',
             'success' => false
         );
 
-        $process = new Process($command, $working_directory);
+        $process = new Process($command, $working_directory, $env);
         $process->setTimeout(300);
         $process->run();
 
@@ -443,20 +435,20 @@ class AssetCompiler
     }
 
     /**
-     * @param string $additional_arguments additional CLI arguments to use (like --trace); please escape the arguments!
+     * @param array $additional_arguments additional CLI arguments to use (like --trace)
      *
-     * @return string default CLI options for SASS commands
+     * @return array default CLI options for SASS commands
      */
-    protected function getSassCliOptions($additional_arguments = '')
+    protected function getSassCliOptions(array $additional_arguments = [])
     {
-        $sass_options = AgaviConfig::get('sass.cli_options', "'--no-cache' '--unix-newlines' '--precision=3'");
+        $sass_options = AgaviConfig::get('sass.cli_options', ['--no-cache', '--unix-newlines', '--precision=3']);
 
         if (true === AgaviConfig::get('sass.debug', false)) {
-            $sass_options .= " '--debug-info' '--line-numbers' '--line-comments' "; // '--trace'
+            $sass_options = array_merge($sass_options, ['--debug-info', '--line-numbers', '--line-comments']); // '--trace'
         }
 
         if (!empty($additional_arguments)) {
-            $sass_options .= ' ' . $additional_arguments . ' ';
+            $sass_options = array_merge($sass_options, $additional_arguments);
         }
 
         return $sass_options;

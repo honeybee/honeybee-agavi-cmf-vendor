@@ -14,7 +14,7 @@ class ConsoleStateMachineRenderer extends StateMachineRenderer
         $renderer = new DotGraphRenderer();
         $dot_graph = $renderer->renderGraph($this->state_machine);
 
-        $process = new Process('dot -Tsvg');
+        $process = new Process(['dot', '-Tsvg']);
         $process->setInput($dot_graph);
         $process->run();
 
