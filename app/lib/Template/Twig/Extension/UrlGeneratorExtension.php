@@ -3,13 +3,13 @@
 namespace Honeygavi\Template\Twig\Extension;
 
 use Honeygavi\Ui\UrlGeneratorInterface;
-use Twig_Extension;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Extension that wraps the UrlGeneratorInterface methods to make them available in twig templates.
  */
-class UrlGeneratorExtension extends Twig_Extension
+class UrlGeneratorExtension extends AbstractExtension
 {
     protected $url_generator;
 
@@ -21,7 +21,7 @@ class UrlGeneratorExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_Function('generateUrl', function ($name, array $parameters = [], array $options = []) {
+            new TwigFunction('generateUrl', function ($name, array $parameters = [], array $options = []) {
                 return $this->generateUrl($name, $parameters, $options);
             }),
         ];

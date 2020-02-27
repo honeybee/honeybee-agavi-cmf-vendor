@@ -13,8 +13,6 @@ use DateTime;
 use Exception;
 use Honeybee\Common\Util\ArrayToolkit;
 use Honeybee\Common\Util\StringToolkit;
-use Honeygavi\Logging\Logger;
-use Honeygavi\Logging\Psr3Logger;
 use Honeybee\Model\Aggregate\AggregateRoot;
 use Honeybee\Model\Aggregate\AggregateRootType;
 use InvalidArgumentException;

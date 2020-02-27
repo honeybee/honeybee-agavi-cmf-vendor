@@ -6,8 +6,6 @@ use AgaviConfig;
 use AgaviContext;
 use AgaviILogger;
 use AgaviLogger;
-use Honeygavi\Logging\Logger;
-use Honeygavi\Logging\LoggerManager;
 use Psr\Log\LogLevel;
 use Psr\Log\LoggerInterface;
 

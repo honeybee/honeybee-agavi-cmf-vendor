@@ -4,7 +4,6 @@ namespace Honeygavi\Ui\Renderer\Html;
 
 use Honeybee\Common\Util\StringToolkit;
 use Honeygavi\Ui\Renderer\Html\Trellis\Runtime\Attribute\HtmlAttributeRenderer;
-use Zend\Permissions\Acl\Resource\GenericResource;
 
 class AclRolesRenderer extends HtmlAttributeRenderer
 {

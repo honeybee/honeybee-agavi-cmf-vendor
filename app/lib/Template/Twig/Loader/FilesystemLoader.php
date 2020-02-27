@@ -2,8 +2,8 @@
 
 namespace Honeygavi\Template\Twig\Loader;
 
-use Twig_Loader_Filesystem;
-use Twig_Error_Loader;
+use Twig\Loader\FilesystemLoader as BaseFilesystemLoader;
+use Twig\Error\LoaderError;
 
 /**
  * Extends the Twig_Loader_Filesystem class to support whitelisting of certain
@@ -12,7 +12,7 @@ use Twig_Error_Loader;
  *
  * @see https://github.com/twigphp/twig/issues/1438
  */
-class FilesystemLoader extends Twig_Loader_Filesystem
+class FilesystemLoader extends BaseFilesystemLoader
 {
     /**
      * Default string used as scope to append to cache key class name.
@@ -98,7 +98,7 @@ class FilesystemLoader extends Twig_Loader_Filesystem
      *
      * @return boolean true if name matches the internally set allowed file extensions
      *
-     * @throws Twig_Error_Loader
+     * @throws LoaderError
      */
     protected function checkAllowedExtensions($name)
     {
@@ -118,7 +118,7 @@ class FilesystemLoader extends Twig_Loader_Filesystem
                 $allowed_extensions_hint = '[]';
             }
 
-            throw new Twig_Error_Loader(
+            throw new LoaderError(
                 sprintf(
                     'Given template "%s" does not have an allowed file extension. Allowed are: %s.',
                     $name,

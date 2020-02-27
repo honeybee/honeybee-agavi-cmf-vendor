@@ -48,26 +48,36 @@
 
     "prefer-stable": true,
 
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../honeybee",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+
     "require": {
-        "php": ">=7.0.0",
+        "php": "^7.2",
         "lib-libxml": "*",
         "honeybee/agavi": "1.0.12",
-        "honeybee/honeybee": "^0.2.23",
-        "michelf/php-markdown": "^1.7",
-        "monolog/monolog": "^1.22",
+        "honeybee/honeybee": "dev-master",
+        "michelf/php-markdown": "^1.9",
+        "monolog/monolog": "^1.25",
         "mthaml/mthaml": "^1.8",
-        "symfony/console": "^4.0",
-        "symfony/finder": "^4.0",
-        "symfony/process": "^4.0",
-        "symfony/validator": "^4.0",
+        "symfony/console": "^4.0 || ^5.0",
+        "symfony/finder": "^4.0 || ^5.0",
+        "symfony/process": "^4.0 || ^5.0",
+        "symfony/validator": "^4.0 || ^5.0",
         "swiftmailer/swiftmailer": "^5.4",
-        "twig/twig": "^2.0",
-        "twig/extensions": "^1.4.0",
-        "ql/uri-template": "^1.1",
-        "roave/security-advisories": "master@dev"
+        "twig/twig": "^2.0 || ^3.0",
+        "twig/intl-extra": "^3.0",
+        "ql/uri-template": "^1.1"
     },
 
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "phpunit/phpunit": "^5.7 || ^6.0 || ^7.0",
         "phpmd/phpmd": "^2.6",
         "squizlabs/php_codesniffer": "^3.5",

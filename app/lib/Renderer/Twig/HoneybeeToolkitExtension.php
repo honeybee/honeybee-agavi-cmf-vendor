@@ -3,8 +3,8 @@
 namespace Honeygavi\Renderer\Twig;
 
 use AgaviConfig;
-use Twig_Extension;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Twig extension to have AgaviConfig methods available as simple
@@ -12,12 +12,12 @@ use Twig_Function;
  *
  * In addition to that there are some filters that may be useful.
  */
-class HoneybeeToolkitExtension extends Twig_Extension
+class HoneybeeToolkitExtension extends AbstractExtension
 {
     public function getFunctions()
     {
         return [
-            new Twig_Function('ac', function ($setting_name, $default_value = null) {
+            new TwigFunction('ac', function ($setting_name, $default_value = null) {
                 return $this->ac($setting_name, $default_value);
             }),
         ];

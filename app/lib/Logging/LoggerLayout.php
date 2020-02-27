@@ -5,8 +5,6 @@ namespace Honeygavi\Logging;
 use AgaviLoggerLayout;
 use AgaviLoggerMessage;
 use DateTime;
-use Honeygavi\Logging\Logger;
-use Honeygavi\Logging\LoggerManager;
 
 /**
  * Default layout used for log messages. By default an ISO-8601 compatible

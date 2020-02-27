@@ -6,7 +6,6 @@ use AgaviLogger;
 use AgaviLoggerAppender;
 use AgaviLoggerMessage;
 use AgaviLoggingException;
-use Honeygavi\Logging\FileLoggerAppender;
 use InvalidArgumentException;
 use Psr\Log\LogLevel;
 

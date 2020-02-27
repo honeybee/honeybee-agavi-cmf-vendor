@@ -19,7 +19,7 @@ interface AclServiceInterface
     public function getRoles();
 
     /**
-     * @return Zend\Permissions\Acl\Acl access control list for the given role id
+     * @return Laminas\Permissions\Acl\Acl access control list for the given role id
      */
     public function getAclForRole($role_id);
 

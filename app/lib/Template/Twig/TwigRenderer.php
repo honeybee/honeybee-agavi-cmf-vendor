@@ -8,8 +8,7 @@ use Honeygavi\Template\TemplateRendererInterface;
 use Honeygavi\Template\Twig\Extension\ToolkitExtension;
 use Honeygavi\Template\Twig\Loader\FilesystemLoader;
 use Symfony\Component\Filesystem\Filesystem;
-use Twig_Environment;
-use Twig_Loader_String;
+use Twig\Environment;
 
 class TwigRenderer implements TemplateRendererInterface
 {
@@ -30,10 +29,10 @@ class TwigRenderer implements TemplateRendererInterface
     ];
 
     /**
-     * @param Twig_Environment $twig configured twig instance
+     * @param Environment $twig configured twig instance
      * @param Filesystem $filesystem filesystem instance with dumpFile() method
      */
-    public function __construct(Twig_Environment $twig, Filesystem $filesystem)
+    public function __construct(Environment $twig, Filesystem $filesystem)
     {
         $this->twig = $twig;
         $this->filesystem = $filesystem;
@@ -61,7 +60,7 @@ class TwigRenderer implements TemplateRendererInterface
      * @param array $data variables and context data for template rendering
      * @param array $settings optional settings to configure rendering process; IGNORED for twig
      *
-     * @throws Symfony\Component\Filesystem\Exception\IOException if target file cannot be written
+     * @throws \Symfony\Component\Filesystem\Exception\IOException if target file cannot be written
      */
     public function renderToFile($template, $target_file, array $data = [], array $settings = [])
     {
@@ -102,6 +101,7 @@ class TwigRenderer implements TemplateRendererInterface
      * Default twig extension added: Honeygavi\Template\Twig\Extensions\ToolkitExtension
      *
      * @param array $settings configuration for the renderer and its default twig instance
+     * @return TwigRenderer
      */
     public static function create(array $settings = [])
     {
@@ -115,11 +115,11 @@ class TwigRenderer implements TemplateRendererInterface
         $loader = static::createTwigLoader($settings);
 
         $twig_options = (array)$settings->get('twig_options', []);
-        $twig = new Twig_Environment($loader, $twig_options);
+        $twig = new Environment($loader, $twig_options);
 
         $twig_extensions = (array)$settings->get('twig_extensions', []);
         foreach ($twig_extensions as $extension_class) {
-            if (is_object($extension_class)) {
+            if (\is_object($extension_class)) {
                 $twig->addExtension($extension_class);
             } else {
                 $twig->addExtension(new $extension_class());

@@ -9,8 +9,8 @@ use AgaviSecurityUser;
 use Exception;
 use Honeygavi\Security\Acl\AclService;
 use Honeybee\UserInterface;
-use Zend\Permissions\Acl\Resource\ResourceInterface;
-use Zend\Permissions\Acl\Role\RoleInterface;
+use Laminas\Permissions\Acl\Resource\ResourceInterface;
+use Laminas\Permissions\Acl\Role\RoleInterface;
 
 /**
  * The AclSecurityUser is aware of the system's available activities and of the specific permissions,

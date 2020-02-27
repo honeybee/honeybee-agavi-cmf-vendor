@@ -3,14 +3,14 @@
 namespace Honeygavi\Template\Twig\Extension;
 
 use Honeygavi\Ui\TranslatorInterface;
-use Twig_Extension;
-use Twig_Filter;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
 /**
  * Extension that wraps the TranslatorInterface methods to make them available in twig templates.
  */
-class TranslatorExtension extends Twig_Extension
+class TranslatorExtension extends AbstractExtension
 {
     protected $translator;
 
@@ -22,7 +22,7 @@ class TranslatorExtension extends Twig_Extension
     public function getFilters()
     {
         return [
-            new Twig_Filter('translate', function (
+            new TwigFilter('translate', function (
                 $message,
                 $domain = null,
                 $locale = null,
@@ -31,16 +31,16 @@ class TranslatorExtension extends Twig_Extension
             ) {
                 return $this->translate($message, $domain, $locale, $params, $fallback);
             }),
-            new Twig_Filter('translateCurrency', function ($currency, $domain = null, $locale = null) {
+            new TwigFilter('translateCurrency', function ($currency, $domain = null, $locale = null) {
                 return $this->translateCurrency($currency, $domain, $locale);
             }),
-            new Twig_Filter('translateNumber', function ($number, $domain = null, $locale = null) {
+            new TwigFilter('translateNumber', function ($number, $domain = null, $locale = null) {
                 return $this->translateNumber($number, $domain, $locale);
             }),
-            new Twig_Filter('translateDate', function ($date, $domain = null, $locale = null) {
+            new TwigFilter('translateDate', function ($date, $domain = null, $locale = null) {
                 return $this->translateDate($date, $domain, $locale);
             }),
-            new Twig_Filter('translatePlural', function (
+            new TwigFilter('translatePlural', function (
                 $message_singular,
                 $message_plural,
                 $amount,
@@ -67,7 +67,7 @@ class TranslatorExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_Function('_', function (
+            new TwigFunction('_', function (
                 $message,
                 $domain = null,
                 $locale = null,
@@ -76,16 +76,16 @@ class TranslatorExtension extends Twig_Extension
             ) {
                 return $this->translate($message, $domain, $locale, $params, $fallback);
             }),
-            new Twig_Function('_c', function ($currency, $domain = null, $locale = null) {
+            new TwigFunction('_c', function ($currency, $domain = null, $locale = null) {
                 return $this->translateCurrency($currency, $domain, $locale);
             }),
-            new Twig_Function('_n', function ($number, $domain = null, $locale = null) {
+            new TwigFunction('_n', function ($number, $domain = null, $locale = null) {
                 return $this->translateNumber($number, $domain, $locale);
             }),
-            new Twig_Function('_d', function ($date, $domain = null, $locale = null) {
+            new TwigFunction('_d', function ($date, $domain = null, $locale = null) {
                 return $this->translateDate($date, $domain, $locale);
             }),
-            new Twig_Function('__', function (
+            new TwigFunction('__', function (
                 $message_singular,
                 $message_plural,
                 $amount,

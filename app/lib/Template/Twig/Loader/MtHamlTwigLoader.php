@@ -3,6 +3,11 @@
 namespace Honeygavi\Template\Twig\Loader;
 
 use MtHaml\Environment;
+use Twig\Error\LoaderError;
+use Twig\ExistsLoaderInterface;
+use Twig\LoaderInterface;
+use Twig\Source;
+use Twig\SourceContextLoaderInterface;
 
 /**
  * Example integration of MtHaml with Twig, by proxying the Loader
@@ -17,12 +22,12 @@ use MtHaml\Environment;
  * $twig->setLoader($mthaml, new \MtHaml\Support\Twig\Loader($origLoader));
  * </code>
  */
-class MtHamlTwigLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface, \Twig_SourceContextLoaderInterface
+class MtHamlTwigLoader implements LoaderInterface, ExistsLoaderInterface, SourceContextLoaderInterface
 {
     protected $env;
     protected $loader;
 
-    public function __construct(Environment $env, \Twig_LoaderInterface $loader)
+    public function __construct(Environment $env, LoaderInterface $loader)
     {
         $this->env = $env;
         $this->loader = $loader;
@@ -38,7 +43,7 @@ class MtHamlTwigLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInter
         $code = $source->getCode();
         $code = $this->renderHaml($name, $code);
 
-        $source = new \Twig_Source($code, $source->getName(), $source->getPath());
+        $source = new Source($code, $source->getName(), $source->getPath());
 
         return $source;
     }
@@ -77,16 +82,16 @@ class MtHamlTwigLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInter
      */
     public function exists($name)
     {
-        if ($this->loader instanceof \Twig_ExistsLoaderInterface) {
+        if ($this->loader instanceof ExistsLoaderInterface) {
             return $this->loader->exists($name);
         }
 
-        if ($this->loader instanceof \Twig_SourceContextLoaderInterface) {
+        if ($this->loader instanceof SourceContextLoaderInterface) {
             try {
                 $this->loader->getSourceContext($name);
 
                 return true;
-            } catch (\Twig_Error_Loader $e) {
+            } catch (LoaderError $e) {
                 return false;
             }
         }

@@ -3,13 +3,13 @@
 namespace Honeygavi\Template\Twig\Extension;
 
 use Honeybee\EnvironmentInterface;
-use Twig_Extension;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Extension that wraps the EnvironmentInterface methods to make them available in twig templates.
  */
-class EnvironmentExtension extends Twig_Extension
+class EnvironmentExtension extends AbstractExtension
 {
     protected $environment;
 
@@ -21,7 +21,7 @@ class EnvironmentExtension extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_Function('getEnvironment', function () {
+            new TwigFunction('getEnvironment', function () {
                 return $this->getEnvironment();
             }),
         ];

@@ -2,8 +2,6 @@
 
 namespace Honeygavi\Logging;
 
-use Honeygavi\Logging\FileLoggerAppender;
-use Honeygavi\Logging\LoggerManager;
 use AgaviLoggerMessage;
 
 /**

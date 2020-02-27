@@ -18,7 +18,7 @@ use Honeybee\Infrastructure\Command\CommandInterface;
 use Honeybee\Infrastructure\DataAccess\Query\QueryInterface;
 use Honeybee\Projection\ProjectionTypeInterface;
 use Honeygavi\Ui\Activity\ActivityMap;
-use Zend\Permissions\Acl\Resource\ResourceInterface;
+use Laminas\Permissions\Acl\Resource\ResourceInterface;
 
 /**
  * The Base\Action serves as the base action to all actions implemented inside of honeybee.

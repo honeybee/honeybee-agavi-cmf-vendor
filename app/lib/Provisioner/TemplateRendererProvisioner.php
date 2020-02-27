@@ -16,12 +16,9 @@ use Honeygavi\Template\Twig\Extension\UrlGeneratorExtension;
 use Honeygavi\Template\Twig\Extension\EnvironmentExtension;
 use Honeygavi\Template\Twig\Loader\FilesystemLoader;
 use Honeybee\ServiceDefinitionInterface;
-use Twig_Environment;
-use Twig_Extension_Debug;
-use Twig_Extensions_Extension_Array;
-use Twig_Extensions_Extension_Date;
-use Twig_Extensions_Extension_Intl;
-use Twig_Extensions_Extension_Text;
+use Twig\Environment;
+use Twig\Extension\DebugExtension;
+use Twig\Extra\Intl\IntlExtension;
 
 class TemplateRendererProvisioner extends AbstractProvisioner
 {
@@ -43,7 +40,7 @@ class TemplateRendererProvisioner extends AbstractProvisioner
     {
         $loader = $this->createTwigLoader($settings);
 
-        $twig = new Twig_Environment($loader, (array)$settings->get('twig_options', []));
+        $twig = new Environment($loader, (array)$settings->get('twig_options', []));
 
         $twig_extensions = (array)$settings->get('twig_extensions', []);
         foreach ($twig_extensions as $extension_class) {
@@ -74,20 +71,17 @@ class TemplateRendererProvisioner extends AbstractProvisioner
         ];
 
         $settings['twig_extensions'] = [
-            Twig_Extensions_Extension_Text::CLASS,
-            Twig_Extensions_Extension_Intl::CLASS,
-            Twig_Extensions_Extension_Array::CLASS,
-            Twig_Extensions_Extension_Date::CLASS,
-            ToolkitExtension::CLASS,
-            HoneybeeToolkitExtension::CLASS,
-            TranslatorExtension::CLASS,
-            UrlGeneratorExtension::CLASS,
-            EnvironmentExtension::CLASS,
-            MarkdownExtension::CLASS
+            ToolkitExtension::class,
+            HoneybeeToolkitExtension::class,
+            TranslatorExtension::class,
+            UrlGeneratorExtension::class,
+            EnvironmentExtension::class,
+            IntlExtension::class,
+            MarkdownExtension::class
         ];
 
         if ($settings['twig_options']['debug'] === true) {
-            $settings['twig_extensions'][] = Twig_Extension_Debug::CLASS;
+            $settings['twig_extensions'][] = DebugExtension::class;
         }
 
         $settings['template_paths'] = [

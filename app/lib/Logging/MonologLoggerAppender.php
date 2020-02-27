@@ -6,7 +6,6 @@ use AgaviLogger;
 use AgaviLoggerAppender;
 use AgaviLoggerMessage;
 use AgaviLoggingException;
-use Honeygavi\Logging\LoggerManager;
 use Honeygavi\Logging\Monolog\DefaultSetup;
 use InvalidArgumentException;
 use Monolog\Logger as MonologLogger;

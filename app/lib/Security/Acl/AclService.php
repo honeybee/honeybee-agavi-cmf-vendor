@@ -9,9 +9,9 @@ use Honeygavi\Security\Acl\Permission\PermissionListMap;
 use Honeygavi\Security\Acl\Permission\PermissionServiceInterface;
 use Honeygavi\Ui\Activity\ActivityServiceInterface;
 use Honeybee\Infrastructure\Expression\ExpressionServiceInterface;
-use Zend\Permissions\Acl\Resource\GenericResource;
-use Zend\Permissions\Acl\Role\GenericRole;
-use Zend\Permissions\Acl\Acl;
+use Laminas\Permissions\Acl\Resource\GenericResource;
+use Laminas\Permissions\Acl\Role\GenericRole;
+use Laminas\Permissions\Acl\Acl;
 
 class AclService extends BaseObject implements AclServiceInterface
 {
@@ -60,7 +60,7 @@ class AclService extends BaseObject implements AclServiceInterface
     }
 
     /**
-     * @return Zend\Permissions\Acl\Acl access control list for the given role id
+     * @return Laminas\Permissions\Acl\Acl access control list for the given role id
      */
     public function getAclForRole($role_id)
     {

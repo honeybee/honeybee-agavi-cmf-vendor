@@ -5,7 +5,6 @@ namespace Honeygavi\Logging;
 use AgaviConfig;
 use AgaviContext;
 use AgaviLoggerMessage;
-use Honeygavi\Logging\FileLoggerAppender;
 
 /**
  * Extends the FileLoggerAppender message with various system, agavi and
