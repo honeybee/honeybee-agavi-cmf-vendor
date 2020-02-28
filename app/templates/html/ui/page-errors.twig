@@ -2,7 +2,7 @@
 <div class="page-errors">
     <div class="page-errors-layout">
         <div class="box">
-            {%- spaceless -%}
+            {%- apply spaceless -%}
             <div class="hb-errors jsb_ jsb_Honeybee_Core/ui/GlobalErrors">
                 <ul class="hb-errors__global">{%- block pageerrors_global -%}{% endblock %}</ul>
                 <div class="hb-errors__specific">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            {%- endspaceless -%}
+            {%- endapply -%}
         </div>
     </div>
 </div>

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6cc694dad0bb17007d3338b792d194c3",
+    "content-hash": "d9dbd5b20dfefadf7802f2ccb6c16474",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -693,16 +693,16 @@
         },
         {
             "name": "honeybee/agavi",
-            "version": "1.0.12",
+            "version": "1.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/honeybee/agavi.git",
-                "reference": "2c6049ba1c69d7e96d272086397458a4c6838930"
+                "reference": "933dc1b103c60b17c5c76ac12de341ce566a2246"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/agavi/zipball/2c6049ba1c69d7e96d272086397458a4c6838930",
-                "reference": "2c6049ba1c69d7e96d272086397458a4c6838930",
+                "url": "https://api.github.com/repos/honeybee/agavi/zipball/933dc1b103c60b17c5c76ac12de341ce566a2246",
+                "reference": "933dc1b103c60b17c5c76ac12de341ce566a2246",
                 "shasum": ""
             },
             "require": {
@@ -753,15 +753,20 @@
                 "framework",
                 "mvc"
             ],
-            "time": "2018-06-07T08:20:37+00:00"
+            "time": "2020-02-28T15:54:32+00:00"
         },
         {
             "name": "honeybee/honeybee",
-            "version": "dev-master",
+            "version": "0.2.24",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/honeybee/honeybee.git",
+                "reference": "7d2d2b2ea21c08ffd9507df92ed950f1fe83e3f3"
+            },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/ba506fa0e9d2d6a3dfb41baec584328f0bd8d98b",
-                "reference": "ba506fa0e9d2d6a3dfb41baec584328f0bd8d98b",
+                "url": "https://api.github.com/repos/honeybee/honeybee/zipball/7d2d2b2ea21c08ffd9507df92ed950f1fe83e3f3",
+                "reference": "7d2d2b2ea21c08ffd9507df92ed950f1fe83e3f3",
                 "shasum": ""
             },
             "require": {
@@ -788,7 +793,7 @@
                 "php-amqplib/php-amqplib": "^2.7.0",
                 "phpmd/phpmd": "^2.6",
                 "phpunit/phpunit": "^6.5 || ^7.0",
-                "roave/security-advisories": "master@dev",
+                "roave/security-advisories": "dev-master",
                 "squizlabs/php_codesniffer": "^3.0"
             },
             "suggest": {
@@ -843,7 +848,7 @@
                 "hexagonal",
                 "messaging"
             ],
-            "time": "2019-11-28T13:04:39+00:00"
+            "time": "2020-02-28T15:59:27+00:00"
         },
         {
             "name": "honeybee/trellis",
@@ -1169,21 +1174,21 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.25.3",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "fa82921994db851a8becaf3787a9e73c5976b6f1"
+                "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/fa82921994db851a8becaf3787a9e73c5976b6f1",
-                "reference": "fa82921994db851a8becaf3787a9e73c5976b6f1",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c861fcba2ca29404dc9e617eedd9eff4616986b8",
+                "reference": "c861fcba2ca29404dc9e617eedd9eff4616986b8",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0",
-                "psr/log": "~1.0"
+                "php": "^7.2",
+                "psr/log": "^1.0.1"
             },
             "provide": {
                 "psr/log-implementation": "1.0.0"
@@ -1191,33 +1196,36 @@
             "require-dev": {
                 "aws/aws-sdk-php": "^2.4.9 || ^3.0",
                 "doctrine/couchdb": "~1.0@dev",
-                "graylog2/gelf-php": "~1.0",
-                "jakub-onderka/php-parallel-lint": "0.9",
+                "elasticsearch/elasticsearch": "^6.0",
+                "graylog2/gelf-php": "^1.4.2",
+                "jakub-onderka/php-parallel-lint": "^0.9",
                 "php-amqplib/php-amqplib": "~2.4",
                 "php-console/php-console": "^3.1.3",
-                "phpunit/phpunit": "~4.5",
-                "phpunit/phpunit-mock-objects": "2.3.0",
+                "phpspec/prophecy": "^1.6.1",
+                "phpunit/phpunit": "^8.3",
+                "predis/predis": "^1.1",
+                "rollbar/rollbar": "^1.3",
                 "ruflin/elastica": ">=0.90 <3.0",
-                "sentry/sentry": "^0.13",
                 "swiftmailer/swiftmailer": "^5.3|^6.0"
             },
             "suggest": {
                 "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
                 "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "elasticsearch/elasticsearch": "Allow sending log messages to an Elasticsearch server via official client",
                 "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
-                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "ext-mbstring": "Allow to work properly with unicode symbols",
+                "ext-mongodb": "Allow sending log messages to a MongoDB server (via driver)",
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
-                "mongodb/mongodb": "Allow sending log messages to a MongoDB server via PHP Driver",
+                "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
                 "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
-                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
-                "sentry/sentry": "Allow sending log messages to a Sentry server"
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "2.x-dev"
                 }
             },
             "autoload": {
@@ -1243,7 +1251,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2019-12-20T14:15:16+00:00"
+            "time": "2019-12-20T14:22:59+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -1950,32 +1958,29 @@
         },
         {
             "name": "shrink0r/monatic",
-            "version": "0.2.1",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shrink0r/monatic.git",
-                "reference": "f39b8b2ef68a397d31d844341487412b335fd107"
+                "reference": "52c03bafbf318a728005360527620ad316d0b65b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shrink0r/monatic/zipball/f39b8b2ef68a397d31d844341487412b335fd107",
-                "reference": "f39b8b2ef68a397d31d844341487412b335fd107",
+                "url": "https://api.github.com/repos/shrink0r/monatic/zipball/52c03bafbf318a728005360527620ad316d0b65b",
+                "reference": "52c03bafbf318a728005360527620ad316d0b65b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0",
-                "symfony/property-access": "~3.1"
+                "php": "^7.0",
+                "symfony/property-access": "^4.0 || ^5.0"
             },
             "require-dev": {
-                "jakub-onderka/php-console-highlighter": "^0.3",
-                "jakub-onderka/php-parallel-lint": "^0.9",
-                "phploc/phploc": "^3.0",
-                "phpmd/phpmd": "^2.4",
-                "phpunit/phpunit": "^5.5",
-                "sami/sami": "^3.3.0",
-                "satooshi/php-coveralls": "master@dev",
-                "sebastian/phpcpd": "^2.0",
-                "squizlabs/php_codesniffer": "^2.6"
+                "php-coveralls/php-coveralls": "^2.2",
+                "phploc/phploc": "^5.0 || ^6.0",
+                "phpmd/phpmd": "^2.8",
+                "phpunit/phpunit": "^5.5 || ^6.0 || ^7.0",
+                "roave/security-advisories": "dev-master",
+                "squizlabs/php_codesniffer": "^2.7"
             },
             "type": "library",
             "autoload": {
@@ -1991,7 +1996,7 @@
             "keywords": [
                 "monad"
             ],
-            "time": "2016-12-08T16:22:56+00:00"
+            "time": "2020-02-28T10:27:15+00:00"
         },
         {
             "name": "shrink0r/workflux",
@@ -2464,26 +2469,26 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "v4.4.4",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
-                "reference": "f419ab2853cc00471ffd7fc18e544b5f5a90adb1"
+                "reference": "e375603b6bd12e8e3aec3fc1b640ac18a4ef4cb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/inflector/zipball/f419ab2853cc00471ffd7fc18e544b5f5a90adb1",
-                "reference": "f419ab2853cc00471ffd7fc18e544b5f5a90adb1",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/e375603b6bd12e8e3aec3fc1b640ac18a4ef4cb2",
+                "reference": "e375603b6bd12e8e3aec3fc1b640ac18a4ef4cb2",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3",
+                "php": "^7.2.5",
                 "symfony/polyfill-ctype": "~1.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -2518,7 +2523,7 @@
                 "symfony",
                 "words"
             ],
-            "time": "2020-01-04T13:00:46+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/intl",
@@ -2833,65 +2838,6 @@
             "time": "2020-01-13T11:15:53+00:00"
         },
         {
-            "name": "symfony/polyfill-php70",
-            "version": "v1.14.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-php70.git",
-                "reference": "419c4940024c30ccc033650373a1fe13890d3255"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-php70/zipball/419c4940024c30ccc033650373a1fe13890d3255",
-                "reference": "419c4940024c30ccc033650373a1fe13890d3255",
-                "shasum": ""
-            },
-            "require": {
-                "paragonie/random_compat": "~1.0|~2.0|~9.99",
-                "php": ">=5.3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.14-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Php70\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ],
-                "classmap": [
-                    "Resources/stubs"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill backporting some PHP 7.0+ features to lower PHP versions",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "polyfill",
-                "portable",
-                "shim"
-            ],
-            "time": "2020-01-13T11:15:53+00:00"
-        },
-        {
             "name": "symfony/polyfill-php72",
             "version": "v1.14.0",
             "source": {
@@ -3055,25 +3001,24 @@
         },
         {
             "name": "symfony/property-access",
-            "version": "v3.4.37",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-access.git",
-                "reference": "54497400a11ace66731c5a6bb4f523aaa95c6d4b"
+                "reference": "18617a8c26b97a262f816c78765eb3cd91630e19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/54497400a11ace66731c5a6bb4f523aaa95c6d4b",
-                "reference": "54497400a11ace66731c5a6bb4f523aaa95c6d4b",
+                "url": "https://api.github.com/repos/symfony/property-access/zipball/18617a8c26b97a262f816c78765eb3cd91630e19",
+                "reference": "18617a8c26b97a262f816c78765eb3cd91630e19",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
-                "symfony/inflector": "~3.1|~4.0",
-                "symfony/polyfill-php70": "~1.0"
+                "php": "^7.2.5",
+                "symfony/inflector": "^4.4|^5.0"
             },
             "require-dev": {
-                "symfony/cache": "~3.1|~4.0"
+                "symfony/cache": "^4.4|^5.0"
             },
             "suggest": {
                 "psr/cache-implementation": "To cache access methods."
@@ -3081,7 +3026,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -3119,7 +3064,7 @@
                 "property path",
                 "reflection"
             ],
-            "time": "2020-01-04T12:05:51+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -4022,26 +3967,25 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9"
+                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
-                "reference": "2e32a6d48972b2c1976ed5d8967145b6cec4a4a9",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/7462d5f123dfc080dfdf26897032a6513644fc95",
+                "reference": "7462d5f123dfc080dfdf26897032a6513644fc95",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1",
+                "php": "^7.2",
                 "phpdocumentor/reflection-common": "^2.0"
             },
             "require-dev": {
-                "ext-tokenizer": "^7.1",
-                "mockery/mockery": "~1",
-                "phpunit/phpunit": "^7.0"
+                "ext-tokenizer": "^7.2",
+                "mockery/mockery": "~1"
             },
             "type": "library",
             "extra": {
@@ -4065,7 +4009,7 @@
                 }
             ],
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
-            "time": "2019-08-22T18:11:29+00:00"
+            "time": "2020-02-18T18:59:58+00:00"
         },
         {
             "name": "phpmd/phpmd",
@@ -4542,12 +4486,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "974eed9766dc388dc01c231fa82faeff0df8892e"
+                "reference": "587080721eaf5b79972d2df5acc7aab75218e686"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/974eed9766dc388dc01c231fa82faeff0df8892e",
-                "reference": "974eed9766dc388dc01c231fa82faeff0df8892e",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/587080721eaf5b79972d2df5acc7aab75218e686",
+                "reference": "587080721eaf5b79972d2df5acc7aab75218e686",
                 "shasum": ""
             },
             "conflict": {
@@ -4591,7 +4535,7 @@
                 "drupal/core": ">=7,<7.69|>=8,<8.7.11|>=8.8,<8.8.1",
                 "drupal/drupal": ">=7,<7.69|>=8,<8.7.11|>=8.8,<8.8.1",
                 "endroid/qr-code-bundle": "<3.4.2",
-                "enshrined/svg-sanitize": "<0.12",
+                "enshrined/svg-sanitize": "<0.13.1",
                 "erusev/parsedown": "<1.7.2",
                 "ezsystems/ezfind-ls": ">=5.3,<5.3.6.1|>=5.4,<5.4.11.1|>=2017.12,<2017.12.0.1",
                 "ezsystems/ezplatform": ">=1.7,<1.7.9.1|>=1.13,<1.13.5.1|>=2.5,<2.5.4",
@@ -4794,7 +4738,7 @@
                 }
             ],
             "description": "Prevents installation of composer packages with known security vulnerabilities: no API, simply require it",
-            "time": "2020-02-27T10:27:06+00:00"
+            "time": "2020-02-28T00:01:17+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
@@ -5479,25 +5423,25 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v4.4.4",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "a167b1860995b926d279f9bb538f873e3bfa3465"
+                "reference": "ff60c90cb7950b592ebc84ad1289d0345bf24f9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/a167b1860995b926d279f9bb538f873e3bfa3465",
-                "reference": "a167b1860995b926d279f9bb538f873e3bfa3465",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/ff60c90cb7950b592ebc84ad1289d0345bf24f9f",
+                "reference": "ff60c90cb7950b592ebc84ad1289d0345bf24f9f",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3"
+                "php": "^7.2.5"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -5528,7 +5472,7 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-04T13:00:46+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -5605,20 +5549,20 @@
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v4.4.4",
+            "version": "v5.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dom-crawler.git",
-                "reference": "b66fe8ccc850ea11c4cd31677706c1219768bea1"
+                "reference": "439c3c7be4daa569deef0dd1e30cf3562108d062"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/b66fe8ccc850ea11c4cd31677706c1219768bea1",
-                "reference": "b66fe8ccc850ea11c4cd31677706c1219768bea1",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/439c3c7be4daa569deef0dd1e30cf3562108d062",
+                "reference": "439c3c7be4daa569deef0dd1e30cf3562108d062",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.1.3",
+                "php": "^7.2.5",
                 "symfony/polyfill-ctype": "~1.8",
                 "symfony/polyfill-mbstring": "~1.0"
             },
@@ -5627,7 +5571,7 @@
             },
             "require-dev": {
                 "masterminds/html5": "^2.6",
-                "symfony/css-selector": "^3.4|^4.0|^5.0"
+                "symfony/css-selector": "^4.4|^5.0"
             },
             "suggest": {
                 "symfony/css-selector": ""
@@ -5635,7 +5579,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.4-dev"
+                    "dev-master": "5.0-dev"
                 }
             },
             "autoload": {
@@ -5662,7 +5606,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2020-01-04T13:00:46+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -5756,7 +5700,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "honeybee/honeybee": 20,
         "roave/security-advisories": 20
     },
     "prefer-stable": true,

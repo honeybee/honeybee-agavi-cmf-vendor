@@ -1,5 +1,5 @@
 {%- set image_placeholder = 'static/themes/whitelabel/binaries/glance-placeholder.png' -%}
-{% spaceless %}
+{% apply spaceless %}
 <div class="hb-glance {{ css }}">
     {% if not image_disabled %}
         {%- set image_url = image_url|default(ac('entity_glance.image_placeholder', image_placeholder)) -%}
@@ -8,4 +8,4 @@
     <span class="hb-glance__title">{{ title }}</span>
     <div class="hb-glance__description">{{ description|default('') }}</div>
 </div>
-{% endspaceless %}
+{% endapply %}

@@ -3,26 +3,16 @@
 namespace Honeygavi\Template\Twig\Loader;
 
 use MtHaml\Environment;
-use Twig\Error\LoaderError;
-use Twig\ExistsLoaderInterface;
-use Twig\LoaderInterface;
+use Twig\Loader\LoaderInterface;
 use Twig\Source;
-use Twig\SourceContextLoaderInterface;
 
 /**
  * Example integration of MtHaml with Twig, by proxying the Loader
  *
  * This loader will parse Twig templates as HAML if their filename end with
  * `.haml`, or if the code starts with `{% haml %}`.
- *
- * Alternatively, use MtHaml\Support\Twig\Lexer.
- *
- * <code>
- * $origLoader = $twig->getLoader();
- * $twig->setLoader($mthaml, new \MtHaml\Support\Twig\Loader($origLoader));
- * </code>
  */
-class MtHamlTwigLoader implements LoaderInterface, ExistsLoaderInterface, SourceContextLoaderInterface
+class MtHamlTwigLoader implements LoaderInterface
 {
     protected $env;
     protected $loader;
@@ -36,16 +26,11 @@ class MtHamlTwigLoader implements LoaderInterface, ExistsLoaderInterface, Source
     /**
      * {@inheritdoc}
      */
-    public function getSourceContext($name)
+    public function getSourceContext(string $name): Source
     {
-        $source = $this->loader->getSourceContext($name);
-
-        $code = $source->getCode();
-        $code = $this->renderHaml($name, $code);
-
-        $source = new Source($code, $source->getName(), $source->getPath());
-
-        return $source;
+        $context = $this->loader->getSourceContext($name);
+        $source = $this->renderHaml($name, $context->getCode());
+        return new Source($source, $context->getName(), $context->getPath());
     }
 
     protected function renderHaml($name, $code)
@@ -64,7 +49,7 @@ class MtHamlTwigLoader implements LoaderInterface, ExistsLoaderInterface, Source
     /**
      * {@inheritdoc}
      */
-    public function getCacheKey($name)
+    public function getCacheKey(string $name): string
     {
         return $this->loader->getCacheKey($name);
     }
@@ -72,7 +57,7 @@ class MtHamlTwigLoader implements LoaderInterface, ExistsLoaderInterface, Source
     /**
      * {@inheritdoc}
      */
-    public function isFresh($name, $time)
+    public function isFresh(string $name, int $time): bool
     {
         return $this->loader->isFresh($name, $time);
     }
@@ -80,20 +65,8 @@ class MtHamlTwigLoader implements LoaderInterface, ExistsLoaderInterface, Source
     /**
      * {@inheritdoc}
      */
-    public function exists($name)
+    public function exists(string $name)
     {
-        if ($this->loader instanceof ExistsLoaderInterface) {
-            return $this->loader->exists($name);
-        }
-
-        if ($this->loader instanceof SourceContextLoaderInterface) {
-            try {
-                $this->loader->getSourceContext($name);
-
-                return true;
-            } catch (LoaderError $e) {
-                return false;
-            }
-        }
+        return $this->loader->exists($name);
     }
 }

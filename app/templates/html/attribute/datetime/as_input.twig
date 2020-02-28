@@ -6,7 +6,7 @@
             <label for="{{ field_id }}">{{ _(field_name~'.field_name', translation_domain) }}</label>
         </div><!--
         --><div class="hb-field__value">
-        {% spaceless %}
+        {% apply spaceless %}
             <div class="datepicker-controls-wrapper">
                 {% if readonly is empty and disabled is empty and widget_enabled %}
                 <button type="button" class="datepicker-toggle" style="display: none;">
@@ -34,7 +34,7 @@
             {% if translations.input_focus_hint is defined %}
                 <div class="input_hint focus">{{ translations.input_focus_hint|raw }}</div>
             {% endif %}
-        {% endspaceless %}
+        {% endapply %}
         </div><!--
         --><div class="hb-field__extra">
             <input type="hidden" value="{{ attribute_value }}" class="initialvalue" />

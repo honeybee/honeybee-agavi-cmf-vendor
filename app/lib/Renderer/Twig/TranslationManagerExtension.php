@@ -2,19 +2,19 @@
 namespace Honeygavi\Renderer\Twig;
 
 use AgaviContext;
-use Twig_Extension;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Twig extension to have AgaviTranslationManager methods available as simple
  * and short functions in twig templates. This should save some keystrokes.
  */
-class TranslationManagerExtension extends Twig_Extension
+class TranslationManagerExtension extends AbstractExtension
 {
     public function getFunctions()
     {
         return [
-            new Twig_Function('_', function (
+            new TwigFunction('_', function (
                 $message,
                 $domain = null,
                 $locale = null,
@@ -23,16 +23,16 @@ class TranslationManagerExtension extends Twig_Extension
             ) {
                 return $this->translate($message, $domain, $locale, $parameters, $defaultTranslation);
             }),
-            new Twig_Function('_c', function ($number, $domain = null, $locale = null) {
+            new TwigFunction('_c', function ($number, $domain = null, $locale = null) {
                 return $this->translateCurrency($number, $domain, $locale);
             }),
-            new Twig_Function('_n', function ($number, $domain = null, $locale = null) {
+            new TwigFunction('_n', function ($number, $domain = null, $locale = null) {
                 return $this->translateNumber($number, $domain, $locale);
             }),
-            new Twig_Function('_d', function ($date, $domain = null, $locale = null) {
+            new TwigFunction('_d', function ($date, $domain = null, $locale = null) {
                 return $this->translateDate($date, $domain, $locale);
             }),
-            new Twig_Function('__', function (
+            new TwigFunction('__', function (
                 $singularMessage,
                 $pluralMessage,
                 $amount,
@@ -109,8 +109,8 @@ class TranslationManagerExtension extends Twig_Extension
         if ($translation_not_found) {
             if ($amount > 1 && !is_null($defaultPluralTranslation)) {
                 $translation = $defaultPluralTranslation;
-            } elseif (!is_null($defaultPluralTranslation)) {
-                $translation = $defaultPluralTranslation;
+            } elseif (!is_null($defaultSingularTranslation)) {
+                $translation = $defaultSingularTranslation;
             }
         }
 

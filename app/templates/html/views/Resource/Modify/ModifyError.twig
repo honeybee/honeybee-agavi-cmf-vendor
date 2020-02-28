@@ -4,7 +4,7 @@
 <div class="page-errors invalid">
     <div class="page-errors-layout">
         <div class="box">
-            {%- spaceless -%}
+            {%- apply spaceless -%}
             <div class="hb-errors">
                 <ul class="hb-errors__global">
                 {% for error in errors %}
@@ -12,7 +12,7 @@
                 {% endfor %}
                 </ul>
             </div>
-            {%- endspaceless -%}
+            {%- endapply -%}
         </div>
     </div>
 </div>

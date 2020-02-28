@@ -22,8 +22,10 @@
             --><div class="hb-list-filter__value">
                     {% if form_parameters is not empty -%}
                         <form action="{{ form_url }}" method="GET" class="hb-list-filter__form" id="filter_{{ filter_name }}_form">
-                            {% for param_name, param_value in form_parameters if param_name != 'filter[' ~filter_name~ ']' -%}
-                                <input type="hidden" name="{{ param_name }}" value="{{ param_value }}">
+                            {% for param_name, param_value in form_parameters -%}
+                                {%- if param_name != 'filter[' ~filter_name~ ']' -%}
+                                    <input type="hidden" name="{{ param_name }}" value="{{ param_value }}">
+                                {%- endif -%}
                             {%- endfor -%}
                     {% endif -%}
 

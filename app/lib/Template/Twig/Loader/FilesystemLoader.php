@@ -17,7 +17,7 @@ class FilesystemLoader extends BaseFilesystemLoader
     /**
      * Default string used as scope to append to cache key class name.
      */
-    const SCOPE_DEFAULT = 'default';
+    public const SCOPE_DEFAULT = 'default';
 
     /**
      * @var array allowed file template extensions
@@ -32,7 +32,7 @@ class FilesystemLoader extends BaseFilesystemLoader
     /**
      * @param array $extensions allowed file template extensions
      */
-    public function setAllowedExtensions(array $extensions)
+    public function setAllowedExtensions(array $extensions): void
     {
         $this->allowed_extensions = $extensions;
     }
@@ -40,7 +40,7 @@ class FilesystemLoader extends BaseFilesystemLoader
     /**
      * @param array $extensions allowed file template extensions
      */
-    public function addAllowedExtensions(array $extensions)
+    public function addAllowedExtensions(array $extensions): void
     {
         $this->allowed_extensions = array_merge($this->allowed_extensions, $extensions);
     }
@@ -48,7 +48,7 @@ class FilesystemLoader extends BaseFilesystemLoader
     /**
      * @return boolean true if allowed extensions have been set; false otherwise.
      */
-    public function hasAllowedExtensions()
+    public function hasAllowedExtensions(): bool
     {
         return (null !== $this->allowed_extensions);
     }
@@ -58,7 +58,7 @@ class FilesystemLoader extends BaseFilesystemLoader
      *
      * @see https://github.com/fabpot/Twig/issues/1438
      */
-    public function getCacheKey($name)
+    public function getCacheKey(string $name): string
     {
         return $this->findTemplate($name) . '_' . $this->scope;
     }
@@ -68,7 +68,7 @@ class FilesystemLoader extends BaseFilesystemLoader
      *
      * @param string $scope
      */
-    public function setScope($scope)
+    public function setScope($scope): void
     {
         $this->scope = trim($scope);
     }
@@ -76,15 +76,20 @@ class FilesystemLoader extends BaseFilesystemLoader
     /**
      * @return string current scope used in cache generation
      */
-    public function getScope()
+    public function getScope(): string
     {
         return $this->scope;
     }
 
     /**
      * Only delegate to parent::findTemplate if name has an allowed extension.
+     *
+     * @param string $name
+     * @param bool $throw
+     * @return string|null
+     * @throws LoaderError
      */
-    protected function findTemplate($name, $throw = true)
+    protected function findTemplate(string $name, bool $throw = true): ?string
     {
         if ($this->hasAllowedExtensions()) {
             $this->checkAllowedExtensions($name);
@@ -100,7 +105,7 @@ class FilesystemLoader extends BaseFilesystemLoader
      *
      * @throws LoaderError
      */
-    protected function checkAllowedExtensions($name)
+    protected function checkAllowedExtensions(string $name): bool
     {
         $allowed = false;
 

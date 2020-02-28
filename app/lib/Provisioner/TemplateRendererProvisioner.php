@@ -10,6 +10,7 @@ use Honeygavi\Renderer\Twig\MarkdownExtension;
 use Honeybee\Infrastructure\Config\Settings;
 use Honeybee\Infrastructure\Config\SettingsInterface;
 use Honeygavi\Template\TemplateRendererInterface;
+use Honeygavi\Template\Twig\Extension\MtHamlExtension;
 use Honeygavi\Template\Twig\Extension\ToolkitExtension;
 use Honeygavi\Template\Twig\Extension\TranslatorExtension;
 use Honeygavi\Template\Twig\Extension\UrlGeneratorExtension;
@@ -77,7 +78,8 @@ class TemplateRendererProvisioner extends AbstractProvisioner
             UrlGeneratorExtension::class,
             EnvironmentExtension::class,
             IntlExtension::class,
-            MarkdownExtension::class
+            MarkdownExtension::class,
+            MtHamlExtension::class,
         ];
 
         if ($settings['twig_options']['debug'] === true) {

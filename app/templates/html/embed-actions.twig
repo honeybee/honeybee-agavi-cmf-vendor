@@ -6,7 +6,7 @@
     Default styles are defined in this SCSS partial:
 
     pub/static/themes/honeybee/lib/objects/embed-actions/_objects.embed-actions.scss
-#}{% spaceless %}
+#}{% apply spaceless %}
 {% set name = name | default("hb-embed-actions") %}
 {% set css = css | default("") %}
 {% set label_id = label_id | default("label-" ~ random()) %}
@@ -45,4 +45,4 @@
         </label>
     </li>
 </ul>
-{% endspaceless %}
+{% endapply %}

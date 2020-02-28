@@ -71,7 +71,7 @@
             <ae:parameter name="extract_vars">true</ae:parameter> <!-- template variables will be available directly; $this->setAttribute('foo', $value) will be available as {{ foo }} -->
             <ae:parameter name="options">
                 <ae:parameter name="charset">UTF-8</ae:parameter> <!-- default charset to use -->
-                <ae:parameter name="base_template_class">Twig_Template</ae:parameter> <!-- default template class to use for generated templates-->
+                <ae:parameter name="base_template_class">Twig\Template</ae:parameter> <!-- default template class to use for generated templates-->
                 <ae:parameter name="autoescape">html</ae:parameter> <!-- html escaping is enabled by default; can be html, js, false; in templates you can use different escaping strategies like css, url, html_attr etc. -->
                 <ae:parameter name="auto_reload">true</ae:parameter> <!-- recompile template whenever source code changes -->
                 <ae:parameter name="strict_variables">false</ae:parameter> <!-- do not throw exception instead of silently using null for invalid variables, attributes or methods -->
@@ -87,10 +87,7 @@
                 <ae:parameter>.html</ae:parameter>
             </ae:parameter>
             <ae:parameter name="extensions">
-                <ae:parameter>Twig_Extensions_Extension_Text</ae:parameter>
-                <ae:parameter>Twig_Extensions_Extension_Intl</ae:parameter>
-                <ae:parameter>Twig_Extensions_Extension_Array</ae:parameter>
-                <ae:parameter>Twig_Extensions_Extension_Date</ae:parameter>
+                <ae:parameter>Twig\Extra\Intl\IntlExtension</ae:parameter>
                 <ae:parameter>Honeygavi\Template\Twig\Extension\ToolkitExtension</ae:parameter>
                 <ae:parameter>Honeygavi\Renderer\Twig\TranslationManagerExtension</ae:parameter>
                 <ae:parameter>Honeygavi\Renderer\Twig\HoneybeeToolkitExtension</ae:parameter>
@@ -322,7 +319,7 @@
                         <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='template_dirs'])" />
                         <ae:parameter name="extensions">
                             <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='extensions']/*)" />
-                            <ae:parameter>Twig_Extension_Debug</ae:parameter>
+                            <ae:parameter>Twig\Extension\DebugExtension</ae:parameter>
                         </ae:parameter>
                         <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='allowed_template_extensions'])" />
                         <ae:parameter name="default_extension">.twig</ae:parameter>
@@ -338,7 +335,7 @@
                         <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='template_dirs'])" />
                         <ae:parameter name="extensions">
                             <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='extensions']/*)" />
-                            <ae:parameter>Twig_Extension_Debug</ae:parameter>
+                            <ae:parameter>Twig\Extension\DebugExtension</ae:parameter>
                         </ae:parameter>
                         <xi:include xpointer="&aeot; xpointer(/ae:configurations/ae:sandbox/ae:parameter[@name='honeybee_twig_renderer_default_parameters']/ae:parameter[@name='allowed_template_extensions'])" />
                         <ae:parameter name="default_extension">.haml</ae:parameter>

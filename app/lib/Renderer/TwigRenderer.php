@@ -7,22 +7,14 @@ use AgaviFileTemplateLayer;
 use AgaviTemplateLayer;
 use AgaviToolkit;
 use AgaviTwigRenderer;
-
-use Twig_Environment;
-use Twig_Loader_Array;
-use Twig_Template;
-
-use MtHaml\Environment as MtHamlEnvironment;
-use MtHaml\Support\Twig\Extension as MtHamlTwigExtension;
-use MtHaml\Filter\Markdown\MichelfMarkdown as MtHamlMarkdownFilter;
-use Honeygavi\Template\Twig\Loader\MtHamlTwigLoader;
-
-use Michelf\MarkdownExtra;
-
 use Honeygavi\Filter\AssetCompiler;
+use Honeygavi\Template\Twig\Extension\MtHamlExtension;
+use Honeygavi\Template\Twig\Loader\MtHamlTwigLoader;
 use Honeygavi\Template\Twig\Loader\FilesystemLoader;
-
-//use Honeygavi\Logging;
+use Michelf\MarkdownExtra;
+use MtHaml\Environment as MtHamlEnvironment;
+use MtHaml\Filter\Markdown\MichelfMarkdown as MtHamlMarkdownFilter;
+use Twig\Loader\ArrayLoader;
 
 /**
  * Extends the AgaviTwigRenderer to add twig extensions via parameters. If you
@@ -39,7 +31,7 @@ class TwigRenderer extends AgaviTwigRenderer
     protected $modules;
 
     /**
-     * @var MtHaml\Environment MtHamlEnvironment for Twig
+     * @var \MtHaml\Environment MtHamlEnvironment for Twig
      */
     protected $mthaml;
 
@@ -110,7 +102,7 @@ class TwigRenderer extends AgaviTwigRenderer
     /**
      * @param AgaviTemplateLayer $layer
      *
-     * @return Twig_Template
+     * @return \Twig\TemplateWrapper
      */
     public function loadTemplate(AgaviTemplateLayer $layer)
     {
@@ -126,13 +118,13 @@ class TwigRenderer extends AgaviTwigRenderer
             $twig->setLoader($new_loader);
         }
 
-        return $twig->loadTemplate($source);
+        return $twig->load($source);
     }
 
     /**
      * Return an initialized Twig instance.
      *
-     * @return Twig_Environment
+     * @return \Twig\Environment
      */
     protected function getEngine()
     {
@@ -147,8 +139,8 @@ class TwigRenderer extends AgaviTwigRenderer
             }
 
             if ($this->getParameter('use_haml', false)) {
-                $ext = new MtHamlTwigExtension($this->getMtHaml());
-                if (!$twig->hasExtension(MtHamlTwigExtension::class)) {
+                $ext = new MtHamlExtension($this->getMtHaml());
+                if (!$twig->hasExtension(MtHamlExtension::class)) {
                     $twig->addExtension($ext);
                 }
             }
@@ -215,7 +207,7 @@ class TwigRenderer extends AgaviTwigRenderer
             // a stream template or whatever; either way, it's something Twig can't load directly :S
             $source = file_get_contents($path);
             $name = sprintf('__some_string_template__%s', hash('sha256', $source, false));
-            $loader = new Twig_Loader_Array([
+            $loader = new ArrayLoader([
                 $name => $source,
             ]);
             $twig->setLoader($loader);
