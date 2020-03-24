@@ -85,7 +85,7 @@ class MailService
             $lm->logTo(
                 'mail',
                 Logger::ERROR,
-                \__METHOD__,
+                __METHOD__,
                 [
                     'Unable to send ResetPassword email to',
                     $user->getEmail(),
@@ -106,7 +106,7 @@ class MailService
             $lm->logTo(
                 'mail',
                 Logger::ERROR,
-                \__METHOD__,
+                __METHOD__,
                 [
                     'Failed to send ResetPassword email to',
                     $user->getEmail(),
