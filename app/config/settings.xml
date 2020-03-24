@@ -61,6 +61,7 @@
         </settings>
 
         <settings prefix="email.">
+            <setting name="app_name">Honeybee</setting>
             <setting name="sender_email">no-reply@honeybee.local</setting>
             <setting name="sender_name">Honeybee CMF</setting>
             <setting name="from_email">contact@honeybee.local</setting>
