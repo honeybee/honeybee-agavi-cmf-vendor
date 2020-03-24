@@ -43,7 +43,7 @@ class ModuleTemplateRenderer
     {
         if ($mixed instanceof ArrayConfig) {
             $this->config = $mixed;
-        } elseif (is_array($mixed)) {
+        } elseif (\is_array($mixed)) {
             $this->config = new ArrayConfig($mixed);
         } else {
             throw new RuntimeError(
@@ -100,14 +100,14 @@ class ModuleTemplateRenderer
             $assigns = [];
             foreach ($renderer->getParameter('assigns', []) as $item => $var) {
                 $getter = 'get' . StringToolkit::asStudlyCaps($item);
-                if (is_callable([$context, $getter])) {
+                if (\is_callable([$context, $getter])) {
                     if (null === $var) {
                         continue;
                     }
-                    $assigns[$var] = call_user_func([$context, $getter]);
+                    $assigns[$var] = \call_user_func([$context, $getter]);
                 }
             }
-            $variables = array_merge($variables, $assigns);
+            $variables = \array_merge($variables, $assigns);
 
             $twig_template = $renderer->loadTemplate($layer);
         }
@@ -205,13 +205,9 @@ class ModuleTemplateRenderer
      */
     public function getLayer($identifier, array $options = [])
     {
-        $output_type_name = isset($options['output_type']) ?
-            $options['output_type'] :
-            $this->config->get('output_type', 'template');
-        $layout_name = isset($options['layout']) ? $options['layout'] : $this->config->get('layout', 'default');
-        $extension = isset($options['template_extension']) ?
-            $options['template_extension'] :
-            $this->config->get('template_extension', '.twig');
+        $output_type_name = $options['output_type'] ?? $this->config->get('output_type', 'template');
+        $layout_name = $options['layout'] ?? $this->config->get('layout', 'default');
+        $extension = $options['template_extension'] ?? $this->config->get('template_extension', '.twig');
 
         $output_type = AgaviContext::getInstance()->getController()->getOutputType($output_type_name);
         $layout = $output_type->getLayout($layout_name);
@@ -222,12 +218,12 @@ class ModuleTemplateRenderer
             );
         }
 
-        $layer_info = array_shift($layout['layers']); // we take the first layer that's available (probably 'content')
+        $layer_info = \array_shift($layout['layers']); // we take the first layer that's available (probably 'content')
 
         $class_name = isset($layer_info['class']) ? $layer_info['class'] : "AgaviFileTemplateLayer";
-        if (!class_exists($class_name)) {
+        if (!\class_exists($class_name)) {
             throw new RuntimeError(
-                sprintf(
+                \sprintf(
                     'First layer of layout "%s" on output type "%s" specifies a non-existant class: %s',
                     $layout_name,
                     $output_type_name,
@@ -236,7 +232,7 @@ class ModuleTemplateRenderer
             );
         }
 
-        $module_name = array_key_exists('module_name', $options) ?
+        $module_name = \array_key_exists('module_name', $options) ?
             $options['module_name'] :
             $this->config->get('module_name', null);
 
@@ -259,7 +255,7 @@ class ModuleTemplateRenderer
 
         $lookup_paths = [];
         if (isset($layer_info['parameters']['targets'])) {
-            $lookup_paths = array_merge($lookup_paths, $layer_info['parameters']['targets']);
+            $lookup_paths = \array_merge($lookup_paths, $layer_info['parameters']['targets']);
         }
 
         $layer_params['targets'] = $lookup_paths;
@@ -274,7 +270,7 @@ class ModuleTemplateRenderer
 
         if (!$layer->getRenderer() instanceof TwigRenderer) {
             throw new RuntimeError(
-                sprintf(
+                \sprintf(
                     'The default layer renderer of layout "%s" on output type "%s" is not an instance of the' .
                     'Honeybee TwigRenderer. At the moment only Twig is supported as a renderer for simple templates.',
                     $layout_name,

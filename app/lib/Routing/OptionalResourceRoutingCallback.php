@@ -31,14 +31,14 @@ class OptionalResourceRoutingCallback extends AgaviRoutingCallback
      */
     public function onGenerate(array $default_parameters, array &$user_parameters, array &$user_options)
     {
-        if (array_key_exists('resource', $user_parameters) && is_object($user_parameters['resource'])) {
+        if (\array_key_exists('resource', $user_parameters) && is_object($user_parameters['resource'])) {
             $resource = $user_parameters['resource']->getValue();
             if ($resource instanceof EntityInterface) {
                 $root_entity = $resource->getRoot() ?: $resource;
                 $ro = $this->getContext()->getRouting();
                 $user_parameters['resource'] = $ro->createValue($root_entity->getIdentifier());
                 $user_parameters['module'] = $ro->createValue(
-                    sprintf(
+                    \sprintf(
                         '%s-%s-%s',
                         StringToolkit::asSnakeCase($root_entity->getType()->getVendor()),
                         StringToolkit::asSnakeCase($root_entity->getType()->getPackage()),

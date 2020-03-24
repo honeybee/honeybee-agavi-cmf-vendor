@@ -70,7 +70,7 @@ class NegotiateOutputTypeRoutingCallback extends AgaviRoutingCallback
         $supported_output_types = array();
         foreach ($all_output_types as $output_type) {
             $media_types = $output_type->getParameter('acceptable_media_types', array());
-            if (is_string($media_types)) {
+            if (\is_string($media_types)) {
                 $media_types = array($media_types);
             }
             if (!empty($media_types)) {
@@ -173,7 +173,7 @@ EOC;
      */
     public static function parseAcceptString($accept_header_value)
     {
-        if (!is_string($accept_header_value)) {
+        if (!\is_string($accept_header_value)) {
             return [];
         }
 
@@ -204,9 +204,9 @@ EOC;
 EOR;
 
         // trim leading/trailing commas and whitespace
-        $accept_header_value = trim($accept_header_value, " \t\n\r\0\x0B,");
+        $accept_header_value = \trim($accept_header_value, " \t\n\r\0\x0B,");
 
-        if (preg_match_all($regex, $accept_header_value, $matches)) {
+        if (\preg_match_all($regex, $accept_header_value, $matches)) {
             foreach ($matches[6] as &$quality) {
                 if ($quality === '') {
                     $quality = '1';
@@ -214,13 +214,13 @@ EOR;
             }
 
             $types = [];
-            $types = array_combine($matches[2], $matches[6]);
+            $types = \array_combine($matches[2], $matches[6]);
 
             // adjust scores of "type/*" or "*/*" media types as those should
             // weigh less than the more specific types in our later matching
             $adjusted = [];
             foreach ($types as $type => $q) {
-                $cnt = substr_count($type, '*');
+                $cnt = \substr_count($type, '*');
                 if ($cnt > 0) {
                     $adjusted[$type] = ($q !== 1) ? (int)$q - $cnt : -$cnt;
                 } else {
@@ -235,7 +235,7 @@ EOR;
                 $temp[] = [$i++, $type, $q];
             }
 
-            uasort($temp, function($a, $b) {
+            \uasort($temp, function($a, $b) {
                 return $a[2] == $b[2] ? ($a[0] > $b[0]) : ($a[2] < $b[2] ? 1 : -1);
             });
 
@@ -244,6 +244,6 @@ EOR;
             }
         }
 
-        return array_keys($weighted_types);
+        return \array_keys($weighted_types);
     }
 }

@@ -50,6 +50,7 @@
 
     "require": {
         "php": "^7.2",
+        "ext-json": "*",
         "lib-libxml": "*",
         "honeybee/agavi": "1.0.13",
         "honeybee/honeybee": "^0.2.24",

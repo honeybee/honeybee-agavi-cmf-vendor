@@ -34,11 +34,11 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
     {
         $ro = $this->getContext()->getRouting();
 
-        if (array_key_exists('attribute', $user_parameters)) {
+        if (\array_key_exists('attribute', $user_parameters)) {
             $attribute = $user_parameters['attribute']->getValue();
             if ($attribute instanceof AttributeInterface) {
                 $user_parameters['module'] = $ro->createValue(
-                    sprintf(
+                    \sprintf(
                         '%s-%s-%s',
                         StringToolkit::asSnakeCase($attribute->getRootType()->getVendor()),
                         StringToolkit::asSnakeCase($attribute->getRootType()->getPackage()),
@@ -49,13 +49,13 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
             }
         }
 
-        if (array_key_exists('resource', $user_parameters)) {
+        if (\array_key_exists('resource', $user_parameters)) {
             $resource = $user_parameters['resource']->getValue();
             if ($resource instanceof EntityInterface) {
                 $root_entity = $resource->getRoot() ?: $resource;
                 $ro = $this->getContext()->getRouting();
                 $user_parameters['module'] = $ro->createValue(
-                    sprintf(
+                    \sprintf(
                         '%s-%s-%s',
                         StringToolkit::asSnakeCase($root_entity->getType()->getVendor()),
                         StringToolkit::asSnakeCase($root_entity->getType()->getPackage()),
@@ -65,13 +65,13 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
                 return true;
             }
         }
-        if (array_key_exists('module', $user_parameters)) {
+        if (\array_key_exists('module', $user_parameters)) {
             $module = $user_parameters['module']->getValue();
             if ($module instanceof EntityTypeInterface) {
                 $root_type = $module->getRoot() ?: $module;
                 $ro = $this->getContext()->getRouting();
                 $user_parameters['module'] = $ro->createValue(
-                    sprintf(
+                    \sprintf(
                         '%s-%s-%s',
                         StringToolkit::asSnakeCase($root_type->getVendor()),
                         StringToolkit::asSnakeCase($root_type->getPackage()),
@@ -83,7 +83,7 @@ class ModuleRoutingCallback extends AgaviRoutingCallback
         }
 
         // there might be a 'module' set as a string in the user parameters
-        if (!array_key_exists('module', $user_parameters)) {
+        if (!\array_key_exists('module', $user_parameters)) {
             throw new InvalidArgumentException(
                 'A "resource" or "module" or "attribute" user parameter instance implementing ' .
                 'EntityInterface, EntityTypeInterface or AttributeInterface is expected.'

@@ -60,7 +60,7 @@ class MailService
         );
 
         $message = $this->module_template_renderer->createMessageFromTemplate(
-            'mails/ResetPassword',
+            $this->config->get('email_template', 'mails/ResetPassword'),
             [
                 'user_password_link' => $user_password_link,
                 'user' => $user
@@ -85,7 +85,7 @@ class MailService
             $lm->logTo(
                 'mail',
                 Logger::ERROR,
-                __METHOD__,
+                \__METHOD__,
                 [
                     'Unable to send ResetPassword email to',
                     $user->getEmail(),
@@ -102,11 +102,11 @@ class MailService
             );
         }
 
-        if (count($info[MailServiceInterface::FAILED_RECIPIENTS]) !== 0) {
+        if (\count($info[MailServiceInterface::FAILED_RECIPIENTS]) !== 0) {
             $lm->logTo(
                 'mail',
                 Logger::ERROR,
-                __METHOD__,
+                \__METHOD__,
                 [
                     'Failed to send ResetPassword email to',
                     $user->getEmail(),

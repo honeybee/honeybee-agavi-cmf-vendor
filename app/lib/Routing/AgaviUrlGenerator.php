@@ -88,11 +88,11 @@ class AgaviUrlGenerator implements UrlGeneratorInterface
 
         if ($url->getType() === Url::TYPE_ROUTE) {
             $route_params = $parameters;
-            $route_params = array_replace_recursive($url->getParameters(), $parameters);
+            $route_params = \array_replace_recursive($url->getParameters(), $parameters);
             $link = $this->routing->gen($url->getValue(), $route_params, $options);
         } elseif ($url->getType() === Url::TYPE_URI_TEMPLATE) {
             $uri_template = new UriTemplate($url->getValue());
-            $template_params = array_replace_recursive($url->getParameters(), $parameters);
+            $template_params = \array_replace_recursive($url->getParameters(), $parameters);
             $link = $uri_template->expand($template_params);
         } else {
             $link = $url->__toString(); // TODO apply params as query params?

@@ -39,7 +39,7 @@ class HoneybeeUploadedFile extends AgaviUploadedFile
             self::PROPERTY_HEIGHT => 0
         ];
 
-        $array = array_merge($defaults, $data);
+        $array = \array_merge($defaults, $data);
 
         // override parent resetting of 'is_moved'
         if (isset($array['is_moved'])) {

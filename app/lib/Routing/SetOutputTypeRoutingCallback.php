@@ -54,7 +54,7 @@ class SetOutputTypeRoutingCallback extends AgaviRoutingCallback
 
         // map of output type to file extensions, e.g. 'html' => array('html', 'htm')
         $uri_extensions = $this->getParameter('uri_extensions', array());
-        if (!is_array($uri_extensions)) {
+        if (!\is_array($uri_extensions)) {
             $uri_extensions = array();
         }
 
@@ -64,14 +64,14 @@ class SetOutputTypeRoutingCallback extends AgaviRoutingCallback
                 if (AgaviConfig::get('core.debug', false)) {
                     throw new InvalidArgumentException('Output type is not available/configured: ' . $output_type);
                 } else {
-                    error_log('[' . __METHOD__ . '] Output type is not available/configured: ' . $output_type);
+                    \error_log('[' . __METHOD__ . '] Output type is not available/configured: ' . $output_type);
                 }
                 continue; // ...we don't want non-existing output types to match later on
             }
 
-            if (is_string($exts)) {
+            if (\is_string($exts)) {
                 $supported_output_types[$output_type] = array($exts);
-            } elseif (is_array($exts)) {
+            } elseif (\is_array($exts)) {
                 $supported_output_types[$output_type] = $exts;
             } else {
                 throw new InvalidArgumentException(
@@ -134,11 +134,11 @@ class SetOutputTypeRoutingCallback extends AgaviRoutingCallback
     protected function getMatchingOutputType($uri_extension, $supported_output_types_extensions_map)
     {
         foreach ($supported_output_types_extensions_map as $output_type => $extensions) {
-            if (is_string($extensions) && $extensions === $uri_extension) {
+            if (\is_string($extensions) && $extensions === $uri_extension) {
                 return $output_type;
-            } elseif (is_array($extensions)) {
+            } elseif (\is_array($extensions)) {
                 foreach ($extensions as $ext) {
-                    if (is_string($ext) && $ext === $uri_extension) {
+                    if (\is_string($ext) && $ext === $uri_extension) {
                         return $output_type;
                     }
                 }

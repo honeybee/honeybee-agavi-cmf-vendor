@@ -52,7 +52,7 @@ final class ServiceLocator implements ServiceLocatorInterface
 
     public function __call($method, array $args)
     {
-        if (preg_match('/^get(\w+)$/', $method, $matches)) {
+        if (\preg_match('/^get(\w+)$/', $method, $matches)) {
             $service_name = StringToolkit::asSnakeCase($matches[1]);
             switch ($service_name) {
                 case 'projection_type_map':

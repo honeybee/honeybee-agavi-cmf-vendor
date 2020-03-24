@@ -45,7 +45,7 @@ class TwigRenderer extends AgaviTwigRenderer
         $this->modules = array();
 
         foreach (AssetCompiler::getAvailableModuleDirectories() as $module_path) {
-            $this->modules[basename($module_path)] = $module_path;
+            $this->modules[\basename($module_path)] = $module_path;
         }
     }
 
@@ -164,12 +164,12 @@ class TwigRenderer extends AgaviTwigRenderer
                 // replace e.g. {module} with name of the current module if possible
                 $dir = AgaviToolkit::expandVariables(
                     $dir,
-                    array_merge(
-                        array_filter($layer->getParameters(), 'is_scalar'),
-                        array_filter($layer->getParameters(), 'is_null')
+                    \array_merge(
+                        \array_filter($layer->getParameters(), 'is_scalar'),
+                        \array_filter($layer->getParameters(), 'is_null')
                     )
                 );
-                if (is_dir($dir) && is_readable($dir)) {
+                if (\is_dir($dir) && \is_readable($dir)) {
                     $paths[] = $dir;
                 } else {
                     //\AgaviContext::getInstance()->getLoggerManager()->logTo(
@@ -182,7 +182,7 @@ class TwigRenderer extends AgaviTwigRenderer
             // set the directory the template is in as the first path to load from, and the directory set on
             // the layer second - that way, including another template inside this template will look at e.g.
             // a locale subdirectory first before falling back to the originally defined folder
-            $pathinfo = pathinfo($path);
+            $pathinfo = \pathinfo($path);
             $paths[] = $pathinfo['dirname'];
             $paths[] = $layer->getParameter('directory');
 
@@ -205,8 +205,8 @@ class TwigRenderer extends AgaviTwigRenderer
             $source = $pathinfo['basename'];
         } else {
             // a stream template or whatever; either way, it's something Twig can't load directly :S
-            $source = file_get_contents($path);
-            $name = sprintf('__some_string_template__%s', hash('sha256', $source, false));
+            $source = \file_get_contents($path);
+            $name = \sprintf('__some_string_template__%s', hash('sha256', $source, false));
             $loader = new ArrayLoader([
                 $name => $source,
             ]);

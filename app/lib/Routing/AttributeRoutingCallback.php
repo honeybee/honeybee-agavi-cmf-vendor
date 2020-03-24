@@ -27,7 +27,7 @@ class AttributeRoutingCallback extends AgaviRoutingCallback
      */
     public function onGenerate(array $default_parameters, array &$user_parameters, array &$user_options)
     {
-        if (!array_key_exists('attribute', $user_parameters)) {
+        if (!\array_key_exists('attribute', $user_parameters)) {
             if ($this->getParameter('mandatory', true)) {
                 throw new InvalidArgumentException(
                     'An "attribute" user parameter that implements AttributeInterface is expected for URL generation.'

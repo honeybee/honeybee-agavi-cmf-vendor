@@ -83,14 +83,14 @@ class ProxyRenderer extends AgaviRenderer
          */
         $explanation = "\n\nRenderers tried:\n - " . implode("\n - ", $attempts) .
                 "\n\nUsually this happens when a template is not in one of the expected 'targets' locations:\n - " .
-                implode("\n - ", $layer->getParameter('targets', []));
+                \implode("\n - ", $layer->getParameter('targets', []));
 
         throw new AgaviException(
             sprintf(
                 'Rendering the template "%s" on the layer "%s" with renderer "%s" failed (module="%s").%s',
                 $layer->getTemplate(),
                 $layer->getName(),
-                get_class($this),
+                \get_class($this),
                 $layer->getParameter('module', ''),
                 $explanation
             )

@@ -75,7 +75,7 @@ class TranslationManagerExtension extends AbstractExtension
     ) {
         $tm = AgaviContext::getInstance()->getTranslationManager();
         $translation = $tm->_($message, $domain, $locale, $parameters);
-        if ($translation === $message && !is_null($defaultTranslation)) {
+        if ($translation === $message && !\is_null($defaultTranslation)) {
             $translation = $defaultTranslation;
         }
         return $translation;
@@ -107,9 +107,9 @@ class TranslationManagerExtension extends AbstractExtension
         $translation = $tm->__($singularMessage, $pluralMessage, $amount, $domain, $locale, $parameters);
         $translation_not_found = $translation === $singularMessage || $translation === $pluralMessage;
         if ($translation_not_found) {
-            if ($amount > 1 && !is_null($defaultPluralTranslation)) {
+            if ($amount > 1 && !\is_null($defaultPluralTranslation)) {
                 $translation = $defaultPluralTranslation;
-            } elseif (!is_null($defaultSingularTranslation)) {
+            } elseif (!\is_null($defaultSingularTranslation)) {
                 $translation = $defaultSingularTranslation;
             }
         }

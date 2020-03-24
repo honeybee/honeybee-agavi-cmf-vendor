@@ -114,8 +114,8 @@ class LoggingSwiftMailer implements MailServiceInterface
         if (false !== $settings->get('logging_enabled', false)) {
             $this->logger->info($this->swift_array_logger->dump());
             if (false !== $settings->get('log_messages', false)) {
-                foreach ($this->swift_message_logger->getMessages() as $message) {
-                    $this->logger->info($message);
+                foreach ($this->swift_message_logger->getMessages() as $msg) {
+                    $this->logger->info($msg);
                 }
                 $this->swift_message_logger->clear();
             }
@@ -223,12 +223,12 @@ class LoggingSwiftMailer implements MailServiceInterface
 
         $body_html = $message->getBodyHtml($message_defaults->get('default_body_html'));
         if (!empty($body_html)) {
-            $mail->addPart($body_html, "text/html");
+            $mail->addPart($body_html, 'text/html');
         }
 
         $body_text = $message->getBodyText($message_defaults->get('default_body_text'));
         if (!empty($body_text)) {
-            $mail->addPart($body_text, "text/plain");
+            $mail->addPart($body_text, 'text/plain');
         }
 
         $attachments = $message->getAttachments();
@@ -317,7 +317,7 @@ class LoggingSwiftMailer implements MailServiceInterface
      *
      * @param array $attachment information about the attachment to create
      *
-     * @return Swift_Attachment or Swift_EmbeddedFile
+     * @return \Swift_Mime_Attachment|\Swift_Mime_EmbeddedFile
      */
     protected function createSwiftAttachment(array $attachment)
     {

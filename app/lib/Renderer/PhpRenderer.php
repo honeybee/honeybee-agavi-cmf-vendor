@@ -21,7 +21,7 @@ class PhpRenderer extends AgaviPhpRenderer
      */
     public function escape($value)
     {
-        return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        return \htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
     }
 
     /**
@@ -49,7 +49,7 @@ class PhpRenderer extends AgaviPhpRenderer
         );
 
         foreach ($more_assigns as $name => $value) {
-            if (in_array($name, $allowed_variables)) {
+            if (\in_array($name, $allowed_variables)) {
                 $this->$name = $value;
             }
         }

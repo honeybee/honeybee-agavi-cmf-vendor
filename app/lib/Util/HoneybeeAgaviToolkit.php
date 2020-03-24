@@ -15,10 +15,10 @@ class HoneybeeAgaviToolkit
 
     protected static function generateTypePath(AggregateRootType $aggregate_root_type, $path)
     {
-        return sprintf(
+        return \sprintf(
             '%1$s%2$s%3$s_%4$s%2$s%5$s%2$s%6$s',
             AgaviConfig::get('core.modules_dir'),
-            DIRECTORY_SEPARATOR,
+            \DIRECTORY_SEPARATOR,
             $aggregate_root_type->getVendor(),
             $aggregate_root_type->getPackage(),
             $path,
@@ -38,10 +38,10 @@ class HoneybeeAgaviToolkit
 
     public static function getTypeSchemaPath(AggregateRootType $aggregate_root_type)
     {
-        return sprintf(
+        return \sprintf(
             '%s%s%s',
             self::generateTypePath($aggregate_root_type, self::CONFIG_PATH),
-            DIRECTORY_SEPARATOR,
+            \DIRECTORY_SEPARATOR,
             self::SCHEMA_PATH
         );
     }

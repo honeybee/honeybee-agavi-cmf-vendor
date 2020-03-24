@@ -35,11 +35,11 @@ class MtHamlTwigLoader implements LoaderInterface
 
     protected function renderHaml($name, $code)
     {
-        if ('haml' === pathinfo($name, PATHINFO_EXTENSION)) {
+        if ('haml' === \pathinfo($name, PATHINFO_EXTENSION)) {
             $code = $this->env->compileString($code, $name);
-        } elseif (preg_match('#^\s*{%\s*haml\s*%}#', $code, $match)) {
-            $padding = str_repeat(' ', strlen($match[0]));
-            $code = $padding . substr($code, strlen($match[0]));
+        } elseif (\preg_match('#^\s*{%\s*haml\s*%}#', $code, $match)) {
+            $padding = \str_repeat(' ', \strlen($match[0]));
+            $code = $padding . \substr($code, \strlen($match[0]));
             $code = $this->env->compileString($code, $name);
         }
 

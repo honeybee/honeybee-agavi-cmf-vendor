@@ -42,7 +42,7 @@ class FilesystemLoader extends BaseFilesystemLoader
      */
     public function addAllowedExtensions(array $extensions): void
     {
-        $this->allowed_extensions = array_merge($this->allowed_extensions, $extensions);
+        $this->allowed_extensions = \array_merge($this->allowed_extensions, $extensions);
     }
 
     /**
@@ -70,7 +70,7 @@ class FilesystemLoader extends BaseFilesystemLoader
      */
     public function setScope($scope): void
     {
-        $this->scope = trim($scope);
+        $this->scope = \trim($scope);
     }
 
     /**
@@ -110,21 +110,21 @@ class FilesystemLoader extends BaseFilesystemLoader
         $allowed = false;
 
         foreach ($this->allowed_extensions as $extension) {
-            if ($extension === substr($name, -mb_strlen($extension))) {
+            if ($extension === \substr($name, -mb_strlen($extension))) {
                 $allowed = true;
                 break;
             }
         }
 
         if (!$allowed) {
-            $allowed_extensions_hint = '["' . implode('", "', $this->allowed_extensions) . '"]';
+            $allowed_extensions_hint = '["' . \implode('", "', $this->allowed_extensions) . '"]';
 
             if (empty($this->allowed_extensions)) {
                 $allowed_extensions_hint = '[]';
             }
 
             throw new LoaderError(
-                sprintf(
+                \sprintf(
                     'Given template "%s" does not have an allowed file extension. Allowed are: %s.',
                     $name,
                     $allowed_extensions_hint

@@ -29,7 +29,7 @@ class ResourceRoutingCallback extends AgaviRoutingCallback
      */
     public function onGenerate(array $default_parameters, array &$user_parameters, array &$user_options)
     {
-        if (!array_key_exists('resource', $user_parameters)) {
+        if (!\array_key_exists('resource', $user_parameters)) {
             throw new InvalidArgumentException(
                 'A "resource" user parameter is expected for URL generation that implements: ' . EntityInterface::CLASS
             );
@@ -48,7 +48,7 @@ class ResourceRoutingCallback extends AgaviRoutingCallback
              * @todo check for EntityTypeInterface on the resource and if it has a type at all?
              */
             $user_parameters['module'] = $ro->createValue(
-                sprintf(
+                \sprintf(
                     '%s-%s-%s',
                     StringToolkit::asSnakeCase($root_entity->getType()->getVendor()),
                     StringToolkit::asSnakeCase($root_entity->getType()->getPackage()),

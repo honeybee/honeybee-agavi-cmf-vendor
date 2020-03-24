@@ -1,32 +1,32 @@
 <?php
 
 // determine local configuration directory
-$local_config_dir = @$local_config_dir ?: getenv('APP_LOCAL_CONFIG_DIR');
+$local_config_dir = @$local_config_dir ?: \getenv('APP_LOCAL_CONFIG_DIR');
 if (empty($local_config_dir)) {
     throw new Exception('Environment variable "APP_LOCAL_CONFIG_DIR" has not been set.');
 }
 
 // determine application directory
-$application_dir = @$application_dir ?: getenv('APP_DIR');
+$application_dir = @$application_dir ?: \getenv('APP_DIR');
 if (empty($application_dir)) {
     throw new Exception('APP_DIR not set. Application probably not set up correctly.');
 }
 
-$application_dir = realpath($application_dir);
-$local_config_dir = realpath($local_config_dir);
+$application_dir = \realpath($application_dir);
+$local_config_dir = \realpath($local_config_dir);
 $vendor_dir = $application_dir . '/vendor';
 $agavi_dir = $vendor_dir . '/agavi/agavi/src';
 $honeybee_dir = $vendor_dir . '/honeybee/honeybee-agavi-cmf-vendor';
 
 // environment name to use
-$environment = @$environment ?: getenv('APP_ENV');
+$environment = @$environment ?: \getenv('APP_ENV');
 if (empty($environment)) {
     throw new Exception('APP_ENV is not set.');
 }
 AgaviConfig::set('core.clean_environment', $environment);
 
 // environment modifier (suffix)
-$environment_modifier = @$environment_modifier ?: getenv('APP_ENV_MODIFIER');
+$environment_modifier = @$environment_modifier ?: \getenv('APP_ENV_MODIFIER');
 if (empty($environment_modifier)) {
     $environment_modifier = '';
 }
@@ -76,7 +76,7 @@ AgaviConfig::set(
 
 // allow a custom cache directory location
 //$cache_dir = '/dev/shm/cache';
-$cache_dir = getenv('APP_CACHE_DIR');
+$cache_dir = \getenv('APP_CACHE_DIR');
 if ($cache_dir === false) {
     $cache_dir = AgaviConfig::get('core.app_dir') . '/cache'; // . AgaviConfig::get('core.environment')
 }
@@ -86,21 +86,21 @@ AgaviConfig::set('core.cache_dir', $cache_dir, true, true); // overwrite, readon
 //}
 
 // default log dir
-$log_dir = getenv('APP_LOG_DIR');
+$log_dir = \getenv('APP_LOG_DIR');
 if ($log_dir === false) {
     $log_dir = AgaviConfig::get('core.app_dir') . '/log';
 }
 AgaviConfig::set('core.log_dir', $log_dir, true, true); // overwrite, readonly
 
 // default data dir
-$data_dir = getenv('APP_DATA_DIR');
+$data_dir = \getenv('APP_DATA_DIR');
 if ($data_dir === false) {
     $data_dir = AgaviConfig::get('core.app_dir') . '/../data';
 }
 AgaviConfig::set('core.data_dir', $data_dir, true, true); // overwrite, readonly
 
 // contexts are e.g. 'web', 'console', 'soap' or 'xmlrpc'
-$default_context = @$default_context ?: getenv('APP_CONTEXT');
+$default_context = @$default_context ?: \getenv('APP_CONTEXT');
 if (!$default_context) {
     throw new RuntimeException('Missing default context setting or APP_CONTEXT environment variable.');
 }
@@ -108,4 +108,4 @@ if (!$default_context) {
 AgaviConfig::set('core.default_context', $default_context);
 
 // some default timezone should always be set
-date_default_timezone_set('Europe/Berlin');
+\date_default_timezone_set('Europe/Berlin');

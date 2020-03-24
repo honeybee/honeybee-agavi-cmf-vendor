@@ -15,10 +15,10 @@ class ConsoleRouting extends AgaviConsoleRouting
 
         $cli_params = '';
         foreach ($parameters as $name => $value) {
-            $cli_params .= sprintf(
+            $cli_params .= \sprintf(
                 ' %s %s',
-                escapeshellarg('-' . $name),
-                escapeshellarg(self::getAsString($value))
+                \escapeshellarg('-' . $name),
+                \escapeshellarg(self::getAsString($value))
             );
         }
 
@@ -26,19 +26,19 @@ class ConsoleRouting extends AgaviConsoleRouting
         foreach ($extras as $name => $value) {
             $extra_params .= sprintf(
                 ' %s %s',
-                escapeshellarg('-' . $name),
-                escapeshellarg(self::getAsString($value))
+                \escapeshellarg('-' . $name),
+                \escapeshellarg(self::getAsString($value))
             );
         }
 
         $cmd = AgaviConfig::get('config.cmd.honeybee', 'bin/cli');
-        if (array_key_exists('APPLICATION_DIR', $_SERVER)) {
+        if (\array_key_exists('APPLICATION_DIR', $_SERVER)) {
             /*
              * on ubuntu/nginx the '_' was set to the relative "bin/cli" command that was used in CLI
              * on opensuse/nginx the '_' was set to the absolute path of the php executable
              * on windows the '_' is never available afaik
              */
-            if (array_key_exists('_', $_SERVER) && StringToolkit::endsWith($_SERVER['_'], 'cli')) {
+            if (\array_key_exists('_', $_SERVER) && StringToolkit::endsWith($_SERVER['_'], 'cli')) {
                 $cmd = $_SERVER['_'];
             }
         }
@@ -59,12 +59,12 @@ class ConsoleRouting extends AgaviConsoleRouting
      */
     public static function getAsString($var)
     {
-        if (is_object($var)) {
+        if (\is_object($var)) {
             return self::getObjectAsString($var);
-        } elseif (is_array($var)) {
+        } elseif (\is_array($var)) {
             return print_r($var, true);
-        } elseif (is_resource($var)) {
-            return (string) sprintf('resource=%s', get_resource_type($var));
+        } elseif (\is_resource($var)) {
+            return (string) \sprintf('resource=%s', get_resource_type($var));
         } elseif (true === $var) {
             return 'true';
         } elseif (false === $var) {
@@ -91,10 +91,10 @@ class ConsoleRouting extends AgaviConsoleRouting
             return $obj->getIdentifier();
         } elseif ($obj instanceof DateTime) {
             return $obj->format('c');
-        } elseif (is_callable(array($obj, '__toString'))) {
+        } elseif (\is_callable(array($obj, '__toString'))) {
             return $obj->__toString();
         } else {
-            return json_encode($obj);
+            return \json_encode($obj);
         }
     }
 }

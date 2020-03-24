@@ -23,8 +23,8 @@ class ModuleAssetsExtension extends AbstractExtension
 
         $module_dirs = AssetCompiler::getAvailableModuleDirectories();
         foreach ($module_dirs as $module_path) {
-            $module_name = basename($module_path);
-            if (is_readable($module_path . "/assets/AllModules.js")) {
+            $module_name = \basename($module_path);
+            if (\is_readable($module_path . "/assets/AllModules.js")) {
                 if (empty($main_modules_for_rjs)) {
                     $main_modules_for_rjs .= "{name: \"$module_name/AllModules\"}";
                 } else {

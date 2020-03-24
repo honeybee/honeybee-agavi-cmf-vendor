@@ -52,9 +52,9 @@ class AclSecurityUser extends AgaviSecurityUser implements RoleInterface, UserIn
     public function getAvailableRoles()
     {
         $honeybee_standard_roles = [ AclService::ROLE_FULL_PRIV, AclService::ROLE_NON_PRIV ];
-        $configured_roles = array_keys(($this->roles_configuration['roles']));
+        $configured_roles = \array_keys(($this->roles_configuration['roles']));
 
-        return array_merge($honeybee_standard_roles, $configured_roles);
+        return \array_merge($honeybee_standard_roles, $configured_roles);
     }
 
     public function getAcl()
@@ -88,12 +88,12 @@ class AclSecurityUser extends AgaviSecurityUser implements RoleInterface, UserIn
             if ($credential instanceof ResourceInterface) {
                 return $this->isAllowed($credential);
             }
-            if (!is_scalar($credential)) {
+            if (!\is_scalar($credential)) {
                 return false;
             }
             return $this->isAllowed(null, $credential);
         } catch (Exception $e) {
-            error_log(__METHOD__ . ' ' . $e->getTraceAsString());
+            \error_log(__METHOD__ . ' ' . $e->getTraceAsString());
             return false;
         }
     }

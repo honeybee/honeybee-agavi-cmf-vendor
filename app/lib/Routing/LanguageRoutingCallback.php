@@ -105,7 +105,7 @@ class LanguageRoutingCallback extends AgaviRoutingCallback
         }
 
         if ($request_data->hasHeader('Accept-Language')) {
-            $has_intl = function_exists('locale_accept_from_http');
+            $has_intl = \function_exists('locale_accept_from_http');
             // try to find the best match for the locale
             $locales = self::parseAcceptLanguage($request_data->getHeader('Accept-Language'));
 
@@ -115,7 +115,7 @@ class LanguageRoutingCallback extends AgaviRoutingCallback
                         // we don't use this directly on Accept-Language,
                         // because we might not have the preferred locale,
                         // but another one in any case, it might help clean up the value a bit further
-                        $locale = locale_accept_from_http($locale);
+                        $locale = \locale_accept_from_http($locale);
                     }
 
                     $this->translation_manager->setLocale($locale);
@@ -172,7 +172,7 @@ class LanguageRoutingCallback extends AgaviRoutingCallback
             }
         }
 
-        if (count($locale_map[$short = substr($localeIdentifier, 0, 2)]) > 1) {
+        if (\count($locale_map[$short = \substr($localeIdentifier, 0, 2)]) > 1) {
             return $localeIdentifier;
         } else {
             return $short;
@@ -190,7 +190,7 @@ class LanguageRoutingCallback extends AgaviRoutingCallback
     {
         $locales = array();
 
-        $match_count = preg_match_all(
+        $match_count = \preg_match_all(
             '/(^|\s*,\s*)([a-zA-Z]{1,8}(-[a-zA-Z]{1,8})*)\s*(;\s*q\s*=\s*(1(\.0{0,3})?|0(\.[0-9]{0,3})))?/i',
             $accept_language,
             $matches
@@ -198,7 +198,7 @@ class LanguageRoutingCallback extends AgaviRoutingCallback
 
         if ($match_count) {
             foreach ($matches[2] as &$language) {
-                $language = str_replace('-', '_', $language);
+                $language = \str_replace('-', '_', $language);
             }
 
             foreach ($matches[5] as &$quality) {
@@ -207,10 +207,10 @@ class LanguageRoutingCallback extends AgaviRoutingCallback
                 }
             }
 
-            $locales = array_combine($matches[2], $matches[5]);
-            arsort($locales, SORT_NUMERIC);
+            $locales = \array_combine($matches[2], $matches[5]);
+            \arsort($locales, SORT_NUMERIC);
         }
 
-        return array_keys($locales);
+        return \array_keys($locales);
     }
 }
