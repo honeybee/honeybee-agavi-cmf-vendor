@@ -8,3 +8,4 @@
 - twig: fixed usage of `spaceless` filter by using `apply spaceless`
 - twig: HtHaml libs is still included, but there's now a functionally equivalent twig extension in the cmf as the lib's extension doesn't use namespaced twig
 - bumped deps to allow symfony 5.x components
+    - adjusted code to work with Process component changes
