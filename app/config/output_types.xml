@@ -71,7 +71,6 @@
             <ae:parameter name="extract_vars">true</ae:parameter> <!-- template variables will be available directly; $this->setAttribute('foo', $value) will be available as {{ foo }} -->
             <ae:parameter name="options">
                 <ae:parameter name="charset">UTF-8</ae:parameter> <!-- default charset to use -->
-                <ae:parameter name="base_template_class">Twig\Template</ae:parameter> <!-- default template class to use for generated templates-->
                 <ae:parameter name="autoescape">html</ae:parameter> <!-- html escaping is enabled by default; can be html, js, false; in templates you can use different escaping strategies like css, url, html_attr etc. -->
                 <ae:parameter name="auto_reload">true</ae:parameter> <!-- recompile template whenever source code changes -->
                 <ae:parameter name="strict_variables">false</ae:parameter> <!-- do not throw exception instead of silently using null for invalid variables, attributes or methods -->
