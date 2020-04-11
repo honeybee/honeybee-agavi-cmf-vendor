@@ -43,10 +43,11 @@ class TaskAction extends Action
         $workflow_service = $this->getServiceLocator()->getWorkflowService();
         $state_machine = $workflow_service->getStateMachine($resource);
 
-        $this->setAttribute(
-            'task_info',
-            $workflow_service->getTaskByStateAndEvent($state_machine, $resource, $request_data->getParameter('event'))
-        );
+        $task_info = $workflow_service->getTaskByStateAndEvent($state_machine, $resource, $request_data->getParameter('event'));
+        $task_info = array_merge($task_info, [
+            'resource' => $resource,
+        ]);
+        $this->setAttribute('task_info', $task_info);
     }
 
     protected function getWorkflowEventValidator()
