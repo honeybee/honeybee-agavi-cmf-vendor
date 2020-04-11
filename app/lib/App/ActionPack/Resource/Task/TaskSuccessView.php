@@ -29,7 +29,7 @@ class TaskSuccessView extends View
         $required_keys = [ 'module', 'action' ];
         foreach ($required_keys as $required_key) {
             if (!isset($container_def[$required_key])) {
-                throw new RuntimeError(sprintf('Missing required task parameter "%".', $required_key));
+                throw new RuntimeError(sprintf('Missing required task parameter "%s".', $required_key));
             }
         }
 
