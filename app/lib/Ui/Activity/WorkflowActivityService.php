@@ -76,7 +76,7 @@ class WorkflowActivityService extends BaseObject
                 'description' => sprintf('%s.description', $action_name),
                 'verb' => 'read',
                 'rels' => [ $action_name ],
-                'settings' => new Settings([ 'form_id' => 'randomId-' . rand() ]),
+                'settings' => new Settings([]),
                 'url' => Url::createRoute($action_options['route'], $route_params)
             ]
         );
@@ -102,7 +102,7 @@ class WorkflowActivityService extends BaseObject
                 'description' => sprintf('%s.description', $workflow_event),
                 'verb' => $request_method,
                 'rels' => [ $workflow_event,  sprintf('%s_resource', $workflow_event) ],
-                'settings' => new Settings([ 'form_id' => 'randomId-' . rand() ]),
+                'settings' => new Settings([]),
                 'url' => Url::createRoute($activity_route, [ 'event' => $workflow_event ])
             ]
         );

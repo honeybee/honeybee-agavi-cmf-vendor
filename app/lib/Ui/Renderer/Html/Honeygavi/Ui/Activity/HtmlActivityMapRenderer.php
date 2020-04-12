@@ -43,7 +43,7 @@ class HtmlActivityMapRenderer extends ActivityMapRenderer
     {
         $hidden_activities = (array)$this->getOption('hidden_activity_names', []);
         $activity_map = $this->getPayload('subject')->filter(function ($activity) use ($hidden_activities) {
-            return !in_array($activity->getName(), $hidden_activities);
+            return !in_array($activity->getName(), $hidden_activities, true);
         });
         if ($activity_map->isEmpty()) {
             return parent::getTemplateParameters();

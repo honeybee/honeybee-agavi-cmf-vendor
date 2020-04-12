@@ -9,20 +9,20 @@ class TaskSuccessView extends View
 {
     public function executeHtml(AgaviRequestDataHolder $request_data)
     {
-        return $this->createWorkflowForwardContainer();
+        return $this->createWorkflowForwardContainer($request_data);
     }
 
     public function executeJson(AgaviRequestDataHolder $request_data)
     {
-        return $this->createWorkflowForwardContainer();
+        return $this->createWorkflowForwardContainer($request_data);
     }
 
     public function executeConsole(AgaviRequestDataHolder $request_data)
     {
-        return $this->createWorkflowForwardContainer();
+        return $this->createWorkflowForwardContainer($request_data);
     }
 
-    protected function createWorkflowForwardContainer()
+    protected function createWorkflowForwardContainer(AgaviRequestDataHolder $request_data)
     {
         $container_def = $this->getAttribute('task_info');
 
@@ -33,9 +33,13 @@ class TaskSuccessView extends View
             }
         }
 
-        $defaults = [ 'arguments' => null, 'output_type' => null, 'request_method' => null];
+        $defaults = [ 'arguments' => null, 'output_type' => null, 'request_method' => null ];
         $container_def = array_merge($defaults, $container_def);
-
+/*
+        if (!array_key_exists('resource', $container_def['arguments'])) {
+            $container_def['arguments']['resource'] = $request_data->getParameter('resource');
+        }
+*/
         return $this->createForwardContainer(
             $container_def['module'],
             $container_def['action'],

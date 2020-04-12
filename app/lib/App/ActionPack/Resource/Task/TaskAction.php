@@ -44,9 +44,6 @@ class TaskAction extends Action
         $state_machine = $workflow_service->getStateMachine($resource);
 
         $task_info = $workflow_service->getTaskByStateAndEvent($state_machine, $resource, $request_data->getParameter('event'));
-        $task_info = array_merge($task_info, [
-            'resource' => $resource,
-        ]);
         $this->setAttribute('task_info', $task_info);
     }
 
