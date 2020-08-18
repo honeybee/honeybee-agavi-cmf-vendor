@@ -342,7 +342,7 @@ define([
                         var $link = $(link);
                         that.$editor_popup_link.find('.editor-popup-link__input-url').first().val($link.prop('href') || '');
                         that.$editor_popup_link.find('.editor-popup-link__input-title').first().val($link.prop('title') || '');
-                        var target = $link.prop('target');
+                        var target = $link.prop('target') || '';
                         if (target.search(/_blank/i) >= 0) {
                             that.$editor_popup_link.find('.editor-popup-link__input-target').first().prop('checked', true);
                         } else {
