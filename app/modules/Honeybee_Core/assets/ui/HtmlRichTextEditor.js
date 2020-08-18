@@ -121,7 +121,10 @@ define([
             RETURN_DOM: true,
             RETURN_DOM_FRAGMENT: true,
             FORBID_TAGS: [],
-            FORBID_ATTR: []
+            FORBID_ATTR: [],
+            ALLOWED_TAGS: ALLOWED_TAGS_ON_PASTE,
+            ALLOWED_ATTR: ALLOWED_ATTRS_ON_PASTE,
+            ALLOW_DATA_ATTR: false
         },
         // DOMPurify options to use when pasting untrusted things from clipboard (via sanitizeToDOMFragment function)
         dompurify_paste_config: {
@@ -130,7 +133,7 @@ define([
             RETURN_DOM_FRAGMENT: true,
             FORBID_TAGS: FORBIDDEN_TAGS_ON_PASTE,
             FORBID_ATTR: FORBIDDEN_ATTRS_ON_PASTE,
-            ALLOW_TAGS: ALLOWED_TAGS_ON_PASTE,
+            ALLOWED_TAGS: ALLOWED_TAGS_ON_PASTE,
             ALLOWED_ATTR: ALLOWED_ATTRS_ON_PASTE,
             ALLOW_DATA_ATTR: false,
             DATA_URI_TAGS: []
@@ -140,8 +143,8 @@ define([
             WHOLE_DOCUMENT: false,
             RETURN_DOM: false,
             RETURN_DOM_FRAGMENT: false,
-            FORBID_TAGS: FORBIDDEN_TAGS_ON_PASTE,
-            FORBID_ATTR: FORBIDDEN_ATTRS_ON_PASTE,
+            FORBID_TAGS: [],
+            FORBID_ATTR: [],
             ALLOWED_TAGS: ALLOWED_TAGS_ON_PASTE,
             ALLOWED_ATTR: ALLOWED_ATTRS_ON_PASTE,
             ALLOW_DATA_ATTR: false
@@ -654,8 +657,8 @@ define([
     };
 
     HtmlRichTextEditor.prototype.keepSyncOptionsConsistent = function() {
-        var sync_config = this.options.dompurify_sync_config;
-        var editor_config = this.options.squire_config;
+        var sync_config = this.options.dompurify_sync_config || {};
+        var editor_config = this.options.squire_config || {};
         // ensure DOMPurify doesn't forbid the blockTag eventually configured for Squire
         if (_.isString(editor_config.blockTag)) {
             var editor_block_tag = _.lowerCase(editor_config.blockTag);
