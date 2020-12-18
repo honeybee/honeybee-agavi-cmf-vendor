@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "dompurify": "^1.0.11 || ^2.0",
+    "dompurify": "^2.0.17",
     "jquery": "^3.3.1",
     "moment": "^2.20.1",
     "node-jsb": "^3.0.0",
