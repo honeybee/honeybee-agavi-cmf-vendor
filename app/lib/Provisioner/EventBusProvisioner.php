@@ -149,14 +149,12 @@ class EventBusProvisioner extends AbstractProvisioner
 
     protected function buildEventFilters(array $filter_configs)
     {
-        // @todo make filter implementor configurable.
-        $filter_implementor = EventFilter::class;
         $event_filters = new EventFilterList;
 
         foreach ($filter_configs as $filter_config) {
             $event_filters->addItem(
                 $this->di_container->make(
-                    $filter_implementor,
+                    $filter_config['implementor'], // EventFilter::class is default in EventBusConfigHandler
                     [ ':settings' => new Settings($filter_config['settings']) ]
                 )
             );

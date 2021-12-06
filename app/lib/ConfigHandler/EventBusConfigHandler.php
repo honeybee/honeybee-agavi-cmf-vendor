@@ -2,7 +2,7 @@
 
 namespace Honeygavi\ConfigHandler;
 
-use Honeybee\Model\Event\Subscription\EventFilter;
+use Honeybee\Infrastructure\Event\Bus\Subscription\EventFilter;
 use AgaviXmlConfigDomDocument;
 use AgaviXmlConfigDomElement;
 use Honeybee\Common\Error\ConfigError;
