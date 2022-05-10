@@ -11,7 +11,7 @@
     "moment": "^2.29.2",
     "node-jsb": "^3.0.0",
     "requirejs": "^2.3.5",
-    "selectize": "git+https://github.com/honeybee/selectize.js.git#v1.0.0",
+    "selectize": "git+https://github.com/honeybee/selectize.js.git#v1.0.1",
     "squire-rte": "^1.11.1",
     "stickyfilljs": "^2.0.3"
   },
