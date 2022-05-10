@@ -129,7 +129,7 @@ class ConsoleDialogValidator extends AgaviValidator
         $this->printIntroduction();
 
         $argvInput = new ArgvInput();
-        $input->setStream($this->input);
+        $argvInput->setStream($this->input);
         if ($this->confirm) {
             // a simple yes/no confirmation dialog
             $this->data = $this->dialog->ask(
